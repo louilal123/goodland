@@ -1,0 +1,31 @@
+.custombtn {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    border: none;
+    background-color: none !important;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.card, .modal, .modal-dialog {
+    border-radius: 2px; 
+    border: none;
+   
+}
+.form-control{
+    border-color: none;
+}
+.form-control:active{
+    border-color: none;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    text-align: center !important;
+    vertical-align: middle !important;
+    padding: 10px;
+    margin:auto !important;
+}
