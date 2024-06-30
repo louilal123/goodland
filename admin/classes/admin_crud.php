@@ -75,22 +75,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
 
-        $photoPath = null;
+  // Handle the photo upload
+  $photoPath = null;
+  if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+      $fileTmpPath = $_FILES['photo']['tmp_name'];
+      $fileName = $_FILES['photo']['name'];
+      $fileSize = $_FILES['photo']['size'];
+      $fileType = $_FILES['photo']['type'];
+      $fileNameCmps = explode(".", $fileName);
+      $fileExtension = strtolower(end($fileNameCmps));
 
-        if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
-            $uploadDir = 'uploads/';
-            $photoName = basename($_FILES['photo']['name']);
-            $uploadFile = $uploadDir . $photoName;
+      $allowedfileExtensions = array('jpg', 'gif', 'png', 'jpeg');
+      if (in_array($fileExtension, $allowedfileExtensions)) {
+          $uploadFileDir = '../uploads/';
+          $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
+          $dest_path = $uploadFileDir . $newFileName;
 
-            if (move_uploaded_file($_FILES['photo']['tmp_name'], $uploadFile)) {
-                $photoPath = $uploadFile;
-            } else {
-                $_SESSION['status2'] = "Oops! Error uploading photo.";
-                $_SESSION['status_icon2'] = "error";
-                header('Location: ../manageadmins.php#addItemModal');
-                exit();
-            }
-        }
+          if(move_uploaded_file($fileTmpPath, $dest_path)) {
+              $photoPath = 'uploads/' . $newFileName;
+          } else {
+              $_SESSION['status1'] = "Error moving the uploaded file.";
+              $_SESSION['status_icon1'] = "error";
+              header('Location: ../manageadmins.php#addItemModal');
+              exit();
+          }
+      } else {
+          $_SESSION['status1'] = "Invalid file type. Only JPG, JPEG, PNG, and GIF files are allowed.";
+          $_SESSION['status_icon1'] = "error";
+          header('Location: ../manageadmins.php#addItemModal');
+          exit();
+      }
+  }
 
         try {
             if ($mainClass->insert_admin($fullname, $username, $email, $password, $photoPath)) {

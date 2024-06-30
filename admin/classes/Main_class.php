@@ -42,7 +42,7 @@ class Main_class {
             $_SESSION['admin_id'] = htmlentities($user['admin_id']);
             $_SESSION['email'] = htmlentities($user['email']);
             $_SESSION['status1'] = "Login Successful!";
-            $_SESSION['status_icon1'] = "success";//i added this line
+            $_SESSION['status_icon1'] = "success";
             header("Location: ../dashboard.php");
             exit();
         } else {
@@ -85,9 +85,8 @@ class Main_class {
     }
 }
 
-//inser new admin
 public function insert_admin($fullname, $username, $email, $password, $photo) {
-    $sql = "INSERT INTO admin (fullname, username, email, password, admin_photo, date_updated, role, status) 
+    $sql = "INSERT INTO admin (fullname, username, email, password, admin_photo, date_created, role, status) 
             VALUES (:fullname, :username, :email, :password, :admin_photo, NOW(), 'admin', 'Active')";
     $stmt = $this->pdo->prepare($sql);
 
@@ -97,10 +96,11 @@ public function insert_admin($fullname, $username, $email, $password, $photo) {
     $stmt->bindParam(':username', $username);
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':password', $hashedPassword);
-    $stmt->bindParam(':admin_photo', $photo);
+    $stmt->bindParam(':admin_photo', $photo, PDO::PARAM_STR); 
 
     return $stmt->execute();
 }
+
 
 // end 
 public function usernameExists($username) {

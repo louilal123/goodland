@@ -88,10 +88,10 @@
                                         </td>
                                         <td>
                                         <button class="btn btn-info btn-sm viewAdminDetailBtn " data-id="<?php echo $admin['admin_id']; ?>" 
-                                        data-bs-toggle="modal" data-bs-target="#viewAdminModal">View</button>
-                                        <a href="#" class="btn btn-success btn-sm editAdminBtn" data-bs-toggle="modal" data-bs-target="#editAdminModal">Edit</a>
+                                        data-bs-toggle="modal" data-bs-target="#viewAdminModal"> <i class="bi bi-eye"></i></button>
+                                        <a href="#" class="btn btn-success btn-sm editAdminBtn" data-bs-toggle="modal" data-bs-target="#editAdminModal"> <i class="bi bi-pencil"></i></a>
                                         
-                                            <a href="classes/delete_admin.php?id=<?=$admin['admin_id']; ?>" class="btn btn-danger btn-sm deleteBtn">Delete</a>
+                                            <a href="classes/delete_admin.php?id=<?=$admin['admin_id']; ?>" class="btn btn-danger btn-sm deleteBtn"> <i class="bi bi-trash"></i></a>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
