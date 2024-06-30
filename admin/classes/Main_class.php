@@ -148,6 +148,12 @@ public function count_all_admins() {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result['total'];
 }
+public function count_all_members() {
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM members");
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total'];
+}
 // end 
 public function update_admin_status($username, $status) {
     try {
