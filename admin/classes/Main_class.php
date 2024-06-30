@@ -136,28 +136,7 @@ public function deleteAdmin($admin_id) {
     exit();
 }
 
-public function delete_member($member_id) {
-   
-    try {
-        $stmt = $this->pdo->prepare("DELETE FROM members WHERE member_id = :member_id");
-        $stmt->bindParam(':member_id', $member_id, PDO::PARAM_INT);
 
-        if ($stmt->execute()) {
-            $_SESSION['status1'] = "Mmber successfully deleted!";
-            $_SESSION['status_icon1'] = "success";
-        } else {
-            $_SESSION['status1'] = "Error deleting Mmber.";
-            $_SESSION['status_icon1'] = "error";
-        }
-    } catch (PDOException $e) {
-        $_SESSION['status1'] = "Oops! Error: " . $e->getMessage();
-        $_SESSION['status_icon1'] = "error";
-    }
-    header('Location: ../managemembers.php');
-    exit();
-}
-
-// end 
 // get all admins table 
 public function get_all_admins() {
     $stmt = $this->pdo->prepare("SELECT admin_id, fullname, username, email, admin_photo, date_created, status, date_updated FROM admin WHERE role = 'Admin' ");
@@ -245,6 +224,31 @@ public function update_member($member_id, $member_name, $description, $photo) {
 
     return $stmt->execute();
 }
+
+public function delete_member($member_id) {
+   
+    try {
+        $stmt = $this->pdo->prepare("DELETE FROM members WHERE member_id = :member_id");
+        $stmt->bindParam(':member_id', $member_id, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            $_SESSION['status1'] = "Mmber successfully deleted!";
+            $_SESSION['status_icon1'] = "success";
+        } else {
+            $_SESSION['status1'] = "Error deleting Mmber.";
+            $_SESSION['status_icon1'] = "error";
+        }
+    } catch (PDOException $e) {
+        $_SESSION['status1'] = "Oops! Error: " . $e->getMessage();
+        $_SESSION['status_icon1'] = "error";
+    }
+    header('Location: ../managemembers.php');
+    exit();
+}
+
+// end 
+
+
 
 }
 ?>
