@@ -75,7 +75,7 @@
                                         <td>
                                         <button class="btn btn-info btn-sm viewAdminDetailBtn" data-id="<?php echo $admin['admin_id']; ?>" 
                                         data-bs-toggle="modal" data-bs-target="#viewAdminModal">View</button>
-                                        <a href="#" class="btn btn-success btn-sm editAdminBtn" data-bs-toggle="modal" data-bs-target="#editAdminModal">Edit</a>
+                                        <a href="#" class="btn btn-success btn-sm editMemberBtn" data-bs-toggle="modal" data-bs-target="#editMemberModal"> <i class="bi bi-pencil"></i></a>
                                         
                                             <a href="classes/delete_admin.php?id=<?=$admin['admin_id']; ?>" class="btn btn-danger btn-sm deleteBtn">Delete</a>
                                         </td>
@@ -91,26 +91,161 @@
                         
                     </div> 
                 </div>
+<!-- start  -->
 
-                <!-- status moda  -->
-           
 
                  <!-- end  -->
 
                 <!-- View Admin Mo d starr -->
-             
-                <!-- end  -->
-           
+                <div class="modal" id="viewMemberModal" tabindex="-1" aria-labelledby="viewMemberModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="viewMemberModalLabel">View Member Details</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="viewMemberForm">
+                    <div class="row">
+                        <div class="col">
+                            <label for="view_member_name" class="form-label">Member Name</label>
+                            <input type="text" class="form-control" name="member_name" id="member_name" disabled>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <label for="view_description" class="form-label">Description</label>
+                            <textarea class="form-control" name="description" id="description" disabled></textarea>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <label for="view_photo" class="form-label">Photo</label>
+                            <img id="view_photo" class="img-fluid" src="" alt="Member Photo">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+                 <!-- end  -->
+<div class="modal" id="editMemberModal" tabindex="-1" aria-labelledby="editMemberModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="editMemberModalLabel">Edit Member</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="classes/members_crud.php" method="post" enctype="multipart/form-data">
+                   <div class="row">
+                        <div class="col">
+                            <label for="edit_member_name" class="form-label">Member ID</label>
+                            <input type="text" class="form-control" name="member_id" id="member_id" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="edit_member_name" class="form-label">Member Name</label>
+                            <input type="text" class="form-control" name="member_name" id="member_name">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <label for="edit_description" class="form-label">Description</label>
+                            <textarea class="form-control" name="description" id="description"></textarea>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <label for="edit_photo" class="form-label">Photo</label>
+                            <input type="file" class="form-control" name="photo" id="photo">
+                            <img id="photo" class="img-fluid mt-2" src="" alt="Current Member Photo">
+                        </div>
+                    </div>
+                    <div class="modal-footer mt-4">
+                        <button type="button" class="btn btn-secondary custombtn" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary custombtn" name="update_member">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>          
                 <!-- start  -->
-
+<div class="modal" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="addItemModalLabel">New Member</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="classes/members_crud.php" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col">
+                            <label for="member_name" class="form-label">Member Name</label>
+                            <input type="text" class="form-control" name="member_name" id="member_name" 
+                         value="<?php echo $_SESSION['form_data']['member_name'] ?? ''; ?>">
+                            <?php if (isset($_SESSION['error_member_name'])): ?>
+                                <p class="error text-danger"><?php echo $_SESSION['error_member_name']; unset($_SESSION['error_member_name']); ?></p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" name="description" id="description"><?php echo $_SESSION['form_data']['description'] ?? ''; ?></textarea>
+                            <?php if (isset($_SESSION['error_description'])): ?>
+                                <p class="error text-danger"><?php echo $_SESSION['error_description']; unset($_SESSION['error_description']); ?></p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <label for="photo" class="form-label">Photo</label>
+                            <input type="file" class="form-control" name="photo" id="photo">
+                        </div>
+                    </div>
+                    <div class="modal-footer mt-4">
+                        <button type="button" class="btn btn-secondary custombtn" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary custombtn" name="add_member">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
                 <!-- end  -->
-            
-
             </div> 
         </main>
           
         </div>
     </div>
+    <script>
+   $(document).ready(function () {
+    $('.editMemberBtn').on('click', function () {
+        $('#editMemberModal').modal('show');
+
+        $tr = $(this).closest('tr');
+
+        var data = $tr.children("td").map(function () {
+            return $(this).text().trim();
+        }).get();
+
+        console.log(data); 
+
+        $('#member_id').val(data[0]);
+        $('#member_name').val(data[1]);
+        $('#description').val(data[2]);
+        $('#member_photo').val(data[4]);
+        $('#date_created').val(data[5]);
+        $('#date_updated').val(data[6]);
+       
+    });
+});
+    </script>
    
     <?php include "includes/footer.php" ?>
    

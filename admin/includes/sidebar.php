@@ -60,7 +60,8 @@
                                 <p style="font-weight:lighter;">Projects</p>
                             </a> 
                         </li>
-                        <li class="nav-item1"> <a href="managemembers" class="nav-link"> <i class="nav-icon bi bi-people"></i>
+                        <li class="nav-item1"> <a href="managemembers" class="nav-link <?= $page == 'managemembers.php' ? ' custombg':'' ?>">
+                             <i class="nav-icon bi bi-people"></i>
                                 <p style="font-weight:lighter;">Members</p>
                             </a> </li>
                         <li class="nav-item1"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-shop"></i>

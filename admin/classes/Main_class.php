@@ -102,6 +102,7 @@ public function insert_admin($fullname, $username, $email, $password, $photo) {
 }
 
 
+
 // end 
 public function usernameExists($username) {
     $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM admin WHERE username = ?");
@@ -173,15 +174,38 @@ public function count_all_members() {
     return $result['total'];
 }
 
+public function insert_member($member_name, $description, $photo) {
+    $sql = "INSERT INTO members (member_name, description, member_photo, date_created) 
+            VALUES (:member_name, :description, :member_photo, NOW())";
+    $stmt = $this->pdo->prepare($sql);
 
-public function insert_photo()
-{
-    try {
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-        return false; 
-    }
+    $stmt->bindParam(':member_name', $member_name);
+    $stmt->bindParam(':description', $description);
+    $stmt->bindParam(':member_photo', $photo, PDO::PARAM_STR); 
+
+    return $stmt->execute();
 }
+
+public function update_member($member_id, $member_name, $description, $photo) {
+    $sql = "UPDATE members SET member_name = :member_name, description = :description, member_photo = :member_photo WHERE member_id = :member_id";
+    $stmt = $this->pdo->prepare($sql);
+
+    $stmt->bindParam(':member_name', $member_name);
+    $stmt->bindParam(':description', $description);
+    $stmt->bindParam(':member_photo', $photo, PDO::PARAM_STR); 
+
+    return $stmt->execute();
+}
+
+public function delete_member($member_id) {
+    $sql = "DELETE FROM members WHERE id = :id";
+    $stmt = $this->pdo->prepare($sql);
+
+    $stmt->bindParam(':id', $member_id, PDO::PARAM_INT);
+
+    return $stmt->execute();
+}
+
 
 }
 ?>
