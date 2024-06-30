@@ -136,6 +136,27 @@ public function deleteAdmin($admin_id) {
     exit();
 }
 
+public function delete_member($member_id) {
+   
+    try {
+        $stmt = $this->pdo->prepare("DELETE FROM members WHERE member_id = :member_id");
+        $stmt->bindParam(':member_id', $member_id, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            $_SESSION['status1'] = "Mmber successfully deleted!";
+            $_SESSION['status_icon1'] = "success";
+        } else {
+            $_SESSION['status1'] = "Error deleting Mmber.";
+            $_SESSION['status_icon1'] = "error";
+        }
+    } catch (PDOException $e) {
+        $_SESSION['status1'] = "Oops! Error: " . $e->getMessage();
+        $_SESSION['status_icon1'] = "error";
+    }
+    header('Location: ../managemembers.php');
+    exit();
+}
+
 // end 
 // get all admins table 
 public function get_all_admins() {
@@ -186,26 +207,44 @@ public function insert_member($member_name, $description, $photo) {
     return $stmt->execute();
 }
 
+// public function is_member_name_exists($member_name) {
+//     $query = "SELECT COUNT(*) FROM members WHERE member_name = :member_name";
+//     $stmt = $this->pdo->prepare($query);
+//     $stmt->bindParam(':member_name', $member_name, PDO::PARAM_STR);
+//     $stmt->execute();
+//     $count = $stmt->fetchColumn();
+
+//     return $count > 0;
+// }
+
+public function is_member_name_exists($member_name, $member_id = null) {
+    if ($member_id) {
+        $sql = "SELECT COUNT(*) FROM members WHERE member_name = :member_name AND member_id != :member_id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':member_name', $member_name);
+        $stmt->bindParam(':member_id', $member_id);
+    } else {
+        $sql = "SELECT COUNT(*) FROM members WHERE member_name = :member_name";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':member_name', $member_name);
+    }
+
+    $stmt->execute();
+    return $stmt->fetchColumn() > 0;
+}
+
+
 public function update_member($member_id, $member_name, $description, $photo) {
     $sql = "UPDATE members SET member_name = :member_name, description = :description, member_photo = :member_photo WHERE member_id = :member_id";
     $stmt = $this->pdo->prepare($sql);
 
+    $stmt->bindParam(':member_id', $member_id);
     $stmt->bindParam(':member_name', $member_name);
     $stmt->bindParam(':description', $description);
     $stmt->bindParam(':member_photo', $photo, PDO::PARAM_STR); 
 
     return $stmt->execute();
 }
-
-public function delete_member($member_id) {
-    $sql = "DELETE FROM members WHERE id = :id";
-    $stmt = $this->pdo->prepare($sql);
-
-    $stmt->bindParam(':id', $member_id, PDO::PARAM_INT);
-
-    return $stmt->execute();
-}
-
 
 }
 ?>
