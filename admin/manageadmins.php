@@ -7,15 +7,7 @@
      body{
 		overflow:hidden;
 	}
-    .btn{
-        border-radius: 0px !important;
-    }
-    .btn-danger{
-        background-color: brown !important;
-    }
-    .btn-info{
-    background-color: skyblue;
-    }
+   
     .modal{
         border-radius: 0px !important;
     }
@@ -58,7 +50,7 @@
                             <div class="card mb-4 card-outline-primary">
                             <div class="card-header d-flex ">
                                 <h3 class="card-title mb-0">List of Admins</h3>
-                                <a class="btn ms-auto custombtn" style="background-color: navy; color: white; border-radius: 0px !important ;" data-bs-toggle="modal" data-bs-target="#addItemModal">Add New Admin</a>
+                                <a class="btn btn-primary ms-auto custombtn" data-bs-toggle="modal" data-bs-target="#addItemModal">Add New Admin</a>
                             </div>
  
                                 <div class="card-body">

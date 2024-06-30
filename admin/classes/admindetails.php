@@ -17,5 +17,8 @@ $adminDetails = $mainClass->getAdminDetails($admin_id);
 //table populate
 $admins = $mainClass->get_all_admins();
 $adminCount = $mainClass->count_all_admins();
+
+$members = $mainClass->get_all_members();
+$memberCount = $mainClass->count_all_members();
 ?>
 

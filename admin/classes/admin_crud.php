@@ -123,19 +123,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: ../manageadmins.php");
         exit();
     }
-
-    // delete 
-    if (isset($_GET['id'])) {
-        $admin_id = intval($_GET['id']); 
-        $conn = new Main_class();
-        $conn->deleteAdmin($admin_id); 
-    } else {
-        $_SESSION['status'] = "Invalid request."; 
-        $_SESSION['status_icon'] = "error";
-    }
-    
-    header('Location: ../manageadmins.php'); 
-    exit();
     
 
 }

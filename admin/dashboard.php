@@ -225,7 +225,7 @@
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3 text-light">5</h1>
+												<h1 class="mt-1 mb-3 text-light"><?php echo $memberCount ?? '0'; ?></h1>
 												<div class="mb-0">
 												<span class="text-light panel-footer"><a href="" class="text-light">More Info</a><i class="bi bi-link-45deg"></i> </span>
 											<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
