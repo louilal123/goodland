@@ -31,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: ../managemembers.php#addItemModal');
             exit();
         }
-
         $photoPath = null;
         if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
             $fileTmpPath = $_FILES['photo']['tmp_name'];

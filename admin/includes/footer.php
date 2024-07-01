@@ -93,7 +93,7 @@ unset($_SESSION['status_icon']);
     }).then((result) => {
         if (result.isConfirmed) {
            
-            window.location.href = 'classes/admin_crud.php'; 
+            window.location.href = 'classes/logout.php'; 
         }
     });
 });

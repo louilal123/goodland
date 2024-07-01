@@ -51,21 +51,24 @@ unset($_SESSION['error_message']);
              
               <form action="classes/login.php" method="post">
                 <?php if ($error_message): ?>
-                  <div class="alert alert-danger" id="alert">
+                  <div class="alert bg-danger text-white" id="alert">
+                  <i class="fas fa-triangle-exclamation"></i>
                     <?php echo $error_message; ?>
                   </div>
                 <?php endif; ?>
                 
                 <!-- Email input -->
                 <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="email" id="form1Example13" name="email" class="form-control form-control-lg" />
+                  <input type="email" name="email" class="form-control form-control-lg"  id="validationCustomUsername" aria-describedby="inputGroupPrepend" required/>
                   <label class="form-label" for="form1Example13">Email address</label>
+                  <div class="invalid-feedback">Please choose a username.</div>
                 </div>
     
                 <!-- Password input -->
                 <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="password" id="form1Example23" name="password" class="form-control form-control-lg" />
+                  <input type="password" name="password" class="form-control form-control-lg"  id="validationCustomPassword" aria-describedby="inputGroupPrepend" required/>
                   <label class="form-label" for="form1Example23">Password</label>
+                  <div class="invalid-feedback">Please choose a username.</div>
                 </div>
     
                 <div class="d-flex justify-content-around align-items-center mb-4">
@@ -86,8 +89,32 @@ unset($_SESSION['error_message']);
       </div>
     </section>
     <!-- End your project here-->
-   
+   <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+import { Input, Ripple, initMDB } from "mdb-ui-kit";
+
+initMDB({ Input, Ripple });
+
+(() => {
+  'use strict';
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation');
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms).forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  });
+})();
+   </script>
     <script type="text/javascript" src="mdbfolder/js/mdb.umd.min.js"></script>
+
     <!-- Custom scripts -->
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {

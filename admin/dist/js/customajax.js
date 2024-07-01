@@ -18,6 +18,7 @@ $(document).ready(function() {
                 }
             });
         });
+       
         
         $('.viewAdminDetailBtn').on('click', function() {
         const adminId = $(this).data('id');

@@ -11,9 +11,24 @@
 	h5{
 		opacity: 0.7 !important;
 	}
-	
+    .greetingmsg {
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    }
+
+    .greetingmsg.show {
+        opacity: 1;
+    }
+    .panel {
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    }
+
+    .panel.show {
+        opacity: 1;
+    }
     .card {
-        border-radius: 2px !important;
+        border-radius: 5px !important;
         border : 0px !important;
         border-color: none !important;
       
@@ -46,11 +61,11 @@
            <?php 
             include "includes/topnav.php"; ?>
             <main class="app-main">
-            <div class="app-content-header"> 
+            <div class="app-content-header mt-1"> 
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Dashboard</h3>
+                            <h3 class="mb-0 greetingmsg">Welcome Back  <strong><?php echo $adminDetails['fullname']; ?></strong> !!!</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
@@ -66,8 +81,8 @@
             <div class="app-content"> 
                 <div class="container-fluid"> 
                     <div class="row">
-								<div class="col-sm-6 col-lg-3">
-									<div class="card" style="background-color: #0A3D62 !important;">
+								    <div class="col-sm-6 col-lg-3">
+								 	    <div class="card" style="background-color: #0A3D62 !important;">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
@@ -341,7 +356,13 @@
           
         </div>
     </div>
-  
+    <script>
+       document.addEventListener("DOMContentLoaded", function() {
+            document.querySelector(".greetingmsg").classList.add("show");
+            document.querySelector(".panel").classList.add("show");
+        });
+
+    </script>
     <?php include "includes/footer.php" ?>
 	<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.min.js" integrity="sha256-+vh8GkaU7C9/wbSLIcwq82tQ2wTf44aOHA8HlBMwRI8=" crossorigin="anonymous"></script>
 

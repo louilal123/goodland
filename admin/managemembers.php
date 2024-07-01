@@ -74,11 +74,12 @@
                                        
                                         <td>
                                         <button class="btn btn-info btn-sm viewMemberBtn" 
-                                        data-bs-toggle="modal" data-bs-target="#viewMemberModal">View</button>
+                                        data-bs-toggle="modal" data-bs-target="#viewMemberModal"><i class="bi bi-eye"></i></button>
                                         <a href="#" class="btn btn-success btn-sm editMemberBtn" data-bs-toggle="modal" 
                                         data-bs-target="#editMemberModal"> <i class="bi bi-pencil"></i></a>
                                         
-                                            <a href="classes/delete_member.php?id=<?=$members['member_id']; ?>" class="btn btn-danger btn-sm deleteBtn">Delete</a>
+                                            <a href="classes/delete_member.php?id=<?=$members['member_id']; ?>" 
+                                            class="btn btn-danger btn-sm deleteMemberBtn"><i class="bi bi-trash"></i></a>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
@@ -111,7 +112,8 @@
                 <div class="row mt">
                         <div class="col">
                             <label for="edit_photo" class="form-label">Photo</label>
-                            <img id="photo1" class="img-fluid mt-2" src="" alt="Current Member Photo"style="height: 100px; width: 100px; border-radius: 100px;">
+                            <img id="photo1" class="img-fluid mt-2" src="" alt="Current Member Photo" 
+                            style="display: flex; flex-direction: column; margin: auto; height: 200px; width: 200px; border-radius: 200px;">
                         </div>
                     </div>
                 <div class="row">
@@ -248,6 +250,26 @@
           
         </div>
     </div>
+    <script>
+         $('.deleteMemberBtn').on('click', function(e) {
+            e.preventDefault(); 
+            
+            const href = $(this).attr('href'); 
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Member will be deleted!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Delete'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = href;
+                }
+            });
+        });
+    </script>
     <script>
    $(document).ready(function () {
     $('.editMemberBtn').on('click', function () {

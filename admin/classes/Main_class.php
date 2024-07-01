@@ -37,12 +37,13 @@ class Main_class {
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    
     if ($user) {
         if (password_verify($password, $user['password'])) {
             $_SESSION['admin_id'] = htmlentities($user['admin_id']);
             $_SESSION['email'] = htmlentities($user['email']);
-            $_SESSION['status1'] = "Login Successful!";
-            $_SESSION['status_icon1'] = "success";
+            $_SESSION['status'] = "Login Successful!";
+            $_SESSION['status_icon'] = "success";
             header("Location: ../dashboard.php");
             exit();
         } else {
