@@ -38,7 +38,7 @@
 
 <body class="starter-page-page">
 
-<header id="header" class="header d-flex align-items-center fixed-top">
+<header id="header" class="header d-flex align-items-center fixed-top" style="background-color: transparent !important;">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between" style="background-color: transparent !important;">
 
       <nav id="navmenu" class="navmenu">
@@ -69,7 +69,7 @@
             <p>FINDING LOCAL SOLUTIONS TO GLOBAL PROBLEMS.</p>
            
           </div>
-          <a class="btn-getstarted" href="index.html#about">Get Started</a>
+          <a class="btn-getstarted" href="home">EXPLORE</a>
 
         </div>
 

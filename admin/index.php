@@ -83,6 +83,10 @@ unset($_SESSION['error_message']);
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
     
               </form>
+              <div class="d-flex justify-content-around align-items-center mb-4">
+                
+                  <a href="../index">Go To Website</a>
+                </div>
             </div>
           </div>
         </div>
