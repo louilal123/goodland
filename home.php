@@ -85,15 +85,15 @@
 
       <div class="container">
 
-        <div class="row justify-content-center text-center" data-aos="fade-up" data-aos-delay="100">
-          <div class="col-xl-6 col-lg-8">
-            <h4> </h4>
-            <h2>WELCOME TO <strong>GOOD</strong><i>LAND</i></h2>
+      <div class="row justify-content-center text-center" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-xl-12 col-lg-12">
+           
+            <h2><span style="font-weight: lighter; color: white;">WELCOME TO </span><strong>GOOD</strong><i>LAND</i></h2>
             <!-- <span>.</span> -->
             <p>FINDING LOCAL SOLUTIONS TO GLOBAL PROBLEMS.</p>
            
           </div>
-          <a class="btn-getstarted" href="index.html#about">Get Started</a>
+          <a class="btn-getstarted" href="home">EXPLORE</a>
 
         </div>
 
