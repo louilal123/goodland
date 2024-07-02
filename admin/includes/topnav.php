@@ -102,6 +102,12 @@
                               <li><a class="dropdown-item text-start" href="profile.php"><i class="bi bi-person"></i> Profile</a></li>
                               <li><a class="dropdown-item mb-2" id="logout" href="#"><i class="bi bi-power"></i> Logout</a></li>
                           </ul>
+                      </li>
+                    </ul>
+                </div> 
+            </nav>
+
+            
 
                           <!-- <ul class="dropdown-menu dropdown-menu-end">
                               <li class="user-header text-bg-primary">
@@ -116,10 +122,6 @@
                                   <a id="logout" class="btn btn-default btn-flat float-end">Sign out</a>
                               </li>
                           </ul> -->
-                      </li>
-                    </ul>
-                </div> 
-            </nav>
 
          
         
