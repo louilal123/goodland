@@ -48,12 +48,10 @@
                             </a> 
                         </li>
                         <li class="nav-header">Manage</li>
-                        <li class="nav-item1"> <a href="#" class="nav-link"> <i class="icon bi bi-book"></i>
-                                <p class="p-tag">Archive Files
-                                <i class="nav-arrow1 icon bi bi-chevron-right"></i>
-                                </p>
-                            </a> 
-                        </li>
+                        <li class="nav-item11"> <a href="manageproducts" class="nav-link <?= $page == 'manageproducts.php' ? ' custombg':'' ?>">
+                             <i class="icon bi bi-people"></i>
+                                <p class="p-tag">Products</p>
+                            </a> </li>
                         <li class="nav-item11"> <a href="#" class="nav-link"> <i class="icon bi bi-backpack"></i>
                                 <p class="p-tag">Projects</p>
                             </a> 

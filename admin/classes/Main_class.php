@@ -246,9 +246,18 @@ public function delete_member($member_id) {
     header('Location: ../managemembers.php');
     exit();
 }
-
-// end 
-
+// end //////////////////////////////////
+// here starts the codes for user side end
+public function get_products() {
+    try {
+        $stmt = $this->pdo->prepare("SELECT * FROM products");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    } catch (PDOException $e) {
+        error_log($e->getMessage(), 3, 'errors.log');
+        return [];
+    }
+}
 
 
 }
