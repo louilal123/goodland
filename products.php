@@ -15,6 +15,23 @@
     .star-rating {
       color: gold;
     }
+    .card-img{
+      height: 200px;
+    }
+    .services{
+      background-color: white;  background-repeat: no-repeat; background-size: cover;
+    }
+    @media (min-width: 1200px) {
+      .services{
+        padding-top: 150px !important; 
+      }
+    }
+    @media (max-width: 768px) {
+      .services {
+        padding-top: 100px; 
+      }
+    }
+   
   </style>
 
 <body class="index-page">
@@ -24,7 +41,7 @@
   <main class="main">
 
     <!-- Services Section -->
-    <section id="services" class="services section" style="padding-top: 150px !important; background-color: white;  background-repeat: no-repeat; background-size: cover;">
+    <section id="services" class="services section" style="">
     <!-- background: url(uploads/background-product.jpg); -->
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up" >
@@ -36,9 +53,11 @@
         <div class="row" id="products-container">
             <?php if ($products): ?>
                 <?php foreach ($products as $product): ?>
-                    <div class="col-12 col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="col-12 col-md-3 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="200">
                         <div class="card">
-                            <img src="<?= htmlspecialchars($product["image_url"]) ?>" class="card-img-top" alt="<?= htmlspecialchars($product["product_name"]) ?>">
+                        <!-- ?? 'uploads/default-photo.jpg'; ?> -->
+                            <img src="<?= htmlspecialchars($product["image_url"]) ?: 'admin/uploads/default_photo.jpg'; ?>" 
+                            class="card-img">
                             <div class="card-body">
                                 <h5 class="card-title"><?= htmlspecialchars($product["product_name"]) ?></h5>
                                 <p class="card-text"><?= htmlspecialchars($product["description"]) ?></p>
@@ -47,7 +66,7 @@
                                     <span class="star-rating"><?= getStarRating($product["rating"]) ?></span>
                                     <span>(<?= htmlspecialchars($product["review_count"]) ?> reviews)</span>
                                 </div>
-                                <a href="#" class="btn btn-secondary">Add to Cart</a>
+                                <a href="#" class="btn btn-secondary btn-end justify-end">Add to Cart</a>
                             </div>
                         </div>
                     </div>
