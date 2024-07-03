@@ -85,11 +85,11 @@
                                         </td>
                                         <td>
                                         <button class="btn btn-info btn-sm viewMemberBtn" 
-                                        data-bs-toggle="modal" data-bs-target="#viewMemberModal"><i class="bi bi-eye"></i></button>
-                                        <a href="#" class="btn btn-success btn-sm editMemberBtn" data-bs-toggle="modal" 
-                                        data-bs-target="#editMemberModal"> <i class="bi bi-pencil"></i></a>
+                                        data-bs-toggle="modal" data-bs-target="#viewEventModal"><i class="bi bi-eye"></i></button>
+                                        <a href="#" class="btn btn-success btn-sm editEventBtn" data-bs-toggle="modal" 
+                                        data-bs-target="#editEventModal"> <i class="bi bi-pencil-square"></i></a>
                                         
-                                            <a href="classes/delete_member.php?id=<?=$events['event_id']; ?>" 
+                                            <a href="classes/delete_event.php?id=<?=$events['event_id']; ?>" 
                                             class="btn btn-danger btn-sm deleteMemberBtn"><i class="bi bi-trash"></i></a>
                                         </td>
                                     </tr>
@@ -111,11 +111,11 @@
         $('#member_photo1').val(data[4]);
         $('#date_created1').val(data[5]);
         $('#date_updated1').val(data[6]); -->
-                <div class="modal" id="viewMemberModal" tabindex="-1" aria-labelledby="viewMemberModalLabel" aria-hidden="true">
+                <div class="modal" id="viewEventModal" tabindex="-1" aria-labelledby="viewEventModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="viewMemberModalLabel">View Member Details</h4>
+                <h4 class="modal-title" id="viewEventModalLabel">View Member Details</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -167,7 +167,7 @@
     </div>
 </div>
                  <!-- end  -->
-<div class="modal" id="editMemberModal" tabindex="-1" aria-labelledby="editMemberModalLabel" aria-hidden="true">
+<div class="modal" id="editEventModal" tabindex="-1" aria-labelledby="editMemberModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -294,8 +294,8 @@
     </script>
     <script>
    $(document).ready(function () {
-    $('.editMemberBtn').on('click', function () {
-        $('#editMemberModal').modal('show');
+    $('.editEventBtn').on('click', function () {
+        $('#editEventModal').modal('show');
 
         $tr = $(this).closest('tr');
 
@@ -322,7 +322,7 @@
 <script>
    $(document).ready(function () {
     $('.viewMemberBtn').on('click', function () {
-        $('#viewMemberModal').modal('show');
+        $('#viewEventModal').modal('show');
 
         $tr = $(this).closest('tr');
 

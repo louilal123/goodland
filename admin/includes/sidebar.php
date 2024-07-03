@@ -1,10 +1,187 @@
 <style>
-    .custombg{
+ /* Sidebar Styling */
+.app-sidebar {
+    width: 250px;
+    height: 100%;
+    background-color: #343a40;
+    color: #fff;
+    padding-left: 15px;
+    padding-bottom: 15px;
+    padding-right: 15px;
+}
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+}
+
+.sidebar-brand .brand-link {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+}
+
+.sidebar-brand .brand-image {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.sidebar-brand .brand-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.sidebar-wrapper {
+    margin-top: 20px;
+}
+
+.nav.sidebar-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-item1 {
+    margin-bottom: 2px; 
+}
+
+.nav-link1 {
+    display: flex;
+    align-items: center;
+    padding: 2px 10px; 
+    color: #adb5bd;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 1rem;
+}
+
+.nav-link1:hover {
+    background-color: #495057;
+    color: #fff;
+}
+
+.nav-link1.active {
+    background-color: Teal;
+    color: #fff;
+}
+
+.nav-link1 .icon {
+    margin-right: 8px;
+    font-size: 1rem;
+}
+
+.nav-header {
+    margin: 10px 0 5px;
+    font-size: 0.75rem;
+    opacity: 0.7;
+    color: #6c757d;
+    text-transform: uppercase;
+    padding-left: 12px;
+}
+
+.p-tag {
+    margin: 5px;
+    font-size: 1rem;
+}
+
+/* Additional Styling to Ensure Visibility */
+.nav-header, .nav-item1 .nav-link1, .nav-link1 .icon .logoo{
+    color: #ffffff !important;
+}
+
+</style>
+<?php  $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/")+1); ?>
+
+<aside class="app-sidebar bg-body-light shadow" data-bs-theme="light">
+    <div class="sidebar-brand mt-2">
+        <a href="" class="brand-link active">
+            <img src="uploads/image.png" alt="Logo" class="brand-image shadow" style="width: 34px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.2) !important;">
+            <h3 class="brand-text text-start mt-2 logoo shadow" style="color: #ffff !important;"><b>Good</b><i>Land</i></h3>
+        </a>
+    </div>
+    <div class="sidebar-wrapper">
+        <nav class="mt-2">
+            <ul class="nav sidebar-menu flex-column">
+                <li class="nav-item1">
+                    <a href="dashboard.php" class="nav-link1 text-bold <?= $page == 'dashboard.php' ? ' active':'' ?>">
+                        <i class="icon bi bi-ui-checks-grid"></i>
+                        <p class="p-tag">Dashboard</p>
+                    </a>
+                </li>
+                <li class="nav-header">Manage</li>
+                <li class="nav-item1">
+                    <a href="manageevents.php" class="nav-link1 <?= $page == 'manageevents.php' ? ' active':'' ?>">
+                        <i class="icon bi bi-calendar-fill"></i>
+                        <p class="p-tag">List of Events</p>
+                    </a>
+                </li>
+                <li class="nav-item1">
+                    <a href="manageproducts.php" class="nav-link1 <?= $page == 'manageproducts.php' ? ' active':'' ?>">
+                        <i class="icon bi bi-box-seam"></i>
+                        <p class="p-tag">List of Products</p>
+                    </a>
+                </li>
+                <li class="nav-item1">
+                    <a href="#" class="nav-link1">
+                        <i class="icon bi bi-briefcase"></i>
+                        <p class="p-tag">List of Projects</p>
+                    </a>
+                </li>
+                <li class="nav-item1">
+                    <a href="managemembers.php" class="nav-link1 <?= $page == 'managemembers.php' ? ' active':'' ?>">
+                        <i class="icon bi bi-people"></i>
+                        <p class="p-tag">List of Members</p>
+                    </a>
+                </li>
+                <li class="nav-item1">
+                    <a href="#" class="nav-link1">
+                        <i class="icon bi bi-shop"></i>
+                        <p class="p-tag">List of Workshops</p>
+                    </a>
+                </li>
+                <li class="nav-item1">
+                    <a href="managecategories.php" class="nav-link1 <?= $page == 'managecategories.php' ? ' active':'' ?>">
+                        <i class="icon bi bi-grid"></i>
+                        <p class="p-tag">List of Categories</p>
+                    </a>
+                </li>
+                <li class="nav-item1">
+                    <a href="manageadmins.php" class="nav-link1 <?= $page == 'manageadmins.php' ? ' active':'' ?>">
+                        <i class="icon bi bi-shield-lock"></i>
+                        <p class="p-tag">List of Admins</p>
+                    </a>
+                </li>
+                <li class="nav-header">Reports</li>
+                <li class="nav-item1">
+                    <a href="managereports.php" class="nav-link1 <?= $page == 'managereports.php' ? ' active':'' ?>">
+                        <i class="icon bi bi-file-earmark-text"></i>
+                        <p class="p-tag">Reports</p>
+                    </a>
+                </li>
+                <li class="nav-header">Maintenance</li>
+                <li class="nav-item1">
+                    <a href="managesettings.php" class="nav-link1 <?= $page == 'managesettings.php' ? ' active':'' ?>">
+                        <i class="icon bi bi-gear"></i>
+                        <p class="p-tag">Settings</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>
+
+
+
+        <!-- /* .custombg{
         color: rgb(50, 150, 200) !important;
         background-color: none !important;
         
     }
-    .nav-item1, .nav-link:hover {
+    .nav-item11, .nav-link1:hover {
         background-color: transparent !important;
         color: rgb(50, 150, 200) !important;
     }
@@ -15,77 +192,13 @@
     .icon{
         
     }
-    .nav-item1:hover{
+    .nav-item11:hover{
         background-color: none !important;
     }
     .p-tag{
         font-family: 'Roboto', sans-serif !important;
         font-size:16px !important;
+       
         
     } 
-</style>
-<?php  $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/")+1); ?>
-
-<aside class="app-sidebar bg-body-primary shadow" data-bs-theme="auto"  > 
-<!-- style="background-color: black !important; color: white !important;"  -->
-            <div class="sidebar-brand mt-2">  
-                <a href="" class="brand-link active" > 
-                <img src="uploads/image.png" style="height: 35px !important;width: 35px !important; border-radius: 100px; box-shadow: 2px 8px 16px #fff;" 
-                class="brand-image opacity-75 shadow">
-                <!-- <img src="assets/images/Goodland.png" style="border-radius: 100px; box-shadow: 2px 8px 16px #fff;" 
-                class="brand-image opacity-75 shadow"> -->
-                    <h3 class="brand-text text-start mt-2" ><b>Good</b><i>Land</i></h3> 
-                </a> 
-            </div> 
-            <div class="sidebar-wrapper">
-                <nav class="mt-2 "> 
-                    <ul class="nav sidebar-menu flex-column" >
-                        <li class="nav-item1"> 
-                            <a href="dashboard" class="nav-link text-bold <?= $page == 'dashboard.php' ? ' custombg':'' ?>"> 
-                                <i class="icon bi bi-ui-checks-grid"></i>
-                               
-                                <p class="p-tag">Dashboard </p>
-                            </a> 
-                        </li>
-                        <li class="nav-header">Manage</li>
-                        <li class="nav-item11"> <a href="manageevents" class="nav-link <?= $page == 'manageevents.php' ? ' custombg':'' ?>">
-                             <i class="icon bi bi-calendar-fill"></i>
-                                <p class="p-tag">Manage Events</p>
-                            </a> </li>
-                        <li class="nav-item11"> <a href="manageproducts" class="nav-link <?= $page == 'manageproducts.php' ? ' custombg':'' ?>">
-                             <i class="icon bi bi-people"></i>
-                                <p class="p-tag">Manage Products</p>
-                            </a> </li>
-                        <li class="nav-item11"> <a href="#" class="nav-link"> <i class="icon bi bi-backpack"></i>
-                                <p class="p-tag">Manage Projects</p>
-                            </a> 
-                        </li>
-                        <li class="nav-item11"> <a href="managemembers" class="nav-link <?= $page == 'managemembers.php' ? ' custombg':'' ?>">
-                             <i class="icon bi bi-people"></i>
-                                <p class="p-tag">Manage Members</p>
-                            </a> </li>
-                        <li class="nav-item11"> <a href="#" class="nav-link"> <i class="icon bi bi-shop"></i>
-                            <p class="p-tag">Manage Workshops</p>
-                        </a> </li>
-                        <li class="nav-item11"> <a href="managecategories" class="nav-link <?= $page == 'managecategories.php' ? ' custombg':'' ?>"> 
-                            <i class="icon bi bi-search"></i>
-                            <p class="p-tag">Manage Categories</p>
-                        </a> </li>
-                        <li class="nav-item11"> <a href="manageadmins" class="nav-link <?= $page == 'manageadmins.php' ? ' custombg':'' ?>"> <i class="icon bi bi-people"></i>
-                            <p class="p-tag">Manage Admins</p>
-                        </a> </li>
-                        <li class="nav-header">Reports</li>
-                        <li class="nav-item11"> <a href="#" class="nav-link <?= $page == 'managereports.php' ? ' custombg':'' ?>"> 
-                            <i class="icon bi bi-calendar"></i>
-                            <p class="p-tag">Reports</p>
-                        </a> </li>
-                        <li class="nav-header">Maintenance</li>
-                        <li class="nav-item11"> <a href="managesettings" class="nav-link <?= $page == 'managesettings.php' ? ' custombg':'' ?>"> 
-                            <i class="icon bi bi-gear"></i>
-                            <p class="p-tag">Settings</p>
-                        </a> </li>
-                    </ul> 
-                </nav>
-            </div> 
-        </aside> 
-        
+     */ -->

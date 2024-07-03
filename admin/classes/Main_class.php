@@ -163,9 +163,8 @@ public function update_admin_status($username, $status) {
     }
 }
 // end 
-
 public function get_all_events() {
-    $stmt = $this->pdo->prepare("SELECT * FROM events");
+    $stmt = $this->pdo->prepare("SELECT * FROM events ORDER BY created_at DESC");
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

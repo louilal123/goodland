@@ -2,7 +2,7 @@
 <nav class="app-header navbar navbar-expand bg-body "> 
                 <div class="container-fluid ">
                     <ul class="navbar-nav">
-                        <li class="nav-item"> <a class="nav-link mb-2" data-lte-toggle="sidebar" href="#" role="button"> 
+                        <li class="nav-item"> <a class="nav-link1 mb-2" data-lte-toggle="sidebar" href="#" role="button"> 
                             <i class="bi bi-list" style="font-weight: bold; font-size: 20px; "></i> 
                     </a> </li>
                         
