@@ -7,8 +7,6 @@
 
 <body class="layout-fixed-complete sidebar-expand-lg sidebar-mini bg-body-tertiary">
 
-          
-
     <div class="app-wrapper">
 
        <?php include "includes/sidebar.php" ?>
@@ -23,13 +21,13 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Manage Members</h3>
+                            <h3 class="mb-0">Manage Events</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                Manage Members
+                                Manage Events
                                 </li>
                             </ol>
                         </div>
@@ -42,43 +40,56 @@
                     <div class="col-md-12">
                             <div class="card mb-4 card-outline-primary">
                             <div class="card-header d-flex ">
-                                <h3 class="card-title mb-0">List of Members</h3>
-                                <a class="btn btn-primary ms-auto custombtn" data-bs-toggle="modal" data-bs-target="#addItemModal">Add New Member</a>
+                                <h3 class="card-title mb-0">List of Events</h3>
+                                <a class="btn btn-primary ms-auto custombtn" data-bs-toggle="modal" data-bs-target="#addItemModal">Add New Events</a>
                             </div>
  
                                 <div class="card-body">
                                     <div class="container-fluid">
                                 <table id="myTable" class="table-responsive table table-hover table-bordered table-striped w-100">
                                 <thead>
+                               
                                 <tr>
-                                    <th>Mmber Id</th>
-                                    <th>Member Name</th>
+                                    <th>Event Id</th>
+                                    <th>Event Name</th>
                                     <th>Description</th>
-                                    <th>Photo</th>
-                                    <th>Date Created</th>
-                                    <th>Date Updated</th>
-                                   
+                                    <th>Event Date</th>
+                                    <th>Location</th>
+                                    <th>Banner</th>
+                                    <th>status</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach ($members as $index => $members): ?>
+                                <?php foreach ($events as $index => $events): ?>
                                     <tr>
-                                   
-                                        <td><?php echo htmlspecialchars($members['member_id']); ?></td>
-                                        <td><?php echo htmlspecialchars($members['member_name']); ?></td>
-                                        <td><?php echo htmlspecialchars($members['description']); ?></td>
-                                        <td> <img src="<?php echo $members['member_photo'] ?? 'uploads/default_photo.jpg'; ?>" alt="" style="width: 40px; height: 40px; "></td>
-                                        <td><?php echo htmlspecialchars($members['date_created']); ?></td>
-                                        <td><?php echo htmlspecialchars($members['date_updated']); ?></td>
-                                       
+                                    <!-- `event_id`, `event_name`, `description`, `event_date`, `location`, `created_at`, `updated_at`, `event_photo`, 
+                                 `status`, `category` -->
+                                        <td><?php echo htmlspecialchars($events['event_id']); ?></td>
+                                        <td><?php echo htmlspecialchars($events['event_name']); ?></td>
+                                        <td><?php echo htmlspecialchars($events['description']); ?></td>
+                                        <td><?php echo htmlspecialchars($events['event_date']); ?></td>
+                                        <td><?php echo htmlspecialchars($events['location']); ?></td>
+                                        <td> <img src="<?php echo $events['event_photo'] ?: 'uploads/default_photo.jpg'; ?>" 
+                                        alt="" style="width: 40px; height: 40px; "></td>
+                                        <td>  
+                                            <?php if ($events['status'] == 'scheduled'): ?>
+                                                <span class="badge bg-success">Scheduled</span>
+                                            <?php elseif ($events['status'] == 'ongoing'): ?>
+                                                    <span class="badge bg-secondary">Ongoing</span>
+                                            <?php elseif ($events['status'] == 'finished'): ?>
+                                                    <span class="badge bg-success">Finished</span> 
+                                            <?php elseif ($events['status'] == 'cancelled'): ?>
+                                                <span class="badge bg-danger">Cancelled</span>
+                                            <?php endif; ?> 
+                                        </td>
                                         <td>
                                         <button class="btn btn-info btn-sm viewMemberBtn" 
                                         data-bs-toggle="modal" data-bs-target="#viewMemberModal"><i class="bi bi-eye"></i></button>
                                         <a href="#" class="btn btn-success btn-sm editMemberBtn" data-bs-toggle="modal" 
                                         data-bs-target="#editMemberModal"> <i class="bi bi-pencil"></i></a>
                                         
-                                            <a href="classes/delete_member.php?id=<?=$members['member_id']; ?>" 
+                                            <a href="classes/delete_member.php?id=<?=$events['event_id']; ?>" 
                                             class="btn btn-danger btn-sm deleteMemberBtn"><i class="bi bi-trash"></i></a>
                                         </td>
                                     </tr>

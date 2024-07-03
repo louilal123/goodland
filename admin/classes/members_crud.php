@@ -49,14 +49,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (move_uploaded_file($fileTmpPath, $dest_path)) {
                     $photoPath = 'uploads/' . $newFileName;
                 } else {
-                    $_SESSION['status1'] = "Error moving the uploaded file.";
-                    $_SESSION['status_icon1'] = "error";
+                    $_SESSION['status'] = "Error moving the uploaded file.";
+                    $_SESSION['status_icon'] = "error";
                     header('Location: ../managemembers.php#addItemModal');
                     exit();
                 }
             } else {
-                $_SESSION['status1'] = "Invalid file type. Only JPG, JPEG, PNG, and GIF files are allowed.";
-                $_SESSION['status_icon1'] = "error";
+                $_SESSION['status'] = "Invalid file type. Only JPG, JPEG, PNG, and GIF files are allowed.";
+                $_SESSION['status_icon'] = "error";
                 header('Location: ../managemembers.php#addItemModal');
                 exit();
             }
@@ -64,15 +64,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         try {
             if ($mainClass->insert_member($member_name, $description, $photoPath)) {
-                $_SESSION['status1'] = "Member successfully added!";
-                $_SESSION['status_icon1'] = "success";
+                $_SESSION['status'] = "Member successfully added!";
+                $_SESSION['status_icon'] = "success";
             } else {
-                $_SESSION['status1'] = "Error adding member.";
-                $_SESSION['status_icon1'] = "error";
+                $_SESSION['status'] = "Error adding member.";
+                $_SESSION['status_icon'] = "error";
             }
         } catch (Exception $e) {
-            $_SESSION['status1'] = "Oops! Error: " . $e->getMessage();
-            $_SESSION['status_icon1'] = "error";
+            $_SESSION['status'] = "Oops! Error: " . $e->getMessage();
+            $_SESSION['status_icon'] = "error";
         }
 
         header('Location: ../managemembers.php');
@@ -125,14 +125,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (move_uploaded_file($fileTmpPath, $dest_path)) {
                     $photoPath = 'uploads/' . $newFileName;
                 } else {
-                    $_SESSION['status1'] = "Error moving the uploaded file.";
-                    $_SESSION['status_icon1'] = "error";
+                    $_SESSION['status'] = "Error moving the uploaded file.";
+                    $_SESSION['status_icon'] = "error";
                     header('Location: ../managemembers.php#editMemberModal');
                     exit();
                 }
             } else {
-                $_SESSION['status1'] = "Invalid file type. Only JPG, JPEG, PNG, and GIF files are allowed.";
-                $_SESSION['status_icon1'] = "error";
+                $_SESSION['status'] = "Invalid file type. Only JPG, JPEG, PNG, and GIF files are allowed.";
+                $_SESSION['status_icon'] = "error";
                 header('Location: ../managemembers.php#editMemberModal');
                 exit();
             }
@@ -140,15 +140,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
         try {
             if ($mainClass->update_member($member_id, $member_name, $description, $photoPath)) {
-                $_SESSION['status1'] = "Member successfully updated!";
-                $_SESSION['status_icon1'] = "success";
+                $_SESSION['status'] = "Member successfully updated!";
+                $_SESSION['status_icon'] = "success";
             } else {
-                $_SESSION['status1'] = "Error updating member details.";
-                $_SESSION['status_icon1'] = "error";
+                $_SESSION['status'] = "Error updating member details.";
+                $_SESSION['status_icon'] = "error";
             }
         } catch (Exception $e) {
-            $_SESSION['status1'] = "Oops! Error: " . $e->getMessage();
-            $_SESSION['status_icon1'] = "error";
+            $_SESSION['status'] = "Oops! Error: " . $e->getMessage();
+            $_SESSION['status_icon'] = "error";
         }
     
         header('Location: ../managemembers.php');

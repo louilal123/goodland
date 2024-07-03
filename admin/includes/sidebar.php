@@ -48,24 +48,28 @@
                             </a> 
                         </li>
                         <li class="nav-header">Manage</li>
+                        <li class="nav-item11"> <a href="manageevents" class="nav-link <?= $page == 'manageevents.php' ? ' custombg':'' ?>">
+                             <i class="icon bi bi-calendar-fill"></i>
+                                <p class="p-tag">Manage Events</p>
+                            </a> </li>
                         <li class="nav-item11"> <a href="manageproducts" class="nav-link <?= $page == 'manageproducts.php' ? ' custombg':'' ?>">
                              <i class="icon bi bi-people"></i>
-                                <p class="p-tag">Products</p>
+                                <p class="p-tag">Manage Products</p>
                             </a> </li>
                         <li class="nav-item11"> <a href="#" class="nav-link"> <i class="icon bi bi-backpack"></i>
-                                <p class="p-tag">Projects</p>
+                                <p class="p-tag">Manage Projects</p>
                             </a> 
                         </li>
                         <li class="nav-item11"> <a href="managemembers" class="nav-link <?= $page == 'managemembers.php' ? ' custombg':'' ?>">
                              <i class="icon bi bi-people"></i>
-                                <p class="p-tag">Members</p>
+                                <p class="p-tag">Manage Members</p>
                             </a> </li>
                         <li class="nav-item11"> <a href="#" class="nav-link"> <i class="icon bi bi-shop"></i>
-                            <p class="p-tag">Workshops</p>
+                            <p class="p-tag">Manage Workshops</p>
                         </a> </li>
                         <li class="nav-item11"> <a href="managecategories" class="nav-link <?= $page == 'managecategories.php' ? ' custombg':'' ?>"> 
                             <i class="icon bi bi-search"></i>
-                            <p class="p-tag">Categories</p>
+                            <p class="p-tag">Manage Categories</p>
                         </a> </li>
                         <li class="nav-item11"> <a href="manageadmins" class="nav-link <?= $page == 'manageadmins.php' ? ' custombg':'' ?>"> <i class="icon bi bi-people"></i>
                             <p class="p-tag">Manage Admins</p>

@@ -163,6 +163,14 @@ public function update_admin_status($username, $status) {
     }
 }
 // end 
+
+public function get_all_events() {
+    $stmt = $this->pdo->prepare("SELECT * FROM events");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
 public function get_all_members() {
     $stmt = $this->pdo->prepare("SELECT * FROM members");
     $stmt->execute();
@@ -174,6 +182,7 @@ public function count_all_members() {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result['total'];
 }
+
 
 public function insert_member($member_name, $description, $photo) {
     $sql = "INSERT INTO members (member_name, description, member_photo, date_created) 
