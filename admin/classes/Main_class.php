@@ -163,6 +163,14 @@ public function update_admin_status($username, $status) {
     }
 }
 // end 
+
+
+public function get_categories() {
+    $stmt = $this->pdo->prepare("SELECT * FROM categories");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 public function get_all_events() {
     $stmt = $this->pdo->prepare("SELECT * FROM events ORDER BY created_at DESC");
     $stmt->execute();
@@ -175,6 +183,7 @@ public function get_all_members() {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
 public function count_all_members() {
     $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM members");
     $stmt->execute();
@@ -195,6 +204,36 @@ public function insert_member($member_name, $description, $photo) {
     return $stmt->execute();
 }
 
+public function insert_event($event_name, $description, $event_date, $location, $event_photo, $status, $category, $organizer) {
+    $sql = "INSERT INTO events (event_name, description, event_date, location, created_at, updated_at, event_photo, category, organizer) 
+            VALUES (:event_name, :description, :event_date, :location, NOW(), NOW(), :event_photo, :category, :organizer)";
+    $stmt = $this->pdo->prepare($sql);
+
+    $stmt->bindParam(':event_name', $event_name);
+    $stmt->bindParam(':description', $description);
+    $stmt->bindParam(':event_date', $event_date);
+    $stmt->bindParam(':location', $location);
+    $stmt->bindParam(':event_photo', $event_photo, PDO::PARAM_STR);
+    // $stmt->bindParam(':status', $status);
+    $stmt->bindParam(':category', $category);
+    $stmt->bindParam(':organizer', $organizer);
+
+    return $stmt->execute();
+}
+public function is_event_date_exists($event_date) {
+    $sql = "SELECT COUNT(*) FROM events WHERE DATE(event_date) = DATE(:event_date)";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindParam(':event_date', $event_date);
+    $stmt->execute();
+    return $stmt->fetchColumn() > 0;
+}
+
+public function get_taken_event_dates() {
+    $stmt = $this->pdo->prepare("SELECT event_date FROM events");
+    $stmt->execute();
+    $dates = $stmt->fetchAll(PDO::FETCH_COLUMN, 0); 
+    return $dates;
+}
 // public function is_member_name_exists($member_name) {
 //     $query = "SELECT COUNT(*) FROM members WHERE member_name = :member_name";
 //     $stmt = $this->pdo->prepare($query);

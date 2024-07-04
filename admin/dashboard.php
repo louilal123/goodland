@@ -1,4 +1,15 @@
 ﻿<?php include "classes/admindetails.php" ?>
+<?php
+$currentHour = date('H');
+
+if ($currentHour < 12) {
+    $greeting = "Good Morning";
+} elseif ($currentHour < 18) {
+    $greeting = "Good Afternoon";
+} else {
+    $greeting = "Good Evening";
+}
+?>
 <!DOCTYPE html>
 <html lang="en"> 
 <?php include "includes/header.php"; ?>
@@ -65,7 +76,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0 greetingmsg">Welcome Back  <strong><?php echo $adminDetails['fullname']; ?></strong> !!!</h3>
+                            <h3 class="mb-0 greetingmsg"><?php echo $greeting; ?>  <strong><?php echo $adminDetails['fullname']; ?></strong> !!!</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">

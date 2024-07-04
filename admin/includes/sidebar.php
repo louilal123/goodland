@@ -1,11 +1,12 @@
 <style>
  /* Sidebar Styling */
 .app-sidebar {
+    top: 0;
     width: 250px;
     height: 100%;
     background-color: #343a40;
     color: #fff;
-    padding-left: 15px;
+    padding-left: 12px;
     padding-bottom: 15px;
     padding-right: 15px;
 }
@@ -45,7 +46,7 @@
 }
 
 .nav-item1 {
-    margin-bottom: 2px; 
+    margin-bottom: 8px; 
 }
 
 .nav-link1 {
@@ -54,7 +55,7 @@
     padding: 2px 10px; 
     color: #adb5bd;
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: 2px;
     transition: background-color 0.3s, color 0.3s;
     font-size: 1rem;
 }
@@ -69,8 +70,8 @@
     color: #fff;
 }
 
-.nav-link1 .icon {
-    margin-right: 8px;
+.nav-link1 .icons {
+    margin-right: 5px;
     font-size: 1rem;
 }
 
@@ -84,11 +85,10 @@
 }
 
 .p-tag {
-    margin: 5px;
+    margin: 4px;
     font-size: 1rem;
+    /* text-transform: uppercase; */
 }
-
-/* Additional Styling to Ensure Visibility */
 .nav-header, .nav-item1 .nav-link1, .nav-link1 .icon .logoo{
     color: #ffffff !important;
 }
@@ -108,64 +108,65 @@
             <ul class="nav sidebar-menu flex-column">
                 <li class="nav-item1">
                     <a href="dashboard.php" class="nav-link1 text-bold <?= $page == 'dashboard.php' ? ' active':'' ?>">
-                        <i class="icon bi bi-ui-checks-grid"></i>
+                        <i class="icons bi bi-ui-checks-grid"></i>
                         <p class="p-tag">Dashboard</p>
                     </a>
                 </li>
                 <li class="nav-header">Manage</li>
                 <li class="nav-item1">
                     <a href="manageevents.php" class="nav-link1 <?= $page == 'manageevents.php' ? ' active':'' ?>">
-                        <i class="icon bi bi-calendar-fill"></i>
-                        <p class="p-tag">List of Events</p>
+                        <i class="icons bi bi-calendar-fill"></i>
+                        <p class="p-tag">List of Events  <i class="nav-arrow bi bi-chevron-right" style="margin-left: 60px;"></i></p>
                     </a>
                 </li>
                 <li class="nav-item1">
                     <a href="manageproducts.php" class="nav-link1 <?= $page == 'manageproducts.php' ? ' active':'' ?>">
-                        <i class="icon bi bi-box-seam"></i>
+                        <i class="icons bi bi-box-seam"></i>
                         <p class="p-tag">List of Products</p>
                     </a>
                 </li>
                 <li class="nav-item1">
                     <a href="#" class="nav-link1">
-                        <i class="icon bi bi-briefcase"></i>
+                        <i class="icons bi bi-briefcase"></i>
                         <p class="p-tag">List of Projects</p>
                     </a>
                 </li>
                 <li class="nav-item1">
                     <a href="managemembers.php" class="nav-link1 <?= $page == 'managemembers.php' ? ' active':'' ?>">
-                        <i class="icon bi bi-people"></i>
+                        <i class="icons bi bi-people"></i>
                         <p class="p-tag">List of Members</p>
                     </a>
                 </li>
                 <li class="nav-item1">
                     <a href="#" class="nav-link1">
-                        <i class="icon bi bi-shop"></i>
+                        <i class="icons bi bi-shop"></i>
                         <p class="p-tag">List of Workshops</p>
                     </a>
                 </li>
                 <li class="nav-item1">
                     <a href="managecategories.php" class="nav-link1 <?= $page == 'managecategories.php' ? ' active':'' ?>">
-                        <i class="icon bi bi-grid"></i>
+                        <i class="icons bi bi-grid"></i>
                         <p class="p-tag">List of Categories</p>
                     </a>
                 </li>
+
                 <li class="nav-item1">
                     <a href="manageadmins.php" class="nav-link1 <?= $page == 'manageadmins.php' ? ' active':'' ?>">
-                        <i class="icon bi bi-shield-lock"></i>
+                        <i class="icons bi bi-shield-lock"></i>
                         <p class="p-tag">List of Admins</p>
                     </a>
                 </li>
                 <li class="nav-header">Reports</li>
                 <li class="nav-item1">
                     <a href="managereports.php" class="nav-link1 <?= $page == 'managereports.php' ? ' active':'' ?>">
-                        <i class="icon bi bi-file-earmark-text"></i>
+                        <i class="icons bi bi-file-earmark-text"></i>
                         <p class="p-tag">Reports</p>
                     </a>
                 </li>
                 <li class="nav-header">Maintenance</li>
                 <li class="nav-item1">
                     <a href="managesettings.php" class="nav-link1 <?= $page == 'managesettings.php' ? ' active':'' ?>">
-                        <i class="icon bi bi-gear"></i>
+                        <i class="icons bi bi-gear"></i>
                         <p class="p-tag">Settings</p>
                     </a>
                 </li>

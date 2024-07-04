@@ -41,7 +41,7 @@
                             <div class="card mb-4 card-outline-primary">
                             <div class="card-header d-flex ">
                                 <h3 class="card-title mb-0">List of Events</h3>
-                                <a class="btn btn-primary ms-auto custombtn" data-bs-toggle="modal" data-bs-target="#addItemModal">Add New Events</a>
+                                <a class="btn btn-primary ms-auto custombtn" data-bs-toggle="modal" data-bs-target="#addEventModal">Add New Event</a>
                             </div>
  
                                 <div class="card-body">
@@ -182,7 +182,6 @@
                             <img id="photo" class="img-fluid mt-2" src="" alt="Current Member Photo" 
                             style="display: flex; flex-direction: column; margin: auto; height: 200px; width: 200px; border-radius: 200px;"> </div>
                     </div>
-                            <!-- <label for="edit_member_name" class="form-label">Member ID</label> -->
                             <input type="hidden" class="form-control" name="member_id" id="member_id" readonly>
                       
                     <div class="row">
@@ -196,13 +195,13 @@
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col">
-                            <label for="edit_description" class="form-label">Description</label>
-                            <textarea class="form-control" name="description" id="description"></textarea>
-                            <?php if (isset($_SESSION['error_description'])): ?>
-                                <p class="error text-danger"><?php echo $_SESSION['error_description']; unset($_SESSION['error_description']); ?></p>
-                            <?php endif; ?>
-                        </div>
+                            <div class="col">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea class="form-control" name="description" id="description"></textarea>
+                                <?php if (isset($_SESSION['error_description'])): ?>
+                                    <p class="error text-danger"><?php echo $_SESSION['error_description']; unset($_SESSION['error_description']); ?></p>
+                                <?php endif; ?>
+                            </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col">
@@ -222,49 +221,98 @@
     </div>
 </div>          
                 <!-- start  -->
-                <div class="modal" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="addItemModalLabel">New Member</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="classes/members_crud.php" method="post" enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="col">
-                            <label for="member_name" class="form-label">Member Name</label>
-                            <input type="text" class="form-control" name="member_name" id="member_name" 
-                            value="<?php echo $_SESSION['form_data']['member_name'] ?? ''; ?>">
-                            <?php if (isset($_SESSION['error_member_name'])): ?>
-                                <p class="error text-danger"><?php echo $_SESSION['error_member_name']; unset($_SESSION['error_member_name']); ?></p>
-                            <?php endif; ?>
+        <div class="modal" id="addEventModal" tabindex="-1" aria-labelledby="addEventModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="addEventModalLabel">New Event</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="classes/events_crud.php" method="post" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="event_name" class="form-label">Event Name</label>
+                                        <input type="text" class="form-control" name="event_name" id="event_name" 
+                                        value="<?php echo $_SESSION['form_data']['event_name'] ?? ''; ?>">
+                                        <?php if (isset($_SESSION['error_event_name'])): ?>
+                                            <p class="error text-danger"><?php echo $_SESSION['error_event_name']; unset($_SESSION['error_event_name']); ?></p>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <label for="description" class="form-label">Description</label>
+                                        <textarea class="form-control" name="description" id="description"><?php echo $_SESSION['form_data']['description'] ?? ''; ?></textarea>
+                                        <?php if (isset($_SESSION['error_description'])): ?>
+                                            <p class="error text-danger"><?php echo $_SESSION['error_description']; unset($_SESSION['error_description']); ?></p>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <label for="event_date" class="form-label">Event Date</label>
+                                        <input type="date" class="form-control" name="event_date" id="event_date"
+                                         min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" required>
+                           
+                                        <?php if (isset($_SESSION['error_event_date'])): ?>
+                                            <p class="error text-danger"><?php echo $_SESSION['error_event_date']; unset($_SESSION['error_event_date']); ?></p>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <label for="location" class="form-label">Location</label>
+                                        <input type="text" class="form-control" name="location" id="location" 
+                                        value="<?php echo $_SESSION['form_data']['location'] ?? ''; ?>">
+                                        <?php if (isset($_SESSION['error_location'])): ?>
+                                            <p class="error text-danger"><?php echo $_SESSION['error_location']; unset($_SESSION['error_location']); ?></p>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                             
+                                <div class="row mt-3">
+                                <div class="col">
+                            <label for="category" class="form-label">Category</label>
+                                <select class="form-select" name="category" id="category" required>
+                                    <?php
+                                    require_once 'classes/Main_class.php';
+                                    $mainClass = new Main_class();
+                                    $categories = $mainClass->get_categories();
+                                    foreach ($categories as $category) {
+                                        echo "<option value=\"{$category['category_name']}\">{$category['category_name']}</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <label for="location" class="form-label">Organizer</label>
+                                        <input type="text" class="form-control" name="organizer" id="organizer" 
+                                        value="<?php echo $_SESSION['form_data']['organizer'] ?? ''; ?>">
+                                        <?php if (isset($_SESSION['error_organizer'])): ?>
+                                            <p class="error text-danger">
+                                                <?php echo $_SESSION['error_organizer']; unset($_SESSION['error_organizer']); ?></p>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <label for="event_photo" class="form-label">Photo</label>
+                                        <input type="file" class="form-control" name="event_photo" id="event_photo" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer mt-4">
+                                    <button type="button" class="btn btn-secondary custombtn" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary custombtn" name="add_event">Save</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col">
-                            <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" name="description" id="description"><?php echo $_SESSION['form_data']['description'] ?? ''; ?></textarea>
-                            <?php if (isset($_SESSION['error_description'])): ?>
-                                <p class="error text-danger"><?php echo $_SESSION['error_description']; unset($_SESSION['error_description']); ?></p>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col">
-                            <label for="photo" class="form-label">Photo</label>
-                            <input type="file" class="form-control" name="photo" id="photo" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer mt-4">
-                        <button type="button" class="btn btn-secondary custombtn" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary custombtn" name="add_member">Save</button>
-                    </div>
-                </form>
-            </div>
+                </div>
         </div>
-    </div>
-</div>
+
 
                 <!-- end  -->
             </div> 
@@ -346,7 +394,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     <?php if (isset($_SESSION['form_data'])): ?>
-    var myModal = new bootstrap.Modal(document.getElementById('addItemModal'), {
+    var myModal = new bootstrap.Modal(document.getElementById('addEventModal'), {
         backdrop: 'static'
     });
     myModal.show();
@@ -357,7 +405,26 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-   
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: 'fetch_taken_dates.php',
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                var takenDates = response;
+                $('#event_date').datepicker({
+                    format: 'yyyy-mm-dd',
+                    beforeShowDay: function(date) {
+                        var formattedDate = date.toISOString().split('T')[0];
+                        return takenDates.indexOf(formattedDate) == -1;
+                    }
+                });
+            }
+        });
+    });
+    </script>
+
     <?php include "includes/footer.php" ?>
    
 <!-- end  -->

@@ -126,11 +126,11 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col">
                             <label for="editusername" class="form-label">Username</label>
                             <input type="text" class="form-control" name="username" id="editusername" readonly>
                         </div>
-                        <div class="col-6">
+                        <div class="col">
                             <label for="editemail" class="form-label">Email</label>
                             <input type="email" class="form-control" name="email" id="editemail" readonly>
                         </div>
@@ -191,22 +191,28 @@
                     <div class="row">
                         <div class="col">
                             <label for="fullname" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" name="fullname" id="fullname" 
+                            <input type="text" class="form-control roundedred" name="fullname" id="fullname" 
                          value="<?php echo $_SESSION['form_data']['fullname'] ?? ''; ?>">
                             <?php if (isset($_SESSION['error_fullname'])): ?>
                                 <p class="error text-danger"><?php echo $_SESSION['error_fullname']; unset($_SESSION['error_fullname']); ?></p>
                             <?php endif; ?>
+                            <?php if (isset($_SESSION['error_fullname1'])): ?>
+                                <p class="error text-danger"><?php echo $_SESSION['error_fullname1']; unset($_SESSION['error_fullname1']); ?></p>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col">
                             <label for="username" class="form-label">Username</label>
                             <input type="text" class="form-control" name="username" id="username" value="<?php echo $_SESSION['form_data']['username'] ?? ''; ?>">
                             <?php if (isset($_SESSION['error_username'])): ?>
                                 <p class="error text-danger"><?php echo $_SESSION['error_username']; unset($_SESSION['error_username']); ?></p>
                             <?php endif; ?>
                         </div>
-                        <div class="col-6">
+                     
+                    </div>
+                    <div class="row">
+                    <div class="col">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" name="email" id="email" value="<?php echo $_SESSION['form_data']['email'] ?? ''; ?>">
                             <?php if (isset($_SESSION['error_email'])): ?>

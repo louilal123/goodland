@@ -20,6 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (empty($fullname)) {
             $_SESSION['error_fullname'] = "Full name is required.";
             $hasError = true;
+        } elseif (!preg_match("/^[a-zA-Z\s]+$/", $fullname)) {
+            // Full name validation
+            $_SESSION['error_fullname1'] = "Full name should contain only letters and spaces.";
+            $hasError = true;
         }
 
         if (empty($username)) {
@@ -29,6 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (empty($email)) {
             $_SESSION['error_email'] = "Email is required.";
+            $hasError = true;
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['error_email_format'] = "Invalid email format.";
             $hasError = true;
         }
 
@@ -42,17 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $hasError = true;
         }
 
-        // Full name validation
-        if (!preg_match("/^[a-zA-Z\s]+$/", $fullname)) {
-            $_SESSION['error_fullname'] = "Full name should contain only letters and spaces.";
-            $hasError = true;
-        }
-
-        // Email validation
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $_SESSION['error_email_format'] = "Invalid email format.";
-            $hasError = true;
-        }
+      
 
         if ($password !== $cPassword) {
             $_SESSION['error_pswd_match'] = "Passwords do not match.";
