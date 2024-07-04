@@ -111,7 +111,7 @@
         $('#member_photo1').val(data[4]);
         $('#date_created1').val(data[5]);
         $('#date_updated1').val(data[6]); -->
-                <div class="modal" id="viewEventModal" tabindex="-1" aria-labelledby="viewEventModalLabel" aria-hidden="true">
+<div class="modal" id="viewEventModal" tabindex="-1" aria-labelledby="viewEventModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -273,7 +273,7 @@
         </div>
     </div>
     <script>
-         $('.deleteMemberBtn').on('click', function(e) {
+         $('.deleteEventBtn').on('click', function(e) {
             e.preventDefault(); 
             
             const href = $(this).attr('href'); 
