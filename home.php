@@ -27,7 +27,7 @@
            
           </div>
          <div class="container mt-5">
-        <button type="button" class="btn btn-primary btn-outline" style="width: 200px; border-radius: 0px;">EXPLORE</button>
+        <button type="button" class="btn btn-info btn-outline" style="width: 200px; border-radius: 0px;">LEARN MORE</button>
         </div>
        </div>
 
@@ -41,25 +41,16 @@
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
         <div class="row gy-4">
-          <div class="col-lg-6 order-1 order-lg-2">
+        <div class="col-lg-6 order-1 order-lg-2 content">
+          <h2 style="font-size: 1.2em; margin-top: 0;">
+            Our mission is to facilitate the realization of an empowered, self-sufficient, and resilient community by using art and collaborations to address the social, economic, and environmental issues on Bantayan Island.
+        </h2>
+            
+          </div>
+          <div class="col-lg-6 order-2 order-lg-1">
             <img src="assets/img/landingbg.png" class="img-fluid" alt="">
           </div>
-          <div class="col-lg-6 order-2 order-lg-1 content">
-            <h3>Voluptatem dignissimos provident</h3>
-            <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
-            <ul>
-              <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
-            </ul>
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
-            </p>
-          </div>
+        
         </div>
 
       </div>
