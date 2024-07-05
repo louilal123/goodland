@@ -1,4 +1,4 @@
-<?php include "classes/products_view.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
