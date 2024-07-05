@@ -37,21 +37,20 @@
 
     <!-- About Section -->
     <section class="about section">
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-4">
-        <div class="col-lg-6 order-1 order-lg-2 content">
-          <h2 style="font-size: 1.2em; margin-top: 0;">
-            Our mission is to facilitate the realization of an empowered, self-sufficient, and resilient community by using art and collaborations to address the social, economic, and environmental issues on Bantayan Island.
-        </h2>
-            
-          </div>
+      <div class="row gy-4 align-items-center">
           <div class="col-lg-6 order-2 order-lg-1">
-            <img src="assets/img/landingbg.png" class="img-fluid" alt="">
+              <img src="assets/img/landingbg.png" class="img-fluid" alt="Photo by John Doe">
+              <p style="font-size: 1em; text-align: start; color: #999; margin-top:10px ;">Courtesy: Photo by Martha Atienza</p>
+       
           </div>
-        
-        </div>
+          <div class="col-lg-6 order-1 order-lg-2 content d-flex flex-column justify-content-center">
+              <p style="font-size: 1.5em; font-style: italic; margin-bottom: 20px; color: #555; text-align: center;">
+                  Our mission is to facilitate the realization of an empowered, self-sufficient, and resilient community by using art and collaborations to address the social, economic, and environmental issues on Bantayan Island.
+              </p>
+                </div>
+      </div>
 
       </div>
 
@@ -69,33 +68,18 @@
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
         <div class="mb-4" data-aos="fade-up" data-aos-delay="200">
-          <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus" frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+       
+        
+  <iframe style="border:0; width: 100%; height: 270px;"  src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d15653.151528180906!2d123.74171731128504!3d11.240220319206975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sPurok%20Kulo%202%2C%20Atop-Atop%20%20Bantayan%206053%2C%20Cebu!5e0!3m2!1sen!2sph!4v1720150598052!5m2!1sen!2sph"  frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div><!-- End Google Maps -->
 
-        <div class="row gy-4">
+        <div class="row gy-4 align-items-center">
 
-          <div class="col-lg-4">
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
-              <i class="bi bi-geo-alt flex-shrink-0"></i>
-              <div>
-                <h3>Address</h3>
-                <p>A108 Adam Street, New York, NY 535022</p>
-              </div>
-            </div><!-- End Info Item -->
-
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-              <i class="bi bi-telephone flex-shrink-0"></i>
-              <div>
-                <h3>Call Us</h3>
-                <p>+1 5589 55488 55</p>
-              </div>
-            </div><!-- End Info Item -->
-
+          <div class="col-lg-4 ">
             <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="500">
-              <i class="bi bi-envelope flex-shrink-0"></i>
               <div>
-                <h3>Email Us</h3>
-                <p>info@example.com</p>
+                <h3>Message Us</h3>
+              
               </div>
             </div><!-- End Info Item -->
 
