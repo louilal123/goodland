@@ -1,15 +1,5 @@
 ﻿<?php include "classes/admindetails.php" ?>
-<?php
-$currentHour = date('H');
 
-if ($currentHour < 12) {
-    $greeting = "Good Morning";
-} elseif ($currentHour < 18) {
-    $greeting = "Good Afternoon";
-} else {
-    $greeting = "Good Evening";
-}
-?>
 <!DOCTYPE html>
 <html lang="en"> 
 <?php include "includes/header.php"; ?>
@@ -76,7 +66,7 @@ if ($currentHour < 12) {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0 greetingmsg"><?php echo $greeting; ?>  <strong><?php echo $adminDetails['fullname']; ?></strong> !!!</h3>
+                            <h3 class="mb-0 greetingmsg"> <span id="greeting"></span> <strong><?php echo $adminDetails['fullname']; ?></strong> !!!</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
@@ -375,6 +365,22 @@ if ($currentHour < 12) {
 
     </script>
     <?php include "includes/footer.php" ?>
+    <script>
+        $(document).ready(function() {
+            var currentHour = new Date().getHours();
+            var greeting;
+
+            if (currentHour < 12) {
+                greeting = "Good Morning";
+            } else if (currentHour < 18) {
+                greeting = "Good Afternoon";
+            } else {
+                greeting = "Good Evening";
+            }
+
+            $('#greeting').text(greeting);
+        });
+    </script>
 	<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.min.js" integrity="sha256-+vh8GkaU7C9/wbSLIcwq82tQ2wTf44aOHA8HlBMwRI8=" crossorigin="anonymous"></script>
 
 <script>

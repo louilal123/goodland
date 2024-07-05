@@ -14,14 +14,14 @@
     <section id="hero" class="hero section dark-background"> 
     <!-- light-background -->
 
-      <img src="assets/img/landingbg.png" alt="" data-aos="fade-in">
+      <img src="uploads/mambacayao.png" alt="" data-aos="fade-in">
 
       <div class="container">
 
       <div class="row justify-content-center text-center" data-aos="fade-up" data-aos-delay="100">
           <div class="col-xl-12 col-lg-12">
            
-            <h2><span style="font-weight: lighter; color: white;">WELCOME TO </span><strong>GOOD</strong><i>LAND</i></h2>
+            <h2><span style="font-weight: lighter; color: white;">Welcome To </span>Good<i>Land</i></h2>
             <!-- <span>.</span> -->
             <p>FINDING LOCAL SOLUTIONS TO GLOBAL PROBLEMS.</p>
            
