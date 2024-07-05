@@ -12,7 +12,7 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="home" class="<?= $page == 'index.php' ? 'active':'' ?>">HOME<br></a></li>
+          <li><a href="index" class="<?= $page == 'index.php' ? 'active':'' ?>">HOME<br></a></li>
           <li><a href="#" class="<?= $page == 'about.php' ? 'active':'' ?>">ABOUT US</a></li>
           <li><a href="projects.php" class="<?= $page == 'projects.php' ? 'active':'' ?>">PROJECTS</a></li>
           <li><a href="#" class="<?= $page == 'methodology.php' ? 'active':'' ?>">METHODOLOGY</a></li>
@@ -23,12 +23,11 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-<!-- Get Started Button -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#authModal">
-  Get Started
-</button>
+      <!-- Get Started Button -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#authModal">
+        <a href="get-started" style="color: white;">Get Started</a>
+      </button>
 
-
-      <!-- <a class="btn-getstarted" href="index.html#about" >Get Started</a> -->
       </div>
   </header>
+

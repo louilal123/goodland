@@ -21,6 +21,8 @@
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <!-- <link rel="stylesheet" href="mdbfolder/main.css" rel="stylesheet"> -->
+   
+<link rel="stylesheet" href="mdbfolder/mdb.min.css">
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">

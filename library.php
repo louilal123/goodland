@@ -45,7 +45,7 @@
     <!-- background: url(uploads/background-product.jpg); -->
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up" >
-        <h2>Products</h2>
+        <h2>Library</h2>
         <p>Library</p>
       </div><!-- End Section Title -->
 
