@@ -6,27 +6,29 @@
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
         <h4 class="sitename" style="color: #fff !important; padding-top: 8px ;"><strong>GOOD</strong><i>Land</i></h4>
-        <!-- <span>.</span> -->
+
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="home" class="<?= $page == 'home.php' ? 'active':'' ?>">HOME<br></a></li>
-          <li><a href="#">ABOUT US</a></li>
-          <li><a href="#">PROJECTS</a></li>
-          <li><a href="#">METHODOLOGY</a></li>
-          <li><a href="#">STORIES</a></li>
-          <li><a href="products" class="<?= $page == 'products.php' ? 'active':'' ?>">PRODUCTS</a></li>
-          <li><a href="#">MEMBERS</a></li>
-          <li><a href="#">CONTACT</a></li>
+          <li><a href="#" class="<?= $page == 'about.php' ? 'active':'' ?>">ABOUT US</a></li>
+          <li><a href="#" class="<?= $page == 'projects.php' ? 'active':'' ?>">PROJECTS</a></li>
+          <li><a href="#" class="<?= $page == 'methodology.php' ? 'active':'' ?>">METHODOLOGY</a></li>
+          <li><a href="#" class="<?= $page == 'stories.php' ? 'active':'' ?>">STORIES</a></li>
+          <li><a href="#" class="<?= $page == 'members.php' ? 'active':'' ?>">MEMBERS</a></li>
+          <li><a href="library" class="<?= $page == 'library.php' ? 'active':'' ?>">LIBRARY</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="index.html#about">Sign Up</a>
+<!-- Get Started Button -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#authModal">
+  Get Started
+</button>
 
-    </div>
+
+      <!-- <a class="btn-getstarted" href="index.html#about" >Get Started</a> -->
+      </div>
   </header>

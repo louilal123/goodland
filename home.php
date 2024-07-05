@@ -27,7 +27,8 @@
            
           </div>
          <div class="container mt-5">
-        <button type="button" class="btn btn-info btn-outline" style="width: 200px; border-radius: 0px;">LEARN MORE</button>
+        <button type="button" class="btn btn-info btn-outline" style="width: 200px; border-radius: 0px; color: white;">
+          <a href="#"style="color: white;">LEARN MORE</a></button>
         </div>
        </div>
 
