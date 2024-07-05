@@ -8,13 +8,13 @@
     color: #fff;
     padding-left: 12px;
     padding-bottom: 15px;
-    padding-right: 15px;
+    padding-right: 20px;
 }
 
 .sidebar-brand {
     display: flex;
     align-items: center;
-    padding: 10px 15px;
+    padding: 10px 10px;
 }
 
 .sidebar-brand .brand-link {
@@ -28,7 +28,7 @@
     height: 35px;
     width: 35px;
     border-radius: 50%;
-    margin-right: 10px;
+    margin-right: 8px;
 }
 
 .sidebar-brand .brand-text {
@@ -47,6 +47,7 @@
 
 .nav-item1 {
     margin-bottom: 8px; 
+    margin-right: 5px;
 }
 
 .nav-link1 {
@@ -57,7 +58,7 @@
     text-decoration: none;
     border-radius: 2px;
     transition: background-color 0.3s, color 0.3s;
-    font-size: 1rem;
+    font-size: 1.25rem;
 }
 
 .nav-link1:hover {
@@ -71,7 +72,7 @@
 }
 
 .nav-link1 .icons {
-    margin-right: 5px;
+    margin-right: 8px;
     font-size: 1rem;
 }
 
