@@ -12,9 +12,9 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="home" class="<?= $page == 'home.php' ? 'active':'' ?>">HOME<br></a></li>
+          <li><a href="home" class="<?= $page == 'index.php' ? 'active':'' ?>">HOME<br></a></li>
           <li><a href="#" class="<?= $page == 'about.php' ? 'active':'' ?>">ABOUT US</a></li>
-          <li><a href="#" class="<?= $page == 'projects.php' ? 'active':'' ?>">PROJECTS</a></li>
+          <li><a href="projects.php" class="<?= $page == 'projects.php' ? 'active':'' ?>">PROJECTS</a></li>
           <li><a href="#" class="<?= $page == 'methodology.php' ? 'active':'' ?>">METHODOLOGY</a></li>
           <li><a href="#" class="<?= $page == 'stories.php' ? 'active':'' ?>">STORIES</a></li>
           <li><a href="#" class="<?= $page == 'members.php' ? 'active':'' ?>">MEMBERS</a></li>

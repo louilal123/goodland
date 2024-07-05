@@ -29,35 +29,32 @@ class Main_class {
         }
     }
     // for login
-    public function login_user($email, $password)
-{
-    session_start();
-    $stmt = $this->pdo->prepare("SELECT admin_id, password FROM admin WHERE email = :email");
-    $stmt->bindParam(':email', $email);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    public function login_user($email, $password) {
+        session_start();
+        
+        $stmt = $this->pdo->prepare("SELECT admin_id, password FROM admin WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    
-    if ($user) {
-        if (password_verify($password, $user['password'])) {
-            $_SESSION['admin_id'] = htmlentities($user['admin_id']);
-            $_SESSION['email'] = htmlentities($user['email']);
-            $_SESSION['status'] = "Login Successful!";
-            $_SESSION['status_icon'] = "success";
-            header("Location: ../dashboard.php");
-            exit();
+        if ($user) {
+            if (password_verify($password, $user['password'])) {
+                $_SESSION['admin_id'] = htmlentities($user['admin_id']);
+                $_SESSION['email'] = htmlentities($user['email']);
+                $_SESSION['status'] = "Login Successful!";
+                $_SESSION['status_icon'] = "success";
+                header("Location: ../dashboard.php");
+                exit();
+            } else {
+                $_SESSION['error_message'] = "Invalid credentials! Please try again.";
+            }
         } else {
             $_SESSION['error_message'] = "Invalid credentials! Please try again.";
-            header("Location: ../index.php");
-            exit();
         }
-    } else {
-        $_SESSION['error_message'] = "Invalid credentials! Please try again.";
+        
         header("Location: ../index.php");
         exit();
     }
-}
-
  //admin details currently login
  public function getAdminDetails($admin_id) {
     $stmt = $this->pdo->prepare("SELECT * FROM admin WHERE admin_id = :admin_id");

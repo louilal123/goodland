@@ -1,7 +1,6 @@
 <?php
 session_start();
-
-$error_message = isset($_SESSION['error_message']) ? $_SESSION['error_message'] : '';
+$error_message = $_SESSION['error_message'] ?? '';
 unset($_SESSION['error_message']);
 ?>
 <!DOCTYPE html>
@@ -48,42 +47,46 @@ unset($_SESSION['error_message']);
             <div class="card-body p-5 shadow-5 text-center">
               <h2 class="fw-bold mb-5">GoodLand Management System</h2>
               <h4 class="fw-light mb-5">Login Administrator</h4>
-             
               <form action="classes/login.php" method="post">
-                <?php if ($error_message): ?>
-                  <div class="alert bg-danger text-white" id="alert">
-                  <i class="fas fa-triangle-exclamation"></i>
-                    <?php echo $error_message; ?>
+                  <?php if ($error_message): ?>
+                      <div class="alert bg-danger text-white" id="alert">
+                          <i class="fas fa-triangle-exclamation"></i>
+                          <?php echo $error_message; ?>
+                      </div>
+                  <?php endif; ?>
+
+                  <!-- Email input -->
+                  <div data-mdb-input-init class="form-outline mb-4">
+                      <input type="text" name="email" class="form-control form-control-lg 
+                      <?php echo !empty($_SESSION['error_email']) ? 'is-invalid' : ''; ?>" id="validationCustomUsername" 
+                      aria-describedby="inputGroupPrepend"  />
+                      <label class="form-label" for="form1Example13">Email address</label>
+                      <?php if (!empty($_SESSION['error_email'])): ?>
+                          <div class="invalid-feedback"><?php echo $_SESSION['error_email']; unset($_SESSION['error_email']); ?></div>
+                      <?php endif; ?>
                   </div>
-                <?php endif; ?>
-                
-                <!-- Email input -->
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="email" name="email" class="form-control form-control-lg"  id="validationCustomUsername" aria-describedby="inputGroupPrepend" required/>
-                  <label class="form-label" for="form1Example13">Email address</label>
-                  <div class="invalid-feedback">Please choose a username.</div>
-                </div>
-    
-                <!-- Password input -->
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="password" name="password" class="form-control form-control-lg"  id="validationCustomPassword" aria-describedby="inputGroupPrepend" required/>
-                  <label class="form-label" for="form1Example23">Password</label>
-                  <div class="invalid-feedback">Please choose a username.</div>
-                </div>
-    
-                <div class="d-flex justify-content-around align-items-center mb-4">
-                  <!-- Checkbox -->
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
-                    <label class="form-check-label" for="form1Example3"> Remember me </label>
+
+                  <!-- Password input -->
+                  <div data-mdb-input-init class="form-outline mb-4">
+                      <input type="password" name="password" class="form-control form-control-lg <?php echo !empty($_SESSION['error_password']) ? 'is-invalid' : ''; ?>" id="validationCustomPassword" aria-describedby="inputGroupPrepend"  />
+                      <label class="form-label" for="form1Example23">Password</label>
+                      <?php if (!empty($_SESSION['error_password'])): ?>
+                          <div class="invalid-feedback"><?php echo $_SESSION['error_password']; unset($_SESSION['error_password']); ?></div>
+                      <?php endif; ?>
                   </div>
-                  <a href="forgot_password.php">Forgot password?</a>
-                </div>
-                <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
-    
+
+                  <div class="d-flex justify-content-around align-items-center mb-4">
+                      <!-- Checkbox -->
+                      <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
+                          <label class="form-check-label" for="form1Example3"> Remember me </label>
+                      </div>
+                      <a href="forgot_password.php">Forgot password?</a>
+                  </div>
+                  <!-- Submit button -->
+                  <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
               </form>
-              <div class="d-flex justify-content-around align-items-center mb-4">
+              <div class="d-flex justify-content-around align-items-center mt-8">
                 
                   <a href="../index">Go To Website</a>
                 </div>

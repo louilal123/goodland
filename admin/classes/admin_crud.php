@@ -91,14 +91,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           if(move_uploaded_file($fileTmpPath, $dest_path)) {
               $photoPath = 'uploads/' . $newFileName;
           } else {
-              $_SESSION['status1'] = "Error moving the uploaded file.";
-              $_SESSION['status_icon1'] = "error";
+              $_SESSION['status'] = "Error moving the uploaded file.";
+              $_SESSION['status_icon'] = "error";
               header('Location: ../manageadmins.php#addItemModal');
               exit();
           }
       } else {
-          $_SESSION['status1'] = "Invalid file type. Only JPG, JPEG, PNG, and GIF files are allowed.";
-          $_SESSION['status_icon1'] = "error";
+          $_SESSION['status'] = "Invalid file type. Only JPG, JPEG, PNG, and GIF files are allowed.";
+          $_SESSION['status_icon'] = "error";
           header('Location: ../manageadmins.php#addItemModal');
           exit();
       }
@@ -106,15 +106,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         try {
             if ($mainClass->insert_admin($fullname, $username, $email, $password, $photoPath)) {
-                $_SESSION['status1'] = "Admin successfully added!";
-                $_SESSION['status_icon1'] = "success";
+                $_SESSION['status'] = "Admin successfully added!";
+                $_SESSION['status_icon'] = "success";
             } else {
-                $_SESSION['status1'] = "Error adding admin.";
-                $_SESSION['status_icon1'] = "error";
+                $_SESSION['status'] = "Error adding admin.";
+                $_SESSION['status_icon'] = "error";
             }
         } catch (Exception $e) {
-            $_SESSION['status1'] = "Oops! Error: " . $e->getMessage();
-            $_SESSION['status_icon1'] = "error";
+            $_SESSION['status'] = "Oops! Error: " . $e->getMessage();
+            $_SESSION['status_icon'] = "error";
         }
 
         header('Location: ../manageadmins.php');
@@ -126,11 +126,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $status = $_POST['status'];
     
         if ($mainClass->update_admin_status($username, $status)) {
-            $_SESSION['status1'] = "Admin status updated successfully!";
-            $_SESSION['status_icon1'] = "success";
+            $_SESSION['status'] = "Admin status updated successfully!";
+            $_SESSION['status_icon'] = "success";
         } else {
-            $_SESSION['status1'] = "Failed to update admin status!";
-            $_SESSION['status_icon1'] = "error";
+            $_SESSION['status'] = "Failed to update admin status!";
+            $_SESSION['status_icon'] = "error";
         }
         header("Location: ../manageadmins.php");
         exit();
