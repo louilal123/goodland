@@ -19,7 +19,7 @@ unset($_SESSION['error_message']);
     <!-- MDB -->
     <link rel="stylesheet" href="mdbfolder/css/mdb.min.css" />
   </head>
-  <body>
+  <body class="bg-dark">
  <!-- Image and text -->
 <nav class="navbar navbar-dark bg-dark">
   <div class="container-fluid">
@@ -43,7 +43,7 @@ unset($_SESSION['error_message']);
             <img src="uploads/image.png" class="img-fluid" style="height: max-content;" alt="Phone image">
           </div> -->
 
-          <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+          <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 bg-white">
             <div class="card-body p-5 shadow-5 text-center">
               <h2 class="fw-bold mb-5">GoodLand Management System</h2>
               <h4 class="fw-light mb-5">Login Administrator</h4>
@@ -57,7 +57,8 @@ unset($_SESSION['error_message']);
 
                   <!-- Email input -->
                   <div data-mdb-input-init class="form-outline mb-4">
-                      <input type="text" name="email" class="form-control form-control-lg 
+                  <i class="fas fa-envelope trailing" id="togglePassword"></i>
+                      <input type="text" name="email" class="form-control form-control-lg form-icon-trailing
                       <?php echo !empty($_SESSION['error_email']) ? 'is-invalid' : ''; ?>" id="validationCustomUsername" 
                       aria-describedby="inputGroupPrepend"  />
                       <label class="form-label" for="form1Example13">Email address</label>
@@ -67,24 +68,32 @@ unset($_SESSION['error_message']);
                   </div>
 
                   <!-- Password input -->
-                  <div data-mdb-input-init class="form-outline mb-4">
-                      <input type="password" name="password" class="form-control form-control-lg <?php echo !empty($_SESSION['error_password']) ? 'is-invalid' : ''; ?>" id="validationCustomPassword" aria-describedby="inputGroupPrepend"  />
-                      <label class="form-label" for="form1Example23">Password</label>
-                      <?php if (!empty($_SESSION['error_password'])): ?>
-                          <div class="invalid-feedback"><?php echo $_SESSION['error_password']; unset($_SESSION['error_password']); ?></div>
-                      <?php endif; ?>
-                  </div>
+                  <div data-mdb-input-init class="form-outline mb-4" style="position: relative;">
+                    <i class="fas fa-lock trailing" id="togglePassword" style="position: absolute; right: 10px; top: 50%;
+                     transform: translateY(-50%); cursor: pointer; z-index: 999;"></i>
+
+                    <input type="password" name="password" class="form-control form-control-lg form-icon-trailing
+                    <?php echo !empty($_SESSION['error_password']) ? 'is-invalid' : ''; ?>" 
+                    id="validationCustomPassword" aria-describedby="inputGroupPrepend" style="cursor: pointer !important;" />
+
+                    <label class="form-label" for="form1Example23">Password</label>
+                    <?php if (!empty($_SESSION['error_password'])): ?>
+                        <div class="invalid-feedback"><?php echo $_SESSION['error_password']; unset($_SESSION['error_password']); ?></div>
+                    <?php endif; ?>
+                </div>
+
+
 
                   <div class="d-flex justify-content-around align-items-center mb-4">
                       <!-- Checkbox -->
                       <div class="form-check">
                           <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
-                          <label class="form-check-label" for="form1Example3"> Remember me </label>
+                          <label class="form-check-label" for="form1Example3">Show Password</label>
                       </div>
                       <a href="forgot_password.php">Forgot password?</a>
                   </div>
                   <!-- Submit button -->
-                  <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+                  <button type="submit" class="btn btn-primary btn-lg btn-block mb-4">Sign in</button>
               </form>
               <div class="d-flex justify-content-around align-items-center mt-8">
                 
@@ -95,7 +104,8 @@ unset($_SESSION['error_message']);
         </div>
       </div>
     </section>
-    <!-- End your project here-->
+
+    <!-- end  -->
    <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
 import { Input, Ripple, initMDB } from "mdb-ui-kit";
@@ -139,5 +149,22 @@ initMDB({ Input, Ripple });
             }
         });
     </script>
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const togglePassword = document.querySelector('#togglePassword');
+    const passwordField = document.querySelector('#validationCustomPassword');
+
+    togglePassword.addEventListener('click', function (e) {
+        // Toggle the type attribute
+        const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordField.setAttribute('type', type);
+        
+        // Toggle the eye / eye-slash icon
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+    });
+});
+</script>
+
   </body>
 </html>

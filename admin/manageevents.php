@@ -57,7 +57,7 @@
                                     <th>Location</th>
                                     <th>Banner</th>
                                     <th>status</th>
-                                    <th>Action</th>
+                                    <th width="200px">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>

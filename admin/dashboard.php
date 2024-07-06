@@ -5,6 +5,7 @@
 <?php include "includes/header.php"; ?>
 <link rel="stylesheet" href="dist/all.min.css">
 <link rel="stylesheet" href="dist/style.css">
+
 <style>
 	 body{
 		overflow:hidden;
@@ -27,12 +28,6 @@
 
     .panel.show {
         opacity: 1;
-    }
-    .card {
-        border-radius: 5px !important;
-        border : 0px !important;
-        border-color: none !important;
-      
     }
     .small-box{
         position :absolute;
@@ -62,7 +57,7 @@
            <?php 
             include "includes/topnav.php"; ?>
             <main class="app-main">
-            <div class="app-content-header mt-1"> 
+            <div class="app-content-header mb-0"> 
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
@@ -83,11 +78,11 @@
                 <div class="container-fluid"> 
                     <div class="row">
 								    <div class="col-sm-6 col-lg-3">
-								 	    <div class="card" style="background-color: #0A3D62 !important;">
+								 	    <div class="card text-bg-primary" >
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title text-light">Website Visits</h5>
+														<h5 class="card-title text-light">Registered Users</h5>
 													</div>
 
 													<div class="col-auto">
@@ -96,7 +91,7 @@
                                                     	</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3 text-light">14</h1>
+												<h1 class=" text-light"> <?php echo $registeredUsersCount ?? '0'; ?></h1>
 												<div class="mb-0">
 												<span class="text-light"><a href="" class="text-light">This Week: </a> </span>
 												<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i> 6 </span>
@@ -105,7 +100,7 @@
 										</div>
 									</div> 
 									<div class="col-sm-6 col-lg-3">
-										<div class="card" style="background-color: #0A3D62 !important;">
+										<div class="card text-bg-warning" >
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
@@ -118,7 +113,7 @@
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3 text-light">45</h1>
+												<h1 class=" text-light">45</h1>
 												<div class="mb-0">
 												<span class="text-light panel-footer"><a href="" class="text-light">More Info </a><i class="bi bi-link-45deg"></i> </span>
 												<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i></span>
@@ -129,7 +124,7 @@
                                     </div>
 
 									<div class="col-sm-6 col-lg-3">
-									<div class="card" style="background-color: #0A3D62 !important;">
+									<div class="card text-bg-danger" >
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
@@ -142,7 +137,7 @@
                                                     	</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3 text-light">0</h1>
+												<h1 class=" text-light">0</h1>
 												<div class="mb-0">
 												<span class="text-light"><a href="" class="text-light">This Week: </a> </span>
 												<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i> 6 </span>
@@ -153,7 +148,7 @@
                                        
 									
                                     <div class="col-sm-6 col-lg-3">
-										<div class="card" style="background-color: #0A3D62 !important;">
+										<div class="card text-bg-info" >
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
@@ -166,7 +161,7 @@
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3 text-light "> <?php echo $adminCount ?? '0'; ?></h1>
+												<h1 class=" text-light "> <?php echo $adminCount ?? '0'; ?></h1>
 												<div class="mb-0">
 												<span class="text-light panel-footer"><a href="" class="text-light">More Info</a><i class="bi bi-link-45deg"></i> </span>
 												<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
@@ -180,7 +175,7 @@
 								 
 
 									<div class="col-sm-6 col-lg-3">
-										<div class="card " style="background-color: #0A3D62 !important;">
+										<div class="card  text-bg-success" >
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
@@ -193,7 +188,7 @@
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3 text-light">5</h1>
+												<h1 class=" text-light">5</h1>
 												<div class="mb-0">
 												<span class="text-light panel-footer"><a href="" class="text-light">More Info</a><i class="bi bi-link-45deg"></i> </span>
 											<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
@@ -204,7 +199,7 @@
                                     </div>
 
 									<div class="col-sm-6 col-lg-3">
-										<div class="card" style="background-color: #0A3D62 !important;">
+										<div class="card text-bg-primary" >
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
@@ -217,7 +212,7 @@
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3 text-light">45</h1>
+												<h1 class=" text-light">45</h1>
 												<div class="mb-0">
 												<span class="text-light panel-footer"><a href="" class="text-light">More Info </a><i class="bi bi-link-45deg"></i> </span>
 												<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i></span>
@@ -228,7 +223,7 @@
                                     </div>
 
 									<div class="col-sm-6 col-lg-3">
-										<div class="card " style="background-color: #0A3D62 !important;">
+										<div class="card  text-bg-success" >
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
@@ -241,7 +236,7 @@
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3 text-light"><?php echo $memberCount ?? '0'; ?></h1>
+												<h1 class=" text-light"><?php echo $memberCount ?? '0'; ?></h1>
 												<div class="mb-0">
 												<span class="text-light panel-footer"><a href="" class="text-light">More Info</a><i class="bi bi-link-45deg"></i> </span>
 											<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
@@ -253,7 +248,7 @@
                                        
 									
                                     <div class="col-sm-6 col-lg-3">
-										<div class="card" style="background-color: #0A3D62 !important;">
+										<div class="card text-bg-warning" >
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
@@ -266,7 +261,7 @@
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3 text-light"> <?php echo $adminCount ?? '0'; ?></h1>
+												<h1 class=" text-light"> <?php echo $adminCount ?? '0'; ?></h1>
 												<div class="mb-0">
 												<span class="text-light panel-footer"><a href="" class="text-light">More Info</a><i class="bi bi-link-45deg"></i> </span>
 												<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>

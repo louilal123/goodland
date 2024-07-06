@@ -23,5 +23,7 @@ $memberCount = $mainClass->count_all_members();
 
 $events = $mainClass->get_all_events();
 // $eventsCount = $mainClass->count_all_events()
+
+$registeredUsersCount = $mainClass->count_registered_users();
 ?>
 

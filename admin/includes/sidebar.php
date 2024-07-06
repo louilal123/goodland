@@ -1,7 +1,9 @@
 <style>
- /* Sidebar Styling */
+/* Sidebar Styling */
 .app-sidebar {
+    position: fixed; /* Ensure the sidebar stays in place */
     top: 0;
+    left: 0; /* Fixes sidebar positioning */
     width: 250px;
     height: 100%;
     background-color: #343a40;
@@ -9,6 +11,7 @@
     padding-left: 12px;
     padding-bottom: 15px;
     padding-right: 20px;
+    z-index: 1000 !important;
 }
 
 .sidebar-brand {
@@ -38,6 +41,7 @@
 
 .sidebar-wrapper {
     margin-top: 20px;
+    z-index: 0;
 }
 
 .nav.sidebar-menu {
@@ -46,33 +50,34 @@
 }
 
 .nav-item1 {
-    margin-bottom: 8px; 
-    margin-right: 5px;
+    margin-bottom: 8px;
 }
 
-.nav-link1 {
+.nav-link12 {
     display: flex;
     align-items: center;
-    padding: 2px 10px; 
+    padding-left: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 0px; 
     color: #adb5bd;
     text-decoration: none;
-    border-radius: 2px;
+    border-radius: 4px; 
     transition: background-color 0.3s, color 0.3s;
-    font-size: 1.25rem;
+    /* font-size: 1.25rem; */
 }
 
-.nav-link1:hover {
+.nav-link12:hover {
     background-color: #495057;
     color: #fff;
 }
 
-.nav-link1.active {
-    background-color: Teal;
+.nav-link12.active {
     color: #fff;
 }
 
-.nav-link1 .icons {
-    margin-right: 8px;
+.nav-link12 .icons {
+    margin-right: 10px;
     font-size: 1rem;
 }
 
@@ -86,87 +91,87 @@
 }
 
 .p-tag {
-    margin: 4px;
+    margin: 0; /* Removed margin */
     font-size: 1rem;
-    /* text-transform: uppercase; */
 }
-.nav-header, .nav-item1 .nav-link1, .nav-link1 .icon .logoo{
-    color: #ffffff !important;
+
+.nav-header, .nav-item1 .nav-link12, .nav-link12 .icon .logoo {
+    color: #f0f0f0 !important;
 }
 
 </style>
 <?php  $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/")+1); ?>
 
 <aside class="app-sidebar bg-body-light shadow" data-bs-theme="light">
-    <div class="sidebar-brand mt-2">
+    <div class="sidebar-brand">
         <a href="" class="brand-link active">
             <img src="uploads/image.png" alt="Logo" class="brand-image shadow" style="width: 34px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.2) !important;">
-            <h3 class="brand-text text-start mt-2 logoo shadow" style="color: #ffff !important;"><b>Good</b><i>Land</i></h3>
+            <h3 class="brand-text text-start  logoo shadow mt-2" style="color: #ffff !important;">Good<i>Land</i></h3>
         </a>
     </div>
     <div class="sidebar-wrapper">
         <nav class="mt-2">
             <ul class="nav sidebar-menu flex-column">
                 <li class="nav-item1">
-                    <a href="dashboard.php" class="nav-link1 text-bold <?= $page == 'dashboard.php' ? ' active':'' ?>">
+                    <a href="dashboard.php" class="nav-link12 text-bold <?= $page == 'dashboard.php' ? ' active text-bg-primary':'' ?>">
                         <i class="icons bi bi-ui-checks-grid"></i>
                         <p class="p-tag">Dashboard</p>
                     </a>
                 </li>
                 <li class="nav-header">Manage</li>
                 <li class="nav-item1">
-                    <a href="manageevents.php" class="nav-link1 <?= $page == 'manageevents.php' ? ' active':'' ?>">
+                    <a href="manageevents.php" class="nav-link12 <?= $page == 'manageevents.php' ? ' active text-bg-primary':'' ?>">
                         <i class="icons bi bi-calendar-fill"></i>
                         <p class="p-tag">List of Events  <i class="nav-arrow bi bi-chevron-right" style="margin-left: 60px;"></i></p>
                     </a>
                 </li>
                 <li class="nav-item1">
-                    <a href="manageproducts.php" class="nav-link1 <?= $page == 'manageproducts.php' ? ' active':'' ?>">
+                    <a href="manageproducts.php" class="nav-link12 <?= $page == 'manageproducts.php' ? ' active text-bg-primary':'' ?>">
                         <i class="icons bi bi-box-seam"></i>
                         <p class="p-tag">List of Products</p>
                     </a>
                 </li>
                 <li class="nav-item1">
-                    <a href="#" class="nav-link1">
+                    <a href="#" class="nav-link12">
                         <i class="icons bi bi-briefcase"></i>
                         <p class="p-tag">List of Projects</p>
                     </a>
                 </li>
                 <li class="nav-item1">
-                    <a href="managemembers.php" class="nav-link1 <?= $page == 'managemembers.php' ? ' active':'' ?>">
+                    <a href="managemembers.php" class="nav-link12 <?= $page == 'managemembers.php' ? ' active text-bg-primary':'' ?>">
                         <i class="icons bi bi-people"></i>
                         <p class="p-tag">List of Members</p>
                     </a>
                 </li>
                 <li class="nav-item1">
-                    <a href="#" class="nav-link1">
+                    <a href="#" class="nav-link12">
                         <i class="icons bi bi-shop"></i>
                         <p class="p-tag">List of Workshops</p>
                     </a>
                 </li>
                 <li class="nav-item1">
-                    <a href="managecategories.php" class="nav-link1 <?= $page == 'managecategories.php' ? ' active':'' ?>">
+                    <a href="managecategories.php" class="nav-link12 <?= $page == 'managecategories.php' ? ' active text-bg-primary':'' ?>">
                         <i class="icons bi bi-grid"></i>
                         <p class="p-tag">List of Categories</p>
                     </a>
                 </li>
 
                 <li class="nav-item1">
-                    <a href="manageadmins.php" class="nav-link1 <?= $page == 'manageadmins.php' ? ' active':'' ?>">
+                    <a href="manageadmins.php" class="nav-link12 <?= $page == 'manageadmins.php' ? ' active text-bg-primary':'' ?>">
                         <i class="icons bi bi-shield-lock"></i>
                         <p class="p-tag">List of Admins</p>
                     </a>
                 </li>
                 <li class="nav-header">Reports</li>
                 <li class="nav-item1">
-                    <a href="managereports.php" class="nav-link1 <?= $page == 'managereports.php' ? ' active':'' ?>">
+                    <a href="managereports.php" class="nav-link12 <?= $page == 'managereports.php' ? ' active text-bg-primary':'' ?>">
                         <i class="icons bi bi-file-earmark-text"></i>
                         <p class="p-tag">Reports</p>
                     </a>
                 </li>
                 <li class="nav-header">Maintenance</li>
                 <li class="nav-item1">
-                    <a href="managesettings.php" class="nav-link1 <?= $page == 'managesettings.php' ? ' active':'' ?>">
+                    <a href="managesettings.php" class="nav-link12 <?= $page == 'managesettings.php' ? ' active text-bg-primary':'' ?>">
                         <i class="icons bi bi-gear"></i>
                         <p class="p-tag">Settings</p>
                     </a>
@@ -183,7 +188,7 @@
         background-color: none !important;
         
     }
-    .nav-item11, .nav-link1:hover {
+    .nav-item11, .nav-link12:hover {
         background-color: transparent !important;
         color: rgb(50, 150, 200) !important;
     }

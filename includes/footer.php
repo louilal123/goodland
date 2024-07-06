@@ -91,6 +91,28 @@
 <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
 <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    
+
 <!-- Main JS File -->
 <script src="assets/js/main.js"></script>
+
+
+<!-- crud sweetalerts  this is included inside all the pages below uaing include-->
+<?php
+if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+?>
+<script>
+Swal.fire({
+    icon: "<?php echo $_SESSION['status_icon']; ?>",
+    title: "<?php echo $_SESSION['status']; ?>",
+    confirmButtonText: "Ok"
+});
+</script>
+<?php
+unset($_SESSION['status']);
+unset($_SESSION['status_icon']);
+}
+?>
+
 

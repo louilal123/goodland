@@ -3,15 +3,7 @@
 <html lang="en"> 
 <?php include "includes/header.php"; ?>
 <link rel="stylesheet" href="dist/custom.css">
-<style>
-     body{
-		overflow:hidden;
-	}
-   
-    .modal{
-        border-radius: 0px !important;
-    }
-</style>
+
 <body class="layout-fixed-complete sidebar-expand-lg sidebar-mini bg-body-tertiary">
 
           

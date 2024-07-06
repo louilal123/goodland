@@ -188,6 +188,14 @@ public function count_all_members() {
     return $result['total'];
 }
 
+public function count_registered_users(){
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM users");
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total'];
+}
+
+
 
 public function insert_member($member_name, $description, $photo) {
     $sql = "INSERT INTO members (member_name, description, member_photo, date_created) 
@@ -302,6 +310,43 @@ public function get_products() {
         return [];
     }
 }
+
+        public function register_user($fullname, $email, $birthday, $username, $password) {
+            try {
+                $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+                $date_created = date('Y-m-d H:i:s');
+                $status = 'enabled';
+
+                $stmt = $this->pdo->prepare("INSERT INTO users (fullname, email, birthday, username, password, date_created, date_updated, last_login, status) VALUES (:fullname, :email, :birthday, :username, :password, :date_created, :date_updated, :last_login, :status)");
+                $stmt->execute([
+                    ':fullname' => $fullname,
+                    ':email' => $email,
+                    ':birthday' => $birthday,
+                    ':username' => $username,
+                    ':password' => $hashed_password,
+                    ':date_created' => $date_created,
+                    ':date_updated' => $date_created,
+                    ':last_login' => null,
+                    ':status' => $status
+                ]);
+                return true;
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+                return false;
+            }
+        }
+
+        public function is_email_exists($email) {
+            $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
+            $stmt->execute([':email' => $email]);
+            return $stmt->fetchColumn() > 0;
+        }
+
+        public function is_username_exists($username) {
+            $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM users WHERE username = :username");
+            $stmt->execute([':username' => $username]);
+            return $stmt->fetchColumn() > 0;
+        }
 
 
 }

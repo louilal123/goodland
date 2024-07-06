@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,11 +43,11 @@
 <?php include "includes/topnav.php"; ?>
 
   <main class="main">
-    <section class="services section">
+    <section class="services section ">
       <div class="container">
         <div class="row">
           <!-- Add Login Form Here -->
-          <div class="col-md-6 offset-md-3 mt-5 mb-5">
+          <div class="col-md-6 offset-md-3 mt-3 mb-5">
             <!-- Material form login -->
             <div class="card">
               <h2 class="card-header info-color white-text text-center py-4">
@@ -54,44 +56,65 @@
 
               <!--Card content-->
               <div class="card-body px-lg-5 pt-0">
+              <form style="color: #757575;" action="classes/signup.php" method="post">
 
-                <!-- Form -->
-                <form style="color: #757575;" action="#!">
-
-                <div class="md-form mt-2">
-                  <label for="materialLoginFormPassword">Fullname</label>
-                    <input type="text" id="materialLoginFormPassword" class="form-control" name="fullname">
+                  <div class="md-form mt-2">
+                    <label for="materialLoginFormFullname">Fullname</label>
+                    <input type="text" id="materialLoginFormFullname" class="form-control 
+                    <?php echo !empty($_SESSION['error_fullname']) ? 'is-invalid' : ''; ?>" name="fullname">
+                    <?php if (!empty($_SESSION['error_fullname'])): ?>
+                        <div class="invalid-feedback"><?php echo $_SESSION['error_fullname']; unset($_SESSION['error_fullname']); ?></div>
+                    <?php endif; ?>
                   </div>
 
                   <div class="md-form mb-2">
-                  <label for="materialLoginFormEmail">E-mail</label>
-                    <input type="email" id="materialLoginFormEmail" class="form-control" name="email">
-                   
+                    <label for="materialLoginFormEmail">E-mail</label>
+                    <input type="email" id="materialLoginFormEmail" class="form-control <?php echo !empty($_SESSION['error_email']) ? 'is-invalid' : ''; ?>" name="email">
+                    <?php if (!empty($_SESSION['error_email'])): ?>
+                        <div class="invalid-feedback"><?php echo $_SESSION['error_email']; unset($_SESSION['error_email']); ?></div>
+                    <?php endif; ?>
                   </div>
 
                   <div class="md-form mb-2">
-                  <label for="materialLoginFormPassword">Birthday</label>
-                    <input type="date" id="materialLoginFormPassword" class="form-control" name="bday">
+                    <label for="materialLoginFormBirthday">Birthday</label>
+                    <input type="date" id="materialLoginFormBirthday" class="form-control <?php echo !empty($_SESSION['error_bday']) ? 'is-invalid' : ''; ?>" name="bday">
+                    <?php if (!empty($_SESSION['error_bday'])): ?>
+                        <div class="invalid-feedback"><?php echo $_SESSION['error_bday']; unset($_SESSION['error_bday']); ?></div>
+                    <?php endif; ?>
                   </div>
 
-                  
                   <div class="md-form mb-2">
-                  <label for="materialLoginFormPassword">Password</label>
-                    <input type="password" id="materialLoginFormPassword" class="form-control" name="pswd">
+                    <label for="materialLoginFormUsername">Username</label>
+                    <input type="text" id="materialLoginFormUsername" class="form-control <?php echo !empty($_SESSION['error_username']) ? 'is-invalid' : ''; ?>" name="username">
+                    <?php if (!empty($_SESSION['error_username'])): ?>
+                        <div class="invalid-feedback"><?php echo $_SESSION['error_username']; unset($_SESSION['error_username']); ?></div>
+                    <?php endif; ?>
                   </div>
 
-                  
                   <div class="md-form mb-2">
-                  <label for="materialLoginFormPassword">Confirm Password</label>
-                    <input type="password" id="materialLoginFormPassword" class="form-control" name="cpswd">
+                    <label for="materialLoginFormPassword">Password</label>
+                    <input type="password" id="materialLoginFormPassword" class="form-control <?php echo !empty($_SESSION['error_password']) ? 'is-invalid' : ''; ?>" name="pswd">
+                    <?php if (!empty($_SESSION['error_password'])): ?>
+                        <div class="invalid-feedback"><?php echo $_SESSION['error_password']; unset($_SESSION['error_password']); ?></div>
+                    <?php endif; ?>
                   </div>
 
-                  <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Signup</button>
+                  <div class="md-form mb-4">
+                    <label for="materialLoginFormConfirmPassword">Confirm Password</label>
+                    <input type="password" id="materialLoginFormConfirmPassword" class="form-control <?php echo !empty($_SESSION['error_confirm_password']) ? 'is-invalid' : ''; ?>" name="cpswd">
+                    <?php if (!empty($_SESSION['error_confirm_password'])): ?>
+                        <div class="invalid-feedback"><?php echo $_SESSION['error_confirm_password']; unset($_SESSION['error_confirm_password']); ?></div>
+                    <?php endif; ?>
+                  </div>
 
-                  <p>Already have an account?
+                  <button type="submit" class="btn btn-primary btn-block z-depth-0 mb-2"  data-mdb-ripple-init>Signup</button>
+                  <!-- <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Signup</button> -->
+
+                  <p class="text-center py-2"> Already have an account?
                     <a href="get-started" >Signin</a>
                   </p>
-                </form>
+                  </form>
+
 
               </div>
 
