@@ -63,7 +63,7 @@ session_start();
                     <input type="text" id="materialLoginFormFullname" class="form-control 
                     <?php echo !empty($_SESSION['error_fullname']) ? 'is-invalid' : ''; ?>" name="fullname">
                     <?php if (!empty($_SESSION['error_fullname'])): ?>
-                        <div class="invalid-feedback"><?php echo $_SESSION['error_fullname']; unset($_SESSION['error_fullname']); ?></div>
+                        <div class="invalid-feedback mb-2"><?php echo $_SESSION['error_fullname']; unset($_SESSION['error_fullname']); ?></div>
                     <?php endif; ?>
                   </div>
 
@@ -71,7 +71,7 @@ session_start();
                     <label for="materialLoginFormEmail">E-mail</label>
                     <input type="email" id="materialLoginFormEmail" class="form-control <?php echo !empty($_SESSION['error_email']) ? 'is-invalid' : ''; ?>" name="email">
                     <?php if (!empty($_SESSION['error_email'])): ?>
-                        <div class="invalid-feedback"><?php echo $_SESSION['error_email']; unset($_SESSION['error_email']); ?></div>
+                        <div class="invalid-feedback mb-2"><?php echo $_SESSION['error_email']; unset($_SESSION['error_email']); ?></div>
                     <?php endif; ?>
                   </div>
 
@@ -79,7 +79,7 @@ session_start();
                     <label for="materialLoginFormBirthday">Birthday</label>
                     <input type="date" id="materialLoginFormBirthday" class="form-control <?php echo !empty($_SESSION['error_birthday']) ? 'is-invalid' : ''; ?>" name="bday">
                     <?php if (!empty($_SESSION['error_birthday'])): ?>
-                        <div class="invalid-feedback"><?php echo $_SESSION['error_birthday']; unset($_SESSION['error_birthday']); ?></div>
+                        <div class="invalid-feedback mb-2"><?php echo $_SESSION['error_birthday']; unset($_SESSION['error_birthday']); ?></div>
                     <?php endif; ?>
                   </div>
 
@@ -87,7 +87,7 @@ session_start();
                     <label for="materialLoginFormUsername">Username</label>
                     <input type="text" id="materialLoginFormUsername" class="form-control <?php echo !empty($_SESSION['error_username']) ? 'is-invalid' : ''; ?>" name="username">
                     <?php if (!empty($_SESSION['error_username'])): ?>
-                        <div class="invalid-feedback"><?php echo $_SESSION['error_username']; unset($_SESSION['error_username']); ?></div>
+                        <div class="invalid-feedback mb-2"><?php echo $_SESSION['error_username']; unset($_SESSION['error_username']); ?></div>
                     <?php endif; ?>
                   </div>
 
@@ -95,7 +95,7 @@ session_start();
                     <label for="materialLoginFormPassword">Password</label>
                     <input type="password" id="materialLoginFormPassword" class="form-control <?php echo !empty($_SESSION['error_password']) ? 'is-invalid' : ''; ?>" name="pswd">
                     <?php if (!empty($_SESSION['error_password'])): ?>
-                        <div class="invalid-feedback"><?php echo $_SESSION['error_password']; unset($_SESSION['error_password']); ?></div>
+                        <div class="invalid-feedback mb-2"><?php echo $_SESSION['error_password']; unset($_SESSION['error_password']); ?></div>
                     <?php endif; ?>
                   </div>
 
@@ -103,7 +103,7 @@ session_start();
                     <label for="materialLoginFormConfirmPassword">Confirm Password</label>
                     <input type="password" id="materialLoginFormConfirmPassword" class="form-control <?php echo !empty($_SESSION['error_confirm_password']) ? 'is-invalid' : ''; ?>" name="cpswd">
                     <?php if (!empty($_SESSION['error_confirm_password'])): ?>
-                        <div class="invalid-feedback"><?php echo $_SESSION['error_confirm_password']; unset($_SESSION['error_confirm_password']); ?></div>
+                        <div class="invalid-feedback mb-2"><?php echo $_SESSION['error_confirm_password']; unset($_SESSION['error_confirm_password']); ?></div>
                     <?php endif; ?>
                   </div>
 
