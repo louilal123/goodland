@@ -46,7 +46,7 @@
  
                                 <div class="card-body">
                                     <div class="container-fluid">
-                                <table id="myTable" class="table-responsive table table-hover table-bordered table-striped w-100">
+                                <table id="myTable" class="table-responsive table table-hover table-striped w-100">
                                 <thead>
                                
                                 <tr>

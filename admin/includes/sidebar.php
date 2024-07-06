@@ -18,6 +18,11 @@
     display: flex;
     align-items: center;
     padding: 10px 10px;
+    text-decoration: none !important;
+    
+}
+.brand-link{
+    text-decoration: none !important;
 }
 
 .sidebar-brand .brand-link {
@@ -91,8 +96,11 @@
 }
 
 .p-tag {
-    margin: 0; /* Removed margin */
-    font-size: 1rem;
+    margin: 0;
+    font-size: 0.75rem;
+    opacity: 0.8;
+    color: white;
+    text-transform: uppercase;
 }
 
 .nav-header, .nav-item1 .nav-link12, .nav-link12 .icon .logoo {
@@ -113,20 +121,20 @@
         <nav class="mt-2">
             <ul class="nav sidebar-menu flex-column">
                 <li class="nav-item1">
-                    <a href="dashboard.php" class="nav-link12 text-bold <?= $page == 'dashboard.php' ? ' active text-bg-primary':'' ?>">
+                    <a href="dashboard" class="nav-link12 text-bold <?= $page == 'dashboard.php' ? ' active text-bg-primary':'' ?>">
                         <i class="icons bi bi-ui-checks-grid"></i>
                         <p class="p-tag">Dashboard</p>
                     </a>
                 </li>
                 <li class="nav-header">Manage</li>
                 <li class="nav-item1">
-                    <a href="manageevents.php" class="nav-link12 <?= $page == 'manageevents.php' ? ' active text-bg-primary':'' ?>">
+                    <a href="manageevents" class="nav-link12 <?= $page == 'manageevents.php' ? ' active text-bg-primary':'' ?>">
                         <i class="icons bi bi-calendar-fill"></i>
                         <p class="p-tag">List of Events  <i class="nav-arrow bi bi-chevron-right" style="margin-left: 60px;"></i></p>
                     </a>
                 </li>
                 <li class="nav-item1">
-                    <a href="manageproducts.php" class="nav-link12 <?= $page == 'manageproducts.php' ? ' active text-bg-primary':'' ?>">
+                    <a href="manageproducts" class="nav-link12 <?= $page == 'manageproducts.php' ? ' active text-bg-primary':'' ?>">
                         <i class="icons bi bi-box-seam"></i>
                         <p class="p-tag">List of Products</p>
                     </a>
@@ -138,7 +146,7 @@
                     </a>
                 </li>
                 <li class="nav-item1">
-                    <a href="managemembers.php" class="nav-link12 <?= $page == 'managemembers.php' ? ' active text-bg-primary':'' ?>">
+                    <a href="managemembers" class="nav-link12 <?= $page == 'managemembers.php' ? ' active text-bg-primary':'' ?>">
                         <i class="icons bi bi-people"></i>
                         <p class="p-tag">List of Members</p>
                     </a>
@@ -150,28 +158,28 @@
                     </a>
                 </li>
                 <li class="nav-item1">
-                    <a href="managecategories.php" class="nav-link12 <?= $page == 'managecategories.php' ? ' active text-bg-primary':'' ?>">
+                    <a href="managecategories" class="nav-link12 <?= $page == 'managecategories.php' ? ' active text-bg-primary':'' ?>">
                         <i class="icons bi bi-grid"></i>
                         <p class="p-tag">List of Categories</p>
                     </a>
                 </li>
 
                 <li class="nav-item1">
-                    <a href="manageadmins.php" class="nav-link12 <?= $page == 'manageadmins.php' ? ' active text-bg-primary':'' ?>">
+                    <a href="manageadmins" class="nav-link12 <?= $page == 'manageadmins.php' ? ' active text-bg-primary':'' ?>">
                         <i class="icons bi bi-shield-lock"></i>
                         <p class="p-tag">List of Admins</p>
                     </a>
                 </li>
                 <li class="nav-header">Reports</li>
                 <li class="nav-item1">
-                    <a href="managereports.php" class="nav-link12 <?= $page == 'managereports.php' ? ' active text-bg-primary':'' ?>">
+                    <a href="managereports" class="nav-link12 <?= $page == 'managereports.php' ? ' active text-bg-primary':'' ?>">
                         <i class="icons bi bi-file-earmark-text"></i>
                         <p class="p-tag">Reports</p>
                     </a>
                 </li>
                 <li class="nav-header">Maintenance</li>
                 <li class="nav-item1">
-                    <a href="managesettings.php" class="nav-link12 <?= $page == 'managesettings.php' ? ' active text-bg-primary':'' ?>">
+                    <a href="managesettings" class="nav-link12 <?= $page == 'managesettings.php' ? ' active text-bg-primary':'' ?>">
                         <i class="icons bi bi-gear"></i>
                         <p class="p-tag">Settings</p>
                     </a>

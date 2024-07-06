@@ -8,7 +8,7 @@
 
 <style>
 	 body{
-		overflow:hidden;
+		overflow:hidden !important;
 	}
 	h5{
 		opacity: 0.7 !important;
@@ -56,12 +56,12 @@
         <div class="app-main-wrapper"> 
            <?php 
             include "includes/topnav.php"; ?>
-            <main class="app-main">
+            <main class="app-main" style="overflow: hidden;">
             <div class="app-content-header mb-0"> 
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0 greetingmsg"> <span id="greeting"></span> <strong><?php echo $adminDetails['fullname']; ?></strong> !!!</h3>
+                            <h3 class="mb-0 greetingmsg"> <span id="greeting"></span> <strong><?php echo $adminDetails['fullname']; ?></strong>.</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
@@ -76,7 +76,7 @@
             </div>
             <div class="app-content"> 
                 <div class="container-fluid"> 
-                    <div class="row">
+                    <div class="row mt-0">
 								    <div class="col-sm-6 col-lg-3">
 								 	    <div class="card text-bg-primary" >
 											<div class="card-body">
@@ -273,7 +273,7 @@
 					</div>
 					<div class="row mt-4">
     <div class="col-lg-6">
-        <div class="card mb-4 shadow-sm">
+        <div class="card mb-4 text-bg-white shadow-sm">
             <div class="card-header border-0">
                 <div class="d-flex justify-content-between align-items-center">
                     <h3 class="card-title mb-0">Website Visits All Time</h3>
