@@ -31,6 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $hasError = true;
     }
 
+    if (empty($birthday)) {
+        $_SESSION['error_birthday'] = "Birthday is required.";
+        $hasError = true;
+    }
+
     if (empty($username)) {
         $_SESSION['error_username'] = "Username is required.";
         $hasError = true;

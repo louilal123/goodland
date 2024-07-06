@@ -77,9 +77,9 @@ session_start();
 
                   <div class="md-form mb-2">
                     <label for="materialLoginFormBirthday">Birthday</label>
-                    <input type="date" id="materialLoginFormBirthday" class="form-control <?php echo !empty($_SESSION['error_bday']) ? 'is-invalid' : ''; ?>" name="bday">
-                    <?php if (!empty($_SESSION['error_bday'])): ?>
-                        <div class="invalid-feedback"><?php echo $_SESSION['error_bday']; unset($_SESSION['error_bday']); ?></div>
+                    <input type="date" id="materialLoginFormBirthday" class="form-control <?php echo !empty($_SESSION['error_birthday']) ? 'is-invalid' : ''; ?>" name="bday">
+                    <?php if (!empty($_SESSION['error_birthday'])): ?>
+                        <div class="invalid-feedback"><?php echo $_SESSION['error_birthday']; unset($_SESSION['error_birthday']); ?></div>
                     <?php endif; ?>
                   </div>
 
