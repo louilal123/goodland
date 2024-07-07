@@ -1,4 +1,4 @@
-<?php include "admin/classes/admindetails.php"; ?>
+<?php //include "admin/classes/admindetails.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
