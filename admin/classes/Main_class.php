@@ -71,7 +71,8 @@ class Main_class {
             'date_created' => $user['date_created'],
             'date_updated' => $user['date_updated'],
             'email' => $user['email'],
-            'status' => $user['status']
+            'status' => $user['status'],
+            'last_signedin' => $user['last_signedin']
             
         ];
     } else {

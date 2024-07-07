@@ -87,14 +87,14 @@
 
 													<div class="col-auto">
 														<div class="stat text-primary">
-                                                        <i class="bi bi-person small-box text-light"></i>
+                                                        <i class="bi bi-person-plus small-box text-light"></i>
                                                     	</div>
 													</div>
 												</div>
 												<h1 class=" text-light"> <?php echo $registeredUsersCount ?? '0'; ?></h1>
 												<div class="mb-0">
-												<span class="text-light"><a href="" class="text-light">This Week: </a> </span>
-												<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i> 6 </span>
+												<span class="text-light panel-footer"><a href="" class="text-light">More Info </a><i class="bi bi-link-45deg"></i> </span>
+												<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
 												</div>
 											</div>
 										</div>
@@ -139,7 +139,7 @@
 												</div>
 												<h1 class=" text-light">0</h1>
 												<div class="mb-0">
-												<span class="text-light"><a href="" class="text-light">This Week: </a> </span>
+												<span class="text-light panel-footer"><a href="" class="text-light">More Info </a> </span>
 												<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i> 6 </span>
 												</div>
 											</div>
@@ -175,7 +175,7 @@
 								 
 
 									<div class="col-sm-6 col-lg-3">
-										<div class="card  text-bg-success" >
+										<div class="card  text-bg-info" >
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
@@ -184,14 +184,14 @@
 
 													<div class="col-auto">
 														<div class="stat text-primary">
-															<i class="bi bi-book small-box text-light"></i>
+															<i class="bi bi-calendar small-box text-light"></i>
 														</div>
 													</div>
 												</div>
 												<h1 class=" text-light">5</h1>
 												<div class="mb-0">
-												<span class="text-light panel-footer"><a href="" class="text-light">More Info</a><i class="bi bi-link-45deg"></i> </span>
-											<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
+												<span class="text-light panel-footer"><a href="" class="text-light">More Info </a><i class="bi bi-link-45deg"></i> </span>
+												<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
 												
 												</div>
 											</div>
@@ -271,7 +271,7 @@
 									</div>  
 
 					</div>
-					<div class="row mt-4">
+<div class="row mt-4">
     <div class="col-lg-6">
         <div class="card mb-4 text-bg-white shadow-sm">
             <div class="card-header border-0">

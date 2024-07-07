@@ -6,7 +6,30 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
      <!-- swetalert  -->
      <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
-     
+     <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+import { Input, Ripple, initMDB } from "mdb-ui-kit";
+
+initMDB({ Input, Ripple });
+
+(() => {
+  'use strict';
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation');
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms).forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  });
+})();
+   </script>
 <!-- ajax codes  for viwing modals etc autopopulate-->
 <script src="dist\js\customajax.js"></script>
 

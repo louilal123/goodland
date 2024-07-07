@@ -15,12 +15,12 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Profile Information</h3>
+                            <h3 class="mb-0">Profile Information / Edit Profile</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                                <li class="breadcrumb-item active" aria-current="page">Edit Profile</li>
                             </ol>
                         </div>
                     </div>
@@ -32,61 +32,39 @@
                         <div class="col-md-6">
                             <div class="card mb-4 card-outline-primary">
                                 <div class="card-header d-flex">
-                                    <h3 class="card-title mb-0">Profile Information</h3>
-                                    <a href="editprofile" class="btn btn-success ms-auto btn-end">Edit Profile</a>
+                                    <h3 class="card-title mb-0">Edit Profile Information </h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col text-center">
-                                                <img src="<?php echo $adminDetails['admin_photo'] ?? 'uploads/default-photo.jpg'; ?>" class="img-fluid rounded-circle mb-3" alt="Admin Photo" style="width: 150px;">
+                                                <img src="<?php echo $adminDetails['admin_photo'] ?? 'uploads/default-photo.jpg'; ?>" 
+                                                class="img-fluid rounded-circle mb-3" alt="Admin Photo" style="width: 150px;">
                                                
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="row mb-3">
                                                     <div class="col">
                                                         <label for="fullname" class="form-label">Full Name</label>
-                                                       <h5><?php echo $adminDetails['fullname']; ?></h5>
+                                                        <input type="text" class="form-control" id="fullname" 
+                                                        value="<?php echo $adminDetails['fullname']; ?>" >
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col">
                                                         <label for="username" class="form-label">Username</label>
-                                                       <h5><?php echo $adminDetails['username']; ?></h5>
+                                                        <input type="text" class="form-control" id="username" value="<?php echo $adminDetails['username']; ?>" >
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col">
                                                         <label for="email" class="form-label">Email</label>
-                                                     <h5><?php echo $adminDetails['email']; ?></h5> 
+                                                        <input type="text" class="form-control" id="email" value="<?php echo $adminDetails['email']; ?>" >
                                                     </div>
                                                 </div>
-                                                <div class="row mb-3">
-                                                    <div class="col">
-                                                        <label for="role" class="form-label">Role</label>
-                                                       <h5><?php echo $adminDetails['role']; ?></h5>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-3">
-                                                    <div class="col">
-                                                        <label for="date_created" class="form-label">Date Created</label>
-                                                       <h5><?php echo $adminDetails['date_created']; ?></h5>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-3">
-                                                    <div class="col">
-                                                        <label for="date_updated" class="form-label">Date Updated</label>
-                                                     <h5><?php echo $adminDetails['date_updated']; ?></h5>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-3">
-                                                    <div class="col">
-                                                        <label for="last_signedin" class="form-label">Last Signed In</label>
-                                                       <h5><?php echo $adminDetails['last_signedin'] ?: '00:00:00'; ?></h5>
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-primary">Change Password</button>
-                                            </div>
+                                                <button class="btn btn-primary ms-auto float-end ">Update</button>
+                                                <a href="profile" class="btn btn-secondary btn-danger btn-outline me-2 float-end">Back</a>
+                                               
                                         </div>
                                     </div>
                                 </div>

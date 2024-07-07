@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
     } else {
-        $_SESSION['error_message'] = "Please correct the errors and try again.";
+        $_SESSION['error_message'] = "Please enter valid credentials.";
         header("Location: ../index.php");
         exit();
     }

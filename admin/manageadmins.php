@@ -183,8 +183,8 @@
                     <div class="row">
                         <div class="col">
                             <label for="fullname" class="form-label">Full Name</label>
-                            <input type="text" class="form-control roundedred" name="fullname" id="fullname" 
-                         value="<?php echo $_SESSION['form_data']['fullname'] ?? ''; ?>">
+                            <input type="text" name="fullname" id="fullname" 
+                         value="<?php echo $_SESSION['form_data']['fullname'] ?? ''; ?>"  class="form-control roundedred">
                             <?php if (isset($_SESSION['error_fullname'])): ?>
                                 <p class="error text-danger"><?php echo $_SESSION['error_fullname']; unset($_SESSION['error_fullname']); ?></p>
                             <?php endif; ?>
