@@ -96,6 +96,9 @@
     text-transform: uppercase;
     padding-left: 12px;
 }
+.nav-arrow{
+    margin-left: 4px;
+}
 
 .p-tag {
     margin: 0;
@@ -132,7 +135,7 @@
                 <li class="nav-item1">
                     <a href="manageevents" class="nav-link12 <?= $page == 'manageevents.php' ? ' active text-bg-primary text-light':'' ?>">
                         <i class="icons bi bi-calendar-fill"></i>
-                        <p class="p-tag">List of Events  <i class="nav-arrow bi bi-chevron-right" style="margin-left: 60px;"></i></p>
+                        <p class="p-tag">List of Events  <i class="nav-arrow bi bi-chevron-right" style="margin-left: 45px;"></i></p>
                     </a>
                 </li>
                 <li class="nav-item1">

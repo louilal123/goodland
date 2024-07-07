@@ -57,8 +57,7 @@
                                     <th>Photo</th>
                                     <th>Date Created</th>
                                     <th>Date Updated</th>
-                                   
-                                    <th>Action</th>
+                                    <th width="200px">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -100,7 +99,7 @@
         $('#member_photo1').val(data[4]);
         $('#date_created1').val(data[5]);
         $('#date_updated1').val(data[6]); -->
-                <div class="modal" id="viewMemberModal" tabindex="-1" aria-labelledby="viewMemberModalLabel" aria-hidden="true">
+                <div class="modal fade" id="viewMemberModal" tabindex="-1" aria-labelledby="viewMemberModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -156,7 +155,7 @@
     </div>
 </div>
                  <!-- end  -->
-<div class="modal" id="editMemberModal" tabindex="-1" aria-labelledby="editMemberModalLabel" aria-hidden="true">
+<div class="modal fade" id="editMemberModal" tabindex="-1" aria-labelledby="editMemberModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -169,12 +168,12 @@
                         <div class="col">
                             <label for="edit_photo" class="form-label">Photo</label>
                             <img id="photo" class="img-fluid mt-2" src="" alt="Current Member Photo" 
-                            style="display: flex; flex-direction: column; margin: auto; height: 200px; width: 200px; border-radius: 200px;"> </div>
+                            style="display: flex; flex-direction: column; margin: auto; height: 250px; width: 800px; "> </div>
                     </div>
                             <!-- <label for="edit_member_name" class="form-label">Member ID</label> -->
                             <input type="hidden" class="form-control" name="member_id" id="member_id" readonly>
                       
-                    <div class="row">
+                    <div class="row mt-4">
                         <div class="col">
                             <label for="edit_member_name" class="form-label">Member Name</label>
                             <input type="text" class="form-control" name="member_name" id="member_name"  
@@ -211,7 +210,7 @@
     </div>
 </div>          
                 <!-- start  -->
-                <div class="modal" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
+                <div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">

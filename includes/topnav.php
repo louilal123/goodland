@@ -17,7 +17,6 @@
           <li><a href="projects.php" class="<?= $page == 'projects.php' ? 'active':'' ?>">PROJECTS</a></li>
           <li><a href="#" class="<?= $page == 'methodology.php' ? 'active':'' ?>">METHODOLOGY</a></li>
           <li><a href="#" class="<?= $page == 'stories.php' ? 'active':'' ?>">STORIES</a></li>
-          <li><a href="#" class="<?= $page == 'members.php' ? 'active':'' ?>">MEMBERS</a></li>
           <li><a href="library" class="<?= $page == 'library.php' ? 'active':'' ?>">LIBRARY</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

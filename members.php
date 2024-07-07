@@ -1,14 +1,8 @@
-<?php include "admin/classes/admindetails.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <?php include "includes/header.php"; ?>
 
-<style>
-  .custom-card{
-    border-radius: 0px !important;
-  }
-</style>
 
 <body class="index-page">
 
@@ -17,25 +11,16 @@
   <main class="main">
 
     <!-- Hero Section -->
-    <section id="hero" class="hero section dark-background"> 
+    <section id="hero" class="hero section1 light-background" style="height: 50%;"> 
     <!-- light-background -->
 
-      <img src="uploads/mambacayao.png" alt="" data-aos="fade-in">
+      <img src="uploads/mambacayao.png" alt="" data-aos="fade-in" style="height: 50%;">
 
       <div class="container">
 
       <div class="row justify-content-center text-center" data-aos="fade-up" data-aos-delay="100">
-          <div class="col-xl-12 col-lg-12">
-           
-            <h2><span style="font-weight: lighter; color: white;">Welcome To </span>Good<i>Land</i></h2>
-            <!-- <span>.</span> -->
-            <p>FINDING LOCAL SOLUTIONS TO GLOBAL PROBLEMS.</p>
-           
-          </div>
-         <div class="container mt-5">
-        <button type="button" class="btn btn-info btn-outline" style="width: 200px; border-radius: 0px; color: white;">
-          <a href="#"style="color: white;">LEARN MORE</a></button>
-        </div>
+      <h1>Meet our Members</h1>
+        
        </div>
 
       </div>
@@ -62,28 +47,6 @@
       </div>
 
     </section><!-- /About Section -->
-
-<section class="about section" data-aos="fade-up" data-aos-delay="100">>
-<h2 class="text-center mb-5 text-bold"> <strong>MEET OUR MEMBERS</strong> </h2>
-  <div class="container" data-aos="fade-up" data-aos-delay="100">
-    
-  <div class="row">
-    <?php foreach ($members as $member): ?>
-    <div class=" col-md-4 custom-card mb-4" style="border-radius: 0px !important;">
-      <div class="card h-100">
-        <img src="<?php echo htmlspecialchars($member['member_photo']) ? 'admin/' . htmlspecialchars($member['member_photo']) : 'admin/uploads/default_photo.jpg'; ?>" class="card-img-top" alt="<?php echo htmlspecialchars($member['member_name']); ?>" style="height: 200px; object-fit: cover;">
-        <div class="card-body">
-          <h5 class="card-title text-bold"><?php echo htmlspecialchars($member['member_name']); ?></h5>
-          <p class="card-text"><?php echo htmlspecialchars($member['description']); ?></p>
-          <a href="#" class="btn btn-primary">Learn More</a>
-        </div>
-      </div>
-    </div>
-    <?php endforeach; ?>
-  </div>
-</div>
-
-</section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact section">
