@@ -57,7 +57,7 @@ include "classes/user_view.php";
 <?php include "includes/topnav.php"; ?>
 
 <main class="main container mt-10">
-<h1 class="text-center mt-5 mb-6"> <strong>MEET OUR MEMBERS</strong> </h1>
+<h1 class="text-center mt-5 mb-6 text-info" style="serif"> <strong>MEET OUR MEMBERS</strong> </h1>
  
 
 <section class="about section" data-aos="fade-up" data-aos-delay="100">
@@ -69,7 +69,7 @@ include "classes/user_view.php";
       <div class="card h-100">
         <img src="<?php echo htmlspecialchars($member['member_photo']) ? 'admin/' . htmlspecialchars($member['member_photo']) : 'admin/uploads/default_photo.jpg'; ?>" class="card-img-top" alt="<?php echo htmlspecialchars($member['member_name']); ?>" style="height: 200px; object-fit: cover;">
         <div class="card-body">
-          <h5 class="card-title text-bold"><?php echo htmlspecialchars($member['member_name']); ?></h5>
+          <h5 class="card-title  fw-bold text-center"><?php echo htmlspecialchars($member['member_name']); ?></h5>
           <p class="card-text"><?php echo htmlspecialchars($member['description']); ?></p>
           <a href="#" class="btn btn-primary">Learn More</a>
         </div>
@@ -79,9 +79,6 @@ include "classes/user_view.php";
   </div>
 </div>
 
-
-<iframe src="https://www.w3schools.com" title="W3Schools Free Online Web Tutorials">
-</iframe>
 
 </main>
 <?php include "includes/footer.php"; ?>

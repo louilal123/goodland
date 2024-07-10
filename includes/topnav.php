@@ -4,18 +4,38 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
 ?>
 
 <style>
-    .itemsnav{
+    .itemsnav {
         font-size: 18px !important;
+    }
+    .getstarted {
+        color: white !important;
+    }
+    .getstarted:hover {
+        color: white;
+        background-color: transparent !important;
+    }
+    .cart-icon {
+        position: relative;
+        display: inline-block;
+    }
+    .cart-icon .badge {
+        position: absolute;
+        top: -5px;
+        right: -10px;
+        background-color: red;
+        color: white;
+        padding: 2px 6px;
+        border-radius: 50%;
     }
 </style>
 
 <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
-            <h4 class="sitename text-info" style="padding-top: 5px;"><strong>GOOD</strong><i>Land</i></h4>
+            <h4 class="sitename" style="color: white; padding-top: 5px;"><strong>GOOD</strong><i>Land</i></h4>
         </a>
 
-        <nav id="navmenu" class="navmenu">
+        <nav id="navmenu" class="navmenu mt-1">
             <ul>
                 <li><a href="index" class="itemsnav <?= $page == 'index.php' ? 'active' : '' ?>">HOME</a></li>
                 <li><a href="aboutus" class="itemsnav <?= $page == 'aboutus.php' ? 'active' : '' ?>">ABOUT US</a></li>
@@ -28,33 +48,45 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
         </nav>
 
         <?php if (isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] === true): ?>
-            <!-- User Dropdown -->
-            <li class="nav-item dropdown user-menu">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" style="margin-top: -15px;">
-                    <img src="<?= $_SESSION['user_photo'] ?: 'uploads/basket.jpg'; ?>" class="user-image rounded-circle shadow" style="width: 40px; height: 40px;">
-                    <span class="d-none d-md-inline text-light "><?= $_SESSION['user_fullname']; ?></span>
+            <div class="nav-item dropdown user-menu">
+ 
+    <div class="d-flex align-items-center">
+       
+        <a href="#" class="nav-link d-flex align-items-center" style="margin-top: 2px; color: white;" data-bs-toggle="dropdown" aria-expanded="false" id="userDropdown">
+            <img src="<?= $_SESSION['user_photo'] ?: 'uploads/basket.jpg'; ?>" class="user-image rounded-circle shadow" style="width: 40px; height: 40px;">
+            <span class="d-none d-md-inline text-light" style="margin-top: 5px; color: white;">
+                <?= $_SESSION['user_fullname']; ?>
+            </span>
+        </a>
+        <ul class="dropdown-menu fade dropdown-menu-lg dropdown-menu-end bg-light" aria-labelledby="userDropdown" style="width: 300px !important; color: white !important;">
+            <li class="d-flex flex-column align-items-center text-center" style="margin-top: 10px !important;">
+                <a class="dropdown-item text-center mt-2" href="#" style="color: black;">
+                    <img src="<?= $_SESSION['user_photo'] ?: 'uploads/basket.jpg'; ?>" style="width: 70px; height: 70px; border-radius: 50%;">
+                    <h4 class="mt-2 mb-0 text-dark ml-2"><small style="color: black;"><?= $_SESSION['user_fullname']; ?></small></h4>
+                    <p class="mt-2 mb-0"><small style="color: black;"><?= $_SESSION['user_email']; ?></small></p>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end bg-light" style="width: 300px !important; color: white;">
-                    <li class="d-flex flex-column align-items-center text-center">
-                        <a class="dropdown-item text-center mt-2" href="#" style="color: black;">
-                        <img src="<?= $_SESSION['user_photo'] ?: 'uploads/basket.jpg'; ?>" style="width: 70px; height: 70px; border-radius: 50%;">
-                            <h4 class="mt-2 mb-0 text-dark">Signed in as:</h4>
-                            <h4 class="mt-2 mb-0 text-dark" ><small style="color: black;"><?= $_SESSION['user_fullname']; ?></small></h4>
-                            <p class="mt-2 mb-0"><small style="color: black;"><?= $_SESSION['user_email']; ?></small></p>
-                        </a>
-                    </li>
-                    <li><hr class="dropdown-divider" style="border-color: white;"></li>
-                    <li><a class="dropdown-item text-start" href="profile.php" style="color: black;"><i class="bi bi-person"></i> Profile</a></li>
-                    <li><a class="dropdown-item mb-2" href="classes/logout.php" style="color: black;"><i class="bi bi-power"></i> Logout</a></li>
-                </ul>
             </li>
-            <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+            <li><hr class="dropdown-divider" style="border-color: white;"></li>
+            <li><a class="dropdown-item text-start" href="profile" style="color: black;"><i class="bi bi-person"></i> Profile</a></li>
+            <li><a class="dropdown-item mb-2" href="classes/logout.php" style="color: black;"><i class="bi bi-power"></i> Logout</a></li>
+        </ul>
+
+        <div class="cart-icon ms-3 dropdown">
+            <a href="#" class="nav-link d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false" id="cartDropdown" style="font-size: 1.5rem; color: white;">
+                <i class="bi bi-cart"></i>
+                <span class="badge">0</span>
+            </a>
+            <ul class="dropdown-menu fade dropdown-menu-end bg-light cart-dropdown" aria-labelledby="cartDropdown" style="width: 500px; border-radius: 0px !important;">
+                <li class="d-flex flex-column align-items-center text-center">
+                    <span class="dropdown-item text-center mt-2" style="color: black;">Your cart is empty</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
         <?php else: ?>
-            <!-- Get Started Button -->
-            <button type="button" class="btn btn-outline-primary">
-                <a href="get-started" style="color: white;">Get Started</a>
-            </button>
+            <a href="get-started" class="btn btn-outline-primary getstarted">Get Started</a>
         <?php endif; ?>
-       </div>
     </div>
 </header>

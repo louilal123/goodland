@@ -62,7 +62,7 @@
       <div class="col-md-3 sidebar">
         <h4 class="filter-title">Browse Sections</h4>
         <ul class="list-unstyled">
-          <li><a href="#historical-events" class="d-block mb-2">Historical Events</a></li>
+          <li><a href="#historical-events" class="d-block mb-2"></a></li>
           <li><a href="#notable-figures" class="d-block mb-2">Notable Figures</a></li>
           <li><a href="#cultural-traditions" class="d-block mb-2">Cultural Traditions</a></li>
           <li><a href="#personal-stories" class="d-block mb-2">Personal Stories</a></li>
