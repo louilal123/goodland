@@ -12,7 +12,7 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
 <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
-            <h4 class="sitename" style="color: #fff !important; padding-top: 5px;"><strong>GOOD</strong><i>Land</i></h4>
+            <h4 class="sitename text-info" style="padding-top: 5px;"><strong>GOOD</strong><i>Land</i></h4>
         </a>
 
         <nav id="navmenu" class="navmenu">
@@ -51,7 +51,7 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
             <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
         <?php else: ?>
             <!-- Get Started Button -->
-            <button type="button" class="btn btn-primary">
+            <button type="button" class="btn btn-outline-primary">
                 <a href="get-started" style="color: white;">Get Started</a>
             </button>
         <?php endif; ?>
