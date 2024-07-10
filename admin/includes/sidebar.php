@@ -133,6 +133,12 @@
                 </li>
                 <li class="nav-header">Manage</li>
                 <li class="nav-item1">
+                    <a href="managedocuments" class="nav-link12 <?= $page == 'managedocuments.php' ? ' active text-bg-primary text-light':'' ?>">
+                        <i class="icons bi bi-book"></i>
+                        <p class="p-tag">List of Documents  <i class="nav-arrow bi bi-chevron-right" style="margin-left: 17px;"></i></p>
+                    </a>
+                </li>
+                <li class="nav-item1">
                     <a href="manageevents" class="nav-link12 <?= $page == 'manageevents.php' ? ' active text-bg-primary text-light':'' ?>">
                         <i class="icons bi bi-calendar-fill"></i>
                         <p class="p-tag">List of Events  <i class="nav-arrow bi bi-chevron-right" style="margin-left: 45px;"></i></p>
@@ -146,7 +152,7 @@
                 </li>
                 <li class="nav-item1">
                     <a href="manageusers" class="nav-link12 <?= $page == 'manageusers.php' ? ' active text-bg-primary text-light':'' ?>">
-                        <i class="icons bi bi-box-seam"></i>
+                        <i class="icons bi bi-people"></i>
                         <p class="p-tag">List of Users</p>
                     </a>
                 </li>
@@ -178,7 +184,7 @@
 
                 <li class="nav-item1">
                     <a href="manageadmins" class="nav-link12 <?= $page == 'manageadmins.php' ? ' active text-bg-primary text-light':'' ?>">
-                        <i class="icons bi bi-shield-lock"></i>
+                        <i class="icons bi bi-people"></i>
                         <p class="p-tag">List of Admins</p>
                     </a>
                 </li>

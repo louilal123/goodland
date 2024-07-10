@@ -299,6 +299,12 @@ public function delete_member($member_id) {
     header('Location: ../managemembers.php');
     exit();
 }
+
+public function get_all_documents() {
+    $stmt = $this->pdo->prepare("SELECT * FROM documents");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 // end //////////////////////////////////
 // here starts the codes for user side end
 public function get_products() {
