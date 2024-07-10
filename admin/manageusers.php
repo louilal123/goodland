@@ -23,13 +23,13 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Manage Members</h3>
+                            <h3 class="mb-0">Manage Registered Users</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                Manage Members
+                                Registered Users
                                 </li>
                             </ol>
                         </div>
@@ -42,9 +42,8 @@
                     <div class="col-md-12">
                             <div class="card mb-4 card-outline-primary">
                             <div class="card-header d-flex ">
-                                <h3 class="card-title mb-0">List of Members</h3>
-                                <a class="btn btn-primary ms-auto custombtn" data-bs-toggle="modal" data-bs-target="#addItemModal">Add New Member</a>
-                            </div>
+                                <h3 class="card-title mb-0">List of Registered Users</h3>
+                               </div>
  
                                 <div class="card-body">
                                     <div class="container-fluid">

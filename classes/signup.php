@@ -62,20 +62,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    try {
-        if ($mainClass->register_user($fullname, $email, $birthday, $username, $password)) {
-            $_SESSION['status'] = "User successfully registered!";
-            $_SESSION['status_icon'] = "success";
-        } else {
-            $_SESSION['status'] = "Error registering user.";
-            $_SESSION['status_icon'] = "error";
-        }
-    } catch (Exception $e) {
-        $_SESSION['status'] = "Oops! Error: " . $e->getMessage();
-        $_SESSION['status_icon'] = "error";
+    if ($mainClass->register_user($fullname, $email, $birthday, $username, $password)) {
+     
+        unset($_SESSION['form_data']);
+        header('Location: ../get-started.php');
+        exit();
+    } else {
+        header('Location: ../register.php');
+        exit();
     }
-
-    header('Location: ../register.php');
-    exit();
 }
 ?>

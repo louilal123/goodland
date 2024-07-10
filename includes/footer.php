@@ -6,7 +6,7 @@
   <div class="container">
     <div class="row ms-auto">
       <div class="col-lg-12 col-md-12 footer-about">
-        <a href="index.html" class="logo d-flex align-items-center">
+        <a href="index.php" class="logo d-flex align-items-center">
           <span class="sitename">GoodLand</span>
         </a>
         <div class="footer-contact pt-3">
@@ -91,28 +91,100 @@
 <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
 <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    
-
 <!-- Main JS File -->
 <script src="assets/js/main.js"></script>
 
 
-<!-- crud sweetalerts  this is included inside all the pages below uaing include-->
-<?php
-if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
-?>
-<script>
-Swal.fire({
-    icon: "<?php echo $_SESSION['status_icon']; ?>",
-    title: "<?php echo $_SESSION['status']; ?>",
-    confirmButtonText: "Ok"
-});
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+     <!-- swetalert  -->
+     <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+     <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+import { Input, Ripple, initMDB } from "mdb-ui-kit";
+
+initMDB({ Input, Ripple });
+
+(() => {
+  'use strict';
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation');
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms).forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  });
+})();
+   </script>
+<!-- ajax codes  for viwing modals etc autopopulate-->
+<script src="dist\js\customajax.js"></script>
+
+   <script>
+  $(window).on('load', function() {
+    setTimeout(function() {
+      $('#loader').fadeOut('slow');
+    }, 1000); 
+  });
 </script>
-<?php
-unset($_SESSION['status']);
-unset($_SESSION['status_icon']);
-}
-?>
+
+<script>
+    $(document).ready(function() {
+        $('#myTable').DataTable({
+           
+        });
+    });
+
+    
+</script>
+
+<!-- modal sweet alert  -->
 
 
+<!-- crud sweetalerts  this is included inside all the pages below uaing include-->
+<script>
+ document.addEventListener("DOMContentLoaded", function() {
+                <?php if (!empty($_SESSION['status']) && !empty($_SESSION['status_icon'])): ?>
+                    Swal.fire({
+                        icon: '<?php echo $_SESSION['status_icon']; ?>',
+                        title: '<?php echo $_SESSION['status']; ?>',
+                    });
+                    <?php
+                    unset($_SESSION['status']);
+                    unset($_SESSION['status_icon']);
+                    ?>
+                <?php endif; ?>
+            });
+        </script>
+
+<!-- end  -->
+
+<?php if (isset($_SESSION['status1']) && $_SESSION['status1'] != '') { ?>
+  <script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: false,
+        didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+        }
+    });
+
+    Toast.fire({
+      icon: "<?php echo $_SESSION['status_icon1']; ?>",
+        title: "<?php echo $_SESSION['status1']; ?>"
+    });
+</script>
+        <?php
+        unset($_SESSION['status1']);
+        unset($_SESSION['status_icon1']);
+    }
+    ?> 

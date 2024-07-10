@@ -60,47 +60,18 @@
 
       <!-- Sidebar -->
       <div class="col-md-3 sidebar">
-        <h4 class="filter-title">Refine Results</h4>
-        <div class="mb-3">
-          <label for="searchWithin" class="form-label">Search within results</label>
-          <input type="text" class="form-control" id="searchWithin" placeholder="Search...">
-        </div>
-        <div class="mb-3">
-          <label for="contentType" class="form-label">Content Type</label>
-          <select class="form-control" id="contentType">
-            <option>All Types</option>
-            <option>Images</option>
-            <option>Panoramas</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label for="imageResolution" class="form-label">Image Resolution</label>
-          <select class="form-control" id="imageResolution">
-            <option>All Resolutions</option>
-            <option>High</option>
-            <option>Medium</option>
-            <option>Low</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label for="dateRange" class="form-label">Date</label>
-          <input type="date" class="form-control" id="dateRange">
-        </div>
-        <div class="mb-3">
-          <label for="classification" class="form-label">Classification</label>
-          <select class="form-control" id="classification">
-            <option>All Classifications</option>
-            <option>Photographs</option>
-            <option>Drawings and Watercolors</option>
-            <option>Prints</option>
-          </select>
-        </div>
+        <h4 class="filter-title">Browse Sections</h4>
+        <ul class="list-unstyled">
+          <li><a href="#historical-events" class="d-block mb-2">Historical Events</a></li>
+          <li><a href="#notable-figures" class="d-block mb-2">Notable Figures</a></li>
+          <li><a href="#cultural-traditions" class="d-block mb-2">Cultural Traditions</a></li>
+          <li><a href="#personal-stories" class="d-block mb-2">Personal Stories</a></li>
+        </ul>
       </div>
 
-      <!-- Main Content -->
       <div class="col-md-9 main-content">
         <div class="search-bar mb-4">
-          <input type="text" class="form-control" placeholder="Search materials...">
+          <input type="text" class="form-control" placeholder="Search materials..." id="mainSearch">
         </div>
         <div class="d-flex justify-content-between align-items-center mb-4">
           <div class="results-count">44,953 results</div>

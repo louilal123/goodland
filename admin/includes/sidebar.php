@@ -103,7 +103,7 @@
 .p-tag {
     margin: 0;
     font-size: 0.75rem;
-    opacity: 0.6;
+    opacity: 0.7;
     color: white;
     text-transform: uppercase;
 }
@@ -144,6 +144,13 @@
                         <p class="p-tag">Messages</p>
                     </a>
                 </li>
+                <li class="nav-item1">
+                    <a href="manageusers" class="nav-link12 <?= $page == 'manageusers.php' ? ' active text-bg-primary text-light':'' ?>">
+                        <i class="icons bi bi-box-seam"></i>
+                        <p class="p-tag">List of Users</p>
+                    </a>
+                </li>
+                
                 <li class="nav-item1">
                     <a href="#" class="nav-link12">
                         <i class="icons bi bi-briefcase"></i>

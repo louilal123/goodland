@@ -1,0 +1,29 @@
+.header {
+    background-color: black !important;
+  }
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+    transition: transform 0.2s;
+  }
+  .star-rating {
+    color: gold;
+  }
+  .card-img {
+    height: 200px;
+  }
+  .services {
+    background-color: white; 
+    background-repeat: no-repeat; 
+    background-size: cover;
+  }
+  @media (min-width: 1200px) {
+    .services {
+      padding-top: 150px !important; 
+    }
+  }
+  @media (max-width: 768px) {
+    .services {
+      padding-top: 100px; 
+    }
+  }

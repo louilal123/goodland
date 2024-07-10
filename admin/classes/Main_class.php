@@ -286,15 +286,15 @@ public function delete_member($member_id) {
         $stmt->bindParam(':member_id', $member_id, PDO::PARAM_INT);
 
         if ($stmt->execute()) {
-            $_SESSION['status1'] = "Mmber successfully deleted!";
-            $_SESSION['status_icon1'] = "success";
+            $_SESSION['status'] = "Mmber successfully deleted!";
+            $_SESSION['status_icon'] = "success";
         } else {
-            $_SESSION['status1'] = "Error deleting Mmber.";
-            $_SESSION['status_icon1'] = "error";
+            $_SESSION['status'] = "Error deleting Mmber.";
+            $_SESSION['status_icon'] = "error";
         }
     } catch (PDOException $e) {
-        $_SESSION['status1'] = "Oops! Error: " . $e->getMessage();
-        $_SESSION['status_icon1'] = "error";
+        $_SESSION['status'] = "Oops! Error: " . $e->getMessage();
+        $_SESSION['status_icon'] = "error";
     }
     header('Location: ../managemembers.php');
     exit();
@@ -311,31 +311,35 @@ public function get_products() {
         return [];
     }
 }
+public function register_user($fullname, $email, $birthday, $username, $password) {
+    try {
+        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+        $date_created = date('Y-m-d H:i:s');
+        $status = 'enabled';
 
-        public function register_user($fullname, $email, $birthday, $username, $password) {
-            try {
-                $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-                $date_created = date('Y-m-d H:i:s');
-                $status = 'enabled';
+        $stmt = $this->pdo->prepare("INSERT INTO users (fullname, email, birthday, username, password, date_created, date_updated, last_login, status) VALUES (:fullname, :email, :birthday, :username, :password, :date_created, :date_updated, :last_login, :status)");
+        $stmt->execute([
+            ':fullname' => $fullname,
+            ':email' => $email,
+            ':birthday' => $birthday,
+            ':username' => $username,
+            ':password' => $hashed_password,
+            ':date_created' => $date_created,
+            ':date_updated' => $date_created,
+            ':last_login' => null,
+            ':status' => $status
+        ]);
 
-                $stmt = $this->pdo->prepare("INSERT INTO users (fullname, email, birthday, username, password, date_created, date_updated, last_login, status) VALUES (:fullname, :email, :birthday, :username, :password, :date_created, :date_updated, :last_login, :status)");
-                $stmt->execute([
-                    ':fullname' => $fullname,
-                    ':email' => $email,
-                    ':birthday' => $birthday,
-                    ':username' => $username,
-                    ':password' => $hashed_password,
-                    ':date_created' => $date_created,
-                    ':date_updated' => $date_created,
-                    ':last_login' => null,
-                    ':status' => $status
-                ]);
-                return true;
-            } catch (PDOException $e) {
-                echo $e->getMessage();
-                return false;
-            }
-        }
+        $_SESSION['status'] = "User successfully registered!";
+        $_SESSION['status_icon'] = "success";
+        return true;
+    } catch (PDOException $e) {
+        $_SESSION['status'] = "Error registering user: " . $e->getMessage();
+        $_SESSION['status_icon'] = "error";
+        return false;
+    }
+}
+
 
         public function is_email_exists($email) {
             $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
@@ -348,6 +352,24 @@ public function get_products() {
             $stmt->execute([':username' => $username]);
             return $stmt->fetchColumn() > 0;
         }
+
+        public function user_login($email, $password) {
+            try {
+                $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+                $stmt->execute([':email' => $email]);
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+                if ($user && password_verify($password, $user['password'])) {
+                    return $user;
+                } else {
+                    return false;
+                }
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+                return false;
+            }
+        }
+        
 
 
 }

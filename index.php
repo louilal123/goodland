@@ -1,4 +1,4 @@
-<?php //include "admin/classes/admindetails.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +13,7 @@
 <body class="index-page">
 
 <?php include "includes/topnav.php"; ?>
-
+<?php include "classes/user_view.php"; ?>
   <main class="main">
 
     <!-- Hero Section -->
@@ -27,7 +27,7 @@
       <div class="row justify-content-center text-center" data-aos="fade-up" data-aos-delay="100">
           <div class="col-xl-12 col-lg-12">
            
-            <h2><span style="font-weight: lighter; color: white;">Welcome To </span>Good<i>Land</i></h2>
+            <h2><span style="font-weight: lighter !important; color: white;">Welcome To </span>Good<i>Land</i></h2>
             <!-- <span>.</span> -->
             <p>FINDING LOCAL SOLUTIONS TO GLOBAL PROBLEMS.</p>
            
@@ -63,27 +63,6 @@
 
     </section><!-- /About Section -->
 
-<section class="about section" data-aos="fade-up" data-aos-delay="100">>
-<h2 class="text-center mb-5 text-bold"> <strong>MEET OUR MEMBERS</strong> </h2>
-  <div class="container" data-aos="fade-up" data-aos-delay="100">
-    
-  <div class="row">
-    <?php foreach ($members as $member): ?>
-    <div class=" col-md-4 custom-card mb-4" style="border-radius: 0px !important;">
-      <div class="card h-100">
-        <img src="<?php echo htmlspecialchars($member['member_photo']) ? 'admin/' . htmlspecialchars($member['member_photo']) : 'admin/uploads/default_photo.jpg'; ?>" class="card-img-top" alt="<?php echo htmlspecialchars($member['member_name']); ?>" style="height: 200px; object-fit: cover;">
-        <div class="card-body">
-          <h5 class="card-title text-bold"><?php echo htmlspecialchars($member['member_name']); ?></h5>
-          <p class="card-text"><?php echo htmlspecialchars($member['description']); ?></p>
-          <a href="#" class="btn btn-primary">Learn More</a>
-        </div>
-      </div>
-    </div>
-    <?php endforeach; ?>
-  </div>
-</div>
-
-</section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact section">

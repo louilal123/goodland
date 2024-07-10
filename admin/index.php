@@ -19,24 +19,15 @@ unset($_SESSION['error_message']);
     <!-- MDB -->
     <link rel="stylesheet" href="mdbfolder/css/mdb.min.css" />
   </head>
-  <body class="bg-dark">
- <!-- Image and text -->
-<nav class="navbar navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <img
-        src="uploads/default_photo.png"
-        class="me-2"
-        height="20"
-        alt="GOODLAND"
-        loading="lazy"
-      />
-     
-    </a>
-  </div>
-</nav>
+  <style>
+    body{
+      oveflow: hidden !important;
+    }
+  </style>
+  <body class="bg-primary" style="oveflow: hidden !important; ">
+
     <!-- Start your project here-->
-    <section class="vh-100">
+    <section class="vh-100" style="oveflow: hidden !important; ">
       <div class="container py-5 h-100">
         <div class="row d-flex align-items-center justify-content-center h-100">
           <!-- <div class="col-md-8 col-lg-7 col-xl-6">

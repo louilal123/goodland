@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,9 +14,6 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transform: scale(1.02);
     transition: transform 0.2s;
-  }
-  .star-rating {
-    color: gold;
   }
   .card-img {
     height: 200px;
@@ -51,36 +50,45 @@
                 <strong>Sign In</strong>
               </h2>
               <div class="card-body px-lg-5 pt-0 ">
-                <form style="color: #757575;" action="#!">
-
-                  <div class="md-form">
+              <form style="color: #757575;" action="classes/login.php" method="post">
+                <div class="md-form mb-4">
                   <label for="materialLoginFormEmail">E-mail</label>
-                    <input type="email" id="materialLoginFormEmail" class="form-control">
-                  </div>
+                  <input type="email" id="materialLoginFormEmail" class="form-control 
+                  <?php echo !empty($_SESSION['error_email']) ? 'is-invalid' : 'is-valid'; ?>" 
+                  name="email" value="<?php echo $_SESSION['form_data']['email'] ?? ''; ?>">
+                  <?php if (!empty($_SESSION['error_email'])): ?>
+                    <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_email']; unset($_SESSION['error_email']); ?></div>
+                  <?php endif; ?>
+                </div>
 
-                  <div class="md-form ">
+                <div class="md-form mb-4">
                   <label for="materialLoginFormPassword">Password</label>
-                    <input type="password" id="materialLoginFormPassword" class="form-control">
-                  </div>
+                  <input type="password" id="materialLoginFormPassword" class="form-control 
+                  <?php echo !empty($_SESSION['error_password']) ? 'is-invalid' : ''; ?>" 
+                  name="password">
+                  <?php if (!empty($_SESSION['error_password'])): ?>
+                    <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_password']; unset($_SESSION['error_password']); ?></div>
+                  <?php endif; ?>
+                </div>
 
-                  <div class="d-flex justify-content-around text-center mt-3 mb-">
-                    <div>
-                      <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="materialLoginFormRemember">
-                        <label class="form-check-label" for="materialLoginFormRemember">Remember me</label>
-                      </div>
+                <div class="d-flex justify-content-around text-center mt-3 mb-3">
+                  <div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="materialLoginFormRemember">
+                      <label class="form-check-label" for="materialLoginFormRemember">Remember me</label>
                     </div>
-                    <div>
-                      <a href="#">Forgot password?</a>
-                    </div>
                   </div>
+                  <div>
+                    <a href="#">Forgot password?</a>
+                  </div>
+                </div>
 
-                  <button class="btn btn-outline-warning btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign in</button>
+                <button class="btn btn-outline-warning btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign in</button>
 
-                  <p>Don't have an account?
-                    <a href="register" >Register</a>
-                  </p>
-                </form>
+                <p>Don't have an account?
+                  <a href="register">Register</a>
+                </p>
+              </form>
 
               </div>
 
@@ -93,5 +101,6 @@
 
 <?php include "includes/footer.php"; ?>
 <script type="text/javascript" src="mdbfolder/mdb.umd.min.js"></script>
+
 </body>
 </html>
