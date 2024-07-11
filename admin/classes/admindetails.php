@@ -27,5 +27,7 @@ $registeredUsersCount = $mainClass->count_registered_users();
 
 $documents = $mainClass->get_all_documents();
 
+$uploadedDocumentsCount =$mainClass->count_all_documents();
+
 ?>
 

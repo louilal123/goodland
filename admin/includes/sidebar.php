@@ -8,10 +8,10 @@
     height: 100%;
     background-color: #343a40;
     color: #fff;
-    padding-left: 12px;
     padding-bottom: 15px;
-    padding-right: 20px;
     z-index: 1000 !important;
+    padding-left: 12px;
+    padding-right: 20px;
 }
 
 .sidebar-brand {
@@ -56,6 +56,7 @@
 
 .nav-item1 {
     margin-bottom: 8px;
+   
 }
 
 .nav-link12 {
@@ -81,6 +82,7 @@
 .nav-link12.active {
     color: #fff;
     opacity: none !important;
+    
 }
 
 .nav-link12 .icons {
@@ -134,7 +136,7 @@
                 <li class="nav-header">Manage</li>
                 <li class="nav-item1">
                     <a href="managedocuments" class="nav-link12 <?= $page == 'managedocuments.php' ? ' active text-bg-primary text-light':'' ?>">
-                        <i class="icons bi bi-book"></i>
+                        <i class="icons bi bi-file-earmark-pdf-fill"></i>
                         <p class="p-tag">List of Documents  <i class="nav-arrow bi bi-chevron-right" style="margin-left: 17px;"></i></p>
                     </a>
                 </li>

@@ -305,6 +305,70 @@ public function get_all_documents() {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+public function add_document($title, $cover, $file_path, $author, $publication_date, $category, $description, $uploaded_by, $status) {
+    $sql = "INSERT INTO documents (title, cover, file_path, author, publication_date, category, description, uploaded_by, status, uploaded_at) 
+            VALUES (:title, :cover, :file_path, :author, :publication_date, :category, :description, :uploaded_by, :status, NOW())";
+    $stmt = $this->pdo->prepare($sql);
+
+    $stmt->bindParam(':title', $title);
+    $stmt->bindParam(':cover', $cover, PDO::PARAM_STR);
+    $stmt->bindParam(':file_path', $file_path, PDO::PARAM_STR);
+    $stmt->bindParam(':author', $author, PDO::PARAM_STR);
+    $stmt->bindParam(':publication_date', $publication_date, PDO::PARAM_STR);
+    $stmt->bindParam(':category', $category, PDO::PARAM_STR);
+    $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+    $stmt->bindParam(':uploaded_by', $uploaded_by, PDO::PARAM_INT);
+    $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+
+    return $stmt->execute();
+}
+
+
+public function count_all_documents(){
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM documents");
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total'];
+}
+
+
+
+
+// public function insert_document($title, $cover, $author, $publication_date, $file_path, $description, $uploaded_by, $category, $status) {
+//     $sql = "INSERT INTO documents (title, cover, author, publication_date, file_path, description, uploaded_by, uploaded_at, category, date_created, date_updated, isdeleted, status) 
+//             VALUES (:title, :cover, :author, :publication_date, :file_path, :description, :uploaded_by, NOW(), :category, NOW(), NOW(), 0, :status)";
+//     $stmt = $this->pdo->prepare($sql);
+
+//     $stmt->bindParam(':title', $title);
+//     $stmt->bindParam(':cover', $cover, PDO::PARAM_STR);
+//     $stmt->bindParam(':author', $author);
+//     $stmt->bindParam(':publication_date', $publication_date);
+//     $stmt->bindParam(':file_path', $file_path);
+//     $stmt->bindParam(':description', $description);
+//     $stmt->bindParam(':uploaded_by', $uploaded_by);
+//     $stmt->bindParam(':category', $category);
+//     $stmt->bindParam(':status', $status);
+
+//     return $stmt->execute();
+// }
+
+// public function add_document($title, $cover, $file_path) {
+//     $sql = "INSERT INTO documents (title, cover, file_path, uploaded_at) 
+//             VALUES (:title, :cover, :file_path, NOW())";
+//     $stmt = $this->pdo->prepare($sql);
+
+//     $stmt->bindParam(':title', $title);
+//     $stmt->bindParam(':cover', $cover, PDO::PARAM_STR);
+//     $stmt->bindParam(':file_path', $file_path, PDO::PARAM_STR);
+
+//     return $stmt->execute();
+// }
+
+
+
+
+
 // end //////////////////////////////////
 // here starts the codes for user side end
 public function get_products() {

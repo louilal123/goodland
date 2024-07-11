@@ -104,7 +104,7 @@
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title text-light">Uploaded Files</h5>
+														<h5 class="card-title text-light">Uploaded Documents</h5>
 													</div>
 
 													<div class="col-auto">
@@ -113,7 +113,7 @@
 														</div>
 													</div>
 												</div>
-												<h1 class=" text-light">45</h1>
+												<h1 class=" text-light"> <?php echo $uploadedDocumentsCount ?? '0'; ?></h1>
 												<div class="mb-0">
 												<span class="text-light panel-footer"><a href="" class="text-light">More Info </a><i class="bi bi-link-45deg"></i> </span>
 												<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i></span>
