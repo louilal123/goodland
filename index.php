@@ -12,7 +12,9 @@
 
 <body class="index-page">
 
-<?php include "includes/topnav.php"; ?>
+<?php include "includes/topnav.php"; 
+
+include "classes/location.php";?>
 <?php include "classes/user_view.php"; ?>
   <main class="main">
 

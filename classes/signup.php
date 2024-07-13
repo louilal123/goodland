@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($username)) {
-        $_SESSION['error_username'] = "Username is required.";
+        $_SESSION['error_username'] = "Username is taken.";
         $hasError = true;
     } elseif ($mainClass->is_username_exists($username)) {
         $_SESSION['error_username'] = "Username already exists.";

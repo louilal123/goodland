@@ -1,9 +1,8 @@
 <style>
 /* Sidebar Styling */
 .app-sidebar {
-    position: fixed; /* Ensure the sidebar stays in place */
     top: 0;
-    left: 0; /* Fixes sidebar positioning */
+    left: 0;
     width: 250px;
     height: 100%;
     background-color: #343a40;

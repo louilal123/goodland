@@ -4,6 +4,22 @@
     <script src="dist/adminlte.js"></script> <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
    
      <!-- swetalert  -->
+     <script>
+        $(document).ready(function() {
+            var currentHour = new Date().getHours();
+            var greeting;
+
+            if (currentHour < 12) {
+                greeting = "Good Morning";
+            } else if (currentHour < 18) {
+                greeting = "Good Afternoon";
+            } else {
+                greeting = "Good Evening";
+            }
+
+            $('#greeting').text(greeting);
+        });
+    </script>
      <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
      <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields

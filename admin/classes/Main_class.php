@@ -1,5 +1,5 @@
 <?php
-
+require_once('geoplugin.class.php');
 require 'connection.php';
 
 class Main_class {
@@ -28,6 +28,70 @@ class Main_class {
             echo $e->getMessage();
         }
     }
+    public function trackVisitor() {
+        $geoplugin = new geoPlugin();
+        
+        $ip = $_SERVER['REMOTE_ADDR'];
+    
+        if ($ip == '127.0.0.1' || $ip == '::1') {
+            $ip = '112.198.194.108';
+        }
+    
+        $geoplugin->locate($ip);
+    
+        $city = $geoplugin->city;
+        $region = $geoplugin->region;
+        $country = $geoplugin->countryName;
+        $latitude = $geoplugin->latitude;
+        $longitude = $geoplugin->longitude;
+    
+        $stmt = $this->pdo->prepare("SELECT * FROM visitor_data WHERE ip = :ip AND DATE(visit_time) = CURDATE()");
+        $stmt->execute([':ip' => $ip]);
+        $existingVisit = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($existingVisit) {
+            $stmt = $this->pdo->prepare("UPDATE visitor_data SET visit_count = visit_count + 1 WHERE ip = :ip AND DATE(visit_time) = CURDATE()");
+            $stmt->execute([':ip' => $ip]);
+        } else {
+            $sql = "INSERT INTO visitor_data (ip, city, region, country, latitude, longitude, visit_time, visit_count) 
+                    VALUES (:ip, :city, :region, :country, :latitude, :longitude, NOW(), 1)";
+    
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([
+                ':ip' => $ip,
+                ':city' => $city,
+                ':region' => $region,
+                ':country' => $country,
+                ':latitude' => $latitude,
+                ':longitude' => $longitude
+            ]);
+        }
+    }
+
+    public function changePassword($userId, $currentPassword, $newPassword) {
+        try {
+            $stmt = $this->pdo->prepare("SELECT password FROM users WHERE user_id = :userId");
+            $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetch();
+
+            if ($result && password_verify($currentPassword, $result['password'])) {
+                
+                $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
+                $updateStmt = $this->pdo->prepare("UPDATE users SET password = :newPassword WHERE user_id = :userId");
+                $updateStmt->bindParam(':newPassword', $newPasswordHash, PDO::PARAM_STR);
+                $updateStmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+                $updateStmt->execute();
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+    
     // for login
     public function login_user($email, $password) {
         session_start();
@@ -171,6 +235,12 @@ public function get_categories() {
 
 public function get_all_events() {
     $stmt = $this->pdo->prepare("SELECT * FROM events ORDER BY created_at DESC");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+public function get_all_registeredUsers() {
+    $stmt = $this->pdo->prepare("SELECT * FROM users");
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -324,7 +394,6 @@ public function add_document($title, $cover, $file_path, $author, $publication_d
     return $stmt->execute();
 }
 
-
 public function count_all_documents(){
     $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM documents");
     $stmt->execute();
@@ -438,6 +507,17 @@ public function register_user($fullname, $email, $birthday, $username, $password
                 echo $e->getMessage();
                 return false;
             }
+        }
+
+        public function get_user_info() {
+            if (isset($_SESSION['user_id'])) {
+                $user_id = $_SESSION['user_id'];
+                $stmt = $this->pdo->prepare("SELECT * FROM users WHERE user_id = :user_id");
+                $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+                $stmt->execute();
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+            }
+            return null;
         }
         
 

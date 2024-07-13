@@ -68,9 +68,10 @@
                                 <?php foreach ($documents as $document): ?>
                                     <tr>
                                         <td><?php echo htmlspecialchars($document['file_id']); ?></td>
-                                        <td> <img src="<?php echo $document['cover'] ?? 'uploaded/default_photo.jpg'; ?>" alt="" 
-                                        style="width: 40px; height: 40px; "></td>
                                         <td><?php echo htmlspecialchars($document['title']); ?></td>
+                                        <td> <img src="<?php echo 'uploads/cover/' . $document['cover'] ?? 'uploads/default_photo.jpg'; ?>" alt="" 
+                                        style="width: 40px; height: 40px; "></td>
+                                      
                                         <td><?php echo htmlspecialchars($document['author']); ?></td>
                                         <td><?php echo htmlspecialchars($document['file_path']); ?></td>
                                         <td><?php echo htmlspecialchars($document['publication_date']); ?></td>

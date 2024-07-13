@@ -4,6 +4,7 @@ include "classes/admindetails.php";
 <!DOCTYPE html>
 <html lang="en">
 <?php include "includes/header.php"; ?>
+
 <style>
     @media print {
         body * {
@@ -50,6 +51,7 @@ include "classes/admindetails.php";
         }
     }
 </style>
+
 <body onload="window.print()">
     <div id="printableArea">
         <div class="container-fluid">

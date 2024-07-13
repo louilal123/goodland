@@ -60,15 +60,15 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach ($members as $index => $members): ?>
+                                <?php foreach ($$registeredUsers as $index => $$registeredUsers): ?>
                                     <tr>
                                    
-                                        <td><?php echo htmlspecialchars($members['member_id']); ?></td>
-                                        <td><?php echo htmlspecialchars($members['member_name']); ?></td>
-                                        <td><?php echo htmlspecialchars($members['description']); ?></td>
-                                        <td> <img src="<?php echo $members['member_photo'] ?? 'uploads/default_photo.jpg'; ?>" alt="" style="width: 40px; height: 40px; "></td>
-                                        <td><?php echo htmlspecialchars($members['date_created']); ?></td>
-                                        <td><?php echo htmlspecialchars($members['date_updated']); ?></td>
+                                        <td><?php echo htmlspecialchars($$registeredUsers['user_id']); ?></td>
+                                        <td><?php echo htmlspecialchars($$registeredUsers['member_name']); ?></td>
+                                        <td><?php echo htmlspecialchars($$registeredUsers['description']); ?></td>
+                                        <td> <img src="<?php echo $$registeredUsers['member_photo'] ?? 'uploads/default_photo.jpg'; ?>" alt="" style="width: 40px; height: 40px; "></td>
+                                        <td><?php echo htmlspecialchars($$registeredUsers['date_created']); ?></td>
+                                        <td><?php echo htmlspecialchars($$registeredUsers['date_updated']); ?></td>
                                        
                                         <td>
                                         <button class="btn btn-info btn-sm viewMemberBtn" 
@@ -76,7 +76,7 @@
                                         <a href="#" class="btn btn-success btn-sm editMemberBtn" data-bs-toggle="modal" 
                                         data-bs-target="#editMemberModal"> <i class="bi bi-pencil"></i></a>
                                         
-                                            <a href="classes/delete_member.php?id=<?=$members['member_id']; ?>" 
+                                            <a href="classes/delete_member.php?id=<?=$$registeredUsers['user_id']; ?>" 
                                             class="btn btn-danger btn-sm deleteMemberBtn"><i class="bi bi-trash"></i></a>
                                         </td>
                                     </tr>
@@ -92,7 +92,7 @@
                     </div> 
                 </div>
 <!-- start  -->
-                 <!-- $('#member_id1').val(data[0]);
+                 <!-- $('#user_id1').val(data[0]);
         $('#member_name1').val(data[1]);
         $('#description1').val(data[2]);
         $('#member_photo1').val(data[4]);
@@ -117,7 +117,7 @@
                 <div class="row">
                         <div class="col">
                             <label for="edit_member_name" class="form-label">Member ID</label>
-                            <input type="text" class="form-control" name="member_id" id="member_id1" readonly>
+                            <input type="text" class="form-control" name="user_id" id="user_id1" readonly>
                         </div>
                     </div>
                     <div class="row">
@@ -162,7 +162,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="classes/members_crud.php" method="post" enctype="multipart/form-data">
+                <form action="classes/$registeredUsers_crud.php" method="post" enctype="multipart/form-data">
                 <div class="row mt">
                         <div class="col">
                             <label for="edit_photo" class="form-label">Photo</label>
@@ -170,7 +170,7 @@
                             style="display: flex; flex-direction: column; margin: auto; height: 250px; width: 800px; "> </div>
                     </div>
                             <!-- <label for="edit_member_name" class="form-label">Member ID</label> -->
-                            <input type="hidden" class="form-control" name="member_id" id="member_id" readonly>
+                            <input type="hidden" class="form-control" name="user_id" id="user_id" readonly>
                       
                     <div class="row mt-4">
                         <div class="col">
@@ -217,7 +217,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="classes/members_crud.php" method="post" enctype="multipart/form-data">
+                <form action="classes/$registeredUsers_crud.php" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col">
                             <label for="member_name" class="form-label">Member Name</label>
@@ -294,7 +294,7 @@
 
         var imgSrc = $tr.find('img').attr('src');
        
-        $('#member_id').val(data[0]);
+        $('#user_id').val(data[0]);
         $('#member_name').val(data[1]);
         $('#description').val(data[2]);
          $('#photo').attr('src', imgSrc);
@@ -320,7 +320,7 @@
         console.log(data); 
         var imgSrc = $tr.find('img').attr('src');
 
-        $('#member_id1').val(data[0]);
+        $('#user_id1').val(data[0]);
         $('#member_name1').val(data[1]);
         $('#description1').val(data[2]);
         $('#photo1').attr('src', imgSrc);

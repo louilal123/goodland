@@ -3,11 +3,45 @@
 <html lang="en"> 
 <?php include "includes/header.php"; ?>
 
+
+<script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
+    <script type='text/javascript'>
+         google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawVisualization);
+
+      function drawVisualization() {
+        // Some raw data (not necessarily accurate)
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
+          ['2004/05',  165,      938,         522,             998,           450,      614.6],
+          ['2005/06',  135,      1120,        599,             1268,          288,      682],
+          ['2006/07',  157,      1167,        587,             807,           397,      623],
+          ['2007/08',  139,      1110,        615,             968,           215,      609.4],
+          ['2008/09',  136,      691,         629,             1026,          366,      569.6]
+        ]);
+
+        var options = {
+          title : 'Monthly Coffee Production by Country',
+          vAxis: {title: 'Cups'},
+          hAxis: {title: 'Month'},
+          seriesType: 'bars',
+          series: {5: {type: 'line'}}
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+
 <link rel="stylesheet" href="dist/custom.css">
- <style>body{
+
+
+ <style>
+ body{
     overflow: hidden;
  }
  </style>
+
 <body class="layout-fixed-complete sidebar-expand-lg sidebar-mini bg-body-tertiary">
 
           
@@ -45,172 +79,9 @@
             
                 
                 <div class="container-fluid"> 
-                    
-                <div class="row mt-4">
-    <div class="col-lg-6">
-        <div class="card mb-4 text-bg-white shadow-sm">
-            <div class="card-header border-0">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h3 class="card-title mb-0">Website Visits All Time</h3>
-                    <a href="javascript:void(0);" class="text-light">View Report</a>
+                    <div class="col-md-6">
+                <div id="chart_div" style="width: 900px; height: 500px;"></div>
                 </div>
-            </div>
-            <div class="card-body">
-                <div class="d-flex">
-                    <p class="d-flex flex-column"> 
-                        <span class="fw-bold fs-5">820</span> 
-                        <span>Website Visitors Over Time</span> 
-                    </p>
-                    <p class="ms-auto d-flex flex-column text-end"> 
-                        <span class="text-success"> 
-                            <i class="bi bi-arrow-up"></i> 12.5%
-                        </span> 
-                        <span class="text-secondary">Since last week</span> 
-                    </p>
-                </div>
-                <div class="position-relative mb-4">
-                    <div id="visitors-chart"></div>
-                </div>
-                <div class="d-flex flex-row justify-content-end">
-                    <span class="me-2">
-                        <i class="bi bi-square-fill text-primary"></i> This Week
-                    </span>
-                    <span>
-                        <i class="bi bi-square-fill text-secondary"></i> Last Week
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="card mb-4 shadow-sm">
-            <div class="card-header border-0">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h3 class="card-title mb-0">Archive Files</h3>
-                    <a href="javascript:void(0);" class="text-light">View Report</a>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="d-flex">
-                    <p class="d-flex flex-column"> 
-                        <span class="fw-bold fs-5">1200</span> 
-                        <span>Files Over Time</span> 
-                    </p>
-                    <p class="ms-auto d-flex flex-column text-end"> 
-                        <span class="text-success"> 
-                            <i class="bi bi-arrow-up"></i> 15.3%
-                        </span> 
-                        <span class="text-secondary">Since last month</span> 
-                    </p>
-                </div>
-                <div class="position-relative mb-4">
-                    <div id="documents-chart"></div>
-                </div>
-                <div class="d-flex flex-row justify-content-end">
-                    <span class="me-2">
-                        <i class="bi bi-square-fill text-primary"></i> This Month
-                    </span>
-                    <span>
-                        <i class="bi bi-square-fill text-secondary"></i> Last Month
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="container-fluid">
-        <div class="card">
-        <h4 class="text-center">User Registration Table</h4>
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Date</th>
-                                                    <th>Total Registrations</th>
-                                                    <th>New Registrations</th>
-                                                    <th>Growth (%)</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>January</td>
-                                                    <td>1000</td>
-                                                    <td>150</td>
-                                                    <td>15%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>February</td>
-                                                    <td>1150</td>
-                                                    <td>120</td>
-                                                    <td>10%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>March</td>
-                                                    <td>1270</td>
-                                                    <td>130</td>
-                                                    <td>11%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>April</td>
-                                                    <td>1400</td>
-                                                    <td>140</td>
-                                                    <td>11%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>May</td>
-                                                    <td>1540</td>
-                                                    <td>150</td>
-                                                    <td>10%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>June</td>
-                                                    <td>1690</td>
-                                                    <td>160</td>
-                                                    <td>10%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>July</td>
-                                                    <td>1850</td>
-                                                    <td>170</td>
-                                                    <td>9%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>August</td>
-                                                    <td>2020</td>
-                                                    <td>180</td>
-                                                    <td>9%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>September</td>
-                                                    <td>2200</td>
-                                                    <td>200</td>
-                                                    <td>10%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>October</td>
-                                                    <td>2400</td>
-                                                    <td>210</td>
-                                                    <td>9%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>November</td>
-                                                    <td>2610</td>
-                                                    <td>220</td>
-                                                    <td>8%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>December</td>
-                                                    <td>2830</td>
-                                                    <td>230</td>
-                                                    <td>8%</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-        </div>
-    </div>
-</div>
-
                 </div>
 
               

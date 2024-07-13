@@ -33,9 +33,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user) {
         $_SESSION['user_logged_in'] = true;
         $_SESSION['user_id'] = $user['user_id'];
+       
         $_SESSION['user_fullname'] = $user['fullname'];
+        $_SESSION['user_birthday'] = $user['birthday'];
+      
+        $_SESSION['user_last_login'] = $user['last_login'];
         $_SESSION['user_email'] = $user['email'];
-        $_SESSION['user_photo'] = $user['photo'];
+        $_SESSION['user_username'] = $user['username'];
+        $_SESSION['user_user_photo'] = $user['user_photo'];
+        $_SESSION['user_password'] = $user['password'];
+        $_SESSION['user_phone'] = $user['phone'];
+        $_SESSION['user_date_created'] = $user['date_updated'];
+        $_SESSION['user_date_updated'] = $user['date_updated'];
+        $_SESSION['user_address'] = $user['address'];
+        $_SESSION['user_bio'] = $user['bio'];
+
+
         $_SESSION['status'] = "Login successful!";
         $_SESSION['status_icon'] = "success";
         header('Location: ../index.php');

@@ -4,51 +4,51 @@
 <html lang="en"> 
 <?php include "includes/header.php"; ?>
 <link rel="stylesheet" href="dist/all.min.css">
-<link rel="stylesheet" href="dist/style.css">
-
 <style>
-	 body{
-		overflow:hidden !important;
-	}
-	h5{
-		opacity: 0.7 !important;
-	}
-    .greetingmsg {
-    opacity: 0;
-    transition: opacity 2s ease-in-out;
-    }
+    body{
+    overflow:hidden !important;
+}
+h5{
+    opacity: 0.7 !important;
+}
+.greetingmsg {
+opacity: 0;
+transition: opacity 2s ease-in-out;
+}
 
-    .greetingmsg.show {
-        opacity: 1;
-    }
-    .panel {
-    opacity: 0;
-    transition: opacity 2s ease-in-out;
-    }
+.greetingmsg.show {
+    opacity: 1;
+}
+.panel {
+opacity: 0;
+transition: opacity 2s ease-in-out;
+}
 
-    .panel.show {
-        opacity: 1;
-    }
-    .small-box{
-        position :absolute;
-        height: 0px;
-        width: 0px;
-        margin-top: 20px !important;
-        font-size: 50px;
-        left: 0px;
-        margin-right: 50px !important; 
-       margin-left: 300px !important;
-        align-items: end;
-        justify-content: end;
-        color: navy; 
-		opacity:0.8;
-    }
-	.panel-footer{
-		opacity: 0.8 !important;
-	}
+.panel.show {
+    opacity: 1;
+}
+.small-box{
+    position :absolute;
+    height: 0px;
+    width: 0px;
+    margin-top: 10px !important;
+    font-size: 50px;
+    left: 0px;
+    margin-right: 50px !important; 
+   margin-left: 300px !important;
+    align-items: end;
+    justify-content: end;
+    color: navy; 
+    opacity:0.8;
+}
+.panel-footer{
+    opacity: 0.8 !important;
+}
+
 </style>
 
-<body class="layout-fixed-complete sidebar-expand-lg sidebar-mini bg-body-tertiary">
+
+<body class="layout-fixed-complete sidebar-expand-lg sidebar-mini bg-body-tertiary" >
 
     <div class="app-wrapper">
 
@@ -56,7 +56,7 @@
         <div class="app-main-wrapper"> 
            <?php 
             include "includes/topnav.php"; ?>
-            <main class="app-main" style="overflow: hidden;">
+            <main class="app-main">
             <div class="app-content-header mb-0"> 
                 <div class="container-fluid">
                     <div class="row">
@@ -93,8 +93,7 @@
 												</div>
 												<h1 class=" text-light"> <?php echo $registeredUsersCount ?? '0'; ?></h1>
 												<div class="mb-0">
-												<span class="text-light panel-footer"><a href="" class="text-light">More Info </a><i class="bi bi-link-45deg"></i> </span>
-												<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
+												
 												</div>
 											</div>
 										</div>
@@ -115,8 +114,7 @@
 												</div>
 												<h1 class=" text-light"> <?php echo $uploadedDocumentsCount ?? '0'; ?></h1>
 												<div class="mb-0">
-												<span class="text-light panel-footer"><a href="" class="text-light">More Info </a><i class="bi bi-link-45deg"></i> </span>
-												<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i></span>
+												
 													
 												</div>
 											</div>
@@ -139,8 +137,7 @@
 												</div>
 												<h1 class=" text-light">0</h1>
 												<div class="mb-0">
-												<span class="text-light panel-footer"><a href="" class="text-light">More Info </a> </span>
-												<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i> 6 </span>
+												
 												</div>
 											</div>
 										</div>
@@ -163,8 +160,6 @@
 												</div>
 												<h1 class=" text-light "> <?php echo $adminCount ?? '0'; ?></h1>
 												<div class="mb-0">
-												<span class="text-light panel-footer"><a href="" class="text-light">More Info</a><i class="bi bi-link-45deg"></i> </span>
-												<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
 												</div>
 											</div>
 										</div>
@@ -190,8 +185,7 @@
 												</div>
 												<h1 class=" text-light">5</h1>
 												<div class="mb-0">
-												<span class="text-light panel-footer"><a href="" class="text-light">More Info </a><i class="bi bi-link-45deg"></i> </span>
-												<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
+												
 												
 												</div>
 											</div>
@@ -214,8 +208,7 @@
 												</div>
 												<h1 class=" text-light">45</h1>
 												<div class="mb-0">
-												<span class="text-light panel-footer"><a href="" class="text-light">More Info </a><i class="bi bi-link-45deg"></i> </span>
-												<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i></span>
+												
 													
 												</div>
 											</div>
@@ -238,9 +231,6 @@
 												</div>
 												<h1 class=" text-light"><?php echo $memberCount ?? '0'; ?></h1>
 												<div class="mb-0">
-												<span class="text-light panel-footer"><a href="" class="text-light">More Info</a><i class="bi bi-link-45deg"></i> </span>
-											<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
-												
 												</div>
 											</div>
 										</div>
@@ -263,85 +253,39 @@
 												</div>
 												<h1 class=" text-light"> <?php echo $adminCount ?? '0'; ?></h1>
 												<div class="mb-0">
-												<span class="text-light panel-footer"><a href="" class="text-light">More Info</a><i class="bi bi-link-45deg"></i> </span>
-												<span class="text-success text-light"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
-												</div>
+											</div>
 											</div>
 										</div>
 									</div>  
 
 					</div>
 <div class="row mt-4">
-    <div class="col-lg-6">
+    <div class="col-lg-5 col-md-12 col-sm-12">
         <div class="card mb-4 text-bg-white shadow-sm">
-            <div class="card-header border-0">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h3 class="card-title mb-0">Website Visits All Time</h3>
-                    <a href="javascript:void(0);" class="text-light">View Report</a>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="d-flex">
-                    <p class="d-flex flex-column"> 
-                        <span class="fw-bold fs-5">820</span> 
-                        <span>Website Visitors Over Time</span> 
-                    </p>
-                    <p class="ms-auto d-flex flex-column text-end"> 
-                        <span class="text-success"> 
-                            <i class="bi bi-arrow-up"></i> 12.5%
-                        </span> 
-                        <span class="text-secondary">Since last week</span> 
-                    </p>
-                </div>
-                <div class="position-relative mb-4">
-                    <div id="visitors-chart"></div>
-                </div>
-                <div class="d-flex flex-row justify-content-end">
-                    <span class="me-2">
-                        <i class="bi bi-square-fill text-primary"></i> This Week
-                    </span>
-                    <span>
-                        <i class="bi bi-square-fill text-secondary"></i> Last Week
-                    </span>
-                </div>
-            </div>
+           <div id="piechart_3d" style=" height: 450px;"></div>
+      
         </div>
     </div>
-    <div class="col-lg-6">
+
+
+    <div class="col-lg-7 col-md-12 col-sm-12">
+        <div class="card mb-4 shadow-sm ms-0">
+        <div id="chart_div" style="width: 100%; margin-left:0px !important; height: 450px;"></div>
+        </div>
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col-lg-7 col-md-12 col-sm-12">
         <div class="card mb-4 shadow-sm">
-            <div class="card-header border-0">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h3 class="card-title mb-0">Archive Files</h3>
-                    <a href="javascript:void(0);" class="text-light">View Report</a>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="d-flex">
-                    <p class="d-flex flex-column"> 
-                        <span class="fw-bold fs-5">1200</span> 
-                        <span>Files Over Time</span> 
-                    </p>
-                    <p class="ms-auto d-flex flex-column text-end"> 
-                        <span class="text-success"> 
-                            <i class="bi bi-arrow-up"></i> 15.3%
-                        </span> 
-                        <span class="text-secondary">Since last month</span> 
-                    </p>
-                </div>
-                <div class="position-relative mb-4">
-                    <div id="documents-chart"></div>
-                </div>
-                <div class="d-flex flex-row justify-content-end">
-                    <span class="me-2">
-                        <i class="bi bi-square-fill text-primary"></i> This Month
-                    </span>
-                    <span>
-                        <i class="bi bi-square-fill text-secondary"></i> Last Month
-                    </span>
-                </div>
-            </div>
+        <div id="columnchart_material" style="height: 450px;"></div>
         </div>
     </div>
+    <div class="col-lg-5">
+        <div class="card mb-4 text-bg-white shadow-sm">
+           <div id="piechart_3d" style=" height: 450px;"></div>
+        </div>
+    </div>
+
 </div>
 
                                 
@@ -360,22 +304,7 @@
 
     </script>
     <?php include "includes/footer.php" ?>
-    <script>
-        $(document).ready(function() {
-            var currentHour = new Date().getHours();
-            var greeting;
-
-            if (currentHour < 12) {
-                greeting = "Good Morning";
-            } else if (currentHour < 18) {
-                greeting = "Good Afternoon";
-            } else {
-                greeting = "Good Evening";
-            }
-
-            $('#greeting').text(greeting);
-        });
-    </script>
+  
 	<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.min.js" integrity="sha256-+vh8GkaU7C9/wbSLIcwq82tQ2wTf44aOHA8HlBMwRI8=" crossorigin="anonymous"></script>
 
 <script>

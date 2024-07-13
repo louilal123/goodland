@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 1);
 ?>
 
@@ -42,7 +43,7 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
                 <li><a href="projects" class="itemsnav <?= $page == 'projects.php' ? 'active' : '' ?>">PROJECTS</a></li>
                 <li><a href="methodology" class="itemsnav <?= $page == 'methodology.php' ? 'active' : '' ?>">METHODOLOGY</a></li>
                 <li><a href="stories" class="itemsnav <?= $page == 'stories.php' ? 'active' : '' ?>">STORIES</a></li>
-                <li><a href="library" class="itemsnav <?= $page == 'library.php' ? 'active' : '' ?>">RESOURCES</a></li>
+                <li><a href="library" class="itemsnav <?= $page == 'library.php' ? 'active' : '' ?>">ARCHIVES</a></li>
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
@@ -53,19 +54,13 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
     <div class="d-flex align-items-center">
        
         <a href="#" class="nav-link d-flex align-items-center" style="margin-top: 2px; color: white;" data-bs-toggle="dropdown" aria-expanded="false" id="userDropdown">
-            <img src="<?= $_SESSION['user_photo'] ?: 'uploads/basket.jpg'; ?>" class="user-image rounded-circle shadow" style="width: 40px; height: 40px;">
+            <img src="<?= $_SESSION['user_user_photo'] ?: 'assets/img/defava.jpg'; ?>" class="user-image rounded-circle shadow" style="width: 40px; height: 40px;">
             <span class="d-none d-md-inline text-light" style="margin-top: 5px; color: white;">
                 <?= $_SESSION['user_fullname']; ?>
             </span>
         </a>
-        <ul class="dropdown-menu fade dropdown-menu-lg dropdown-menu-end bg-light" aria-labelledby="userDropdown" style="width: 300px !important; color: white !important;">
-            <li class="d-flex flex-column align-items-center text-center" style="margin-top: 10px !important;">
-                <a class="dropdown-item text-center mt-2" href="#" style="color: black;">
-                    <img src="<?= $_SESSION['user_photo'] ?: 'uploads/basket.jpg'; ?>" style="width: 70px; height: 70px; border-radius: 50%;">
-                    <h4 class="mt-2 mb-0 text-dark ml-2"><small style="color: black;"><?= $_SESSION['user_fullname']; ?></small></h4>
-                    <p class="mt-2 mb-0"><small style="color: black;"><?= $_SESSION['user_email']; ?></small></p>
-                </a>
-            </li>
+        <ul class="dropdown-menu fade dropdown-menu-lg dropdown-menu-end bg-light" aria-labelledby="userDropdown" style="border-radius: 0px !important; width: 300px !important; color: white !important;">
+          
             <li><hr class="dropdown-divider" style="border-color: white;"></li>
             <li><a class="dropdown-item text-start" href="profile" style="color: black;"><i class="bi bi-person"></i> Profile</a></li>
             <li><a class="dropdown-item mb-2" href="classes/logout.php" style="color: black;"><i class="bi bi-power"></i> Logout</a></li>
@@ -73,12 +68,12 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
 
         <div class="cart-icon ms-3 dropdown">
             <a href="#" class="nav-link d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false" id="cartDropdown" style="font-size: 1.5rem; color: white;">
-                <i class="bi bi-cart"></i>
+                <i class="bi bi-bell"></i>
                 <span class="badge">0</span>
             </a>
             <ul class="dropdown-menu fade dropdown-menu-end bg-light cart-dropdown" aria-labelledby="cartDropdown" style="width: 500px; border-radius: 0px !important;">
                 <li class="d-flex flex-column align-items-center text-center">
-                    <span class="dropdown-item text-center mt-2" style="color: black;">Your cart is empty</span>
+                    <span class="dropdown-item text-center mt-2" style="color: black;">Notifications</span>
                 </li>
             </ul>
         </div>

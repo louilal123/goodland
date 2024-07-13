@@ -1,0 +1,44 @@
+.header {
+    background-color: black !important;
+  }
+  .main {
+    margin-top: 150px; 
+  }
+  .sidebar {
+    border-right: 1px solid #ddd;
+    padding-right: 20px;
+  }
+  .sidebar .filter-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .main-content .search-bar {
+    margin-bottom: 20px;
+  }
+  .main-content .results-count {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  .main-content .card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+  }
+  .main-content .card img {
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 15px;
+  }
+  .main-content .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .main-content .card-text {
+    font-size: 1rem;
+    color: #555;
+  }

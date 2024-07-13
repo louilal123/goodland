@@ -1,0 +1,17 @@
+.header {
+    background-color: black !important;
+}
+
+.main {
+    margin-top: 150px !important;
+    margin-bottom: 200px !important;
+}
+.sidenavv a{
+    margin-left: 20px !important;
+        }
+@media (min-width: 992px) {
+    .main {
+        margin-top: 100px;
+        margin-bottom: 200px !important;
+    }
+}

@@ -8,10 +8,9 @@ if (!isset($_SESSION['admin_id'])) {
 
 require_once 'Main_class.php';
 
-$admin_id = $_SESSION['admin_id']; // Retrieve admin_id from session
+$admin_id = $_SESSION['admin_id']; 
 $mainClass = new Main_class();
 
-// specific admin currenly login 
 $adminDetails = $mainClass->getAdminDetails($admin_id);
 
 //table populate
@@ -24,6 +23,7 @@ $memberCount = $mainClass->count_all_members();
 $events = $mainClass->get_all_events();
 
 $registeredUsersCount = $mainClass->count_registered_users();
+$registeredUsers =$mainClass->get_all_registeredUsers();
 
 $documents = $mainClass->get_all_documents();
 
