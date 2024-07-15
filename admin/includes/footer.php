@@ -3,6 +3,34 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script> <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
     <script src="dist/adminlte.js"></script> <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
    
+
+    
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawVisualization);
+
+    function drawVisualization() {
+        fetch('get_visitor_data.php')
+            .then(response => response.json())
+            .then(chartData => {
+                var data = google.visualization.arrayToDataTable(chartData);
+
+                var options = {
+                    title: 'Monthly Website Visitors By Country',
+                    vAxis: {title: 'Number of Visitors'},
+                    hAxis: {title: 'Month'},
+                    seriesType: 'bars',
+                    series: {chartData[0].length - 1: {type: 'line'}} // Last series as line
+                };
+
+                var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+                chart.draw(data, options);
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
+</script>
+
      <!-- swetalert  -->
      <script>
         $(document).ready(function() {

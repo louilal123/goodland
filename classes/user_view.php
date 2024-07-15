@@ -9,7 +9,7 @@ $members = $mainClass->get_all_members();
 
 $documents = $mainClass->get_all_documents();
 
-
+$fileTypes = $mainClass->get_file_types();
 // Track the visitor
 // $mainClass->trackVisitor();
 

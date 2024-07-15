@@ -51,33 +51,37 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
         <?php if (isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] === true): ?>
             <div class="nav-item dropdown user-menu">
  
-    <div class="d-flex align-items-center">
-       
-        <a href="#" class="nav-link d-flex align-items-center" style="margin-top: 2px; color: white;" data-bs-toggle="dropdown" aria-expanded="false" id="userDropdown">
-            <img src="<?= $_SESSION['user_user_photo'] ?: 'assets/img/defava.jpg'; ?>" class="user-image rounded-circle shadow" style="width: 40px; height: 40px;">
-            <span class="d-none d-md-inline text-light" style="margin-top: 5px; color: white;">
-                <?= $_SESSION['user_fullname']; ?>
-            </span>
-        </a>
-        <ul class="dropdown-menu fade dropdown-menu-lg dropdown-menu-end bg-light" aria-labelledby="userDropdown" style="border-radius: 0px !important; width: 300px !important; color: white !important;">
-          
-            <li><hr class="dropdown-divider" style="border-color: white;"></li>
-            <li><a class="dropdown-item text-start" href="profile" style="color: black;"><i class="bi bi-person"></i> Profile</a></li>
-            <li><a class="dropdown-item mb-2" href="classes/logout.php" style="color: black;"><i class="bi bi-power"></i> Logout</a></li>
-        </ul>
+            <div class="d-flex align-items-center">
+                <a href="#" class="nav-link d-flex align-items-center" style="margin-top: 2px; color: white;" data-bs-toggle="dropdown" aria-expanded="false" id="userDropdown">
+                    <img src="<?= $_SESSION['user_user_photo'] ?: 'assets/img/defava.jpg'; ?>" class="user-image rounded-circle shadow" style="width: 40px; height: 40px;">
+                    <span class="d-none d-md-inline text-light" style="margin-top: 5px; color: white;">
+                        <?= $_SESSION['user_fullname']; ?>
+                    </span>
+                </a>
+                <ul class="dropdown-menu fade dropdown-menu-lg dropdown-menu-end bg-light" aria-labelledby="userDropdown" style="border-radius: 0px !important; width: 300px !important; color: white !important;">
+                    <li><hr class="dropdown-divider" style="border-color: white;"></li>
+                    <li><a class="dropdown-item text-start" href="profile" style="color: black;"><i class="bi bi-person"></i> Profile</a></li>
+                    <li><a class="dropdown-item mb-2" href="classes/logout.php" style="color: black;"><i class="bi bi-power"></i> Logout</a></li>
+                </ul>
 
-        <div class="cart-icon ms-3 dropdown">
-            <a href="#" class="nav-link d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false" id="cartDropdown" style="font-size: 1.5rem; color: white;">
-                <i class="bi bi-bell"></i>
-                <span class="badge">0</span>
-            </a>
-            <ul class="dropdown-menu fade dropdown-menu-end bg-light cart-dropdown" aria-labelledby="cartDropdown" style="width: 500px; border-radius: 0px !important;">
-                <li class="d-flex flex-column align-items-center text-center">
-                    <span class="dropdown-item text-center mt-2" style="color: black;">Notifications</span>
-                </li>
-            </ul>
-        </div>
-    </div>
+                <div class="cart-icon ms-3 dropdown">
+                    <a href="#" class="nav-link d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false" id="cartDropdown" style="font-size: 1.5rem; color: white;">
+                        <i class="bi bi-bell" style="font-size: 18px;"></i>
+                        <span class="badge badge-notifications" style="font-size: 12px;">0</span>
+                    </a>
+                    <ul class="dropdown-menu fade dropdown-menu-end bg-light cart-dropdown" aria-labelledby="cartDropdown" style="width: 500px; border-radius: 0px !important;">
+                        <li class="d-flex flex-column align-items-center text-center">
+                            <span class="dropdown-item text-center mt-2" style="color: black;">Notifications</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="ms-3 dropdown">
+                    <a href="upload_file.php" class="nav-link d-flex align-items-center" style="font-size: 1.5rem; color: white;">
+                        <i class="bi bi-upload" style="font-size: 18px;"></i>
+                    </a>
+                </div>
+            </div>
+
 </div>
 
         <?php else: ?>

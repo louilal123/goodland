@@ -120,7 +120,7 @@
     <div class="sidebar-brand">
         <a href="" class="brand-link active">
             <img src="uploads/image.png" alt="Logo" class="brand-image shadow" style="width: 34px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.2) !important;">
-            <h3 class="brand-text text-start  logoo shadow mt-2" style="color: #ffff !important;">Good<i>Land</i></h3>
+            <h3 class="brand-text text-start  logoo shadow mt-2 fw-light" style="color: #ffff !important;">Good<i>Land</i></h3>
         </a>
     </div>
     <div class="sidebar-wrapper">
@@ -134,23 +134,47 @@
                 </li>
                 <li class="nav-header">Manage</li>
                 <li class="nav-item1">
-                    <a href="managedocuments" class="nav-link12 <?= $page == 'managedocuments.php' ? ' active text-bg-primary text-light':'' ?>">
+                    <a href="pending_files" class="nav-link12 <?= $page == 'pending_files.php' ? ' active text-bg-primary text-light':'' ?>">
                         <i class="icons bi bi-file-earmark-pdf-fill"></i>
-                        <p class="p-tag">List of Documents  <i class="nav-arrow bi bi-chevron-right" style="margin-left: 17px;"></i></p>
+                        <p class="p-tag">Manage Pending Files</p>
+                    </a>
+                  
+                </li>
+                
+                <li class="nav-item1">
+                    <a href="approved_files" class="nav-link12 <?= $page == 'approved_files.php' ? ' active text-bg-primary text-light':'' ?>">
+                        <i class="icons bi bi-file-earmark-pdf-fill"></i>
+                        <p class="p-tag">Manage Approved Files</p>
+                    </a>
+                  
+                </li>
+
+                <li class="nav-item1">
+                    <a href="declined_files" class="nav-link12 <?= $page == 'declined_files.php' ? ' active text-bg-primary text-light':'' ?>">
+                        <i class="icons bi bi-file-earmark-pdf-fill"></i>
+                        <p class="p-tag">Manage Declined Files</p>
+                    </a>
+                  
+                </li>
+                <li class="nav-item1">
+                    <a href="managefiletypes" class="nav-link12 <?= $page == 'managefiletypes.php' ? ' active text-bg-primary text-light':'' ?>">
+                        <i class="icons bi bi-grid"></i>
+                        <p class="p-tag">Manage File Types</p>
                     </a>
                 </li>
+
                 <li class="nav-item1">
                     <a href="manageevents" class="nav-link12 <?= $page == 'manageevents.php' ? ' active text-bg-primary text-light':'' ?>">
                         <i class="icons bi bi-calendar-fill"></i>
                         <p class="p-tag">List of Events  <i class="nav-arrow bi bi-chevron-right" style="margin-left: 45px;"></i></p>
                     </a>
                 </li>
-                <li class="nav-item1">
+                <!-- <li class="nav-item1">
                     <a href="manageproducts" class="nav-link12 <?= $page == 'manageproducts.php' ? ' active text-bg-primary text-light':'' ?>">
                         <i class="icons bi bi-box-seam"></i>
                         <p class="p-tag">Messages</p>
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item1">
                     <a href="manageusers" class="nav-link12 <?= $page == 'manageusers.php' ? ' active text-bg-primary text-light':'' ?>">
                         <i class="icons bi bi-people"></i>
@@ -158,30 +182,6 @@
                     </a>
                 </li>
                 
-                <li class="nav-item1">
-                    <a href="#" class="nav-link12">
-                        <i class="icons bi bi-briefcase"></i>
-                        <p class="p-tag">List of Projects</p>
-                    </a>
-                </li>
-                <li class="nav-item1">
-                    <a href="managemembers" class="nav-link12 <?= $page == 'managemembers.php' ? ' active text-bg-primary text-light':'' ?>">
-                        <i class="icons bi bi-people"></i>
-                        <p class="p-tag">List of Members</p>
-                    </a>
-                </li>
-                <li class="nav-item1">
-                    <a href="#" class="nav-link12">
-                        <i class="icons bi bi-shop"></i>
-                        <p class="p-tag">List of Workshops</p>
-                    </a>
-                </li>
-                <li class="nav-item1">
-                    <a href="managecategories" class="nav-link12 <?= $page == 'managecategories.php' ? ' active text-bg-primary text-light':'' ?>">
-                        <i class="icons bi bi-grid"></i>
-                        <p class="p-tag">List of Categories</p>
-                    </a>
-                </li>
 
                 <li class="nav-item1">
                     <a href="manageadmins" class="nav-link12 <?= $page == 'manageadmins.php' ? ' active text-bg-primary text-light':'' ?>">

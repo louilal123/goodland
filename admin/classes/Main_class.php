@@ -67,6 +67,54 @@ class Main_class {
             ]);
         }
     }
+    public function getVisitorData() {
+        $stmt = $this->pdo->prepare("SELECT MONTHNAME(visit_time) as Month, country, COUNT(*) as Visitors FROM visitor_data GROUP BY Month, country ORDER BY visit_time");
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        // Transform data into the required format
+        $data = [];
+        $countries = [];
+        $months = [];
+        $monthlyTotals = [];
+    
+        foreach ($rows as $row) {
+            $months[$row['Month']] = true;
+            $countries[$row['country']] = true;
+        }
+    
+        $header = array_merge(['Month'], array_keys($countries), ['Average']);
+        $data[] = $header;
+    
+        foreach ($months as $month => $_) {
+            $row = array_fill(0, count($header), 0);
+            $row[0] = $month;
+            $totalVisitors = 0;
+            $countryCount = 0;
+    
+            foreach ($rows as $entry) {
+                if ($entry['Month'] == $month) {
+                    $countryIndex = array_search($entry['country'], $header);
+                    if ($countryIndex !== false) {
+                        $row[$countryIndex] = $entry['Visitors'];
+                        $totalVisitors += $entry['Visitors'];
+                        $countryCount++;
+                    }
+                }
+            }
+    
+            // Calculate the average
+            $average = $countryCount > 0 ? $totalVisitors / $countryCount : 0;
+            $row[count($row) - 1] = $average;
+            $data[] = $row;
+        }
+    
+        return $data;
+    }
+    
+    
+    
+    
 
     public function changePassword($userId, $currentPassword, $newPassword) {
         try {
@@ -376,6 +424,84 @@ public function get_all_documents() {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+
+public function get_all_approved_files() {
+    $stmt = $this->pdo->prepare("
+        SELECT files.*, users.fullname 
+        FROM files 
+        LEFT JOIN users ON files.user_id = users.user_id
+        WHERE files.status = 'Approved' 
+        ORDER BY files.upload_date DESC
+    ");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+public function get_all_declined_files() {
+    $stmt = $this->pdo->prepare("
+        SELECT files.*, users.fullname 
+        FROM files 
+        LEFT JOIN users ON files.user_id = users.user_id
+        WHERE files.status = 'Declined' 
+        ORDER BY files.upload_date DESC
+    ");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+public function get_all_pending_files() {
+    $stmt = $this->pdo->prepare("
+        SELECT files.*, users.fullname 
+        FROM files 
+        LEFT JOIN users ON files.user_id = users.user_id
+        WHERE files.status = 'Pending' 
+        ORDER BY files.upload_date DESC
+    ");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+public function count_all_files() {
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM files");
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total'];
+}
+
+public function count_all_pending_files() {
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM files WHERE status = 'Pending' ");
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total'];
+}
+public function count_all_declined_files() {
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM files WHERE status = 'Declined' ");
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total'];
+}
+public function count_approved_files() {
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM files WHERE status = 'Approved' ");
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total'];
+}
+
+public function count_file_types() {
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM filetypes ");
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total'];
+}
+public function get_file_types() {
+    $stmt = $this->pdo->prepare("SELECT * FROM filetypes");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+
 public function add_document($title, $cover, $file_path, $author, $publication_date, $category, $description, $uploaded_by, $status) {
     $sql = "INSERT INTO documents (title, cover, file_path, author, publication_date, category, description, uploaded_by, status, uploaded_at) 
             VALUES (:title, :cover, :file_path, :author, :publication_date, :category, :description, :uploaded_by, :status, NOW())";
@@ -518,6 +644,28 @@ public function register_user($fullname, $email, $birthday, $username, $password
                 return $stmt->fetch(PDO::FETCH_ASSOC);
             }
             return null;
+        }
+
+
+        public function saveFileInfo($userId, $title, $description, $fileTypeId, $fileName, $filePath) {
+            try {
+                $stmt = $this->pdo->prepare("INSERT INTO files (user_id, title, description, file_type, file_path) VALUES
+                 (:user_id, :title, :description, :file_type, :file_path)");
+                $stmt->bindParam(':user_id', $userId);
+                $stmt->bindParam(':title', $title);
+                $stmt->bindParam(':description', $description);
+                $stmt->bindParam(':file_type', $fileTypeId);
+                $stmt->bindParam(':file_path', $filePath);
+                $stmt->execute();
+    
+                $_SESSION['status'] = "File successfully uploaded!";
+                $_SESSION['status_icon'] = "success";
+                return true;
+            } catch (PDOException $e) {
+                $_SESSION['status'] = "Error uploading file: " . $e->getMessage();
+                $_SESSION['status_icon'] = "error";
+                return false;
+            }
         }
         
 

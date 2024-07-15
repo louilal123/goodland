@@ -16,6 +16,8 @@
      <script  src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
      
      <!-- datatable  -->
+     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
+
      <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css">
     <script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
     <script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
@@ -46,15 +48,36 @@
         chart.draw(data, options);
       }
     </script>
+ <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawVisualization);
 
+        function drawVisualization() {
+            var chartData = <?php echo json_encode($chartData); ?>;
+            var data = google.visualization.arrayToDataTable(chartData);
 
+            var options = {
+                title: 'Monthly Website Visitors By Country',
+                is3D: true,
+                vAxis: {title: 'Number of Visitors'},
+                hAxis: {title: 'Month'},
+                seriesType: 'bars',
+                series: {
+                    <?php echo count($chartData[0]) - 2; ?>: {type: 'line'} // The last column (average) should be a line
+                }
+            };
+
+            var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
+<!-- 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawVisualization);
 
       function drawVisualization() {
-        // Some raw data (not necessarily accurate)
         var data = google.visualization.arrayToDataTable([
           ['Month', 'Philippines', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
           ['Jan',  2,      0,         2,             2,           1,      2],
@@ -77,7 +100,7 @@
         var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
-    </script>
+    </script> -->
 
      <script type='text/javascript'>
      google.charts.load('current', {

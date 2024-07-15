@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <?php include "includes/header.php"; ?>
@@ -10,62 +9,84 @@ if (!isset($_SESSION['user_logged_in']) || $_SESSION['user_logged_in'] !== true)
     header('Location: error/index.php');
     exit();
 }?>
-<main class="main container mb-5 mt-5">
-   
+<main class="main container mb-5">
+     
     <div class="container emp-profile mb-5">
         <form method="post">
             <div class="row">
                 <div class="col-md-4">
-                    <div class="card  data-mdb-ripple-init" style="padding-top: 30px; padding-bottom: 30px; " >
-                        <img src="<?= $_SESSION['user_photo'] ?? 'uploads/try.png' ?>" class="img-fluid rounded" 
-                        style="display: flex; margin: auto; height: 210px; width: 250px;  
-                        border: 4px solid #f0f0f0; border-radius: 230px !important;"/>
-                        <a href="" class="btn-secondary"><input type="file" id="profilePhotoInput" name="file"/></a> 
-                       
-                        
+                    <div class="card" style="padding-top: 20px; padding-bottom: 20px;">
+                        <img src="<?= $_SESSION['user_photo'] ?? 'uploads/try.png' ?>" class="img-fluid rounded"
+                             style="display: flex; margin: auto; height: 180px; width: 180px;  
+                             border: 4px solid #f0f0f0; border-radius: 230px !important;"/>
+                        <a href="" class="btn-secondary"></a>
                     </div>
                     <div class="card mt-3 profile-work">
                         <div class="card-body sidenavv">
-                            <p>My Uploads</p>
-                            
-                                <a href="#" >Documents</a><br/>
-                                <a href="#" >Images</a><br/>
-                                <a href="#" >Maps</a><br/>
-                                <a href="#" >Recordings</a><br/>
-                                <br/>
+                            <p>About Me</p>
+                            <textarea class="form-control" id="textAreaExample3" rows="3">
+                                <?= $_SESSION['user_bio'] ?? ''; ?>
+                            </textarea>
+                           
+                            <button type="submit" class="btn btn-success mt-2 mb-3 float-end">Update Bio</button>
+                            <br/>  <br/>
                             <p>Settings</p>
-                                <a href="#" data-toggle="modal" data-target="#changePasswordModal">Change Password</a><br/>
-                                <a href="classes/logout.php">Logout</a><br/><br/>
+                            <a href="#" data-toggle="modal" data-target="#changePasswordModal">Change Password</a><br/>
+                            <a href="classes/logout.php">Logout</a><br/><br/>
                             <p>Account</p>
-                                <a href="classes/logout.php">Delete Account</a><br/>
+                            <a href="classes/logout.php">Delete Account</a><br/>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-8 mb-5">
-                    <div class="card " style="height: 220px;">
+                    <div class="card" style="height: auto;">
                         <div class="card-body">
-                            <h4>My Account<?//= $_SESSION['user_fullname']; ?></h4>
-                            <div class="form-outline w-100 mt-4">
-                              <!-- Textarea 2 rows height -->
-                                <div data-mdb-input-init class="form-outline">
-                                <textarea class="form-control" id="textAreaExample3" rows="3">
-                                <?= $_SESSION['user_bio'] ?? ''; ?>
-                                </textarea>
-                                <label class="form-label" for="textAreaExample3">Bio</label>
+                            <h4>Dashboard</h4>
+                            <div class="row mt-4">
+                                <div class="col-md-3">
+                                    <div class="card  text-center">
+                                        <div class="card-body">
+                                            <h4>0</h4>
+                                            <p class="card-text">Total Uploads</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                 
-                            <button type="submit" class="btn btn-success mt-2 mb-1 float-end">Update Bio</button>
-                            
+                                <div class="col-md-3">
+                                    <div class="card text-center">
+                                        <div class="card-body">
+                                            <h4>0</h4>
+                                            <p class="card-text">Approved</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card text-center">
+                                        <div class="card-body">
+                                            <h4>0</h4>
+                                            <p class="card-text">Pending</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card text-center">
+                                        <div class="card-body">
+                                            <h4>0</h4>
+                                            <p class="card-text mt-1">Declined</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card mb-5">
+                    <div class="card mb-5 mt-3">
                         <div class="card-body">
-                        <ul class="nav nav-tabs mb-5" id="myTab" role="tablist">
+                            <ul class="nav nav-tabs mb-5" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" 
+                                    role="tab" aria-controls="profile" aria-selected="false">My Uploads</a>
                                 </li>
                             </ul>
                             <div class="tab-content profile-tab" id="myTabContent">
@@ -124,9 +145,9 @@ if (!isset($_SESSION['user_logged_in']) || $_SESSION['user_logged_in'] !== true)
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                    <!-- Timeline content here -->
-                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <!-- Timeline content here -->
                             </div>
                         </div>
                     </div>
@@ -141,7 +162,7 @@ if (!isset($_SESSION['user_logged_in']) || $_SESSION['user_logged_in'] !== true)
                     <h4 class="modal-title">Change Password</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post">
+                    <form action="classes/change_password.php" method="post">
                         <div class="form-group">
                             <label for="currentPassword">Current Password:</label>
                             <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
@@ -154,13 +175,12 @@ if (!isset($_SESSION['user_logged_in']) || $_SESSION['user_logged_in'] !== true)
                             <label for="confirmPassword">Confirm New Password:</label>
                             <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
                         </div>
-                   
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" name="change_password">Change Password</button>
                 </div>
-                </form>
             </div>
         </div>
     </div>

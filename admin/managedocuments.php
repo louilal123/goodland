@@ -84,7 +84,8 @@
                                         </td>
                                         <td><?php echo htmlspecialchars($document['uploaded_at']); ?></td>
                                         <td>
-                                            <button class="btn btn-info btn-sm viewDocumentBtn" data-bs-toggle="modal" data-bs-target="#viewDocumentModal"><i class="bi bi-eye"></i></button>
+                                            <button class="btn btn-info btn-sm viewDocumentBtn" data-bs-toggle="modal" 
+                                            data-bs-target="#viewDocumentModal"><i class="bi bi-eye"></i></button>
                                             <a href="#" class="btn btn-success btn-sm editDocumentBtn" data-bs-toggle="modal" data-bs-target="#editDocumentModal"><i class="bi bi-pencil-square"></i></a>
                                             <a href="classes/delete_document.php?id=<?=$document['file_id']; ?>" class="btn btn-danger btn-sm deleteDocumentBtn"><i class="bi bi-trash"></i></a>
                                             <?php if ($document['status'] === 'draft'): ?>
