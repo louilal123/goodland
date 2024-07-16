@@ -32,7 +32,7 @@
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
+          ['Task', 'Count'],
           ['Documents',     7],
           ['Images',      2],
           ['Maps',  2],

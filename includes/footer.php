@@ -95,9 +95,10 @@
 <script src="assets/js/main.js"></script>
 
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
      <!-- swetalert  -->
      <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+     <script type="text/javascript" src="mdbfolder/mdb.umd.min.js"></script>
      <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
 import { Input, Ripple, initMDB } from "mdb-ui-kit";
@@ -122,16 +123,7 @@ initMDB({ Input, Ripple });
   });
 })();
    </script>
-<!-- ajax codes  for viwing modals etc autopopulate-->
-<script src="dist\js\customajax.js"></script>
 
-   <script>
-  $(window).on('load', function() {
-    setTimeout(function() {
-      $('#loader').fadeOut('slow');
-    }, 1000); 
-  });
-</script>
 
 <script>
     $(document).ready(function() {

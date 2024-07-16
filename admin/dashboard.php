@@ -81,6 +81,9 @@
 								 	    <div class="card text-bg-primary" >
 											<div class="card-body">
 												<div class="row">
+												<div class="col mt-2">
+														<h5 class="card-title text-light">Registered Users</h5>
+													</div>
 													
 													<div class="col-auto">
 														<div class="stat text-primary">
@@ -90,9 +93,7 @@
 												</div> 
                                                  <!-- style="margin-left:50px;" -->
 												<h1 class=" text-light"> <?php echo $registeredUsersCount ?? '0'; ?></h1>
-												<div class="col mt-2">
-														<h5 class="card-title text-light">Registered Users</h5>
-													</div>
+												
 
 											</div>
 										</div>

@@ -23,7 +23,7 @@
   <!-- <link rel="stylesheet" href="mdbfolder/main.css" rel="stylesheet"> -->
   <script  src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" ></script>
     
    
 <link rel="stylesheet" href="mdbfolder/mdb.min.css">

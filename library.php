@@ -48,7 +48,8 @@ if (isset($_POST['viewPdf'])) {
                     <?php foreach ($documents as $document): ?>
                     <div class="col-md-4 mb-4">
                         <div class="card" style="height: 100%;">
-                            <img src="admin/uploads/cover/<?php echo htmlspecialchars($document['cover'] ?? 'default_photo.jpg'); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($document['title']); ?>" style="height: 200px; object-fit: cover;">
+                            <img src="admin/uploads/cover/<?php echo htmlspecialchars($document['cover'] ?? 'default_photo.jpg'); ?>" 
+                            class="card-img-top" alt="<?php echo htmlspecialchars($document['title']); ?>" style="height: 200px; object-fit: cover;">
                             <div class="card-body d-flex flex-column">
                                 <p class="card-title" style="font-size: 16px;"><?php echo htmlspecialchars($document['title']); ?></p>
                                 <div class="mt-auto">

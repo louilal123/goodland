@@ -487,6 +487,82 @@ public function count_approved_files() {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result['total'];
 }
+///user currently login files start 
+public function get_user_documents($userId, $fileType = 'Documents', $status = null, $searchTerm = '') {
+    try {
+        $query = "SELECT * FROM files WHERE user_id = :user_id AND file_type = :file_type";
+        if ($status && $status !== 'All') {
+            $query .= " AND status = :status";
+        }
+        if ($searchTerm) {
+            $query .= " AND (title LIKE :searchTerm OR description LIKE :searchTerm)";
+        }
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $stmt->bindParam(':file_type', $fileType, PDO::PARAM_STR);
+        if ($status && $status !== 'All') {
+            $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+        }
+        if ($searchTerm) {
+            $searchTerm = '%' . $searchTerm . '%';
+            $stmt->bindParam(':searchTerm', $searchTerm, PDO::PARAM_STR);
+        }
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        error_log("Database error: " . $e->getMessage());
+        return [];
+    }
+}
+
+
+
+public function count_user_files($userId) {
+    try {
+        $stmt = $this->pdo->prepare("
+            SELECT 
+                COUNT(*) AS user_total,
+                SUM(status = 'Pending') AS user_pending,
+                SUM(status = 'Approved') AS user_approved,
+                SUM(status = 'Disapproved') AS user_declined
+            FROM files
+            WHERE user_id = :user_id
+        ");
+
+        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            return [
+                'user_total' => $result['user_total'] ?? 0,
+                'user_pending' => $result['user_pending'] ?? 0,
+                'user_approved' => $result['user_approved'] ?? 0,
+                'user_declined' => $result['user_declined'] ?? 0,
+            ];
+        } else {
+            return [
+                'user_total' => 0,
+                'user_pending' => 0,
+                'user_approved' => 0,
+                'user_declined' => 0,
+            ];
+        }
+    } catch (PDOException $e) {
+        error_log("Database error: " . $e->getMessage());
+
+        return [
+            'user_total' => 0,
+            'user_pending' => 0,
+            'user_approved' => 0,
+            'user_declined' => 0,
+        ];
+    }
+}
+//end count logged in user files
+
+
 
 public function count_file_types() {
     $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM filetypes ");
@@ -667,6 +743,7 @@ public function register_user($fullname, $email, $birthday, $username, $password
                 return false;
             }
         }
+        
         
 
 

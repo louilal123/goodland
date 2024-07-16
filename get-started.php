@@ -100,7 +100,6 @@ session_start();
   </main>
 
 <?php include "includes/footer.php"; ?>
-<script type="text/javascript" src="mdbfolder/mdb.umd.min.js"></script>
 
 </body>
 </html>

@@ -53,10 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $hasError = true;
         } else {
             $uploadFileDir = '../uploads/';
-            $destPath = $fileName;
+            $destPath = $uploadFileDir . $fileName;  // Path to move the file
 
             if (move_uploaded_file($fileTmpPath, $destPath)) {
-                if (!$mainClass->saveFileInfo($userId, $title, $description, $file_type, $fileName, $destPath)) {
+                if (!$mainClass->saveFileInfo($userId, $title, $description, $file_type, $fileName, $fileName)) {
                     $_SESSION['error_file'] = "Error saving file information.";
                     $hasError = true;
                 }
