@@ -184,35 +184,53 @@ $documents = $mainClass->get_user_documents($userId, 'Documents', $statusFilter,
             <input type="text" id="documentSearch" class="form-control me-2" placeholder="Search..." onkeyup="searchDocuments()" value="<?= htmlspecialchars($searchTerm); ?>">
             <div class="btn-group">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <?= htmlspecialchars($statusFilter); ?>
+                    <i class="bi bi-filter"></i> Filter
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="filterDropdown">
-                    <li><a class="dropdown-item" href="#" onclick="applyFilter('All')">All</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="applyFilter('Pending')">Pending</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="applyFilter('Approved')">Approved</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="applyFilter('Declined')">Declined</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="filterDocuments('All')">All</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="filterDocuments('Pending')">Pending</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="filterDocuments('Approved')">Approved</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="filterDocuments('Declined')">Declined</a></li>
                 </ul>
             </div>
         </div>
 
-        <!-- Documents List -->
-        <div class="row" id="documentList">
-            <?php foreach ($documents as $doc): ?>
-                <div class="col-md-3 mb-4">
-                    <div class="card custom-card">
-                        <div class="card-img-top">
-                            <?php if ($doc['file_type'] === 'pdf'): ?>
-                                <embed src="<?= htmlspecialchars($doc['file_path']); ?>" class="img-fluid custom-embed-pdf" />
-                            <?php else: ?>
-                                <img src="<?= htmlspecialchars($doc['file_path']); ?>" class="img-fluid custom-card-img" alt="Document Image" />
-                            <?php endif; ?>
-                        </div>
-                        <div class="card-body custom-card-body">
-                            <h5 class="card-title custom-card-title"><?= htmlspecialchars($doc['file_name']); ?></h5>
-                            <p class="card-text custom-card-text">Uploaded on: <?= htmlspecialchars($doc['upload_date']); ?></p>
-                            <p class="card-text custom-card-text">Status: <?= htmlspecialchars($doc['status']); ?></p>
-                            <div class="custom-card-footer">
-                                <a href="<?= htmlspecialchars($doc['file_path']); ?>" class="btn btn-primary">View</a>
+        <div class="row" id="documentsContainer">
+            <?php foreach ($documents as $file): ?>
+                <?php 
+                $statusClass = '';
+                if ($file['status'] == 'Pending') {
+                    $statusClass = 'badge bg-warning text-light';
+                } elseif ($file['status'] == 'Declined') {
+                    $statusClass = 'badge bg-danger text-light';
+                } elseif ($file['status'] == 'Approved') {
+                    $statusClass = 'badge bg-success text-light';
+                }
+                ?>
+                <div class="col-md-3 mt-2">
+                    <div class="card mb-4 shadow-sm custom-card">
+                        <embed src="uploads/<?= htmlspecialchars($file['file_path']); ?>#toolbar=0&navpanes=0"
+                            type="application/pdf" class="custom-card-img" style="overflow:hidden !important;">
+                        <div class="custom-card-body" style="margin-left: 20px !important; margin-right: 35px !important;">
+                            <h6 class="custom-card-title fw-bold"><?= htmlspecialchars($file['title']); ?></h6>
+                            <p class="custom-card-text"><small class="text-muted">Upload Date: <?= htmlspecialchars($file['upload_date']); ?></small></p>
+                            <p class="custom-card-text"><small class="text-muted">Status: </small><small class="text-light <?= $statusClass; ?>"><?= htmlspecialchars($file['status']); ?></small></p>
+                            <div class="d-flex justify-content-between">
+                                <a href="uploads/<?= htmlspecialchars($file['file_path']); ?>" class="btn-link" download="<?= htmlspecialchars($file['title']); ?>">
+                                    <small class="text-primary"><i class="bi bi-arrow-down"></i> Download</small>
+                                </a>
+                                <a type="submit" class="btn-link" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#fileModal"
+                                data-title="<?= htmlspecialchars($file['title']); ?>"
+                                data-description="<?= htmlspecialchars($file['description']); ?>"
+                                data-filetype="<?= htmlspecialchars($file['file_type']); ?>"
+                                data-status="<?= htmlspecialchars($file['status']); ?>"
+                                data-date="<?= htmlspecialchars($file['upload_date']); ?>"
+                                data-remarks="<?= htmlspecialchars($file['remarks']); ?>"
+                                data-path="uploads/<?= htmlspecialchars($file['file_path']); ?>">
+                                <small class="text-primary"><i class="bi bi-eye"></i> View</small>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -220,181 +238,182 @@ $documents = $mainClass->get_user_documents($userId, 'Documents', $statusFilter,
             <?php endforeach; ?>
         </div>
     </div>
-    <div class="tab-pane fade show active" id="ex-with-icons-tabs-1" role="tabpanel" aria-labelledby="ex-with-icons-tab-1">
-        <div class="row">
-            <div class="col-md-6">
-                <label class="form-label">Name</label>
-                <input type="text" class="form-control" value="John Doe">
-            </div>
-            <div class="col-md-6">
-                <label class="form-label">Email</label>
-                <input type="text" class="form-control" value="john.doe@example.com">
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-6">
-                <label class="form-label">Phone</label>
-                <input type="text" class="form-control" value="123-456-7890">
-            </div>
-            <div class="col-md-6">
-                <label class="form-label">Address</label>
-                <input type="text" class="form-control" value="123 Main St, Springfield">
-            </div>
-        </div>
-    </div>
-    <div class="tab-pane fade" id="ex-with-icons-tabs-3" role="tabpanel" aria-labelledby="ex-with-icons-tab-3">
-        <div class="row">
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Image 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Image 1</h5>
-                        <p class="card-text">Description of image 1.</p>
-                        <a href="#" class="btn btn-primary">View</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Image 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Image 2</h5>
-                        <p class="card-text">Description of image 2.</p>
-                        <a href="#" class="btn btn-primary">View</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Image 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Image 3</h5>
-                        <p class="card-text">Description of image 3.</p>
-                        <a href="#" class="btn btn-primary">View</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Image 4">
-                    <div class="card-body">
-                        <h5 class="card-title">Image 4</h5>
-                        <p class="card-text">Description of image 4.</p>
-                        <a href="#" class="btn btn-primary">View</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="tab-pane fade" id="ex-with-icons-tabs-4" role="tabpanel" aria-labelledby="ex-with-icons-tab-4">
-        <p>Content for Maps tab.</p>
-    </div>
-    <div class="tab-pane fade" id="ex-with-icons-tabs-5" role="tabpanel" aria-labelledby="ex-with-icons-tab-5">
-        <p>Content for Arts tab.</p>
-    </div>
-</div>
-<!-- Tabs content -->
-                            </div> <!-- End of card-body -->
-                        </div> <!-- End of card -->
-                    </div> <!-- End of col-md-8 -->
-                </div> <!-- End of row -->
-            </form> <!-- End of form -->
-        </div> <!-- End of container emp-profile mb-5 mt-5 -->
-    </main> <!-- End of main container mb-5 -->
 
-    <!-- Change Password Modal -->
-    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="currentPassword" class="form-label">Current Password</label>
-                            <input type="password" class="form-control" id="currentPassword">
-                        </div>
-                        <div class="mb-3">
-                            <label for="newPassword" class="form-label">New Password</label>
-                            <input type="password" class="form-control" id="newPassword">
-                        </div>
-                        <div class="mb-3">
-                            <label for="confirmPassword" class="form-label">Confirm New Password</label>
-                            <input type="password" class="form-control" id="confirmPassword">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div> <!-- End of Change Password Modal -->
+                                    <div class="tab-pane fade" id="ex-with-icons-tabs-3" role="tabpanel" aria-labelledby="ex-with-icons-tab-3">
+                                        Tab 3 content
+                                    </div>
+                                    <div class="tab-pane fade" id="ex-with-icons-tabs-4" role="tabpanel" aria-labelledby="ex-with-icons-tab-4">
+                                        Tab 4 content
+                                    </div>
+                                    <div class="tab-pane fade" id="ex-with-icons-tabs-5" role="tabpanel" aria-labelledby="ex-with-icons-tab-5">
+                                        Tab 5 content
+                                    </div>
+                                    <div class="tab-pane fade show active" id="ex-with-icons-tabs-1" role="tabpanel" aria-labelledby="ex-with-icons-tab-1">
+                                    <div class="row mb-2">
+                                            <div class="col-md-6">
+                                                <label>Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control" value="<?= $_SESSION['user_fullname']; ?>" readonly>
+                                            </div>
+                                        </div> 
+
+                                        <div class="row mb-2">
+                                            <div class="col-md-6">
+                                                <label>Username</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control" value="<?= $_SESSION['user_username'] ?? ''; ?>" readonly>
+                                            </div>
+                                        </div> 
+
+                                        <div class="row mb-2">
+                                            <div class="col-md-6">
+                                                <label>Email</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="email" class="form-control" value="<?= $_SESSION['user_email']; ?>" readonly>
+                                            </div>
+                                        </div> 
+
+                                        <div class="row mb-2">
+                                            <div class="col-md-6">
+                                                <label>Phone</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control" value="<?= $_SESSION['user_phone'] ?? ''; ?>" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2">
+                                            <div class="col-md-6">
+                                                <label>Address</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control" value="<?= $_SESSION['user_address'] ?? ''; ?>" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2">
+                                            <div class="col-md-6">
+                                                <label>Birthday</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="date" class="form-control" value="<?= $_SESSION['user_birthday'] ?? ''; ?>" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-12">
+                                                <a href="#" class="btn btn-primary float-end" data-mdb-ripple-init>Update</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                    </div>
+                                  
+
+                            </div> <!-- End of card-body -->
+                        </div> <!-- End of card mb-5 mt-3 -->
+                        
+                    </div> <!-- End of col-md-8 mb-5 -->
+                    
+                </div> <!-- End of row -->
+                
+        </div> <!-- End emp-profile-->
+
+        <!-- modals  -->
+<div class="modal fade" id="fileModal" tabindex="-1" aria-labelledby="fileModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>File Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body mt-2">
+        <embed id="fileModalPreview" src="#toolbar=0&navpanes=0" type="application/pdf" class="custom-embed-pdf" style="toolbar:0;display: flex; margin: auto;height: 400px;">
+        <p><strong>Title:</strong> <span class="modal-title" id="fileModalTitle"></span></p>
+        <p><strong>Description:</strong> <span id="fileModalDescription"></span></p>
+        <p><strong>File Type:</strong> <span id="fileModalType"></span></p>
+        <p><strong>Status:</strong> <span id="fileModalStatus"></span></p>
+        <p><strong>Date Uploaded:</strong> <span id="fileModalDate"></span></p>
+        <p><strong>Remarks:</strong></p>
+        <textarea id="fileModalRemarks" rows="3" class="form-control" readonly></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    </main> <!-- End of main container mb-5 mt-5 -->
 
     <?php include "includes/footer.php"; ?>
-
     <script>
-        // Function to filter documents by status
-        function applyFilter(status) {
-            window.location.href = `?status=${status}&search=${document.getElementById('documentSearch').value}`;
-        }
+function filterDocuments(status) {
+    const searchTerm = document.getElementById('documentSearch').value;
+    window.location.href = `profile.php?status=${status}&search=${searchTerm}`;
+}
 
-        // Function to search documents by name
-        function searchDocuments() {
-            const searchTerm = document.getElementById('documentSearch').value;
-            const statusFilter = "<?= htmlspecialchars($statusFilter); ?>";
-            window.location.href = `?status=${statusFilter}&search=${searchTerm}`;
-        }
-    </script>
-
-<script>
+function searchDocuments() {
+    const status = document.querySelector('.dropdown-menu .active') ? document.querySelector('.dropdown-menu .active').innerText : 'All';
+    const searchTerm = document.getElementById('documentSearch').value;
+    window.location.href = `profile.php?status=${status}&search=${searchTerm}`;
+}
+</script>
+    
+     <script>
           
-          document.addEventListener('DOMContentLoaded', (event) => {
-              const fileModal = document.getElementById('fileModal');
-              fileModal.addEventListener('show.bs.modal', (event) => {
-              const button = event.relatedTarget;
-              const title = button.getAttribute('data-title');
-              const description = button.getAttribute('data-description');
-              const fileType = button.getAttribute('data-filetype');
-              const status = button.getAttribute('data-status');
-              const date = button.getAttribute('data-date');
-              const remarks = button.getAttribute('data-remarks');
-              const path = button.getAttribute('data-path');
-  
-              const modalTitle = fileModal.querySelector('.modal-title');
-              const modalPreview = fileModal.querySelector('#fileModalPreview');
-              const modalDescription = fileModal.querySelector('#fileModalDescription');
-              const modalType = fileModal.querySelector('#fileModalType');
-              const modalStatus = fileModal.querySelector('#fileModalStatus');
-              const modalDate = fileModal.querySelector('#fileModalDate');
-              const modalRemarks = fileModal.querySelector('#fileModalRemarks');
-  
-              modalTitle.textContent = title;
-              modalPreview.src = path;
-              modalDescription.textContent = description;
-              modalType.textContent = fileType;
-              modalDate.textContent = date;
-              modalRemarks.textContent = remarks;
-  
-              // Set status badge color
-              let statusClass;
-              switch (status.toLowerCase()) {
-                  case 'approved':
-                  statusClass = 'badge bg-success';
-                  break;
-                  case 'declined':
-                  statusClass = 'badge bg-danger';
-                  break;
-                  case 'pending':
-                  statusClass = 'badge bg-warning';
-                  break;
-                  default:
-                  statusClass = 'badge bg-secondary';
-              }
-              modalStatus.className = statusClass;
-              modalStatus.textContent = status;
-              });
-          });
-       </script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const fileModal = document.getElementById('fileModal');
+            fileModal.addEventListener('show.bs.modal', (event) => {
+            const button = event.relatedTarget;
+            const title = button.getAttribute('data-title');
+            const description = button.getAttribute('data-description');
+            const fileType = button.getAttribute('data-filetype');
+            const status = button.getAttribute('data-status');
+            const date = button.getAttribute('data-date');
+            const remarks = button.getAttribute('data-remarks');
+            const path = button.getAttribute('data-path');
+
+            const modalTitle = fileModal.querySelector('.modal-title');
+            const modalPreview = fileModal.querySelector('#fileModalPreview');
+            const modalDescription = fileModal.querySelector('#fileModalDescription');
+            const modalType = fileModal.querySelector('#fileModalType');
+            const modalStatus = fileModal.querySelector('#fileModalStatus');
+            const modalDate = fileModal.querySelector('#fileModalDate');
+            const modalRemarks = fileModal.querySelector('#fileModalRemarks');
+
+            modalTitle.textContent = title;
+            modalPreview.src = path;
+            modalDescription.textContent = description;
+            modalType.textContent = fileType;
+            modalDate.textContent = date;
+            modalRemarks.textContent = remarks;
+
+            // Set status badge color
+            let statusClass;
+            switch (status.toLowerCase()) {
+                case 'approved':
+                statusClass = 'badge bg-success';
+                break;
+                case 'declined':
+                statusClass = 'badge bg-danger';
+                break;
+                case 'pending':
+                statusClass = 'badge bg-warning';
+                break;
+                default:
+                statusClass = 'badge bg-secondary';
+            }
+            modalStatus.className = statusClass;
+            modalStatus.textContent = status;
+            });
+        });
+     </script>
+
 </body>
 </html>

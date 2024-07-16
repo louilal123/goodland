@@ -28,6 +28,18 @@ class Main_class {
             echo $e->getMessage();
         }
     }
+
+    public function fetchApprovedDocuments() {
+        $stmt = $this->pdo->prepare("SELECT f.id, f.user_id, f.title, f.description, f.file_path, f.file_type, 
+            f.upload_date, f.status, f.remarks, f.isDeleted, u.fullname AS uploader_fullname
+            FROM files f
+            INNER JOIN users u ON f.user_id = u.user_id
+            WHERE f.status = 'Approved' AND f.isDeleted = 0");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+
     public function trackVisitor() {
         $geoplugin = new geoPlugin();
         
@@ -430,7 +442,7 @@ public function get_all_approved_files() {
         SELECT files.*, users.fullname 
         FROM files 
         LEFT JOIN users ON files.user_id = users.user_id
-        WHERE files.status = 'Approved' 
+        WHERE files.status = 'Approved' AND isDeleted = 0 
         ORDER BY files.upload_date DESC
     ");
     $stmt->execute();
@@ -442,7 +454,7 @@ public function get_all_declined_files() {
         SELECT files.*, users.fullname 
         FROM files 
         LEFT JOIN users ON files.user_id = users.user_id
-        WHERE files.status = 'Declined' 
+        WHERE files.status = 'Declined' AND isDeleted = 0 
         ORDER BY files.upload_date DESC
     ");
     $stmt->execute();
@@ -454,7 +466,7 @@ public function get_all_pending_files() {
         SELECT files.*, users.fullname 
         FROM files 
         LEFT JOIN users ON files.user_id = users.user_id
-        WHERE files.status = 'Pending' 
+        WHERE files.status = 'Pending' AND isDeleted = 0 
         ORDER BY files.upload_date DESC
     ");
     $stmt->execute();

@@ -1,6 +1,9 @@
 <?php
-if (isset($_POST['viewPdf'])) {
-    $file_path = 'admin/uploads/documents/' . $_POST['file_path'];
+include "classes/user_view.php";
+?>
+<?php
+if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
+    $file_path = 'uploads/' . htmlspecialchars($_GET['file_path']);
     if (file_exists($file_path)) {
         header("Content-Type: application/pdf");
         readfile($file_path);
@@ -10,70 +13,224 @@ if (isset($_POST['viewPdf'])) {
     }
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
-
 <?php include "includes/header.php"; ?>
 <link rel="stylesheet" href="assets/css/style.css">
+<style>
+    .custom-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Ensure uniform height for all cards */
+            overflow: hidden; /* Prevents content from overflowing */
+        }
 
+        .custom-card-img {
+            object-fit: cover; /* Ensures the image fits within its container */
+            height: 190px !important; /* Fixed height for uniformity */
+            overflow: hidden; /* Prevents overflow */
+            width: 100% !important;
+        }
+
+
+        .custom-card-text1 {
+            columns: 6;
+            -webkit-columns: 6;
+            -moz-columns: 6;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+          
+        }
+        .custom-card-footer {
+            margin-top: auto; /* Pushes the footer to the bottom */
+        }
+</style>
 <body class="index-page">
+<?php include "includes/topnav.php"; ?>
 
-<?php include "includes/topnav.php"; include "classes/user_view.php"; ?>
-
-<main class="main container mt-10">
+<main class="main container mt-10 mb-5" style="margin-bottom: 150px important;">
+    <div class="card" style="border-radius:0px;">
+        <div class="card-body" style="border-radius:0px;">
     <h1 class="text-center mt-5"><strong>BROWSE OUR ARCHIVE FILES</strong></h1>
     <h6 class="text-center mb-6">Explore the rich culture and heritage of Bantayan Island</h6>
     <div class="container-fluid mt-10">
         <div class="row justify-content-center">
-
             <!-- Sidebar -->
             <div class="col-md-2 sidebar mr-5">
-              
                 <h4 class="filter-title">Browse Sections</h4>
                 <ul class="list-unstyled">
+                <li><a href="#notable-figures" class="d-block mb-2 active btn-link">All Files</a></li>
                     <li><a href="#notable-figures" class="d-block mb-2 text-dark">Documents</a></li>
                     <li><a href="#cultural-traditions" class="d-block mb-2 text-dark">Images</a></li>
                     <li><a href="#personal-stories" class="d-block mb-2 text-dark">Stories</a></li>
                     <li><a href="#notable-figures" class="d-block mb-2 text-dark">Maps</a></li>
                 </ul>
-               
             </div>
 
             <!-- Main Content -->
             <div class="col-md-10 main-content">
                 <div class="search-bar mb-4">
-                    <input type="text" class="form-control search" placeholder="Search materials..." id="mainSearch">
+                    <div class="input-group">
+                        <input type="text" class="form-control search w-50" placeholder="Search materials..." id="mainSearch">
+                        <div class="input-group-append ">
+                            <span class="input-group-text"><i class="bi bi-search"></i></span>
+                        </div>
+                    </div>
                 </div>
-                <div class="row">
-                    <?php foreach ($documents as $document): ?>
-                    <div class="col-md-4 mb-4">
-                        <div class="card" style="height: 100%;">
-                            <img src="admin/uploads/cover/<?php echo htmlspecialchars($document['cover'] ?? 'default_photo.jpg'); ?>" 
-                            class="card-img-top" alt="<?php echo htmlspecialchars($document['title']); ?>" style="height: 200px; object-fit: cover;">
-                            <div class="card-body d-flex flex-column">
-                                <p class="card-title" style="font-size: 16px;"><?php echo htmlspecialchars($document['title']); ?></p>
-                                <div class="mt-auto">
-                                   
-                                    <div class="d-flex justify-content-between">
-                                        <form method="post">
-                                            <input type="hidden" name="file_path" value="<?php echo htmlspecialchars($document['file_path']); ?>">
-                                            <button type="submit" name="viewPdf" class="btn btn-link p-0"><i class="bi bi-eye"></i> View</button>
-                                        </form>
-                                        <button class="btn btn-link p-0"><i class="bi bi-bookmark"></i> Bookmark</button>
-                                    </div>
+                <div class="row" id="documentsContainer">
+                    <?php foreach ($documents as $file): ?>
+               
+                    <div class="col-md-3 mt-2 document-item">
+                        <div class="card mb-4 shadow-sm custom-card" style="height: 400px;">
+                            <embed src="uploads/<?= htmlspecialchars($file['file_path']); ?>#toolbar=0&navpanes=0"
+                                type="application/pdf" class="custom-card-img" style="overflow:hidden !important; width: 100% !important;">
+                            <div class="custom-card-body" style="margin-left: 20px !important; margin-right: 20px !important;">
+                                <h6 class="custom-card-title fw-bold mt-2"><?= htmlspecialchars($file['title']); ?></h6>
+                                <!-- <p class="custom-card-text"><small class="text-muted">Upload Date: <?//= htmlspecialchars($file['upload_date']); ?></small></p> -->
+                                <p class="custom-card-text1"><small class="text-muted"> </small><small class="text-muted">
+                                    <?= htmlspecialchars($file['description']); ?></small></p>
+                                    <p class="custom-card-text"><small class="text-muted"> </small><small class="text-muted">
+                                    <?= htmlspecialchars($file['file_type']); ?></small></p>
+                                      <p class="custom-card-text"><small class="text-muted">Added By: 
+                                      <?= htmlspecialchars($file['uploader_fullname']); ?></small></p>
+                                <div class="d-flex justify-content-between custom-card-footer">
+                                    <a href="uploads/<?= htmlspecialchars($file['file_path']); ?>" class="btn-link custom-card-footer" download="<?= htmlspecialchars($file['title']); ?>">
+                                        <small class="text-primary"><i class="bi bi-arrow-down"></i> Download</small>
+                                    </a>
+                                    <!-- <a href="view_pdf.php?file_path=<?//= urlencode($file['file_path']); ?>" class="btn-link custom-card-footer">
+                                        <small class="text-primary"><i class="bi bi-eye"></i> View</small>
+                                    </a> -->
+                                    <a href="#" class="btn-link custom-card-footer"
+    data-bs-toggle="modal"
+    data-bs-target="#fileModal"
+    data-title="<?= htmlspecialchars($file['title']); ?>"
+    data-description="<?= htmlspecialchars($file['description']); ?>"
+    data-filetype="<?= htmlspecialchars($file['file_type']); ?>"
+    data-uploadedby=  <?= htmlspecialchars($file['uploader_fullname']); ?>
+    data-status="<?= htmlspecialchars($file['status']); ?>"
+    data-date="<?= htmlspecialchars($file['upload_date']); ?>"
+    data-remarks="<?= htmlspecialchars($file['remarks']); ?>"
+    data-path="uploads/<?= htmlspecialchars($file['file_path']); ?>">
+    <small class="text-primary"><i class="bi bi-eye"></i> View</small>
+</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <?php endforeach; ?>
                 </div>
+               
             </div>
-
         </div>
     </div>
+    </div>
+    </div>
+
+    <!-- modals  -->
+<!-- Modal -->
+<div class="modal fade" id="fileModal" tabindex="-1" aria-labelledby="fileModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="fileModalLabel">File Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <embed id="fileModalPreview" src="" type="application/pdf" class="embed-responsive-item"></embed>
+                </div>
+                <p><strong>Title:</strong> <span id="fileModalTitle"></span></p>
+                <p><strong>Description:</strong> <span id="fileModalDescription"></span></p>
+                <p><strong>File Type:</strong> <span id="fileModalType"></span></p>
+                <!-- <p><strong>Status:</strong> <span id="fileModalStatus"></span></p> -->
+                <p><strong>Added By:</strong> <span id="fileModalUploadedBy"></span></p>
+                <p><strong>Date Uploaded:</strong> <span id="fileModalDate"></span></p>
+                <!-- <p><strong>Remarks:</strong></p> -->
+                <!-- <textarea id="fileModalRemarks" rows="3" class="form-control" readonly></textarea> -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="viewFileBtn">View File</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </main>
 <?php include "includes/footer.php"; ?>
-</body>
+<script>
+function filterDocuments(status) {
+    const searchTerm = document.getElementById('documentSearch').value;
+    window.location.href = `profile.php?status=${status}&search=${searchTerm}`;
+}
 
+function searchDocuments() {
+    const status = document.querySelector('.dropdown-menu .active') ? document.querySelector('.dropdown-menu .active').innerText : 'All';
+    const searchTerm = document.getElementById('documentSearch').value;
+    window.location.href = `profile.php?status=${status}&search=${searchTerm}`;
+}
+</script>
+    
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const fileModal = document.getElementById('fileModal');
+        fileModal.addEventListener('show.bs.modal', (event) => {
+            const button = event.relatedTarget;
+            const title = button.getAttribute('data-title');
+            const description = button.getAttribute('data-description');
+            const fileType = button.getAttribute('data-filetype');
+            const status = button.getAttribute('data-status');
+            const date = button.getAttribute('data-date');
+            const uploadedby = button.getAttribute('data-uploadedby');
+            const remarks = button.getAttribute('data-remarks');
+            const path = button.getAttribute('data-path');
+
+            const modalTitle = fileModal.querySelector('#fileModalTitle');
+            const modalPreview = fileModal.querySelector('#fileModalPreview');
+            const modalDescription = fileModal.querySelector('#fileModalDescription');
+            const modalType = fileModal.querySelector('#fileModalType');
+            const modalStatus = fileModal.querySelector('#fileModalStatus');
+            const modalUploadedBy = fileModal.querySelector('#fileModalUploadedBy');
+            const modalDate = fileModal.querySelector('#fileModalDate');
+            const modalRemarks = fileModal.querySelector('#fileModalRemarks');
+            const viewFileBtn = fileModal.querySelector('#viewFileBtn');
+
+            modalTitle.textContent = title;
+            modalPreview.src = path;
+            modalDescription.textContent = description;
+            modalType.textContent = fileType;
+            // modalStatus.textContent = status; // Update this line if status is available
+            modalUploadedBy.textContent = uploadedby; 
+            modalDate.textContent = date; // Update this line if date is available
+            // modalRemarks.textContent = remarks;
+
+            viewFileBtn.addEventListener('click', () => {
+                // Redirect to view the file directly if needed
+                window.location.href = path; // Replace with appropriate action
+            });
+        });
+    });
+</script>
+
+<script>
+document.getElementById('mainSearch').addEventListener('input', function() {
+    let filter = this.value.toLowerCase();
+    let items = document.querySelectorAll('.document-item');
+    let visibleCount = 0;
+    items.forEach(function(item) {
+        let title = item.querySelector('.custom-card-title').textContent.toLowerCase();
+        if (title.includes(filter)) {
+            item.style.display = '';
+            visibleCount++;
+        } else {
+            item.style.display = 'none';
+        }
+    });
+    document.getElementById('entryInfo').textContent = `Showing ${visibleCount} of ${items.length} total entries`;
+});
+</script>
+</body>
 </html>

@@ -11,8 +11,7 @@ $mainClass = new Main_class();
 
 
 $members = $mainClass->get_all_members();
-
-$documents = $mainClass->get_all_documents();
+$documents = $mainClass->fetchApprovedDocuments();
 
 $fileTypes = $mainClass->get_file_types();
 // Track the visitor
