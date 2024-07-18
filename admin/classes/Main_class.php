@@ -29,6 +29,69 @@ class Main_class {
         }
     }
 
+    public function getUserNotifications($user_id) {
+        $stmt = $this->pdo->prepare("SELECT id, file_id, message, is_read, created_at FROM user_notifications WHERE user_id = ? ORDER BY created_at DESC");
+        $stmt->execute([$user_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function getUnreadNotificationCount($user_id) {
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM user_notifications WHERE user_id = ? AND is_read = 0");
+        $stmt->execute([$user_id]);
+        return $stmt->fetchColumn();
+    }
+    
+
+    public function approveFile($file_id, $remarks) {
+        try {
+            $query = "UPDATE files SET status = 'Approved', remarks = ? WHERE id = ?";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([$remarks, $file_id]);
+    
+            $fileQuery = "SELECT user_id, title, upload_date FROM files WHERE id = ?";
+            $fileStmt = $this->pdo->prepare($fileQuery);
+            $fileStmt->execute([$file_id]);
+            $file = $fileStmt->fetch();
+    
+            if ($file) {
+                $message = "Your pending file <strong> ".$file['title']."</strong> has been approved 
+                and successfully published to the website.";
+                $notificationQuery = "INSERT INTO user_notifications (user_id, file_id, message) VALUES (?, ?, ?)";
+                $notificationStmt = $this->pdo->prepare($notificationQuery);
+                $notificationStmt->execute([$file['user_id'], $file_id, $message]);
+            }
+    
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+    
+    public function declineFile($file_id, $remarks) {
+        try {
+            $query = "UPDATE files SET status = 'Declined', remarks = ? WHERE id = ?";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([$remarks, $file_id]);
+    
+            $fileQuery = "SELECT user_id, title, upload_date FROM files WHERE id = ?";
+            $fileStmt = $this->pdo->prepare($fileQuery);
+            $fileStmt->execute([$file_id]);
+            $file = $fileStmt->fetch();
+    
+            if ($file) {
+                $message = "Your uploaded file (".$file['title'].") on (".$file['upload_date'].") has been declined.";
+                $notificationQuery = "INSERT INTO user_notifications (user_id, file_id, message) VALUES (?, ?, ?)";
+                $notificationStmt = $this->pdo->prepare($notificationQuery);
+                $notificationStmt->execute([$file['user_id'], $file_id, $message]);
+            }
+    
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+    
+
     public function fetchApprovedDocuments() {
         $stmt = $this->pdo->prepare("SELECT f.id, f.user_id, f.title, f.description, f.file_path, f.file_type, 
             f.upload_date, f.status, f.remarks, f.isDeleted, u.fullname AS uploader_fullname

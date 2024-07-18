@@ -84,32 +84,34 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
         <td><?php echo htmlspecialchars($file['fullname']); ?></td>
         <td><?php echo htmlspecialchars($file['upload_date']); ?></td>
         <td>
-            <a href="../uploads/<?php echo htmlspecialchars($file['file_path']); ?>" class="btn btn-info btn-sm viewBtn ml-1" name="viewPdf">
-                <i class="bi bi-search"></i> View
-            </a>
-            <button class="btn btn-success btn-sm approveBtn ml-1" 
-                data-id="<?php echo $file['id']; ?>" 
-                data-title="<?php echo htmlspecialchars($file['title']); ?>" 
-                data-description="<?php echo htmlspecialchars($file['description']); ?>" 
-                data-filepath="<?php echo htmlspecialchars($file['file_path']); ?>" 
-                data-filetype="<?php echo htmlspecialchars($file['file_type']); ?>" 
-                data-uploaded_by="<?php echo htmlspecialchars($file['fullname']); ?>" 
-                data-upload_date="<?php echo htmlspecialchars($file['upload_date']); ?>" 
-               data-bs-toggle="modal" data-bs-target="#approveModal">
-                <i class="bi bi-check-lg"></i> Approve
-            </button>
-            <button class="btn btn-warning btn-sm declineBtn ml-1" 
-                data-id="<?php echo $file['id']; ?>" 
-                data-title="<?php echo htmlspecialchars($file['title']); ?>" 
-                data-description="<?php echo htmlspecialchars($file['description']); ?>" 
-                data-filepath="<?php echo htmlspecialchars($file['file_path']); ?>" 
-                data-filetype="<?php echo htmlspecialchars($file['file_type']); ?>" 
-                data-uploaded_by="<?php echo htmlspecialchars($file['fullname']); ?>" 
-                data-upload_date="<?php echo htmlspecialchars($file['upload_date']); ?>" 
-                data-bs-toggle="modal" data-bs-target="#declineModal">
-                <i class="bi bi-hand-thumbs-down"></i> Decline
-            </button>
-        </td>
+        <a href="../uploads/<?php echo htmlspecialchars($file['file_path']); ?>" class="btn btn-info btn-sm viewBtn ml-1" name="viewPdf">
+            <i class="bi bi-search"></i> View
+        </a>
+        <button class="btn btn-success btn-sm approveBtn ml-1"
+            data-id="<?php echo htmlspecialchars($file['id']); ?>"
+            data-title="<?php echo htmlspecialchars($file['title']); ?>"
+            data-description="<?php echo htmlspecialchars($file['description']); ?>"
+            data-filepath="<?php echo htmlspecialchars($file['file_path']); ?>"
+            data-filetype="<?php echo htmlspecialchars($file['file_type']); ?>"
+            data-uploaded_by="<?php echo htmlspecialchars($file['fullname']); ?>"
+            data-upload_date="<?php echo htmlspecialchars($file['upload_date']); ?>"
+            data-bs-toggle="modal"
+            data-bs-target="#approveModal">
+            <i class="bi bi-check-lg"></i> Approve
+        </button>
+        <button class="btn btn-warning btn-sm declineBtn ml-1"
+            data-id="<?php echo htmlspecialchars($file['id']); ?>"
+            data-title="<?php echo htmlspecialchars($file['title']); ?>"
+            data-description="<?php echo htmlspecialchars($file['description']); ?>"
+            data-filepath="<?php echo htmlspecialchars($file['file_path']); ?>"
+            data-filetype="<?php echo htmlspecialchars($file['file_type']); ?>"
+            data-uploaded_by="<?php echo htmlspecialchars($file['fullname']); ?>"
+            data-upload_date="<?php echo htmlspecialchars($file['upload_date']); ?>"
+            data-bs-toggle="modal"
+            data-bs-target="#declineModal">
+            <i class="bi bi-x-lg"></i> Decline
+        </button>
+    </td>
     </tr>
     <?php endforeach; ?>
 </tbody>
@@ -127,8 +129,9 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
 
             </div>
         </div>
-    </div>
+  
 <!-- View Modal -->
+<!-- Decline Modal -->
 <!-- Decline Modal -->
 <div class="modal fade" id="declineModal" tabindex="-1" aria-labelledby="declineModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -138,44 +141,32 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <embed src="../uploads/<?= htmlspecialchars($file['file_path']); ?>#toolbar=0&navpanes=0"
-            type="application/pdf" class="custom-card-img mb-1" style="display: flex; margin: auto;overflow:hidden !important; width: 50% !important;height: 360px;">
+                <embed src="" id="declineFilePathEmbed" type="application/pdf" class="custom-card-img mb-1" style="display: flex; flex-direction: column; margin: auto; overflow: hidden !important; width: 50% !important; height: 360px;">
                 <p><strong>Title:</strong> <span id="declineFileTitle"></span></p>
                 <p><strong>Description:</strong> <span id="declineFileDescription"></span></p>
                 <p><strong>File Path:</strong> <span id="declineFilePath"></span></p>
                 <p><strong>File Type:</strong> <span id="declineFileType"></span></p>
-                <p><strong>Upload By:</strong> <span id="declineUploadedBy"></span></p>
+                <p><strong>Uploaded By:</strong> <span id="declineUploadedBy"></span></p>
                 <p><strong>Upload Date:</strong> <span id="declineUploadDate"></span></p>
-                <div class="mb-3">
-                   <p><strong>Admin Remarks:</strong></p>
-                    <textarea class="form-control" id="declineRemarks" name="remarks" rows="3" required>File declined! Your file doesnt match the details you provided.</textarea>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="declineDeclineBtn" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-warning" id="declineSubmitBtn">Decline</button>
+                <form method="POST" action="classes/file_action.php">
+                    <input type="hidden" name="file_id" id="declineFileId">
+                    <div class="mb-3">
+                        <p><strong>Remarks:</strong></p>
+                        <textarea class="form-control" id="declineRemarks" name="remarks" rows="3" required>Please provide your reason for declining this file.</textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-warning" name="declineBtn">Decline</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
+
 <!-- View Modal -->
-<!-- <div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="viewModalLabel">View File Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p><strong>Title:</strong> <span id="viewFileTitle"></span></p>
-                <p><strong>Description:</strong> <span id="viewFileDescription"></span></p>
-                <p><strong>File Path:</strong> <span id="viewFilePath"></span></p>
-                <p><strong>File Type:</strong> <span id="viewFileType"></span></p>
-                <p><strong>Upload Date:</strong> <span id="viewUploadDate"></span></p>
-            </div>
-        </div>
-    </div>
-</div> -->
+
+<!-- Approve Modal -->
 <!-- Approve Modal -->
 <div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -185,27 +176,30 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <embed src="../uploads/<?= htmlspecialchars($file['file_path']); ?>#toolbar=0&navpanes=0"
-            type="application/pdf" class="custom-card-img mb-1" style="display: flex; margin: auto;overflow:hidden !important; width: 50% !important;height: 360px;">
+                <embed src="" id="approveFilePathEmbed" type="application/pdf" class="custom-card-img mb-1" style="display: flex; margin: auto; overflow: hidden !important; width: 50% !important; height: 360px;">
                 <p><strong>Title:</strong> <span id="approveFileTitle"></span></p>
                 <p><strong>Description:</strong> <span id="approveFileDescription"></span></p>
                 <p><strong>File Path:</strong> <span id="approveFilePath"></span></p>
                 <p><strong>File Type:</strong> <span id="approveFileType"></span></p>
                 <p><strong>Uploaded By:</strong> <span id="approveUploadedBy"></span></p>
                 <p><strong>Upload Date:</strong> <span id="approveUploadDate"></span></p>
-                <div class="mb-3">
-                    <p><strong>Remarks:</strong></p>
-                    <textarea class="form-control" id="approveRemarks" name="remarks" rows="3" required>
-                    File Approved! Thank you for sharing your resource to our platform.
-                    </textarea>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="approveDeclineBtn" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success" id="approveSubmitBtn">Approve</button>
+                <form method="POST" action="classes/file_action.php">
+                    <input type="hidden" name="file_id" id="approveFileId">
+                    <div class="mb-3">
+                        <p><strong>Remarks:</strong></p>
+                        <textarea class="form-control" id="approveRemarks" name="remarks" rows="3" required>File Approved! Thank you for sharing your resource on our platform.</textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success" name="approveBtn">Approve</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
+
+
 </div>
 
 
@@ -215,8 +209,42 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
 
 <?php include "includes/footer.php"; ?>
 <script type="text/javascript" src="mdbfolder/mdb.umd.min.js"></script>
-<script>document.addEventListener('DOMContentLoaded', (event) => {
+<!-- <script>
+   $(document).ready(function () {
+    $('.declineBtn').on('click', function () {
+        $('#declineModal').modal('show');
 
+        $tr = $(this).closest('tr');
+
+        var data = $tr.children("td").map(function () {
+            return $(this).text().trim();
+        }).get();
+
+        console.log(data); 
+
+        $('#declineFileId').val(data[0]);
+        $('#declineTitle').val(data[1]);
+        $('#editusername').val(data[2]);
+        $('#editemail').val(data[3]);
+       
+        
+         var status = data[7].includes('Active') ? 'Active' : 'Inactive';
+        $('#editstatus').val(status);
+
+        if (status === 'Active') {
+            $('#editstatus option[value="Active"]').hide();
+            $('#editstatus option[value="Inactive"]').show();
+        } else {
+            $('#editstatus option[value="Active"]').show();
+            $('#editstatus option[value="Inactive"]').hide();
+        }
+    });
+});
+
+
+    </script> -->
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
     document.querySelectorAll('.approveBtn').forEach(button => {
         button.addEventListener('click', function() {
             let id = this.getAttribute('data-id');
@@ -227,15 +255,17 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
             let uploaded_by = this.getAttribute('data-uploaded_by');
             let upload_date = this.getAttribute('data-upload_date');
 
+            // Update elements in approve modal
+            document.getElementById('approveFileId').value = id;
             document.getElementById('approveFileTitle').textContent = title;
             document.getElementById('approveFileDescription').textContent = description;
             document.getElementById('approveFilePath').textContent = filepath;
+            document.getElementById('approveFilePathEmbed').src = `../uploads/${filepath}#toolbar=0&navpanes=0`;
             document.getElementById('approveFileType').textContent = filetype;
             document.getElementById('approveUploadedBy').textContent = uploaded_by;
             document.getElementById('approveUploadDate').textContent = upload_date;
         });
     });
-
     document.querySelectorAll('.declineBtn').forEach(button => {
         button.addEventListener('click', function() {
             let id = this.getAttribute('data-id');
@@ -246,53 +276,19 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
             let uploaded_by = this.getAttribute('data-uploaded_by');
             let upload_date = this.getAttribute('data-upload_date');
 
+            // Update elements in decline modal
+            document.getElementById('declineFileId').value = id;
             document.getElementById('declineFileTitle').textContent = title;
             document.getElementById('declineFileDescription').textContent = description;
             document.getElementById('declineFilePath').textContent = filepath;
+            document.getElementById('declineFilePathEmbed').src = `../uploads/${filepath}#toolbar=0&navpanes=0`;
             document.getElementById('declineFileType').textContent = filetype;
             document.getElementById('declineUploadedBy').textContent = uploaded_by;
             document.getElementById('declineUploadDate').textContent = upload_date;
         });
     });
-
-    document.getElementById('approveSubmitBtn').addEventListener('click', function() {
-        let remarks = document.getElementById('approveRemarks').value.trim();
-        let form = new FormData();
-        form.append('file_id', document.getElementById('approveFileId').value);
-        form.append('remarks', remarks);
-        form.append('action', 'approve');
-
-        if (confirm('Are you sure you want to approve this file?')) {
-            fetch('classes/file_action.php', {
-                method: 'POST',
-                body: form
-            }).then(response => response.text())
-              .then(data => {
-                  alert(data);
-                  location.reload();
-              });
-        }
-    });
-
-    document.getElementById('declineSubmitBtn').addEventListener('click', function() {
-        let remarks = document.getElementById('declineRemarks').value.trim();
-        let form = new FormData();
-        form.append('file_id', document.getElementById('declineFileId').value);
-        form.append('remarks', remarks);
-        form.append('action', 'decline');
-
-        if (confirm('Are you sure you want to decline this file?')) {
-            fetch('classes/file_action.php', {
-                method: 'POST',
-                body: form
-            }).then(response => response.text())
-              .then(data => {
-                  alert(data);
-                  location.reload();
-              });
-        }
-    });
 });
+
 
 </script>
 

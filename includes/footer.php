@@ -180,3 +180,51 @@ initMDB({ Input, Ripple });
         unset($_SESSION['status_icon1']);
     }
     ?> 
+
+
+<!-- notifications start  -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const markAllReadBtn = document.getElementById('markAllRead');
+    const notificationItems = document.querySelectorAll('.notification-item');
+
+    markAllReadBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        fetch('mark_all_notifications_read.php', {
+            method: 'POST',
+            body: JSON.stringify({ user_id: <?= $userId; ?> }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.querySelector('.badge-notifications').textContent = '0';
+                notificationItems.forEach(item => {
+                    item.classList.remove('unread');
+                });
+            }
+        });
+    });
+
+    notificationItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            const notificationId = e.currentTarget.getAttribute('data-id');
+            fetch('mark_notification_read.php', {
+                method: 'POST',
+                body: JSON.stringify({ notification_id: notificationId }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    e.currentTarget.classList.remove('unread');
+                    const unreadCount = document.querySelectorAll('.notification-item.unread').length;
+                    document.querySelector('.badge-notifications').textContent = unreadCount;
+                }
+            });
+        });
+    });
+});
+</script>

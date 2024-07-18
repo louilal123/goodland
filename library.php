@@ -20,7 +20,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
 <?php include "includes/header.php"; ?>
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
-    .custom-card {
+     .custom-card {
             display: flex;
             flex-direction: column;
             height: 100%; /* Ensure uniform height for all cards */
@@ -29,21 +29,28 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
 
         .custom-card-img {
             object-fit: cover; /* Ensures the image fits within its container */
-            height: 190px !important; /* Fixed height for uniformity */
+            height: 190px; /* Fixed height for uniformity */
             overflow: hidden; /* Prevents overflow */
-            width: 100% !important;
         }
 
 
-        .custom-card-text1 {
-            columns: 6;
-            -webkit-columns: 6;
-            -moz-columns: 6;
+        .custom-card-title {
+            margin-top: 15px;
+           
             text-overflow: ellipsis;
             white-space: nowrap;
             overflow: hidden;
           
         }
+
+        .custom-embed-pdf {
+            pointer-events: none !important;
+            object-fit: cover; /* Ensures the image fits within its container */
+            height: 250px !important; /* Fixed height for uniformity */
+            overflow: hidden !important; /* Prevents overflow */
+        }
+
+
         .custom-card-footer {
             margin-top: auto; /* Pushes the footer to the bottom */
         }
@@ -85,12 +92,12 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                
                     <div class="col-md-3 mt-2 document-item">
                         <div class="card mb-4 shadow-sm custom-card" style="height: 400px;">
-                            <embed src="uploads/<?= htmlspecialchars($file['file_path']); ?>#toolbar=0&navpanes=0"
+                            <embed src="uploads/<?= htmlspecialchars($file['file_path']); ?>"
                                 type="application/pdf" class="custom-card-img" style="overflow:hidden !important; width: 100% !important;">
                             <div class="custom-card-body" style="margin-left: 20px !important; margin-right: 20px !important;">
                                 <h6 class="custom-card-title fw-bold mt-2"><?= htmlspecialchars($file['title']); ?></h6>
                                 <!-- <p class="custom-card-text"><small class="text-muted">Upload Date: <?//= htmlspecialchars($file['upload_date']); ?></small></p> -->
-                                <p class="custom-card-text1"><small class="text-muted"> </small><small class="text-muted">
+                                <p class="custom-card-title"><small class="text-muted"> </small><small class="text-muted">
                                     <?= htmlspecialchars($file['description']); ?></small></p>
                                     <p class="custom-card-text"><small class="text-muted"> </small><small class="text-muted">
                                     <?= htmlspecialchars($file['file_type']); ?></small></p>
@@ -104,18 +111,18 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                                         <small class="text-primary"><i class="bi bi-eye"></i> View</small>
                                     </a> -->
                                     <a href="#" class="btn-link custom-card-footer"
-    data-bs-toggle="modal"
-    data-bs-target="#fileModal"
-    data-title="<?= htmlspecialchars($file['title']); ?>"
-    data-description="<?= htmlspecialchars($file['description']); ?>"
-    data-filetype="<?= htmlspecialchars($file['file_type']); ?>"
-    data-uploadedby=  <?= htmlspecialchars($file['uploader_fullname']); ?>
-    data-status="<?= htmlspecialchars($file['status']); ?>"
-    data-date="<?= htmlspecialchars($file['upload_date']); ?>"
-    data-remarks="<?= htmlspecialchars($file['remarks']); ?>"
-    data-path="uploads/<?= htmlspecialchars($file['file_path']); ?>">
-    <small class="text-primary"><i class="bi bi-eye"></i> View</small>
-</a>
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#fileModal"
+                                        data-title="<?= htmlspecialchars($file['title']); ?>"
+                                        data-description="<?= htmlspecialchars($file['description']); ?>"
+                                        data-filetype="<?= htmlspecialchars($file['file_type']); ?>"
+                                        data-uploadedby=  <?= htmlspecialchars($file['uploader_fullname']); ?>
+                                        data-status="<?= htmlspecialchars($file['status']); ?>"
+                                        data-date="<?= htmlspecialchars($file['upload_date']); ?>"
+                                        data-remarks="<?= htmlspecialchars($file['remarks']); ?>"
+                                        data-path="uploads/<?= htmlspecialchars($file['file_path']); ?>">
+                                        <small class="text-primary"><i class="bi bi-eye"></i> View</small>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -138,9 +145,9 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                 <h5 class="modal-title" id="fileModalLabel">File Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" >
                 <div class="embed-responsive embed-responsive-16by9">
-                    <embed id="fileModalPreview" src="" type="application/pdf" class="embed-responsive-item"></embed>
+                    <embed id="fileModalPreview" src="" type="application/pdf" class="embed-responsive-item" style="display:flex; height: 250px; margin: auto;"></embed>
                 </div>
                 <p><strong>Title:</strong> <span id="fileModalTitle"></span></p>
                 <p><strong>Description:</strong> <span id="fileModalDescription"></span></p>

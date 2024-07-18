@@ -1,5 +1,16 @@
 <?php
 session_start();
+require_once __DIR__ . '/../admin/classes/Main_class.php';
+
+$mainClass = new Main_class();
+
+$notifications = [];
+
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+    $notifications = $mainClass->getUserNotifications($user_id);
+    $unread_count = $mainClass->getUnreadNotificationCount($user_id);
+}
 
 $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 1);
 ?>
@@ -28,6 +39,18 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
         padding: 2px 6px;
         border-radius: 50%;
     }
+    .itemsnav {
+    font-size: 18px !important;
+    }
+.notification-item {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.notification-item:hover {
+    background-color: #f8f9fa;
+}
+
 </style>
 
 <header id="header" class="header d-flex align-items-center fixed-top">
@@ -64,22 +87,30 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
                     <li><a class="dropdown-item mb-2" href="classes/logout.php" style="color: black;"><i class="bi bi-power"></i> Logout</a></li>
                 </ul>
 
-                <div class="cart-icon ms-3 dropdown">
-                    <a href="#" class="nav-link d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false" id="cartDropdown" style="font-size: 1.5rem; color: white;">
-                        <i class="bi bi-bell" style="font-size: 18px;"></i>
-                        <span class="badge badge-notifications" style="font-size: 12px;">0</span>
-                    </a>
-                    <ul class="dropdown-menu fade dropdown-menu-end bg-light cart-dropdown" aria-labelledby="cartDropdown" style="width: 500px; border-radius: 0px !important;">
-                        <li class="d-flex flex-column align-items-center text-center">
-                            <span class="dropdown-item text-center mt-2" style="color: black;">Notifications</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="ms-3 dropdown">
-                    <a href="upload_file.php" class="nav-link d-flex align-items-center" style="font-size: 1.5rem; color: white;">
-                        <i class="bi bi-upload" style="font-size: 18px;"></i>
-                    </a>
-                </div>
+                    <div class="cart-icon ms-3 dropdown">
+                        <a href="#" class="nav-link d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false" id="cartDropdown" style="font-size: 1.5rem; color: white;">
+                            <i class="bi bi-bell" style="font-size: 18px;"></i>
+                            <span class="badge badge-notifications" style="font-size: 12px;"><?= $unread_count; ?></span>
+                        </a>
+                        <ul class="dropdown-menu fade dropdown-menu-end bg-light cart-dropdown" aria-labelledby="cartDropdown" style="width: 500px; border-radius: 0px !important;">
+                            <li class="d-flex flex-column align-items-center text-center">
+                                <span class="dropdown-item text-center mt-2" style="color: black;">Notifications</span>
+                                <a href="#" id="markAllRead" class="dropdown-item text-center" style="color: black;">Mark all as read</a>
+                                <hr class="dropdown-divider" style="border-color: black;">
+                                <?php foreach ($notifications as $notification): ?>
+                                    <a href="#" class="dropdown-item notification-item text-start" style="color: black;" data-id="<?= $notification['id']; ?>">
+                                        <?= $notification['message']; ?>
+                                        <br><small class="text-muted"><?= $notification['created_at']; ?></small>
+                                    </a>
+                                <?php endforeach; ?>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="ms-3 dropdown">
+                        <a href="upload_file.php" class="nav-link d-flex align-items-center" style="font-size: 1.5rem; color: white;">
+                            <i class="bi bi-upload" style="font-size: 18px;"></i>
+                        </a>
+                    </div>
             </div>
 
 </div>
@@ -89,3 +120,52 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
         <?php endif; ?>
     </div>
 </header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const markAllReadBtn = document.getElementById('markAllRead');
+    const notificationItems = document.querySelectorAll('.notification-item');
+
+    markAllReadBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        fetch('mark_all_notifications_read.php', {
+            method: 'POST',
+            body: JSON.stringify({ user_id: <?= $userId; ?> }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.querySelector('.badge-notifications').textContent = '0';
+                notificationItems.forEach(item => {
+                    item.classList.remove('unread');
+                });
+            }
+        });
+    });
+
+    notificationItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            const notificationId = e.currentTarget.getAttribute('data-id');
+            fetch('mark_notification_read.php', {
+                method: 'POST',
+                body: JSON.stringify({ notification_id: notificationId }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    e.currentTarget.classList.remove('unread');
+                    const unreadCount = document.querySelectorAll('.notification-item.unread').length;
+                    document.querySelector('.badge-notifications').textContent = unreadCount;
+                }
+            });
+        });
+    });
+});
+</script>
+
+
+
