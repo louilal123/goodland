@@ -28,7 +28,22 @@ class Main_class {
             echo $e->getMessage();
         }
     }
-
+    public function recordDownload($file_id, $user_id = null) {
+        try {
+            $stmt = $this->pdo->prepare("INSERT INTO downloads (file_id, user_id) VALUES (:file_id, :user_id)");
+            $stmt->bindParam(':file_id', $file_id, PDO::PARAM_INT);
+            if ($user_id === null) {
+                $stmt->bindValue(':user_id', null, PDO::PARAM_NULL);
+            } else {
+                $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            }
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
     public function getUserNotifications($user_id) {
         $stmt = $this->pdo->prepare("SELECT id, file_id, message, is_read, created_at FROM user_notifications WHERE user_id = ? ORDER BY created_at DESC");
         $stmt->execute([$user_id]);
@@ -97,7 +112,7 @@ class Main_class {
             f.upload_date, f.status, f.remarks, f.isDeleted, u.fullname AS uploader_fullname
             FROM files f
             INNER JOIN users u ON f.user_id = u.user_id
-            WHERE f.status = 'Approved' AND f.isDeleted = 0");
+            WHERE f.status = 'Approved' AND f.isDeleted = 0 AND f.file_type ='Documents' ");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

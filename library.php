@@ -30,7 +30,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
         .custom-card-img {
             object-fit: cover; /* Ensures the image fits within its container */
             height: 190px; /* Fixed height for uniformity */
-            overflow: hidden; /* Prevents overflow */
+            overflow-y: hidden; /* Prevents overflow */
         }
 
 
@@ -65,19 +65,17 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
     <h6 class="text-center mb-6">Explore the rich culture and heritage of Bantayan Island</h6>
     <div class="container-fluid mt-10">
         <div class="row justify-content-center">
-            <!-- Sidebar -->
+           
             <div class="col-md-2 sidebar mr-5">
                 <h4 class="filter-title">Browse Sections</h4>
                 <ul class="list-unstyled">
-                <li><a href="#notable-figures" class="d-block mb-2 active btn-link">All Files</a></li>
-                    <li><a href="#notable-figures" class="d-block mb-2 text-dark">Documents</a></li>
+                    <li><a href="#notable-figures" class="d-block mb-2 active btn-link">Documents</a></li>
                     <li><a href="#cultural-traditions" class="d-block mb-2 text-dark">Images</a></li>
                     <li><a href="#personal-stories" class="d-block mb-2 text-dark">Stories</a></li>
                     <li><a href="#notable-figures" class="d-block mb-2 text-dark">Maps</a></li>
                 </ul>
             </div>
 
-            <!-- Main Content -->
             <div class="col-md-10 main-content">
                 <div class="search-bar mb-4">
                     <div class="input-group">
@@ -92,8 +90,10 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                
                     <div class="col-md-3 mt-2 document-item">
                         <div class="card mb-4 shadow-sm custom-card" style="height: 400px;">
-                            <embed src="uploads/<?= htmlspecialchars($file['file_path']); ?>"
-                                type="application/pdf" class="custom-card-img" style="overflow:hidden !important; width: 100% !important;">
+                        <embed src="uploads/<?= htmlspecialchars($file['file_path']); ?>#toolbar=0&navpanes=0&scrollbar=0"
+                                type="application/pdf"
+                                style="overflow-y:hidden !important; overflow-x: hidden !important;">
+
                             <div class="custom-card-body" style="margin-left: 20px !important; margin-right: 20px !important;">
                                 <h6 class="custom-card-title fw-bold mt-2"><?= htmlspecialchars($file['title']); ?></h6>
                                 <!-- <p class="custom-card-text"><small class="text-muted">Upload Date: <?//= htmlspecialchars($file['upload_date']); ?></small></p> -->
@@ -104,12 +104,10 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                                       <p class="custom-card-text"><small class="text-muted">Added By: 
                                       <?= htmlspecialchars($file['uploader_fullname']); ?></small></p>
                                 <div class="d-flex justify-content-between custom-card-footer">
-                                    <a href="uploads/<?= htmlspecialchars($file['file_path']); ?>" class="btn-link custom-card-footer" download="<?= htmlspecialchars($file['title']); ?>">
-                                        <small class="text-primary"><i class="bi bi-arrow-down"></i> Download</small>
-                                    </a>
-                                    <!-- <a href="view_pdf.php?file_path=<?//= urlencode($file['file_path']); ?>" class="btn-link custom-card-footer">
-                                        <small class="text-primary"><i class="bi bi-eye"></i> View</small>
-                                    </a> -->
+                                <a href="uploads/<?= htmlspecialchars($file['file_path']); ?>" class="btn-link custom-card-footer download-btn" download="<?= htmlspecialchars($file['title']); ?>">
+                                    <small class="text-primary"><i class="bi bi-arrow-down"></i> Download</small>
+                                </a>
+
                                     <a href="#" class="btn-link custom-card-footer"
                                         data-bs-toggle="modal"
                                         data-bs-target="#fileModal"
@@ -166,8 +164,65 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
     </div>
 </div>
 
+<!-- Confirmation Modal -->
+<div class="modal fade" id="downloadModal" tabindex="-1" aria-labelledby="downloadModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="downloadModalLabel">Confirm Download</h5>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to download this file?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="confirmDownloadBtn">Download</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 </main>
 <?php include "includes/footer.php"; ?>
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    let downloadLink = '';
+    let fileId = '';
+    let fileName = '';
+
+    document.querySelectorAll('.download-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            downloadLink = this.getAttribute('href');
+            fileId = this.getAttribute('data-file-id');
+            fileName = this.getAttribute('download');
+            let downloadModal = new bootstrap.Modal(document.getElementById('downloadModal'));
+            downloadModal.show();
+        });
+    });
+
+    document.getElementById('confirmDownloadBtn').addEventListener('click', function() {
+        let a = document.createElement('a');
+        a.href = downloadLink;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        let downloadModal = bootstrap.Modal.getInstance(document.getElementById('downloadModal'));
+        downloadModal.hide();
+        
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', 'classes/record_download.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send('file_id=' + fileId);
+    });
+});
+</script>
+
+
+
 <script>
 function filterDocuments(status) {
     const searchTerm = document.getElementById('documentSearch').value;
