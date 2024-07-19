@@ -189,7 +189,16 @@ class Main_class {
             f.upload_date, f.status, f.remarks, f.isDeleted, u.fullname AS uploader_fullname
             FROM files f
             INNER JOIN users u ON f.user_id = u.user_id
-            WHERE f.status = 'Approved' AND f.isDeleted = 0 AND f.file_type ='Audio Recordings' ");
+            WHERE f.status = 'Approved' AND f.isDeleted = 0 AND f.file_type ='Audio' ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function  fetchApprovedArts(){
+        $stmt = $this->pdo->prepare("SELECT f.id, f.user_id, f.title, f.description, f.file_path, f.file_type, 
+            f.upload_date, f.status, f.remarks, f.isDeleted, u.fullname AS uploader_fullname
+            FROM files f
+            INNER JOIN users u ON f.user_id = u.user_id
+            WHERE f.status = 'Approved' AND f.isDeleted = 0 AND f.file_type ='Arts' ");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

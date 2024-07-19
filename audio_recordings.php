@@ -71,7 +71,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                 <ul class="list-unstyled">
                     <li><a href="library" class="d-block mb-2 text-dark">Documents</a></li>
                     <li><a href="images" class="d-block mb-2 text-dark">Images</a></li>
-                    <!-- <li><a href="arts" class="d-block mb-2 active btn-link">Arts</a></li> -->
+                    <li><a href="arts" class="d-block mb-2 active btn-link">Arts</a></li>
                     <li><a href="maps" class="d-block mb-2  text-dark">Maps</a></li>
                     <li><a href="audio_recordings" class="d-block mb-2 active btn-link">Audio Recordings</a></li>
                 </ul>

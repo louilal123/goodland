@@ -13,7 +13,7 @@ $mainClass = new Main_class();
 $members = $mainClass->get_all_members();
 $documents = $mainClass->fetchApprovedDocuments();
 $images = $mainClass->fetchApprovedImages();
-// $arts = $mainClass->fetchApprovedArts();
+$arts = $mainClass->fetchApprovedArts();
 $maps = $mainClass->fetchApprovedMaps();
 $audio = $mainClass->fetchApprovedAudio();
 
