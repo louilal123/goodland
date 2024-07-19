@@ -157,6 +157,14 @@
                 </li>
 
                 <li class="nav-item1">
+                    <a href="recycled_files" class="nav-link12 <?= $page == 'recycled_files.php' ? ' active text-bg-primary text-light':'' ?>">
+                        <i class="icons bi bi-trash-fill"></i>
+                        <p class="p-tag">Manage Recycled Files</p>
+                    </a>
+                  
+                </li>
+
+                <li class="nav-item1">
                     <a href="manageevents" class="nav-link12 <?= $page == 'manageevents.php' ? ' active text-bg-primary text-light':'' ?>">
                         <i class="icons bi bi-calendar-fill"></i>
                         <p class="p-tag">List of Events  <i class="nav-arrow bi bi-chevron-right" style="margin-left: 45px;"></i></p>

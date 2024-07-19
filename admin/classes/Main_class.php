@@ -164,8 +164,37 @@ class Main_class {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function fetchApprovedImages() {
+        $stmt = $this->pdo->prepare("SELECT f.id, f.user_id, f.title, f.description, f.file_path, f.file_type, 
+            f.upload_date, f.status, f.remarks, f.isDeleted, u.fullname AS uploader_fullname
+            FROM files f
+            INNER JOIN users u ON f.user_id = u.user_id
+            WHERE f.status = 'Approved' AND f.isDeleted = 0 AND f.file_type ='Images' ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
-   // In Main_class.php
+  
+    public function  fetchApprovedMaps(){
+        $stmt = $this->pdo->prepare("SELECT f.id, f.user_id, f.title, f.description, f.file_path, f.file_type, 
+            f.upload_date, f.status, f.remarks, f.isDeleted, u.fullname AS uploader_fullname
+            FROM files f
+            INNER JOIN users u ON f.user_id = u.user_id
+            WHERE f.status = 'Approved' AND f.isDeleted = 0 AND f.file_type ='Maps' ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function  fetchApprovedAudio(){
+        $stmt = $this->pdo->prepare("SELECT f.id, f.user_id, f.title, f.description, f.file_path, f.file_type, 
+            f.upload_date, f.status, f.remarks, f.isDeleted, u.fullname AS uploader_fullname
+            FROM files f
+            INNER JOIN users u ON f.user_id = u.user_id
+            WHERE f.status = 'Approved' AND f.isDeleted = 0 AND f.file_type ='Audio Recordings' ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+
 public function getMediaCounts() {
     $stmt = $this->pdo->prepare("
         SELECT 
@@ -572,26 +601,26 @@ public function get_all_pending_files() {
 
 
 public function count_all_files() {
-    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM files");
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM files WHERE isDeleted = 0 ");
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result['total'];
 }
 
 public function count_all_pending_files() {
-    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM files WHERE status = 'Pending' ");
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM files WHERE status = 'Pending' and isDeleted = 0 ");
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result['total'];
 }
 public function count_all_declined_files() {
-    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM files WHERE status = 'Declined' ");
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM files WHERE status = 'Declined'  and isDeleted = 0 ");
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result['total'];
 }
 public function count_approved_files() {
-    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM files WHERE status = 'Approved' ");
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM files WHERE status = 'Approved'  and isDeleted = 0 ");
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result['total'];
@@ -635,7 +664,7 @@ public function count_user_files($userId) {
                 SUM(status = 'Approved') AS user_approved,
                 SUM(status = 'Disapproved') AS user_declined
             FROM files
-            WHERE user_id = :user_id
+            WHERE user_id = :user_id AND isDeleted = 0
         ");
 
         $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
@@ -710,6 +739,13 @@ public function count_all_documents(){
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result['total'];
+}
+
+
+public function get_all_recycled_files() {
+    $stmt = $this->pdo->prepare("SELECT * FROM files WHERE isDeleted = 1");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 // end //////////////////////////////////
@@ -815,6 +851,8 @@ public function register_user($fullname, $email, $birthday, $username, $password
                 return false;
             }
         }
+
+
         
         
 

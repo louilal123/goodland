@@ -69,11 +69,11 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
             <div class="col-md-2 sidebar mr-5">
                 <h4 class="filter-title">Browse Sections</h4>
                 <ul class="list-unstyled">
-                    <li><a href="library" class="d-block mb-2 active btn-link">Documents</a></li>
+                    <li><a href="library" class="d-block mb-2 text-dark">Documents</a></li>
                     <li><a href="images" class="d-block mb-2 text-dark">Images</a></li>
-                    <!-- <li><a href="arts" class="d-block mb-2 text-dark">Arts</a></li> -->
-                    <li><a href="maps" class="d-block mb-2 text-dark">Maps</a></li>
-                    <li><a href="audio_recordings" class="d-block mb-2 text-dark">Audio Recordings</a></li>
+                    <!-- <li><a href="arts" class="d-block mb-2 active btn-link">Arts</a></li> -->
+                    <li><a href="maps" class="d-block mb-2  text-dark">Maps</a></li>
+                    <li><a href="audio_recordings" class="d-block mb-2 active btn-link">Audio Recordings</a></li>
                 </ul>
             </div>
 
@@ -87,12 +87,12 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                     </div>
                 </div>
                 <div class="row" id="documentsContainer">
-                    <?php foreach ($documents as $file): ?>
+                    <?php foreach ($audio as $file): ?>
                
                     <div class="col-md-3 mt-2 document-item">
                         <div class="card mb-4 shadow-sm custom-card" style="height: 400px;">
-                        <embed src="uploads/<?= htmlspecialchars($file['file_path']); ?>#toolbar=0&navpanes=0&scrollbar=0"
-                                type="application/pdf"
+                        <img src="uploads/<?= htmlspecialchars($file['file_path']); ?>"
+                        class="custom-embed-pdf"
                                 style="overflow-y:hidden !important; overflow-x: hidden !important;">
 
                             <div class="custom-card-body" style="margin-left: 20px !important; margin-right: 20px !important;">
@@ -104,7 +104,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                                     <?= htmlspecialchars($file['file_type']); ?></small></p>
                                       <p class="custom-card-text"><small class="text-muted">Added By: 
                                       <?= htmlspecialchars($file['uploader_fullname']); ?></small></p>
-                                <div class="d-flex justify-content-between custom-card-footer">
+                                <div class="d-flex justify-content-between custom-card-footer mb-3">
                                 <a href="uploads/<?= htmlspecialchars($file['file_path']); ?>" class="btn-link custom-card-footer download-btn" download="<?= htmlspecialchars($file['title']); ?>">
                                     <small class="text-primary"><i class="bi bi-arrow-down"></i> Download</small>
                                 </a>
@@ -146,7 +146,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
             </div>
             <div class="modal-body" >
                 <div class="embed-responsive embed-responsive-16by9">
-                    <embed id="fileModalPreview" src="" type="application/pdf" class="embed-responsive-item" style="display:flex; height: 250px; margin: auto;"></embed>
+                    <embed id="fileModalPreview" src=""class="embed-responsive-item" style="display:flex; height: 250px; width: auto; margin: auto;"></embed>
                 </div>
                 <p><strong>Title:</strong> <span id="fileModalTitle"></span></p>
                 <p><strong>Description:</strong> <span id="fileModalDescription"></span></p>

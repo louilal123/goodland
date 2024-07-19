@@ -32,7 +32,7 @@
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Task', 'Count'],
+          ['File Type', 'Count'],
           <?php echo $mediaData; ?>
         ]);
 

@@ -41,11 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fileExtension = strtolower(end($fileNameCmps));
 
         $allowedExtensions = [
-            'Documents' => ['pdf', 'doc', 'docx', 'xls', 'xlsx'],
-            'Images' => ['jpg', 'jpeg', 'png', 'gif'],
+            'Documents' => ['pdf'],
+            'Images' => ['jpg', 'jpeg', 'png'],
+            'Arts' => ['jpg', 'jpeg', 'png'],
             'Audio' => ['mp3'],
-            'Maps' => ['zip', 'rar'],
-            'Arts' => ['jpg', 'jpeg', 'png', 'gif']
+            'Maps' => ['jpg', 'jpeg', 'png']
         ];
 
         if (!array_key_exists($file_type, $allowedExtensions) || !in_array($fileExtension, $allowedExtensions[$file_type])) {

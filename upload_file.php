@@ -70,11 +70,17 @@ if (!isset($_SESSION['user_logged_in']) || $_SESSION['user_logged_in'] !== true)
             }
         ?>" name="file_type">
             <option value="" disabled selected>Select file type</option>
-            <option value="Documents" <?php echo (isset($_SESSION['form_data']['file_type']) && $_SESSION['form_data']['file_type'] == 'Documents') ? 'selected' : ''; ?>>Documents</option>
-            <option value="Images" <?php echo (isset($_SESSION['form_data']['file_type']) && $_SESSION['form_data']['file_type'] == 'Images') ? 'selected' : ''; ?>>Images</option>
-            <option value="Audio" <?php echo (isset($_SESSION['form_data']['file_type']) && $_SESSION['form_data']['file_type'] == 'Audio') ? 'selected' : ''; ?>>Audio</option>
-            <option value="Maps" <?php echo (isset($_SESSION['form_data']['file_type']) && $_SESSION['form_data']['file_type'] == 'Maps') ? 'selected' : ''; ?>>Maps</option>
-            <option value="Arts" <?php echo (isset($_SESSION['form_data']['file_type']) && $_SESSION['form_data']['file_type'] == 'Arts') ? 'selected' : ''; ?>>Arts</option>
+            <option value="Documents" <?php echo (isset($_SESSION['form_data']['file_type']) 
+            && $_SESSION['form_data']['file_type'] == 'Documents') ? 'selected' : ''; ?>>Document</option>
+            <option value="Images" <?php echo (isset($_SESSION['form_data']['file_type']) 
+            && $_SESSION['form_data']['file_type'] == 'Arts') ? 'selected' : ''; ?>>Image</option>
+             <option value="Arts" <?php echo (isset($_SESSION['form_data']['file_type']) 
+            && $_SESSION['form_data']['file_type'] == 'Images') ? 'selected' : ''; ?>>Arts</option>
+            <option value="Audio" <?php echo (isset($_SESSION['form_data']['file_type']) 
+            && $_SESSION['form_data']['file_type'] == 'Audio') ? 'selected' : ''; ?>>Audio Recording</option>
+            <option value="Maps" <?php echo (isset($_SESSION['form_data']['file_type']) 
+            && $_SESSION['form_data']['file_type'] == 'Maps') ? 'selected' : ''; ?>>Maps</option>
+          
         </select>
         <?php if (!empty($_SESSION['error_file_type'])): ?>
             <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_file_type']; unset($_SESSION['error_file_type']); ?></div>
@@ -96,24 +102,78 @@ if (!isset($_SESSION['user_logged_in']) || $_SESSION['user_logged_in'] !== true)
         <?php endif; ?>
     </div>
 
-    <button type="submit" class="btn btn-primary btn-block z-depth-0 mb-2 mt-4" data-mdb-ripple-init>Upload</button>
+    <button type="submit" class="btn btn-primary btn-block z-depth-0 mb-2 mt-4" >Upload</button>
 </form>
 
                                
                         </div>
                         <div class="footer text-center mt-5">
-                                    <p class="text-center mt-5">By uploading, you agree to our <a href="#">Uploader Agreement</a></p>
-                                    <p class="text-center">Ensure you have the rights to share the documents you upload.</p>
-                                </div>
-                        </div>
+    <p class="text-center mt-5">By uploading, you agree to our
+        <a href="#" id="uploaderAgreementLink">Uploader Agreement</a>
+    </p>
+    <p class="text-center">Ensure you have the rights to share the documents you upload.</p>
+</div>
+
                     </div>
                 </div>
             </div>
+
+
+            
         </section>
+
+
     </main>
+    
+<!-- Modal -->
+<div class="modal fade" id="uploaderAgreementModal" tabindex="-1" aria-labelledby="uploaderAgreementModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold text-center" id="uploaderAgreementModalLabel">Goodland Uploader Agreement</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Effective Date:</strong> July 2024</p>
+                <p><strong>Introduction</strong><br>By uploading content to GoodlandPh ("Platform"), you agree to the following terms.</p>
+                <p><strong>Grant of License</strong><br>You grant GoodlandPh a non-exclusive, worldwide, royalty-free license to use, reproduce, distribute, and display your content.</p>
+                <p><strong>Ownership and Rights</strong><br>You retain ownership of your content. You confirm that:
+                    <ul>
+                        <li>You own the content or have permission to upload it.</li>
+                        <li>Your content does not violate any third-party rights.</li>
+                    </ul>
+                </p>
+                <p><strong>Content Guidelines</strong><br>Do not upload content that:
+                    <ul>
+                        <li>Is illegal, harmful, or abusive.</li>
+                        <li>Contains viruses or malware.</li>
+                        <li>Violates laws or regulations.</li>
+                    </ul>
+                </p>
+                <p><strong>Indemnification</strong><br>You agree to indemnify GoodlandPh from any claims or damages resulting from your content or violation of this agreement.</p>
+                <p><strong>Termination</strong><br>GoodlandPh may remove content or terminate your access if you violate this agreement.</p>
+                <p><strong>Changes to the Agreement</strong><br>We may update this agreement and will notify you of any changes. Continued use of the platform means you accept the new terms.</p>
+                <p><strong>Governing Law</strong><br>This agreement is governed by the laws of [Your Jurisdiction].</p>
+                <p><strong>Contact Information</strong><br>For questions, contact us at goodland.phillipines@gmail.com.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
     <?php include "includes/footer.php"; ?>
     <script type="text/javascript" src="mdbfolder/mdb.umd.min.js"></script>
+    <script>
+document.getElementById('uploaderAgreementLink').addEventListener('click', function(event) {
+    event.preventDefault();
+    var myModal = new mdb.Modal(document.getElementById('uploaderAgreementModal'));
+    myModal.show();
+});
+</script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

@@ -35,13 +35,13 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Manage Pending Files</h3>
+                            <h3 class="mb-0">Manage Recycled Files</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                              Pending Files
+                                Recycled Files
                                 </li>
                             </ol>
                         </div>
@@ -54,9 +54,8 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                         <div class="col-md-12">
                                 <div class="card mb-4 card-outline-primary">
                                     <div class="card-header d-flex ">
-                                        <h3 class="card-title mb-0">List of Pending Files</h3>
-                                        <a class="btn btn-primary ms-auto custombtn" data-bs-toggle="modal" data-bs-target="#addapproved_fileModal">Add New approved_file</a>
-                                    </div>
+                                        <h3 class="card-title mb-0">List of Recycled Files</h3>
+                                         </div>
     
                                     <div class="card-body">
                                         <div class="container-fluid">
@@ -70,7 +69,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                             <th>File Type</th>
                             <th>Uploaded By</th>
                             <th>Upload Date</th>
-                            <th width="400px">Action</th>
+                            <th width="315px">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -209,40 +208,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
 
 <?php include "includes/footer.php"; ?>
 <script type="text/javascript" src="mdbfolder/mdb.umd.min.js"></script>
-<!-- <script>
-   $(document).ready(function () {
-    $('.declineBtn').on('click', function () {
-        $('#declineModal').modal('show');
 
-        $tr = $(this).closest('tr');
-
-        var data = $tr.children("td").map(function () {
-            return $(this).text().trim();
-        }).get();
-
-        console.log(data); 
-
-        $('#declineFileId').val(data[0]);
-        $('#declineTitle').val(data[1]);
-        $('#editusername').val(data[2]);
-        $('#editemail').val(data[3]);
-       
-        
-         var status = data[7].includes('Active') ? 'Active' : 'Inactive';
-        $('#editstatus').val(status);
-
-        if (status === 'Active') {
-            $('#editstatus option[value="Active"]').hide();
-            $('#editstatus option[value="Inactive"]').show();
-        } else {
-            $('#editstatus option[value="Active"]').show();
-            $('#editstatus option[value="Inactive"]').hide();
-        }
-    });
-});
-
-
-    </script> -->
 <script>
 document.addEventListener('DOMContentLoaded', (event) => {
     document.querySelectorAll('.approveBtn').forEach(button => {
