@@ -186,6 +186,26 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
 
 </main>
 <?php include "includes/footer.php"; ?>
+
+<script>
+document.getElementById('mainSearch').addEventListener('input', function() {
+    let filter = this.value.toLowerCase();
+    let items = document.querySelectorAll('.document-item');
+    let visibleCount = 0;
+    items.forEach(function(item) {
+        let title = item.querySelector('.custom-card-title').textContent.toLowerCase();
+        if (title.includes(filter)) {
+            item.style.display = '';
+            visibleCount++;
+        } else {
+            item.style.display = 'none';
+        }
+    });
+    document.getElementById('entryInfo').textContent = `Showing ${visibleCount} of ${items.length} total entries`;
+});
+</script>
+
+
 <script>
 document.addEventListener('DOMContentLoaded', (event) => {
     let downloadLink = '';
@@ -223,20 +243,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 </script>
 
 
-
-<script>
-function filterDocuments(status) {
-    const searchTerm = document.getElementById('documentSearch').value;
-    window.location.href = `profile.php?status=${status}&search=${searchTerm}`;
-}
-
-function searchDocuments() {
-    const status = document.querySelector('.dropdown-menu .active') ? document.querySelector('.dropdown-menu .active').innerText : 'All';
-    const searchTerm = document.getElementById('documentSearch').value;
-    window.location.href = `profile.php?status=${status}&search=${searchTerm}`;
-}
-</script>
-    
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
         const fileModal = document.getElementById('fileModal');
@@ -278,22 +284,5 @@ function searchDocuments() {
     });
 </script>
 
-<script>
-document.getElementById('mainSearch').addEventListener('input', function() {
-    let filter = this.value.toLowerCase();
-    let items = document.querySelectorAll('.document-item');
-    let visibleCount = 0;
-    items.forEach(function(item) {
-        let title = item.querySelector('.custom-card-title').textContent.toLowerCase();
-        if (title.includes(filter)) {
-            item.style.display = '';
-            visibleCount++;
-        } else {
-            item.style.display = 'none';
-        }
-    });
-    document.getElementById('entryInfo').textContent = `Showing ${visibleCount} of ${items.length} total entries`;
-});
-</script>
 </body>
 </html>
