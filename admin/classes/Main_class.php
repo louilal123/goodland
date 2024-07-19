@@ -661,7 +661,85 @@ public function get_user_documents($userId, $fileType = 'Documents', $status = n
         return [];
     }
 }
+public function get_user_images($userId, $fileType = 'Images', $status = null, $searchTerm = '') {
+    try {
+        $query = "SELECT * FROM files WHERE user_id = :user_id AND file_type = :file_type";
+        if ($status && $status !== 'All') {
+            $query .= " AND status = :status";
+        }
+        if ($searchTerm) {
+            $query .= " AND (title LIKE :searchTerm OR description LIKE :searchTerm)";
+        }
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $stmt->bindParam(':file_type', $fileType, PDO::PARAM_STR);
+        if ($status && $status !== 'All') {
+            $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+        }
+        if ($searchTerm) {
+            $searchTerm = '%' . $searchTerm . '%';
+            $stmt->bindParam(':searchTerm', $searchTerm, PDO::PARAM_STR);
+        }
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        error_log("Database error: " . $e->getMessage());
+        return [];
+    }
+}
+public function get_user_arts($userId, $fileType = 'Arts', $status = null, $searchTerm = '') {
+    try {
+        $query = "SELECT * FROM files WHERE user_id = :user_id AND file_type = :file_type";
+        if ($status && $status !== 'All') {
+            $query .= " AND status = :status";
+        }
+        if ($searchTerm) {
+            $query .= " AND (title LIKE :searchTerm OR description LIKE :searchTerm)";
+        }
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $stmt->bindParam(':file_type', $fileType, PDO::PARAM_STR);
+        if ($status && $status !== 'All') {
+            $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+        }
+        if ($searchTerm) {
+            $searchTerm = '%' . $searchTerm . '%';
+            $stmt->bindParam(':searchTerm', $searchTerm, PDO::PARAM_STR);
+        }
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        error_log("Database error: " . $e->getMessage());
+        return [];
+    }
+}
 
+public function get_user_maps($userId, $fileType = 'Maps', $status = null, $searchTerm = '') {
+    try {
+        $query = "SELECT * FROM files WHERE user_id = :user_id AND file_type = :file_type";
+        if ($status && $status !== 'All') {
+            $query .= " AND status = :status";
+        }
+        if ($searchTerm) {
+            $query .= " AND (title LIKE :searchTerm OR description LIKE :searchTerm)";
+        }
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $stmt->bindParam(':file_type', $fileType, PDO::PARAM_STR);
+        if ($status && $status !== 'All') {
+            $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+        }
+        if ($searchTerm) {
+            $searchTerm = '%' . $searchTerm . '%';
+            $stmt->bindParam(':searchTerm', $searchTerm, PDO::PARAM_STR);
+        }
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        error_log("Database error: " . $e->getMessage());
+        return [];
+    }
+}
 
 
 public function count_user_files($userId) {

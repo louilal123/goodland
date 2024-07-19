@@ -70,6 +70,10 @@ $userDeclined = $fileCounts['user_declined'] ?? 0;
 $statusFilter = isset($_GET['status']) ? $_GET['status'] : 'All';
 $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
 $documents = $mainClass->get_user_documents($userId, 'Documents', $statusFilter, $searchTerm);
+$arts = $mainClass->get_user_arts($userId, 'Arts', $statusFilter, $searchTerm);
+$maps = $mainClass->get_user_documents($userId, 'Maps', $statusFilter, $searchTerm);
+$images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $searchTerm);
+// DOCUMENTS END
 // DOCUMENTS END
 
 ?>
@@ -157,8 +161,7 @@ $documents = $mainClass->get_user_documents($userId, 'Documents', $statusFilter,
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <a data-mdb-tab-init class="nav-link" id="ex-with-icons-tab-2" href="#ex-with-icons-tabs-2" role="tab"
-                                        aria-controls="ex-with-icons-tabs-2" aria-selected="false"><i class="bi bi-chart-line fa-fw me-2"></i>
-                                        Documents <span class="badge bg-info" style=" color: #fff !important;">4</span></a>
+                                        aria-controls="ex-with-icons-tabs-2" aria-selected="false"><i class="bi bi-chart-line fa-fw me-2"></a>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <a data-mdb-tab-init class="nav-link" id="ex-with-icons-tab-3" href="#ex-with-icons-tabs-3" role="tab"
@@ -240,10 +243,128 @@ $documents = $mainClass->get_user_documents($userId, 'Documents', $statusFilter,
     </div>
 
                                     <div class="tab-pane fade" id="ex-with-icons-tabs-3" role="tabpanel" aria-labelledby="ex-with-icons-tab-3">
-                                        Tab 3 content
+                                    <h3>Images</h3>
+
+<!-- Search Bar and Filter Dropdown -->
+<div class="mb-4 d-flex align-items-center">
+    <input type="text" id="documentSearch" class="form-control me-2" placeholder="Search..." onkeyup="searchDocuments()" value="<?= htmlspecialchars($searchTerm); ?>">
+    <div class="btn-group">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-filter"></i> Filter
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+            <li><a class="dropdown-item" href="#" onclick="filterDocuments('All')">All</a></li>
+            <li><a class="dropdown-item" href="#" onclick="filterDocuments('Pending')">Pending</a></li>
+            <li><a class="dropdown-item" href="#" onclick="filterDocuments('Approved')">Approved</a></li>
+            <li><a class="dropdown-item" href="#" onclick="filterDocuments('Declined')">Declined</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="row" id="documentsContainer">
+    <?php foreach ($images as $file): ?>
+        <?php 
+        $statusClass = '';
+        if ($file['status'] == 'Pending') {
+            $statusClass = 'badge bg-warning text-light';
+        } elseif ($file['status'] == 'Declined') {
+            $statusClass = 'badge bg-danger text-light';
+        } elseif ($file['status'] == 'Approved') {
+            $statusClass = 'badge bg-success text-light';
+        }
+        ?>
+        <div class="col-md-3 mt-2">
+            <div class="card mb-4 shadow-sm custom-card">
+                <embed src="uploads/<?= htmlspecialchars($file['file_path']); ?>#toolbar=0&navpanes=0"
+                    type="application/pdf" class="custom-card-img" style="overflow:hidden !important;">
+                <div class="custom-card-body" style="margin-left: 20px !important; margin-right: 35px !important;">
+                    <h6 class="custom-card-title fw-bold"><?= htmlspecialchars($file['title']); ?></h6>
+                    <p class="custom-card-text"><small class="text-muted">Upload Date: <?= htmlspecialchars($file['upload_date']); ?></small></p>
+                    <p class="custom-card-text"><small class="text-muted">Status: </small><small class="text-light <?= $statusClass; ?>"><?= htmlspecialchars($file['status']); ?></small></p>
+                    <div class="d-flex justify-content-between">
+                        <a href="uploads/<?= htmlspecialchars($file['file_path']); ?>" class="btn-link" download="<?= htmlspecialchars($file['title']); ?>">
+                            <small class="text-primary"><i class="bi bi-arrow-down"></i> Download</small>
+                        </a>
+                        <a type="submit" class="btn-link" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#fileModal"
+                        data-title="<?= htmlspecialchars($file['title']); ?>"
+                        data-description="<?= htmlspecialchars($file['description']); ?>"
+                        data-filetype="<?= htmlspecialchars($file['file_type']); ?>"
+                        data-status="<?= htmlspecialchars($file['status']); ?>"
+                        data-date="<?= htmlspecialchars($file['upload_date']); ?>"
+                        data-remarks="<?= htmlspecialchars($file['remarks']); ?>"
+                        data-path="uploads/<?= htmlspecialchars($file['file_path']); ?>">
+                        <small class="text-primary"><i class="bi bi-eye"></i> View</small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
                                     </div>
                                     <div class="tab-pane fade" id="ex-with-icons-tabs-4" role="tabpanel" aria-labelledby="ex-with-icons-tab-4">
-                                        Tab 4 content
+                                    <h3>Maps</h3>
+
+<!-- Search Bar and Filter Dropdown -->
+<div class="mb-4 d-flex align-items-center">
+    <input type="text" id="documentSearch" class="form-control me-2" placeholder="Search..." onkeyup="searchDocuments()" value="<?= htmlspecialchars($searchTerm); ?>">
+    <div class="btn-group">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-filter"></i> Filter
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+            <li><a class="dropdown-item" href="#" onclick="filterDocuments('All')">All</a></li>
+            <li><a class="dropdown-item" href="#" onclick="filterDocuments('Pending')">Pending</a></li>
+            <li><a class="dropdown-item" href="#" onclick="filterDocuments('Approved')">Approved</a></li>
+            <li><a class="dropdown-item" href="#" onclick="filterDocuments('Declined')">Declined</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="row" id="documentsContainer">
+    <?php foreach ($maps as $file): ?>
+        <?php 
+        $statusClass = '';
+        if ($file['status'] == 'Pending') {
+            $statusClass = 'badge bg-warning text-light';
+        } elseif ($file['status'] == 'Declined') {
+            $statusClass = 'badge bg-danger text-light';
+        } elseif ($file['status'] == 'Approved') {
+            $statusClass = 'badge bg-success text-light';
+        }
+        ?>
+        <div class="col-md-3 mt-2">
+            <div class="card mb-4 shadow-sm custom-card">
+                <embed src="uploads/<?= htmlspecialchars($file['file_path']); ?>#toolbar=0&navpanes=0"
+                    type="application/pdf" class="custom-card-img" style="overflow:hidden !important;">
+                <div class="custom-card-body" style="margin-left: 20px !important; margin-right: 35px !important;">
+                    <h6 class="custom-card-title fw-bold"><?= htmlspecialchars($file['title']); ?></h6>
+                    <p class="custom-card-text"><small class="text-muted">Upload Date: <?= htmlspecialchars($file['upload_date']); ?></small></p>
+                    <p class="custom-card-text"><small class="text-muted">Status: </small><small class="text-light <?= $statusClass; ?>"><?= htmlspecialchars($file['status']); ?></small></p>
+                    <div class="d-flex justify-content-between">
+                        <a href="uploads/<?= htmlspecialchars($file['file_path']); ?>" class="btn-link" download="<?= htmlspecialchars($file['title']); ?>">
+                            <small class="text-primary"><i class="bi bi-arrow-down"></i> Download</small>
+                        </a>
+                        <a type="submit" class="btn-link" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#fileModal"
+                        data-title="<?= htmlspecialchars($file['title']); ?>"
+                        data-description="<?= htmlspecialchars($file['description']); ?>"
+                        data-filetype="<?= htmlspecialchars($file['file_type']); ?>"
+                        data-status="<?= htmlspecialchars($file['status']); ?>"
+                        data-date="<?= htmlspecialchars($file['upload_date']); ?>"
+                        data-remarks="<?= htmlspecialchars($file['remarks']); ?>"
+                        data-path="uploads/<?= htmlspecialchars($file['file_path']); ?>">
+                        <small class="text-primary"><i class="bi bi-eye"></i> View</small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
                                     </div>
                                     <div class="tab-pane fade" id="ex-with-icons-tabs-5" role="tabpanel" aria-labelledby="ex-with-icons-tab-5">
                                         Tab 5 content
