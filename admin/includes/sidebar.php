@@ -135,7 +135,7 @@
                 <li class="nav-header">Manage</li>
                 <li class="nav-item1">
                     <a href="pending_files" class="nav-link12 <?= $page == 'pending_files.php' ? ' active text-bg-primary text-light':'' ?>">
-                        <i class="icons bi bi-file-earmark-pdf-fill"></i>
+                        <i class="icons bi bi-hourglass-split"></i>
                         <p class="p-tag">Manage Pending Files</p>
                     </a>
                   
@@ -143,24 +143,17 @@
                 
                 <li class="nav-item1">
                     <a href="approved_files" class="nav-link12 <?= $page == 'approved_files.php' ? ' active text-bg-primary text-light':'' ?>">
-                        <i class="icons bi bi-file-earmark-pdf-fill"></i>
+                        <i class="icons bi bi-check-circle-fill"></i>
                         <p class="p-tag">Manage Approved Files</p>
                     </a>
-                  
                 </li>
 
                 <li class="nav-item1">
                     <a href="declined_files" class="nav-link12 <?= $page == 'declined_files.php' ? ' active text-bg-primary text-light':'' ?>">
-                        <i class="icons bi bi-file-earmark-pdf-fill"></i>
+                        <i class="icons bi bi-x-circle-fill"></i>
                         <p class="p-tag">Manage Declined Files</p>
                     </a>
                   
-                </li>
-                <li class="nav-item1">
-                    <a href="managefiletypes" class="nav-link12 <?= $page == 'managefiletypes.php' ? ' active text-bg-primary text-light':'' ?>">
-                        <i class="icons bi bi-grid"></i>
-                        <p class="p-tag">Manage File Types</p>
-                    </a>
                 </li>
 
                 <li class="nav-item1">
@@ -169,12 +162,7 @@
                         <p class="p-tag">List of Events  <i class="nav-arrow bi bi-chevron-right" style="margin-left: 45px;"></i></p>
                     </a>
                 </li>
-                <!-- <li class="nav-item1">
-                    <a href="manageproducts" class="nav-link12 <?= $page == 'manageproducts.php' ? ' active text-bg-primary text-light':'' ?>">
-                        <i class="icons bi bi-box-seam"></i>
-                        <p class="p-tag">Messages</p>
-                    </a>
-                </li> -->
+             
                 <li class="nav-item1">
                     <a href="manageusers" class="nav-link12 <?= $page == 'manageusers.php' ? ' active text-bg-primary text-light':'' ?>">
                         <i class="icons bi bi-people"></i>

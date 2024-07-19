@@ -1,9 +1,18 @@
 ﻿<?php include "classes/admindetails.php" ?>
+<?php
+require_once('classes/Main_class.php');
+$mainClass = new Main_class();
+$mediaCounts = $mainClass->getMediaCounts();
 
+$mediaData = [];
+foreach ($mediaCounts as $count) {
+    $mediaData[] = "['" . $count['MediaType'] . "', " . $count['Count'] . "]";
+}
+$mediaData = implode(", ", $mediaData);
+?>
 <!DOCTYPE html>
 <html lang="en"> 
 <?php include "includes/header.php"; ?>
-<!-- <link rel="stylesheet" href="dist/custom.css"> -->
 <style>
     body{
         overflow:hidden !important;
@@ -61,7 +70,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <h3 class="mb-0 greetingmsg fw-bold"> <span id="greeting"class="fw-light " ></span> 
-                            <strong><?php echo $adminDetails['fullname']; ?></strong>.</h3>
+                            <?php echo $adminDetails['fullname']; ?>.</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
@@ -91,7 +100,6 @@
                                                     	</div>
 													</div>
 												</div> 
-                                                 <!-- style="margin-left:50px;" -->
 												<h1 class=" text-light"> <?php echo $registeredUsersCount ?? '0'; ?></h1>
 												
 
@@ -105,8 +113,6 @@
 													<div class="col mt-0">
 														<h5 class="card-title text-light">Approved User Uploads</h5>
 													</div>
-
-													<!-- bi bi-check-circle-fill   bi-hourglass-split  bi-x-circle-fill -->
 
 													<div class="col-auto">
 														<div class="stat text-primary">
@@ -167,7 +173,6 @@
 										</div>
 									</div>
                                        
-									
 
 					</div>
 					<div class="row mt-4">
@@ -279,19 +284,6 @@
         <div id="chart_div" style="width: 100%; margin-left:0px !important; height: 450px; margin: 0px; padding: 0px;"></div>
         </div>
     </div>
-</div>
-<div class="row mt-4">
-    <div class="col-lg-7 col-md-12 col-sm-12">
-        <div class="card mb-4 shadow-sm">
-        <div id="columnchart_material" style="height: 450px;"></div>
-        </div>
-    </div>
-    <div class="col-lg-5">
-        <div class="card mb-4 text-bg-white shadow-sm">
-           <div id="piechart_3d" style=" height: 450px;"></div>
-        </div>
-    </div>
-
 </div>
 
                                 

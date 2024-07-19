@@ -28,6 +28,54 @@ class Main_class {
             echo $e->getMessage();
         }
     }
+
+
+    
+    public function getVisitorData() {
+        $stmt = $this->pdo->prepare("SELECT MONTHNAME(visit_time) as Month, country, COUNT(*) as Visitors FROM visitor_data GROUP BY Month, country ORDER BY visit_time");
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        // Transform data into the required format
+        $data = [];
+        $countries = [];
+        $months = [];
+        $monthlyTotals = [];
+    
+        foreach ($rows as $row) {
+            $months[$row['Month']] = true;
+            $countries[$row['country']] = true;
+        }
+    
+        $header = array_merge(['Month'], array_keys($countries), ['Average']);
+        $data[] = $header;
+    
+        foreach ($months as $month => $_) {
+            $row = array_fill(0, count($header), 0);
+            $row[0] = $month;
+            $totalVisitors = 0;
+            $countryCount = 0;
+    
+            foreach ($rows as $entry) {
+                if ($entry['Month'] == $month) {
+                    $countryIndex = array_search($entry['country'], $header);
+                    if ($countryIndex !== false) {
+                        $row[$countryIndex] = $entry['Visitors'];
+                        $totalVisitors += $entry['Visitors'];
+                        $countryCount++;
+                    }
+                }
+            }
+    
+            // Calculate the average
+            $average = $countryCount > 0 ? $totalVisitors / $countryCount : 0;
+            $row[count($row) - 1] = $average;
+            $data[] = $row;
+        }
+    
+        return $data;
+    }
+
     public function recordDownload($file_id, $user_id = null) {
         try {
             $stmt = $this->pdo->prepare("INSERT INTO downloads (file_id, user_id) VALUES (:file_id, :user_id)");
@@ -116,8 +164,23 @@ class Main_class {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
 
+   // In Main_class.php
+public function getMediaCounts() {
+    $stmt = $this->pdo->prepare("
+        SELECT 
+            file_type AS MediaType, COUNT(*) AS Count 
+        FROM files
+        WHERE isDeleted = 0
+        GROUP BY file_type
+    ");
+    $stmt->execute();
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $rows;
+}
+
+    
+    
     public function trackVisitor() {
         $geoplugin = new geoPlugin();
         
@@ -156,50 +219,6 @@ class Main_class {
                 ':longitude' => $longitude
             ]);
         }
-    }
-    public function getVisitorData() {
-        $stmt = $this->pdo->prepare("SELECT MONTHNAME(visit_time) as Month, country, COUNT(*) as Visitors FROM visitor_data GROUP BY Month, country ORDER BY visit_time");
-        $stmt->execute();
-        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-        // Transform data into the required format
-        $data = [];
-        $countries = [];
-        $months = [];
-        $monthlyTotals = [];
-    
-        foreach ($rows as $row) {
-            $months[$row['Month']] = true;
-            $countries[$row['country']] = true;
-        }
-    
-        $header = array_merge(['Month'], array_keys($countries), ['Average']);
-        $data[] = $header;
-    
-        foreach ($months as $month => $_) {
-            $row = array_fill(0, count($header), 0);
-            $row[0] = $month;
-            $totalVisitors = 0;
-            $countryCount = 0;
-    
-            foreach ($rows as $entry) {
-                if ($entry['Month'] == $month) {
-                    $countryIndex = array_search($entry['country'], $header);
-                    if ($countryIndex !== false) {
-                        $row[$countryIndex] = $entry['Visitors'];
-                        $totalVisitors += $entry['Visitors'];
-                        $countryCount++;
-                    }
-                }
-            }
-    
-            // Calculate the average
-            $average = $countryCount > 0 ? $totalVisitors / $countryCount : 0;
-            $row[count($row) - 1] = $average;
-            $data[] = $row;
-        }
-    
-        return $data;
     }
     
     
@@ -692,43 +711,6 @@ public function count_all_documents(){
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result['total'];
 }
-
-
-
-
-// public function insert_document($title, $cover, $author, $publication_date, $file_path, $description, $uploaded_by, $category, $status) {
-//     $sql = "INSERT INTO documents (title, cover, author, publication_date, file_path, description, uploaded_by, uploaded_at, category, date_created, date_updated, isdeleted, status) 
-//             VALUES (:title, :cover, :author, :publication_date, :file_path, :description, :uploaded_by, NOW(), :category, NOW(), NOW(), 0, :status)";
-//     $stmt = $this->pdo->prepare($sql);
-
-//     $stmt->bindParam(':title', $title);
-//     $stmt->bindParam(':cover', $cover, PDO::PARAM_STR);
-//     $stmt->bindParam(':author', $author);
-//     $stmt->bindParam(':publication_date', $publication_date);
-//     $stmt->bindParam(':file_path', $file_path);
-//     $stmt->bindParam(':description', $description);
-//     $stmt->bindParam(':uploaded_by', $uploaded_by);
-//     $stmt->bindParam(':category', $category);
-//     $stmt->bindParam(':status', $status);
-
-//     return $stmt->execute();
-// }
-
-// public function add_document($title, $cover, $file_path) {
-//     $sql = "INSERT INTO documents (title, cover, file_path, uploaded_at) 
-//             VALUES (:title, :cover, :file_path, NOW())";
-//     $stmt = $this->pdo->prepare($sql);
-
-//     $stmt->bindParam(':title', $title);
-//     $stmt->bindParam(':cover', $cover, PDO::PARAM_STR);
-//     $stmt->bindParam(':file_path', $file_path, PDO::PARAM_STR);
-
-//     return $stmt->execute();
-// }
-
-
-
-
 
 // end //////////////////////////////////
 // here starts the codes for user side end
