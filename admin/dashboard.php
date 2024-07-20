@@ -48,7 +48,7 @@ $mediaData = implode(", ", $mediaData);
         align-items: end;
         justify-content: end;
         color: navy; 
-        opacity:0.8;
+        /* opacity:0.8; */
     }
     .panel-footer{
         opacity: 0.8 !important;
@@ -214,7 +214,7 @@ $mediaData = implode(", ", $mediaData);
 														</div>
 													</div>
 												</div>
-												<h1 class=" text-light"> <?php echo $count_files_types ?? '0'; ?></h1>
+												<h1 class=" text-light"> <?php echo $count_files_types ?? '4'; ?></h1>
 												<div class="mb-0">
 												
 												
@@ -237,7 +237,7 @@ $mediaData = implode(", ", $mediaData);
 														</div>
 													</div>
 												</div>
-												<h1 class=" text-light">45</h1>
+												<h1 class=" text-light"> <?php echo $count_recycled_files ?? '0'; ?></h1>
 												<div class="mb-0">
 												
 													

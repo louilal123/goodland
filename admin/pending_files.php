@@ -35,13 +35,13 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Manage Recycled Files</h3>
+                            <h3 class="mb-0">Manage Pending Files</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                Recycled Files
+                                Pending Files
                                 </li>
                             </ol>
                         </div>
@@ -66,10 +66,10 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                             <th>Title</th>
                             <th>Description</th>
                             <th>File Path</th>
-                            <th>File Type</th>
-                            <th>Uploaded By</th>
-                            <th>Upload Date</th>
-                            <th width="315px">Action</th>
+                            <th width="120px">File Type</th>
+                            <th width="140px">Uploaded By</th>
+                            <th width="150px">Upload Date</th>
+                            <th width="320px">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -151,7 +151,8 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                     <input type="hidden" name="file_id" id="declineFileId">
                     <div class="mb-3">
                         <p><strong>Remarks:</strong></p>
-                        <textarea class="form-control" id="declineRemarks" name="remarks" rows="3" required>Please provide your reason for declining this file.</textarea>
+                        <textarea class="form-control" id="declineRemarks" name="remarks" rows="3" required>
+                            Your file does not adhere to our website upload agreement policies. If you think this is wrong, you can always reupload the file again.</textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>

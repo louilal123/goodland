@@ -117,7 +117,7 @@ class Main_class {
             $file = $fileStmt->fetch();
     
             if ($file) {
-                $message = "Your pending file <strong> ".$file['title']."</strong> has been approved 
+                $message = "Your file <strong> ".$file['title']."</strong> has been approved 
                 and successfully published to the website.";
                 $notificationQuery = "INSERT INTO user_notifications (user_id, file_id, message) VALUES (?, ?, ?)";
                 $notificationStmt = $this->pdo->prepare($notificationQuery);
@@ -129,6 +129,59 @@ class Main_class {
             return false;
         }
     }
+
+    // recycle declined files 
+    
+    public function addToPending($file_id, $remarks) {
+        try {
+            $query = "UPDATE files SET status = 'Pending', remarks = ? WHERE id = ?";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([$remarks, $file_id]);
+    
+            $fileQuery = "SELECT user_id, title, upload_date FROM files WHERE id = ?";
+            $fileStmt = $this->pdo->prepare($fileQuery);
+            $fileStmt->execute([$file_id]);
+            $file = $fileStmt->fetch();
+    
+            if ($file) {
+                $message = "Your approvedfile <strong> ".$file['title']."</strong> is under investigation for upload agreement violations. 
+                We have decided to take it down from the website temporarily.";
+                $notificationQuery = "INSERT INTO user_notifications (user_id, file_id, message) VALUES (?, ?, ?)";
+                $notificationStmt = $this->pdo->prepare($notificationQuery);
+                $notificationStmt->execute([$file['user_id'], $file_id, $message]);
+            }
+    
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+    // add to pending Btn from approved files
+    public function addToPending1($file_id, $remarks) {
+        try {
+            $query = "UPDATE files SET status = 'Pending', remarks = ? WHERE id = ?";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([$remarks, $file_id]);
+    
+            $fileQuery = "SELECT user_id, title, upload_date FROM files WHERE id = ?";
+            $fileStmt = $this->pdo->prepare($fileQuery);
+            $fileStmt->execute([$file_id]);
+            $file = $fileStmt->fetch();
+    
+            if ($file) {
+                $message = "Your approvedfile <strong> ".$file['title']."</strong> is under investigation for upload agreement violations. 
+                We have decided to take it down from the website temporarily.";
+                $notificationQuery = "INSERT INTO user_notifications (user_id, file_id, message) VALUES (?, ?, ?)";
+                $notificationStmt = $this->pdo->prepare($notificationQuery);
+                $notificationStmt->execute([$file['user_id'], $file_id, $message]);
+            }
+    
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+    //for recosndier buttons from declined files
     
     public function declineFile($file_id, $remarks) {
         try {
@@ -147,6 +200,19 @@ class Main_class {
                 $notificationStmt = $this->pdo->prepare($notificationQuery);
                 $notificationStmt->execute([$file['user_id'], $file_id, $message]);
             }
+    
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+      
+    public function restoreFile($file_id) {
+        try {
+            $query = "UPDATE files SET status = 'Declined' WHERE id = ?";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([$file_id]);
     
             return true;
         } catch (PDOException $e) {
@@ -289,8 +355,7 @@ public function getMediaCounts() {
     
     // for login
     public function login_user($email, $password) {
-        session_start();
-        
+    
         $stmt = $this->pdo->prepare("SELECT admin_id, password FROM admin WHERE email = :email");
         $stmt->bindParam(':email', $email);
         $stmt->execute();
@@ -305,10 +370,12 @@ public function getMediaCounts() {
                 header("Location: ../dashboard.php");
                 exit();
             } else {
-                $_SESSION['error_message'] = "Invalid credentials! Please try again.";
+                $_SESSION['status'] = "Invalid credentials! Please try again.";
+                $_SESSION['status_icon'] = "Invalid credentials! Please try again.";
             }
         } else {
-            $_SESSION['error_message'] = "Invalid credentials! Please try again.";
+            $_SESSION['status'] = "Invalid credentials! Please try again.";
+            $_SESSION['status_icon'] = "Invalid credentials! Please try again.";
         }
         
         header("Location: ../index.php");
@@ -608,6 +675,18 @@ public function get_all_pending_files() {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+public function get_all_recycled_files() {
+    $stmt = $this->pdo->prepare("
+        SELECT files.*, users.fullname 
+        FROM files 
+        LEFT JOIN users ON files.user_id = users.user_id
+        WHERE isDeleted = 1 
+        ORDER BY files.upload_date DESC
+    ");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 
 public function count_all_files() {
     $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM files WHERE isDeleted = 0 ");
@@ -628,8 +707,15 @@ public function count_all_declined_files() {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result['total'];
 }
-public function count_approved_files() {
+public function count_all_approved_files() {
     $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM files WHERE status = 'Approved'  and isDeleted = 0 ");
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total'];
+}
+
+public function count_all_recycled_files() {
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM files WHERE isDeleted = 1 ");
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result['total'];
@@ -751,7 +837,7 @@ public function count_user_files($userId) {
                 SUM(status = 'Approved') AS user_approved,
                 SUM(status = 'Disapproved') AS user_declined
             FROM files
-            WHERE user_id = :user_id AND isDeleted = 0
+            WHERE user_id = :user_id 
         ");
 
         $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
@@ -829,12 +915,6 @@ public function count_all_documents(){
 }
 
 
-public function get_all_recycled_files() {
-    $stmt = $this->pdo->prepare("SELECT * FROM files WHERE isDeleted = 1");
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
 // end //////////////////////////////////
 // here starts the codes for user side end
 public function get_products() {
@@ -888,7 +968,6 @@ public function register_user($fullname, $email, $birthday, $username, $password
             $stmt->execute([':username' => $username]);
             return $stmt->fetchColumn() > 0;
         }
-
         public function user_login($email, $password) {
             try {
                 $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
@@ -896,6 +975,11 @@ public function register_user($fullname, $email, $birthday, $username, $password
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
         
                 if ($user && password_verify($password, $user['password'])) {
+                    // Update the last_login field to the current timestamp
+                    $updateStmt = $this->pdo->prepare("UPDATE users SET last_login = NOW() WHERE user_id = :user_id");
+                    $updateStmt->execute([':user_id' => $user['user_id']]);
+                    
+                    // Return the user data after updating the last_login field
                     return $user;
                 } else {
                     return false;
@@ -905,6 +989,7 @@ public function register_user($fullname, $email, $birthday, $username, $password
                 return false;
             }
         }
+        
 
         public function get_user_info() {
             if (isset($_SESSION['user_id'])) {

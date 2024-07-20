@@ -158,7 +158,7 @@
 
                 <li class="nav-item1">
                     <a href="recycled_files" class="nav-link12 <?= $page == 'recycled_files.php' ? ' active text-bg-primary text-light':'' ?>">
-                        <i class="icons bi bi-trash-fill"></i>
+                        <i class="icons bi bi-recycle"></i>
                         <p class="p-tag">Manage Recycled Files</p>
                     </a>
                   
