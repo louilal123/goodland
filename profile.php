@@ -77,7 +77,7 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                 <div class="row">
 
                     <div class="col-md-3">
-                    <div class="card" style="padding-top: 20px; padding-bottom: 0px;">
+                    <div class="card bg-primary bg-opacity-10" style="padding-top: 20px; padding-bottom: 0px;">
                     <img src="uploads/<?= htmlspecialchars($_SESSION['user_user_photo']  ?? 'uploads/try.png'); ?>" class="img-fluid rounded"
                         style="display: flex; margin: auto; height: 180px; width: 180px;  
                         border: 4px solid #f0f0f0; border-radius: 230px !important;" id="profileImage" />
@@ -86,7 +86,7 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                     </a>
                 </div> <!-- End of user photo card -->
 
-                        <div class="card mt-3 profile-work">
+                        <div class="card mt-3 profile-work bg-primary bg-opacity-10">
                             <div class="card-body sidenavv">
                                 <p>About Me</p>
                                  <form action="classes/update_bio.php" method="post">
@@ -95,7 +95,7 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                                 <button type="submit" class="btn btn-success mt-2 mb-3 float-end">Update Bio</button>
                                 </form><br/><br/>
                                 <p>Settings</p>
-                                <a href="#" class="btn btn-link text-info" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Change Password</a><br/>
+                                <a href="#" class="btn-link text-info" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Change Password</a><br/>
                                 <a href="classes/logout.php">Logout</a><br/><br/>
                                 <p>Account</p>
                                 <a href="classes/logout.php">Delete Account</a><br/>
@@ -104,42 +104,43 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                     </div> <!-- End of col-md-4 -->
 
                     <div class="col-md-9 mb-5">
-                        <div class="card" style="height: auto;">
+                        <div class="card bg-primary bg-opacity-10" style="height: auto;">
                             <div class="card-body">
                                 <h4>Dashboard</h4>
                                 <div class="row mt-4">
                                     <div class="col-md-3">
-                                        <div class="card text-center">
+                                        <div class="card text-center text-white bg-primary bg-opacity-75">
                                             <div class="card-body">
-                                                <h4><?php echo $fileCounts['user_total'] ?? '0'; ?></h4>
-                                                <p class="card-text">Total Uploads</p>
+                                                <h3 class="text-white" class="text-white"><?php echo $fileCounts['user_total'] ?? '0'; ?></h4>
+                                                <p class="card-text text-white"><i class="bi bi-upload"></i> Total Uploads</p>
                                             </div> 
                                         </div> 
                                     </div> 
 
                                     <div class="col-md-3">
-                                        <div class="card text-center">
+                                        <div class="card text-center text-white bg-success bg-opacity-75">
                                             <div class="card-body">
-                                                <h4><?php echo $fileCounts['user_approved'] ?? '0'; ?></h4>
-                                                <p class="card-text">Approved</p>
+                                                <h3 class="text-white"><?php echo $fileCounts['user_approved'] ?? '0'; ?></h4>
+                                                <p class="card-text"><i class="bi bi-check-circle-fill"></i> Approved Files</p>
+                                                	<!-- bi-check-circle-fill <i class="bi bi-hourglass-split -->
                                             </div> 
                                         </div> 
                                     </div> 
 
                                     <div class="col-md-3">
-                                        <div class="card text-center">
-                                            <div class="card-body">
-                                                <h4><?php echo $fileCounts['user_pending'] ?? '0'; ?></h4>
-                                                <p class="card-text">Pending</p>
+                                        <div class="card text-center text-white bg-warning bg-opacity-75">
+                                            <div class="card-body ">
+                                                <h3 class="text-white"><?php echo $fileCounts['user_pending'] ?? '0'; ?></h4>
+                                                <p class="card-text "><i class="bi bi-hourglass-split"></i> Pending Files</p>
                                             </div> 
                                         </div> 
                                     </div> 
 
                                     <div class="col-md-3">
-                                        <div class="card text-center">
+                                        <div class="card text-center text-white bg-danger bg-opacity-75">
                                             <div class="card-body">
-                                                <h4><?php echo $fileCounts['user_declined'] ?? '0'; ?></h4>
-                                                <p class="card-text mt-1">Declined</p>
+                                                <h3 class="text-white"><?php echo $fileCounts['user_declined'] ?? '0'; ?></h4>
+                                                <p class="card-text mt-1"><i class="bi bi-x-circle-fill"></i> Declined Files</p>
                                             </div> 
                                         </div> 
                                     </div> 
@@ -147,29 +148,29 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                             </div> 
                         </div> 
 
-                        <div class="card mb-5 mt-3">
+                        <div class="card mb-5 mt-3 bg-primary bg-opacity-10">
                             <div class="card-body mb-5 mt-3">
                                 <!-- Tabs navs -->
                                     <ul class="nav nav-tabs mb-3" id="ex-with-icons" role="tablist">
                                     <li class="nav-item" role="presentation">
                                         <a data-mdb-tab-init class="nav-link active" id="ex-with-icons-tab-1" href="#ex-with-icons-tabs-1" role="tab"
-                                        aria-controls="ex-with-icons-tabs-1" aria-selected="true"></i>Personal Information</a>
+                                        aria-controls="ex-with-icons-tabs-1" aria-selected="true"><i class="bi bi-info-circle-fill"></i>  Personal Information</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <a data-mdb-tab-init class="nav-link" id="ex-with-icons-tab-2" href="#ex-with-icons-tabs-2" role="tab"
-                                        aria-controls="ex-with-icons-tabs-2" aria-selected="false"><i class="bi bi-chart-line fa-fw me-2"></i>Documents</a>
+                                        aria-controls="ex-with-icons-tabs-2" aria-selected="false"><i class="bi bi-folder-fill fa-fw me-2"></i>Documents</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <a data-mdb-tab-init class="nav-link" id="ex-with-icons-tab-3" href="#ex-with-icons-tabs-3" role="tab"
-                                        aria-controls="ex-with-icons-tabs-3" aria-selected="false"><i class="fas fa-camera-retro"></i>Images</a>
+                                        aria-controls="ex-with-icons-tabs-3" aria-selected="false"><i class="bi bi-image-fill"></i> Images</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <a data-mdb-tab-init class="nav-link" id="ex-with-icons-tab-4" href="#ex-with-icons-tabs-4" role="tab"
-                                        aria-controls="ex-with-icons-tabs-4" aria-selected="false"><i class="bi bi-cogs fa-fw me-2"></i>Maps</a>
+                                        aria-controls="ex-with-icons-tabs-4" aria-selected="false"><i class="bi bi-map-fill fa-fw me-2"></i>Maps</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <a data-mdb-tab-init class="nav-link" id="ex-with-icons-tab-5" href="#ex-with-icons-tabs-5" role="tab"
-                                        aria-controls="ex-with-icons-tabs-5" aria-selected="false"><i class="bi bi-cogs fa-fw me-2"></i>Arts</a>
+                                        aria-controls="ex-with-icons-tabs-5" aria-selected="false"><i class="bi bi-palette2 fa-fw me-2"></i> Arts</a>
                                     </li>
                                     </ul>
                                     <!-- Tabs navs -->
