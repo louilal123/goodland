@@ -84,6 +84,7 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
             <form method="post">
 
                 <div class="row">
+
                     <div class="col-md-3">
                         <div class="card" style="padding-top: 20px; padding-bottom: 20px;">
                             <img src="<?= $_SESSION['user_photo'] ?? 'uploads/try.png' ?>" class="img-fluid rounded"
@@ -99,12 +100,12 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                                 <button type="submit" class="btn btn-success mt-2 mb-3 float-end">Update Bio</button>
                                 <br/><br/>
                                 <p>Settings</p>
-                                <a href="#" data-toggle="modal" data-target="#changePasswordModal">Change Password</a><br/>
+                                <a href="#" class="btn btn-link text-info" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Change Password</a><br/>
                                 <a href="classes/logout.php">Logout</a><br/><br/>
                                 <p>Account</p>
                                 <a href="classes/logout.php">Delete Account</a><br/>
-                            </div> <!-- End of card-body sidenavv -->
-                        </div> <!-- End of profile-work card -->
+                            </div> 
+                        </div> 
                     </div> <!-- End of col-md-4 -->
 
                     <div class="col-md-9 mb-5">
@@ -117,39 +118,39 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                                             <div class="card-body">
                                                 <h4><?php echo $fileCounts['user_total'] ?? '0'; ?></h4>
                                                 <p class="card-text">Total Uploads</p>
-                                            </div> <!-- End of card-body -->
-                                        </div> <!-- End of card -->
-                                    </div> <!-- End of col-md-3 -->
+                                            </div> 
+                                        </div> 
+                                    </div> 
 
                                     <div class="col-md-3">
                                         <div class="card text-center">
                                             <div class="card-body">
                                                 <h4><?php echo $fileCounts['user_approved'] ?? '0'; ?></h4>
                                                 <p class="card-text">Approved</p>
-                                            </div> <!-- End of card-body -->
-                                        </div> <!-- End of card -->
-                                    </div> <!-- End of col-md-3 -->
+                                            </div> 
+                                        </div> 
+                                    </div> 
 
                                     <div class="col-md-3">
                                         <div class="card text-center">
                                             <div class="card-body">
                                                 <h4><?php echo $fileCounts['user_pending'] ?? '0'; ?></h4>
                                                 <p class="card-text">Pending</p>
-                                            </div> <!-- End of card-body -->
-                                        </div> <!-- End of card -->
-                                    </div> <!-- End of col-md-3 -->
+                                            </div> 
+                                        </div> 
+                                    </div> 
 
                                     <div class="col-md-3">
                                         <div class="card text-center">
                                             <div class="card-body">
                                                 <h4><?php echo $fileCounts['user_declined'] ?? '0'; ?></h4>
                                                 <p class="card-text mt-1">Declined</p>
-                                            </div> <!-- End of card-body -->
-                                        </div> <!-- End of card -->
-                                    </div> <!-- End of col-md-3 -->
+                                            </div> 
+                                        </div> 
+                                    </div> 
                                 </div> <!-- End of row mt-4 -->
-                            </div> <!-- End of card-body -->
-                        </div> <!-- End of card -->
+                            </div> 
+                        </div> 
 
                         <div class="card mb-5 mt-3">
                             <div class="card-body mb-5 mt-3">
@@ -161,7 +162,7 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <a data-mdb-tab-init class="nav-link" id="ex-with-icons-tab-2" href="#ex-with-icons-tabs-2" role="tab"
-                                        aria-controls="ex-with-icons-tabs-2" aria-selected="false"><i class="bi bi-chart-line fa-fw me-2"></a>
+                                        aria-controls="ex-with-icons-tabs-2" aria-selected="false"><i class="bi bi-chart-line fa-fw me-2"></i>Documents</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <a data-mdb-tab-init class="nav-link" id="ex-with-icons-tab-3" href="#ex-with-icons-tabs-3" role="tab"
@@ -177,141 +178,70 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                                     </li>
                                     </ul>
                                     <!-- Tabs navs -->
-<!-- Tabs content -->
-<div class="tab-content" id="ex-with-icons-content">
-    <div class="tab-pane fade" id="ex-with-icons-tabs-2" role="tabpanel" aria-labelledby="ex-with-icons-tab-2">
-        <h3>Documents</h3>
+                                <div class="tab-content" id="ex-with-icons-content">
+                                    <div class="tab-pane fade" id="ex-with-icons-tabs-2" role="tabpanel" aria-labelledby="ex-with-icons-tab-2">
+                                        <h3>Documents</h3>
+                                        <div class="mb-4 d-flex align-items-center">
+                                            <input type="text" id="documentSearch" class="form-control me-2" placeholder="Search..." onkeyup="searchDocuments()" value="<?= htmlspecialchars($searchTerm); ?>">
+                                            <div class="btn-group">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="bi bi-filter"></i> Filter
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+                                                    <li><a class="dropdown-item" href="#" onclick="filterDocuments('All')">All</a></li>
+                                                    <li><a class="dropdown-item" href="#" onclick="filterDocuments('Pending')">Pending</a></li>
+                                                    <li><a class="dropdown-item" href="#" onclick="filterDocuments('Approved')">Approved</a></li>
+                                                    <li><a class="dropdown-item" href="#" onclick="filterDocuments('Declined')">Declined</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
 
-        <!-- Search Bar and Filter Dropdown -->
-        <div class="mb-4 d-flex align-items-center">
-            <input type="text" id="documentSearch" class="form-control me-2" placeholder="Search..." onkeyup="searchDocuments()" value="<?= htmlspecialchars($searchTerm); ?>">
-            <div class="btn-group">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-filter"></i> Filter
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="filterDropdown">
-                    <li><a class="dropdown-item" href="#" onclick="filterDocuments('All')">All</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="filterDocuments('Pending')">Pending</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="filterDocuments('Approved')">Approved</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="filterDocuments('Declined')">Declined</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="row" id="documentsContainer">
-            <?php foreach ($documents as $file): ?>
-                <?php 
-                $statusClass = '';
-                if ($file['status'] == 'Pending') {
-                    $statusClass = 'badge bg-warning text-light';
-                } elseif ($file['status'] == 'Declined') {
-                    $statusClass = 'badge bg-danger text-light';
-                } elseif ($file['status'] == 'Approved') {
-                    $statusClass = 'badge bg-success text-light';
-                }
-                ?>
-                <div class="col-md-3 mt-2">
-                    <div class="card mb-4 shadow-sm custom-card">
-                        <embed src="uploads/<?= htmlspecialchars($file['file_path']); ?>#toolbar=0&navpanes=0"
-                            type="application/pdf" class="custom-card-img" style="overflow:hidden !important;">
-                        <div class="custom-card-body" style="margin-left: 20px !important; margin-right: 35px !important;">
-                            <h6 class="custom-card-title fw-bold"><?= htmlspecialchars($file['title']); ?></h6>
-                            <p class="custom-card-text"><small class="text-muted">Upload Date: <?= htmlspecialchars($file['upload_date']); ?></small></p>
-                            <p class="custom-card-text"><small class="text-muted">Status: </small><small class="text-light <?= $statusClass; ?>"><?= htmlspecialchars($file['status']); ?></small></p>
-                            <div class="d-flex justify-content-between">
-                                <a href="uploads/<?= htmlspecialchars($file['file_path']); ?>" class="btn-link" download="<?= htmlspecialchars($file['title']); ?>">
-                                    <small class="text-primary"><i class="bi bi-arrow-down"></i> Download</small>
-                                </a>
-                                <a type="submit" class="btn-link" 
-                                data-bs-toggle="modal" 
-                                data-bs-target="#fileModal"
-                                data-title="<?= htmlspecialchars($file['title']); ?>"
-                                data-description="<?= htmlspecialchars($file['description']); ?>"
-                                data-filetype="<?= htmlspecialchars($file['file_type']); ?>"
-                                data-status="<?= htmlspecialchars($file['status']); ?>"
-                                data-date="<?= htmlspecialchars($file['upload_date']); ?>"
-                                data-remarks="<?= htmlspecialchars($file['remarks']); ?>"
-                                data-path="uploads/<?= htmlspecialchars($file['file_path']); ?>">
-                                <small class="text-primary"><i class="bi bi-eye"></i> View</small>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-
-                                    <div class="tab-pane fade" id="ex-with-icons-tabs-3" role="tabpanel" aria-labelledby="ex-with-icons-tab-3">
-                                    <h3>Images</h3>
-
-<!-- Search Bar and Filter Dropdown -->
-<div class="mb-4 d-flex align-items-center">
-    <input type="text" id="documentSearch" class="form-control me-2" placeholder="Search..." onkeyup="searchDocuments()" value="<?= htmlspecialchars($searchTerm); ?>">
-    <div class="btn-group">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-filter"></i> Filter
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="filterDropdown">
-            <li><a class="dropdown-item" href="#" onclick="filterDocuments('All')">All</a></li>
-            <li><a class="dropdown-item" href="#" onclick="filterDocuments('Pending')">Pending</a></li>
-            <li><a class="dropdown-item" href="#" onclick="filterDocuments('Approved')">Approved</a></li>
-            <li><a class="dropdown-item" href="#" onclick="filterDocuments('Declined')">Declined</a></li>
-        </ul>
-    </div>
-</div>
-
-<div class="row" id="documentsContainer">
-    <?php foreach ($images as $file): ?>
-        <?php 
-        $statusClass = '';
-        if ($file['status'] == 'Pending') {
-            $statusClass = 'badge bg-warning text-light';
-        } elseif ($file['status'] == 'Declined') {
-            $statusClass = 'badge bg-danger text-light';
-        } elseif ($file['status'] == 'Approved') {
-            $statusClass = 'badge bg-success text-light';
-        }
-        ?>
-        <div class="col-md-3 mt-2">
-            <div class="card mb-4 shadow-sm custom-card">
-                <embed src="uploads/<?= htmlspecialchars($file['file_path']); ?>#toolbar=0&navpanes=0"
-                    type="application/pdf" class="custom-card-img" style="overflow:hidden !important;">
-                <div class="custom-card-body" style="margin-left: 20px !important; margin-right: 35px !important;">
-                    <h6 class="custom-card-title fw-bold"><?= htmlspecialchars($file['title']); ?></h6>
-                    <p class="custom-card-text"><small class="text-muted">Upload Date: <?= htmlspecialchars($file['upload_date']); ?></small></p>
-                    <p class="custom-card-text"><small class="text-muted">Status: </small><small class="text-light <?= $statusClass; ?>"><?= htmlspecialchars($file['status']); ?></small></p>
-                    <div class="d-flex justify-content-between">
-                        <a href="uploads/<?= htmlspecialchars($file['file_path']); ?>" class="btn-link" download="<?= htmlspecialchars($file['title']); ?>">
-                            <small class="text-primary"><i class="bi bi-arrow-down"></i> Download</small>
-                        </a>
-                        <a type="submit" class="btn-link" 
-                        data-bs-toggle="modal" 
-                        data-bs-target="#fileModal"
-                        data-title="<?= htmlspecialchars($file['title']); ?>"
-                        data-description="<?= htmlspecialchars($file['description']); ?>"
-                        data-filetype="<?= htmlspecialchars($file['file_type']); ?>"
-                        data-status="<?= htmlspecialchars($file['status']); ?>"
-                        data-date="<?= htmlspecialchars($file['upload_date']); ?>"
-                        data-remarks="<?= htmlspecialchars($file['remarks']); ?>"
-                        data-path="uploads/<?= htmlspecialchars($file['file_path']); ?>">
-                        <small class="text-primary"><i class="bi bi-eye"></i> View</small>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php endforeach; ?>
-</div>
+                                        <div class="row" id="documentsContainer">
+                                            <?php foreach ($documents as $file): ?>
+                                                <?php 
+                                                $statusClass = '';
+                                                if ($file['status'] == 'Pending') {
+                                                    $statusClass = 'badge bg-warning text-light';
+                                                } elseif ($file['status'] == 'Declined') {
+                                                    $statusClass = 'badge bg-danger text-light';
+                                                } elseif ($file['status'] == 'Approved') {
+                                                    $statusClass = 'badge bg-success text-light';
+                                                }
+                                                ?>
+                                                <div class="col-md-3 mt-2">
+                                                    <div class="card mb-4 shadow-sm custom-card">
+                                                        <embed src="uploads/<?= htmlspecialchars($file['file_path']); ?>#toolbar=0&navpanes=0"
+                                                            type="application/pdf" class="custom-card-img" width="100%" style="overflow-y:hidden !important;">
+                                                        <div class="custom-card-body" style="margin-left: 20px !important; margin-right: 35px !important;">
+                                                            <h6 class="custom-card-title fw-bold"><?= htmlspecialchars($file['title']); ?></h6>
+                                                            <p class="custom-card-text"><small class="text-muted">Upload Date: <?= htmlspecialchars($file['upload_date']); ?></small></p>
+                                                            <p class="custom-card-text"><small class="text-muted">Status: </small><small class="text-light <?= $statusClass; ?>"><?= htmlspecialchars($file['status']); ?></small></p>
+                                                            <div class="d-flex justify-content-between">
+                                                                <a href="uploads/<?= htmlspecialchars($file['file_path']); ?>" class="btn-link" download="<?= htmlspecialchars($file['title']); ?>">
+                                                                    <small class="text-primary"><i class="bi bi-arrow-down"></i> Download</small>
+                                                                </a>
+                                                                <a type="submit" class="btn-link" 
+                                                                data-bs-toggle="modal" 
+                                                                data-bs-target="#fileModal"
+                                                                data-title="<?= htmlspecialchars($file['title']); ?>"
+                                                                data-description="<?= htmlspecialchars($file['description']); ?>"
+                                                                data-filetype="<?= htmlspecialchars($file['file_type']); ?>"
+                                                                data-status="<?= htmlspecialchars($file['status']); ?>"
+                                                                data-date="<?= htmlspecialchars($file['upload_date']); ?>"
+                                                                data-remarks="<?= htmlspecialchars($file['remarks']); ?>"
+                                                                data-path="uploads/<?= htmlspecialchars($file['file_path']); ?>">
+                                                                <small class="text-primary"><i class="bi bi-eye"></i> View</small>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </div>
                                     </div>
-                                    <div class="tab-pane fade" id="ex-with-icons-tabs-4" role="tabpanel" aria-labelledby="ex-with-icons-tab-4">
-                                        Tab 4 content
-                                    </div>
-                                    <div class="tab-pane fade" id="ex-with-icons-tabs-5" role="tabpanel" aria-labelledby="ex-with-icons-tab-5">
-                                        Tab 5 content
-                                    </div>
+
                                     <div class="tab-pane fade show active" id="ex-with-icons-tabs-1" role="tabpanel" aria-labelledby="ex-with-icons-tab-1">
-                                    <div class="row mb-2">
+                                        <div class="row mb-2">
                                             <div class="col-md-6">
                                                 <label>Name</label>
                                             </div>
@@ -371,16 +301,13 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                                             </div>
                                         </div>
                                     </div>
-                                   
-                                    </div>
-                                  
-
-                            </div> <!-- End of card-body -->
+                                </div>
+                            </div> 
                         </div> <!-- End of card mb-5 mt-3 -->
                         
-                    </div> <!-- End of col-md-8 mb-5 -->
+                    </div>
                     
-                </div> <!-- End of row -->
+                </div> 
                 
         </div> <!-- End emp-profile-->
 
@@ -408,24 +335,66 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
     </div>
   </div>
 </div>
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="classes/change_password.php" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="currentPassword">Current Password</label>
+                        <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm New Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" name="change_password">Change Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
-
-    </main> <!-- End of main container mb-5 mt-5 -->
+    </main> 
 
     <?php include "includes/footer.php"; ?>
     <script>
-function filterDocuments(status) {
-    const searchTerm = document.getElementById('documentSearch').value;
-    window.location.href = `profile.php?status=${status}&search=${searchTerm}`;
-}
+    function filterDocuments(status) {
+        currentFilterStatus = status;
+        searchDocuments();
+    }
 
-function searchDocuments() {
-    const status = document.querySelector('.dropdown-menu .active') ? document.querySelector('.dropdown-menu .active').innerText : 'All';
-    const searchTerm = document.getElementById('documentSearch').value;
-    window.location.href = `profile.php?status=${status}&search=${searchTerm}`;
-}
+    function searchDocuments() {
+        var input = document.getElementById("documentSearch");
+        var filterText = input.value.toLowerCase();
+        var cards = document.getElementsByClassName('custom-card');
+
+        for (var i = 0; i < cards.length; i++) {
+            var statusElement = cards[i].querySelector('.custom-card-text small.text-light');
+            var cardStatus = statusElement ? statusElement.textContent.trim() : '';
+            var cardText = cards[i].innerText.toLowerCase();
+
+            var shouldDisplay = (currentFilterStatus === 'All' || cardStatus === currentFilterStatus) &&
+                                cardText.includes(filterText);
+
+            cards[i].style.display = shouldDisplay ? "block" : "none";
+        }
+    }
+    document.getElementById("documentSearch").addEventListener("keyup", searchDocuments);
 </script>
+
     
      <script>
           
