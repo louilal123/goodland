@@ -325,19 +325,14 @@ public function getMediaCounts() {
         }
     }
     
-    
-    
-    
-
     public function changePassword($userId, $currentPassword, $newPassword) {
         try {
             $stmt = $this->pdo->prepare("SELECT password FROM users WHERE user_id = :userId");
             $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
             $stmt->execute();
             $result = $stmt->fetch();
-
+    
             if ($result && password_verify($currentPassword, $result['password'])) {
-                
                 $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
                 $updateStmt = $this->pdo->prepare("UPDATE users SET password = :newPassword WHERE user_id = :userId");
                 $updateStmt->bindParam(':newPassword', $newPasswordHash, PDO::PARAM_STR);
@@ -352,6 +347,20 @@ public function getMediaCounts() {
             return false;
         }
     }
+
+    public function updateBio($userId, $bio) {
+        try {
+            $stmt = $this->pdo->prepare("UPDATE users SET bio = :bio, date_updated = NOW() WHERE user_id = :userId");
+            $stmt->bindParam(':bio', $bio, PDO::PARAM_STR);
+            $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+    
     
     // for login
     public function login_user($email, $password) {
@@ -968,6 +977,54 @@ public function register_user($fullname, $email, $birthday, $username, $password
             $stmt->execute([':username' => $username]);
             return $stmt->fetchColumn() > 0;
         }
+
+        // end regitser 
+        // start updaitng 
+
+        public function is_email_exists_except_user($email, $userId) {
+            $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM users WHERE email = :email AND user_id != :user_id");
+            $stmt->execute([':email' => $email, ':user_id' => $userId]);
+            return $stmt->fetchColumn() > 0;
+        }
+        
+        public function is_username_exists_except_user($username, $userId) {
+            $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM users WHERE username = :username AND user_id != :user_id");
+            $stmt->execute([':username' => $username, ':user_id' => $userId]);
+            return $stmt->fetchColumn() > 0;
+        }
+        
+        public function update_user_profile($userId, $fullname, $username, $email, $address, $birthday) {
+            $date_updated = date('Y-m-d H:i:s');
+            $stmt = $this->pdo->prepare("UPDATE users SET fullname = :fullname, username = :username, email = :email, 
+             address = :address, birthday = :birthday, date_updated = :date_updated WHERE user_id = :user_id");
+            return $stmt->execute([
+                ':fullname' => $fullname,
+                ':username' => $username,
+                ':email' => $email,
+               
+                ':address' => $address,
+                ':birthday' => $birthday,
+                ':date_updated' => $date_updated,
+                ':user_id' => $userId
+            ]);
+        }
+        
+        public function update_user_photo($userId, $photoPath) {
+            try {
+                $stmt = $this->pdo->prepare("UPDATE users SET user_photo = :photo WHERE user_id = :user_id");
+                $stmt->execute([
+                    ':photo' => $photoPath,
+                    ':user_id' => $userId
+                ]);
+                return true;
+            } catch (PDOException $e) {
+                // Handle error
+                return false;
+            }
+        }
+        
+       
+        
         public function user_login($email, $password) {
             try {
                 $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");

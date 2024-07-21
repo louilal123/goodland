@@ -40,11 +40,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user_last_login'] = $user['last_login'];
         $_SESSION['user_email'] = $user['email'];
         $_SESSION['user_username'] = $user['username'];
-        $_SESSION['user_user_photo'] = $user['user_photo'];
+        $_SESSION['user_photo'] = $user['user_photo'];
         $_SESSION['user_password'] = $user['password'];
-        $_SESSION['user_phone'] = $user['phone'];
         $_SESSION['user_date_created'] = $user['date_updated'];
         $_SESSION['user_date_updated'] = $user['date_updated'];
+       
         $_SESSION['user_address'] = $user['address'];
         $_SESSION['user_bio'] = $user['bio'];
 

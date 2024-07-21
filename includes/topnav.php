@@ -76,7 +76,7 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
  
             <div class="d-flex align-items-center">
                 <a href="#" class="nav-link d-flex align-items-center" style="margin-top: 2px; color: white;" data-bs-toggle="dropdown" aria-expanded="false" id="userDropdown">
-                    <img src="<?= $_SESSION['user_user_photo'] ?: 'assets/img/defava.jpg'; ?>" class="user-image rounded-circle shadow" style="width: 40px; height: 40px;">
+                <img src="uploads/<?= htmlspecialchars($_SESSION['user_user_photo']  ?? 'uploads/try.png'); ?>"class="user-image rounded-circle shadow" style="width: 40px; height: 40px;">
                     <span class="d-none d-md-inline text-light" style="margin-top: 5px; color: white;">
                         <?= $_SESSION['user_fullname']; ?>
                     </span>

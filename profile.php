@@ -72,24 +72,28 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
     <main class="main container mb-5" style="margin-top: 150px !important;">
 
         <div class="container emp-profile mb-5 mt-5">
-            <form method="post">
+          
 
                 <div class="row">
 
                     <div class="col-md-3">
-                        <div class="card" style="padding-top: 20px; padding-bottom: 20px;">
-                            <img src="<?= $_SESSION['user_photo'] ?? 'uploads/try.png' ?>" class="img-fluid rounded"
-                                style="display: flex; margin: auto; height: 180px; width: 180px;  
-                                border: 4px solid #f0f0f0; border-radius: 230px !important;" />
-                            <a href="" class="btn-secondary"></a>
-                        </div> <!-- End of user photo card -->
+                    <div class="card" style="padding-top: 20px; padding-bottom: 0px;">
+                    <img src="uploads/<?= htmlspecialchars($_SESSION['user_user_photo']  ?? 'uploads/try.png'); ?>" class="img-fluid rounded"
+                        style="display: flex; margin: auto; height: 180px; width: 180px;  
+                        border: 4px solid #f0f0f0; border-radius: 230px !important;" id="profileImage" />
+                    <a href="#" class="btn btn-secondary mt-4 mb-0" data-bs-toggle="modal" data-bs-target="#editProfilePhotoModal">
+                        <i class="bi bi-camera"></i> Edit Profile Picture
+                    </a>
+                </div> <!-- End of user photo card -->
 
                         <div class="card mt-3 profile-work">
                             <div class="card-body sidenavv">
                                 <p>About Me</p>
-                                <textarea class="form-control" id="textAreaExample3" rows="3"><?= $_SESSION['user_bio'] ?? ''; ?></textarea>
+                                 <form action="classes/update_bio.php" method="post">
+                                <textarea class="form-control" name="bio" id="textAreaExample3" rows="3"><?= $_SESSION['user_bio'] ?? ''; ?></textarea>
+                              
                                 <button type="submit" class="btn btn-success mt-2 mb-3 float-end">Update Bio</button>
-                                <br/><br/>
+                                </form><br/><br/>
                                 <p>Settings</p>
                                 <a href="#" class="btn btn-link text-info" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Change Password</a><br/>
                                 <a href="classes/logout.php">Logout</a><br/><br/>
@@ -391,12 +395,13 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                                     </div>
 
                                     <div class="tab-pane fade show active" id="ex-with-icons-tabs-1" role="tabpanel" aria-labelledby="ex-with-icons-tab-1">
+                                 
                                         <div class="row mb-2">
                                             <div class="col-md-6">
                                                 <label>Name</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" value="<?= $_SESSION['user_fullname']; ?>" readonly>
+                                                <input type="text" name="fullname" class="form-control" value="<?= $_SESSION['user_fullname']; ?>" readonly>
                                             </div>
                                         </div> 
 
@@ -405,7 +410,7 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                                                 <label>Username</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" value="<?= $_SESSION['user_username'] ?? ''; ?>" readonly>
+                                                <input type="text" name="username" class="form-control" value="<?= $_SESSION['user_username'] ?? ''; ?>" readonly>
                                             </div>
                                         </div> 
 
@@ -414,25 +419,16 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                                                 <label>Email</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="email" class="form-control" value="<?= $_SESSION['user_email']; ?>" readonly>
+                                                <input type="email" name="email" class="form-control" value="<?= $_SESSION['user_email']; ?>" readonly>
                                             </div>
                                         </div> 
-
-                                        <div class="row mb-2">
-                                            <div class="col-md-6">
-                                                <label>Phone</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="text" class="form-control" value="<?= $_SESSION['user_phone'] ?? ''; ?>" readonly>
-                                            </div>
-                                        </div>
 
                                         <div class="row mb-2">
                                             <div class="col-md-6">
                                                 <label>Address</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" value="<?= $_SESSION['user_address'] ?? ''; ?>" readonly>
+                                                <input type="text" name="address" class="form-control" value="<?= $_SESSION['user_address'] ?? ''; ?>" readonly>
                                             </div>
                                         </div>
 
@@ -441,15 +437,16 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                                                 <label>Birthday</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="date" class="form-control" value="<?= $_SESSION['user_birthday'] ?? ''; ?>" readonly>
+                                                <input type="date" name="birthday" class="form-control" value="<?= $_SESSION['user_birthday'] ?? ''; ?>" readonly>
                                             </div>
                                         </div>
 
                                         <div class="row mb-3">
                                             <div class="col-md-12">
-                                                <a href="#" class="btn btn-primary float-end" data-mdb-ripple-init>Update</a>
+                                            <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#updateProfileModal">Update</button>
                                             </div>
                                         </div>
+                                      
                                     </div>
                                 </div>
                             </div> 
@@ -462,6 +459,47 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
         </div> <!-- End emp-profile-->
 
         <!-- modals  -->
+<!-- Profile Update Modal -->
+<div class="modal fade" id="updateProfileModal" tabindex="-1" aria-labelledby="updateProfileModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateProfileModalLabel">Update Profile Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="classes/update_profile.php" method="post">
+                <div class="modal-body">
+                    <div class="form-group mb-2">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" class="form-control" id="fullname" name="fullname" value="<?= $_SESSION['user_fullname'] ?? ''; ?>" required>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" value="<?= $_SESSION['user_username'] ?? ''; ?>" required>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="<?= $_SESSION['user_email'] ?? ''; ?>" required>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="address">Address</label>
+                        <input type="text" class="form-control" id="address" name="address" value="<?= $_SESSION['user_address'] ?? ''; ?>">
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="birthday">Birthday</label>
+                        <input type="date" class="form-control" id="birthday" name="birthday" value="<?= $_SESSION['user_birthday'] ?? ''; ?>" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 <div class="modal fade" id="fileModal" tabindex="-1" aria-labelledby="fileModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -515,11 +553,45 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
         </div>
     </div>
 </div>
-
+<!-- Edit Profile Photo Modal -->
+<div class="modal fade" id="editProfilePhotoModal" tabindex="-1" aria-labelledby="editProfilePhotoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProfilePhotoModalLabel">Edit Profile Picture</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="classes/update_profile_photo.php" method="post" enctype="multipart/form-data">
+                <div class="modal-body text-center">
+                    <img src="<?= $_SESSION['user_photo'] ?? 'uploads/try.png' ?>" class="img-fluid rounded mb-3"
+                        style="display: flex; margin: auto; height: 180px; width: 180px;  
+                        border: 4px solid #f0f0f0; border-radius: 230px !important;" id="modalProfileImage" />
+                    <input type="file" id="fileInput" name="profile_photo" accept="image/*" style="display: block; margin: auto;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
     </main> 
 
     <?php include "includes/footer.php"; ?>
+    <script>
+document.getElementById('fileInput').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('modalProfileImage').src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    }
+});
+</script>
 
     
     <script>
