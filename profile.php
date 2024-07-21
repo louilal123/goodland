@@ -3,7 +3,7 @@
 <?php include "includes/header.php"; ?>
 <link rel="stylesheet" href="assets/css/profile.css">
 <style>
-        .custom-card {
+     .custom-card {
             display: flex;
             flex-direction: column;
             height: 100%; /* Ensure uniform height for all cards */
@@ -13,14 +13,9 @@
         .custom-card-img {
             object-fit: cover; /* Ensures the image fits within its container */
             height: 190px; /* Fixed height for uniformity */
-            overflow: hidden; /* Prevents overflow */
+            overflow-y: hidden; /* Prevents overflow */
         }
 
-        .custom-card-body {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1; /* Allows the card body to take up available space */
-        }
 
         .custom-card-title {
             margin-top: 15px;
@@ -38,14 +33,10 @@
             overflow: hidden !important; /* Prevents overflow */
         }
 
-        .custom-card-text {
-            margin-bottom: 0.5rem; /* Adds space between text elements */
-        }
 
         .custom-card-footer {
             margin-top: auto; /* Pushes the footer to the bottom */
         }
-
 </style>
 <body class="index-page">
 <?php 
@@ -181,18 +172,12 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                                 <div class="tab-content" id="ex-with-icons-content">
                                     <div class="tab-pane fade" id="ex-with-icons-tabs-2" role="tabpanel" aria-labelledby="ex-with-icons-tab-2">
                                         <h3>Documents</h3>
-                                        <div class="mb-4 d-flex align-items-center">
-                                            <input type="text" id="documentSearch" class="form-control me-2" placeholder="Search..." onkeyup="searchDocuments()" value="<?= htmlspecialchars($searchTerm); ?>">
-                                            <div class="btn-group">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="bi bi-filter"></i> Filter
-                                                </button>
-                                                <ul class="dropdown-menu" aria-labelledby="filterDropdown">
-                                                    <li><a class="dropdown-item" href="#" onclick="filterDocuments('All')">All</a></li>
-                                                    <li><a class="dropdown-item" href="#" onclick="filterDocuments('Pending')">Pending</a></li>
-                                                    <li><a class="dropdown-item" href="#" onclick="filterDocuments('Approved')">Approved</a></li>
-                                                    <li><a class="dropdown-item" href="#" onclick="filterDocuments('Declined')">Declined</a></li>
-                                                </ul>
+                                        <div class="search-bar mb-4">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control search w-50" placeholder="Search materials..." id="documentsSearch">
+                                                <div class="input-group-append ">
+                                                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -208,10 +193,175 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                                                     $statusClass = 'badge bg-success text-light';
                                                 }
                                                 ?>
-                                                <div class="col-md-3 mt-2">
+                                                <div class="col-md-3 mt-2 document-item">
                                                     <div class="card mb-4 shadow-sm custom-card">
                                                         <embed src="uploads/<?= htmlspecialchars($file['file_path']); ?>#toolbar=0&navpanes=0"
-                                                            type="application/pdf" class="custom-card-img" width="100%" style="overflow-y:hidden !important;">
+                                                            type="application/pdf" class="custom-card-img" style="overflow:hidden !important;">
+                                                        <div class="custom-card-body" style="margin-left: 20px !important; margin-right: 35px !important;">
+                                                            <h6 class="custom-card-title fw-bold"><?= htmlspecialchars($file['title']); ?></h6>
+                                                            <p class="custom-card-text"><small class="text-muted">Upload Date: <?= htmlspecialchars($file['upload_date']); ?></small></p>
+                                                            <p class="custom-card-text"><small class="text-muted">Status: </small><small class="text-light <?= $statusClass; ?>"><?= htmlspecialchars($file['status']); ?></small></p>
+                                                            <div class="d-flex justify-content-between">
+                                                                <a href="uploads/<?= htmlspecialchars($file['file_path']); ?>" class="btn-link" download="<?= htmlspecialchars($file['title']); ?>">
+                                                                    <small class="text-primary"><i class="bi bi-arrow-down"></i> Download</small>
+                                                                </a>
+                                                                <a type="submit" class="btn-link" 
+                                                                data-bs-toggle="modal" 
+                                                                data-bs-target="#fileModal"
+                                                                data-title="<?= htmlspecialchars($file['title']); ?>"
+                                                                data-description="<?= htmlspecialchars($file['description']); ?>"
+                                                                data-filetype="<?= htmlspecialchars($file['file_type']); ?>"
+                                                                data-status="<?= htmlspecialchars($file['status']); ?>"
+                                                                data-date="<?= htmlspecialchars($file['upload_date']); ?>"
+                                                                data-remarks="<?= htmlspecialchars($file['remarks']); ?>"
+                                                                data-path="uploads/<?= htmlspecialchars($file['file_path']); ?>">
+                                                                <small class="text-primary"><i class="bi bi-eye"></i> View</small>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="ex-with-icons-tabs-3" role="tabpanel" aria-labelledby="ex-with-icons-tab-3">
+                                        <h3>Images</h3>
+                                        <div class="search-bar mb-4">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control search w-50" placeholder="Search materials..." id="imagesSearch">
+                                                <div class="input-group-append ">
+                                                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" id="documentsContainer">
+                                            <?php foreach ($images as $file): ?>
+                                                <?php 
+                                                $statusClass = '';
+                                                if ($file['status'] == 'Pending') {
+                                                    $statusClass = 'badge bg-warning text-light';
+                                                } elseif ($file['status'] == 'Declined') {
+                                                    $statusClass = 'badge bg-danger text-light';
+                                                } elseif ($file['status'] == 'Approved') {
+                                                    $statusClass = 'badge bg-success text-light';
+                                                }
+                                                ?>
+                                                <div class="col-md-3 mt-2 document-item">
+                                                    <div class="card mb-4 shadow-sm custom-card">
+                                                        <img src="uploads/<?= htmlspecialchars($file['file_path']); ?>#toolbar=0&navpanes=0"
+                                                            type="application/pdf" class="custom-card-img" style="overflow:hidden !important;">
+                                                        <div class="custom-card-body" style="margin-left: 20px !important; margin-right: 35px !important;">
+                                                            <h6 class="custom-card-title fw-bold"><?= htmlspecialchars($file['title']); ?></h6>
+                                                            <p class="custom-card-text"><small class="text-muted">Upload Date: <?= htmlspecialchars($file['upload_date']); ?></small></p>
+                                                            <p class="custom-card-text"><small class="text-muted">Status: </small><small class="text-light <?= $statusClass; ?>"><?= htmlspecialchars($file['status']); ?></small></p>
+                                                            <div class="d-flex justify-content-between">
+                                                                <a href="uploads/<?= htmlspecialchars($file['file_path']); ?>" class="btn-link" download="<?= htmlspecialchars($file['title']); ?>">
+                                                                    <small class="text-primary"><i class="bi bi-arrow-down"></i> Download</small>
+                                                                </a>
+                                                                <a type="submit" class="btn-link" 
+                                                                data-bs-toggle="modal" 
+                                                                data-bs-target="#fileModal"
+                                                                data-title="<?= htmlspecialchars($file['title']); ?>"
+                                                                data-description="<?= htmlspecialchars($file['description']); ?>"
+                                                                data-filetype="<?= htmlspecialchars($file['file_type']); ?>"
+                                                                data-status="<?= htmlspecialchars($file['status']); ?>"
+                                                                data-date="<?= htmlspecialchars($file['upload_date']); ?>"
+                                                                data-remarks="<?= htmlspecialchars($file['remarks']); ?>"
+                                                                data-path="uploads/<?= htmlspecialchars($file['file_path']); ?>">
+                                                                <small class="text-primary"><i class="bi bi-eye"></i> View</small>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tab-pane fade" id="ex-with-icons-tabs-4" role="tabpanel" aria-labelledby="ex-with-icons-tab-4">
+                                        <h3>Maps</h3>
+                                        <div class="search-bar mb-4">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control search w-50" placeholder="Search materials..." id="mapsSearch">
+                                                <div class="input-group-append ">
+                                                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" id="documentsContainer">
+                                            <?php foreach ($maps as $file): ?>
+                                                <?php 
+                                                $statusClass = '';
+                                                if ($file['status'] == 'Pending') {
+                                                    $statusClass = 'badge bg-warning text-light';
+                                                } elseif ($file['status'] == 'Declined') {
+                                                    $statusClass = 'badge bg-danger text-light';
+                                                } elseif ($file['status'] == 'Approved') {
+                                                    $statusClass = 'badge bg-success text-light';
+                                                }
+                                                ?>
+                                                <div class="col-md-3 mt-2 document-item">
+                                                    <div class="card mb-4 shadow-sm custom-card">
+                                                        <img src="uploads/<?= htmlspecialchars($file['file_path']); ?>"
+                                                            type="application/pdf" class="custom-card-img" style="overflow:hidden !important;">
+                                                        <div class="custom-card-body" style="margin-left: 20px !important; margin-right: 35px !important;">
+                                                            <h6 class="custom-card-title fw-bold"><?= htmlspecialchars($file['title']); ?></h6>
+                                                            <p class="custom-card-text"><small class="text-muted">Upload Date: <?= htmlspecialchars($file['upload_date']); ?></small></p>
+                                                            <p class="custom-card-text"><small class="text-muted">Status: </small><small class="text-light <?= $statusClass; ?>"><?= htmlspecialchars($file['status']); ?></small></p>
+                                                            <div class="d-flex justify-content-between">
+                                                                <a href="uploads/<?= htmlspecialchars($file['file_path']); ?>" class="btn-link" download="<?= htmlspecialchars($file['title']); ?>">
+                                                                    <small class="text-primary"><i class="bi bi-arrow-down"></i> Download</small>
+                                                                </a>
+                                                                <a type="submit" class="btn-link" 
+                                                                data-bs-toggle="modal" 
+                                                                data-bs-target="#fileModal"
+                                                                data-title="<?= htmlspecialchars($file['title']); ?>"
+                                                                data-description="<?= htmlspecialchars($file['description']); ?>"
+                                                                data-filetype="<?= htmlspecialchars($file['file_type']); ?>"
+                                                                data-status="<?= htmlspecialchars($file['status']); ?>"
+                                                                data-date="<?= htmlspecialchars($file['upload_date']); ?>"
+                                                                data-remarks="<?= htmlspecialchars($file['remarks']); ?>"
+                                                                data-path="uploads/<?= htmlspecialchars($file['file_path']); ?>">
+                                                                <small class="text-primary"><i class="bi bi-eye"></i> View</small>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="ex-with-icons-tabs-5" role="tabpanel" aria-labelledby="ex-with-icons-tab-5">
+                                        <h3>Arts</h3>
+                                        <div class="search-bar mb-4">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control search w-50" placeholder="Search materials..." id="artsSearch">
+                                                <div class="input-group-append ">
+                                                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" id="documentsContainer">
+                                            <?php foreach ($arts as $file): ?>
+                                                <?php 
+                                                $statusClass = '';
+                                                if ($file['status'] == 'Pending') {
+                                                    $statusClass = 'badge bg-warning text-light';
+                                                } elseif ($file['status'] == 'Declined') {
+                                                    $statusClass = 'badge bg-danger text-light';
+                                                } elseif ($file['status'] == 'Approved') {
+                                                    $statusClass = 'badge bg-success text-light';
+                                                }
+                                                ?>
+                                                <div class="col-md-3 mt-2 document-item">
+                                                    <div class="card mb-4 shadow-sm custom-card">
+                                                        <img src="uploads/<?= htmlspecialchars($file['file_path']); ?>"
+                                                            type="application/pdf" class="custom-card-img" style="overflow:hidden !important;">
                                                         <div class="custom-card-body" style="margin-left: 20px !important; margin-right: 35px !important;">
                                                             <h6 class="custom-card-title fw-bold"><?= htmlspecialchars($file['title']); ?></h6>
                                                             <p class="custom-card-text"><small class="text-muted">Upload Date: <?= htmlspecialchars($file['upload_date']); ?></small></p>
@@ -370,31 +520,79 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
     </main> 
 
     <?php include "includes/footer.php"; ?>
+
+    
     <script>
-    function filterDocuments(status) {
-        currentFilterStatus = status;
-        searchDocuments();
-    }
-
-    function searchDocuments() {
-        var input = document.getElementById("documentSearch");
-        var filterText = input.value.toLowerCase();
-        var cards = document.getElementsByClassName('custom-card');
-
-        for (var i = 0; i < cards.length; i++) {
-            var statusElement = cards[i].querySelector('.custom-card-text small.text-light');
-            var cardStatus = statusElement ? statusElement.textContent.trim() : '';
-            var cardText = cards[i].innerText.toLowerCase();
-
-            var shouldDisplay = (currentFilterStatus === 'All' || cardStatus === currentFilterStatus) &&
-                                cardText.includes(filterText);
-
-            cards[i].style.display = shouldDisplay ? "block" : "none";
+document.getElementById('artsSearch').addEventListener('input', function() {
+    let filter = this.value.toLowerCase();
+    let items = document.querySelectorAll('.document-item');
+    let visibleCount = 0;
+    items.forEach(function(item) {
+        let title = item.querySelector('.custom-card-title').textContent.toLowerCase();
+        if (title.includes(filter)) {
+            item.style.display = '';
+            visibleCount++;
+        } else {
+            item.style.display = 'none';
         }
-    }
-    document.getElementById("documentSearch").addEventListener("keyup", searchDocuments);
+    });
+    document.getElementById('entryInfo').textContent = `Showing ${visibleCount} of ${items.length} total entries`;
+});
 </script>
 
+    <script>
+document.getElementById('mapsSearch').addEventListener('input', function() {
+    let filter = this.value.toLowerCase();
+    let items = document.querySelectorAll('.document-item');
+    let visibleCount = 0;
+    items.forEach(function(item) {
+        let title = item.querySelector('.custom-card-title').textContent.toLowerCase();
+        if (title.includes(filter)) {
+            item.style.display = '';
+            visibleCount++;
+        } else {
+            item.style.display = 'none';
+        }
+    });
+    document.getElementById('entryInfo').textContent = `Showing ${visibleCount} of ${items.length} total entries`;
+});
+</script>
+
+    <script>
+document.getElementById('imagesSearch').addEventListener('input', function() {
+    let filter = this.value.toLowerCase();
+    let items = document.querySelectorAll('.document-item');
+    let visibleCount = 0;
+    items.forEach(function(item) {
+        let title = item.querySelector('.custom-card-title').textContent.toLowerCase();
+        if (title.includes(filter)) {
+            item.style.display = '';
+            visibleCount++;
+        } else {
+            item.style.display = 'none';
+        }
+    });
+    document.getElementById('entryInfo').textContent = `Showing ${visibleCount} of ${items.length} total entries`;
+});
+</script>
+
+    <script>
+document.getElementById('documentsSearch').addEventListener('input', function() {
+    let filter = this.value.toLowerCase();
+    let items = document.querySelectorAll('.document-item');
+    let visibleCount = 0;
+    items.forEach(function(item) {
+        let title = item.querySelector('.custom-card-title').textContent.toLowerCase();
+        if (title.includes(filter)) {
+            item.style.display = '';
+            visibleCount++;
+        } else {
+            item.style.display = 'none';
+        }
+    });
+    document.getElementById('entryInfo').textContent = `Showing ${visibleCount} of ${items.length} total entries`;
+});
+</script>
     
      <script>
           

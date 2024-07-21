@@ -206,42 +206,6 @@ document.getElementById('mainSearch').addEventListener('input', function() {
 </script>
 
 
-<script>
-document.addEventListener('DOMContentLoaded', (event) => {
-    let downloadLink = '';
-    let fileId = '';
-    let fileName = '';
-
-    document.querySelectorAll('.download-btn').forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            downloadLink = this.getAttribute('href');
-            fileId = this.getAttribute('data-file-id');
-            fileName = this.getAttribute('download');
-            let downloadModal = new bootstrap.Modal(document.getElementById('downloadModal'));
-            downloadModal.show();
-        });
-    });
-
-    document.getElementById('confirmDownloadBtn').addEventListener('click', function() {
-        let a = document.createElement('a');
-        a.href = downloadLink;
-        a.download = fileName;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-
-        let downloadModal = bootstrap.Modal.getInstance(document.getElementById('downloadModal'));
-        downloadModal.hide();
-        
-        let xhr = new XMLHttpRequest();
-        xhr.open('POST', 'classes/record_download.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.send('file_id=' + fileId);
-    });
-});
-</script>
-
 
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {

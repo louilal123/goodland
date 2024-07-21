@@ -835,7 +835,7 @@ public function count_user_files($userId) {
                 COUNT(*) AS user_total,
                 SUM(status = 'Pending') AS user_pending,
                 SUM(status = 'Approved') AS user_approved,
-                SUM(status = 'Disapproved') AS user_declined
+                SUM(status = 'Declined') AS user_declined
             FROM files
             WHERE user_id = :user_id 
         ");
