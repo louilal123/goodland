@@ -24,7 +24,7 @@ unset($_SESSION['error_message']);
       oveflow: hidden !important;
     }
   </style>
-  <body class="bg-primary" style="oveflow: hidden !important; ">
+  <body class="bg-light bg-opacity-50" style="oveflow: hidden !important; ">
 
     <!-- Start your project here-->
     <section class="vh-100" style="oveflow: hidden !important; ">
@@ -34,9 +34,9 @@ unset($_SESSION['error_message']);
             <img src="uploads/image.png" class="img-fluid" style="height: max-content;" alt="Phone image">
           </div> -->
 
-          <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 bg-white">
-            <div class="card-body p-5 shadow-5 text-center">
-              <h2 class="fw-bold mb-5">GoodLand Management System</h2>
+          <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 ">
+            <div class="card-body p-5 shadow-5 text-center bg-primary bg-opacity-10">
+              <h2 class="fw-bold mb-5">GOODLAND MANAGEMENT SYSTEM</h2>
               <h4 class="fw-light mb-5">Login Administrator</h4>
               <form action="classes/login.php" method="post">
                   <?php if ($error_message): ?>

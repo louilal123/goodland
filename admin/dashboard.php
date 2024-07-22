@@ -281,9 +281,9 @@ $mediaData = implode(", ", $mediaData);
 
     <div class="col-lg-7 col-md-12 col-sm-12">
         <div class="card mb-4 shadow-sm ms-0">
-        <div id="chart_div" style="width: 100%; margin-left:0px !important; height: 450px; margin: 0px; padding: 0px;"></div>
-        </div>
-    </div>
+			<div id="chart_div" style="width: 100%; margin-left:0px !important; height: 450px; margin: 0px; padding: 0px;"></div>
+		</div>
+   	</div>
 </div>
 
                                 

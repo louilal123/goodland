@@ -59,21 +59,21 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
 <?php include "includes/topnav.php"; ?>
 
 <main class="main container mt-10 mb-5" style="margin-bottom: 150px important;">
-    <div class="card" style="border-radius:0px;">
+<div class="card bg-light bg-opacity-75" style="border-radius:0px;">
         <div class="card-body" style="border-radius:0px;">
-    <h1 class="text-center mt-5"><strong>BROWSE OUR ARCHIVE FILES</strong></h1>
-    <h6 class="text-center mb-6">Explore the rich culture and heritage of Bantayan Island</h6>
+    <h1 class="text-center mt-5 text-primary" style="font-size: 52px;  font-family: 'Trebuchet MS', sans-serif;"><strong>BROWSE OUR ARCHIVE FILES</strong></h1>
+    <h5 class="text-center mb-6">Explore the rich culture and heritage of Bantayan Island</h5>
     <div class="container-fluid mt-10">
         <div class="row justify-content-center">
            
             <div class="col-md-2 sidebar mr-5">
-                <h4 class="filter-title">Browse Sections</h4>
+                <h4 class="filter-title  mb-4">Browse Sections</h4>
                 <ul class="list-unstyled">
                     <li><a href="library" class="d-block mb-2 text-dark">Documents</a></li>
                     <li><a href="images" class="d-block mb-2 text-dark">Images</a></li>
                     <li><a href="arts" class="d-block mb-2 text-dark">Arts</a></li>
                     <li><a href="maps" class="d-block mb-2 active btn-link">Maps</a></li>
-                    <li><a href="audio_recordings" class="d-block mb-2 text-dark">Audio Recordings</a></li>
+                    <!-- <li><a href="audio_recordings" class="d-block mb-2 text-dark">Audio Recordings</a></li> -->
                 </ul>
             </div>
 
