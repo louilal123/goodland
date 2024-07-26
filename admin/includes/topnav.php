@@ -3,7 +3,7 @@
                 <div class="container-fluid ">
                     <ul class="navbar-nav">
                         <li class="nav-item1 mt-1 ms-1"> 
-                            <a class="nav-link1 mb-2" data-lte-toggle="sidebar" href="#" role="button"> 
+                            <a class="nav-link1 mb-2 sidebar-toggle" data-lte-toggle="sidebar" href="#" role="button"> 
                             <i class="bi bi-list" style="margin: auto; color: #333;"></i> 
                         </a> 
                     </li>    
@@ -26,7 +26,7 @@
         </ul>
       </li>
                        
-                        <li class="nav-item dropdown"> <a class="nav-link" data-bs-toggle="dropdown" href="#"> <i class="bi bi-bell"></i> 
+                        <li class="nav-item dropdown"> <a class="nav-link" data-bs-toggle="dropdown" href="#"> <i class="bi bi-bars"></i> 
                         <!-- <span class="navbar-badge badge text-bg-danger">15</span> -->
                         </a>
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end"> <span class="dropdown-item dropdown-header">15 Notifications</span>
@@ -85,6 +85,20 @@
                        </div>
                    </div>
                </div>
+
+
+               <script>
+                // JavaScript to toggle sidebar collapse
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButton = document.querySelector('.sidebar-toggle');
+    const sidebar = document.querySelector('.app-sidebar');
+
+    toggleButton.addEventListener('click', function() {
+        sidebar.classList.toggle('collapsed');
+    });
+});
+
+               </script>
 
          
         

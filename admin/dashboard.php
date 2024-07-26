@@ -14,6 +14,10 @@ $mediaData = implode(", ", $mediaData);
 <html lang="en"> 
 <?php include "includes/header.php"; ?>
 <style>
+	 .main-blur {
+            backdrop-filter: blur(5px);
+			background: rgba(108, 117, 125, 0.1); 
+        }
     body{
         overflow:hidden !important;
     }
@@ -61,10 +65,10 @@ $mediaData = implode(", ", $mediaData);
     <div class="app-wrapper">
 
        <?php include "includes/sidebar.php" ?>
-        <div class="app-main-wrapper"> 
+        <div class="app-main-wrapper main-blur"> 
            <?php 
             include "includes/topnav.php"; ?>
-            <main class="app-main">
+            <main class="app-main ">
             <div class="app-content-header mb-0"> 
                 <div class="container-fluid">
                     <div class="row">
@@ -87,27 +91,26 @@ $mediaData = implode(", ", $mediaData);
                 <div class="container-fluid"> 
                     <div class="row mt-0">
 								    <div class="col-sm-6 col-lg-3">
-								 	    <div class="card text-bg-primary" >
+								 	    <div class="card text-bg-primary bg-opacity-75" style="border-radius: 5px;">
 											<div class="card-body">
 												<div class="row">
-												<div class="col mt-2">
-														<h5 class="card-title text-light">Registered Users</h5>
-													</div>
-													
-													<div class="col-auto">
-														<div class="stat text-primary">
-                                                        <i class="bi bi-person-plus small-box text-light"></i>
-                                                    	</div>
-													</div>
-												</div> 
-												<h1 class=" text-light"> <?php echo $registeredUsersCount ?? '0'; ?></h1>
+													<div class="col mt-0">
+															<h5 class="card-title text-light">Registered Users</h5>
+														</div>
+														
+														<div class="col-auto">
+															<div class="stat text-primary">
+															<i class="bi bi-person-plus small-box text-light"></i>
+															</div>
+														</div>
+													</div> 
+													<h1 class=" text-light"> <?php echo $registeredUsersCount ?? '0'; ?></h1>
 												
-
 											</div>
 										</div>
 									</div> 
 									<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-success" >
+										<div class="card text-bg-success" style="border-radius: 5px;">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
@@ -130,7 +133,7 @@ $mediaData = implode(", ", $mediaData);
                                     </div>
 
 									<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-warning" >
+										<div class="card text-bg-warning" style="border-radius: 5px;">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
@@ -152,7 +155,7 @@ $mediaData = implode(", ", $mediaData);
 									</div>
 
 									<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-danger" >
+										<div class="card text-bg-danger" style="border-radius: 5px;">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
@@ -178,7 +181,7 @@ $mediaData = implode(", ", $mediaData);
 					<div class="row mt-4">
 
 									<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-warning" >
+										<div class="card text-bg-warning" style="border-radius: 5px;">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
@@ -201,7 +204,7 @@ $mediaData = implode(", ", $mediaData);
 								 
 
 									<div class="col-sm-6 col-lg-3">
-										<div class="card  text-bg-info" >
+										<div class="card  text-bg-info" style="border-radius: 5px;">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
@@ -224,7 +227,7 @@ $mediaData = implode(", ", $mediaData);
                                     </div>
 
 									<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-danger" >
+										<div class="card text-bg-danger" style="border-radius: 5px;">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
@@ -271,16 +274,16 @@ $mediaData = implode(", ", $mediaData);
 									</div>  
 
 					</div>
-<div class="row mt-4">
-    <div class="col-lg-5 col-md-12 col-sm-12">
-        <div class="card mb-4 text-bg-white shadow-sm">
+<div class="row mt-4 ">
+    <div class="col-lg-5 col-md-12 col-sm-12 ">
+        <div class="card mb-4  bg-primary bg-opacity-10">
            <div id="piechart_3d" style=" height: 450px;"></div>
       
         </div>
     </div>
 
     <div class="col-lg-7 col-md-12 col-sm-12">
-        <div class="card mb-4 shadow-sm ms-0">
+        <div class="card mb-4  bg-primary bg-opacity-10">
 			<div id="chart_div" style="width: 100%; margin-left:0px !important; height: 450px; margin: 0px; padding: 0px;"></div>
 		</div>
    	</div>

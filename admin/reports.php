@@ -85,16 +85,12 @@ $mediaData = implode(", ", $mediaData);
         }
     </script>
 
-
-
-
-
 <style>
     @page {
         margin: 0;
     }
     body {
-        margin: 2cm;
+        margin: 1cm;
     }
     h3{
         font-weight: bold;

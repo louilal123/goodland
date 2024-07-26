@@ -39,7 +39,7 @@ $mediaData = implode(", ", $mediaData);
                         </div>
                     </div>
                 </div>
-                <button onclick="window.location.href='reports.php'" class="btn btn-primary float-end">Print Report</button>
+                <button onclick="window.location.href='reports'" class="btn btn-primary float-end">Print Report</button>
             </div>
            
             <div class="app-content"> 
