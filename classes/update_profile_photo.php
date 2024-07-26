@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($updateSuccess) {
                 // Update session variable
-                $_SESSION['user_user_photo'] = $fileName;
+                $_SESSION['user_user_photo'] = 'uploads/' . $fileName;
                 
                 $_SESSION['status'] = "Profile photo updated successfully!";
                 $_SESSION['status_icon'] = "success";
