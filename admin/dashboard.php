@@ -13,6 +13,7 @@ $mediaData = implode(", ", $mediaData);
 <!DOCTYPE html>
 <html lang="en"> 
 <?php include "includes/header.php"; ?>
+
 <style>
 	 .main-blur {
             backdrop-filter: blur(5px);
@@ -98,9 +99,9 @@ $mediaData = implode(", ", $mediaData);
 															<h5 class="card-title text-light">Registered Users</h5>
 														</div>
 														
-														<div class="col-auto">
+														<div class="col-auto mt-4">
 															<div class="stat text-primary">
-															<i class="bi bi-person-plus small-box text-light"></i>
+															<i class="fas fa-users small-box text-light"></i>
 															</div>
 														</div>
 													</div> 
@@ -117,9 +118,9 @@ $mediaData = implode(", ", $mediaData);
 														<h5 class="card-title text-light">Approved User Uploads</h5>
 													</div>
 
-													<div class="col-auto">
+													<div class="col-auto mt-4">
 														<div class="stat text-primary">
-                                                         <i class="bi bi-check-circle-fill small-box text-light"></i>
+                                                         <i class="fas fa-thumbs-up small-box text-light"></i>
 														</div>
 													</div>
 												</div>
@@ -140,9 +141,9 @@ $mediaData = implode(", ", $mediaData);
 														<h5 class="card-title text-light">Pending User Uploads</h5>
 													</div>
 
-													<div class="col-auto">
+													<div class="col-auto mt-4">
 														<div class="stat text-primary">
-                                                        <i class="bi bi-hourglass-split small-box text-light"></i>
+                                                        <i class="fas fa-hourglass small-box text-light"></i>
                                                     	</div>
 													</div>
 												</div>
@@ -162,9 +163,9 @@ $mediaData = implode(", ", $mediaData);
 														<h5 class="card-title text-light">Declined User Uploads</h5>
 													</div>
 
-													<div class="col-auto">
+													<div class="col-auto mt-4">
 														<div class="stat text-primary">
-                                                        <i class="bi bi-x-circle-fill small-box text-light"></i>
+                                                        <i class="fas fa-thumbs-down small-box text-light"></i>
                                                     	</div>
 													</div>
 												</div>
@@ -188,9 +189,9 @@ $mediaData = implode(", ", $mediaData);
 														<h5 class="card-title text-light">Total Files</h5>
 													</div>
 
-													<div class="col-auto">
+													<div class="col-auto mt-4">
 														<div class="stat text-primary">
-															<i class="bi bi-folder-fill small-box text-light"></i>
+															<i class="fas fa-folder small-box text-light"></i>
 														</div>
 													</div>
 												</div>
@@ -211,9 +212,9 @@ $mediaData = implode(", ", $mediaData);
 														<h5 class="card-title text-light">File Types</h5>
 													</div>
 
-													<div class="col-auto">
+													<div class="col-auto mt-4">
 														<div class="stat text-primary">
-															<i class="bi bi-file-earmark-text-fill  small-box text-light"></i>
+															<i class="fas fa-folder  small-box text-light"></i>
 														</div>
 													</div>
 												</div>
@@ -234,9 +235,9 @@ $mediaData = implode(", ", $mediaData);
 														<h5 class="card-title text-light">Recycled Files</h5>
 													</div>
 
-													<div class="col-auto">
+													<div class="col-auto mt-4">
 														<div class="stat text-primary">
-                                                         <i class="bi bi-trash-fill small-box text-light"></i>
+                                                         <i class="fas fa-trash small-box text-light"></i>
 														</div>
 													</div>
 												</div>
@@ -260,9 +261,9 @@ $mediaData = implode(", ", $mediaData);
 														<h5 class="card-title text-light">System Users</h5>
 													</div>
 
-													<div class="col-auto">
+													<div class="col-auto mt-4">
 														<div class="stat text-primary">
-															<i class="bi bi-people small-box text-light"></i>
+															<i class="fas fa-users small-box text-light"></i>
 														</div>
 													</div>
 												</div>
@@ -287,6 +288,16 @@ $mediaData = implode(", ", $mediaData);
 			<div id="chart_div" style="width: 100%; margin-left:0px !important; height: 450px; margin: 0px; padding: 0px;"></div>
 		</div>
    	</div>
+	<div class="col-md-12">
+	<div class="card">
+<div class="card-header py-3">
+  <h5 class="mb-0 text-center"><strong>Sales</strong></h5>
+</div>
+<div class="card-body">
+  <canvas class="my-4 w-100" id="myChart" height="380"></canvas>
+</div>
+</div>
+	</div>
 </div>
 
                                 
@@ -305,7 +316,50 @@ $mediaData = implode(", ", $mediaData);
 
     </script>
     <?php include "includes/footer.php" ?>
-  
+  <script>
+	
+// Graph
+var ctx = document.getElementById("myChart");
+
+var myChart = new Chart(ctx, {
+  type: "line",
+  data: {
+    labels: [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ],
+    datasets: [
+      {
+        data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+        lineTension: 0,
+        backgroundColor: "transparent",
+        borderColor: "#007bff",
+        borderWidth: 4,
+        pointBackgroundColor: "#007bff",
+      },
+    ],
+  },
+  options: {
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: false,
+          },
+        },
+      ],
+    },
+    legend: {
+      display: false,
+    },
+  },
+});
+  </script>
    
 </body>
 

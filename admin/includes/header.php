@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="dist/loader.css">
     <link rel="stylesheet" href="dist/custom.css">
     <!-- font-aswesome  -->
-    <link rel="stylesheet" href="dist/fontawesome-free-6.5.2-web/css/all.min.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
     <!-- swetalert  -->
      <script  src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -23,7 +23,8 @@
     <script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
     <!-- end datatabke  -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
+    crossorigin="anonymous"></script>
     
 <link rel="stylesheet" href="mdbfolder/css/mdb.min.css" />
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

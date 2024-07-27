@@ -51,6 +51,7 @@ $documents = $mainClass->get_all_documents();
 $uploadedDocumentsCount =$mainClass->count_all_documents();
 
 
+$visitors = $mainClass->getVisitors();
 //chart data
 $chartData = $mainClass->getVisitorData();
 // header('Content-Type: application/json');
@@ -62,7 +63,6 @@ $pieChartData = $mainClass->getFileTypeData();
 
 // Encode the data as JSON for use in JavaScript
 return json_encode($pieChartData);
-
 
 
 ?>

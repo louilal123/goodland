@@ -11,6 +11,10 @@
     font-family: 'Roboto', sans-serif;
     transition: width 0.3s ease; 
 }
+.bg-primary1{
+    padding-right: 30px !important;
+    border-radius:0px;
+}
 
 .app-sidebar.collapsed {
     width: 80px; 
@@ -97,15 +101,15 @@
     transition: background-color 0.3s;
 }
 
-.nav-link12:hover::before,
+/* .nav-link12:hover::before,
 .nav-link123:hover::before {
     background-color: #495057;
 }
 
-.nav-link12.active::before,
-.nav-link123.active::before {
+.nav-link12.active bg-primary bg-primary1::before,
+.nav-link123.active bg-primary bg-primary1::before {
     background-color: #007bff; 
-}
+} */
 
 .nav-header {
     margin: 10px 0 5px;
@@ -182,7 +186,7 @@
 
 <aside class="app-sidebar bg-body-light shadow" data-bs-theme="light">
     <div class="sidebar-brand">
-        <a href="" class="brand-link active">
+        <a href="" class="brand-link">
             <img src="uploads/image.png" alt="Logo" class="brand-image shadow" style="width: 34px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.2) !important;">
             <h3 class="brand-text text-start logoo shadow mt-2 fw-light" style="color: #ffff !important;">Good<i>Land</i></h3>
         </a>
@@ -191,36 +195,36 @@
         <nav class="mt-2">
             <ul class="nav sidebar-menu flex-column">
                 <li class="nav-item1">
-                    <a href="dashboard" class="nav-link12 text-bold <?= $page == 'dashboard.php' ? ' active ':'' ?>">
-                        <i class="icons bi bi-ui-checks-grid"></i>
+                    <a href="dashboard" class="nav-link12 text-bold <?= $page == 'dashboard.php' ? ' active bg-primary bg-primary1 ':'' ?>">
+                        <i class="icons fas fa-dashboard"></i>
                         <p class="p-tag">Dashboard</p>
                     </a>
                 </li>
                 <li class="nav-header">Manage</li>
                 <li class="nav-item1">
                     <a href="#pendingFilesSubmenu" class="nav-link12" data-bs-toggle="collapse" aria-expanded="<?= in_array($page, ['pending_files.php', 'approved_files.php', 'declined_files.php', 'recycled_files.php']) ? 'true' : 'false' ?>">
-                        <i class="icons bi bi-folder-fill"></i>
-                        <p class="p-tag">Manage User Files <i class="nav-arrow bi bi-chevron-right" style="margin-left: 25px;"></i></p>
+                        <i class="icons fas fa-folder"></i>
+                        <p class="p-tag">Manage User Files <i class="nav-arrow fas fa-chevron-right" style="margin-left: 25px;"></i></p>
                     </a>
                     <div id="pendingFilesSubmenu" class="collapse <?= in_array($page, ['pending_files.php', 'approved_files.php', 'declined_files.php', 'recycled_files.php']) ? 'show' : '' ?>">
                         <ul class="nav flex-column">
                             <li class="nav-item12">
-                                <a href="pending_files" class="nav-link123 <?= $page == 'pending_files.php' ? ' active ':'' ?>">
+                                <a href="pending_files" class="nav-link123 <?= $page == 'pending_files.php' ? ' active bg-primary bg-primary1 ':'' ?>">
                                     <p class="p-tag">List of Pending Files</p>
                                 </a>
                             </li>
                             <li class="nav-item12">
-                                <a href="approved_files" class="nav-link123 <?= $page == 'approved_files.php' ? ' active ':'' ?>">
+                                <a href="approved_files" class="nav-link123 <?= $page == 'approved_files.php' ? ' active bg-primary bg-primary1 ':'' ?>">
                                     <p class="p-tag">List of Approved Files</p>
                                 </a>
                             </li>
                             <li class="nav-item12">
-                                <a href="declined_files" class="nav-link123 <?= $page == 'declined_files.php' ? ' active ':'' ?>">
+                                <a href="declined_files" class="nav-link123 <?= $page == 'declined_files.php' ? ' active bg-primary bg-primary1 ':'' ?>">
                                     <p class="p-tag">List of Declined Files</p>
                                 </a>
                             </li>
                             <li class="nav-item12">
-                                <a href="recycled_files" class="nav-link123 <?= $page == 'recycled_files.php' ? ' active ':'' ?>">
+                                <a href="recycled_files" class="nav-link123 <?= $page == 'recycled_files.php' ? ' active bg-primary bg-primary1 ':'' ?>">
                                     <p class="p-tag">List of Recycled Files</p>
                                 </a>
                             </li>
@@ -228,40 +232,52 @@
                     </div>
                 </li>
                 <li class="nav-item1">
-                    <a href="managedocuments" class="nav-link12 <?= $page == 'managedocuments.php' ? ' active ':'' ?>">
-                        <i class="icons bi bi-x-circle-fill"></i>
+                    <a href="visitors" class="nav-link12 <?= $page == 'visitors.php' ? ' active bg-primary bg-primary1 ':'' ?>">
+                        <i class="icons fas fa-user-plus"></i>
+                        <p class="p-tag">List of Visitors</p>
+                    </a>
+                </li>
+                <li class="nav-item1">
+                    <a href="downloads" class="nav-link12 <?= $page == 'downloads.php' ? ' active bg-primary bg-primary1 ':'' ?>">
+                        <i class="icons fas fa-download"></i>
+                        <p class="p-tag">List of Downloads</p>
+                    </a>
+                </li>
+                <li class="nav-item1">
+                    <a href="managedocuments" class="nav-link12 <?= $page == 'managedocuments.php' ? ' active bg-primary bg-primary1 ':'' ?>">
+                        <i class="icons fas fa-folder"></i>
                         <p class="p-tag">List of Documents</p>
                     </a>
                 </li>
                 <li class="nav-item1">
-                    <a href="manageevents" class="nav-link12 <?= $page == 'manageevents.php' ? ' active ':'' ?>">
-                        <i class="icons bi bi-calendar-fill"></i>
+                    <a href="manageevents" class="nav-link12 <?= $page == 'manageevents.php' ? ' active bg-primary bg-primary1 ':'' ?>">
+                        <i class="icons fas fa-calendar-plus"></i>
                         <p class="p-tag">List of Events </p>
                     </a>
                 </li>
                 <li class="nav-item1">
-                    <a href="manageusers" class="nav-link12 <?= $page == 'manageusers.php' ? ' active ':'' ?>">
-                        <i class="icons bi bi-people"></i>
+                    <a href="manageusers" class="nav-link12 <?= $page == 'manageusers.php' ? ' active bg-primary bg-primary1 ':'' ?>">
+                        <i class="icons fas fa-users"></i>
                         <p class="p-tag">List of Users</p>
                     </a>
                 </li>
                 <li class="nav-item1">
-                    <a href="manageadmins" class="nav-link12 <?= $page == 'manageadmins.php' ? ' active ':'' ?>">
-                        <i class="icons bi bi-people"></i>
+                    <a href="manageadmins" class="nav-link12 <?= $page == 'manageadmins.php' ? ' active bg-primary bg-primary1 ':'' ?>">
+                        <i class="icons fas fa-users"></i>
                         <p class="p-tag">List of Admins</p>
                     </a>
                 </li>
                 <li class="nav-header">Reports</li>
                 <li class="nav-item1">
-                    <a href="managereports" class="nav-link12 <?= $page == 'managereports.php' ? ' active ':'' ?>">
-                        <i class="icons bi bi-file-earmark-text"></i>
+                    <a href="managereports" class="nav-link12 <?= $page == 'managereports.php' ? ' active bg-primary bg-primary1 ':'' ?>">
+                        <i class="icons fas fa-folder"></i>
                         <p class="p-tag">Reports</p>
                     </a>
                 </li>
                 <li class="nav-header">Maintenance</li>
                 <li class="nav-item1">
-                    <a href="managesettings" class="nav-link12 <?= $page == 'managesettings.php' ? ' active ':'' ?>">
-                        <i class="icons bi bi-gear"></i>
+                    <a href="managesettings" class="nav-link12 <?= $page == 'managesettings.php' ? ' active bg-primary bg-primary1 ':'' ?>">
+                        <i class="icons fas fa-gear"></i>
                         <p class="p-tag">Settings</p>
                     </a>
                 </li>

@@ -29,7 +29,21 @@ class Main_class {
         }
     }
 
-
+    public function getVisitors() {
+        $stmt = $this->pdo->prepare("
+            SELECT  v.id, v.user_id, v.ip, v.city, v.region, v.country, v.latitude, v.longitude,  v.visit_time, v.visit_count, u.fullname
+             FROM visitor_data v
+            LEFT JOIN 
+                users u ON v.user_id = u.user_id
+            ORDER BY 
+                v.visit_time DESC
+        ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    
+    
     
     public function getVisitorData() {
         $stmt = $this->pdo->prepare("SELECT MONTHNAME(visit_time) as Month, country, COUNT(*) as Visitors FROM visitor_data GROUP BY Month, country ORDER BY visit_time");
