@@ -18,13 +18,13 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Website Visitors</h3>
+                            <h3 class="mb-0">Manage File Downloads</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                Website Visitors
+                                Downloads
                                 </li>
                             </ol>
                         </div>
@@ -35,11 +35,40 @@
                 <div class="container-fluid"> 
                     <div class="row">
                         <div class="col-md-12">
-                           <div class="card">
-                            <table>
-                                
-                            </table>
-                           </div>
+                       
+                            <div class="card mb-4 card-outline-primary">
+                                <div class="card-header d-flex">
+                                    <h3 class="card-title mb-0">List of Downloads</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="container-fluid">
+                                        <table id="myTable" class="table-responsive table table-hover table-striped w-100">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                   
+                                                    <th>File Title</th>
+                                                   
+                                                    <th>User Fullname</th>
+                                                    <th>Download Time</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach ($downloads as $download): ?>
+                                                    <tr>
+                                                        <td><?php echo htmlspecialchars($download['id']); ?></td>
+                                                      
+                                                        <td><?php echo htmlspecialchars($download['title']); ?></td>
+                                                        
+                                                        <td><?php echo htmlspecialchars($download['fullname']); ?></td>
+                                                        <td><?php echo date("M d, Y h:i A", strtotime($download['download_time'])); ?></td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div> <!-- /.card -->
                         </div> <!-- /.col -->
                         
                     </div> 

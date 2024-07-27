@@ -127,7 +127,7 @@
 .p-tag {
     margin: 0;
     font-size: 1rem;
-    opacity: 0.7;
+    /* opacity: 0.7; */
     color: white;
     /* text-transform: uppercase; */
 }
@@ -179,6 +179,10 @@
     position: relative;
     right: 0;
 }
+.nav-link123{
+    opacity: 0.9;
+    margin-left:18px;
+}
 
 
 </style>
@@ -188,7 +192,7 @@
     <div class="sidebar-brand">
         <a href="" class="brand-link">
             <img src="uploads/image.png" alt="Logo" class="brand-image shadow" style="width: 34px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.2) !important;">
-            <h3 class="brand-text text-start logoo shadow mt-2 fw-light" style="color: #ffff !important;">Good<i>Land</i></h3>
+            <h3 class="brand-text text-start logoo shadow mt-2  fw-bold text-light">Good<i>Land</i></h3>
         </a>
     </div>
     <div class="sidebar-wrapper">
@@ -210,22 +214,29 @@
                         <ul class="nav flex-column">
                             <li class="nav-item12">
                                 <a href="pending_files" class="nav-link123 <?= $page == 'pending_files.php' ? ' active bg-primary bg-primary1 ':'' ?>">
-                                    <p class="p-tag">List of Pending Files</p>
+                                    <p class="p-tag">Pending Files 
+                                        <span class="badge bg-warning text-light"><?php echo $count_pending_files ?? ''; ?></span></p>
                                 </a>
                             </li>
                             <li class="nav-item12">
                                 <a href="approved_files" class="nav-link123 <?= $page == 'approved_files.php' ? ' active bg-primary bg-primary1 ':'' ?>">
-                                    <p class="p-tag">List of Approved Files</p>
+                                    <p class="p-tag">Approved Files
+                                    <span class="badge bg-success text-light"><?php echo $count_approved_files ?? ''; ?></span>
+                                    </p>
                                 </a>
                             </li>
                             <li class="nav-item12">
                                 <a href="declined_files" class="nav-link123 <?= $page == 'declined_files.php' ? ' active bg-primary bg-primary1 ':'' ?>">
-                                    <p class="p-tag">List of Declined Files</p>
+                                    <p class="p-tag">Declined Files
+                                    <span class="badge bg-danger text-light"><?php echo $count_declined_files ?? ''; ?></span>  
+                                    </p>
                                 </a>
                             </li>
                             <li class="nav-item12">
                                 <a href="recycled_files" class="nav-link123 <?= $page == 'recycled_files.php' ? ' active bg-primary bg-primary1 ':'' ?>">
-                                    <p class="p-tag">List of Recycled Files</p>
+                                    <p class="p-tag">Recycled Files
+                                    <span class="badge bg-danger text-light"><?php echo $count_recycled_files ?? ''; ?></span>
+                                    </p>
                                 </a>
                             </li>
                         </ul>

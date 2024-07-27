@@ -42,6 +42,19 @@ class Main_class {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
+    public function getDownloads() {
+        $stmt = $this->pdo->prepare("
+            SELECT d.id, d.file_id, d.user_id, d.download_time, 
+                   u.fullname, f.title
+            FROM downloads d
+            LEFT JOIN users u ON d.user_id = u.user_id
+            LEFT JOIN files f ON d.file_id = f.id
+            ORDER BY d.download_time DESC
+        ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
     
     
     

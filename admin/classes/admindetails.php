@@ -52,6 +52,8 @@ $uploadedDocumentsCount =$mainClass->count_all_documents();
 
 
 $visitors = $mainClass->getVisitors();
+
+$downloads =$mainClass->getDownloads();
 //chart data
 $chartData = $mainClass->getVisitorData();
 // header('Content-Type: application/json');

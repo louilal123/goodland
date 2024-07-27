@@ -28,7 +28,7 @@ include "classes/location.php";?>
 
       <div class="row justify-content-center text-center" data-aos="fade-up" data-aos-delay="100">
           <div class="col-xl-12 col-lg-12">
-           
+          
             <h2><span style="font-weight: lighter !important; color: white;">Welcome To </span>Good<i>Land</i></h2>
             <!-- <span>.</span> -->
             <p>FINDING LOCAL SOLUTIONS TO GLOBAL PROBLEMS.</p>

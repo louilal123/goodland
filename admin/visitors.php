@@ -73,7 +73,7 @@
                                                         <td><?php echo htmlspecialchars($visitor['country']); ?></td>
                                                         <td><?php echo htmlspecialchars($visitor['latitude']); ?></td>
                                                         <td><?php echo htmlspecialchars($visitor['longitude']); ?></td>
-                                                        <td><?php echo htmlspecialchars($visitor['visit_time']); ?></td>
+                                                        <td><?php echo date("M d, Y h:i A", strtotime($visitor['visit_time'])); ?></td>
                                                         <td><?php echo htmlspecialchars($visitor['visit_count']); ?></td>
                                                     </tr>
                                                 <?php endforeach; ?>

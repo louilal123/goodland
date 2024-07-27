@@ -105,7 +105,7 @@ $mediaData = implode(", ", $mediaData);
 															</div>
 														</div>
 													</div> 
-													<h1 class=" text-light"> <?php echo $registeredUsersCount ?? '0'; ?></h1>
+													<h1 class=" text-light"> <?php echo $registeredUsersCount ?? ''; ?></h1>
 												
 											</div>
 										</div>
@@ -124,7 +124,7 @@ $mediaData = implode(", ", $mediaData);
 														</div>
 													</div>
 												</div>
-												<h1 class=" text-light"> <?php echo $count_approved_files ?? '0'; ?></h1>
+												<h1 class=" text-light"> <?php echo $count_approved_files ?? ''; ?></h1>
 												<div class="mb-0">
 												
 													
@@ -209,12 +209,12 @@ $mediaData = implode(", ", $mediaData);
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title text-light">File Types</h5>
+														<h5 class="card-title text-light">Downloads</h5>
 													</div>
 
 													<div class="col-auto mt-4">
 														<div class="stat text-primary">
-															<i class="fas fa-folder  small-box text-light"></i>
+															<i class="fas fa-download  small-box text-light"></i>
 														</div>
 													</div>
 												</div>

@@ -30,13 +30,11 @@ unset($_SESSION['error_message']);
     <section class="vh-100" style="oveflow: hidden !important; ">
       <div class="container py-5 h-100">
         <div class="row d-flex align-items-center justify-content-center h-100">
-          <!-- <div class="col-md-8 col-lg-7 col-xl-6">
-            <img src="uploads/image.png" class="img-fluid" style="height: max-content;" alt="Phone image">
-          </div> -->
 
           <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 ">
             <div class="card-body p-5 shadow-5 text-center bg-primary bg-opacity-10">
-              <h2 class="fw-bold mb-5">GOODLAND MANAGEMENT SYSTEM</h2>
+            <img src="uploads/logogoodland.png" style="display: flex; margin: auto; width: 150px;height: 60px;">
+              <!-- <h2 class="fw-bold mb-5">GOODLAND MANAGEMENT SYSTEM</h2> -->
               <h4 class="fw-light mb-5">Login Administrator</h4>
               <form action="classes/login.php" method="post">
                   <?php if ($error_message): ?>
@@ -78,7 +76,7 @@ unset($_SESSION['error_message']);
                   <div class="d-flex justify-content-around align-items-center mb-4">
                       <!-- Checkbox -->
                       <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
+                          <input class="form-check-input" type="checkbox" value="" id="showPasswordCheckbox" />
                           <label class="form-check-label" for="form1Example3">Show Password</label>
                       </div>
                       <a href="forgot_password.php">Forgot password?</a>
@@ -140,21 +138,16 @@ initMDB({ Input, Ripple });
             }
         });
     </script>
-    <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const togglePassword = document.querySelector('#togglePassword');
-    const passwordField = document.querySelector('#validationCustomPassword');
 
-    togglePassword.addEventListener('click', function (e) {
-        // Toggle the type attribute
-        const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
-        passwordField.setAttribute('type', type);
-        
-        // Toggle the eye / eye-slash icon
-        this.classList.toggle('fa-eye');
-        this.classList.toggle('fa-eye-slash');
+<script>
+    document.getElementById('showPasswordCheckbox').addEventListener('change', function () {
+        var passwordInput = document.getElementById('validationCustomPassword');
+        if (this.checked) {
+            passwordInput.type = 'text';
+        } else {
+            passwordInput.type = 'password';
+        }
     });
-});
 </script>
 
   </body>

@@ -105,7 +105,11 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                                       <p class="custom-card-text"><small class="text-muted">Added By: 
                                       <?= htmlspecialchars($file['uploader_fullname']); ?></small></p>
                                 <div class="d-flex justify-content-between custom-card-footer">
-                                <a href="uploads/<?= htmlspecialchars($file['file_path']); ?>" class="btn-link custom-card-footer download-btn" download="<?= htmlspecialchars($file['title']); ?>">
+                                <a href="uploads/<?= htmlspecialchars($file['file_path']); ?>" class="btn-link custom-card-footer download-btn" 
+           data-id="<?= htmlspecialchars($file['id']); ?>" 
+           data-title="<?= htmlspecialchars($file['title']); ?>" 
+           data-path="uploads/<?= htmlspecialchars($file['file_path']); ?>" 
+           onclick="confirmDownload(event)">
                                     <small class="text-primary"><i class="bi bi-arrow-down"></i> Download</small>
                                 </a>
 
@@ -248,5 +252,70 @@ document.getElementById('mainSearch').addEventListener('input', function() {
     });
 </script>
 
+<!-- for downlaod  -->
+<script>
+    function confirmDownload(event) {
+    event.preventDefault(); // Prevent the default link behavior
+
+    var element = event.currentTarget;
+    var filePath = element.getAttribute('href');
+    var fileId = element.getAttribute('data-id');
+    var fileTitle = element.getAttribute('data-title');
+
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn btn-success",
+            cancelButton: "btn btn-danger"
+        },
+        buttonsStyling: false
+    });
+
+    swalWithBootstrapButtons.fire({
+        title: "Are you sure?",
+        text: `Do you want to download ${fileTitle}?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Record the download in the database
+            fetch('classes/record_download.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ file_id: fileId })
+            }).then(response => response.json())
+              .then(data => {
+                  if (data.success) {
+                      // Proceed with the download
+                      window.location.href = filePath;
+
+                      swalWithBootstrapButtons.fire({
+                          title: "Downloaded!",
+                          text: "Your file has been downloaded.",
+                          icon: "success"
+                      });
+                  } else {
+                      swalWithBootstrapButtons.fire({
+                          title: "Error!",
+                          text: "There was an error recording the download.",
+                          icon: "error"
+                      });
+                  }
+              });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            swalWithBootstrapButtons.fire({
+                title: "Cancelled",
+                text: "Your download has been cancelled.",
+                icon: "error"
+            });
+        }
+    });
+}
+
+</script>
 </body>
 </html>

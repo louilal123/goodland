@@ -71,9 +71,9 @@
                                                             <td><img src="<?php echo $user['user_photo'] ?? '../uploads/default_photo.jpg'; ?>" alt="" style="width: 40px; height: 40px;"></td>
                                                             <td><?php echo htmlspecialchars($user['bio']); ?></td>
                                                             <td><?php echo htmlspecialchars($user['address']); ?></td>
-                                                            <td><?php echo htmlspecialchars($user['date_created']); ?></td>
-                                                            <td><?php echo htmlspecialchars($user['date_updated']); ?></td>
-                                                            <td><?php echo htmlspecialchars($user['last_login']); ?></td>
+                                                            <td><?php echo date("M d, Y h:i A", strtotime($user['date_created'])); ?></td>
+                                                            <td><?php echo date("M d, Y h:i A", strtotime($user['date_updated'])); ?></td>
+                                                            <td><?php echo date("M d, Y h:i A", strtotime($user['last_login'])); ?></td>
                                                             <td>
                                                                 <button class="btn btn-info btn-sm viewMemberBtn" data-bs-toggle="modal" data-bs-target="#viewMemberModal"><i class="bi bi-eye"></i></button>
                                                                 <a href="#" class="btn btn-success btn-sm editMemberBtn" data-bs-toggle="modal" data-bs-target="#editMemberModal"><i class="bi bi-pencil"></i></a>

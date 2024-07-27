@@ -77,16 +77,17 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                 <div class="row">
 
                     <div class="col-md-3">
-                    <div class="card bg-primary bg-opacity-10" style="padding-top: 20px; padding-bottom: 0px;">
-                    <img src="uploads/<?= htmlspecialchars($_SESSION['user_user_photo']  ?? 'uploads/try.png'); ?>" class="img-fluid rounded"
+                    <div class="card  " style="padding-top: 20px; padding-bottom: 0px;">
+                    <img src="uploads/<?= htmlspecialchars($_SESSION['user_photo']  ?? 'uploads/25-Picture.png'); ?>" class="img-fluid rounded"
                         style="display: flex; margin: auto; height: 180px; width: 180px;  
                         border: 4px solid #f0f0f0; border-radius: 230px !important;" id="profileImage" />
                     <a href="#" class="btn btn-secondary mt-4 mb-0" data-bs-toggle="modal" data-bs-target="#editProfilePhotoModal">
                         <i class="bi bi-camera"></i> Edit Profile Picture
                     </a>
-                </div> <!-- End of user photo card -->
+                </div>
+                <?//php  var_dump($_SESSION);?> <!-- End of user photo card -->
 
-                        <div class="card mt-3 profile-work bg-primary bg-opacity-10">
+                        <div class="card mt-3 profile-work  ">
                             <div class="card-body sidenavv">
                                 <p>About Me</p>
                                  <form action="classes/update_bio.php" method="post">
@@ -104,7 +105,7 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                     </div> <!-- End of col-md-4 -->
 
                     <div class="col-md-9 mb-5">
-                        <div class="card bg-primary bg-opacity-10" style="height: auto;">
+                        <div class="card  " style="height: auto;">
                             <div class="card-body">
                                 <h4>Dashboard</h4>
                                 <div class="row mt-4">
@@ -148,7 +149,7 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                             </div> 
                         </div> 
 
-                        <div class="card mb-5 mt-3 bg-primary bg-opacity-10">
+                        <div class="card mb-5 mt-3  ">
                             <div class="card-body mb-5 mt-3">
                                 <!-- Tabs navs -->
                                     <ul class="nav nav-tabs mb-3" id="ex-with-icons" role="tablist">

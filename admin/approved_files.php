@@ -81,7 +81,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
         <td><?php echo htmlspecialchars($file['file_path']); ?></td>
         <td><?php echo htmlspecialchars($file['file_type']); ?></td>
         <td><?php echo htmlspecialchars($file['fullname']); ?></td>
-        <td><?php echo htmlspecialchars($file['upload_date']); ?></td>
+        <td><?php echo date("M d, Y h:i A", strtotime($file['upload_date'])); ?></td>
         <td>
         <a href="../uploads/<?php echo htmlspecialchars($file['file_path']); ?>" class="btn btn-info btn-sm viewBtn ml-1" name="viewPdf">
             <i class="bi bi-search"></i> View

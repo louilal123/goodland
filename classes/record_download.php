@@ -4,10 +4,23 @@ require_once __DIR__ . '/../admin/classes/Main_class.php';
 
 $mainClass = new Main_class();
 
-$file_id = isset($_POST['file_id']) ? intval($_POST['file_id']) : 0;
-$user_id = isset($_SESSION['user_id']) ? intval($_SESSION['user_id']) : null;
 
-if ($file_id > 0) {
-    $mainClass->recordDownload($file_id, $user_id);
+$data = json_decode(file_get_contents('php://input'), true);
+
+if (isset($data['file_id'])) {
+    $file_id = $data['file_id'];
+    $user_id = $_SESSION['user_id']; // Assuming you have user sessions
+
+    $stmt = $pdo->prepare('INSERT INTO downloads (user_id, file_id, download_time) VALUES (:user_id, :file_id, NOW())');
+    $stmt->execute(['user_id' => $user_id, 'file_id' => $file_id]);
+
+    if ($stmt->rowCount()) {
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false]);
+    }
+} else {
+    echo json_encode(['success' => false, 'message' => 'Invalid request']);
 }
 ?>
+
