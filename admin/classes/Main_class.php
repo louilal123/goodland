@@ -1,6 +1,6 @@
 <?php
 require_once('geoplugin.class.php');
-require 'connection.php';
+require 'connection1.php';
 
 class Main_class {
 
