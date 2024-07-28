@@ -291,7 +291,7 @@ $mediaData = implode(", ", $mediaData);
 	<div class="col-md-12">
 	<div class="card">
 <div class="card-header py-3">
-  <h5 class="mb-0 text-center"><strong>Sales</strong></h5>
+  <h5 class="mb-0 text-center"><strong>Downloads for the <?php echo date("M - Y")."\n";?></strong></h5>
 </div>
 <div class="card-body">
   <canvas class="my-4 w-100" id="myChart" height="380"></canvas>
@@ -316,50 +316,81 @@ $mediaData = implode(", ", $mediaData);
 
     </script>
     <?php include "includes/footer.php" ?>
-  <script>
-	
-// Graph
-var ctx = document.getElementById("myChart");
+	<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        fetch('classes/fetchdownloads.php')
+            .then(response => response.json())
+            .then(data => {
+                const signedInDownloads = data.signedInDownloads;
+                const nonSignedInDownloads = data.nonSignedInDownloads;
 
-var myChart = new Chart(ctx, {
-  type: "line",
-  data: {
-    labels: [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ],
-    datasets: [
-      {
-        data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-        lineTension: 0,
-        backgroundColor: "transparent",
-        borderColor: "#007bff",
-        borderWidth: 4,
-        pointBackgroundColor: "#007bff",
-      },
-    ],
-  },
-  options: {
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: false,
-          },
-        },
-      ],
-    },
-    legend: {
-      display: false,
-    },
-  },
-});
-  </script>
+                const labels = []; // Days of the current month
+                const signedInData = []; // Downloads for signed-in users
+                const nonSignedInData = []; // Downloads for non-signed-in users
+
+                const daysInMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
+
+                for (let i = 1; i <= daysInMonth; i++) {
+                    labels.push(i.toString());
+
+                    const signedInDownload = signedInDownloads.find(d => d.download_day == i);
+                    const nonSignedInDownload = nonSignedInDownloads.find(d => d.download_day == i);
+
+                    signedInData.push(signedInDownload ? signedInDownload.download_count : 0);
+                    nonSignedInData.push(nonSignedInDownload ? nonSignedInDownload.download_count : 0);
+                }
+
+                // Update the chart
+                updateChart(labels, signedInData, nonSignedInData);
+            });
+    });
+
+    function updateChart(labels, signedInData, nonSignedInData) {
+        var ctx = document.getElementById("myChart").getContext('2d');
+
+        var myChart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: "Signed-In Users",
+                        data: signedInData,
+                        lineTension: 0,
+                        backgroundColor: "transparent",
+                        borderColor: "#007bff",
+                        borderWidth: 4,
+                        pointBackgroundColor: "#007bff",
+                    },
+                    {
+                        label: "Non-Signed-In Users",
+                        data: nonSignedInData,
+                        lineTension: 0,
+                        backgroundColor: "transparent",
+                        borderColor: "#ff0000",
+                        borderWidth: 4,
+                        pointBackgroundColor: "#ff0000",
+                    }
+                ],
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true,
+                            },
+                        },
+                    ],
+                },
+                legend: {
+                    display: true,
+                },
+            },
+        });
+    }
+    </script>
+
    
 </body>
 

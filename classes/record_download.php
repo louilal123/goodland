@@ -10,9 +10,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $mainClass = new Main_class(); // Make sure to use the correct class name
         
-        // Check if the record already exists
-        if ($user_id !== null && !$mainClass->isDownloadRecorded($file_id, $user_id)) {
-            // Insert the new record if it does not exist
+        // Check if the record already exists for logged-in users
+        if ($user_id !== null) {
+            if (!$mainClass->isDownloadRecorded($file_id, $user_id)) {
+                // Insert the new record if it does not exist
+                $mainClass->recordDownload($file_id, $user_id);
+            }
+        } else {
+            // Insert the new record with null user_id for non-logged-in users
             $mainClass->recordDownload($file_id, $user_id);
         }
         

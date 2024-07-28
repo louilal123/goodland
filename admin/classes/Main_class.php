@@ -1,6 +1,6 @@
 <?php
 require_once('geoplugin.class.php');
-require 'connection1.php';
+require 'connection.php';
 
 class Main_class {
 
@@ -28,7 +28,22 @@ class Main_class {
             echo $e->getMessage();
         }
     }
+// downloads start 
+public function getDownloadData($currentMonth, $currentYear, $isSignedIn) {
+    $userCondition = $isSignedIn ? 'IS NOT NULL' : 'IS NULL';
+    $stmt = $this->pdo->prepare("
+        SELECT DAY(download_time) as download_day, COUNT(*) as download_count 
+        FROM downloads 
+        WHERE user_id $userCondition
+        AND MONTH(download_time) = :currentMonth 
+        AND YEAR(download_time) = :currentYear 
+        GROUP BY DAY(download_time)
+    ");
+    $stmt->execute(['currentMonth' => $currentMonth, 'currentYear' => $currentYear]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
+// end 
     public function getVisitors() {
         $stmt = $this->pdo->prepare("
             SELECT  v.id, v.user_id, v.ip, v.city, v.region, v.country, v.latitude, v.longitude,  v.visit_time, v.visit_count, u.fullname
@@ -102,11 +117,15 @@ class Main_class {
     
         return $data;
     }
+   
+
+//line cahrt end
+
 
     public function isDownloadRecorded($file_id, $user_id) {
         $stmt = $this->pdo->prepare("
             SELECT COUNT(*) FROM downloads 
-            WHERE file_id = :file_id AND user_id = :user_id
+            WHERE file_id = :file_id AND (user_id = :user_id OR :user_id IS NULL)
         ");
         $stmt->execute(['file_id' => $file_id, 'user_id' => $user_id]);
         return $stmt->fetchColumn() > 0;
@@ -120,6 +139,7 @@ class Main_class {
         ");
         return $stmt->execute(['file_id' => $file_id, 'user_id' => $user_id]);
     }
+    
     
     
     public function getUserNotifications($user_id) {
@@ -559,8 +579,6 @@ public function count_all_members() {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result['total'];
 }
-
-
 
 public function count_registered_users(){
     $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM users");
@@ -1086,8 +1104,6 @@ public function register_user($fullname, $email, $birthday, $username, $password
                 return false;
             }
         }
-
-
         
 
         public function get_user_info() {
