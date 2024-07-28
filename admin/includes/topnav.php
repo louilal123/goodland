@@ -57,7 +57,7 @@
                               </li>
                               <li><hr class="dropdown-divider"></li>
                               <li><a class="dropdown-item text-start" href="profile.php"><i class="bi bi-person"></i> Profile</a></li>
-                              <li><a class="dropdown-item mb-2" type="button" data-bs-toggle="modal" data-bs-target="#Modal" >
+                              <li><a class="dropdown-item mb-2" href="classes/logout.php">
                                 <i class="bi bi-power"></i> Logout</a></li>
                           </ul>
                       </li>

@@ -2,25 +2,47 @@
 session_start();
 require_once __DIR__ . '/../admin/classes/Main_class.php';
 
-$mainClass = new Main_class();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['file_id']) && isset($_POST['file_path'])) {
+        $file_id = intval($_POST['file_id']);
+        $file_path = $_POST['file_path']; // This should be relative to the document root
+        $user_id = isset($_SESSION['user_id']) ? intval($_SESSION['user_id']) : null;
 
+        $mainClass = new Main_class(); // Make sure to use the correct class name
+        
+        // Check if the record already exists
+        if ($user_id !== null && !$mainClass->isDownloadRecorded($file_id, $user_id)) {
+            // Insert the new record if it does not exist
+            $mainClass->recordDownload($file_id, $user_id);
+        }
+        
+        // Determine the absolute path of the file
+        $absolute_path = __DIR__ . '/../' . $file_path;
 
-$data = json_decode(file_get_contents('php://input'), true);
+        // Check if file exists
+        if (file_exists($absolute_path)) {
+            // Start the file download
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="' . basename($absolute_path) . '"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($absolute_path));
 
-if (isset($data['file_id'])) {
-    $file_id = $data['file_id'];
-    $user_id = $_SESSION['user_id']; // Assuming you have user sessions
-
-    $stmt = $pdo->prepare('INSERT INTO downloads (user_id, file_id, download_time) VALUES (:user_id, :file_id, NOW())');
-    $stmt->execute(['user_id' => $user_id, 'file_id' => $file_id]);
-
-    if ($stmt->rowCount()) {
-        echo json_encode(['success' => true]);
+            readfile($absolute_path);
+            exit;
+        } else {
+            $_SESSION['status'] = "Error: File does not exist.";
+            $_SESSION['status_icon'] = "error";
+        }
     } else {
-        echo json_encode(['success' => false]);
+        $_SESSION['status'] = "Error: File ID or File Path is not set.";
+        $_SESSION['status_icon'] = "error";
     }
-} else {
-    echo json_encode(['success' => false, 'message' => 'Invalid request']);
+
+    // Redirect back to library or some other page
+    header('Location: ../library.php');
+    exit();
 }
 ?>
-

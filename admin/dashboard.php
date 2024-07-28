@@ -218,7 +218,7 @@ $mediaData = implode(", ", $mediaData);
 														</div>
 													</div>
 												</div>
-												<h1 class=" text-light"> <?php echo $count_files_types ?? '4'; ?></h1>
+												<h1 class=" text-light"> <?php echo $downloadsCount ?? '0'; ?></h1>
 												<div class="mb-0">
 												
 												

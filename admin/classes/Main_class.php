@@ -103,22 +103,25 @@ class Main_class {
         return $data;
     }
 
-    public function recordDownload($file_id, $user_id = null) {
-        try {
-            $stmt = $this->pdo->prepare("INSERT INTO downloads (file_id, user_id) VALUES (:file_id, :user_id)");
-            $stmt->bindParam(':file_id', $file_id, PDO::PARAM_INT);
-            if ($user_id === null) {
-                $stmt->bindValue(':user_id', null, PDO::PARAM_NULL);
-            } else {
-                $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-            }
-            $stmt->execute();
-            return true;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            return false;
-        }
+    public function isDownloadRecorded($file_id, $user_id) {
+        $stmt = $this->pdo->prepare("
+            SELECT COUNT(*) FROM downloads 
+            WHERE file_id = :file_id AND user_id = :user_id
+        ");
+        $stmt->execute(['file_id' => $file_id, 'user_id' => $user_id]);
+        return $stmt->fetchColumn() > 0;
     }
+    
+    public function recordDownload($file_id, $user_id) {
+        // Insert the new record
+        $stmt = $this->pdo->prepare("
+            INSERT INTO downloads (file_id, user_id, download_time) 
+            VALUES (:file_id, :user_id, NOW())
+        ");
+        return $stmt->execute(['file_id' => $file_id, 'user_id' => $user_id]);
+    }
+    
+    
     public function getUserNotifications($user_id) {
         $stmt = $this->pdo->prepare("SELECT id, file_id, message, is_read, created_at FROM user_notifications WHERE user_id = ? ORDER BY created_at DESC");
         $stmt->execute([$user_id]);
@@ -557,8 +560,18 @@ public function count_all_members() {
     return $result['total'];
 }
 
+
+
 public function count_registered_users(){
     $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM users");
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total'];
+}
+
+
+public function count_downloads(){
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM downloads");
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result['total'];
@@ -1073,6 +1086,8 @@ public function register_user($fullname, $email, $birthday, $username, $password
                 return false;
             }
         }
+
+
         
 
         public function get_user_info() {

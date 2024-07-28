@@ -49,6 +49,7 @@ $registeredUsers =$mainClass->get_all_registeredUsers();
 $documents = $mainClass->get_all_documents();
 
 $uploadedDocumentsCount =$mainClass->count_all_documents();
+$downloadsCount = $mainClass->count_downloads();
 
 
 $visitors = $mainClass->getVisitors();

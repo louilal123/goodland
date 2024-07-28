@@ -105,13 +105,15 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                                       <p class="custom-card-text"><small class="text-muted">Added By: 
                                       <?= htmlspecialchars($file['uploader_fullname']); ?></small></p>
                                 <div class="d-flex justify-content-between custom-card-footer">
-                                <a href="uploads/<?= htmlspecialchars($file['file_path']); ?>" class="btn-link custom-card-footer download-btn" 
-           data-id="<?= htmlspecialchars($file['id']); ?>" 
-           data-title="<?= htmlspecialchars($file['title']); ?>" 
-           data-path="uploads/<?= htmlspecialchars($file['file_path']); ?>" 
-           onclick="confirmDownload(event)">
-                                    <small class="text-primary"><i class="bi bi-arrow-down"></i> Download</small>
-                                </a>
+                                <a href="#" class="btn-link custom-card-footer"
+    data-bs-toggle="modal"
+    data-bs-target="#downloadModal"
+    data-id="<?= htmlspecialchars($file['id']);?>"
+    data-title="<?= htmlspecialchars($file['title']); ?>"
+    data-path="uploads/<?= htmlspecialchars($file['file_path']); ?>">
+    <small class="text-primary"><i class="bi bi-arrow-down"></i> Download</small>
+</a>
+
 
                                     <a href="#" class="btn-link custom-card-footer"
                                         data-bs-toggle="modal"
@@ -140,6 +142,32 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
     </div>
 
     <!-- modals  -->
+    <!-- Download Confirmation Modal -->
+<div class="modal fade" id="downloadModal" tabindex="-1" aria-labelledby="downloadModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form action="classes/record_download.php" method="post" id="downloadForm">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="downloadModalLabel">Download Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="fileId" name="file_id">
+                    <input type="text" id="filePath" name="file_path">
+                    <input type="hidden" id="userId" name="user_id" value="<?= isset($_SESSION['user_id']) ? htmlspecialchars($_SESSION['user_id']) : ''; ?>">
+                    <p>Are you sure you want to download this file?</p>
+                    <p><strong id="fileTitle"></strong></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="confirmDownload">Download</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 <!-- Modal -->
 <div class="modal fade" id="fileModal" tabindex="-1" aria-labelledby="fileModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -169,27 +197,33 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
     </div>
 </div>
 
-<!-- Confirmation Modal -->
-<div class="modal fade" id="downloadModal" tabindex="-1" aria-labelledby="downloadModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="downloadModalLabel">Confirm Download</h5>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to download this file?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" id="confirmDownloadBtn">Download</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 </main>
 <?php include "includes/footer.php"; ?>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var downloadModal = document.getElementById('downloadModal');
+    downloadModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var fileId = button.getAttribute('data-id');
+        var fileTitle = button.getAttribute('data-title');
+        var filePath = button.getAttribute('data-path');
+
+        var modalTitle = downloadModal.querySelector('#fileTitle');
+        var modalFileId = downloadModal.querySelector('#fileId');
+        var modalFilePath = downloadModal.querySelector('#filePath');
+
+        modalTitle.textContent = fileTitle;
+        modalFileId.value = fileId;
+        modalFilePath.value = filePath; // Ensure file path includes 'uploads/'
+    });
+});
+</script>
+
+
 
 <script>
 document.getElementById('mainSearch').addEventListener('input', function() {
@@ -253,69 +287,5 @@ document.getElementById('mainSearch').addEventListener('input', function() {
 </script>
 
 <!-- for downlaod  -->
-<script>
-    function confirmDownload(event) {
-    event.preventDefault(); // Prevent the default link behavior
-
-    var element = event.currentTarget;
-    var filePath = element.getAttribute('href');
-    var fileId = element.getAttribute('data-id');
-    var fileTitle = element.getAttribute('data-title');
-
-    const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-            confirmButton: "btn btn-success",
-            cancelButton: "btn btn-danger"
-        },
-        buttonsStyling: false
-    });
-
-    swalWithBootstrapButtons.fire({
-        title: "Are you sure?",
-        text: `Do you want to download ${fileTitle}?`,
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
-        reverseButtons: true
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Record the download in the database
-            fetch('classes/record_download.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ file_id: fileId })
-            }).then(response => response.json())
-              .then(data => {
-                  if (data.success) {
-                      // Proceed with the download
-                      window.location.href = filePath;
-
-                      swalWithBootstrapButtons.fire({
-                          title: "Downloaded!",
-                          text: "Your file has been downloaded.",
-                          icon: "success"
-                      });
-                  } else {
-                      swalWithBootstrapButtons.fire({
-                          title: "Error!",
-                          text: "There was an error recording the download.",
-                          icon: "error"
-                      });
-                  }
-              });
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-            swalWithBootstrapButtons.fire({
-                title: "Cancelled",
-                text: "Your download has been cancelled.",
-                icon: "error"
-            });
-        }
-    });
-}
-
-</script>
 </body>
 </html>
