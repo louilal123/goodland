@@ -863,6 +863,7 @@ public function count_all_recycled_files() {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result['total'];
 }
+//ALL USER SIDES HERE
 ///user currently login files start 
 public function get_user_documents($userId, $fileType = 'Documents', $status = null, $searchTerm = '') {
     try {
