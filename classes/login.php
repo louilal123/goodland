@@ -47,9 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['status'] = "Login successful!";
         $_SESSION['status_icon'] = "success";
         
-        // Track visitor and update user ID
-        $mainClass->trackVisitor(true, $user['user_id']);
-        
         header('Location: ../index.php');
         exit();
     } else {
@@ -58,5 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: ../get-started.php');
         exit();
     }
+    var_dump(error_log);
 }
 ?>

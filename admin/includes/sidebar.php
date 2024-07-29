@@ -12,7 +12,7 @@
     transition: width 0.3s ease; 
 }
 .bg-primary1{
-    padding-right: 30px !important;
+    padding-right: 60px !important;
     border-radius:0px;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .brand-text {
-    font-size: 1.2rem; /* Reduced font size */
+    font-size: 1.2rem; 
     font-weight: bold;
 }
 
@@ -58,13 +58,14 @@
 
 .nav-item1 {
     margin-bottom: 8px;
+
 }
 
 .nav-link12,
 .nav-link123 {
     display: flex;
     align-items: center;
-    padding: 8px 18px 8px 25px;
+    padding: 8px 18px 8px 28px;
     color: #adb5bd;
     text-decoration: none;
     border-radius: 4px;
@@ -192,7 +193,7 @@
     <div class="sidebar-brand">
         <a href="" class="brand-link">
             <img src="uploads/image.png" alt="Logo" class="brand-image shadow" style="width: 34px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.2) !important;">
-            <h3 class="brand-text text-start logoo shadow mt-2  fw-bold text-light">Good<i>Land</i></h3>
+            <h3 class="brand-text text-start logoo shadow mt-2 text-light">Good<i>Land</i></h3>
         </a>
     </div>
     <div class="sidebar-wrapper">

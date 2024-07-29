@@ -28,6 +28,122 @@ class Main_class {
             echo $e->getMessage();
         }
     }
+// line h=chart monthly visits website 
+public function get_monthly_visitor_data() {
+    try {
+        $stmt = $this->pdo->prepare("
+            SELECT
+                DAY(visit_time) AS visit_day,
+                SUM(CASE WHEN user_id IS NOT NULL THEN 1 ELSE 0 END) AS signed_up_visits,
+                SUM(CASE WHEN user_id IS NULL THEN 1 ELSE 0 END) AS non_signed_up_visits
+            FROM visitor_data
+            WHERE MONTH(visit_time) = MONTH(CURDATE())
+              AND YEAR(visit_time) = YEAR(CURDATE())
+            GROUP BY visit_day
+            ORDER BY visit_day;
+        ");
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        $data = [];
+        foreach ($results as $row) {
+            $data[] = [
+                'day' => (int)$row['visit_day'],
+                'signed_up' => (int)$row['signed_up_visits'],
+                'non_signed_up' => (int)$row['non_signed_up_visits']
+            ];
+        }
+        return $data;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return [];
+    }
+}
+
+
+public function get_visitor_data_for_current_month() {
+    $stmt = $this->pdo->prepare("
+        SELECT v.id, v.user_id, v.ip, v.city, v.region, v.country, v.latitude, v.longitude, v.visit_time, v.visit_count, u.fullname
+        FROM visitor_data v
+        LEFT JOIN users u ON v.user_id = u.user_id
+        WHERE MONTH(v.visit_time) = MONTH(CURRENT_DATE())
+        AND YEAR(v.visit_time) = YEAR(CURRENT_DATE())
+        ORDER BY v.visit_time DESC
+    ");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+public function get_download_data_for_current_month() {
+    $stmt = $this->pdo->prepare("
+        SELECT d.id, d.file_id, d.user_id, d.download_time, u.fullname, f.title
+        FROM downloads d
+        LEFT JOIN users u ON d.user_id = u.user_id
+        LEFT JOIN files f ON d.file_id = f.id
+        WHERE MONTH(d.download_time) = MONTH(CURRENT_DATE())
+        AND YEAR(d.download_time) = YEAR(CURRENT_DATE())
+        ORDER BY d.download_time DESC
+    ");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+//this is for the horizontal bar chart signup and non signup
+public function getDownloadData1() {
+    $stmt = $this->pdo->prepare("
+    SELECT 
+        f.file_type, 
+        IF(d.user_id IS NULL, 'Non-Signed-Up', 'Signed-Up') as user_type, 
+        COUNT(d.id) as download_count
+    FROM downloads d
+    JOIN files f ON d.file_id = f.id
+    GROUP BY f.file_type, user_type
+");
+$stmt->execute();
+return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+    
+    
+    public function trackVisitor() {
+        $geoplugin = new geoPlugin();
+        
+        $ip = $_SERVER['REMOTE_ADDR'];
+    
+        if ($ip == '127.0.0.1' || $ip == '::1') {
+            $ip = '112.198.194.108';
+        }
+    
+        $geoplugin->locate($ip);
+    
+        $city = $geoplugin->city;
+        $region = $geoplugin->region;
+        $country = $geoplugin->countryName;
+        $latitude = $geoplugin->latitude;
+        $longitude = $geoplugin->longitude;
+    
+        $stmt = $this->pdo->prepare("SELECT * FROM visitor_data WHERE ip = :ip AND DATE(visit_time) = CURDATE()");
+        $stmt->execute([':ip' => $ip]);
+        $existingVisit = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($existingVisit) {
+            $stmt = $this->pdo->prepare("UPDATE visitor_data SET visit_count = visit_count + 1 WHERE ip = :ip AND DATE(visit_time) = CURDATE()");
+            $stmt->execute([':ip' => $ip]);
+        } else {
+            $sql = "INSERT INTO visitor_data (ip, city, region, country, latitude, longitude, visit_time, visit_count) 
+                    VALUES (:ip, :city, :region, :country, :latitude, :longitude, NOW(), 1)";
+    
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([
+                ':ip' => $ip,
+                ':city' => $city,
+                ':region' => $region,
+                ':country' => $country,
+                ':latitude' => $latitude,
+                ':longitude' => $longitude
+            ]);
+        }
+    }
 // downloads start 
 public function getDownloadData($currentMonth, $currentYear, $isSignedIn) {
     $userCondition = $isSignedIn ? 'IS NOT NULL' : 'IS NULL';
@@ -334,46 +450,6 @@ public function getMediaCounts() {
 }
 
     
-    
-    public function trackVisitor() {
-        $geoplugin = new geoPlugin();
-        
-        $ip = $_SERVER['REMOTE_ADDR'];
-    
-        if ($ip == '127.0.0.1' || $ip == '::1') {
-            $ip = '112.198.194.108';
-        }
-    
-        $geoplugin->locate($ip);
-    
-        $city = $geoplugin->city;
-        $region = $geoplugin->region;
-        $country = $geoplugin->countryName;
-        $latitude = $geoplugin->latitude;
-        $longitude = $geoplugin->longitude;
-    
-        $stmt = $this->pdo->prepare("SELECT * FROM visitor_data WHERE ip = :ip AND DATE(visit_time) = CURDATE()");
-        $stmt->execute([':ip' => $ip]);
-        $existingVisit = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-        if ($existingVisit) {
-            $stmt = $this->pdo->prepare("UPDATE visitor_data SET visit_count = visit_count + 1 WHERE ip = :ip AND DATE(visit_time) = CURDATE()");
-            $stmt->execute([':ip' => $ip]);
-        } else {
-            $sql = "INSERT INTO visitor_data (ip, city, region, country, latitude, longitude, visit_time, visit_count) 
-                    VALUES (:ip, :city, :region, :country, :latitude, :longitude, NOW(), 1)";
-    
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute([
-                ':ip' => $ip,
-                ':city' => $city,
-                ':region' => $region,
-                ':country' => $country,
-                ':latitude' => $latitude,
-                ':longitude' => $longitude
-            ]);
-        }
-    }
     
     public function changePassword($userId, $currentPassword, $newPassword) {
         try {
@@ -1081,29 +1157,131 @@ public function register_user($fullname, $email, $birthday, $username, $password
             }
         }
         
-       
+       //login for users
+       public function updateVisitorDataWithUserId($ip, $userId) {
+        $geoplugin = new geoPlugin();
+        $geoplugin->locate($ip);
         
-        public function user_login($email, $password) {
-            try {
-                $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
-                $stmt->execute([':email' => $email]);
-                $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-                if ($user && password_verify($password, $user['password'])) {
-                    // Update the last_login field to the current timestamp
-                    $updateStmt = $this->pdo->prepare("UPDATE users SET last_login = NOW() WHERE user_id = :user_id");
-                    $updateStmt->execute([':user_id' => $user['user_id']]);
-                    
-                    // Return the user data after updating the last_login field
-                    return $user;
-                } else {
-                    return false;
+        $city = $geoplugin->city;
+        $region = $geoplugin->region;
+        $country = $geoplugin->countryName;
+        $latitude = $geoplugin->latitude;
+        $longitude = $geoplugin->longitude;
+    
+        $stmt = $this->pdo->prepare("SELECT * FROM visitor_data WHERE ip = :ip AND visit_time >= NOW() - INTERVAL 1 DAY");
+        $stmt->execute([':ip' => $ip]);
+        $visitor = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($visitor) {
+            $updateVisitorStmt = $this->pdo->prepare("UPDATE visitor_data SET user_id = :user_id, city = :city, region = :region, country = :country, latitude = :latitude, longitude = :longitude WHERE id = :id");
+            $updateVisitorStmt->execute([
+                ':user_id' => $userId,
+                ':city' => $city,
+                ':region' => $region,
+                ':country' => $country,
+                ':latitude' => $latitude,
+                ':longitude' => $longitude,
+                ':id' => $visitor['id']
+            ]);
+        }
+    }
+    
+
+    public function insertIpAddress($userId, $ip) {
+        $insertIpStmt = $this->pdo->prepare("INSERT INTO ip_addresses (user_id, ip) VALUES (:user_id, :ip) ON DUPLICATE KEY UPDATE ip = :ip");
+        $insertIpStmt->execute([':user_id' => $userId, ':ip' => $ip]);
+    }
+   
+    public function user_login($email, $password) {
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+            $stmt->execute([':email' => $email]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            if ($user && password_verify($password, $user['password'])) {
+                $updateStmt = $this->pdo->prepare("UPDATE users SET last_login = NOW() WHERE user_id = :user_id");
+                $updateStmt->execute([':user_id' => $user['user_id']]);
+    
+                $geoplugin = new geoPlugin();
+                $ip = $_SERVER['REMOTE_ADDR'];
+    
+                if ($ip == '127.0.0.1' || $ip == '::1') {
+                    $ip = '112.198.194.108';
                 }
-            } catch (PDOException $e) {
-                echo $e->getMessage();
+    
+                // Locate IP using geoPlugin
+                $geoplugin->locate($ip);
+    
+                // Check if there is any recent visitor with the same user_id and ip
+                $stmt = $this->pdo->prepare("SELECT * FROM visitor_data WHERE user_id = :user_id AND ip = :ip AND visit_time >= NOW() - INTERVAL 1 DAY");
+                $stmt->execute([':user_id' => $user['user_id'], ':ip' => $ip]);
+                $visitor = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+                if ($visitor) {
+                    // Update the visitor_data with the user_id only if user_id is currently NULL
+                    if (is_null($visitor['user_id'])) {
+                        $updateVisitorStmt = $this->pdo->prepare("UPDATE visitor_data SET user_id = :user_id WHERE id = :id");
+                        $updateVisitorStmt->execute([':user_id' => $user['user_id'], ':id' => $visitor['id']]);
+                    }
+                } else {
+                    // Insert new record if no matching user_id and ip for the current day
+                    $insertVisitorStmt = $this->pdo->prepare("INSERT INTO visitor_data (user_id, ip, city, region, country, latitude, longitude, visit_time, visit_count) 
+                                                             VALUES (:user_id, :ip, :city, :region, :country, :latitude, :longitude, NOW(), 1)");
+                    $insertVisitorStmt->execute([
+                        ':user_id' => $user['user_id'],
+                        ':ip' => $ip,
+                        ':city' => $geoplugin->city,
+                        ':region' => $geoplugin->region,
+                        ':country' => $geoplugin->countryName,
+                        ':latitude' => $geoplugin->latitude,
+                        ':longitude' => $geoplugin->longitude
+                    ]);
+                }
+    
+                // Check if there is already a record in user_ips with the same user_id and ip
+                $stmt = $this->pdo->prepare("SELECT * FROM user_ips WHERE user_id = :user_id AND ip = :ip");
+                $stmt->execute([':user_id' => $user['user_id'], ':ip' => $ip]);
+                $existingIp = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+                if (!$existingIp) {
+                    // Insert into user_ips to associate the IP with the user only if no existing record is found
+                    $insertIpStmt = $this->pdo->prepare("INSERT INTO user_ips (user_id, ip) VALUES (:user_id, :ip)");
+                    $insertIpStmt->execute([':user_id' => $user['user_id'], ':ip' => $ip]);
+                }
+    
+                return $user;
+            } else {
                 return false;
             }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
         }
+    }
+    
+    
+    
+        // public function user_login($email, $password) {
+        //     try {
+        //         $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+        //         $stmt->execute([':email' => $email]);
+        //         $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        //         if ($user && password_verify($password, $user['password'])) {
+                   
+        //             $updateStmt = $this->pdo->prepare("UPDATE users SET last_login = NOW() WHERE user_id = :user_id");
+        //             $updateStmt->execute([':user_id' => $user['user_id']]);
+                    
+                   
+        //             return $user;
+        //         } else {
+        //             return false;
+        //         }
+        //     } catch (PDOException $e) {
+        //         echo $e->getMessage();
+        //         return false;
+        //     }
+        // }
         
 
         public function get_user_info() {

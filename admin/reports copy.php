@@ -11,14 +11,86 @@ $m_visitors = $mainClass->get_visitor_data_for_current_month();
 $m_downloads = $mainClass->get_download_data_for_current_month();
 ?>
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<html lang="en"> 
+<?php include "includes/header.php"; ?>
 
-  
-    
-<link rel="stylesheet" href="mdbfolder/css/mdb.min.css" />
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<style>
+    @page {
+        margin: 0;
+    }
+    body {
+        margin: 1cm;
+    }
+    h3{
+        font-weight: bold;
+    }
+    .card {
+        border: none;
+        box-shadow: none;
+        margin: 0;
+        padding: 0;
+    }
+    #chart_div, #piechart_3d {
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    @media print {
+        body * {
+            visibility: hidden;
+        }
+        #printableArea, #printableArea * {
+            visibility: visible;
+        }
+        #printableArea {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            padding: 10px;
+            font-size: 10px;
+        }
+        .container-fluid {
+            margin: 0;
+            padding: 0;
+        }
+        .row, .card, table {
+            margin-bottom: 10px;
+        }
+        .card-header, .card-body {
+            padding: 5px;
+        }
+        h3, h4 {
+            font-size: 14px;
+        }
+        .card-title {
+            font-size: 12px;
+        }
+        .fw-bold {
+            font-size: 12px;
+        }
+        .d-flex {
+            font-size: 10px;
+        }
+        table {
+            font-size: 10px;
+        }
+        th, td {
+            font-size: 10px;
+        }
+        #reportHeader {
+            position: fixed;
+            top: 10;
+            margin-top:50px;
+            width: 100%;
+            background: white;
+            padding: 10px;
+            text-align: center;
+            z-index: 1000;
+        }
+    }
+</style>
 <script type="text/javascript">
     google.charts.load('current', {'packages':['line']});
     google.charts.setOnLoadCallback(drawChart);
@@ -51,7 +123,7 @@ $m_downloads = $mainClass->get_download_data_for_current_month();
                 subtitle: 'Signed-Up Users vs Non-Signed-Up Users'
             },
             width: 850,
-            height: 390,
+            height: 380,
             hAxis: {
                 title: 'Day',
                 ticks: Array.from({length: daysInMonth}, (_, i) => i + 1) // All days of the month
@@ -114,125 +186,61 @@ $m_downloads = $mainClass->get_download_data_for_current_month();
 
 
 
+<body class="layout-fixed-complete sidebar-expand-lg sidebar-mini bg-body-tertiary" >
 
-<style>
-    @page {
-        margin-top: 0;
-        margin-left: 1inch;
-        margin-right: 1inch;
-        margin-bottom: 2inch;
+    <div class="app-wrapper">
 
-    }
-    body {
-        margin: 1cm;
-    }
-    h3{
-        font-weight: bold;
-    }
-    .card {
-        border: none;
-        box-shadow: none;
-        margin: 0;
-        padding: 0;
-    }
-    #chart_div, #piechart_3d {
-        border: none;
-        margin: 0;
-        padding: 0;
-    }
+       <?php include "includes/sidebar.php" ?>
+        <div class="app-main-wrapper"> 
+           <?php 
+            include "includes/topnav.php"; ?>
+          
+            <main class="app-main">
+                <div class="app-content-header"> 
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h3 class="mb-0">Manage Reports</h3>
+                            </div>
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-end">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Reports</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="window.location.href='reports'" class="btn btn-primary float-end">Print Report</button>
+                </div>
 
-    @media print {
-        body * {
-            visibility: hidden;
-        }
-        #printableArea, #printableArea * {
-            visibility: visible;
-        }
-        #printableArea {
-            position: absolute;
-            left: 0;
-            top: 10;
-            width: 100%;
-            padding: 30px;
-            font-size: 10px;
-        }
-        .container-fluid {
-            margin: 0;
-            padding: 0;
-        }
-        .row, .card, table {
-            margin-bottom: 10px;
-        }
-        .card-header, .card-body {
-            padding: 5px;
-        }
-        h3, h4 {
-            font-size: 14px;
-        }
-        .card-title {
-            font-size: 12px;
-        }
-        .fw-bold {
-            font-size: 12px;
-        }
-        .d-flex {
-            font-size: 10px;
-        }
-        table {
-            font-size: 10px;
-        }
-        th, td {
-            font-size: 10px;
-        }
-        #reportHeader {
-            position: fixed;
-            top: 0;
-            margin-top:50px;
-            width: 100%;
-            background: white;
-            padding: 10px;
-            text-align: center;
-            z-index: 1000;
-        }
-    }
-</style>
-
-<body onload="window.print()">
-    <div id="printableArea">
-        <div id="reportHeader">
-            <img src="uploads/logogoodland.png" style="display:flex; margin: auto; width: 150px; height:55px;">
-            <h4 class="text-center">GoodLand Management System</h4>
-            <h4 class="text-center">Purok Kulo 2, Atop-Atop, Bantayan 6053, Cebu</h4>
-            <h4 class="text-center"><span id="reportDate"></span></h4>
-            <!-- <h4 class="text-center mt-5">Report Type: Monthly</h4> -->
-            
-        </div>
-
-        <div class="container-fluid" style="margin-top: 150px;"> 
+                <div class="app-content"> 
+                    <div class="container-fluid"> 
                         <!-- Charts Section -->
-                        <div class="row mt-5" >
-                            <div class="col-md-12 mt-5">
+                        <div class="row mt-4">
+                            <div class="col-md-7">
                                 <div class="card">
-                                    
+                                    <div class="card-header">
+                                        <h5 class="mb-0"><strong>Website Visits for the <?php echo date("M - Y"); ?></strong></h5>
+                                    </div>
                                     <div class="card-body">
                                         <div id="line_chart" style="height: 390px;"></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-5">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h6 class="mb-0">Downloads for the <?php echo date("M - Y"); ?></h5>
+                                        <h5 class="mb-0"><strong>Downloads for the <?php echo date("M - Y"); ?></strong></h5>
                                     </div>
                                     <div class="card-body">
-                                        <div id="side_chart" style="width: 900px; height: 290px;"></div>
+                                        <div id="side_chart" style="width: 600px; height: 390px;"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Tables Section -->
-                        <div class="row mt-1">
+                        <div class="row mt-3 mb-2">
                             <div class="col-md-7">
                                 <div class="card">
                                     <div class="card-header">Website Visitors Details</div>
@@ -291,18 +299,16 @@ $m_downloads = $mainClass->get_download_data_for_current_month();
                             </div>     
                         </div>
                     </div>
-        
-       
+                </div> 
+            </main>
+
+          
+        </div>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const reportDateElement = document.getElementById("reportDate");
-            const today = new Date();
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            const formattedDate = today.toLocaleDateString('en-US', options);
-            reportDateElement.textContent = `Report As Of: ${formattedDate}`;
-        });
-    </script>
+    <?php include "includes/footer.php" ?>
+  
+   
 </body>
+
 </html>

@@ -9,10 +9,38 @@ foreach ($mediaCounts as $count) {
     $mediaData[] = "['" . $count['MediaType'] . "', " . $count['Count'] . "]";
 }
 $mediaData = implode(", ", $mediaData);
+
+//for the line chart
+$visitor_data = $mainClass->get_monthly_visitor_data();
+$download_data = $mainClass->getDownloadData1();
 ?>
 <!DOCTYPE html>
 <html lang="en"> 
 <?php include "includes/header.php"; ?>
+
+<script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawVisualization);
+
+        function drawVisualization() {
+            var chartData = <?php echo json_encode($chartData); ?>;
+            var data = google.visualization.arrayToDataTable(chartData);
+
+            var options = {
+                title: 'Monthly Website Visitors By Country',
+                is3D: true,
+                vAxis: {title: 'Number of Visitors'},
+                hAxis: {title: 'Month'},
+                seriesType: 'bars',
+                series: {
+                    <?php echo count($chartData[0]) - 2; ?>: {type: 'line'} // The last column (average) should be a line
+                }
+            };
+
+            var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
 
 <style>
 	 .main-blur {
@@ -275,29 +303,51 @@ $mediaData = implode(", ", $mediaData);
 									</div>  
 
 					</div>
+
+					<div class="row mt-4 ">
+						
+
+						<div class="col-md-7" >
+							<div class="card" >
+								<div class="card-header">
+								<h5 class="mb-0"><strong>Website Visits for the <?php echo date("M - Y")."\n";?></strong></h5>
+								
+								</div>
+								<div class="card-body">
+									<div id="line_chart" style="height: 390px;">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-5">
+							<div class="card">
+								<div class="card-header">
+										<h5 class="mb-0"><strong>Downloads for the <?php echo date("M - Y")."\n";?></strong></h5>
+										
+								</div>
+								<div class="card-body">
+									
+									<div id="side_chart" style="width: 600px; height: 390px;"></div>
+								</div>
+						</div>
+						</div>
+					</div>
+
+
 <div class="row mt-4 ">
     <div class="col-lg-5 col-md-12 col-sm-12 ">
-        <div class="card mb-4  bg-primary bg-opacity-10">
+        <div class="card  bg-primary bg-opacity-10">
            <div id="piechart_3d" style=" height: 450px;"></div>
       
         </div>
     </div>
 
     <div class="col-lg-7 col-md-12 col-sm-12">
-        <div class="card mb-4  bg-primary bg-opacity-10">
+        <div class="card  bg-primary bg-opacity-10">
 			<div id="chart_div" style="width: 100%; margin-left:0px !important; height: 450px; margin: 0px; padding: 0px;"></div>
 		</div>
    	</div>
-	<div class="col-md-12">
-	<div class="card">
-<div class="card-header py-3">
-  <h5 class="mb-0 text-center"><strong>Downloads for the <?php echo date("M - Y")."\n";?></strong></h5>
-</div>
-<div class="card-body">
-  <canvas class="my-4 w-100" id="myChart" height="380"></canvas>
-</div>
-</div>
-	</div>
+	
 </div>
 
                                 
@@ -316,80 +366,7 @@ $mediaData = implode(", ", $mediaData);
 
     </script>
     <?php include "includes/footer.php" ?>
-	<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        fetch('classes/fetchdownloads.php')
-            .then(response => response.json())
-            .then(data => {
-                const signedInDownloads = data.signedInDownloads;
-                const nonSignedInDownloads = data.nonSignedInDownloads;
-
-                const labels = []; // Days of the current month
-                const signedInData = []; // Downloads for signed-in users
-                const nonSignedInData = []; // Downloads for non-signed-in users
-
-                const daysInMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
-
-                for (let i = 1; i <= daysInMonth; i++) {
-                    labels.push(i.toString());
-
-                    const signedInDownload = signedInDownloads.find(d => d.download_day == i);
-                    const nonSignedInDownload = nonSignedInDownloads.find(d => d.download_day == i);
-
-                    signedInData.push(signedInDownload ? signedInDownload.download_count : 0);
-                    nonSignedInData.push(nonSignedInDownload ? nonSignedInDownload.download_count : 0);
-                }
-
-                // Update the chart
-                updateChart(labels, signedInData, nonSignedInData);
-            });
-    });
-
-    function updateChart(labels, signedInData, nonSignedInData) {
-        var ctx = document.getElementById("myChart").getContext('2d');
-
-        var myChart = new Chart(ctx, {
-            type: "line",
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: "Signed-In Users",
-                        data: signedInData,
-                        lineTension: 0,
-                        backgroundColor: "transparent",
-                        borderColor: "#007bff",
-                        borderWidth: 4,
-                        pointBackgroundColor: "#007bff",
-                    },
-                    {
-                        label: "Non-Signed-In Users",
-                        data: nonSignedInData,
-                        lineTension: 0,
-                        backgroundColor: "transparent",
-                        borderColor: "#ff0000",
-                        borderWidth: 4,
-                        pointBackgroundColor: "#ff0000",
-                    }
-                ],
-            },
-            options: {
-                scales: {
-                    yAxes: [
-                        {
-                            ticks: {
-                                beginAtZero: true,
-                            },
-                        },
-                    ],
-                },
-                legend: {
-                    display: true,
-                },
-            },
-        });
-    }
-    </script>
+	
 
    
 </body>
