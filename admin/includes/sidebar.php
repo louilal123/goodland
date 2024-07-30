@@ -180,8 +180,11 @@
     position: relative;
     right: 0;
 }
+.nav-link12{
+    opacity: .8;
+}
 .nav-link123{
-    opacity: 0.9;
+    opacity: 0.7;
     margin-left:18px;
 }
 

@@ -68,7 +68,7 @@
                                                                 <span class="badge bg-danger">Disabled</span>
                                                             <?php endif; ?>
                                                             </td>
-                                                            <td><img src="<?php echo $user['user_photo'] ?? '../uploads/default_photo.jpg'; ?>" alt="" style="width: 40px; height: 40px;"></td>
+                                                            <td><img src="../uploads/<?php echo $user['user_photo'] ?: 'default_photo.jpg'; ?>" alt="" style="width: 40px; height: 40px;"></td>
                                                             <td><?php echo htmlspecialchars($user['bio']); ?></td>
                                                             <td><?php echo htmlspecialchars($user['address']); ?></td>
                                                             <td><?php echo date("M d, Y h:i A", strtotime($user['date_created'])); ?></td>
@@ -76,7 +76,8 @@
                                                             <td><?php echo date("M d, Y h:i A", strtotime($user['last_login'])); ?></td>
                                                             <td>
                                                                 <button class="btn btn-info btn-sm viewMemberBtn" data-bs-toggle="modal" data-bs-target="#viewMemberModal"><i class="bi bi-eye"></i></button>
-                                                                <a href="#" class="btn btn-success btn-sm editMemberBtn" data-bs-toggle="modal" data-bs-target="#editMemberModal"><i class="bi bi-pencil"></i></a>
+                                                                <a href="#" class="btn btn-success btn-sm editMemberBtn" 
+                                                                data-bs-toggle="modal" data-bs-target="#editMemberStatusModal"><i class="bi bi-pencil"></i></a>
                                                                 <a href="classes/delete_member.php?id=<?=$user['user_id']; ?>" class="btn btn-danger btn-sm deleteMemberBtn"><i class="bi bi-trash"></i></a>
                                                             </td>
                                                         </tr>
@@ -91,209 +92,167 @@
                     </div>
                 </div>
 
-                <!-- View Member Modal -->
-                <div class="modal fade" id="viewMemberModal" tabindex="-1" aria-labelledby="viewMemberModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title" id="viewMemberModalLabel">View User Details</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="viewMemberForm">
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="photo1" class="form-label">User Photo</label>
-                                            <img id="photo1" class="img-fluid mt-2" src="" style="display: flex; flex-direction: column; margin: auto; height: 200px; width: 200px; border-radius: 200px;">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="user_id1" class="form-label">User ID</label>
-                                            <input type="text" class="form-control" id="user_id1" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="fullname1" class="form-label">Full Name</label>
-                                            <input type="text" class="form-control" id="fullname1" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="email1" class="form-label">Email</label>
-                                            <input type="text" class="form-control" id="email1" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="username1" class="form-label">Username</label>
-                                            <input type="text" class="form-control" id="username1" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="birthday1" class="form-label">Birthday</label>
-                                            <input type="text" class="form-control" id="birthday1" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="status1" class="form-label">Status</label>
-                                            <input type="text" class="form-control" id="status1" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="bio1" class="form-label">Bio</label>
-                                            <textarea class="form-control" id="bio1" readonly></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="address1" class="form-label">Address</label>
-                                            <textarea class="form-control" id="address1" readonly></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="date_created1" class="form-label">Date Created</label>
-                                            <input type="text" class="form-control" id="date_created1" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="date_updated1" class="form-label">Date Updated</label>
-                                            <input type="text" class="form-control" id="date_updated1" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="last_login1" class="form-label">Last Login</label>
-                                            <input type="text" class="form-control" id="last_login1" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer mt-4">
-                                        <button type="button" class="btn btn-secondary custombtn" data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!-- Edit Member Status Modal -->
+<div class="modal fade" id="editMemberStatusModal" tabindex="-1" aria-labelledby="editMemberStatusModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editMemberStatusModalLabel">Edit User Status</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="editMemberStatusForm" method="post" action="classes/update_user_status.php">
+          <input type="hidden" id="editUserId" name="user_id">
+          <div class="mb-3">
+            <label for="editUserPhoto" class="form-label">User Photo</label>
+            <div id="editUserPhotoContainer">
+              <img id="editUserPhoto" src="" alt="User Photo" style="display: flex; margin:auto; width: 100px; height: 100px;">
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="editUserName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="editUserName" readonly>
+          </div>
+          
+          <div class="mb-3">
+            <label for="editStatus" class="form-label">Status</label>
+            <select class="form-select" id="editStatus" name="status">
+              <option value="enabled">Enabled</option>
+              <option value="disabled">Disabled</option>
+            </select>
+          </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
-                <!-- Edit Member Modal -->
-                <div class="modal fade" id="editMemberModal" tabindex="-1" aria-labelledby="editMemberModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title" id="editMemberModalLabel">Edit Member</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="classes/$registeredUsers_crud.php" method="POST" id="editMemberForm" enctype="multipart/form-data">
-                                    <input type="hidden" name="user_id" id="user_id2">
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="photo2" class="form-label">User Photo</label>
-                                            <input type="file" class="form-control" id="photo2" name="user_photo">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="fullname2" class="form-label">Full Name</label>
-                                            <input type="text" class="form-control" id="fullname2" name="fullname">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="email2" class="form-label">Email</label>
-                                            <input type="email" class="form-control" id="email2" name="email">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="username2" class="form-label">Username</label>
-                                            <input type="text" class="form-control" id="username2" name="username">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="birthday2" class="form-label">Birthday</label>
-                                            <input type="date" class="form-control" id="birthday2" name="birthday">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="status2" class="form-label">Status</label>
-                                            <select class="form-control" id="status2" name="status">
-                                                <option value="Active">Active</option>
-                                                <option value="Inactive">Inactive</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="bio2" class="form-label">Bio</label>
-                                            <textarea class="form-control" id="bio2" name="bio"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="address2" class="form-label">Address</label>
-                                            <textarea class="form-control" id="address2" name="address"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer mt-4">
-                                        <button type="button" class="btn btn-secondary custombtn" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" name="editRegisteredUsers" class="btn btn-primary custombtn">Save Changes</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!-- View Member Modal -->
+<div class="modal fade" id="viewMemberModal" tabindex="-1" aria-labelledby="viewMemberModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-lg modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewMemberModalLabel">View User Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="viewUserName" class="form-label">Full Name</label>
+          <input type="text" class="form-control" id="viewUserName" disabled>
+        </div>
+        <div class="mb-3">
+          <label for="viewUserPhoto" class="form-label">User Photo</label>
+          <div id="viewUserPhotoContainer">
+            <img id="viewUserPhoto" src="" alt="User Photo" style="width: 100px; height: 100px;">
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="viewUserEmail" class="form-label">Email</label>
+          <input type="text" class="form-control" id="viewUserEmail" disabled>
+        </div>
+        <div class="mb-3">
+          <label for="viewUserUsername" class="form-label">Username</label>
+          <input type="text" class="form-control" id="viewUserUsername" disabled>
+        </div>
+        <div class="mb-3">
+          <label for="viewUserBirthday" class="form-label">Birthday</label>
+          <input type="text" class="form-control" id="viewUserBirthday" disabled>
+        </div>
+        <div class="mb-3">
+          <label for="viewUserStatus" class="form-label">Status</label>
+          <input type="text" class="form-control" id="viewUserStatus" disabled>
+        </div>
+        <div class="mb-3">
+          <label for="viewUserBio" class="form-label">Bio</label>
+          <textarea class="form-control" id="viewUserBio" rows="3" disabled></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="viewUserAddress" class="form-label">Address</label>
+          <input type="text" class="form-control" id="viewUserAddress" disabled>
+        </div>
+        <div class="mb-3">
+          <label for="viewDateCreated" class="form-label">Date Created</label>
+          <input type="text" class="form-control" id="viewDateCreated" disabled>
+        </div>
+        <div class="mb-3">
+          <label for="viewDateUpdated" class="form-label">Date Updated</label>
+          <input type="text" class="form-control" id="viewDateUpdated" disabled>
+        </div>
+        <div class="mb-3">
+          <label for="viewLastLogin" class="form-label">Last Login</label>
+          <input type="text" class="form-control" id="viewLastLogin" disabled>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
             </main>
         </div>
     </div>
     <?php include "includes/footer.php"; ?>
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="plugins/jquery/jquery.min.js"></script>
-    <script src="dist/js/adminlte.min.js"></script>
-    <script src="dist/js/script.js"></script>
+<script>
+   document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.editMemberBtn').forEach(button => {
+    button.addEventListener('click', function () {
+      const row = button.closest('tr');
+      const userId = row.children[0].textContent.trim();
+      const fullName = row.children[1].textContent.trim();
+      const userPhoto = row.children[6].querySelector('img').src; // Assumes photo is in the 7th column
+      const statusText = row.children[5].textContent.trim();
+      
+      document.getElementById('editUserId').value = userId;
+      document.getElementById('editUserName').value = fullName;
+      document.getElementById('editUserPhoto').src = userPhoto;
+      document.getElementById('editStatus').value = statusText === 'Enabled' ? 'enabled' : 'disabled';
+    });
+  });
+});
 
-    <script>
-        $(document).ready(function() {
-            $('.viewMemberBtn').click(function() {
-                var tr = $(this).closest('tr');
-                $('#user_id1').val(tr.find('td:eq(0)').text());
-                $('#fullname1').val(tr.find('td:eq(1)').text());
-                $('#email1').val(tr.find('td:eq(2)').text());
-                $('#username1').val(tr.find('td:eq(3)').text());
-                $('#birthday1').val(tr.find('td:eq(4)').text());
-                $('#status1').val(tr.find('td:eq(5)').text());
-                $('#bio1').val(tr.find('td:eq(7)').text());
-                $('#address1').val(tr.find('td:eq(8)').text());
-                $('#date_created1').val(tr.find('td:eq(9)').text());
-                $('#date_updated1').val(tr.find('td:eq(10)').text());
-                $('#last_login1').val(tr.find('td:eq(11)').text());
-                var photo = tr.find('td:eq(6) img').attr('src');
-                $('#photo1').attr('src', photo);
-            });
 
-            $('.editMemberBtn').click(function() {
-                var tr = $(this).closest('tr');
-                $('#user_id2').val(tr.find('td:eq(0)').text());
-                $('#fullname2').val(tr.find('td:eq(1)').text());
-                $('#email2').val(tr.find('td:eq(2)').text());
-                $('#username2').val(tr.find('td:eq(3)').text());
-                $('#birthday2').val(tr.find('td:eq(4)').text());
-                $('#status2').val(tr.find('td:eq(5)').text());
-                $('#bio2').val(tr.find('td:eq(7)').text());
-                $('#address2').val(tr.find('td:eq(8)').text());
-            });
-        });
-    </script>
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.viewMemberBtn').forEach(button => {
+    button.addEventListener('click', function () {
+      const row = button.closest('tr');
+      const userId = row.children[0].textContent.trim();
+      const fullName = row.children[1].textContent.trim();
+      const userEmail = row.children[2].textContent.trim();
+      const username = row.children[3].textContent.trim();
+      const birthday = row.children[4].textContent.trim();
+      const statusText = row.children[5].textContent.trim();
+      const userPhoto = row.children[6].querySelector('img').src;
+      const bio = row.children[7].textContent.trim();
+      const address = row.children[8].textContent.trim();
+      const dateCreated = row.children[9].textContent.trim();
+      const dateUpdated = row.children[10].textContent.trim();
+      const lastLogin = row.children[11].textContent.trim();
+
+      document.getElementById('viewUserName').value = fullName;
+      document.getElementById('viewUserEmail').value = userEmail;
+      document.getElementById('viewUserUsername').value = username;
+      document.getElementById('viewUserBirthday').value = birthday;
+      document.getElementById('viewUserStatus').value = statusText;
+      document.getElementById('viewUserPhoto').src = userPhoto;
+      document.getElementById('viewUserBio').value = bio;
+      document.getElementById('viewUserAddress').value = address;
+      document.getElementById('viewDateCreated').value = dateCreated;
+      document.getElementById('viewDateUpdated').value = dateUpdated;
+      document.getElementById('viewLastLogin').value = lastLogin;
+    });
+  });
+});
+
+</script>
 </body>
 </html>

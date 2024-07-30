@@ -68,7 +68,7 @@
                                         <td><?php echo htmlspecialchars($admin['fullname']); ?></td>
                                         <td><?php echo htmlspecialchars($admin['username']); ?></td>
                                         <td><?php echo htmlspecialchars($admin['email']); ?></td>
-                                        <td> <img src="uploads/<?php echo $admin['admin_photo'] ?? 'uploads/default_photo.jpg'; ?>" alt="" 
+                                        <td> <img src="uploads/<?php echo $admin['admin_photo'] ?: 'default_photo.jpg'; ?>" alt="" 
                                         style="width: 40px; height: 40px; "></td>
                                         <td><?php echo date("M d, Y h:i A", strtotime($admin['date_created'])); ?></td>
                                         <td><?php echo date("M d, Y h:i A", strtotime($admin['date_updated'])); ?></td>

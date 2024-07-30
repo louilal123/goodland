@@ -105,9 +105,14 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                                       <p class="custom-card-text"><small class="text-muted">Added By: 
                                       <?= htmlspecialchars($file['uploader_fullname']); ?></small></p>
                                 <div class="d-flex justify-content-between custom-card-footer mb-3">
-                                <a href="uploads/<?= htmlspecialchars($file['file_path']); ?>" class="btn-link custom-card-footer download-btn" download="<?= htmlspecialchars($file['title']); ?>">
-                                    <small class="text-primary"><i class="bi bi-arrow-down"></i> Download</small>
-                                </a>
+                                <a href="#" class="btn-link custom-card-footer"
+    data-bs-toggle="modal"
+    data-bs-target="#downloadModal"
+    data-id="<?= htmlspecialchars($file['id']);?>"
+    data-title="<?= htmlspecialchars($file['title']); ?>"
+    data-path="uploads/<?= htmlspecialchars($file['file_path']); ?>">
+    <small class="text-primary"><i class="bi bi-arrow-down"></i> Download</small>
+</a>
 
                                     <a href="#" class="btn-link custom-card-footer"
                                         data-bs-toggle="modal"
@@ -186,114 +191,6 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
 
 </main>
 <?php include "includes/footer.php"; ?>
-<script>
-document.addEventListener('DOMContentLoaded', (event) => {
-    let downloadLink = '';
-    let fileId = '';
-    let fileName = '';
-
-    document.querySelectorAll('.download-btn').forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            downloadLink = this.getAttribute('href');
-            fileId = this.getAttribute('data-file-id');
-            fileName = this.getAttribute('download');
-            let downloadModal = new bootstrap.Modal(document.getElementById('downloadModal'));
-            downloadModal.show();
-        });
-    });
-
-    document.getElementById('confirmDownloadBtn').addEventListener('click', function() {
-        let a = document.createElement('a');
-        a.href = downloadLink;
-        a.download = fileName;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-
-        let downloadModal = bootstrap.Modal.getInstance(document.getElementById('downloadModal'));
-        downloadModal.hide();
-        
-        let xhr = new XMLHttpRequest();
-        xhr.open('POST', 'classes/record_download.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.send('file_id=' + fileId);
-    });
-});
-</script>
-
-
-
-<script>
-function filterDocuments(status) {
-    const searchTerm = document.getElementById('documentSearch').value;
-    window.location.href = `profile.php?status=${status}&search=${searchTerm}`;
-}
-
-function searchDocuments() {
-    const status = document.querySelector('.dropdown-menu .active') ? document.querySelector('.dropdown-menu .active').innerText : 'All';
-    const searchTerm = document.getElementById('documentSearch').value;
-    window.location.href = `profile.php?status=${status}&search=${searchTerm}`;
-}
-</script>
-    
-<script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        const fileModal = document.getElementById('fileModal');
-        fileModal.addEventListener('show.bs.modal', (event) => {
-            const button = event.relatedTarget;
-            const title = button.getAttribute('data-title');
-            const description = button.getAttribute('data-description');
-            const fileType = button.getAttribute('data-filetype');
-            const status = button.getAttribute('data-status');
-            const date = button.getAttribute('data-date');
-            const uploadedby = button.getAttribute('data-uploadedby');
-            const remarks = button.getAttribute('data-remarks');
-            const path = button.getAttribute('data-path');
-
-            const modalTitle = fileModal.querySelector('#fileModalTitle');
-            const modalPreview = fileModal.querySelector('#fileModalPreview');
-            const modalDescription = fileModal.querySelector('#fileModalDescription');
-            const modalType = fileModal.querySelector('#fileModalType');
-            const modalStatus = fileModal.querySelector('#fileModalStatus');
-            const modalUploadedBy = fileModal.querySelector('#fileModalUploadedBy');
-            const modalDate = fileModal.querySelector('#fileModalDate');
-            const modalRemarks = fileModal.querySelector('#fileModalRemarks');
-            const viewFileBtn = fileModal.querySelector('#viewFileBtn');
-
-            modalTitle.textContent = title;
-            modalPreview.src = path;
-            modalDescription.textContent = description;
-            modalType.textContent = fileType;
-            // modalStatus.textContent = status; // Update this line if status is available
-            modalUploadedBy.textContent = uploadedby; 
-            modalDate.textContent = date; // Update this line if date is available
-            // modalRemarks.textContent = remarks;
-
-            viewFileBtn.addEventListener('click', () => {
-                // Redirect to view the file directly if needed
-                window.location.href = path; // Replace with appropriate action
-            });
-        });
-    });
-</script>
-
-<script>
-document.getElementById('mainSearch').addEventListener('input', function() {
-    let filter = this.value.toLowerCase();
-    let items = document.querySelectorAll('.document-item');
-    let visibleCount = 0;
-    items.forEach(function(item) {
-        let title = item.querySelector('.custom-card-title').textContent.toLowerCase();
-        if (title.includes(filter)) {
-            item.style.display = '';
-            visibleCount++;
-        } else {
-            item.style.display = 'none';
-        }
-    });
-    document.getElementById('entryInfo').textContent = `Showing ${visibleCount} of ${items.length} total entries`;
-});
-</script>
+<?php include "js/file.php"?>
 </body>
 </html>

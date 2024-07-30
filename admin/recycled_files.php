@@ -154,8 +154,8 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                         <textarea class="form-control" id="declineRemarks" name="remarks" rows="3" required>Please provide your reason for declining this file.</textarea>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-warning" name="deleteFileBtn">Delete</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger" name="deleteBtn"><i class="fas fa-trash"></i> Delete</button>
                     </div>
                 </form>
             </div>
@@ -189,8 +189,8 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                         <textarea class="form-control" id="approveRemarks" name="remarks" rows="3" required>File Approved! Thank you for sharing your resource on our platform.</textarea>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success" name="restoreBtn">Restore</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-success" name="restoreBtn"><i class="fas fa-arrow-up"></i> Restore</button>
                     </div>
                 </form>
             </div>
@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             document.getElementById('approveFileTitle').textContent = title;
             document.getElementById('approveFileDescription').textContent = description;
             document.getElementById('approveFilePath').textContent = filepath;
-            document.getElementById('approveFilePathEmbed').src = `../uploads/${filepath}#toolbar=0&navpanes=0`;
+            document.getElementById('approveFilePathEmbed').src = `uploads/${filepath}#toolbar=0&navpanes=0`;
             document.getElementById('approveFileType').textContent = filetype;
             document.getElementById('approveUploadedBy').textContent = uploaded_by;
             document.getElementById('approveUploadDate').textContent = upload_date;
@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             document.getElementById('declineFileTitle').textContent = title;
             document.getElementById('declineFileDescription').textContent = description;
             document.getElementById('declineFilePath').textContent = filepath;
-            document.getElementById('declineFilePathEmbed').src = `../uploads/${filepath}#toolbar=0&navpanes=0`;
+            document.getElementById('declineFilePathEmbed').src = `uploads/${filepath}#toolbar=0&navpanes=0`;
             document.getElementById('declineFileType').textContent = filetype;
             document.getElementById('declineUploadedBy').textContent = uploaded_by;
             document.getElementById('declineUploadDate').textContent = upload_date;

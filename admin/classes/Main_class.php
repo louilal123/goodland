@@ -144,6 +144,53 @@ return $stmt->fetchAll(PDO::FETCH_ASSOC);
             ]);
         }
     }
+    //ADMIN DETAILS PROFILE INFO 
+    public function updateAdminInfo($id, $fullname, $username, $email) {
+        try {
+            $stmt = $this->pdo->prepare("UPDATE admin SET fullname = :fullname, username = :username, email = :email WHERE admin_id = :id");
+            $stmt->bindParam(':fullname', $fullname);
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':id', $id);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function updateAdminPassword($id, $newPassword) {
+        try {
+            $stmt = $this->pdo->prepare("UPDATE admin SET password = :password WHERE admin_id = :id");
+            $stmt->bindParam(':password', password_hash($newPassword, PASSWORD_BCRYPT));
+            $stmt->bindParam(':id', $id);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function updateAdminPhoto($id, $photoPath) {
+        try {
+            $stmt = $this->pdo->prepare("UPDATE admin SET admin_photo = :admin_photo WHERE admin_id = :id");
+            $stmt->bindParam(':admin_photo', $photoPath);
+            $stmt->bindParam(':id', $id);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function getAdminPassword($id) {
+        try {
+            $stmt = $this->pdo->prepare("SELECT password FROM admin WHERE admin_id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+    // END ADMIN DETAILS 
 // downloads start 
 public function getDownloadData($currentMonth, $currentYear, $isSignedIn) {
     $userCondition = $isSignedIn ? 'IS NOT NULL' : 'IS NULL';
@@ -377,6 +424,32 @@ public function getDownloadData($currentMonth, $currentYear, $isSignedIn) {
     public function restoreFile($file_id) {
         try {
             $query = "UPDATE files SET status = 'Declined' WHERE id = ?";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([$file_id]);
+    
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+    public function recycleFile($file_id) {
+        try {
+            $query = "UPDATE files SET isDeleted = 1 WHERE id = ?";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([$file_id]);
+    
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+
+
+         
+    public function deleteFile($file_id) {
+        try {
+            $query = "UPDATE files SET isDeleted = 2 WHERE id = ?";
             $stmt = $this->pdo->prepare($query);
             $stmt->execute([$file_id]);
     
@@ -622,6 +695,14 @@ public function update_admin_status($username, $status) {
     }
 }
 // end 
+
+//USER STATUS
+public function updateUserStatus($user_id, $status) {
+    $stmt = $this->pdo->prepare("UPDATE users SET status = ? WHERE user_id = ?");
+    return $stmt->execute([$status, $user_id]);
+}
+
+// USER STAUS END 
 
 
 public function get_categories() {
