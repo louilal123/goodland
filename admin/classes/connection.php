@@ -6,7 +6,7 @@ define('DB_PASSWORD', '1Goodland_db');
 define('DB_NAME', 'u510162695_goodland_db');
 define('DB_CHARSET', 'utf8mb4'); 
 
-
+//
 // define('DB_HOST', 'localhost');
 // define('DB_USERNAME', 'root');
 // define('DB_PASSWORD', '');
