@@ -150,22 +150,22 @@
       </div>
       <div class="modal-body">
         <form id="editMemberStatusForm" method="post" action="classes/delete_user.php">
-          <input type="hidden" id="editUserId" name="user_id">
+          <input type="text" id="UserId" name="user_id">
           <div class="mb-3">
             <label for="editUserPhoto" class="form-label">User Photo</label>
             <div id="editUserPhotoContainer">
-              <img id="editUserPhoto" src="" alt="User Photo" style="display: flex; margin:auto; width: 100px; height: 100px;">
+              <img id="UserPhoto" src="" alt="User Photo" style="display: flex; margin:auto; width: 100px; height: 100px;">
             </div>
           </div>
           <div class="mb-3">
-            <label for="editUserName" class="form-label">Full Name</label>
-            <input type="text" class="form-control" id="editUserName" readonly>
+            <label for="UserName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="UserName" readonly>
           </div>
         
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary">Delete</button>
+        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i>Delete</button>
         </form>
       </div>
     </div>
@@ -252,9 +252,9 @@ document.addEventListener('DOMContentLoaded', function () {
             
             // Update the modal with user data
             const modal = document.getElementById('deleteuserBtn');
-            modal.querySelector('#editUserId').value = userId;
-            modal.querySelector('#editUserName').value = fullName;
-            modal.querySelector('#editUserPhoto').src = userPhoto;
+            modal.querySelector('#UserId').value = userId;
+            modal.querySelector('#UserName').value = fullName;
+            modal.querySelector('#UserPhoto').src = userPhoto;
         });
     });
 });
