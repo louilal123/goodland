@@ -35,13 +35,13 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Manage Pending Files</h3>
+                            <h3 class="mb-0">Manage Approved Files</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                Pending Files
+                                Approved Files
                                 </li>
                             </ol>
                         </div>
@@ -54,7 +54,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                         <div class="col-md-12">
                                 <div class="card mb-4 card-outline-primary">
                                     <div class="card-header d-flex ">
-                                        <h3 class="card-title mb-0">List of Pending Files</h3>
+                                        <h3 class="card-title mb-0">List of Approved Files</h3>
                                          </div>
     
                                     <div class="card-body">
