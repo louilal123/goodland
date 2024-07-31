@@ -119,7 +119,7 @@ $download_data = $mainClass->getDownloadData1();
             <div class="app-content"> 
                 <div class="container-fluid"> 
                     <div class="row mt-0">
-								    <div class="col-sm-6 col-lg-3">
+								    <!-- <div class="col-sm-6 col-lg-3">
 								 	    <div class="card text-bg-primary bg-opacity-75" style="border-radius: 5px;">
 											<div class="card-body">
 												<div class="row">
@@ -137,7 +137,7 @@ $download_data = $mainClass->getDownloadData1();
 												
 											</div>
 										</div>
-									</div> 
+									</div>  -->
 									<div class="col-sm-6 col-lg-3">
 										<div class="card text-bg-success" style="border-radius: 5px;">
 											<div class="card-body">
@@ -214,7 +214,7 @@ $download_data = $mainClass->getDownloadData1();
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title text-light">Total Files</h5>
+														<h5 class="card-title text-light">User Uploaded Files</h5>
 													</div>
 
 													<div class="col-auto mt-4">

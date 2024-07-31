@@ -72,7 +72,6 @@ unset($_SESSION['error_message']);
                 </div>
 
 
-
                   <div class="d-flex justify-content-around align-items-center mb-4">
                       <!-- Checkbox -->
                       <div class="form-check">
