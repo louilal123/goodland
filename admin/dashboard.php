@@ -360,7 +360,7 @@ $download_data = $mainClass->getDownloadData1();
 
 <div class="row mt-4 ">
     <div class="col-lg-5 col-md-12 col-sm-12 ">
-        <div class="card  bg-primary bg-opacity-10">
+        <div class="card ">
            <div class="card-body">
 		   <div id="piechart_3d" style=" height: 390px;"></div>
       
@@ -369,7 +369,7 @@ $download_data = $mainClass->getDownloadData1();
     </div>
 
     <div class="col-lg-7 col-md-12 col-sm-12">
-        <div class="card  bg-primary bg-opacity-10">
+        <div class="card ">
 			<div class="card-body">
 			<div id="chart_div"style=" height: 390px;"></div>
 			</div>
