@@ -92,7 +92,7 @@ session_start();
 
                 <button class="btn btn-outline-warning btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign in</button>
 
-                <p>Don't have an account?
+                <p class="text-center">Don't have an account?
                     <a href="register">Register</a>
                 </p>
             </form>
