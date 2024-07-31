@@ -334,7 +334,6 @@ $download_data = $mainClass->getDownloadData1();
 							<div class="col-md-7" >
 								<div class="card" >
 									<div class="card-header">
-									<h5 class="mb-0"><strong>Website Visits for the <?php echo date("M - Y")."\n";?></strong></h5>
 									
 									</div>
 									<div class="card-body">
@@ -346,7 +345,6 @@ $download_data = $mainClass->getDownloadData1();
 							<div class="col-md-5">
 								<div class="card">
 									<div class="card-header">
-											<h5 class="mb-0"><strong>Downloads for the <?php echo date("M - Y")."\n";?></strong></h5>
 											
 									</div>
 									<div class="card-body">
