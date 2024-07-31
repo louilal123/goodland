@@ -75,18 +75,14 @@
                                                             <td><?php echo date("M d, Y h:i A", strtotime($user['date_updated'])); ?></td>
                                                             <td><?php echo date("M d, Y h:i A", strtotime($user['last_login'])); ?></td>
                                                             <td>
-                                                                <button class="btn btn-info btn-sm viewMemberBtn" data-bs-toggle="modal" data-bs-target="#viewMemberModal"><i class="bi bi-eye"></i></button>
+                                                                <button class="btn btn-info btn-sm viewMemberBtn" 
+                                                                data-bs-toggle="modal" data-bs-target="#viewMemberModal"><i class="bi bi-eye"></i></button>
                                                                 <a href="#" class="btn btn-success btn-sm editMemberBtn" 
                                                                 data-bs-toggle="modal" data-bs-target="#editMemberStatusModal">
                                                                 <i class="bi bi-pencil"></i></a>
-                                                                <button class="btn btn-danger btn-sm deleteMemberBtn" 
-                        data-bs-toggle="modal" 
-                        data-bs-target="#confirmDeleteModal" 
-                        data-url="classes/delete_user.php?id=<?=$user['user_id']; ?>" 
-                        data-username="<?php echo htmlspecialchars($user['fullname']); ?>">
-                    <i class="bi bi-trash"></i>
-                </button>
-                                                              </td>
+                                                                <a href="#" 
+                                                                class="btn btn-danger btn-sm deleteuserBtn"><i class="bi bi-trash"></i></a>
+                                                            </td>
                                                         </tr>
                                                     <?php endforeach; ?>
                                                 </tbody>
@@ -127,6 +123,38 @@
               <option value="enabled">Enabled</option>
               <option value="disabled">Disabled</option>
             </select>
+          </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Member Status Modal -->
+<div class="modal fade" id="deleteuserBtn" tabindex="-1" aria-labelledby="editMemberStatusModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editMemberStatusModalLabel">Edit User Status</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="editMemberStatusForm" method="post" action="classes/delete_user.php">
+          <input type="hidden" id="editUserId" name="user_id">
+          <div class="mb-3">
+            <label for="editUserPhoto" class="form-label">User Photo</label>
+            <div id="editUserPhotoContainer">
+              <img id="editUserPhoto" src="" alt="User Photo" style="display: flex; margin:auto; width: 100px; height: 100px;">
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="editUserName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="editUserName" readonly>
           </div>
         
       </div>
@@ -207,6 +235,26 @@
         </div>
     </div>
     <?php include "includes/footer.php"; ?>
+    <script>
+   document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.deleteuserBtn').forEach(button => {
+    button.addEventListener('click', function () {
+      const row = button.closest('tr');
+      const userId = row.children[0].textContent.trim();
+      const fullName = row.children[1].textContent.trim();
+      const userPhoto = row.children[6].querySelector('img').src; // Assumes photo is in the 7th column
+      const statusText = row.children[5].textContent.trim();
+      
+      document.getElementById('editUserId').value = userId;
+      document.getElementById('editUserName').value = fullName;
+      document.getElementById('editUserPhoto').src = userPhoto;
+      document.getElementById('editStatus').value = statusText === 'Enabled' ? 'enabled' : 'disabled';
+    });
+  });
+});
+
+
+</script>
 <script>
    document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.editMemberBtn').forEach(button => {
@@ -260,24 +308,6 @@
   });
 });
 
-</script>
-
-  <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const confirmDeleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
-    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-    const userNameSpan = document.getElementById('userName');
-    
-    document.querySelectorAll('.deleteMemberBtn').forEach(button => {
-        button.addEventListener('click', function (event) {
-            const userName = this.getAttribute('data-username');
-            const deleteUrl = this.getAttribute('data-url');
-            
-            userNameSpan.textContent = userName;
-            confirmDeleteBtn.setAttribute('href', deleteUrl);
-        });
-    });
-});
 </script>
 </body>
 </html>

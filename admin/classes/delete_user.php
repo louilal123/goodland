@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-if (isset($_GET['id'])) {
-    $member_id = intval($_GET['id']); 
+if (isset($_POST['id'])) {
+    $member_id = intval($_POST['id']); 
     require_once "Main_class.php"; 
     $conn = new Main_class();
     $conn->delete_user($user_id); 
