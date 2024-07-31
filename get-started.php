@@ -55,6 +55,8 @@ session_start();
               <form style="color: #757575;" action="classes/login.php" method="post">
                 <div class="md-form mb-4">
                     <label for="materialLoginFormEmailOrUsername">Email or Username</label>
+                    <i class="fas fa-lock trailing" id="togglePassword" style="position: absolute; right: 10px; top: 50%;
+                     transform: translateY(-50%); cursor: pointer; z-index: 999;"></i>
                     <input type="text" id="materialLoginFormEmailOrUsername" class="form-control 
                     <?php echo !empty($_SESSION['error_emailOrUsername']) ? 'is-invalid' : ''; ?>" 
                     name="emailOrUsername" value="<?php echo $_SESSION['form_data']['emailOrUsername'] ?? ''; ?>">
@@ -65,6 +67,8 @@ session_start();
 
                 <div class="md-form mb-4">
                     <label for="materialLoginFormPassword">Password</label>
+                    <i class="fas fa-lock trailing" id="togglePassword" style="position: absolute; right: 10px; top: 50%;
+                     transform: translateY(-50%); cursor: pointer; z-index: 999;"></i>
                     <input type="password" id="validationCustomPassword" class="form-control 
                     <?php echo !empty($_SESSION['error_password']) ? 'is-invalid' : ''; ?>" 
                     name="password">

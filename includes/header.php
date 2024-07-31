@@ -26,6 +26,9 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" ></script>
     
    
+    <!-- font-aswesome  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
 <link rel="stylesheet" href="mdbfolder/mdb.min.css">
 
   <!-- Main CSS File -->
