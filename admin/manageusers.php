@@ -81,7 +81,9 @@
                                                                 data-bs-toggle="modal" data-bs-target="#editMemberStatusModal">
                                                                 <i class="bi bi-pencil"></i></a>
                                                                 <a href="#" 
-                                                                class="btn btn-danger btn-sm deleteuserBtn"><i class="bi bi-trash"></i></a>
+                                                                class="btn btn-danger btn-sm deleteuserBtn"
+                                                                data-bs-toggle="modal" data-bs-target="#editMemberStatusModal">
+                                                                <i class="bi bi-trash"></i></a>
                                                             </td>
                                                         </tr>
                                                     <?php endforeach; ?>
