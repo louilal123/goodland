@@ -49,7 +49,7 @@ session_start();
           <div class="col-md-6 offset-md-3 mt-5 mb-5">
             <div class="card">
             <div class="card-header">
-            <img src="uploads/logogoodland.png" style="display: flex; margin: auto; width: 150px;height: 60px;">
+            <img src="../uploads/logogoodland.png" style="display: flex; margin: auto; width: 150px;height: 60px;">
             </div>
             <h2 class=" info-color white-text text-center py-4 ">
                 <strong>Sign In</strong>
