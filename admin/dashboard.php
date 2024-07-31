@@ -260,7 +260,7 @@ $download_data = $mainClass->getDownloadData1();
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title text-light">Total Visitors</h5>
+														<h5 class="card-title text-light">Visitors</h5>
 													</div>
 
 													<div class="col-auto mt-4">
