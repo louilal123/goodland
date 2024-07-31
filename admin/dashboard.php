@@ -211,6 +211,29 @@ $download_data = $mainClass->getDownloadData1();
 					</div>
 					<div class="row mt-4">
 
+					<div class="col-sm-6 col-lg-3">
+										<div class="card text-bg-danger" style="border-radius: 5px;">
+											<div class="card-body">
+												<div class="row">
+													<div class="col mt-0">
+														<h5 class="card-title text-light">Recycled Files</h5>
+													</div>
+
+													<div class="col-auto mt-4">
+														<div class="stat text-primary">
+                                                         <i class="fas fa-trash small-box text-light"></i>
+														</div>
+													</div>
+												</div>
+												<h1 class=" text-light"> <?php echo $count_recycled_files ?? '0'; ?></h1>
+												<div class="mb-0">
+												
+													
+												</div>
+											</div>
+										</div>
+                                    </div>
+
 									
 					<div class="col-sm-6 col-lg-3">
 								 	    <div class="card text-bg-primary bg-opacity-75" style="border-radius: 5px;">
@@ -277,28 +300,7 @@ $download_data = $mainClass->getDownloadData1();
 										</div>
                                     </div>
 
-									<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-danger" style="border-radius: 5px;">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title text-light">Recycled Files</h5>
-													</div>
-
-													<div class="col-auto mt-4">
-														<div class="stat text-primary">
-                                                         <i class="fas fa-trash small-box text-light"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class=" text-light"> <?php echo $count_recycled_files ?? '0'; ?></h1>
-												<div class="mb-0">
-												
-													
-												</div>
-											</div>
-										</div>
-                                    </div>
+								
                                        
 									
 
@@ -329,44 +331,44 @@ $download_data = $mainClass->getDownloadData1();
 					<div class="row mt-4 ">
 						
 
-						<div class="col-md-7" >
-							<div class="card" >
-								<div class="card-header">
-								<h5 class="mb-0"><strong>Website Visits for the <?php echo date("M - Y")."\n";?></strong></h5>
-								
-								</div>
-								<div class="card-body">
-									<div id="line_chart" style="height: 390px;">
+							<div class="col-md-7" >
+								<div class="card" >
+									<div class="card-header">
+									<h5 class="mb-0"><strong>Website Visits for the <?php echo date("M - Y")."\n";?></strong></h5>
+									
+									</div>
+									<div class="card-body">
+										<div id="line_chart" style="height: 390px;">
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-md-5">
-							<div class="card">
-								<div class="card-header">
-										<h5 class="mb-0"><strong>Downloads for the <?php echo date("M - Y")."\n";?></strong></h5>
+							<div class="col-md-5">
+								<div class="card">
+									<div class="card-header">
+											<h5 class="mb-0"><strong>Downloads for the <?php echo date("M - Y")."\n";?></strong></h5>
+											
+									</div>
+									<div class="card-body">
 										
-								</div>
-								<div class="card-body">
-									
-									<div id="side_chart" style="width: 600px; height: 390px;"></div>
-								</div>
-						</div>
-						</div>
+										<div id="side_chart" style="width: 600px; height: 390px;"></div>
+									</div>
+							</div>
+							</div>
 					</div>
 
 
 <div class="row mt-4 ">
     <div class="col-lg-5 col-md-12 col-sm-12 ">
         <div class="card  bg-primary bg-opacity-10">
-           <div id="piechart_3d" style=" height: 450px;"></div>
+           <div id="piechart_3d" style=" height: 390px;"></div>
       
         </div>
     </div>
 
     <div class="col-lg-7 col-md-12 col-sm-12">
         <div class="card  bg-primary bg-opacity-10">
-			<div id="chart_div" ></div>
+			<div id="chart_div"style=" height: 390px;"></div>
 		</div>
    	</div>
 	
