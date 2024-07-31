@@ -40,7 +40,9 @@ session_start();
 <?php include "includes/topnav.php"; ?>
 
   <main class="main">
+
     <section class="services section">
+    <img src="uploads/mambacayao.png" alt="" data-aos="fade-in">
       <div class="container mb-5 mt-2">
         <div class="row">
           
