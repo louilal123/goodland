@@ -74,9 +74,9 @@ session_start();
                 <div class="d-flex justify-content-around text-center mt-3 mb-3">
                   <div>
                     <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="materialLoginFormRemember">
-                      <label class="form-check-label" for="materialLoginFormRemember">Remember me</label>
-                    </div>
+                    <input class="form-check-input" type="checkbox" value="" id="showPasswordCheckbox" />
+                    <label class="form-check-label" for="form1Example3">Show Password</label>
+                  </div>
                   </div>
                   <div>
                     <a href="#">Forgot password?</a>
@@ -100,6 +100,17 @@ session_start();
   </main>
 
 <?php include "includes/footer.php"; ?>
+
+<script>
+    document.getElementById('showPasswordCheckbox').addEventListener('change', function () {
+        var passwordInput = document.getElementById('validationCustomPassword');
+        if (this.checked) {
+            passwordInput.type = 'text';
+        } else {
+            passwordInput.type = 'password';
+        }
+    });
+</script>
 
 </body>
 </html>
