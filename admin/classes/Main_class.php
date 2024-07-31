@@ -858,8 +858,13 @@ public function delete_member($member_id) {
 }
 
 public function delete_user($user_id) {
-   
     try {
+        // First, delete related records from the files table
+        $stmt = $this->pdo->prepare("DELETE FROM files WHERE user_id = :user_id");
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        // Then, delete the user
         $stmt = $this->pdo->prepare("DELETE FROM users WHERE user_id = :user_id");
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 
@@ -877,6 +882,7 @@ public function delete_user($user_id) {
     header('Location: ../manageusers.php');
     exit();
 }
+
 
 public function get_all_documents() {
     $stmt = $this->pdo->prepare("SELECT * FROM documents");
