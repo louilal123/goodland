@@ -861,7 +861,7 @@ public function delete_user($user_id) {
    
     try {
         $stmt = $this->pdo->prepare("DELETE FROM users WHERE user_id = :user_id");
-        $stmt->bindParam(':user_id', $member_id, PDO::PARAM_INT);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 
         if ($stmt->execute()) {
             $_SESSION['status'] = "User successfully deleted!";

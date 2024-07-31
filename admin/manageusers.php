@@ -150,7 +150,7 @@
       </div>
       <div class="modal-body">
         <form id="editMemberStatusForm" method="post" action="classes/delete_user.php">
-          <input type="text" id="UserId" name="user_id">
+          <input type="hidden" id="UserId" name="user_id">
           <div class="mb-3">
             <label for="editUserPhoto" class="form-label">User Photo</label>
             <div id="editUserPhotoContainer">
@@ -165,7 +165,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i>Delete</button>
+        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
         </form>
       </div>
     </div>
