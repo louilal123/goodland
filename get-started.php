@@ -53,29 +53,30 @@ session_start();
               <div class="card-body px-lg-5 pt-0 ">
 
               <form style="color: #757575;" action="classes/login.php" method="post">
-                <div class="md-form mb-4">
-                    <label for="materialLoginFormEmailOrUsername">Email or Username</label>
-                    <i class="fas fa-lock trailing" id="togglePassword" style="position: absolute; right: 10px; top: 50%;
-                     transform: translateY(-50%); cursor: pointer; z-index: 999;"></i>
-                    <input type="text" id="materialLoginFormEmailOrUsername" class="form-control 
-                    <?php echo !empty($_SESSION['error_emailOrUsername']) ? 'is-invalid' : ''; ?>" 
-                    name="emailOrUsername" value="<?php echo $_SESSION['form_data']['emailOrUsername'] ?? ''; ?>">
-                    <?php if (!empty($_SESSION['error_emailOrUsername'])): ?>
-                        <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_emailOrUsername']; unset($_SESSION['error_emailOrUsername']); ?></div>
-                    <?php endif; ?>
-                </div>
+                   <!-- Email or Username input -->
+                  <div data-mdb-input-init class="form-outline mb-4">
+                      <i class="fas fa-user trailing" id="toggleEmailOrUsername"></i>
+                      <input type="text" name="emailOrUsername" class="form-control form-control-lg form-icon-trailing
+                      <?php echo !empty($_SESSION['error_emailOrUsername']) ? 'is-invalid' : ''; ?>" id="materialLoginFormEmailOrUsername" 
+                      value="<?php echo $_SESSION['form_data']['emailOrUsername'] ?? ''; ?>" />
+                      <label class="form-label" for="materialLoginFormEmailOrUsername">Email or Username</label>
+                      <?php if (!empty($_SESSION['error_emailOrUsername'])): ?>
+                          <div class="invalid-feedback"><?php echo $_SESSION['error_emailOrUsername']; unset($_SESSION['error_emailOrUsername']); ?></div>
+                      <?php endif; ?>
+                  </div>
 
-                <div class="md-form mb-4">
-                    <label for="materialLoginFormPassword">Password</label>
-                    <i class="fas fa-lock trailing" id="togglePassword" style="position: absolute; right: 10px; top: 50%;
-                     transform: translateY(-50%); cursor: pointer; z-index: 999;"></i>
-                    <input type="password" id="validationCustomPassword" class="form-control 
-                    <?php echo !empty($_SESSION['error_password']) ? 'is-invalid' : ''; ?>" 
-                    name="password">
-                    <?php if (!empty($_SESSION['error_password'])): ?>
-                        <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_password']; unset($_SESSION['error_password']); ?></div>
-                    <?php endif; ?>
-                </div>
+                  <!-- Password input -->
+                  <div data-mdb-input-init class="form-outline mb-4" style="position: relative;">
+                      <i class="fas fa-lock trailing" id="togglePassword" style="position: absolute; right: 10px; top: 50%;
+                      transform: translateY(-50%); cursor: pointer; z-index: 999;"></i>
+                      <input type="password" name="password" class="form-control form-control-lg form-icon-trailing
+                      <?php echo !empty($_SESSION['error_password']) ? 'is-invalid' : ''; ?>" 
+                      id="validationCustomPassword" aria-describedby="inputGroupPrepend" style="cursor: pointer !important;" />
+                      <label class="form-label" for="validationCustomPassword">Password</label>
+                      <?php if (!empty($_SESSION['error_password'])): ?>
+                          <div class="invalid-feedback"><?php echo $_SESSION['error_password']; unset($_SESSION['error_password']); ?></div>
+                      <?php endif; ?>
+                  </div>
 
                 <div class="d-flex justify-content-around text-center mt-3 mb-3">
                     <div>
