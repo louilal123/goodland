@@ -79,9 +79,14 @@
                                                                 <a href="#" class="btn btn-success btn-sm editMemberBtn" 
                                                                 data-bs-toggle="modal" data-bs-target="#editMemberStatusModal">
                                                                 <i class="bi bi-pencil"></i></a>
-                                                                <a href="classes/delete_user.php?id=<?=$user['user_id']; ?>" 
-                                                                class="btn btn-danger btn-sm deleteMemberBtn"><i class="bi bi-trash"></i></a>
-                                                            </td>
+                                                                <button class="btn btn-danger btn-sm deleteMemberBtn" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#confirmDeleteModal" 
+                        data-url="classes/delete_user.php?id=<?=$user['user_id']; ?>" 
+                        data-username="<?php echo htmlspecialchars($user['fullname']); ?>">
+                    <i class="bi bi-trash"></i>
+                </button>
+                                                              </td>
                                                         </tr>
                                                     <?php endforeach; ?>
                                                 </tbody>
@@ -255,6 +260,24 @@
   });
 });
 
+</script>
+
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const confirmDeleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+    const userNameSpan = document.getElementById('userName');
+    
+    document.querySelectorAll('.deleteMemberBtn').forEach(button => {
+        button.addEventListener('click', function (event) {
+            const userName = this.getAttribute('data-username');
+            const deleteUrl = this.getAttribute('data-url');
+            
+            userNameSpan.textContent = userName;
+            confirmDeleteBtn.setAttribute('href', deleteUrl);
+        });
+    });
+});
 </script>
 </body>
 </html>
