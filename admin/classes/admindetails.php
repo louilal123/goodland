@@ -52,7 +52,7 @@ $uploadedDocumentsCount =$mainClass->count_all_documents();
 $downloadsCount = $mainClass->count_downloads();
 
 // total visitors count 
-$uniqueVisitorCount = $conn->get_unique_visitor_count();
+$uniqueVisitorCount = $mainClass->get_unique_visitor_count();
 
 $visitors = $mainClass->getVisitors();
 
