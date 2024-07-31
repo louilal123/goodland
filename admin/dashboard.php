@@ -333,9 +333,7 @@ $download_data = $mainClass->getDownloadData1();
 
 							<div class="col-md-7" >
 								<div class="card" >
-									<div class="card-header">
 									
-									</div>
 									<div class="card-body">
 										<div id="line_chart" style="height: 390px;">
 										</div>
@@ -344,9 +342,7 @@ $download_data = $mainClass->getDownloadData1();
 							</div>
 							<div class="col-md-5">
 								<div class="card">
-									<div class="card-header">
-											
-									</div>
+									
 									<div class="card-body">
 										
 										<div id="side_chart" style="width: 600px; height: 390px;"></div>
