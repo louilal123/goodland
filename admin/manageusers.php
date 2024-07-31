@@ -81,9 +81,12 @@
                                                                 data-bs-toggle="modal" data-bs-target="#editMemberStatusModal">
                                                                 <i class="bi bi-pencil"></i></a>
                                                                 <a href="#" 
-                                                                class="btn btn-danger btn-sm deleteuserBtn"
-                                                                data-bs-toggle="modal" data-bs-target="#editMemberStatusModal">
-                                                                <i class="bi bi-trash"></i></a>
+   class="btn btn-danger btn-sm deleteuserBtn"
+   data-bs-toggle="modal" 
+   data-bs-target="#deleteuserBtn"> <!-- Ensure ID matches the modal -->
+   <i class="bi bi-trash"></i>
+</a>
+
                                                             </td>
                                                         </tr>
                                                     <?php endforeach; ?>
@@ -238,25 +241,25 @@
     </div>
     <?php include "includes/footer.php"; ?>
     <script>
-   document.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('.deleteuserBtn').forEach(button => {
-    button.addEventListener('click', function () {
-      const row = button.closest('tr');
-      const userId = row.children[0].textContent.trim();
-      const fullName = row.children[1].textContent.trim();
-      const userPhoto = row.children[6].querySelector('img').src; // Assumes photo is in the 7th column
-      const statusText = row.children[5].textContent.trim();
-      
-      document.getElementById('editUserId').value = userId;
-      document.getElementById('editUserName').value = fullName;
-      document.getElementById('editUserPhoto').src = userPhoto;
-      document.getElementById('editStatus').value = statusText === 'Enabled' ? 'enabled' : 'disabled';
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.deleteuserBtn').forEach(button => {
+        button.addEventListener('click', function () {
+            const row = button.closest('tr');
+            const userId = row.children[0].textContent.trim();
+            const fullName = row.children[1].textContent.trim();
+            const userPhoto = row.children[6].querySelector('img').src; // Assumes photo is in the 7th column
+            const statusText = row.children[5].textContent.trim();
+            
+            // Update the modal with user data
+            const modal = document.getElementById('deleteuserBtn');
+            modal.querySelector('#editUserId').value = userId;
+            modal.querySelector('#editUserName').value = fullName;
+            modal.querySelector('#editUserPhoto').src = userPhoto;
+        });
     });
-  });
 });
-
-
 </script>
+
 <script>
    document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.editMemberBtn').forEach(button => {
