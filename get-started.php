@@ -46,40 +46,41 @@ session_start();
       <div class="container mb-5 mt-2">
         <div class="row">
           
-        <div class="col-md-6 offset-md-3 mt-5 mb-5">
-    <div class="card">
-        <div class="card-header">
-            <img src="uploads/logogoodland.png" style="display: flex; margin: auto; width: 150px; height: 60px;">
-        </div>
-        <h2 class="info-color white-text text-center py-4">
-            <strong>Sign In</strong>
-        </h2>
-        <div class="card-body px-lg-5 pt-0">
-            <form style="color: #757575;" action="classes/login.php" method="post">
-                <!-- Email or Username input -->
-                <div data-mdb-input-init class="form-outline mb-4">
-                    <i class="fas fa-user trailing" id="toggleEmailOrUsername"></i>
-                    <input type="text" name="emailOrUsername" class="form-control form-control-lg form-icon-trailing
-                    <?php echo !empty($_SESSION['error_emailOrUsername']) ? 'is-invalid' : ''; ?>" id="materialLoginFormEmailOrUsername" 
-                    value="<?php echo $_SESSION['form_data']['emailOrUsername'] ?? ''; ?>" />
-                    <label class="form-label" for="materialLoginFormEmailOrUsername">Email or Username</label>
-                    <?php if (!empty($_SESSION['error_emailOrUsername'])): ?>
-                        <div class="invalid-feedback"><?php echo $_SESSION['error_emailOrUsername']; unset($_SESSION['error_emailOrUsername']); ?></div>
-                    <?php endif; ?>
-                </div>
+          <div class="col-md-6 offset-md-3 mt-5 mb-5">
+            <div class="card">
+            <div class="card-header">
+            <img src="uploads/logogoodland.png" style="display: flex; margin: auto; width: 150px;height: 60px;">
+            </div>
+            <h2 class=" info-color white-text text-center py-4 ">
+                <strong>Sign In</strong>
+              </h2>
+              <div class="card-body px-lg-5 pt-0 ">
 
-                <!-- Password input -->
-                <div data-mdb-input-init class="form-outline mb-4" style="position: relative;">
-                    <i class="fas fa-lock trailing" id="togglePassword" style="position: absolute; right: 10px; top: 50%;
-                    transform: translateY(-50%); cursor: pointer; z-index: 999;"></i>
-                    <input type="password" name="password" class="form-control form-control-lg form-icon-trailing
-                    <?php echo !empty($_SESSION['error_password']) ? 'is-invalid' : ''; ?>" 
-                    id="validationCustomPassword" aria-describedby="inputGroupPrepend" style="cursor: pointer !important;" />
-                    <label class="form-label" for="validationCustomPassword">Password</label>
-                    <?php if (!empty($_SESSION['error_password'])): ?>
-                        <div class="invalid-feedback"><?php echo $_SESSION['error_password']; unset($_SESSION['error_password']); ?></div>
-                    <?php endif; ?>
-                </div>
+              <form style="color: #757575;" action="classes/login.php" method="post">
+                   <!-- Email or Username input -->
+                  <div data-mdb-input-init class="form-outline mb-4">
+                      <i class="fas fa-user trailing" id="toggleEmailOrUsername"></i>
+                      <input type="text" name="emailOrUsername" class="form-control form-control-lg form-icon-trailing
+                      <?php echo !empty($_SESSION['error_emailOrUsername']) ? 'is-invalid' : ''; ?>" id="materialLoginFormEmailOrUsername" 
+                      value="<?php echo $_SESSION['form_data']['emailOrUsername'] ?? ''; ?>" />
+                      <label class="form-label" for="materialLoginFormEmailOrUsername">Email or Username</label>
+                      <?php if (!empty($_SESSION['error_emailOrUsername'])): ?>
+                          <div class="invalid-feedback"><?php echo $_SESSION['error_emailOrUsername']; unset($_SESSION['error_emailOrUsername']); ?></div>
+                      <?php endif; ?>
+                  </div>
+
+                  <!-- Password input -->
+                  <div data-mdb-input-init class="form-outline mb-4" style="position: relative;">
+                      <i class="fas fa-lock trailing" id="togglePassword" style="position: absolute; right: 10px; top: 50%;
+                      transform: translateY(-50%); cursor: pointer; z-index: 999;"></i>
+                      <input type="password" name="password" class="form-control form-control-lg form-icon-trailing
+                      <?php echo !empty($_SESSION['error_password']) ? 'is-invalid' : ''; ?>" 
+                      id="validationCustomPassword" aria-describedby="inputGroupPrepend" style="cursor: pointer !important;" />
+                      <label class="form-label" for="validationCustomPassword">Password</label>
+                      <?php if (!empty($_SESSION['error_password'])): ?>
+                          <div class="invalid-feedback"><?php echo $_SESSION['error_password']; unset($_SESSION['error_password']); ?></div>
+                      <?php endif; ?>
+                  </div>
 
                 <div class="d-flex justify-content-around text-center mt-3 mb-3">
                     <div>
@@ -99,11 +100,12 @@ session_start();
                     <a href="register">Register</a>
                 </p>
             </form>
-        </div>
-    </div>
-</div>
 
 
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
     </section>
