@@ -36,7 +36,7 @@ unset($_SESSION['error_message']);
             <img src="uploads/logogoodland.png" style="display: flex; margin: auto; width: 150px; height: 60px;">
         </div>
         <h2 class="info-color white-text text-center py-4">
-            <strong>Sign In</strong>
+            <strong>Login Administrator</strong>
         </h2>
         <div class="card-body px-lg-5 pt-0">
             <form style="color: #757575;" action="classes/login.php" method="post">
