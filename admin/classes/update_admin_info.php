@@ -16,14 +16,14 @@ if (isset($_POST['fullname']) && isset($_POST['username']) && isset($_POST['emai
     if ($username !== $currentAdmin['username'] && $mainClass->usernameExists($username)) {
         $_SESSION['status'] = "Username already taken";
         $_SESSION['status_icon'] = "error";
-        header('Location: profile.php');
+        header('Location: ../profile.php');
         exit();
     }
 
     if ($email !== $currentAdmin['email'] && $mainClass->emailExists($email)) {
         $_SESSION['status'] = "Email already taken";
         $_SESSION['status_icon'] = "error";
-        header('Location: profile.php');
+        header('Location: ../profile.php');
         exit();
     }
 
@@ -36,12 +36,12 @@ if (isset($_POST['fullname']) && isset($_POST['username']) && isset($_POST['emai
         $_SESSION['status'] = "Error updating profile";
         $_SESSION['status_icon'] = "error";
     }
-    header('Location: profile.php');
+    header('Location: ../profile.php');
     exit();
 } else {
     $_SESSION['status'] = "Missing required fields";
     $_SESSION['status_icon'] = "error";
-    header('Location: profile.php');
+    header('Location: ../profile.php');
     exit();
 }
 ?>
