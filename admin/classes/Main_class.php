@@ -862,7 +862,7 @@ public function get_unique_visitor_count() {
         $stmt = $this->pdo->prepare("
             SELECT COUNT(*) AS unique_visitors
             FROM (
-                SELECT DISTINCT ip, city, region, country, latitude, longitude
+                SELECT DISTINCT user_id ip, city, region, country, latitude, longitude
                 FROM visitor_data
             ) AS unique_visitors_data
         ");
