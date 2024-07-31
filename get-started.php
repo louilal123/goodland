@@ -54,7 +54,7 @@ session_start();
                 <div class="md-form mb-4">
                   <label for="materialLoginFormEmail">E-mail</label>
                   <input type="email" id="materialLoginFormEmail" class="form-control 
-                  <?php echo !empty($_SESSION['error_email']) ? 'is-invalid' : 'is-valid'; ?>" 
+                  <?php echo !empty($_SESSION['error_email']) ? 'is-invalid' : ''; ?>" 
                   name="email" value="<?php echo $_SESSION['form_data']['email'] ?? ''; ?>">
                   <?php if (!empty($_SESSION['error_email'])): ?>
                     <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_email']; unset($_SESSION['error_email']); ?></div>
@@ -82,7 +82,7 @@ session_start();
                     <a href="#">Forgot password?</a>
                   </div>
                 </div>
-<!-- what -->
+
                 <button class="btn btn-outline-warning btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign in</button>
 
                 <p>Don't have an account?
