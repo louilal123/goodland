@@ -5,16 +5,13 @@ require_once __DIR__ . '/../admin/classes/Main_class.php';
 $mainClass = new Main_class();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'];
+    $emailOrUsername = $_POST['emailOrUsername'];
     $password = $_POST['password'];
 
     $hasError = false;
 
-    if (empty($email)) {
-        $_SESSION['error_email'] = "Email is required.";
-        $hasError = true;
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $_SESSION['error_email'] = "Invalid email format.";
+    if (empty($emailOrUsername)) {
+        $_SESSION['error_emailOrUsername'] = "Email or Username is required.";
         $hasError = true;
     }
 
@@ -29,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    $user = $mainClass->user_login($email, $password);
+    $user = $mainClass->user_login($emailOrUsername, $password);
     if ($user) {
         $_SESSION['user_logged_in'] = true;
         $_SESSION['user_id'] = $user['user_id'];
@@ -40,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user_username'] = $user['username'];
         $_SESSION['user_photo'] = $user['user_photo'];
         $_SESSION['user_password'] = $user['password'];
-        $_SESSION['user_date_created'] = $user['date_updated'];
+        $_SESSION['user_date_created'] = $user['date_created'];
         $_SESSION['user_date_updated'] = $user['date_updated'];
         $_SESSION['user_address'] = $user['address'];
         $_SESSION['user_bio'] = $user['bio'];
@@ -50,11 +47,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: ../index.php');
         exit();
     } else {
-        $_SESSION['status'] = "Invalid email or password.";
+        $_SESSION['status'] = "Invalid email/username or password.";
         $_SESSION['status_icon'] = "error";
         header('Location: ../get-started.php');
         exit();
     }
-    var_dump(error_log);
 }
 ?>

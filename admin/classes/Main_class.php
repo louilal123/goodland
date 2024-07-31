@@ -1274,10 +1274,10 @@ public function register_user($fullname, $email, $birthday, $username, $password
         $insertIpStmt->execute([':user_id' => $userId, ':ip' => $ip]);
     }
    
-    public function user_login($email, $password) {
+    public function user_login($emailOrUsername, $password) {
         try {
-            $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
-            $stmt->execute([':email' => $email]);
+            $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = :emailOrUsername OR username = :emailOrUsername LIMIT 1");
+            $stmt->execute([':emailOrUsername' => $emailOrUsername]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
             if ($user && password_verify($password, $user['password'])) {

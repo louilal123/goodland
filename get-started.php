@@ -46,53 +46,52 @@ session_start();
           
           <div class="col-md-6 offset-md-3 mt-5 mb-5">
             <div class="card">
-              <div class="row">
-              <img src="admin/uploads/logogoodland.png" style="display: flex; margin: auto; width: 150px;height: 60px;">
-           
-              </div>
+            
             <h2 class="card-header info-color white-text text-center py-4 ">
                 <strong>Sign In</strong>
               </h2>
               <div class="card-body px-lg-5 pt-0 ">
+
               <form style="color: #757575;" action="classes/login.php" method="post">
                 <div class="md-form mb-4">
-                  <label for="materialLoginFormEmail">E-mail</label>
-                  <input type="email" id="materialLoginFormEmail" class="form-control 
-                  <?php echo !empty($_SESSION['error_email']) ? 'is-invalid' : ''; ?>" 
-                  name="email" value="<?php echo $_SESSION['form_data']['email'] ?? ''; ?>">
-                  <?php if (!empty($_SESSION['error_email'])): ?>
-                    <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_email']; unset($_SESSION['error_email']); ?></div>
-                  <?php endif; ?>
+                    <label for="materialLoginFormEmailOrUsername">Email or Username</label>
+                    <input type="text" id="materialLoginFormEmailOrUsername" class="form-control 
+                    <?php echo !empty($_SESSION['error_emailOrUsername']) ? 'is-invalid' : ''; ?>" 
+                    name="emailOrUsername" value="<?php echo $_SESSION['form_data']['emailOrUsername'] ?? ''; ?>">
+                    <?php if (!empty($_SESSION['error_emailOrUsername'])): ?>
+                        <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_emailOrUsername']; unset($_SESSION['error_emailOrUsername']); ?></div>
+                    <?php endif; ?>
                 </div>
 
                 <div class="md-form mb-4">
-                  <label for="materialLoginFormPassword">Password</label>
-                  <input type="password" id="validationCustomPassword" class="form-control 
-                  <?php echo !empty($_SESSION['error_password']) ? 'is-invalid' : ''; ?>" 
-                  name="password">
-                  <?php if (!empty($_SESSION['error_password'])): ?>
-                    <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_password']; unset($_SESSION['error_password']); ?></div>
-                  <?php endif; ?>
+                    <label for="materialLoginFormPassword">Password</label>
+                    <input type="password" id="validationCustomPassword" class="form-control 
+                    <?php echo !empty($_SESSION['error_password']) ? 'is-invalid' : ''; ?>" 
+                    name="password">
+                    <?php if (!empty($_SESSION['error_password'])): ?>
+                        <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_password']; unset($_SESSION['error_password']); ?></div>
+                    <?php endif; ?>
                 </div>
 
                 <div class="d-flex justify-content-around text-center mt-3 mb-3">
-                  <div>
-                    <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="showPasswordCheckbox" />
-                    <label class="form-check-label" for="form1Example3">Show Password</label>
-                  </div>
-                  </div>
-                  <div>
-                    <a href="#">Forgot password?</a>
-                  </div>
+                    <div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="showPasswordCheckbox" />
+                            <label class="form-check-label" for="form1Example3">Show Password</label>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="#">Forgot password?</a>
+                    </div>
                 </div>
 
                 <button class="btn btn-outline-warning btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign in</button>
 
                 <p>Don't have an account?
-                  <a href="register">Register</a>
+                    <a href="register">Register</a>
                 </p>
-              </form>
+            </form>
+
 
               </div>
 
