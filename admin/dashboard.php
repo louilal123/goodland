@@ -119,25 +119,27 @@ $download_data = $mainClass->getDownloadData1();
             <div class="app-content"> 
                 <div class="container-fluid"> 
                     <div class="row mt-0">
-								    <!-- <div class="col-sm-6 col-lg-3">
-								 	    <div class="card text-bg-primary bg-opacity-75" style="border-radius: 5px;">
+								    <!--   -->
+									<div class="col-sm-6 col-lg-3">
+										<div class="card text-bg-warning" style="border-radius: 5px;">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-															<h5 class="card-title text-light">Registered Users</h5>
+														<h5 class="card-title text-light">User Uploaded Files</h5>
+													</div>
+
+													<div class="col-auto mt-4">
+														<div class="stat text-primary">
+															<i class="fas fa-folder small-box text-light"></i>
 														</div>
-														
-														<div class="col-auto mt-4">
-															<div class="stat text-primary">
-															<i class="fas fa-users small-box text-light"></i>
-															</div>
-														</div>
-													</div> 
-													<h1 class=" text-light"> <?php echo $registeredUsersCount ?? ''; ?></h1>
-												
+													</div>
+												</div>
+												<h1 class=" text-light"> <?php echo $count_files ?? '0'; ?></h1>
+												<div class="mb-0">
+											</div>
 											</div>
 										</div>
-									</div>  -->
+									</div>  
 									<div class="col-sm-6 col-lg-3">
 										<div class="card text-bg-success" style="border-radius: 5px;">
 											<div class="card-body">
@@ -209,27 +211,26 @@ $download_data = $mainClass->getDownloadData1();
 					</div>
 					<div class="row mt-4">
 
-									<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-warning" style="border-radius: 5px;">
+									
+					<div class="col-sm-6 col-lg-3">
+								 	    <div class="card text-bg-primary bg-opacity-75" style="border-radius: 5px;">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title text-light">User Uploaded Files</h5>
-													</div>
-
-													<div class="col-auto mt-4">
-														<div class="stat text-primary">
-															<i class="fas fa-folder small-box text-light"></i>
+															<h5 class="card-title text-light">Registered Users</h5>
 														</div>
-													</div>
-												</div>
-												<h1 class=" text-light"> <?php echo $count_files ?? '0'; ?></h1>
-												<div class="mb-0">
-											</div>
+														
+														<div class="col-auto mt-4">
+															<div class="stat text-primary">
+															<i class="fas fa-users small-box text-light"></i>
+															</div>
+														</div>
+													</div> 
+													<h1 class=" text-light"> <?php echo $registeredUsersCount ?? ''; ?></h1>
+												
 											</div>
 										</div>
-									</div>  
-
+									</div>
 								 
 
 									<div class="col-sm-6 col-lg-3">

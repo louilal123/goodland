@@ -77,8 +77,10 @@
                                                             <td>
                                                                 <button class="btn btn-info btn-sm viewMemberBtn" data-bs-toggle="modal" data-bs-target="#viewMemberModal"><i class="bi bi-eye"></i></button>
                                                                 <a href="#" class="btn btn-success btn-sm editMemberBtn" 
-                                                                data-bs-toggle="modal" data-bs-target="#editMemberStatusModal"><i class="bi bi-pencil"></i></a>
-                                                                <a href="classes/delete_member.php?id=<?=$user['user_id']; ?>" class="btn btn-danger btn-sm deleteMemberBtn"><i class="bi bi-trash"></i></a>
+                                                                data-bs-toggle="modal" data-bs-target="#editMemberStatusModal">
+                                                                <i class="bi bi-pencil"></i></a>
+                                                                <a href="classes/delete_user.php?id=<?=$user['user_id']; ?>" 
+                                                                class="btn btn-danger btn-sm deleteMemberBtn"><i class="bi bi-trash"></i></a>
                                                             </td>
                                                         </tr>
                                                     <?php endforeach; ?>

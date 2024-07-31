@@ -857,6 +857,27 @@ public function delete_member($member_id) {
     exit();
 }
 
+public function delete_user($user_id) {
+   
+    try {
+        $stmt = $this->pdo->prepare("DELETE FROM users WHERE user_id = :user_id");
+        $stmt->bindParam(':user_id', $member_id, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            $_SESSION['status'] = "User successfully deleted!";
+            $_SESSION['status_icon'] = "success";
+        } else {
+            $_SESSION['status'] = "Error deleting user.";
+            $_SESSION['status_icon'] = "error";
+        }
+    } catch (PDOException $e) {
+        $_SESSION['status'] = "Oops! Error: " . $e->getMessage();
+        $_SESSION['status_icon'] = "error";
+    }
+    header('Location: ../manageusers.php');
+    exit();
+}
+
 public function get_all_documents() {
     $stmt = $this->pdo->prepare("SELECT * FROM documents");
     $stmt->execute();
