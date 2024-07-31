@@ -857,6 +857,24 @@ public function delete_member($member_id) {
     exit();
 }
 
+public function get_unique_visitor_count() {
+    try {
+        $stmt = $this->pdo->prepare("
+            SELECT COUNT(*) AS unique_visitors
+            FROM (
+                SELECT DISTINCT ip, city, region, country, latitude, longitude
+                FROM visitor_data
+            ) AS unique_visitors_data
+        ");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['unique_visitors'];
+    } catch (PDOException $e) {
+        // Handle error appropriately
+        return 0;
+    }
+}
+
 public function delete_user($user_id) {
     try {
         // First, delete related records from the files table

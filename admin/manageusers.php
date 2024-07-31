@@ -145,7 +145,8 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editMemberStatusModalLabel">Delete User</h5>
+        <h5 class="modal-title" id="editMemberStatusModalLabel">Confirm?</h5>
+        <p>All data related to this user will be deleted.</p>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

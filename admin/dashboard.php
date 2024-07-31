@@ -231,6 +231,27 @@ $download_data = $mainClass->getDownloadData1();
 											</div>
 										</div>
 									</div>
+
+									<div class="col-sm-6 col-lg-3">
+										<div class="card text-bg-info" >
+											<div class="card-body">
+												<div class="row">
+													<div class="col mt-0">
+														<h5 class="card-title text-light">Total Visitors</h5>
+													</div>
+
+													<div class="col-auto mt-4">
+														<div class="stat text-primary">
+															<i class="fas fa-users small-box text-light"></i>
+														</div>
+													</div>
+												</div>
+												<h1 class=" text-light "> <?php echo $uniqueVisitorCount ?? '0'; ?></h1>
+												<div class="mb-0">
+												</div>
+											</div>
+										</div>
+									</div>  
 								 
 
 									<div class="col-sm-6 col-lg-3">
@@ -282,7 +303,7 @@ $download_data = $mainClass->getDownloadData1();
 									
 
 									
-                                    <div class="col-sm-6 col-lg-3">
+                                    <!-- <div class="col-sm-6 col-lg-3">
 										<div class="card text-bg-info" >
 											<div class="card-body">
 												<div class="row">
@@ -296,12 +317,12 @@ $download_data = $mainClass->getDownloadData1();
 														</div>
 													</div>
 												</div>
-												<h1 class=" text-light "> <?php echo $adminCount ?? '0'; ?></h1>
+												<h1 class=" text-light "> <?//php echo $adminCount ?? '0'; ?></h1>
 												<div class="mb-0">
 												</div>
 											</div>
 										</div>
-									</div>  
+									</div>   -->
 
 					</div>
 
