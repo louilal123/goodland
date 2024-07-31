@@ -86,18 +86,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
         <a href="../uploads/<?php echo htmlspecialchars($file['file_path']); ?>" class="btn btn-info btn-sm viewBtn ml-1" name="viewPdf">
             <i class="bi bi-search"></i> View
         </a>
-        <button class="btn btn-success btn-sm approveBtn ml-1"
-            data-id="<?php echo htmlspecialchars($file['id']); ?>"
-            data-title="<?php echo htmlspecialchars($file['title']); ?>"
-            data-description="<?php echo htmlspecialchars($file['description']); ?>"
-            data-filepath="<?php echo htmlspecialchars($file['file_path']); ?>"
-            data-filetype="<?php echo htmlspecialchars($file['file_type']); ?>"
-            data-uploaded_by="<?php echo htmlspecialchars($file['fullname']); ?>"
-            data-upload_date="<?php echo htmlspecialchars($file['upload_date']); ?>"
-            data-bs-toggle="modal"
-            data-bs-target="#approveModal">
-            <i class="bi bi-arrow-up"></i> Restore
-        </button>
+       
         <button class="btn btn-danger btn-sm declineBtn ml-1"
             data-id="<?php echo htmlspecialchars($file['id']); ?>"
             data-title="<?php echo htmlspecialchars($file['title']); ?>"

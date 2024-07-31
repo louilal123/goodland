@@ -61,7 +61,7 @@ if (isset($_POST['file_id'])) {
             $_SESSION['status'] = "Error restoring the file";
             $_SESSION['status_icon'] = "error";
         }
-        header('Location: ../declined_files.php');
+        header('Location: ../recycled_files.php');
         exit();
     } elseif (isset($_POST['deleteBtn'])) {
         $result = $mainClass->deleteFile($file_id); // Assuming you have a method to delete a file

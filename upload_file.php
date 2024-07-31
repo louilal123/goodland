@@ -76,8 +76,7 @@ if (!isset($_SESSION['user_logged_in']) || $_SESSION['user_logged_in'] !== true)
             && $_SESSION['form_data']['file_type'] == 'Arts') ? 'selected' : ''; ?>>Image</option>
              <option value="Arts" <?php echo (isset($_SESSION['form_data']['file_type']) 
             && $_SESSION['form_data']['file_type'] == 'Images') ? 'selected' : ''; ?>>Arts</option>
-            <option value="Audio" <?php echo (isset($_SESSION['form_data']['file_type']) 
-            && $_SESSION['form_data']['file_type'] == 'Audio') ? 'selected' : ''; ?>>Audio Recording</option>
+           
             <option value="Maps" <?php echo (isset($_SESSION['form_data']['file_type']) 
             && $_SESSION['form_data']['file_type'] == 'Maps') ? 'selected' : ''; ?>>Maps</option>
           

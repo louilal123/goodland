@@ -252,7 +252,7 @@
                         <p class="p-tag">List of Visitors</p>
                     </a>
                 </li>
-                <li class="nav-item1">
+                <!-- <li class="nav-item1">
                     <a href="downloads" class="nav-link12 <?= $page == 'downloads.php' ? ' active bg-primary bg-primary1 ':'' ?>">
                         <i class="icons fas fa-download"></i>
                         <p class="p-tag">List of Downloads</p>
@@ -269,7 +269,7 @@
                         <i class="icons fas fa-calendar-plus"></i>
                         <p class="p-tag">List of Events </p>
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item1">
                     <a href="manageusers" class="nav-link12 <?= $page == 'manageusers.php' ? ' active bg-primary bg-primary1 ':'' ?>">
                         <i class="icons fas fa-users"></i>
