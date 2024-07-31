@@ -133,8 +133,8 @@ $m_downloads = $mainClass->get_download_data_for_current_month();
                             </div>
                         </div>
                     </div>
-                    <button onclick="window.location.href='reports'" class="btn btn-primary float-end">Print Report</button>
-                </div>
+                    <button onclick="window.open('reports', '_blank')" class="btn btn-primary float-end">Print Report</button>
+                    </div>
 
                 <div class="app-content"> 
                     <div class="container-fluid"> 
