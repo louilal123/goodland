@@ -63,7 +63,7 @@ session_start();
 
                 <div class="md-form mb-4">
                   <label for="materialLoginFormPassword">Password</label>
-                  <input type="password" id="materialLoginFormPassword" class="form-control 
+                  <input type="password" id="validationCustomPassword" class="form-control 
                   <?php echo !empty($_SESSION['error_password']) ? 'is-invalid' : ''; ?>" 
                   name="password">
                   <?php if (!empty($_SESSION['error_password'])): ?>
@@ -82,7 +82,7 @@ session_start();
                     <a href="#">Forgot password?</a>
                   </div>
                 </div>
-
+<!-- what -->
                 <button class="btn btn-outline-warning btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign in</button>
 
                 <p>Don't have an account?
