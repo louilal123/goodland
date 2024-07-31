@@ -236,7 +236,7 @@ $download_data = $mainClass->getDownloadData1();
 
 									
 					<div class="col-sm-6 col-lg-3">
-								 	    <div class="card text-bg-primary bg-opacity-75" style="border-radius: 5px;">
+								 	    <div class="card text-bg-primary" style="border-radius: 5px;">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
