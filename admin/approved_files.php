@@ -120,7 +120,6 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
   
 <!-- View Modal -->
 <!-- Decline Modal -->
-<!-- Decline Modal -->
 <div class="modal fade" id="declineModal" tabindex="-1" aria-labelledby="declineModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
