@@ -79,6 +79,7 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
                 <img src="uploads/<?= htmlspecialchars($_SESSION['user_photo']  ?? 'uploads/try.png'); ?>"class="user-image rounded-circle shadow" style="width: 40px; height: 40px;">
                     <span class="d-none d-md-inline text-light" style="margin-top: 5px; color: white;">
                         <?= $_SESSION['user_fullname']; ?>
+                         <i class="fas fa-chevron-down"></i>
                     </span>
                 </a>
                 <ul class="dropdown-menu fade dropdown-menu-lg dropdown-menu-end bg-light" aria-labelledby="userDropdown" style="border-radius: 0px !important; width: 300px !important; color: white !important;">
@@ -91,6 +92,7 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
                         <a href="#" class="nav-link d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false" id="cartDropdown" style="font-size: 1.5rem; color: white;">
                             <i class="bi bi-bell" style="font-size: 18px;"></i>
                             <span class="badge badge-notifications" style="font-size: 12px;"><?= $unread_count; ?></span>
+                            <i class="fas fa-chevron-down"></i>
                         </a>
                         <ul class="dropdown-menu fade dropdown-menu-end bg-light cart-dropdown" aria-labelledby="cartDropdown" style="width: 500px; border-radius: 0px !important;">
                             <li class="d-flex flex-column align-items-center text-center">
@@ -98,7 +100,8 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
                                 <a href="#" id="markAllRead" class="dropdown-item text-center" style="color: black;">Mark all as read</a>
                                 <hr class="dropdown-divider" style="border-color: black;">
                                 <?php foreach ($notifications as $notification): ?>
-                                    <a href="#" class="dropdown-item notification-item text-start" style="color: black;" data-id="<?= $notification['id']; ?>">
+                                    <a href="#" class="dropdown-item notification-item text-start" style="color: black;" 
+                                    data-id="<?= $notification['id']; ?>">
                                         <?= $notification['message']; ?>
                                         <br><small class="text-muted"><?= $notification['created_at']; ?></small>
                                     </a>

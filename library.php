@@ -153,7 +153,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="fileId" name="file_id">
-                    <input type="text" id="filePath" name="file_path">
+                    <input type="hidden" id="filePath" name="file_path">
                     <input type="hidden" id="userId" name="user_id" value="<?= isset($_SESSION['user_id']) ? htmlspecialchars($_SESSION['user_id']) : ''; ?>">
                     <p>Are you sure you want to download this file?</p>
                     <p><strong id="fileTitle"></strong></p>
