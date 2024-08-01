@@ -191,7 +191,7 @@ $m_downloads = $mainClass->get_download_data_for_current_month();
             top: 0;
             width: 100%;
             background: white;
-            padding: 10px;
+            padding: 20px; /* Increased padding for better spacing */
             text-align: center;
             z-index: 1000;
         }
