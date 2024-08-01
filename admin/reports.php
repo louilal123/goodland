@@ -226,20 +226,6 @@ $m_downloads = $mainClass->get_download_data_for_current_month();
                             </div>
                             <div class="col-md-12">
                                 <div class="card">
-                                    <div class="card-header">
-                                        <h6 class="mb-0">Downloads for the <?php echo date("M - Y"); ?></h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <div id="side_chart" style="width: 900px; height: 290px;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tables Section -->
-                        <div class="row mt-1">
-                            <div class="col-md-7">
-                                <div class="card">
                                     <div class="card-header">Website Visitors Details</div>
                                     <div class="card-body">
                                         <table class="table table-bordered table-sm text-sm">
@@ -268,8 +254,23 @@ $m_downloads = $mainClass->get_download_data_for_current_month();
                                         </table>
                                     </div>
                                 </div>
-                            </div>  
-                            <div class="col-md-5">
+                            </div> 
+                           
+                        </div>
+
+                        <!-- Tables Section -->
+                        <div class="row mt-1">
+                        <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6 class="mb-0">Downloads for the <?php echo date("M - Y"); ?></h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="side_chart" style="width: 900px; height: 290px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-header">File Downloads Details</div>
                                     <div class="card-body">
