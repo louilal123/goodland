@@ -113,17 +113,15 @@ $m_downloads = $mainClass->get_download_data_for_current_month();
 </script>
 
 
-
 <style>
     @page {
-        margin-top: 0in;
+        margin-top: 0;
         margin-left: 1in;
         margin-right: 1in;
-        margin-bottom: 0in;
+        margin-bottom: 2in;
     }
     body {
         margin: 1cm;
-        padding-top: 10px;
     }
     h3 {
         font-weight: bold;
@@ -190,7 +188,6 @@ $m_downloads = $mainClass->get_download_data_for_current_month();
         #reportHeader {
             position: fixed;
             top: 0;
-            margin-top: 40px;
             width: 100%;
             background: white;
             padding: 20px; /* Increased padding for better spacing */
@@ -202,6 +199,7 @@ $m_downloads = $mainClass->get_download_data_for_current_month();
         }
     }
 </style>
+
 
 
 <body onload="window.print()">
