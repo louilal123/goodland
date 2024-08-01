@@ -119,7 +119,7 @@ $m_downloads = $mainClass->get_download_data_for_current_month();
         margin-top: 0in;
         margin-left: 1in;
         margin-right: 1in;
-        margin-bottom: 2in;
+        margin-bottom: 0in;
     }
     body {
         margin: 1cm;
@@ -190,7 +190,7 @@ $m_downloads = $mainClass->get_download_data_for_current_month();
         #reportHeader {
             position: fixed;
             top: 0;
-            margin-top: 20px;
+            margin-top: 40px;
             width: 100%;
             background: white;
             padding: 20px; /* Increased padding for better spacing */
