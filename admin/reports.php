@@ -116,13 +116,14 @@ $m_downloads = $mainClass->get_download_data_for_current_month();
 
 <style>
     @page {
-        margin-top: 1in;
+        margin-top: 0in;
         margin-left: 1in;
         margin-right: 1in;
         margin-bottom: 2in;
     }
     body {
         margin: 1cm;
+        padding-top: 10px;
     }
     h3 {
         font-weight: bold;
