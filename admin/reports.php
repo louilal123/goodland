@@ -211,7 +211,7 @@ $m_downloads = $mainClass->get_download_data_for_current_month();
             <h4 class="text-center">GoodLand Management System</h4>
             <h4 class="text-center">Purok Kulo 2, Atop-Atop, Bantayan 6053, Cebu</h4>
             <h4 class="text-center"><span id="reportDate"></span></h4>
-            <!-- <h4 class="text-center mt-5">Report Type: Monthly</h4> -->
+            <h3 class="text-center mt-5">Report Type: Monthly</h5>
             
         </div>
 
