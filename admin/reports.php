@@ -190,6 +190,7 @@ $m_downloads = $mainClass->get_download_data_for_current_month();
         #reportHeader {
             position: fixed;
             top: 0;
+            margin-top: 20px;
             width: 100%;
             background: white;
             padding: 20px; /* Increased padding for better spacing */
