@@ -1,12 +1,13 @@
 <?php
 if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
-    $file_path = 'uploads/' . htmlspecialchars($_GET['file_path']);
+    $file_path = '../uploads/' . htmlspecialchars($_GET['file_path']);
     if (file_exists($file_path)) {
         header("Content-Type: application/pdf");
         readfile($file_path);
         exit;
     } else {
-        echo "File not found.";
+        $_SESSION['status'] = "Error fetching file";
+        $_SESSION['status_icon'] = "error";
     }
 }
 ?>
@@ -155,37 +156,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
 <!-- View Modal -->
 
 <!-- Approve Modal -->
-<!-- Approve Modal -->
-<div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="approveModalLabel">Restore File</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <embed src="" id="approveFilePathEmbed" type="application/pdf" class="custom-card-img mb-1" style="display: flex; margin: auto; overflow: hidden !important; width: 50% !important; height: 360px;">
-                <p><strong>Title:</strong> <span id="approveFileTitle"></span></p>
-                <p><strong>Description:</strong> <span id="approveFileDescription"></span></p>
-                <p><strong>File Path:</strong> <span id="approveFilePath"></span></p>
-                <p><strong>File Type:</strong> <span id="approveFileType"></span></p>
-                <p><strong>Uploaded By:</strong> <span id="approveUploadedBy"></span></p>
-                <p><strong>Upload Date:</strong> <span id="approveUploadDate"></span></p>
-                <form method="POST" action="classes/file_action.php">
-                    <input type="hidden" name="file_id" id="approveFileId">
-                    <div class="mb-3">
-                        <p><strong>Remarks:</strong></p>
-                        <textarea class="form-control" id="approveRemarks" name="remarks" rows="3" required>File Approved! Thank you for sharing your resource on our platform.</textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-success" name="restoreBtn"><i class="fas fa-arrow-up"></i> Restore</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 
 </div>
