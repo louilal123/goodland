@@ -114,19 +114,17 @@ $m_downloads = $mainClass->get_download_data_for_current_month();
 
 
 
-
 <style>
     @page {
         margin-top: 0;
-        margin-left: 1inch;
-        margin-right: 1inch;
-        margin-bottom: 2inch;
-
+        margin-left: 1in;
+        margin-right: 1in;
+        margin-bottom: 2in;
     }
     body {
         margin: 1cm;
     }
-    h3{
+    h3 {
         font-weight: bold;
     }
     .card {
@@ -140,7 +138,6 @@ $m_downloads = $mainClass->get_download_data_for_current_month();
         margin: 0;
         padding: 0;
     }
-
     @media print {
         body * {
             visibility: hidden;
@@ -151,7 +148,7 @@ $m_downloads = $mainClass->get_download_data_for_current_month();
         #printableArea {
             position: absolute;
             left: 0;
-            top: 10;
+            top: 0; /* Changed from 10 to 0 */
             width: 100%;
             padding: 30px;
             font-size: 10px;
@@ -180,22 +177,30 @@ $m_downloads = $mainClass->get_download_data_for_current_month();
         }
         table {
             font-size: 10px;
+            width: 100%;
+            border-collapse: collapse;
         }
         th, td {
             font-size: 10px;
+            padding: 5px; /* Added padding for better readability */
+            text-align: left; /* Ensure text is left-aligned */
+            border: 1px solid #ddd; /* Added border for better table visibility */
         }
         #reportHeader {
             position: fixed;
             top: 0;
-            margin-top:50px;
             width: 100%;
             background: white;
             padding: 10px;
             text-align: center;
             z-index: 1000;
         }
+        .page-break {
+            page-break-before: always; /* Ensures new sections start on a new page */
+        }
     }
 </style>
+
 
 <body onload="window.print()">
     <div id="printableArea">
