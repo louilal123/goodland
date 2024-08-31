@@ -8,6 +8,24 @@
   .custom-card{
     border-radius: 0px !important;
   }
+  .hero video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.hero:before {
+  content: "";
+  background: color-mix(in srgb, var(--background-color), transparent 30%);
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
 </style>
 
 <body class="index-page">
@@ -21,8 +39,10 @@ include "classes/location.php";?>
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background"> 
     <!-- light-background -->
-
-      <img src="uploads/mambacayao.png" alt="" data-aos="fade-in">
+    <video autoplay muted loop playsinline class="background-video">
+    <source src="https://cdn.arcgis.com/sharing/rest/content/items/8af5121e605a4ae684a1862a51a68b26/resources/6Kc_MpmZPtZWn8QiKobhi.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 
       <div class="container">
 

@@ -190,7 +190,7 @@ $download_data = $mainClass->getDownloadData1();
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title text-light">Declined User Uploads</h5>
+														<h5 class="card-title text-light">Archived User Uploads</h5>
 													</div>
 
 													<div class="col-auto mt-4">
@@ -206,8 +206,7 @@ $download_data = $mainClass->getDownloadData1();
 											</div>
 										</div>
 									</div>
-                                       
-
+                          
 					</div>
 					<div class="row mt-4">
 

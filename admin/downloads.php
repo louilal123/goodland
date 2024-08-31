@@ -39,6 +39,8 @@
                             <div class="card mb-4 card-outline-primary">
                                 <div class="card-header d-flex">
                                     <h3 class="card-title mb-0">List of Downloads</h3>
+                                    <a class="btn btn-danger ms-auto custombtn" data-bs-toggle="modal" data-bs-target="#addItemModal"><i class="fas fa-trash"></i> Delete All</a>
+                          
                                 </div>
                                 <div class="card-body">
                                     <div class="container-fluid">
@@ -51,6 +53,7 @@
                                                    
                                                     <th>User Fullname</th>
                                                     <th>Download Time</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -62,6 +65,11 @@
                                                         
                                                         <td><?php echo htmlspecialchars($download['fullname']); ?></td>
                                                         <td><?php echo date("M d, Y h:i A", strtotime($download['download_time'])); ?></td>
+                                                        <td> <a href="#" class="btn btn-danger btn-sm deleteuserBtn"
+                                                            data-bs-toggle="modal" 
+                                                            data-bs-target="#deleteuserBtn"> 
+                                                            <i class="bi bi-trash"></i>
+                                                            </td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </tbody>

@@ -44,6 +44,8 @@
                             <div class="card mb-4 card-outline-primary">
                                 <div class="card-header d-flex">
                                     <h3 class="card-title mb-0">List of Website Visitors</h3>
+                                    <a class="btn btn-danger ms-auto custombtn" data-bs-toggle="modal" data-bs-target="#addItemModal"><i class="fas fa-trash"></i> Delete All</a>
+                          
                                 </div>
                                 <div class="card-body">
                                     <div class="container-fluid">
@@ -52,14 +54,11 @@
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>Full Name</th>
-                                                    <th>IP</th>
-                                                    <th>City</th>
                                                     <th>Region</th>
                                                     <th>Country</th>
-                                                    <th>Latitude</th>
-                                                    <th>Longitude</th>
                                                     <th>Visit Time</th>
                                                     <th>Visit Count</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -67,14 +66,15 @@
                                                     <tr>
                                                         <td><?php echo htmlspecialchars($visitor['id']); ?></td>
                                                         <td><?php echo htmlspecialchars($visitor['fullname']); ?></td>
-                                                        <td><?php echo htmlspecialchars($visitor['ip']); ?></td>
-                                                        <td><?php echo htmlspecialchars($visitor['city']); ?></td>
                                                         <td><?php echo htmlspecialchars($visitor['region']); ?></td>
                                                         <td><?php echo htmlspecialchars($visitor['country']); ?></td>
-                                                        <td><?php echo htmlspecialchars($visitor['latitude']); ?></td>
-                                                        <td><?php echo htmlspecialchars($visitor['longitude']); ?></td>
                                                         <td><?php echo date("M d, Y h:i A", strtotime($visitor['visit_time'])); ?></td>
                                                         <td><?php echo htmlspecialchars($visitor['visit_count']); ?></td>
+                                                        <td>                             <a href="#" 
+                                                            class="btn btn-danger btn-sm deleteuserBtn"
+                                                            data-bs-toggle="modal" 
+                                                            data-bs-target="#deleteuserBtn"> 
+                                                            <i class="bi bi-trash"></i> Delete</td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </tbody>

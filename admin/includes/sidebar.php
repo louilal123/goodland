@@ -231,7 +231,7 @@
                             </li>
                             <li class="nav-item12">
                                 <a href="declined_files" class="nav-link123 <?= $page == 'declined_files.php' ? ' active bg-primary bg-primary1 ':'' ?>">
-                                    <p class="p-tag">Declined Files
+                                    <p class="p-tag">Archived Files
                                     <span class="badge bg-danger text-light"><?php echo $count_declined_files ?? ''; ?></span>  
                                     </p>
                                 </a>
@@ -252,13 +252,13 @@
                         <p class="p-tag">List of Visitors</p>
                     </a>
                 </li>
-                <!-- <li class="nav-item1">
+               <li class="nav-item1">
                     <a href="downloads" class="nav-link12 <?= $page == 'downloads.php' ? ' active bg-primary bg-primary1 ':'' ?>">
                         <i class="icons fas fa-download"></i>
                         <p class="p-tag">List of Downloads</p>
                     </a>
                 </li>
-                <li class="nav-item1">
+                <!--  <li class="nav-item1">
                     <a href="managedocuments" class="nav-link12 <?= $page == 'managedocuments.php' ? ' active bg-primary bg-primary1 ':'' ?>">
                         <i class="icons fas fa-folder"></i>
                         <p class="p-tag">List of Documents</p>
