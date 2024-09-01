@@ -2,7 +2,7 @@
 session_start(); 
 
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: ../error/index.php");
+    header("Location: ../admin/");
     exit();
 }
 
