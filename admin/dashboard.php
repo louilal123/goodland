@@ -43,16 +43,7 @@ $download_data = $mainClass->getDownloadData1();
     </script>
 
 <style>
-	 .main-blur {
-            backdrop-filter: blur(5px);
-			background: rgba(108, 117, 125, 0.1); 
-        }
-    body{
-        overflow:hidden !important;
-    }
-    h5{
-        opacity: 0.7 !important;
-    }
+	 
     .greetingmsg {
     opacity: 0;
     transition: opacity 2s ease-in-out;
@@ -121,40 +112,40 @@ $download_data = $mainClass->getDownloadData1();
                     <div class="row mt-0">
 								    <!--   -->
 									<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-primary" style="border-radius: 5px;">
+										<div class="card text-bg-light" style="border-radius: 5px;">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title text-light">User Uploaded Files</h5>
+														<h5 class="card-title text-dark">User Uploaded Files</h5>
 													</div>
 
 													<div class="col-auto mt-4">
 														<div class="stat text-primary">
-															<i class="fas fa-folder small-box text-light"></i>
+															<i class="fas fa-upload small-box text-success"></i>
 														</div>
 													</div>
 												</div>
-												<h1 class=" text-light"> <?php echo $count_files ?? '0'; ?></h1>
+												<h1 class=" text-dark"> <?php echo $count_files ?? '0'; ?></h1>
 												<div class="mb-0">
 											</div>
 											</div>
 										</div>
 									</div>  
 									<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-success" style="border-radius: 5px;">
+										<div class="card text-bg-light" style="border-radius: 5px;">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title text-light">Approved User Uploads</h5>
+														<h5 class="card-title text-dark">Approved User Uploads</h5>
 													</div>
 
 													<div class="col-auto mt-4">
 														<div class="stat text-primary">
-                                                         <i class="fas fa-thumbs-up small-box text-light"></i>
+                                                         <i class="fas fa-check small-box text-primary"></i>
 														</div>
 													</div>
 												</div>
-												<h1 class=" text-light"> <?php echo $count_approved_files ?? ''; ?></h1>
+												<h1 class=" text-dark"> <?php echo $count_approved_files ?? ''; ?></h1>
 												<div class="mb-0">
 												
 													
@@ -164,20 +155,20 @@ $download_data = $mainClass->getDownloadData1();
                                     </div>
 
 									<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-warning" style="border-radius: 5px;">
+										<div class="card text-bg-light" style="border-radius: 5px;">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title text-light">Pending User Uploads</h5>
+														<h5 class="card-title text-dark">Pending User Uploads</h5>
 													</div>
 
 													<div class="col-auto mt-4">
 														<div class="stat text-primary">
-                                                        <i class="fas fa-hourglass small-box text-light"></i>
+                                                        <i class="fas fa-hourglass small-box text-warning"></i>
                                                     	</div>
 													</div>
 												</div>
-												<h1 class=" text-light"> <?php echo $count_pending_files ?? '0'; ?></h1>
+												<h1 class=" text-dark"> <?php echo $count_pending_files ?? '0'; ?></h1>
 												<div class="mb-0">
 												
 												</div>
@@ -186,20 +177,20 @@ $download_data = $mainClass->getDownloadData1();
 									</div>
 
 									<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-danger" style="border-radius: 5px;">
+										<div class="card text-bg-light" style="border-radius: 5px;">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title text-light">Archived User Uploads</h5>
+														<h5 class="card-title text-dark">Archived User Uploads</h5>
 													</div>
 
 													<div class="col-auto mt-4">
 														<div class="stat text-primary">
-                                                        <i class="fas fa-thumbs-down small-box text-light"></i>
+                                                        <i class="fas fa-archive small-box text-secondary"></i>
                                                     	</div>
 													</div>
 												</div>
-												<h1 class=" text-light"> <?php echo $count_declined_files ?? '0'; ?></h1>
+												<h1 class=" text-dark"> <?php echo $count_declined_files ?? '0'; ?></h1>
 												<div class="mb-0">
 												
 												</div>
@@ -211,20 +202,20 @@ $download_data = $mainClass->getDownloadData1();
 					<div class="row mt-4">
 
 					<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-danger" style="border-radius: 5px;">
+										<div class="card text-bg-light" style="border-radius: 5px;">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title text-light">Recycled Files</h5>
+														<h5 class="card-title text-dark">Recycled Files</h5>
 													</div>
 
 													<div class="col-auto mt-4">
 														<div class="stat text-primary">
-                                                         <i class="fas fa-trash small-box text-light"></i>
+                                                         <i class="fas fa-trash small-box text-danger"></i>
 														</div>
 													</div>
 												</div>
-												<h1 class=" text-light"> <?php echo $count_recycled_files ?? '0'; ?></h1>
+												<h1 class=" text-dark"> <?php echo $count_recycled_files ?? '0'; ?></h1>
 												<div class="mb-0">
 												
 													
@@ -235,40 +226,40 @@ $download_data = $mainClass->getDownloadData1();
 
 									
 					<div class="col-sm-6 col-lg-3">
-								 	    <div class="card text-bg-primary" style="border-radius: 5px;">
+								 	    <div class="card text-bg-light" style="border-radius: 5px;">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-															<h5 class="card-title text-light">Registered Users</h5>
+															<h5 class="card-title text-dark">Registered Users</h5>
 														</div>
 														
 														<div class="col-auto mt-4">
 															<div class="stat text-primary">
-															<i class="fas fa-users small-box text-light"></i>
+															<i class="fas fa-user small-box text-alert"></i>
 															</div>
 														</div>
 													</div> 
-													<h1 class=" text-light"> <?php echo $registeredUsersCount ?? ''; ?></h1>
+													<h1 class=" text-dark"> <?php echo $registeredUsersCount ?? ''; ?></h1>
 												
 											</div>
 										</div>
 									</div>
 
 									<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-info" >
+										<div class="card text-bg-light" >
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title text-light">Visitors</h5>
+														<h5 class="card-title text-dark">Visitors</h5>
 													</div>
 
 													<div class="col-auto mt-4">
 														<div class="stat text-primary">
-															<i class="fas fa-users small-box text-light"></i>
+															<i class="fas fa-chart-line small-box text-info"></i>
 														</div>
 													</div>
 												</div>
-												<h1 class=" text-light "> <?php echo $uniqueVisitorCount ?? '0'; ?></h1>
+												<h1 class=" text-dark "> <?php echo $uniqueVisitorCount ?? '0'; ?></h1>
 												<div class="mb-0">
 												</div>
 											</div>
@@ -277,20 +268,20 @@ $download_data = $mainClass->getDownloadData1();
 								 
 
 									<div class="col-sm-6 col-lg-3">
-										<div class="card  text-bg-info" style="border-radius: 5px;">
+										<div class="card  text-bg-light" style="border-radius: 5px;">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title text-light">Downloads</h5>
+														<h5 class="card-title text-dark">Downloads</h5>
 													</div>
 
 													<div class="col-auto mt-4">
 														<div class="stat text-primary">
-															<i class="fas fa-download  small-box text-light"></i>
+															<i class="fas fa-download  small-box text-success"></i>
 														</div>
 													</div>
 												</div>
-												<h1 class=" text-light"> <?php echo $downloadsCount ?? '0'; ?></h1>
+												<h1 class=" text-dark"> <?php echo $downloadsCount ?? '0'; ?></h1>
 												<div class="mb-0">
 												
 												

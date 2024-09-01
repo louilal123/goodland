@@ -8,7 +8,7 @@
     }</style>
 <div class="app-wrapper">
     <?php include "includes/sidebar.php"; ?>
-    <div class="app-main-wrapper">
+    <div class="app-main-wrappe main-blurr">
         <?php include "includes/topnav.php"; ?>
         <main class="app-main">
             <div class="app-content-header">

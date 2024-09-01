@@ -4,16 +4,17 @@
     left: 0;
     width: 100%; 
     height: 100%;
-    background-color: #343a40;
-    color: #fff;
+    /* background-color: #343a40; */
+    /* color: black; */
     padding-bottom: 15px;
     z-index: 1000 !important;
     font-family: 'Roboto', sans-serif;
     transition: width 0.3s ease; 
 }
 .bg-primary1{
-    padding-right: 60px !important;
+    padding-right: 0px !important;
     border-radius:0px;
+    color: #fff !important;s
 }
 
 .app-sidebar.collapsed {
@@ -27,12 +28,12 @@
     text-decoration: none !important;
 }
 
-.brand-link {
+/* .brand-link {
     text-decoration: none !important;
     display: flex;
     align-items: center;
     color: #fff;
-}
+} */
 
 .brand-image {
     height: 35px;
@@ -65,8 +66,8 @@
 .nav-link123 {
     display: flex;
     align-items: center;
-    padding: 8px 18px 8px 28px;
-    color: #adb5bd;
+    padding: 8px 16px;
+    /* color: #adb5bd; */
     text-decoration: none;
     border-radius: 4px;
     position: relative;
@@ -83,7 +84,7 @@
 .nav-link12 .p-tag,
 .nav-link123 .p-tag {
     font-size: 1rem; 
-    margin-left: 10px; /* Adjust margin for text */
+    margin-left: 16px; /* Adjust margin for text */
     flex-grow: 1;
 }
 
@@ -91,6 +92,7 @@
 .nav-link123::before {
     content: "";
     position: absolute;
+    padding: 8px 16px;
     top: 50%;
     left: 0;
     right: 0;
@@ -102,23 +104,13 @@
     transition: background-color 0.3s;
 }
 
-/* .nav-link12:hover::before,
-.nav-link123:hover::before {
-    background-color: #495057;
-}
-
-.nav-link12.active bg-primary bg-primary1::before,
-.nav-link123.active bg-primary bg-primary1::before {
-    background-color: #007bff; 
-} */
 
 .nav-header {
     margin: 10px 0 5px;
     font-size: 1rem;
     opacity: 0.7;
-    color: #6c757d;
-    /* text-transform: uppercase; */
-    padding-left: 12px;
+    color: #fff;
+    padding-left: 16px;
 }
 
 .nav-arrow {
@@ -128,17 +120,14 @@
 .p-tag {
     margin: 0;
     font-size: 1rem;
-    /* opacity: 0.7; */
-    color: white;
-    /* text-transform: uppercase; */
 }
 
 .nav-header, .nav-item1 .nav-link12, .nav-link12 .icon .logoo {
-    color: #fff !important;
+    /* color: #333 !important; */
 }
 
 .collapse .nav-link12 {
-    padding-left: 60px; 
+    padding-left: 70px; 
 }
 
 .collapse.show {
@@ -153,8 +142,8 @@
 
 .app-sidebar.collapsed .nav-link12,
 .app-sidebar.collapsed .nav-link123 {
-    padding: 6px 18px; 
-    margin-left: 10px;
+    padding: 8px 16px; 
+    margin-left: 12px;
 }
 
 .app-sidebar.collapsed .brand-text {
@@ -192,18 +181,18 @@
 </style>
 <?php $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/")+1); ?>
 
-<aside class="app-sidebar bg-body-light shadow" data-bs-theme="light">
+<aside class="app-sidebar bg-body-light light" data-bs-theme="light">
     <div class="sidebar-brand">
         <a href="" class="brand-link">
             <img src="uploads/image.png" alt="Logo" class="brand-image shadow" style="width: 34px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.2) !important;">
-            <h3 class="brand-text text-start logoo shadow mt-2 text-light">Good<i>Land</i></h3>
+            <h4 class="text-dark mt-2">Good<i>Land</i></h3>
         </a>
     </div>
     <div class="sidebar-wrapper">
         <nav class="mt-2">
             <ul class="nav sidebar-menu flex-column">
                 <li class="nav-item1">
-                    <a href="dashboard" class="nav-link12 text-bold <?= $page == 'dashboard.php' ? ' active bg-primary bg-primary1 ':'' ?>">
+                    <a href="dashboard" class="nav-link12 text-bold <?= $page == 'dashboard.php' ? '  bg-primary bg-primary1 ':'' ?>">
                         <i class="icons fas fa-dashboard"></i>
                         <p class="p-tag">Dashboard</p>
                     </a>
@@ -258,18 +247,6 @@
                         <p class="p-tag">List of Downloads</p>
                     </a>
                 </li>
-                <!--  <li class="nav-item1">
-                    <a href="managedocuments" class="nav-link12 <?= $page == 'managedocuments.php' ? ' active bg-primary bg-primary1 ':'' ?>">
-                        <i class="icons fas fa-folder"></i>
-                        <p class="p-tag">List of Documents</p>
-                    </a>
-                </li>
-                <li class="nav-item1">
-                    <a href="manageevents" class="nav-link12 <?= $page == 'manageevents.php' ? ' active bg-primary bg-primary1 ':'' ?>">
-                        <i class="icons fas fa-calendar-plus"></i>
-                        <p class="p-tag">List of Events </p>
-                    </a>
-                </li> -->
                 <li class="nav-item1">
                     <a href="manageusers" class="nav-link12 <?= $page == 'manageusers.php' ? ' active bg-primary bg-primary1 ':'' ?>">
                         <i class="icons fas fa-users"></i>

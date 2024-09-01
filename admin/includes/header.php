@@ -27,6 +27,7 @@
     crossorigin="anonymous"></script>
     
 <link rel="stylesheet" href="mdbfolder/css/mdb.min.css" />
+<link rel="stylesheet" href="dist/blur.css">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});

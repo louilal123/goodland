@@ -7,7 +7,7 @@
 <body class="layout-fixed-complete sidebar-expand-lg sidebar-mini bg-body-tertiary">
     <div class="app-wrapper">
         <?php include "includes/sidebar.php"; ?>
-        <div class="app-main-wrapper">
+        <div class="app-main-wrapper main-blur">
             <?php include "includes/topnav.php"; ?>
             <main class="app-main">
                 <div class="app-content-header">

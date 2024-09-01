@@ -119,7 +119,7 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
 </div>
 
         <?php else: ?>
-            <a href="get-started" class="btn btn-outline-primary getstarted">Get Started</a>
+            <a href="get-started" class="btn btn-outline-primary btn-getstarted">Get Started</a>
         <?php endif; ?>
     </div>
 </header>
