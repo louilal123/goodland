@@ -14,7 +14,7 @@
 .bg-primary1{
     padding-right: 0px !important;
     border-radius:0px;
-    color: #fff !important;s
+    color: #fff !important;
 }
 
 .app-sidebar.collapsed {
@@ -108,7 +108,6 @@
 .nav-header {
     margin: 10px 0 5px;
     font-size: 1rem;
-    opacity: 0.7;
     color: #fff;
     padding-left: 16px;
 }
@@ -170,10 +169,10 @@
     right: 0;
 }
 .nav-link12{
-    opacity: .8;
+    /* opacity: .8; */
 }
 .nav-link123{
-    opacity: 0.7;
+    /* opacity: 0.7; */
     margin-left:18px;
 }
 

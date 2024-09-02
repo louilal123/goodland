@@ -78,7 +78,6 @@
                 title: 'Website Visitors',
                 subtitle: 'Signed-Up Users vs Non-Signed-Up Users'
             },
-            width: 850,
             height: 380,
             hAxis: {
                 title: 'Day',

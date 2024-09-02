@@ -335,7 +335,7 @@ $download_data = $mainClass->getDownloadData1();
 									
 									<div class="card-body">
 										
-										<div id="side_chart" style="width: 600px; height: 390px;"></div>
+										<div id="side_chart" style="height: 390px;"></div>
 									</div>
 							</div>
 							</div>
