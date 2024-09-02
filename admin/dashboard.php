@@ -96,7 +96,7 @@ $download_data = $mainClass->getDownloadData1();
                     <div class="row">
                         <div class="col-sm-6">
                             <h3 class="mb-0 greetingmsg fw-bold"> <span id="greeting"class="fw-light " ></span> 
-                            <?php echo $adminDetails['fullname']; ?>.</h3>
+                            <?php echo $adminDetails['username']; ?>.</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
