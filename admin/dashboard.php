@@ -43,7 +43,9 @@ $download_data = $mainClass->getDownloadData1();
     </script>
 
 <style>
-	 
+	 body{
+		overflow: hidden;
+	 }
     .greetingmsg {
     opacity: 0;
     transition: opacity 2s ease-in-out;
