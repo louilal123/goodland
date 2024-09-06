@@ -79,6 +79,10 @@ $download_data = $mainClass->getDownloadData1();
     .panel-footer{
         opacity: 0.8 !important;
     }
+	
+    .main-blur {
+    background: rgba(108, 117, 125, 0.1); 
+}
 
 </style>
 

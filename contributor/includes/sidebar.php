@@ -7,10 +7,10 @@
 <aside class="app-sidebar bg-body-light" data-bs-theme="light"> 
     <div class="sidebar-brand bg-light" style="border: 2px #f0f0f; margin-top:2px;"> 
         <a href="../index.html" class="brand-link"> 
-            <img src="dist/assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image opacity-75 shadow"> 
+        <img src="../admin/uploads/landingbg.png" alt="AdminLTE Logo" class="brand-image opacity-75 shadow rounded" 
+        style=" width: 2.5rem ; height: 2rem;border-radius: 100% "> 
             <span class="brand-text">
-                <span class="fw-bold text-info">GOOD</span>
-                <span class="fw-light text-info">Land</span>
+                <span class="fw-bold text-info">GOOD</span><span class="fw-light text-info">Land</span>
             </span> <!--end::Brand Text--> 
         </a> <!--end::Brand Link--> 
     </div> <!--end::Sidebar Brand-->
