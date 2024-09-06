@@ -24,7 +24,7 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
     }
     .getstarted:hover {
         color: white;
-        background-color: transparent !important;
+        background-color: none !important;
     }
     .cart-icon {
         position: relative;

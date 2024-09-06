@@ -1,10 +1,10 @@
 
-<nav class="app-header navbar navbar-expand bg-body "> 
+<nav class="app-header navbar navbar-expand bg-body " style="background: rgba(108, 117, 125, 0.2) !important;  ">> 
                 <div class="container-fluid ">
                     <ul class="navbar-nav">
-                        <li class="nav-item1 mt-1 ms-1"> 
+                        <li class="nav-item1 mt-2 ms-1"> 
                             <a class="nav-link1 mb-2 sidebar-toggle" data-lte-toggle="sidebar" href="#" role="button"> 
-                            <i class="bi bi-list" style="margin: auto; color: #333;"></i> 
+                            <i class="fas fa-bars" style="margin: auto; color: #333; font-size: 18px;"></i> 
                         </a> 
                     </li>    
                     </ul> 
@@ -85,20 +85,3 @@
                        </div>
                    </div>
                </div>
-
-
-               <script>
-                // JavaScript to toggle sidebar collapse
-document.addEventListener('DOMContentLoaded', function() {
-    const toggleButton = document.querySelector('.sidebar-toggle');
-    const sidebar = document.querySelector('.app-sidebar');
-
-    toggleButton.addEventListener('click', function() {
-        sidebar.classList.toggle('collapsed');
-    });
-});
-
-               </script>
-
-         
-        

@@ -62,6 +62,9 @@ $download_data = $mainClass->getDownloadData1();
     .panel.show {
         opacity: 1;
     }
+	.main-blur {
+    background: rgba(108, 117, 125, 0.1); 
+}
     .small-box{
         position :absolute;
         height: 0px;
@@ -93,13 +96,13 @@ $download_data = $mainClass->getDownloadData1();
             <main class="app-main ">
             <div class="app-content-header mb-0"> 
                 <div class="container-fluid">
-                    <div class="row">
+                    <div class="row mb-0">
                         <div class="col-sm-6">
                             <h3 class="mb-0 greetingmsg"> <span id="greeting"class="fw-light " ></span> 
                             <?php echo $adminDetails['username']; ?>.</h3>
                         </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-end">
+                        <div class="col-sm-6 mb-0">
+                            <ol class="breadcrumb float-sm-end mb-0">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
                                 Analytics
@@ -109,7 +112,7 @@ $download_data = $mainClass->getDownloadData1();
                     </div>
                 </div>
             </div>
-            <div class="app-content"> 
+            <div class="app-content mt-0" style="margin-bottom: 0px important;"> 
                 <div class="container-fluid"> 
                     <div class="row mt-0">
 								    <!--   -->
@@ -123,7 +126,7 @@ $download_data = $mainClass->getDownloadData1();
 
 													<div class="col-auto mt-4">
 														<div class="stat text-primary">
-															<i class="fas fa-upload small-box text-success"></i>
+															<i class="fas fa-arrow-up small-box text-success"></i>
 														</div>
 													</div>
 												</div>
@@ -279,7 +282,7 @@ $download_data = $mainClass->getDownloadData1();
 
 													<div class="col-auto mt-4">
 														<div class="stat text-primary">
-															<i class="fas fa-download  small-box text-success"></i>
+															<i class="fas fa-arrow-down  small-box text-success"></i>
 														</div>
 													</div>
 												</div>

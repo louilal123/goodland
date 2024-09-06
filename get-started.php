@@ -10,11 +10,7 @@ session_start();
   .header {
     background-color: black !important;
   }
-  .card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transform: scale(1.02);
-    transition: transform 0.2s;
-  }
+ 
   .card-img {
     height: 200px;
   }
@@ -52,7 +48,7 @@ session_start();
             <img src="uploads/logogoodland.png" style="display: flex; margin: auto; width: 150px;height: 60px;">
             </div>
             <h2 class=" info-color white-text text-center py-4 ">
-                <strong>Sign In</strong>
+                <strong>Welcome Back</strong>
               </h2>
               <div class="card-body px-lg-5 pt-0 ">
 
@@ -94,9 +90,11 @@ session_start();
                     </div>
                 </div>
 
-                <button class="btn btn-outline-warning btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign in</button>
 
-                <p class="text-center">Don't have an account?
+                <button type="submit" class="btn btn-primary btn-block z-depth-0 mb-4 mt-4 " data-mdb-ripple-init>Signup</button>
+
+                <p class="text-center mt-2">Don't have an account?
+
                     <a href="register">Register</a>
                 </p>
             </form>

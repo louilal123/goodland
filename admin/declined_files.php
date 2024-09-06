@@ -21,6 +21,9 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
     body{
         overflow: hidden;
     }
+    .main-blur {
+    background: rgba(108, 117, 125, 0.1); 
+}
 </style>
 <body class="layout-fixed-complete sidebar-expand-lg sidebar-mini bg-body-tertiary">
 

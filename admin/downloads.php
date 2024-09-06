@@ -2,8 +2,15 @@
 <!DOCTYPE html>
 <html lang="en"> 
 <?php include "includes/header.php"; ?>
-
-<!-- <link rel="stylesheet" href="dist/custom.css"> -->
+<style>
+    body{
+        overflow: hidden;
+        
+    }
+    .main-blur {
+    background: rgba(108, 117, 125, 0.1); 
+}
+</style>
 
 <body class="layout-fixed-complete sidebar-expand-lg sidebar-mini bg-body-tertiary">
 
