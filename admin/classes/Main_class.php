@@ -578,17 +578,13 @@ public function getMediaCounts() {
                 header("Location: ../dashboard.php");
                 exit();
             } else {
-                $_SESSION['status'] = "Invalid credentials! Please try again.";
-                $_SESSION['status_icon'] = "error";
+                return false; // Invalid password
             }
         } else {
-            $_SESSION['status'] = "Invalid credentials! Please try again.";
-            $_SESSION['status_icon'] = "error";
+            return false; // User not found
         }
-    
-        header("Location: ../index.php");
-        exit();
     }
+    
     
  //admin details currently login
  public function getAdminDetails($admin_id) {
