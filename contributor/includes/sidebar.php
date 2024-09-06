@@ -22,7 +22,7 @@
                 <li class="nav-item">
                     <a href="dashboard" class="nav-link <?= $page == 'dashboard.php' ? 'bg-primary1 bg-primary text-light' : '' ?>">
                         <i class="nav-icon fas fa-dashboard"></i>
-                        <p class="text">Overview</p>
+                        <p class="text">Dashboard</p>
                     </a>
                 </li>
                 
