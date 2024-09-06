@@ -85,3 +85,20 @@
                        </div>
                    </div>
                </div>
+
+
+               <script>
+                // JavaScript to toggle sidebar collapse
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButton = document.querySelector('.sidebar-toggle');
+    const sidebar = document.querySelector('.app-sidebar');
+
+    toggleButton.addEventListener('click', function() {
+        sidebar.classList.toggle('collapsed');
+    });
+});
+
+               </script>
+
+         
+        

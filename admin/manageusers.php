@@ -2,16 +2,7 @@
 <!DOCTYPE html>
 <html lang="en"> 
 <?php include "includes/header.php"; ?>
-
-<style>
-  body{
-    overflow: hidden;
-
-  }
-  .main-blur {
-    background: rgba(108, 117, 125, 0.2); 
-}
-</style>
+<link rel="stylesheet" href="dist/custom.css">
 
 <body class="layout-fixed-complete sidebar-expand-lg sidebar-mini bg-body-tertiary">
     <div class="app-wrapper">

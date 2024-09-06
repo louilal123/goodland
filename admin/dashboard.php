@@ -62,9 +62,6 @@ $download_data = $mainClass->getDownloadData1();
     .panel.show {
         opacity: 1;
     }
-	.main-blur {
-    background: rgba(108, 117, 125, 0.1); 
-}
     .small-box{
         position :absolute;
         height: 0px;
@@ -126,7 +123,7 @@ $download_data = $mainClass->getDownloadData1();
 
 													<div class="col-auto mt-4">
 														<div class="stat text-primary">
-															<i class="fas fa-arrow-up small-box text-success"></i>
+															<i class="fas fa-upload small-box text-success"></i>
 														</div>
 													</div>
 												</div>
@@ -282,7 +279,7 @@ $download_data = $mainClass->getDownloadData1();
 
 													<div class="col-auto mt-4">
 														<div class="stat text-primary">
-															<i class="fas fa-arrow-down  small-box text-success"></i>
+															<i class="fas fa-download  small-box text-success"></i>
 														</div>
 													</div>
 												</div>
