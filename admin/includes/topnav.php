@@ -1,5 +1,5 @@
 
-<nav class="app-header navbar navbar-expand bg-body " style="background: rgba(108, 117, 125, 0.2) !important;  ">> 
+<nav class="app-header navbar navbar-expand bg-body " style="background: rgba(108, 117, 125, 0.2) !important;  ">
                 <div class="container-fluid ">
                     <ul class="navbar-nav">
                         <li class="nav-item1 mt-2 ms-1"> 
