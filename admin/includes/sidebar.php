@@ -46,7 +46,7 @@
                               
                                 <li class="nav-item"> <a href="recyled_files" class="nav-link  <?= $page == 'recycled_files.php' ? '  bg-primary text-light  ':'' ?>"> 
                                     <i class="nav-icon fas fa-bin"></i>
-                                        <p>Recycled Files</p>
+                                        <p>Archived Files</p>
                                 </a> </li>
                             </ul>
                         </li>
