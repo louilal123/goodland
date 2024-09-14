@@ -1,11 +1,11 @@
-<nav class="app-header navbar navbar-expand bg-body" style="background: rgba(108, 117, 125, 0.1) !important;">
-    <div class="container-fluid">
+
+<nav class="app-header navbar navbar-expand bg-body main-blur" style="background: rgba(108, 117, 125, 0.2) !important;  "> <!--begin::Container-->
+                <div class="container-fluid" style="border: 0px !important;"> <!--begin::Start Navbar Links-->
                     <ul class="navbar-nav">
                         <li class="nav-item"> <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button"> <i class="fas fa-bars"></i> </a> </li>
                         <li class="nav-item d-none d-md-block"> <a href="#" class="nav-link"></a> </li>
                        
                     </ul>
-
         <ul class="navbar-nav ms-auto">
           
 

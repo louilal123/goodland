@@ -56,7 +56,7 @@
                             </a> </li>
                         <li class="nav-item"> <a href="manageusers" class="nav-link <?= $page == 'manageusers.php' ? '  bg-primary text-light  ':'' ?>"> 
                             <i class="nav-icon fas fa-users"></i>
-                                <p class="text">List of Users</p>
+                                <p class="text">List of Contributors</p>
                             </a> </li>
                         <li class="nav-item"> <a href="visitors" class="nav-link <?= $page == 'visitors.php' ? '  bg-primary text-light  ':'' ?>"> 
                             <i class="nav-icon fas fa-eye"></i>
@@ -64,7 +64,7 @@
                             </a> </li>
                             <li class="nav-item"> <a href="contributors" class="nav-link <?= $page == 'contributors.php' ? '  bg-primary text-light  ':'' ?>"> 
                             <i class="nav-icon fas fa-users"></i>
-                                <p class="text">List of Contributors</p>
+                                <p class="text">List of Users</p>
                             </a> </li>
                         <li class="nav-item"> <a href="manageadmins" class="nav-link <?= $page == 'manageadmins.php' ? '  bg-primary text-light  ':'' ?>"> 
                             <i class="nav-icon fas fa-users"></i>

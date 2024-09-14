@@ -13,13 +13,13 @@
                 <div class="app-content-header">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-sm-6">
-                                <h3 class="mb-0">Manage Registered Users</h3>
+                        <div class="col-sm-6">
+                                <h3 class="mb-0">Manage Contributors</h3>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-end">
                                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Registered Users</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Contributors</li>
                                 </ol>
                             </div>
                         </div>
@@ -30,9 +30,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card mb-4 card-outline-primary">
-                                    <div class="card-header d-flex">
-                                        <h3 class="card-title mb-0">List of Registered Users</h3>
-                                    </div>
+                                  
                                     <div class="card-body">
                                         <div class="container-fluid">
                                             <table id="myTable" class="table-responsive table table-hover table-striped w-100">
@@ -42,13 +40,8 @@
                                                         <th>Full Name</th>
                                                         <th>Email</th>
                                                         <th>Username</th>
-                                                        <th>Birthday</th>
                                                         <th>Status</th>
-                                                        <th>User Photo</th>
-                                                        <th>Bio</th>
-                                                        <th>Address</th>
                                                         <th>Date Created</th>
-                                                        <th>Date Updated</th>
                                                         <th>Last Login</th>
                                                         <th width="170px">Action</th>
                                                     </tr>
@@ -57,10 +50,9 @@
                                                     <?php foreach ($registeredUsers as $user): ?>
                                                         <tr>
                                                             <td><?php echo htmlspecialchars($user['user_id']); ?></td>
-                                                            <td><?php echo htmlspecialchars($user['fullname']); ?></td>
+                                                            <td><img src="../uploads/<?php echo $user['user_photo'] ?: 'default_photo.jpg'; ?>" alt="" style="width: 40px; height: 40px;"> <?php echo htmlspecialchars($user['fullname']); ?></td>
                                                             <td><?php echo htmlspecialchars($user['email']); ?></td>
                                                             <td><?php echo htmlspecialchars($user['username']); ?></td>
-                                                            <td><?php echo htmlspecialchars($user['birthday']); ?></td>
                                                             <td>
                                                             <?php if ($user['status'] == 'enabled'): ?>
                                                                 <span class="badge bg-success">Enabled</span>
@@ -68,11 +60,7 @@
                                                                 <span class="badge bg-danger">Disabled</span>
                                                             <?php endif; ?>
                                                             </td>
-                                                            <td><img src="../uploads/<?php echo $user['user_photo'] ?: 'default_photo.jpg'; ?>" alt="" style="width: 40px; height: 40px;"></td>
-                                                            <td><?php echo htmlspecialchars($user['bio']); ?></td>
-                                                            <td><?php echo htmlspecialchars($user['address']); ?></td>
                                                             <td><?php echo date("M d, Y h:i A", strtotime($user['date_created'])); ?></td>
-                                                            <td><?php echo date("M d, Y h:i A", strtotime($user['date_updated'])); ?></td>
                                                             <td><?php echo date("M d, Y h:i A", strtotime($user['last_login'])); ?></td>
                                                             <td>
                                                                 <button class="btn btn-info btn-sm viewMemberBtn" 

@@ -1,0 +1,6 @@
+/* this is for all butons that have custom-btn class */
+.custom-btn:hover{
+    background-color: var(--accent-color) !important;
+    color: var(--contrast-color) !important;
+  }
+  

@@ -1,4 +1,4 @@
-<?php include "../admin/classes/admindetails.php" ?>
+<?php //include "../admin/classes/admindetails.php" ?>
 <!DOCTYPE html>
 <html lang="en"> 
  
@@ -24,7 +24,7 @@
   		margin-left: 300px !important;
         align-items: end;
         justify-content: end;
-        color: navy; 
+        
         /* opacity:0.8; */
     }
 	
@@ -32,13 +32,13 @@
         opacity: 0.8 !important;
     }
 
-    .main-blur {
+    /* .main-blur {
     background: rgba(108, 117, 125, 0.1); 
-}
+} */
 
 </style>
 
-<body class="layout-fixed-complete sidebar-expand-lg sidebar-mini bg-body-tertiary" style="overflow: hidden;"> 
+<body class="layout-fixed-complete sidebar-expand-lg sidebar-mini bg-white" style="overflow: hidden;"> 
     <div class="app-wrapper"> 
 
        <?php include "includes/sidebar.php"?>
@@ -48,17 +48,16 @@
         <?php include "includes/topnav.php"?>
 
             <main class="app-main main-blur" > 
-                <div class="app-content-header mb-0" style="margin-bottom: 0px !important;">
+                <div class="app-content-header mb-0">
                     <div class="container-fluid"> 
                         <div class="row">
                             <div class="col-sm-8">
-                                <h3 class="mb-0 ">Welcome, Contributor</h3>
+                                <h3 class="mb-0 text-black">Overview</h3>
                             </div>
-                            <div class="col-sm-4">
-                                <ol class="breadcrumb float-sm-end">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">
-                                        Overview
+                            <div class="col-sm-4 text-black">
+                                <ol class="breadcrumb float-sm-end text-black">
+                                    <li class="breadcrumb-item text-info    "><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item  text-black" aria-current="page">Overview
                                     </li>
                                 </ol>
                             </div>
@@ -184,34 +183,34 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach ($admins as $index => $admin): ?>
+                                <?//php foreach ($admins as $index => $admin): ?>
                                     <tr>
-                                    <td><?php echo $index + 1; ?></td>
-                                        <td><?php echo htmlspecialchars($admin['fullname']); ?></td>
-                                        <td><?php echo htmlspecialchars($admin['username']); ?></td>
-                                        <td><?php echo htmlspecialchars($admin['email']); ?></td>
-                                        <td> <img src="uploads/<?php echo $admin['admin_photo'] ?: 'default_photo.jpg'; ?>" alt="" 
+                                    <td><?//php echo $index + 1; ?></td>
+                                        <td><?//php echo htmlspecialchars($admin['fullname']); ?></td>
+                                        <td><?//php echo htmlspecialchars($admin['username']); ?></td>
+                                        <td><?//php echo htmlspecialchars($admin['email']); ?></td>
+                                        <td> <img src="uploads/<?//php echo $admin['admin_photo'] ?: 'default_photo.jpg'; ?>" alt="" 
                                         style="width: 40px; height: 40px; "></td>
-                                        <td><?php echo date("M d, Y h:i A", strtotime($admin['date_created'])); ?></td>
-                                        <td><?php echo date("M d, Y h:i A", strtotime($admin['date_updated'])); ?></td>
+                                        <td><?//php echo date("M d, Y h:i A", strtotime($admin['date_created'])); ?></td>
+                                        <td><?//php echo date("M d, Y h:i A", strtotime($admin['date_updated'])); ?></td>
                                         <td>
-                                            <?php if ($admin['status'] == 'Active'): ?>
+                                            <?//php if ($admin['status'] == 'Active'): ?>
                                                 <span class="badge bg-success">Active</span>
-                                            <?php else: ?>
+                                            <?//php else: ?>
                                                 <span class="badge bg-secondary">Inactive</span>
-                                            <?php endif; ?>
+                                            <?//php endif; ?>
                                         </td>
                                         <td>
-                                        <button class="btn btn-info btn-sm viewAdminDetailBtn " data-id="<?php echo $admin['admin_id']; ?>" 
+                                        <button class="btn btn-info btn-sm viewAdminDetailBtn " data-id="<?//php echo $admin['admin_id']; ?>" 
                                         data-bs-toggle="modal" data-bs-target="#viewAdminModal"> <i class="bi bi-eye-fill"></i></button>
                                         <a href="#" class="btn btn-success btn-sm editAdminBtn" data-bs-toggle="modal" data-bs-target="#editAdminModal">
                                              <i class="bi bi-pencil-square"></i></a>
                                         
-                                            <a href="classes/delete_admin.php?id=<?=$admin['admin_id']; ?>" class="btn btn-danger btn-sm deleteBtn"> 
+                                            <a href="classes/delete_admin.php?id=<?//=$admin['admin_id']; ?>" class="btn btn-danger btn-sm deleteBtn"> 
                                                 <i class="bi bi-trash-fill"></i></a>
                                         </td>
                                     </tr>
-                                    <?php endforeach; ?>
+                                    <?//php endforeach; ?>
                                 </tbody>
                            
                             </table>
@@ -228,13 +227,7 @@
             </main>
             
           
-            <footer class="app-footer"> 
-                <div class="float-end d-none d-sm-inline">GoodLand Team</div><strong>
-                    Copyright &copy; 2024&nbsp;
-                    <a href="https://goodlandv2.com" class="text-decoration-none">GoodLand</a>.
-                </strong>
-                All rights reserved.
-            </footer> <!--end::Footer-->
+         
         </div>
     </div>
 

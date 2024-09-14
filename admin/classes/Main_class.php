@@ -28,6 +28,12 @@ class Main_class {
             echo $e->getMessage();
         }
     }
+
+    public function is_email_exists($email) {
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
+        $stmt->execute([':email' => $email]);
+        return $stmt->fetchColumn() > 0;
+    }
 // line h=chart monthly visits website 
 public function get_monthly_visitor_data() {
     try {
@@ -1194,26 +1200,24 @@ public function get_products() {
         return [];
     }
 }
-public function register_user($fullname, $email, $birthday, $username, $password) {
+public function register_user($fullname, $email, $password, $activation_token_hash) {
     try {
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
         $date_created = date('Y-m-d H:i:s');
-        $status = 'enabled';
+        $status = 'pending'; // Set the status to pending until the account is activated
 
-        $stmt = $this->pdo->prepare("INSERT INTO users (fullname, email, birthday, username, password, date_created, date_updated, last_login, status) VALUES (:fullname, :email, :birthday, :username, :password, :date_created, :date_updated, :last_login, :status)");
+        $stmt = $this->pdo->prepare("INSERT INTO users (fullname, email, password, account_activation_hash, date_created, status) 
+                                     VALUES (:fullname, :email, :password, :activation_token_hash, :date_created, :status)");
         $stmt->execute([
             ':fullname' => $fullname,
             ':email' => $email,
-            ':birthday' => $birthday,
-            ':username' => $username,
             ':password' => $hashed_password,
+            ':activation_token_hash' => $activation_token_hash,
             ':date_created' => $date_created,
-            ':date_updated' => $date_created,
-            ':last_login' => null,
             ':status' => $status
         ]);
 
-        $_SESSION['status'] = "User successfully registered!";
+        $_SESSION['status'] = "User successfully registered! Please check your email to activate your account.";
         $_SESSION['status_icon'] = "success";
         return true;
     } catch (PDOException $e) {
@@ -1223,12 +1227,76 @@ public function register_user($fullname, $email, $birthday, $username, $password
     }
 }
 
+               // Method to check if token exists
+    public function is_token_valid($token_hash) {
+        $sql = "SELECT user_id FROM users WHERE account_activation_hash = :token_hash LIMIT 1";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':token_hash', $token_hash);
+        $stmt->execute();
+        return $stmt->rowCount() > 0;
+    }
 
-        public function is_email_exists($email) {
-            $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
-            $stmt->execute([':email' => $email]);
-            return $stmt->fetchColumn() > 0;
+    // Method to update activation hash to NULL
+    public function update_activation_hash($token_hash) {
+        $sql = "UPDATE users SET account_activation_hash = NULL WHERE account_activation_hash = :token_hash";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':token_hash', $token_hash);
+        $stmt->execute();
+    }
+    //forgot passwd
+    public function save_reset_token($email, $token_hash, $expiry) {
+        try {
+            $sql = "UPDATE users 
+                    SET reset_token_hash = :token_hash, reset_token_expires_at = :expiry 
+                    WHERE email = :email";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([
+                ':token_hash' => $token_hash,
+                ':expiry' => $expiry,
+                ':email' => $email
+            ]);
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
         }
+    }
+    //start louie
+// Fetch user by reset token
+public function get_user_by_reset_token($token_hash) {
+    try {
+        $sql = "SELECT * FROM users WHERE reset_token_hash = :token_hash LIMIT 1";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':token_hash' => $token_hash]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return null;
+    }
+}
+
+// Update user password and clear reset token
+public function update_password($user_id, $password_hash) {
+    try {
+        $sql = "UPDATE users 
+                SET password = :password_hash, 
+                    reset_token_hash = NULL, 
+                    reset_token_expires_at = NULL 
+                WHERE user_id = :user_id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            ':password_hash' => $password_hash,
+            ':user_id' => $user_id
+        ]);
+        return $stmt->rowCount() > 0;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
+
+    // end luie
+       
 
         public function is_username_exists($username) {
             $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM users WHERE username = :username");
