@@ -44,7 +44,7 @@
                                         <p>Declined Files</p>
                                     </a> </li>
                               
-                                <li class="nav-item"> <a href="recyled_files" class="nav-link  <?= $page == 'recycled_files.php' ? '  bg-primary text-light  ':'' ?>"> 
+                                <li class="nav-item"> <a href="archived_files.php" class="nav-link  <?= $page == 'archived_files.php' ? '  bg-primary text-light  ':'' ?>"> 
                                     <i class="nav-icon fas fa-bin"></i>
                                         <p>Archived Files</p>
                                 </a> </li>

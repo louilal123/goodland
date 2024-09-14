@@ -36,13 +36,13 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Manage Recycled Files</h3>
+                            <h3 class="mb-0">Manage Archived Files</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                Recycled Files
+                                Archived Files
                                 </li>
                             </ol>
                         </div>
@@ -55,7 +55,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                         <div class="col-md-12">
                                 <div class="card mb-4 card-outline-primary">
                                     <div class="card-header d-flex ">
-                                        <h3 class="card-title mb-0">List of Recycled Files</h3>
+                                        <h3 class="card-title mb-0">List of Archived Files</h3>
                                          </div>
     
                                     <div class="card-body">
@@ -74,7 +74,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                         </tr>
                     </thead>
                     <tbody>
-    <?php foreach ($recycled_files as $file): ?>
+    <?php foreach ($Archived_files as $file): ?>
     <tr>
         <td><?php echo htmlspecialchars($file['id']); ?></td>
         <td><?php echo htmlspecialchars($file['title']); ?></td>
