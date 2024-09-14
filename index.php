@@ -7,7 +7,7 @@
 <body class="index-page">
 <style>
   .header{
-    background: #161616 !important;
+    background: #060606 !important;
   }
 </style>
  <?php include "includes/topnav.php"?>
@@ -77,25 +77,25 @@
     <!-- Values Section -->
     <section id="values" class="values section">
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h1>Mission and Vision</h1>
-      </div><!-- End Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Mission and Vision</h2>
+        <p>Our Mission and Vision</p>
+      </div>
 
       <div class="container">
 
         <div class="row gy-4">
 
           <div class="col-lg-6 " data-aos="fade-up" data-aos-delay="100">
-            <div class="card  ">
-              <img src="assets/img/values-1.png" class="img-fluid" alt="">
+            <div class="card bg-dark ">
+              <!-- <img src="assets/img/values-1.png" class="img-fluid" alt=""> -->
               <h3>Our vision is an empowered community of Bantayan islanders enjoying the quality of life in an ecologically balanced environment through their shared dreams.</h3>
                </div>
           </div><!-- End Card Item -->
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="card">
-              <img src="assets/img/values-3.png" class="img-fluid" alt="">
+            <div class="card bg-dark">
+              <!-- <img src="assets/img/values-3.png" class="img-fluid" alt=""> -->
               <h3>Our mission is to facilitate the realization of an empowered, self-sufficient, and resilient community by using art and collaborations to address the social, economic, and environmental issues on Bantayan Island.</h3>
             </div>
           </div><!-- End Card Item -->
@@ -107,7 +107,7 @@
     </section><!-- /Values Section -->
 
     <!-- Stats Section -->
-    <section id="stats" class="stats section">
+    <!-- <section id="stats" class="stats section">
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -121,7 +121,7 @@
                 <p>Happy Clients</p>
               </div>
             </div>
-          </div><!-- End Stats Item -->
+          </div>
 
           <div class="col-lg-3 col-md-6">
             <div class="stats-item d-flex align-items-center w-100 h-100">
@@ -131,7 +131,7 @@
                 <p>Projects</p>
               </div>
             </div>
-          </div><!-- End Stats Item -->
+          </div>
 
           <div class="col-lg-3 col-md-6">
             <div class="stats-item d-flex align-items-center w-100 h-100">
@@ -141,7 +141,7 @@
                 <p>Hours Of Support</p>
               </div>
             </div>
-          </div><!-- End Stats Item -->
+          </div>
 
           <div class="col-lg-3 col-md-6">
             <div class="stats-item d-flex align-items-center w-100 h-100">
@@ -151,22 +151,22 @@
                 <p>Hard Workers</p>
               </div>
             </div>
-          </div><!-- End Stats Item -->
+          </div>
 
         </div>
 
       </div>
 
-    </section><!-- /Stats Section -->
+    </section> -->
+    <!-- /Stats Section -->
 
     <!-- Features Section -->
-    <section id="features" class="features section">
+    <!-- <section id="features" class="features section">
 
-      <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Features</h2>
         <p>Our Advacedd Features<br></p>
-      </div><!-- End Section Title -->
+      </div>
 
       <div class="container">
 
@@ -184,42 +184,42 @@
                   <i class="bi bi-check"></i>
                   <h3>Eos aspernatur rem</h3>
                 </div>
-              </div><!-- End Feature Item -->
+              </div>
 
               <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
                 <div class="feature-box d-flex align-items-center">
                   <i class="bi bi-check"></i>
                   <h3>Facilis neque ipsa</h3>
                 </div>
-              </div><!-- End Feature Item -->
+              </div>
 
               <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
                 <div class="feature-box d-flex align-items-center">
                   <i class="bi bi-check"></i>
                   <h3>Volup amet volupt</h3>
                 </div>
-              </div><!-- End Feature Item -->
+              </div>
 
               <div class="col-md-6" data-aos="fade-up" data-aos-delay="500">
                 <div class="feature-box d-flex align-items-center">
                   <i class="bi bi-check"></i>
                   <h3>Rerum omnis sint</h3>
                 </div>
-              </div><!-- End Feature Item -->
+              </div>
 
               <div class="col-md-6" data-aos="fade-up" data-aos-delay="600">
                 <div class="feature-box d-flex align-items-center">
                   <i class="bi bi-check"></i>
                   <h3>Alias possimus</h3>
                 </div>
-              </div><!-- End Feature Item -->
+              </div>
 
               <div class="col-md-6" data-aos="fade-up" data-aos-delay="700">
                 <div class="feature-box d-flex align-items-center">
                   <i class="bi bi-check"></i>
                   <h3>Repellendus molli</h3>
                 </div>
-              </div><!-- End Feature Item -->
+              </div>
 
             </div>
           </div>
@@ -228,10 +228,11 @@
 
       </div>
 
-    </section><!-- /Features Section -->
+    </section> -->
+    <!-- /Features Section -->
 
     <!-- Alt Features Section -->
-    <section id="alt-features" class="alt-features section">
+    <!-- <section id="alt-features" class="alt-features section">
 
       <div class="container">
 
@@ -247,7 +248,7 @@
                   <h4>Corporis voluptates sit</h4>
                   <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
                 </div>
-              </div><!-- End Feature Item -->
+              </div>
 
               <div class="col-md-6 icon-box">
                 <i class="bi bi-card-checklist"></i>
@@ -255,7 +256,7 @@
                   <h4>Ullamco laboris nisi</h4>
                   <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
                 </div>
-              </div><!-- End Feature Item -->
+              </div>
 
               <div class="col-md-6 icon-box">
                 <i class="bi bi-dribbble"></i>
@@ -263,7 +264,7 @@
                   <h4>Labore consequatur</h4>
                   <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
                 </div>
-              </div><!-- End Feature Item -->
+              </div>
 
               <div class="col-md-6 icon-box">
                 <i class="bi bi-filter-circle"></i>
@@ -271,7 +272,7 @@
                   <h4>Beatae veritatis</h4>
                   <p>Expedita veritatis consequuntur nihil tempore laudantium vitae denat pacta</p>
                 </div>
-              </div><!-- End Feature Item -->
+              </div>
 
               <div class="col-md-6 icon-box">
                 <i class="bi bi-lightning-charge"></i>
@@ -279,7 +280,7 @@
                   <h4>Molestiae dolor</h4>
                   <p>Et fuga et deserunt et enim. Dolorem architecto ratione tensa raptor marte</p>
                 </div>
-              </div><!-- End Feature Item -->
+              </div>
 
               <div class="col-md-6 icon-box">
                 <i class="bi bi-patch-check"></i>
@@ -287,7 +288,7 @@
                   <h4>Explicabo consectetur</h4>
                   <p>Est autem dicta beatae suscipit. Sint veritatis et sit quasi ab aut inventore</p>
                 </div>
-              </div><!-- End Feature Item -->
+              </div>
 
             </div>
 
@@ -301,16 +302,16 @@
 
       </div>
 
-    </section><!-- /Alt Features Section -->
+    </section> -->
+    <!-- /Alt Features Section -->
 
     <!-- Services Section -->
-    <section id="services" class="services section">
+    <!-- <section id="services" class="services section">
 
-      <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Services</h2>
         <p>Check Our Services<br></p>
-      </div><!-- End Section Title -->
+      </div>
 
       <div class="container">
 
@@ -323,7 +324,7 @@
               <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
               <a href="#" class="read-more stretched-link"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
             </div>
-          </div><!-- End Service Item -->
+          </div>
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
             <div class="service-item item-orange position-relative">
@@ -332,7 +333,7 @@
               <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
               <a href="#" class="read-more stretched-link"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
             </div>
-          </div><!-- End Service Item -->
+          </div>
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <div class="service-item item-teal position-relative">
@@ -341,7 +342,7 @@
               <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
               <a href="#" class="read-more stretched-link"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
             </div>
-          </div><!-- End Service Item -->
+          </div>
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
             <div class="service-item item-red position-relative">
@@ -350,7 +351,7 @@
               <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
               <a href="#" class="read-more stretched-link"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
             </div>
-          </div><!-- End Service Item -->
+          </div>
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
             <div class="service-item item-indigo position-relative">
@@ -359,7 +360,7 @@
               <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed animi at autem alias eius labore.</p>
               <a href="#" class="read-more stretched-link"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
             </div>
-          </div><!-- End Service Item -->
+          </div>
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
             <div class="service-item item-pink position-relative">
@@ -368,22 +369,23 @@
               <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti recusandae ducimus enim.</p>
               <a href="#" class="read-more stretched-link"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
             </div>
-          </div><!-- End Service Item -->
+          </div>
 
         </div>
 
       </div>
 
-    </section><!-- /Services Section -->
+    </section> -->
+    <!-- /Services Section -->
 
     <!-- Pricing Section -->
-    <section id="pricing" class="pricing section">
+    <!-- <section id="pricing" class="pricing section">
 
-      <!-- Section Title -->
+    
       <div class="container section-title" data-aos="fade-up">
         <h2>Pricing</h2>
         <p>Check Our Affordable Pricing<br></p>
-      </div><!-- End Section Title -->
+      </div>
 
       <div class="container">
 
@@ -405,7 +407,7 @@
               </ul>
               <a href="#" class="btn-buy">Buy Now</a>
             </div>
-          </div><!-- End Pricing Item -->
+          </div>
 
           <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
             <div class="pricing-tem">
@@ -424,7 +426,7 @@
               </ul>
               <a href="#" class="btn-buy">Buy Now</a>
             </div>
-          </div><!-- End Pricing Item -->
+          </div>
 
           <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
             <div class="pricing-tem">
@@ -442,7 +444,7 @@
               </ul>
               <a href="#" class="btn-buy">Buy Now</a>
             </div>
-          </div><!-- End Pricing Item -->
+          </div>
 
           <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
             <div class="pricing-tem">
@@ -460,22 +462,23 @@
               </ul>
               <a href="#" class="btn-buy">Buy Now</a>
             </div>
-          </div><!-- End Pricing Item -->
+          </div>
 
-        </div><!-- End pricing row -->
+        </div>
 
       </div>
 
-    </section><!-- /Pricing Section -->
+    </section>
+     -->
+    <!-- /Pricing Section -->
 
     <!-- Faq Section -->
-    <section id="faq" class="faq section">
+    <!-- <section id="faq" class="faq section">
 
-      <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>F.A.Q</h2>
         <p>Frequently Asked Questions</p>
-      </div><!-- End Section Title -->
+      </div>
 
       <div class="container">
 
@@ -491,7 +494,7 @@
                   <p>Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.</p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
+              </div>
 
               <div class="faq-item">
                 <h3>Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?</h3>
@@ -499,7 +502,7 @@
                   <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
+              </div>
 
               <div class="faq-item">
                 <h3>Dolor sit amet consectetur adipiscing elit pellentesque?</h3>
@@ -507,11 +510,11 @@
                   <p>Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis</p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
+              </div>
 
             </div>
 
-          </div><!-- End Faq Column-->
+          </div>
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
 
@@ -523,7 +526,7 @@
                   <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
+              </div>
 
               <div class="faq-item">
                 <h3>Tempus quam pellentesque nec nam aliquam sem et tortor consequat?</h3>
@@ -531,7 +534,7 @@
                   <p>Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in</p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
+              </div>
 
               <div class="faq-item">
                 <h3>Perspiciatis quod quo quos nulla quo illum ullam?</h3>
@@ -539,26 +542,27 @@
                   <p>Enim ea facilis quaerat voluptas quidem et dolorem. Quis et consequatur non sed in suscipit sequi. Distinctio ipsam dolore et.</p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
+              </div>
 
             </div>
 
-          </div><!-- End Faq Column-->
+          </div>
 
         </div>
 
       </div>
 
-    </section><!-- /Faq Section -->
+    </section> -->
+    <!-- /Faq Section -->
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio section">
+    <!-- <section id="portfolio" class="portfolio section">
 
-      <!-- Section Title -->
+      
       <div class="container section-title" data-aos="fade-up">
         <h2>Portfolio</h2>
         <p>Check our latest work</p>
-      </div><!-- End Section Title -->
+      </div>
 
       <div class="container">
 
@@ -570,7 +574,7 @@
             <li data-filter=".filter-product">Product</li>
             <li data-filter=".filter-branding">Branding</li>
             <li data-filter=".filter-books">Books</li>
-          </ul><!-- End Portfolio Filters -->
+          </ul>
 
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
 
@@ -584,7 +588,7 @@
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
               <div class="portfolio-content h-100">
@@ -596,7 +600,7 @@
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
               <div class="portfolio-content h-100">
@@ -609,7 +613,7 @@
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
               <div class="portfolio-content h-100">
@@ -621,7 +625,7 @@
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
               <div class="portfolio-content h-100">
@@ -633,7 +637,7 @@
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
               <div class="portfolio-content h-100">
@@ -645,7 +649,7 @@
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
               <div class="portfolio-content h-100">
@@ -657,7 +661,7 @@
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
               <div class="portfolio-content h-100">
@@ -669,7 +673,7 @@
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
               <div class="portfolio-content h-100">
@@ -681,7 +685,7 @@
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
               <div class="portfolio-content h-100">
@@ -693,7 +697,7 @@
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
               <div class="portfolio-content h-100">
@@ -705,7 +709,7 @@
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
               <div class="portfolio-content h-100">
@@ -717,24 +721,25 @@
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
-          </div><!-- End Portfolio Container -->
-
+          </div>
         </div>
 
       </div>
 
-    </section><!-- /Portfolio Section -->
+    </section> -->
+    
+    <!-- /Portfolio Section -->
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials section">
+    <!-- <section id="testimonials" class="testimonials section">
 
-      <!-- Section Title -->
+      
       <div class="container section-title" data-aos="fade-up">
         <h2>Testimonials</h2>
         <p>What they are saying about us<br></p>
-      </div><!-- End Section Title -->
+      </div>
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -780,7 +785,7 @@
                   <h4>Ceo &amp; Founder</h4>
                 </div>
               </div>
-            </div><!-- End testimonial item -->
+            </div>
 
             <div class="swiper-slide">
               <div class="testimonial-item">
@@ -796,7 +801,7 @@
                   <h4>Designer</h4>
                 </div>
               </div>
-            </div><!-- End testimonial item -->
+            </div>
 
             <div class="swiper-slide">
               <div class="testimonial-item">
@@ -812,7 +817,7 @@
                   <h4>Store Owner</h4>
                 </div>
               </div>
-            </div><!-- End testimonial item -->
+            </div>
 
             <div class="swiper-slide">
               <div class="testimonial-item">
@@ -828,7 +833,7 @@
                   <h4>Freelancer</h4>
                 </div>
               </div>
-            </div><!-- End testimonial item -->
+            </div>
 
             <div class="swiper-slide">
               <div class="testimonial-item">
@@ -844,7 +849,7 @@
                   <h4>Entrepreneur</h4>
                 </div>
               </div>
-            </div><!-- End testimonial item -->
+            </div>
 
           </div>
           <div class="swiper-pagination"></div>
@@ -852,16 +857,16 @@
 
       </div>
 
-    </section><!-- /Testimonials Section -->
+    </section> -->
 
     <!-- Team Section -->
     <section id="team" class="team section">
 
-      <!-- Section Title -->
+      
       <div class="container section-title" data-aos="fade-up">
         <h2>Members</h2>
         <p>MEET OUR MEMBERS</p>
-      </div><!-- End Section Title -->
+      </div>
 
       <div class="container">
 
@@ -993,13 +998,13 @@
     </section><!-- /Team Section -->
 
     <!-- Clients Section -->
-    <section id="clients" class="clients section">
+    <!-- <section id="clients" class="clients section">
 
-      <!-- Section Title -->
+      
       <div class="container section-title" data-aos="fade-up">
         <h2>Clients</h2>
         <p>We work with best clients<br></p>
-      </div><!-- End Section Title -->
+      </div>
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -1052,16 +1057,16 @@
 
       </div>
 
-    </section><!-- /Clients Section -->
+    </section> -->
 
     <!-- Recent Posts Section -->
-    <section id="recent-posts" class="recent-posts section">
+    <!-- <section id="recent-posts" class="recent-posts section">
 
-      <!-- Section Title -->
+      
       <div class="container section-title" data-aos="fade-up">
         <h2>Recent Posts</h2>
         <p>Recent posts form our Blog</p>
-      </div><!-- End Section Title -->
+      </div>
 
       <div class="container">
 
@@ -1096,7 +1101,7 @@
               </div>
 
             </div>
-          </div><!-- End post item -->
+          </div>
 
           <div class="col-xl-4 col-md-6">
             <div class="post-item position-relative h-100" data-aos="fade-up" data-aos-delay="200">
@@ -1127,7 +1132,7 @@
               </div>
 
             </div>
-          </div><!-- End post item -->
+          </div>
 
           <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <div class="post-item position-relative h-100">
@@ -1158,22 +1163,22 @@
               </div>
 
             </div>
-          </div><!-- End post item -->
+          </div>
 
         </div>
 
       </div>
 
-    </section><!-- /Recent Posts Section -->
+    </section> -->
 
     <!-- Contact Section -->
     <section id="contact" class="contact section">
 
-      <!-- Section Title -->
+      
       <div class="container section-title" data-aos="fade-up">
         <h2>Contact</h2>
         <p>Contact Us</p>
-      </div><!-- End Section Title -->
+      </div>
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -1185,9 +1190,9 @@
               <div class="col-md-6">
                 <div class="info-item" data-aos="fade" data-aos-delay="200">
                   <i class="bi bi-geo-alt"></i>
-                  <h3>Address</h3>
+                  <h3>Purok Brgy Mambacayao</h3>
                   <p>A108 Adam Street</p>
-                  <p>New York, NY 535022</p>
+                  <p>Bantayan Island Philipppines</p>
                 </div>
               </div><!-- End Info Item -->
 
@@ -1204,7 +1209,7 @@
                 <div class="info-item" data-aos="fade" data-aos-delay="400">
                   <i class="bi bi-envelope"></i>
                   <h3>Email Us</h3>
-                  <p>info@example.com</p>
+                  <p>info@goodlandv2@gmail.com</p>
                   <p>contact@example.com</p>
                 </div>
               </div><!-- End Info Item -->
