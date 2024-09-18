@@ -66,7 +66,6 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                             <th>Title</th>
                             <th>Description</th>
                             <th>File Path</th>
-                            <th width="150px">File Type</th>
                             <th width="150px">Uploaded By</th>
                             <th width="150px">Upload Date</th>
                             <th width="240px">Action</th>
@@ -79,7 +78,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
         <td><?php echo htmlspecialchars($file['title']); ?></td>
         <td><?php echo htmlspecialchars($file['description']); ?></td>
         <td><?php echo htmlspecialchars($file['file_path']); ?></td>
-        <td><?php echo htmlspecialchars($file['file_type']); ?></td>
+       
         <td><?php echo htmlspecialchars($file['fullname']); ?></td>
         <td><?php echo date("M d, Y h:i A", strtotime($file['upload_date'])); ?></td>
         <td>
@@ -87,17 +86,17 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
             <i class="bi bi-search"></i> View
         </a>
        
-        <button class="btn btn-warning btn-sm declineBtn ml-1"
+        <button class="btn btn-dark btn-sm declineBtn ml-1"
             data-id="<?php echo htmlspecialchars($file['id']); ?>"
             data-title="<?php echo htmlspecialchars($file['title']); ?>"
             data-description="<?php echo htmlspecialchars($file['description']); ?>"
             data-filepath="<?php echo htmlspecialchars($file['file_path']); ?>"
-            data-filetype="<?php echo htmlspecialchars($file['file_type']); ?>"
+          
             data-uploaded_by="<?php echo htmlspecialchars($file['fullname']); ?>"
             data-upload_date="<?php echo htmlspecialchars($file['upload_date']); ?>"
             data-bs-toggle="modal"
             data-bs-target="#declineModal">
-            <i class="bi bi-recycle"></i> Recycle
+            <i class="bi bi-recycle"></i> Archive
         </button>
     </td>
     </tr>

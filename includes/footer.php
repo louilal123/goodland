@@ -78,3 +78,44 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <?php if (isset($_SESSION['status']) && $_SESSION['status'] != ''): ?>
+        <script>
+            Swal.fire({
+                icon: "<?php echo $_SESSION['status_icon']; ?>", // e.g., 'warning', 'error', 'success'
+                title: "<?php echo $_SESSION['status']; ?>",    // The message (like 'Account not activated')
+                confirmButtonText: "Ok"
+            });
+        </script>
+        <?php
+        // Clear the session status after showing the message
+        unset($_SESSION['status']);
+        unset($_SESSION['status_icon']);
+        ?>
+    <?php endif; ?>
+
+    <script type="text/javascript" src="mdbfolder/mdb.umd.min.js"></script>
+     <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+import { Input, Ripple, initMDB } from "mdb-ui-kit";
+
+initMDB({ Input, Ripple });
+
+(() => {
+  'use strict';
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation');
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms).forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  });
+})();
+   </script>

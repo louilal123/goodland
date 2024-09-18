@@ -1,4 +1,9 @@
 <?php $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/")+1); ?>
+<style>
+  .header{
+    background: #060606 !important;
+  }
+</style>
 <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
@@ -24,7 +29,7 @@
               <li><a href="#">Dropdown 4</a></li>
             </ul>
           </li>
-          <li><a href="blog.html">Archives</a></li>
+          <li><a href="archives.php" class=" <?= $page == 'archives.php' ? 'active':'' ?>">Archives</a></li>
           <!-- -->
           
         </ul>

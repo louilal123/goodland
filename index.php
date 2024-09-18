@@ -5,11 +5,7 @@
 </head>
 
 <body class="index-page">
-<style>
-  .header{
-    background: #060606 !important;
-  }
-</style>
+
  <?php include "includes/topnav.php"?>
 
   <main class="main">
@@ -66,7 +62,7 @@
           </div>
 
           <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
+            <img src="assets/img/backgroun.jpg" class="img-fluid" alt="">
           </div>
 
         </div>
@@ -88,14 +84,14 @@
 
           <div class="col-lg-6 " data-aos="fade-up" data-aos-delay="100">
             <div class="card bg-dark ">
-              <!-- <img src="assets/img/values-1.png" class="img-fluid" alt=""> -->
+              <img src="assets/img/values-1.png" class="img-fluid" alt="">
               <h3>Our vision is an empowered community of Bantayan islanders enjoying the quality of life in an ecologically balanced environment through their shared dreams.</h3>
                </div>
           </div><!-- End Card Item -->
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
             <div class="card bg-dark">
-              <!-- <img src="assets/img/values-3.png" class="img-fluid" alt=""> -->
+              <img src="assets/img/values-3.png" class="img-fluid" alt="">
               <h3>Our mission is to facilitate the realization of an empowered, self-sufficient, and resilient community by using art and collaborations to address the social, economic, and environmental issues on Bantayan Island.</h3>
             </div>
           </div><!-- End Card Item -->

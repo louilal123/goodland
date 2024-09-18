@@ -25,18 +25,18 @@
                             <div class="card-body px-lg-5 pt-0">
                                 <form style="color: #757575;" action="classes/signup.php" method="post">
                                     <div class="md-form mb-3">
-                                        <label for="materialLoginFormFullname">Fullname</label>
-                                        <input type="text" id="materialLoginFormFullname" class="form-control 
+                                        <label for="materialLoginFormname">name</label>
+                                        <input type="text" id="materialLoginFormname" class="form-control 
                                         <?php 
-                                            if (!empty($_SESSION['error_fullname'])) {
+                                            if (!empty($_SESSION['error_name'])) {
                                                 echo 'is-invalid';
-                                            } elseif (!empty($_SESSION['form_data']['fullname'])) {
+                                            } elseif (!empty($_SESSION['form_data']['name'])) {
                                                 echo 'is-valid';
                                             }
-                                        ?>" name="fullname" 
-                                        value="<?php echo $_SESSION['form_data']['fullname'] ?? ''; ?>">
-                                        <?php if (!empty($_SESSION['error_fullname'])): ?>
-                                            <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_fullname']; unset($_SESSION['error_fullname']); ?></div>
+                                        ?>" name="name" 
+                                        value="<?php echo $_SESSION['form_data']['name'] ?? ''; ?>">
+                                        <?php if (!empty($_SESSION['error_name'])): ?>
+                                            <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_name']; unset($_SESSION['error_name']); ?></div>
                                         <?php endif; ?>
                                     </div>
 

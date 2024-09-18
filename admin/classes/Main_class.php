@@ -94,22 +94,6 @@ public function get_download_data_for_current_month() {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-
-//this is for the horizontal bar chart signup and non signup
-public function getDownloadData1() {
-    $stmt = $this->pdo->prepare("
-    SELECT 
-        f.file_type, 
-        IF(d.user_id IS NULL, 'Non-Signed-Up', 'Signed-Up') as user_type, 
-        COUNT(d.id) as download_count
-    FROM downloads d
-    JOIN files f ON d.file_id = f.id
-    GROUP BY f.file_type, user_type
-");
-$stmt->execute();
-return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-    
     
     public function trackVisitor() {
         $geoplugin = new geoPlugin();
@@ -467,68 +451,15 @@ public function getDownloadData($currentMonth, $currentYear, $isSignedIn) {
     
 
     public function fetchApprovedDocuments() {
-        $stmt = $this->pdo->prepare("SELECT f.id, f.user_id, f.title, f.description, f.file_path, f.file_type, 
+        $stmt = $this->pdo->prepare("SELECT f.id, f.user_id, f.title, f.description, f.file_path, 
             f.upload_date, f.status, f.remarks, f.isDeleted, u.fullname AS uploader_fullname
             FROM files f
             INNER JOIN users u ON f.user_id = u.user_id
-            WHERE f.status = 'Approved' AND f.isDeleted = 0 AND f.file_type ='Documents' ");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-    public function fetchApprovedImages() {
-        $stmt = $this->pdo->prepare("SELECT f.id, f.user_id, f.title, f.description, f.file_path, f.file_type, 
-            f.upload_date, f.status, f.remarks, f.isDeleted, u.fullname AS uploader_fullname
-            FROM files f
-            INNER JOIN users u ON f.user_id = u.user_id
-            WHERE f.status = 'Approved' AND f.isDeleted = 0 AND f.file_type ='Images' ");
+            WHERE f.status = 'Approved' AND f.isDeleted = 0  ");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-  
-    public function  fetchApprovedMaps(){
-        $stmt = $this->pdo->prepare("SELECT f.id, f.user_id, f.title, f.description, f.file_path, f.file_type, 
-            f.upload_date, f.status, f.remarks, f.isDeleted, u.fullname AS uploader_fullname
-            FROM files f
-            INNER JOIN users u ON f.user_id = u.user_id
-            WHERE f.status = 'Approved' AND f.isDeleted = 0 AND f.file_type ='Maps' ");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-    public function  fetchApprovedAudio(){
-        $stmt = $this->pdo->prepare("SELECT f.id, f.user_id, f.title, f.description, f.file_path, f.file_type, 
-            f.upload_date, f.status, f.remarks, f.isDeleted, u.fullname AS uploader_fullname
-            FROM files f
-            INNER JOIN users u ON f.user_id = u.user_id
-            WHERE f.status = 'Approved' AND f.isDeleted = 0 AND f.file_type ='Audio' ");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-    public function  fetchApprovedArts(){
-        $stmt = $this->pdo->prepare("SELECT f.id, f.user_id, f.title, f.description, f.file_path, f.file_type, 
-            f.upload_date, f.status, f.remarks, f.isDeleted, u.fullname AS uploader_fullname
-            FROM files f
-            INNER JOIN users u ON f.user_id = u.user_id
-            WHERE f.status = 'Approved' AND f.isDeleted = 0 AND f.file_type ='Arts' ");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-    
-
-public function getMediaCounts() {
-    $stmt = $this->pdo->prepare("
-        SELECT 
-            file_type AS MediaType, COUNT(*) AS Count 
-        FROM files
-        WHERE isDeleted = 0
-        GROUP BY file_type
-    ");
-    $stmt->execute();
-    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $rows;
-}
-
-    
     
     public function changePassword($userId, $currentPassword, $newPassword) {
         try {
@@ -553,20 +484,6 @@ public function getMediaCounts() {
         }
     }
 
-    public function updateBio($userId, $bio) {
-        try {
-            $stmt = $this->pdo->prepare("UPDATE users SET bio = :bio, date_updated = NOW() WHERE user_id = :userId");
-            $stmt->bindParam(':bio', $bio, PDO::PARAM_STR);
-            $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
-            $stmt->execute();
-            return true;
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-            return false;
-        }
-    }
-    
-    
     // for login
     public function login_user($emailOrUsername, $password) {
         $stmt = $this->pdo->prepare("SELECT admin_id, email, username, password FROM admin WHERE email = :emailOrUsername OR username = :emailOrUsername");
@@ -620,6 +537,84 @@ public function getMediaCounts() {
         ];
     }
 }
+
+ //user details currently login
+ public function current_Loggedin_UserDetails($user_id) {
+    $stmt = $this->pdo->prepare("SELECT * FROM users WHERE user_id = :user_id");
+    $stmt->bindParam(':user_id', $user_id);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+        return [
+            'user_photo' => !empty($user['user_photo']) ? $user['user_photo'] : 'default_photo.jpg',
+            'fullname' => $user['fullname'],
+            'username' => $user['username'],
+            'date_created' => $user['date_created'],
+            'date_updated' => $user['date_updated'],
+            'email' => $user['email'],
+            'status' => $user['status'],
+            
+            'last_login' => $user['last_login']
+            
+        ];
+    } else {
+        return [
+            'user_photo' => 'uploads/default_photo.jpg',
+            'fullname' => ''
+        ];
+    }
+}
+
+
+public function get_all_files() {
+    $stmt = $this->pdo->prepare("
+        SELECT files 
+        FROM files 
+        ORDER BY files.upload_date DESC
+    ");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+public function getUserFileCount($user_id) {
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) as file_count FROM files WHERE user_id = :user_id AND isDeleted = 0");
+    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $result['file_count'];
+}
+public function getPendingFileCount($user_id) {
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) as file_count FROM files WHERE user_id = :user_id AND status = 'Pending' AND isDeleted = 0");
+    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $result['file_count'];
+}
+public function getApprovedFileCount($user_id) {
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) as file_count FROM files WHERE user_id = :user_id AND status = 'Approved' AND isDeleted = 0");
+    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $result['file_count'];
+}
+public function getDeclinedFileCount($user_id) {
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) as file_count FROM files WHERE user_id = :user_id AND status = 'Declined' AND isDeleted = 0");
+    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $result['file_count'];
+}
+
+
+
+
+
+// end forcontriu user 
 
 public function insert_admin($fullname, $username, $email, $password, $photo) {
     $sql = "INSERT INTO admin (fullname, username, email, password, admin_photo, date_created, role, status) 
@@ -987,179 +982,13 @@ public function count_all_approved_files() {
 }
 
 public function count_all_recycled_files() {
-    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM files WHERE isDeleted = 1 ");
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM files WHERE status = 'Archived' ");
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result['total'];
 }
 //ALL USER SIDES HERE
 ///user currently login files start 
-public function get_user_documents($userId, $fileType = 'Documents', $status = null, $searchTerm = '') {
-    try {
-        $query = "SELECT * FROM files WHERE user_id = :user_id AND file_type = :file_type";
-        if ($status && $status !== 'All') {
-            $query .= " AND status = :status";
-        }
-        if ($searchTerm) {
-            $query .= " AND (title LIKE :searchTerm OR description LIKE :searchTerm)";
-        }
-        $stmt = $this->pdo->prepare($query);
-        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
-        $stmt->bindParam(':file_type', $fileType, PDO::PARAM_STR);
-        if ($status && $status !== 'All') {
-            $stmt->bindParam(':status', $status, PDO::PARAM_STR);
-        }
-        if ($searchTerm) {
-            $searchTerm = '%' . $searchTerm . '%';
-            $stmt->bindParam(':searchTerm', $searchTerm, PDO::PARAM_STR);
-        }
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        error_log("Database error: " . $e->getMessage());
-        return [];
-    }
-}
-public function get_user_images($userId, $fileType = 'Images', $status = null, $searchTerm = '') {
-    try {
-        $query = "SELECT * FROM files WHERE user_id = :user_id AND file_type = :file_type";
-        if ($status && $status !== 'All') {
-            $query .= " AND status = :status";
-        }
-        if ($searchTerm) {
-            $query .= " AND (title LIKE :searchTerm OR description LIKE :searchTerm)";
-        }
-        $stmt = $this->pdo->prepare($query);
-        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
-        $stmt->bindParam(':file_type', $fileType, PDO::PARAM_STR);
-        if ($status && $status !== 'All') {
-            $stmt->bindParam(':status', $status, PDO::PARAM_STR);
-        }
-        if ($searchTerm) {
-            $searchTerm = '%' . $searchTerm . '%';
-            $stmt->bindParam(':searchTerm', $searchTerm, PDO::PARAM_STR);
-        }
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        error_log("Database error: " . $e->getMessage());
-        return [];
-    }
-}
-public function get_user_arts($userId, $fileType = 'Arts', $status = null, $searchTerm = '') {
-    try {
-        $query = "SELECT * FROM files WHERE user_id = :user_id AND file_type = :file_type";
-        if ($status && $status !== 'All') {
-            $query .= " AND status = :status";
-        }
-        if ($searchTerm) {
-            $query .= " AND (title LIKE :searchTerm OR description LIKE :searchTerm)";
-        }
-        $stmt = $this->pdo->prepare($query);
-        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
-        $stmt->bindParam(':file_type', $fileType, PDO::PARAM_STR);
-        if ($status && $status !== 'All') {
-            $stmt->bindParam(':status', $status, PDO::PARAM_STR);
-        }
-        if ($searchTerm) {
-            $searchTerm = '%' . $searchTerm . '%';
-            $stmt->bindParam(':searchTerm', $searchTerm, PDO::PARAM_STR);
-        }
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        error_log("Database error: " . $e->getMessage());
-        return [];
-    }
-}
-
-public function get_user_maps($userId, $fileType = 'Maps', $status = null, $searchTerm = '') {
-    try {
-        $query = "SELECT * FROM files WHERE user_id = :user_id AND file_type = :file_type";
-        if ($status && $status !== 'All') {
-            $query .= " AND status = :status";
-        }
-        if ($searchTerm) {
-            $query .= " AND (title LIKE :searchTerm OR description LIKE :searchTerm)";
-        }
-        $stmt = $this->pdo->prepare($query);
-        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
-        $stmt->bindParam(':file_type', $fileType, PDO::PARAM_STR);
-        if ($status && $status !== 'All') {
-            $stmt->bindParam(':status', $status, PDO::PARAM_STR);
-        }
-        if ($searchTerm) {
-            $searchTerm = '%' . $searchTerm . '%';
-            $stmt->bindParam(':searchTerm', $searchTerm, PDO::PARAM_STR);
-        }
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        error_log("Database error: " . $e->getMessage());
-        return [];
-    }
-}
-
-
-public function count_user_files($userId) {
-    try {
-        $stmt = $this->pdo->prepare("
-            SELECT 
-                COUNT(*) AS user_total,
-                SUM(status = 'Pending') AS user_pending,
-                SUM(status = 'Approved') AS user_approved,
-                SUM(status = 'Declined') AS user_declined
-            FROM files
-            WHERE user_id = :user_id 
-        ");
-
-        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
-        $stmt->execute();
-
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($result) {
-            return [
-                'user_total' => $result['user_total'] ?? 0,
-                'user_pending' => $result['user_pending'] ?? 0,
-                'user_approved' => $result['user_approved'] ?? 0,
-                'user_declined' => $result['user_declined'] ?? 0,
-            ];
-        } else {
-            return [
-                'user_total' => 0,
-                'user_pending' => 0,
-                'user_approved' => 0,
-                'user_declined' => 0,
-            ];
-        }
-    } catch (PDOException $e) {
-        error_log("Database error: " . $e->getMessage());
-
-        return [
-            'user_total' => 0,
-            'user_pending' => 0,
-            'user_approved' => 0,
-            'user_declined' => 0,
-        ];
-    }
-}
-//end count logged in user files
-
-
-
-public function count_file_types() {
-    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM filetypes ");
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $result['total'];
-}
-public function get_file_types() {
-    $stmt = $this->pdo->prepare("SELECT * FROM filetypes");
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
 
 
 public function add_document($title, $cover, $file_path, $author, $publication_date, $category, $description, $uploaded_by, $status) {
@@ -1202,19 +1031,21 @@ public function get_products() {
 }
 public function register_user($fullname, $email, $password, $activation_token_hash) {
     try {
+        $random_number = rand(10000, 99999);  // Generates a random number between 10000 and 99999
+        $username = 'user_' . $random_number;
+
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
         $date_created = date('Y-m-d H:i:s');
-        $status = 'pending'; // Set the status to pending until the account is activated
 
-        $stmt = $this->pdo->prepare("INSERT INTO users (fullname, email, password, account_activation_hash, date_created, status) 
-                                     VALUES (:fullname, :email, :password, :activation_token_hash, :date_created, :status)");
+        $stmt = $this->pdo->prepare("INSERT INTO users (fullname, email, password, username, account_activation_hash, date_created) 
+                                     VALUES (:fullname, :email, :password, :username, :activation_token_hash, :date_created)");
         $stmt->execute([
             ':fullname' => $fullname,
             ':email' => $email,
             ':password' => $hashed_password,
+            ':username' => $username,
             ':activation_token_hash' => $activation_token_hash,
-            ':date_created' => $date_created,
-            ':status' => $status
+            ':date_created' => $date_created
         ]);
 
         $_SESSION['status'] = "User successfully registered! Please check your email to activate your account.";
@@ -1223,26 +1054,29 @@ public function register_user($fullname, $email, $password, $activation_token_ha
     } catch (PDOException $e) {
         $_SESSION['status'] = "Error registering user: " . $e->getMessage();
         $_SESSION['status_icon'] = "error";
+        header("Location: ../../../c-signup.php");
         return false;
     }
 }
 
-               // Method to check if token exists
-    public function is_token_valid($token_hash) {
-        $sql = "SELECT user_id FROM users WHERE account_activation_hash = :token_hash LIMIT 1";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':token_hash', $token_hash);
-        $stmt->execute();
-        return $stmt->rowCount() > 0;
-    }
 
-    // Method to update activation hash to NULL
-    public function update_activation_hash($token_hash) {
-        $sql = "UPDATE users SET account_activation_hash = NULL WHERE account_activation_hash = :token_hash";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':token_hash', $token_hash);
-        $stmt->execute();
-    }
+// Method to check if token exists
+public function is_token_valid($token_hash) {
+    $sql = "SELECT user_id FROM users WHERE account_activation_hash = :token_hash LIMIT 1";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindParam(':token_hash', $token_hash);
+    $stmt->execute();
+    return $stmt->rowCount() > 0;
+}
+
+public function update_activation_hash($token_hash) {
+    $sql = "UPDATE users SET account_activation_hash = NULL WHERE account_activation_hash = :token_hash";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindParam(':token_hash', $token_hash);
+    return $stmt->execute(); // This returns true on success or false on failure
+}
+
+
     //forgot passwd
     public function save_reset_token($email, $token_hash, $expiry) {
         try {
@@ -1384,66 +1218,27 @@ public function update_password($user_id, $password_hash) {
         $insertIpStmt->execute([':user_id' => $userId, ':ip' => $ip]);
     }
    
-    public function user_login($emailOrUsername, $password) {
+    
+    public function user_login($email, $password) {
         try {
-            $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = :emailOrUsername OR username = :emailOrUsername LIMIT 1");
-            $stmt->execute([':emailOrUsername' => $emailOrUsername]);
+            $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+            $stmt->execute([':email' => $email]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
-            if ($user && password_verify($password, $user['password'])) {
-                $updateStmt = $this->pdo->prepare("UPDATE users SET last_login = NOW() WHERE user_id = :user_id");
-                $updateStmt->execute([':user_id' => $user['user_id']]);
-    
-                $geoplugin = new geoPlugin();
-                $ip = $_SERVER['REMOTE_ADDR'];
-    
-                if ($ip == '127.0.0.1' || $ip == '::1') {
-                    $ip = '112.198.194.108';
+            if ($user) {
+                if ($user['account_activation_hash'] !== null) {
+                  
+                    return 'account_not_activated';
                 }
-    
-                // Locate IP using geoPlugin
-                $geoplugin->locate($ip);
-    
-                // Check if there is any recent visitor with the same user_id and ip
-                $stmt = $this->pdo->prepare("SELECT * FROM visitor_data WHERE user_id = :user_id AND ip = :ip AND visit_time >= NOW() - INTERVAL 1 DAY");
-                $stmt->execute([':user_id' => $user['user_id'], ':ip' => $ip]);
-                $visitor = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-                if ($visitor) {
-                    // Update the visitor_data with the user_id only if user_id is currently NULL
-                    if (is_null($visitor['user_id'])) {
-                        $updateVisitorStmt = $this->pdo->prepare("UPDATE visitor_data SET user_id = :user_id WHERE id = :id");
-                        $updateVisitorStmt->execute([':user_id' => $user['user_id'], ':id' => $visitor['id']]);
-                    }
+                if (password_verify($password, $user['password'])) {
+                    
+                    $this->update_last_login($user['user_id']);
+                    return $user;
                 } else {
-                    // Insert new record if no matching user_id and ip for the current day
-                    $insertVisitorStmt = $this->pdo->prepare("INSERT INTO visitor_data (user_id, ip, city, region, country, latitude, longitude, visit_time, visit_count) 
-                                                             VALUES (:user_id, :ip, :city, :region, :country, :latitude, :longitude, NOW(), 1)");
-                    $insertVisitorStmt->execute([
-                        ':user_id' => $user['user_id'],
-                        ':ip' => $ip,
-                        ':city' => $geoplugin->city,
-                        ':region' => $geoplugin->region,
-                        ':country' => $geoplugin->countryName,
-                        ':latitude' => $geoplugin->latitude,
-                        ':longitude' => $geoplugin->longitude
-                    ]);
+                    return false; 
                 }
-    
-                // Check if there is already a record in user_ips with the same user_id and ip
-                $stmt = $this->pdo->prepare("SELECT * FROM user_ips WHERE user_id = :user_id AND ip = :ip");
-                $stmt->execute([':user_id' => $user['user_id'], ':ip' => $ip]);
-                $existingIp = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-                if (!$existingIp) {
-                    // Insert into user_ips to associate the IP with the user only if no existing record is found
-                    $insertIpStmt = $this->pdo->prepare("INSERT INTO user_ips (user_id, ip) VALUES (:user_id, :ip)");
-                    $insertIpStmt->execute([':user_id' => $user['user_id'], ':ip' => $ip]);
-                }
-    
-                return $user;
             } else {
-                return false;
+                return false; 
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
@@ -1451,30 +1246,16 @@ public function update_password($user_id, $password_hash) {
         }
     }
     
+    public function update_last_login($user_id) {
+        try {
+            $updateStmt = $this->pdo->prepare("UPDATE users SET last_login = NOW() WHERE user_id = :user_id");
+            $updateStmt->execute([':user_id' => $user_id]);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
     
-    
-        // public function user_login($email, $password) {
-        //     try {
-        //         $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
-        //         $stmt->execute([':email' => $email]);
-        //         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        //         if ($user && password_verify($password, $user['password'])) {
-                   
-        //             $updateStmt = $this->pdo->prepare("UPDATE users SET last_login = NOW() WHERE user_id = :user_id");
-        //             $updateStmt->execute([':user_id' => $user['user_id']]);
-                    
-                   
-        //             return $user;
-        //         } else {
-        //             return false;
-        //         }
-        //     } catch (PDOException $e) {
-        //         echo $e->getMessage();
-        //         return false;
-        //     }
-        // }
-        
+
 
         public function get_user_info() {
             if (isset($_SESSION['user_id'])) {
@@ -1487,18 +1268,23 @@ public function update_password($user_id, $password_hash) {
             return null;
         }
 
-
-        public function saveFileInfo($userId, $title, $description, $fileTypeId, $fileName, $filePath) {
+//file crud contiebutorrs
+        public function saveFileInfo($userId, $title, $description, $filePath, $coverPath = '') {
             try {
-                $stmt = $this->pdo->prepare("INSERT INTO files (user_id, title, description, file_type, file_path) VALUES
-                 (:user_id, :title, :description, :file_type, :file_path)");
+                $uploadDate = date('Y-m-d H:i:s');
+
+                $stmt = $this->pdo->prepare("INSERT INTO files (user_id, title, cover_path, description, file_path, upload_date) 
+                                            VALUES (:user_id, :title, :cover_path, :description, :file_path, :upload_date)");
+
                 $stmt->bindParam(':user_id', $userId);
                 $stmt->bindParam(':title', $title);
+                $stmt->bindParam(':cover_path', $coverPath);
                 $stmt->bindParam(':description', $description);
-                $stmt->bindParam(':file_type', $fileTypeId);
                 $stmt->bindParam(':file_path', $filePath);
+                $stmt->bindParam(':upload_date', $uploadDate);
+
                 $stmt->execute();
-    
+
                 $_SESSION['status'] = "File successfully uploaded!";
                 $_SESSION['status_icon'] = "success";
                 return true;
@@ -1510,6 +1296,7 @@ public function update_password($user_id, $password_hash) {
         }
 
 
+// file crud contributors end /
         
         
 

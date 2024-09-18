@@ -155,10 +155,7 @@ $m_downloads = $mainClass->get_download_data_for_current_month();
         };
 
         // Fill in the data from the database
-        rawData.forEach(function(row) {
-            downloadCounts[row.file_type][row.user_type] = row.download_count;
-        });
-
+      
         // Push the data to formattedData array
         fileTypes.forEach(function(type) {
             formattedData.push([type, downloadCounts[type]['Signed-Up'], downloadCounts[type]['Non-Signed-Up']]);

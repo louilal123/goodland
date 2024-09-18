@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include "includes/header.php"; ?>
-<link rel="stylesheet" href="../assets/css/profile.css">
+<link rel="stylesheet" href="assets/css/profile.css">
 <style>
      .custom-card {
             display: flex;
@@ -216,7 +216,7 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                                                                 data-bs-target="#fileModal"
                                                                 data-title="<?= htmlspecialchars($file['title']); ?>"
                                                                 data-description="<?= htmlspecialchars($file['description']); ?>"
-                                                               
+                                                                data-filetype="<?= htmlspecialchars($file['file_type']); ?>"
                                                                 data-status="<?= htmlspecialchars($file['status']); ?>"
                                                                 data-date="<?= htmlspecialchars($file['upload_date']); ?>"
                                                                 data-remarks="<?= htmlspecialchars($file['remarks']); ?>"
@@ -271,7 +271,7 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                                                                 data-bs-target="#fileModal"
                                                                 data-title="<?= htmlspecialchars($file['title']); ?>"
                                                                 data-description="<?= htmlspecialchars($file['description']); ?>"
-                                                               
+                                                                data-filetype="<?= htmlspecialchars($file['file_type']); ?>"
                                                                 data-status="<?= htmlspecialchars($file['status']); ?>"
                                                                 data-date="<?= htmlspecialchars($file['upload_date']); ?>"
                                                                 data-remarks="<?= htmlspecialchars($file['remarks']); ?>"
@@ -326,7 +326,7 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                                                                 data-bs-target="#fileModal"
                                                                 data-title="<?= htmlspecialchars($file['title']); ?>"
                                                                 data-description="<?= htmlspecialchars($file['description']); ?>"
-                                                               
+                                                                data-filetype="<?= htmlspecialchars($file['file_type']); ?>"
                                                                 data-status="<?= htmlspecialchars($file['status']); ?>"
                                                                 data-date="<?= htmlspecialchars($file['upload_date']); ?>"
                                                                 data-remarks="<?= htmlspecialchars($file['remarks']); ?>"
@@ -381,7 +381,7 @@ $images = $mainClass->get_user_documents($userId, 'Images', $statusFilter, $sear
                                                                 data-bs-target="#fileModal"
                                                                 data-title="<?= htmlspecialchars($file['title']); ?>"
                                                                 data-description="<?= htmlspecialchars($file['description']); ?>"
-                                                               
+                                                                data-filetype="<?= htmlspecialchars($file['file_type']); ?>"
                                                                 data-status="<?= htmlspecialchars($file['status']); ?>"
                                                                 data-date="<?= htmlspecialchars($file['upload_date']); ?>"
                                                                 data-remarks="<?= htmlspecialchars($file['remarks']); ?>"

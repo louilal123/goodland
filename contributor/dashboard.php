@@ -1,237 +1,92 @@
-<?php //include "../admin/classes/admindetails.php" ?>
 <!DOCTYPE html>
-<html lang="en"> 
- 
-<?php include "includes/header.php"?>
-<style>
-	
-     .panel {
-    opacity: 0;
-    transition: opacity 2s ease-in-out;
-    }
+<html lang="en"> <!--begin::Head-->
 
-    .panel.show {
-        opacity: 1;
-    }
-    .small-box{
-        position :absolute;
-        height: 0px;
-        width: 0px;
-        margin-top: 0px !important;
-        font-size: 50px;
-        left: 0px;
-        margin-right: 50px !important; 
-  		margin-left: 300px !important;
-        align-items: end;
-        justify-content: end;
-        
-        /* opacity:0.8; */
-    }
-	
-    .panel-footer{
-        opacity: 0.8 !important;
-    }
+<head>
+<?php include "includes/header.php";?>
+</head> 
 
-    /* .main-blur {
-    background: rgba(108, 117, 125, 0.1); 
-} */
-
-</style>
-
-<body class="layout-fixed-complete sidebar-expand-lg sidebar-mini bg-white" style="overflow: hidden;"> 
-    <div class="app-wrapper"> 
-
-       <?php include "includes/sidebar.php"?>
-
+<body class="layout-fixed-complete sidebar-expand-lg sidebar-mini bg-body-tertiary"> 
+    <div class="app-wrapper">
+    <?php include "includes/sidebar.php";?>
         <div class="app-main-wrapper">
-          
-        <?php include "includes/topnav.php"?>
-
-            <main class="app-main main-blur" > 
-                <div class="app-content-header mb-0">
-                    <div class="container-fluid"> 
+        <?php include "includes/topnav.php";?>
+            
+            <main class="app-main">
+                <div class="app-content-header"> 
+                    <div class="container-fluid"> <!--begin::Row-->
                         <div class="row">
                             <div class="col-sm-8">
-                                <h3 class="mb-0 text-black">Overview</h3>
+                                <h3 class="mb-0">Welcome  <small><?php echo $user_details['username']; ?>.</small></h3>
                             </div>
-                            <div class="col-sm-4 text-black">
-                                <ol class="breadcrumb float-sm-end text-black">
-                                    <li class="breadcrumb-item text-info    "><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item  text-black" aria-current="page">Overview
+                            <div class="col-sm-4">
+                                <ol class="breadcrumb float-sm-end">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">
+                                        Overview
                                     </li>
                                 </ol>
                             </div>
-                        </div> 
-                    </div> 
+                        </div> <!--end::Row-->
+                    </div> <!--end::Container-->
                 </div> 
-                <div class="app-content">
-                    <div class="container-fluid"> 
-                       
-
-                               <div class="row mt-0">
-								    <!--   -->
-									<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-light" style="border-radius: 5px;">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title text-dark">Uploaded Files</h5>
-													</div>
-
-													<div class="col-auto mt-4">
-														<div class="stat text-primary">
-															<i class="fas fa-arrow-up small-box text-success"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class=" text-dark"> <?php echo $count_files ?? '0'; ?></h1>
-												<div class="mb-0">
-											</div>
-											</div>
-										</div>
-									</div>  
-									<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-light" style="border-radius: 5px;">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title text-dark">Approved Files</h5>
-													</div>
-
-													<div class="col-auto mt-4">
-														<div class="stat text-primary">
-                                                         <i class="fas fa-check small-box text-primary"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class=" text-dark"> <?php echo $count_approved_files ?? '0'; ?></h1>
-												<div class="mb-0">
-												
-													
-												</div>
-											</div>
-										</div>
-                                    </div>
-
-									<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-light" style="border-radius: 5px;">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title text-dark">Pending Files</h5>
-													</div>
-
-													<div class="col-auto mt-4">
-														<div class="stat text-primary">
-                                                        <i class="fas fa-hourglass small-box text-warning"></i>
-                                                    	</div>
-													</div>
-												</div>
-												<h1 class=" text-dark"> <?php echo $count_pending_files ?? '0'; ?></h1>
-												<div class="mb-0">
-												
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-light" style="border-radius: 5px;">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title text-dark">Declined Uploads</h5>
-													</div>
-
-													<div class="col-auto mt-4">
-														<div class="stat text-primary">
-                                                        <i class="fas fa-x small-box text-danger"></i>
-                                                    	</div>
-													</div>
-												</div>
-												<h1 class=" text-dark"> <?php echo $count_declined_files ?? '0'; ?></h1>
-												<div class="mb-0">
-												
-												</div>
-											</div>
-										</div>
-									</div>
-                          
-					            </div> 
-								<div class="row mt-4">
-                        <div class="col-md-12 flat">
-                            <div class="card mb-4 card-outline-primary">
-                            <div class="card-header d-flex ">
-                                <h3 class="card-title mb-0">List of Admins</h3>
-                                <a class="btn btn-primary ms-auto custombtn" data-bs-toggle="modal" data-bs-target="#addItemModal">Add New Admin</a>
-                            </div>
- 
-                                <div class="card-body">
-                                    <div class="container-fluid">
-                                <table id="myTable" class="table-responsive table table-hover  table-striped w-100">
-                                <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Fullname</th>
-                                    <th>Username</th>
-                                    <th>Email</th>
-                                    <th>Photo</th>
-                                    <th>Date_created</th>
-                                    <th>Modified</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?//php foreach ($admins as $index => $admin): ?>
-                                    <tr>
-                                    <td><?//php echo $index + 1; ?></td>
-                                        <td><?//php echo htmlspecialchars($admin['fullname']); ?></td>
-                                        <td><?//php echo htmlspecialchars($admin['username']); ?></td>
-                                        <td><?//php echo htmlspecialchars($admin['email']); ?></td>
-                                        <td> <img src="uploads/<?//php echo $admin['admin_photo'] ?: 'default_photo.jpg'; ?>" alt="" 
-                                        style="width: 40px; height: 40px; "></td>
-                                        <td><?//php echo date("M d, Y h:i A", strtotime($admin['date_created'])); ?></td>
-                                        <td><?//php echo date("M d, Y h:i A", strtotime($admin['date_updated'])); ?></td>
-                                        <td>
-                                            <?//php if ($admin['status'] == 'Active'): ?>
-                                                <span class="badge bg-success">Active</span>
-                                            <?//php else: ?>
-                                                <span class="badge bg-secondary">Inactive</span>
-                                            <?//php endif; ?>
-                                        </td>
-                                        <td>
-                                        <button class="btn btn-info btn-sm viewAdminDetailBtn " data-id="<?//php echo $admin['admin_id']; ?>" 
-                                        data-bs-toggle="modal" data-bs-target="#viewAdminModal"> <i class="bi bi-eye-fill"></i></button>
-                                        <a href="#" class="btn btn-success btn-sm editAdminBtn" data-bs-toggle="modal" data-bs-target="#editAdminModal">
-                                             <i class="bi bi-pencil-square"></i></a>
-                                        
-                                            <a href="classes/delete_admin.php?id=<?//=$admin['admin_id']; ?>" class="btn btn-danger btn-sm deleteBtn"> 
-                                                <i class="bi bi-trash-fill"></i></a>
-                                        </td>
-                                    </tr>
-                                    <?//php endforeach; ?>
-                                </tbody>
-                           
-                            </table>
+                <div class="app-content"> 
+                <div class="container-fluid"> <!--begin::Row-->
+                    <div class="row"> <!--begin::Col-->
+                        <div class="col-lg-3 col-6"> <!--begin::Small Box Widget 1-->
+                            <div class="small-box text-bg-primary">
+                                <div class="inner text-white p-4 pb-2">
+                                    <h3> <?php echo htmlspecialchars($fileCount) ?? '0'; ?> </h3>
+                                    <p>All Files</p>
                                 </div> 
+                                <div class="small-box-icon texg"><i class="fas fa-folder"></i></div> 
+                            </div> <!--end::Small Box Widget 1-->
+                        </div> <!--end::Col-->
+                        <div class="col-lg-3 col-6"> <!--begin::Small Box Widget 2-->
+                            <div class="small-box text-bg-success">
+                                <div class="inner text-white p-4 pb-2">
+                                    <h3><?php echo $pending_file ?? '0'; ?> </h3>
+                                    <p>Pending Files</p>
                                 </div>
-                            </div> <!-- /.card -->
-                        </div> <!-- /.col -->
-                        
-                    </div> 
+                                <div class="small-box-icon texs"><i class="fas fa-check-circle"></i></div>
+                            </div> <!--end::Small Box Widget 2-->
+                        </div> <!--end::Col-->
+                        <div class="col-lg-3 col-6"> <!--begin::Small Box Widget 3-->
+                            <div class="small-box text-bg-warning">
+                                <div class="inner text-white p-4 pb-2">
+                                    <h3><?php echo $approved_file ?? '0'; ?></h3>
+                                    <p>Approved Files</p>
+                                </div> 
+                                <div class="small-box-icon texg"><i class="fas fa-clock"></i></div> 
+                            </div> <!--end::Small Box Widget 3-->
+                        </div> <!--end::Col-->
+                        <div class="col-lg-3 col-6"> <!--begin::Small Box Widget 4-->
+                            <div class="small-box text-bg-danger">
+                                <div class="inner text-white p-4 pb-2">
+                                <h3><?php echo $declined_file ?? '0'; ?></h3>
+                                    <p>Declined Files</p>
+                                </div> 
+                                <div class="small-box-icon tex"><i class="fas fa-archive"></i></div> 
+                            </div> <!--end::Small Box Widget 4-->
+                        </div> <!--end::Col-->
+                    </div> <!--end::Row--> <!--begin::Row-->
+                    <div class="row"> <!-- Start col -->
+                        <div class="col-lg-12 connectedSortable">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h3 class="card-title">Sales Value</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div id="revenue-chart"></div>
+                                </div>
+                            </div> 
 
+                        </div> 
 
-                    </div> 
+                    </div> <!-- /.row (main row) -->
+                </div> <!--end::Container-->
                 </div> <!--end::App Content-->
             </main>
-            
-          
-         
-        </div>
-    </div>
-
-    <?php include "includes/footer.php" ?>
+            <?php include "includes/footer.php";?>
 </body><!--end::Body-->
 
 </html>

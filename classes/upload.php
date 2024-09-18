@@ -7,7 +7,7 @@ $mainClass = new Main_class();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
     $description = $_POST['description'];
-    $file_type = $_POST['file_type'];
+    
     $userId = $_SESSION['user_id'];
 
     $hasError = false;
@@ -24,11 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $hasError = true;
     }
 
-    // Validate file type
-    if (empty($file_type)) {
-        $_SESSION['error_file_type'] = "File type is required.";
-        $hasError = true;
-    }
 
     // Validate file
     if (empty($_FILES['file']['name'])) {
@@ -48,23 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'Maps' => ['jpg', 'jpeg', 'png']
         ];
 
-        if (!array_key_exists($file_type, $allowedExtensions) || !in_array($fileExtension, $allowedExtensions[$file_type])) {
-            $_SESSION['error_file'] = "Invalid file type for selected file type.";
-            $hasError = true;
-        } else {
-            $uploadFileDir = '../uploads/';
-            $destPath = $uploadFileDir . $fileName;  // Path to move the file
-
-            if (move_uploaded_file($fileTmpPath, $destPath)) {
-                if (!$mainClass->saveFileInfo($userId, $title, $description, $file_type, $fileName, $fileName)) {
-                    $_SESSION['error_file'] = "Error saving file information.";
-                    $hasError = true;
-                }
-            } else {
-                $_SESSION['error_file'] = "Error moving the uploaded file.";
-                $hasError = true;
-            }
-        }
+     
     }
 
     if ($hasError) {

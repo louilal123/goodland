@@ -17,7 +17,6 @@ $arts = $mainClass->fetchApprovedArts();
 $maps = $mainClass->fetchApprovedMaps();
 $audio = $mainClass->fetchApprovedAudio();
 
-$fileTypes = $mainClass->get_file_types();
 // Track the visitor
 // $mainClass->trackVisitor();
 

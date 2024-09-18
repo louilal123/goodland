@@ -1,5 +1,12 @@
-
-<nav class="app-header navbar navbar-expand bg-body main-blur" style="background: rgba(108, 117, 125, 0.2) !important;  "> <!--begin::Container-->
+<style>
+    .app-main{
+    background: rgba(108, 117, 125, 0.2) !important; 
+}
+body{
+    overflow: hidden !important;
+}
+</style>
+<nav class="app-header navbar navbar-expand bg-white" > <!--begin::Container-->
                 <div class="container-fluid" style="border: 0px !important;"> <!--begin::Start Navbar Links-->
                     <ul class="navbar-nav">
                         <li class="nav-item"> <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button"> <i class="fas fa-bars"></i> </a> </li>

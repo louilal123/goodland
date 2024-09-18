@@ -24,12 +24,12 @@
     <div class="row gy-4">
       <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center ms-auto">
       <h1 data-aos="fade-right" data-aos-delay="100">
-        <span class="text-info">Signup Success</span>. 
+        <span class="text-info">Account activated! You can now login.</span>. 
       </h1>
       <br>
-      <h4 data-aos="fade-right" data-aos-delay="100">
-      Please check your email to activate your account.
-</h4>
+      <div class="d-flex flex-column flex-md-row" data-aos="fade-up" data-aos-delay="200">
+                            <a class="btn btn-outline-info btn-rounded btn-lg custom-btn" href="c-login.php">Login</a>
+                        </div>
      
       </div>
       <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center ms-auto">

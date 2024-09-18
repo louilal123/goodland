@@ -39,8 +39,8 @@
                         <div class="col-md-12 flat">
                             <div class="card mb-4 card-outline-primary">
                             <div class="card-header d-flex ">
-                                <h3 class="card-title mb-0">List of Admins</h3>
-                                <a class="btn btn-primary ms-auto custombtn" data-bs-toggle="modal" data-bs-target="#addItemModal">Add New Admin</a>
+                                <h3>List of Admins</h3>
+                                <a class="btn btn-primary ms-auto btn-lg custombtn" data-bs-toggle="modal" data-bs-target="#addItemModal">Add New Admin</a>
                             </div>
  
                                 <div class="card-body">
@@ -52,7 +52,7 @@
                                     <th>Fullname</th>
                                     <th>Username</th>
                                     <th>Email</th>
-                                    <th>Photo</th>
+                                    
                                     <th>Date_created</th>
                                     <th>Modified</th>
                                     <th>Status</th>
@@ -63,11 +63,10 @@
                                 <?php foreach ($admins as $index => $admin): ?>
                                     <tr>
                                     <td><?php echo $index + 1; ?></td>
-                                        <td><?php echo htmlspecialchars($admin['fullname']); ?></td>
+                                        <td><img src="uploads/<?php echo $admin['admin_photo'] ?: 'default_photo.jpg'; ?>" alt="" 
+                                        style="width: 40px; height: 40px; "> <?php echo htmlspecialchars($admin['fullname']); ?></td>
                                         <td><?php echo htmlspecialchars($admin['username']); ?></td>
                                         <td><?php echo htmlspecialchars($admin['email']); ?></td>
-                                        <td> <img src="uploads/<?php echo $admin['admin_photo'] ?: 'default_photo.jpg'; ?>" alt="" 
-                                        style="width: 40px; height: 40px; "></td>
                                         <td><?php echo date("M d, Y h:i A", strtotime($admin['date_created'])); ?></td>
                                         <td><?php echo date("M d, Y h:i A", strtotime($admin['date_updated'])); ?></td>
                                         <td>
@@ -95,7 +94,6 @@
                                 </div>
                             </div> <!-- /.card -->
                         </div> <!-- /.col -->
-                        
                     </div> 
                 </div>
 

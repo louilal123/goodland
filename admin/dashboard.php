@@ -1,109 +1,28 @@
 ﻿<?php include "classes/admindetails.php" ?>
-<?php
-require_once('classes/Main_class.php');
-$mainClass = new Main_class();
-$mediaCounts = $mainClass->getMediaCounts();
 
-$mediaData = [];
-foreach ($mediaCounts as $count) {
-    $mediaData[] = "['" . $count['MediaType'] . "', " . $count['Count'] . "]";
-}
-$mediaData = implode(", ", $mediaData);
-
-//for the line chart
-$visitor_data = $mainClass->get_monthly_visitor_data();
-$download_data = $mainClass->getDownloadData1();
-?>
 <!DOCTYPE html>
 <html lang="en"> 
 <?php include "includes/header.php"; ?>
+</head>
 
-<script type="text/javascript">
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawVisualization);
-
-        function drawVisualization() {
-            var chartData = <?php echo json_encode($chartData); ?>;
-            var data = google.visualization.arrayToDataTable(chartData);
-
-            var options = {
-                title: 'Monthly Website Visitors By Country',
-                is3D: true,
-                vAxis: {title: 'Number of Visitors'},
-                hAxis: {title: 'Month'},
-                seriesType: 'bars',
-                series: {
-                    <?php echo count($chartData[0]) - 2; ?>: {type: 'line'} // The last column (average) should be a line
-                }
-            };
-
-            var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-            chart.draw(data, options);
-        }
-    </script>
-
-<style>
-	 body{
-		overflow: hidden;
-	 }
-    .greetingmsg {
-    opacity: 0;
-    transition: opacity 2s ease-in-out;
-    }
-
-    .greetingmsg.show {
-        opacity: 1;
-    }
-    .panel {
-    opacity: 0;
-    transition: opacity 2s ease-in-out;
-    }
-
-    .panel.show {
-        opacity: 1;
-    }
-    .small-box{
-        position :absolute;
-        height: 0px;
-        width: 0px;
-        margin-top: 0px !important;
-        font-size: 50px;
-        left: 0px;
-        margin-right: 50px !important; 
-    margin-left: 300px !important;
-        align-items: end;
-        justify-content: end;
-        color: navy; 
-        /* opacity:0.8; */
-    }
-    .panel-footer{
-        opacity: 0.8 !important;
-    }
-	
-    .main-blur {
-    background: rgba(108, 117, 125, 0.1); 
-}
-
-</style>
-
-<body class="layout-fixed-complete sidebar-expand-lg sidebar-mini bg-body-tertiary" >
+<body class="layout-fixed-complete sidebar-expand-lg sidebar-mini bg-body-tertiary" style="overflow: hidden !important;" >
 
     <div class="app-wrapper">
 
        <?php include "includes/sidebar.php" ?>
-        <div class="app-main-wrapper main-blur"> 
+        <div class="app-main-wrapper "> 
            <?php 
             include "includes/topnav.php"; ?>
-            <main class="app-main ">
-            <div class="app-content-header mb-0"> 
+            <main class="app-main bg-light opacity-90">
+            <div class="app-content-header"> 
                 <div class="container-fluid">
-                    <div class="row mb-0">
+                    <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0 greetingmsg"> <span id="greeting"class="fw-light " ></span> 
+                            <h3 class=" greetingmsg"> <span id="greeting"class="fw-light " ></span> 
                             <?php echo $adminDetails['username']; ?>.</h3>
                         </div>
-                        <div class="col-sm-6 mb-0">
-                            <ol class="breadcrumb float-sm-end mb-0">
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-end ">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
                                 Analytics
@@ -114,263 +33,106 @@ $download_data = $mainClass->getDownloadData1();
                 </div>
             </div>
             <div class="app-content mt-0" style="margin-bottom: 0px important;"> 
-                <div class="container-fluid"> 
-                    <div class="row mt-0">
-								    <!--   -->
-									<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-light" style="border-radius: 5px;">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title text-dark">User Uploaded Files</h5>
-													</div>
+			<div class="container-fluid"> <!--begin::Row-->
+                    <div class="row"> <!--begin::Col-->
+                        <div class="col-lg-3 col-6"> 
+                            <div class="small-box bg-warning">
+                                <div class="inner text-white p-4 pb-2">
+                                    <h3> <?php echo $count_files ?? '0'; ?></h3>
+                                    <p>Total Files</p>
+                                </div> 
+                                <div class="small-box-icon texg"><i class="fas fa-folder"></i></div> 
+                            </div> 
+                        </div> <!--end::Col-->
+					    <div class="col-lg-3 col-6"> 
+                            <div class="small-box bg-success ">
+                                <div class="inner text-white p-4 pb-2">
+                                    <h3><?php echo $count_approved_files ?? '0'; ?></h3>
+                                    <p>Approved Files</p>
+                                </div>
+                                <div class="small-box-icon texs"><i class="fas fa-check-circle"></i></div>
+                            </div> 
+                        </div> <!--end::Col-->
+                        <div class="col-lg-3 col-6"> 
+                            <div class="small-box bg-warning -success">
+                                <div class="inner text-white p-4 pb-2">
+                                    <h3> <?php echo $count_pending_files ?? '0'; ?></h3>
+                                    <p>Pending Files</p>
+                                </div> 
+                                <div class="small-box-icon texg"><i class="fas fa-clock"></i></div> 
+                            </div> 
+                        </div> <!--end::Col-->
+                        <div class="col-lg-3 col-6"> 
+                            <div class="small-box bg-danger -warning">
+                                <div class="inner text-white p-4 pb-2">
+                                    <h3> <?php echo $count_declined_files ?? '0'; ?></h3>
+                                    <p>Declined Files</p>
+                                </div>
+                                <div class="small-box-icon tex"><i class="fas fa-times-circle"></i></div> 
+                            </div> 
+                        </div> 
+                        <div class="col-lg-3 col-6"> 
+                            <div class="small-box bg-secondary -danger">
+                                <div class="inner text-white p-4 pb-2">
+                                    <h3><?php echo $count_recycled_files ?? '0'; ?></h3>
+                                    <p>Archived Files</p>
+                                </div> 
+                                <div class="small-box-icon tex"><i class="fas fa-archive"></i></div> 
+                            </div> 
+                        </div> <!--end::Col-->
+                        <div class="col-lg-3 col-6"> 
+                            <div class="small-box bg-primary ">
+                                <div class="inner text-white p-4 pb-2">
+                                    <h3><?php echo $registeredUsersCount ?? ''; ?></h3>
+                                    <p>Total Contributors</p>
+                                </div> 
+                                <div class="small-box-icon texy"><i class="fas fa-user-circle"></i></div> 
+                            </div> 
+                        </div> <!--end::Col-->
 
-													<div class="col-auto mt-4">
-														<div class="stat text-primary">
-															<i class="fas fa-upload small-box text-success"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class=" text-dark"> <?php echo $count_files ?? '0'; ?></h1>
-												<div class="mb-0">
-											</div>
-											</div>
-										</div>
-									</div>  
-									<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-light" style="border-radius: 5px;">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title text-dark">Approved User Uploads</h5>
-													</div>
-
-													<div class="col-auto mt-4">
-														<div class="stat text-primary">
-                                                         <i class="fas fa-check small-box text-primary"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class=" text-dark"> <?php echo $count_approved_files ?? ''; ?></h1>
-												<div class="mb-0">
-												
-													
-												</div>
-											</div>
-										</div>
-                                    </div>
-
-									<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-light" style="border-radius: 5px;">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title text-dark">Pending User Uploads</h5>
-													</div>
-
-													<div class="col-auto mt-4">
-														<div class="stat text-primary">
-                                                        <i class="fas fa-hourglass small-box text-warning"></i>
-                                                    	</div>
-													</div>
-												</div>
-												<h1 class=" text-dark"> <?php echo $count_pending_files ?? '0'; ?></h1>
-												<div class="mb-0">
-												
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-light" style="border-radius: 5px;">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title text-dark">Archived User Uploads</h5>
-													</div>
-
-													<div class="col-auto mt-4">
-														<div class="stat text-primary">
-                                                        <i class="fas fa-archive small-box text-secondary"></i>
-                                                    	</div>
-													</div>
-												</div>
-												<h1 class=" text-dark"> <?php echo $count_declined_files ?? '0'; ?></h1>
-												<div class="mb-0">
-												
-												</div>
-											</div>
-										</div>
-									</div>
-                          
-					</div>
-					<div class="row mt-4">
-
-					<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-light" style="border-radius: 5px;">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title text-dark">Recycled Files</h5>
-													</div>
-
-													<div class="col-auto mt-4">
-														<div class="stat text-primary">
-                                                         <i class="fas fa-trash small-box text-danger"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class=" text-dark"> <?php echo $count_recycled_files ?? '0'; ?></h1>
-												<div class="mb-0">
-												
-													
-												</div>
-											</div>
-										</div>
-                                    </div>
-
-									
-					<div class="col-sm-6 col-lg-3">
-								 	    <div class="card text-bg-light" style="border-radius: 5px;">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-															<h5 class="card-title text-dark">Registered Users</h5>
-														</div>
-														
-														<div class="col-auto mt-4">
-															<div class="stat text-primary">
-															<i class="fas fa-user small-box text-alert"></i>
-															</div>
-														</div>
-													</div> 
-													<h1 class=" text-dark"> <?php echo $registeredUsersCount ?? ''; ?></h1>
-												
-											</div>
-										</div>
-									</div>
-
-									<div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-light" >
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title text-dark">Visitors</h5>
-													</div>
-
-													<div class="col-auto mt-4">
-														<div class="stat text-primary">
-															<i class="fas fa-chart-line small-box text-info"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class=" text-dark "> <?php echo $uniqueVisitorCount ?? '0'; ?></h1>
-												<div class="mb-0">
-												</div>
-											</div>
-										</div>
-									</div>  
-								 
-
-									<div class="col-sm-6 col-lg-3">
-										<div class="card  text-bg-light" style="border-radius: 5px;">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title text-dark">Downloads</h5>
-													</div>
-
-													<div class="col-auto mt-4">
-														<div class="stat text-primary">
-															<i class="fas fa-download  small-box text-success"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class=" text-dark"> <?php echo $downloadsCount ?? '0'; ?></h1>
-												<div class="mb-0">
-												
-												
-												</div>
-											</div>
-										</div>
-                                    </div>
-
-								
-                                       
-									
-
-									
-                                    <!-- <div class="col-sm-6 col-lg-3">
-										<div class="card text-bg-info" >
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title text-light">System Users</h5>
-													</div>
-
-													<div class="col-auto mt-4">
-														<div class="stat text-primary">
-															<i class="fas fa-users small-box text-light"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class=" text-light "> <?//php echo $adminCount ?? '0'; ?></h1>
-												<div class="mb-0">
-												</div>
-											</div>
-										</div>
-									</div>   -->
-
-					</div>
-
-					<div class="row mt-4 ">
-						
-
-							<div class="col-md-7" >
-								<div class="card" >
-									
-									<div class="card-body">
-										<div id="line_chart" style="height: 390px;">
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-5">
-								<div class="card">
-									
-									<div class="card-body">
-										
-										<div id="side_chart" style="height: 390px;"></div>
-									</div>
-							</div>
-							</div>
-					</div>
-
-
-<div class="row mt-4 ">
-    <div class="col-lg-5 col-md-12 col-sm-12 ">
-        <div class="card ">
-           <div class="card-body">
-		   <div id="piechart_3d" style=" height: 390px;"></div>
-      
-		   </div>
-        </div>
-    </div>
-
-    <div class="col-lg-7 col-md-12 col-sm-12">
-        <div class="card ">
-			<div class="card-body">
-			<div id="chart_div"style=" height: 390px;"></div>
-			</div>
-		</div>
-   	</div>
-	
-</div>
-
-                                
-                  
-                </div>
+                        <div class="col-lg-3 col-6"> 
+                            <div class="small-box bg-success -warning">
+                                <div class="inner text-white p-4 pb-2">
+                                    <h3><?php echo $downloadsCount ?? '0'; ?></h3>
+                                    <p>Downloads</p>
+                                </div>
+                                <div class="small-box-icon text"><i class="fas fa-arrow-circle-down"></i></div> 
+                            </div> 
+                        </div> 
+                        <div class="col-lg-3 col-6"> 
+                            <div class="small-box bg-primary -danger">
+                                <div class="inner text-white p-4 pb-2">
+                                    <h3><?php echo $adminCount ?? '0'; ?></h3>
+                                    <p>System Users</p>
+                                </div> 
+                                <div class="small-box-icon text"><i class="fas fa-users"></i></div> 
+                            </div> 
+                        </div> <!--end::Col-->
+                    </div> <!--end::Row--> <!--begin::Row-->
+                    <div class="row"> <!-- Start col -->
+                        <div class="col-lg-12">
+                            <div class="card card-outline outline-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Monthly Downloads</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div id="revenue-chart"></div>
+                                </div>
+                            </div> 
+                        </div> 
+                        <div class="col-lg-12 mt-3">
+                            <div class="card card-outline outline-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Monthly Downloads</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div id="revenue-chart"></div>
+                                </div>
+                            </div> 
+                        </div> 
+                    </div> 
+                </div> 
+              
             </div> 
            </main>
           

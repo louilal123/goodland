@@ -48,9 +48,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                   
                                                     <th>File Title</th>
-                                                   
                                                     <th>User Fullname</th>
                                                     <th>Download Time</th>
                                                     <th>Action</th>

@@ -27,91 +27,63 @@ if (!isset($_SESSION['user_logged_in']) || $_SESSION['user_logged_in'] !== true)
                             <p class="card-text text-center">
                                 Contribute to our library with your valuable documents and resources
                             </p>
- <form style="color: #757575;" action="classes/upload.php" method="post" enctype="multipart/form-data">
-    <div class="md-form mb-3">
-        <label for="materialFileTitle">Title</label>
-        <input type="text" id="materialFileTitle" class="form-control 
-        <?php 
-            if (!empty($_SESSION['error_title'])) {
-                echo 'is-invalid';
-            } elseif (!empty($_SESSION['form_data']['title'])) {
-                echo 'is-valid';
-            }
-        ?>" name="title" 
-        value="<?php echo $_SESSION['form_data']['title'] ?? ''; ?>">
-        <?php if (!empty($_SESSION['error_title'])): ?>
-            <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_title']; unset($_SESSION['error_title']); ?></div>
-        <?php endif; ?>
-    </div>
+                            <form style="color: #757575;" action="classes/upload.php" method="post" enctype="multipart/form-data">
+                                <div class="md-form mb-3">
+                                    <label for="materialFileTitle">Title</label>
+                                    <input type="text" id="materialFileTitle" class="form-control 
+                                    <?php 
+                                        if (!empty($_SESSION['error_title'])) {
+                                            echo 'is-invalid';
+                                        } elseif (!empty($_SESSION['form_data']['title'])) {
+                                            echo 'is-valid';
+                                        }
+                                    ?>" name="title" 
+                                    value="<?php echo $_SESSION['form_data']['title'] ?? ''; ?>">
+                                    <?php if (!empty($_SESSION['error_title'])): ?>
+                                        <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_title']; unset($_SESSION['error_title']); ?></div>
+                                    <?php endif; ?>
+                                </div>
 
-    <div class="md-form mb-3">
-        <label for="materialFileDescription">Description</label>
-        <textarea id="materialFileDescription" class="form-control 
-        <?php 
-            if (!empty($_SESSION['error_description'])) {
-                echo 'is-invalid';
-            } elseif (!empty($_SESSION['form_data']['description'])) {
-                echo 'is-valid';
-            }
-        ?>" name="description"><?php echo $_SESSION['form_data']['description'] ?? ''; ?></textarea>
-        <?php if (!empty($_SESSION['error_description'])): ?>
-            <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_description']; unset($_SESSION['error_description']); ?></div>
-        <?php endif; ?>
-    </div>
+                                <div class="md-form mb-3">
+                                    <label for="materialFileDescription">Description</label>
+                                    <textarea id="materialFileDescription" class="form-control 
+                                    <?php 
+                                        if (!empty($_SESSION['error_description'])) {
+                                            echo 'is-invalid';
+                                        } elseif (!empty($_SESSION['form_data']['description'])) {
+                                            echo 'is-valid';
+                                        }
+                                    ?>" name="description"><?php echo $_SESSION['form_data']['description'] ?? ''; ?></textarea>
+                                    <?php if (!empty($_SESSION['error_description'])): ?>
+                                        <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_description']; unset($_SESSION['error_description']); ?></div>
+                                    <?php endif; ?>
+                                </div>
 
-    <div class="md-form mb-3">
-        <label for="materialFileType">File Type</label>
-        <select id="materialFileType" class="form-control 
-        <?php 
-            if (!empty($_SESSION['error_file_type'])) {
-                echo 'is-invalid';
-            } elseif (!empty($_SESSION['form_data']['file_type'])) {
-                echo 'is-valid';
-            }
-        ?>" name="file_type">
-            <option value="" disabled selected>Select file type</option>
-            <option value="Documents" <?php echo (isset($_SESSION['form_data']['file_type']) 
-            && $_SESSION['form_data']['file_type'] == 'Documents') ? 'selected' : ''; ?>>Document</option>
-            <option value="Images" <?php echo (isset($_SESSION['form_data']['file_type']) 
-            && $_SESSION['form_data']['file_type'] == 'Arts') ? 'selected' : ''; ?>>Image</option>
-             <option value="Arts" <?php echo (isset($_SESSION['form_data']['file_type']) 
-            && $_SESSION['form_data']['file_type'] == 'Images') ? 'selected' : ''; ?>>Arts</option>
-           
-            <option value="Maps" <?php echo (isset($_SESSION['form_data']['file_type']) 
-            && $_SESSION['form_data']['file_type'] == 'Maps') ? 'selected' : ''; ?>>Maps</option>
-          
-        </select>
-        <?php if (!empty($_SESSION['error_file_type'])): ?>
-            <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_file_type']; unset($_SESSION['error_file_type']); ?></div>
-        <?php endif; ?>
-    </div>
+                                <div class="md-form mb-3">
+                                    <label for="file">File</label>
+                                    <input type="file" id="file" class="form-control 
+                                    <?php 
+                                        if (!empty($_SESSION['error_file'])) {
+                                            echo 'is-invalid';
+                                        } elseif (!empty($_SESSION['form_data']['file'])) {
+                                            echo 'is-valid';
+                                        }
+                                    ?>" name="file">
+                                    <?php if (!empty($_SESSION['error_file'])): ?>
+                                        <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_file']; unset($_SESSION['error_file']); ?></div>
+                                    <?php endif; ?>
+                                </div>
 
-    <div class="md-form mb-3">
-        <label for="file">File</label>
-        <input type="file" id="file" class="form-control 
-        <?php 
-            if (!empty($_SESSION['error_file'])) {
-                echo 'is-invalid';
-            } elseif (!empty($_SESSION['form_data']['file'])) {
-                echo 'is-valid';
-            }
-        ?>" name="file">
-        <?php if (!empty($_SESSION['error_file'])): ?>
-            <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_file']; unset($_SESSION['error_file']); ?></div>
-        <?php endif; ?>
-    </div>
+                                <button type="submit" class="btn btn-primary btn-block z-depth-0 mb-2 mt-4" >Upload</button>
+                            </form>
 
-    <button type="submit" class="btn btn-primary btn-block z-depth-0 mb-2 mt-4" >Upload</button>
-</form>
-
-                               
                         </div>
                         <div class="footer text-center mt-5">
-    <p class="text-center mt-5">By uploading, you agree to our
-        <a href="#" id="uploaderAgreementLink">Uploader Agreement</a>
-    </p>
-    <p class="text-center">Ensure you have the rights to share the documents you upload.</p>
-</div>
+                            <p class="text-center mt-5">By uploading, you agree to our
+                                <a href="#" id="uploaderAgreementLink">Uploader Agreement</a>
+                            </p>
+                            <p class="text-center">Ensure you have the rights to share the documents you upload.</p>
+                        </div>
 
                     </div>
                 </div>

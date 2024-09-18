@@ -62,14 +62,14 @@ if ($main->register_user($_POST["name"], $_POST["email"], $_POST["password"], $a
     $mail->addAddress($_POST["email"]);
     $mail->Subject = "Account Activation";
     $mail->Body = <<<END
-      Click <a href="http://localhost/goodland/classes/activate-account.php?token={$activation_token_hash}">
+      Click <a href="http://localhost/goodland/activate-account.php?token={$activation_token_hash}">
       Confirm Account.
       </a> to activate your account.
     END;
 
     try {
         $mail->send();
-        header("Location: ../c-login.php");
+        header("Location: c-signup.php");
         exit;
     } catch (Exception $e) {
         $_SESSION['status'] = "Message could not be sent. Mailer error: {$mail->ErrorInfo}";
@@ -77,10 +77,6 @@ if ($main->register_user($_POST["name"], $_POST["email"], $_POST["password"], $a
         header("Location: ../c-signup.php");
         exit;
     }
-    
-    $_SESSION['status'] = "User successfully registered! Please check your email to activate your account.";
-    $_SESSION['status_icon'] = "success";
-    header("Location: ../c-signup.php");
 } else {
     $_SESSION['status'] = "Error registering user";
     $_SESSION['status_icon'] = "error";

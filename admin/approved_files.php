@@ -79,7 +79,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
         <td><?php echo htmlspecialchars($file['title']); ?></td>
         <td><?php echo htmlspecialchars($file['description']); ?></td>
         <td><?php echo htmlspecialchars($file['file_path']); ?></td>
-        <td><?php echo htmlspecialchars($file['file_type']); ?></td>
+       
         <td><?php echo htmlspecialchars($file['fullname']); ?></td>
         <td><?php echo date("M d, Y h:i A", strtotime($file['upload_date'])); ?></td>
         <td>
@@ -92,7 +92,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
             data-title="<?php echo htmlspecialchars($file['title']); ?>"
             data-description="<?php echo htmlspecialchars($file['description']); ?>"
             data-filepath="<?php echo htmlspecialchars($file['file_path']); ?>"
-            data-filetype="<?php echo htmlspecialchars($file['file_type']); ?>"
+            
             data-uploaded_by="<?php echo htmlspecialchars($file['fullname']); ?>"
             data-upload_date="<?php echo htmlspecialchars($file['upload_date']); ?>"
             data-bs-toggle="modal"

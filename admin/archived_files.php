@@ -67,20 +67,19 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                             <th>Title</th>
                             <th>Description</th>
                             <th>File Path</th>
-                            <th width="150px">File Type</th>
                             <th width="150px">Uploaded By</th>
                             <th width="150px">Upload Date</th>
                             <th width="315px">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-    <?php foreach ($Archived_files as $file): ?>
+    <?php foreach ($recycled_files as $file): ?>
     <tr>
         <td><?php echo htmlspecialchars($file['id']); ?></td>
         <td><?php echo htmlspecialchars($file['title']); ?></td>
         <td><?php echo htmlspecialchars($file['description']); ?></td>
         <td><?php echo htmlspecialchars($file['file_path']); ?></td>
-        <td><?php echo htmlspecialchars($file['file_type']); ?></td>
+      
         <td><?php echo htmlspecialchars($file['fullname']); ?></td>
         <td><?php echo htmlspecialchars($file['upload_date']); ?></td>
         <td>
@@ -93,8 +92,8 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
             data-title="<?php echo htmlspecialchars($file['title']); ?>"
             data-description="<?php echo htmlspecialchars($file['description']); ?>"
             data-filepath="<?php echo htmlspecialchars($file['file_path']); ?>"
-            data-filetype="<?php echo htmlspecialchars($file['file_type']); ?>"
-            data-uploaded_by="<?php echo htmlspecialchars($file['fullname']); ?>"
+           
+            data-uploaded_by="<?php echo htmlspecialchars($file['fullname']) ?? ''; ?>"
             data-upload_date="<?php echo htmlspecialchars($file['upload_date']); ?>"
             data-bs-toggle="modal"
             data-bs-target="#declineModal">

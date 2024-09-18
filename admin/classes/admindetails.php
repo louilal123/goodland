@@ -11,6 +11,10 @@ require_once 'Main_class.php';
 $admin_id = $_SESSION['admin_id']; 
 $mainClass = new Main_class();
 
+
+
+$adminDetails = $mainClass->getAdminDetails($admin_id);
+
 $count_files = $mainClass->count_all_files();
 //FILES
 $approved_files = $mainClass->get_all_approved_files();
@@ -26,13 +30,6 @@ $count_declined_files = $mainClass->count_all_declined_files();
 $recycled_files = $mainClass->get_all_recycled_files();
 $count_recycled_files = $mainClass->count_all_recycled_files();
 
-
-
-// $recycled_files = $mainClass->get_all_recycled_files();
-$filetypes_count = $mainClass->count_file_types();
-
-
-$adminDetails = $mainClass->getAdminDetails($admin_id);
 
 //table populate
 $admins = $mainClass->get_all_admins();

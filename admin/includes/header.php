@@ -21,10 +21,10 @@
      
      <!-- datatable  -->
      <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
-
-     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css">
+<!-- 
+     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css"> -->
     <script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
-    <script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
+    <!-- <script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script> -->
     <!-- end datatabke  -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
@@ -51,95 +51,5 @@
         chart.draw(data, options);
       }
     </script>
-<script type="text/javascript">
-    google.charts.load('current', {'packages':['line']});
-    google.charts.setOnLoadCallback(drawChart);
 
-    function drawChart() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('number', 'Day');
-        data.addColumn('number', 'Signed-Up Users');
-        data.addColumn('number', 'Non-Signed-Up Users');
-
-        var rawData = <?php echo json_encode($visitor_data); ?>;
-        var formattedData = [];
-        var daysInMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
-
-        // Initialize all days with 0 values
-        for (var day = 1; day <= daysInMonth; day++) {
-            formattedData.push([day, 0, 0]);
-        }
-
-        // Fill in the data from the database
-        rawData.forEach(function(row) {
-            formattedData[row.day - 1] = [row.day, row.signed_up, row.non_signed_up];
-        });
-
-        data.addRows(formattedData);
-
-        var options = {
-            chart: {
-                title: 'Website Visitors',
-                subtitle: 'Signed-Up Users vs Non-Signed-Up Users'
-            },
-            height: 380,
-            hAxis: {
-                title: 'Day',
-                ticks: Array.from({length: daysInMonth}, (_, i) => i + 1) // All days of the month
-            },
-            vAxis: {
-                title: 'Visits'
-            }
-        };
-
-        var chart = new google.charts.Line(document.getElementById('line_chart'));
-        chart.draw(data, google.charts.Line.convertOptions(options));
-    }
-</script>
-<script type="text/javascript">
-    google.charts.load('current', {packages: ['corechart', 'bar']});
-    google.charts.setOnLoadCallback(drawBarColors);
-
-    function drawBarColors() {
-        var rawData = <?php echo json_encode($download_data); ?>;
-        var formattedData = [['File Type', 'Signed-Up Users', 'Non-Signed-Up Users']];
-
-        // Initialize all file types with zero downloads for both user types
-        var fileTypes = ['Documents', 'Images', 'Arts', 'Maps'];
-        var downloadCounts = {
-            'Documents': { 'Signed-Up': 0, 'Non-Signed-Up': 0 },
-            'Images': { 'Signed-Up': 0, 'Non-Signed-Up': 0 },
-            'Arts': { 'Signed-Up': 0, 'Non-Signed-Up': 0 },
-            'Maps': { 'Signed-Up': 0, 'Non-Signed-Up': 0 }
-        };
-
-        // Fill in the data from the database
-        rawData.forEach(function(row) {
-            downloadCounts[row.file_type][row.user_type] = row.download_count;
-        });
-
-        // Push the data to formattedData array
-        fileTypes.forEach(function(type) {
-            formattedData.push([type, downloadCounts[type]['Signed-Up'], downloadCounts[type]['Non-Signed-Up']]);
-        });
-
-        var data = google.visualization.arrayToDataTable(formattedData);
-
-        var options = {
-            title: 'Number of Downloads by File Type',
-            chartArea: {width: '50%'},
-            hAxis: {
-                title: 'Total Downloads',
-                minValue: 0
-            },
-            vAxis: {
-                title: 'File Type'
-            },
-            bars: 'horizontal'
-        };
-
-        var chart = new google.visualization.BarChart(document.getElementById('side_chart'));
-        chart.draw(data, options);
-    }
-</script>
 </head>

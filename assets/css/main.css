@@ -344,7 +344,7 @@ h6 {
 @media (max-width: 1199px) {
 
   /* Hide Login and Signup buttons on mobile */
-  .btn-getstarted1 {
+  .btn-getstarted1, .lognin-btn {
     display: none;
   }
   .mobile-nav-toggle {

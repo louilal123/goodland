@@ -1,5 +1,5 @@
+<?php include "classes/user_details.php"?>
 
-<head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Contributor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,5 +9,8 @@
     <link rel="stylesheet" href="dist/css/adminlte.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <link rel="stylesheet" href="../admin/mdbfolder/css/mdb.min.css" />
-</head>
+   
+    <script  src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+<link rel="stylesheet" href="../mdbfolder/mdb.min.css">
+     
