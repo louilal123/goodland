@@ -3,4 +3,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
 
 
-ErrorDocument 404 http://localhost/goodland/index.php
+ErrorDocument 404 https://goodland.ph
+
+
+<!-- ErrorDocument 404 http://localhost/goodland/index.php -->
