@@ -13,10 +13,10 @@
    <!-- Hero Section -->
 <section id="hero" class="hero section">
   <div class="background-video-container">
-    <video autoplay muted loop id="hero-background-video">
+    <!-- <video autoplay muted loop id="hero-background-video">
       <source src="https://cdn.arcgis.com/sharing/rest/content/items/8af5121e605a4ae684a1862a51a68b26/resources/6Kc_MpmZPtZWn8QiKobhi.mp4" type="video/mp4">
       Your browser does not support the video tag.
-    </video>
+    </video> -->
   </div>
   
   <div class="container">
