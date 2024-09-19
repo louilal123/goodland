@@ -1,7 +1,7 @@
 <?php $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/")+1); ?>
 <style>
   .header{
-    background: #060606 !important;
+    background: #161616 !important;
   }
 </style>
 <header id="header" class="header d-flex align-items-center fixed-top">

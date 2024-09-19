@@ -189,3 +189,20 @@ unset($_SESSION['status_icon']);
 
     </script>
 
+    
+<script
+    disable-devtool-auto
+    src='https://cdn.jsdelivr.net/npm/disable-devtool'
+    md5='xxx'
+    url='xxx'
+    tk-name='xxx'
+    interval='xxx'
+    disable-menu='xxx'
+    detectors='xxx'
+    clear-log='true'
+    disable-select='true'
+    disable-copy='true'
+    disable-cut='true'
+    disable-paste='true'
+></script>
+

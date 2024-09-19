@@ -53,7 +53,7 @@
                 Through our community based projects, we invesion to contribute to the community and environmental preservation, and also youth education.
               </p>
               <div class="text-center text-lg-start">
-                <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
+                <a href="about" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
                   <span>Read More</span>
                   <i class="bi bi-arrow-right"></i>
                 </a>
@@ -899,8 +899,29 @@
                 </div>
               </div>
               <div class="member-info">
-                <h2>Martha Atienza</h2>
-              <p>Visual artist focusing on environmental, social and economical issues.</p> 
+                <h2>Jake Atienza</h2>
+              <p>Interdisciplinary Researcher
+              ​& Artist.</p> 
+              <a href="https://www.jakeatienza.com/home" class="read-more stretched-link" style="color: #28747c;"><span>Read More <i class="bi bi-arrow-right"></i></span> </a>
+             
+            </div>
+            </div>
+          </div><!-- End Team Member -->
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+            <div class="team-member">
+              <div class="member-img">
+                <img src="assets/img/mayet.jpg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter-x"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h2>Bihiya Warriors
+               </h2>
+              <p> Youth-lead Community Group.</p> 
               <a href="#" class="read-more stretched-link" style="color: #28747c;"><span>Read More <i class="bi bi-arrow-right"></i></span> </a>
              
             </div>
@@ -918,8 +939,9 @@
                 </div>
               </div>
               <div class="member-info">
-                <h2>Martha Atienza</h2>
-              <p>Visual artist focusing on environmental, social and economical issues.</p> 
+                <h2>John Ortega
+               </h2>
+              <p> Community Organizer, Radio Broadcaster / Fisherfolk People's Organization Leader/ Mentor.</p> 
               <a href="#" class="read-more stretched-link" style="color: #28747c;"><span>Read More <i class="bi bi-arrow-right"></i></span> </a>
              
             </div>
@@ -937,8 +959,9 @@
                 </div>
               </div>
               <div class="member-info">
-                <h2>Martha Atienza</h2>
-              <p>Visual artist focusing on environmental, social and economical issues.</p> 
+                <h2>Ramon Alontaga
+                </h2>
+              <p>Innovative artist specialized in mechanical and DIY island technology.</p> 
               <a href="#" class="read-more stretched-link" style="color: #28747c;"><span>Read More <i class="bi bi-arrow-right"></i></span> </a>
              
             </div>
@@ -956,27 +979,9 @@
                 </div>
               </div>
               <div class="member-info">
-                <h2>Martha Atienza</h2>
-              <p>Visual artist focusing on environmental, social and economical issues.</p> 
-              <a href="#" class="read-more stretched-link" style="color: #28747c;"><span>Read More <i class="bi bi-arrow-right"></i></span> </a>
-             
-            </div>
-            </div>
-          </div><!-- End Team Member -->
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-            <div class="team-member">
-              <div class="member-img">
-                <img src="assets/img/mayet.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h2>Martha Atienza</h2>
-              <p>Visual artist focusing on environmental, social and economical issues.</p> 
+                <h2>​DAKOgamay
+               </h2>
+              <p> Dakogamay is an experimental platform established by siblings Martha Atienza and Jake Atienza.</p> 
               <a href="#" class="read-more stretched-link" style="color: #28747c;"><span>Read More <i class="bi bi-arrow-right"></i></span> </a>
              
             </div>

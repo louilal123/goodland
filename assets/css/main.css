@@ -928,7 +928,7 @@ section,
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.7)); /* Gradient from dark to light */
+  background: linear-gradient(to top, rgba(22, 22, 22, 1), rgba(22, 22, 22, 0.6)); /* Gradient from dark to light */
   z-index: -1; /* Overlay should be behind content but in front of the video */
 }
 
