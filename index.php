@@ -22,7 +22,7 @@
   <div class="container">
     <div class="row gy-4">
       <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center ">
-        <h1 data-aos="fade-up">Finding Local Solutions To Global .</h1>
+        <h1 data-aos="fade-up">Finding Local Solutions To Global Problems.</h1>
         <p data-aos="fade-up" data-aos-delay="100">
           GOODLand is a platform under Martha Atienza’s Art Lab that develops and applies a creative and collaborative methodology utilized to tackle social, economic and environmental issues on Bantayan Island in the Visayas, Philippines.
         </p>
