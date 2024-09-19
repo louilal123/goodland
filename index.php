@@ -91,7 +91,7 @@
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
             <div class="card bg-dark">
-              <img src="assets/img/values-3.png" class="img-fluid" alt="">
+              <img src="images/download.jpg" class="img-fluid" alt="">
               <h3>Our mission is to facilitate the realization of an empowered, self-sufficient, and resilient community by using art and collaborations to address the social, economic, and environmental issues on Bantayan Island.</h3>
             </div>
           </div><!-- End Card Item -->
@@ -871,7 +871,7 @@
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="team-member">
               <div class="member-img">
-                <img src="assets/img/mayet.jpg" class="img-fluid" alt="">
+                <img src="images/mayett.jpg" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter-x"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
@@ -890,7 +890,7 @@
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="team-member">
               <div class="member-img">
-                <img src="images/mayett.jpg" class="img-fluid" alt="">
+                <img src="images/jake.jpg" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter-x"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
@@ -910,7 +910,7 @@
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="team-member">
               <div class="member-img">
-                <img src="assets/img/mayet.jpg" class="img-fluid" alt="">
+                <img src="images/bihiyaa.jpg" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter-x"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
