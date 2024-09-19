@@ -91,7 +91,7 @@
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
             <div class="card bg-dark">
-              <img src="images/download.jpg" class="img-fluid" alt="">
+              <img src="images/missionn.jpg" class="img-fluid" alt="">
               <h3>Our mission is to facilitate the realization of an empowered, self-sufficient, and resilient community by using art and collaborations to address the social, economic, and environmental issues on Bantayan Island.</h3>
             </div>
           </div><!-- End Card Item -->
