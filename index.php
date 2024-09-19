@@ -84,7 +84,7 @@
 
           <div class="col-lg-6 " data-aos="fade-up" data-aos-delay="100">
             <div class="card bg-dark ">
-              <img src="assets/img/values-1.png" class="img-fluid" alt="">
+              <img src="images/vision.jpg" class="img-fluid" alt="">
               <h3>Our vision is an empowered community of Bantayan islanders enjoying the quality of life in an ecologically balanced environment through their shared dreams.</h3>
                </div>
           </div><!-- End Card Item -->
@@ -890,7 +890,7 @@
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="team-member">
               <div class="member-img">
-                <img src="assets/img/mayet.jpg" class="img-fluid" alt="">
+                <img src="images/mayett.jpg" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter-x"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
@@ -922,7 +922,7 @@
                 <h2>Bihiya Warriors
                </h2>
               <p> Youth-lead Community Group.</p> 
-              <a href="#" class="read-more stretched-link" style="color: #28747c;"><span>Read More <i class="bi bi-arrow-right"></i></span> </a>
+              <a href="images/bihiyaa.jpg" class="read-more stretched-link" style="color: #28747c;"><span>Read More <i class="bi bi-arrow-right"></i></span> </a>
              
             </div>
             </div>
@@ -930,7 +930,7 @@
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="team-member">
               <div class="member-img">
-                <img src="assets/img/mayet.jpg" class="img-fluid" alt="">
+                <img src="images/caster.jpg" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter-x"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
@@ -950,7 +950,7 @@
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="team-member">
               <div class="member-img">
-                <img src="assets/img/mayet.jpg" class="img-fluid" alt="">
+                <img src="images/joni.jpg" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter-x"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
@@ -970,7 +970,7 @@
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="team-member">
               <div class="member-img">
-                <img src="assets/img/mayet.jpg" class="img-fluid" alt="">
+                <img src="images/dakogamay.jpg" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter-x"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
