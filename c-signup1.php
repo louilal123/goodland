@@ -33,7 +33,7 @@
                         <p data-aos="fade-right" data-aos-delay="100">Join us in making a difference by sharing valuable resources and insights with the community.</p>
                         <p data-aos="fade-right text-light" data-aos-delay="100">Already have an account?</p>
                         <div class="d-flex flex-column flex-md-row" data-aos="fade-up" data-aos-delay="200">
-                            <a class="btn btn-outline-info btn-rounded btn-lg custom-btn" href="c-login.php">Login</a>
+                            <a class="btn btn-outline-info btn-rounded btn-lg custom-btn" href="c-login">Login</a>
                         </div>
                     </div>
                     <div class="col-lg-6 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="100">

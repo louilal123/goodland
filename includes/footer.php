@@ -19,7 +19,7 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Useful Links</h4>
           <ul>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="/">Home</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">About</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Projects</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Methodology</a></li>
@@ -27,23 +27,22 @@
         </div>
 
         <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Our Services</h4>
+          <h4 style="color: #000 !important;">.</h4>
           <ul>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Stories</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Story Maps</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Archives</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of Service</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#contact">Contact Us</a></li>
           </ul>
         </div>
 
         <div class="col-lg-4 col-md-12">
-          <h4>Follow Us</h4>
-          <p>You cannot follow us into the ocean but you can always follow us on social media.</p>
+          <h4>CONNECT WITH US</h4>
+          <p>You dont have to follow us into the ocean. But you can always follow us on social media.</p>
           <div class="social-links d-flex">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
+            <a href="https://www.facebook.com/goodland.philippines/"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.youtube.com/@goodland4831"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.instagram.com/goodland.philippines"><i class="bi bi-linkedin"></i></a>
           </div>
         </div>
 
