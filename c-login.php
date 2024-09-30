@@ -116,7 +116,49 @@ unset($_SESSION['error_message']);
         });
     </script>
     <script>
-        
+        document.addEventListener('DOMContentLoaded', function() {
+    const emailOrUsernameInput = document.querySelector('input[name="emailOrUsername"]');
+    const passwordInput = document.querySelector('input[name="password"]');
+    
+    const inputs = [emailOrUsernameInput, passwordInput];
+
+    inputs.forEach(input => {
+        input.addEventListener('input', function() {
+            const feedback = input.parentNode.querySelector('.invalid-feedback');
+            
+            // Check if the input is empty
+            if (input.value.trim() === '') {
+                input.classList.remove('is-valid');
+                input.classList.add('is-invalid');
+                if (feedback) {
+                    feedback.innerText = 'This field is required';
+                    feedback.style.display = 'block';
+                }
+                return; // Exit early if the field is empty
+            }
+
+            // For non-empty fields
+            input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
+            if (feedback) {
+                feedback.style.display = 'none';
+            }
+
+            // Email validation (only if this is the email/username input)
+            if (input === emailOrUsernameInput && input.value.includes('@')) {
+                if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(input.value.trim())) {
+                    input.classList.remove('is-valid');
+                    input.classList.add('is-invalid');
+                    if (feedback) {
+                        feedback.innerText = 'Valid email is required';
+                        feedback.style.display = 'block';
+                    }
+                }
+            }
+        });
+    });
+});
+
     </script>
 </body>
 </html>
