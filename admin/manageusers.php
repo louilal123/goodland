@@ -51,8 +51,10 @@
                                                         <tr>
                                                             <td><?php echo htmlspecialchars($user['user_id']); ?></td>
                                                             <td><img src="../uploads/<?php echo $user['user_photo'] ?: 'default_photo.jpg'; ?>" alt="" style="width: 40px; height: 40px;"> <?php echo htmlspecialchars($user['fullname']); ?></td>
-                                                            <td><?php echo htmlspecialchars($user['email']); ?></td>
-                                                            <td><?php echo htmlspecialchars($user['username']); ?></td>
+                                                            <td>
+                                                              <?php echo htmlspecialchars($user['email']); ?></td>
+                                                            <td>  <img src="../assets/flags/<?php echo $user['country_flag'] . '.png'; ?> " 
+                                                            alt="" style="width: 20px; height: 20px;">  <?php echo htmlspecialchars($user['username']); ?></td>
                                                             <td>
                                                             <?php if ($user['status'] == 'enabled'): ?>
                                                                 <span class="badge bg-success">Enabled</span>
@@ -61,19 +63,23 @@
                                                             <?php endif; ?>
                                                             </td>
                                                             <td><?php echo date("M d, Y h:i A", strtotime($user['date_created'])); ?></td>
-                                                            <td><?php echo date("M d, Y h:i A", strtotime($user['last_login'])); ?></td>
+                                                            <td>
+                                                              <?php 
+                                                              echo (empty($user['last_login'])) ? '' : date("M d, Y h:i A", strtotime($user['last_login'])); 
+                                                              ?>
+                                                          </td>
+
                                                             <td>
                                                                 <button class="btn btn-info btn-sm viewMemberBtn" 
-                                                                data-bs-toggle="modal" data-bs-target="#viewMemberModal"><i class="bi bi-eye"></i></button>
+                                                                data-bs-toggle="modal" data-bs-target="#viewMemberModal"><i class="bi bi-search"></i></button>
                                                                 <a href="#" class="btn btn-success btn-sm editMemberBtn" 
                                                                 data-bs-toggle="modal" data-bs-target="#editMemberStatusModal">
-                                                                <i class="bi bi-pencil"></i></a>
-                                                                <a href="#" 
-   class="btn btn-danger btn-sm deleteuserBtn"
-   data-bs-toggle="modal" 
-   data-bs-target="#deleteuserBtn"> <!-- Ensure ID matches the modal -->
-   <i class="bi bi-trash"></i>
-</a>
+                                                                <i class="bi bi-pencil-square"></i></a>
+                                                                <a href="#" class="btn btn-danger btn-sm deleteuserBtn"
+                                                                  data-bs-toggle="modal" 
+                                                                  data-bs-target="#deleteuserBtn"> 
+                                                                  <i class="bi bi-trash"></i>
+                                                                </a>
 
                                                             </td>
                                                         </tr>
@@ -154,7 +160,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
+        <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> Delete</button>
         </form>
       </div>
     </div>
@@ -229,79 +235,6 @@
         </div>
     </div>
     <?php include "includes/footer.php"; ?>
-    <script>
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.deleteuserBtn').forEach(button => {
-        button.addEventListener('click', function () {
-            const row = button.closest('tr');
-            const userId = row.children[0].textContent.trim();
-            const fullName = row.children[1].textContent.trim();
-            const userPhoto = row.children[6].querySelector('img').src; // Assumes photo is in the 7th column
-            const statusText = row.children[5].textContent.trim();
-            
-            // Update the modal with user data
-            const modal = document.getElementById('deleteuserBtn');
-            modal.querySelector('#UserId').value = userId;
-            modal.querySelector('#UserName').value = fullName;
-            modal.querySelector('#UserPhoto').src = userPhoto;
-        });
-    });
-});
-</script>
-
-<script>
-   document.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('.editMemberBtn').forEach(button => {
-    button.addEventListener('click', function () {
-      const row = button.closest('tr');
-      const userId = row.children[0].textContent.trim();
-      const fullName = row.children[1].textContent.trim();
-      const userPhoto = row.children[6].querySelector('img').src; // Assumes photo is in the 7th column
-      const statusText = row.children[5].textContent.trim();
-      
-      document.getElementById('editUserId').value = userId;
-      document.getElementById('editUserName').value = fullName;
-      document.getElementById('editUserPhoto').src = userPhoto;
-      document.getElementById('editStatus').value = statusText === 'Enabled' ? 'enabled' : 'disabled';
-    });
-  });
-});
-
-
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('.viewMemberBtn').forEach(button => {
-    button.addEventListener('click', function () {
-      const row = button.closest('tr');
-      const userId = row.children[0].textContent.trim();
-      const fullName = row.children[1].textContent.trim();
-      const userEmail = row.children[2].textContent.trim();
-      const username = row.children[3].textContent.trim();
-      const birthday = row.children[4].textContent.trim();
-      const statusText = row.children[5].textContent.trim();
-      const userPhoto = row.children[6].querySelector('img').src;
-      const bio = row.children[7].textContent.trim();
-      const address = row.children[8].textContent.trim();
-      const dateCreated = row.children[9].textContent.trim();
-      const dateUpdated = row.children[10].textContent.trim();
-      const lastLogin = row.children[11].textContent.trim();
-
-      document.getElementById('viewUserName').value = fullName;
-      document.getElementById('viewUserEmail').value = userEmail;
-      document.getElementById('viewUserUsername').value = username;
-      document.getElementById('viewUserBirthday').value = birthday;
-      document.getElementById('viewUserStatus').value = statusText;
-      document.getElementById('viewUserPhoto').src = userPhoto;
-      document.getElementById('viewUserBio').value = bio;
-      document.getElementById('viewUserAddress').value = address;
-      document.getElementById('viewDateCreated').value = dateCreated;
-      document.getElementById('viewDateUpdated').value = dateUpdated;
-      document.getElementById('viewLastLogin').value = lastLogin;
-    });
-  });
-});
-
-</script>
+   
 </body>
 </html>

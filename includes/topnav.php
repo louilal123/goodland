@@ -1,5 +1,8 @@
+<?php include "classes/user_view.php";?>
 <?php $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/")+1); ?>
 <style>
+
+
   .header{
     background: #161616 !important;
   }
@@ -34,9 +37,32 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to top, rgba(22, 22, 22, 1), rgba(22, 22, 22, 0.9)); 
+  background: linear-gradient(to top, rgba(22, 22, 22, 1), rgba(22, 22, 22, 0.8)); 
   z-index: -1; 
 }
+
+  .heading{
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Add the gradient overlay */
+  .heading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(22, 22, 22, 1), rgba(22, 22, 22, 0.8));
+    z-index: -1; /* Place the gradient below the content but above the background image */
+  }
+
+  /* .custom-btn:hover {
+    border-color: ;
+        background-color: var(--accent-color) !important;
+        color: var(--contrast-color) !important;
+    } */
 </style>
 <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
@@ -49,11 +75,11 @@
 
       <nav id="navmenu" class="navmenu mx-auto">
         <ul>
-          <li><a href="index.php"  class=" <?= $page == 'index.php' ? 'active':'' ?>">Home<br></a></li>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Projects</a></li>
-          <li><a href="#">Methodology</a></li>
-          <li><a href="stories.php" class=" <?= $page == 'stories.php' ? 'active':'' ?>" >Stories</a></li>
+          <li><a href="index"  class=" <?= $page == 'index.php' ? 'active':'' ?>">Home<br></a></li>
+          <li><a href="about" class=" <?= $page == 'about.php' ? 'active':'' ?>">About Us</a></li>
+          <li><a href="projects" class=" <?= $page == 'projects.php' ? 'active':'' ?>">Projects</a></li>
+          <li><a href="methodology" class=" <?= $page == 'methodology.php' ? 'active':'' ?>">Methodology</a></li>
+          <!-- <li><a href="stories" class=" <?//= $page == 'stories.php' ? 'active':'' ?>" >Stories</a></li> -->
         <li class="dropdown"><a href="#"><span>Story Maps </span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">Mambacayao Dako</a></li>
@@ -63,7 +89,7 @@
               <li><a href="#">Dropdown 4</a></li>
             </ul>
           </li>
-          <li><a href="archives.php" class=" <?= $page == 'archives.php' ? 'active':'' ?>">Archives</a></li>
+          <li><a href="" class=" <?= $page == 'archives.php' ? 'active':'' ?>">Archives</a></li>
           <!-- -->
           
         </ul>

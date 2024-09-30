@@ -24,7 +24,7 @@
     <div class="row gy-4">
       <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center ms-auto">
       <h1 data-aos="fade-right" data-aos-delay="100">
-        <span class="text-info">Account activated! You can now login.</span>. 
+        <span class="text-info">Thank you for confirming your email! The administrators will now review your registration entry. Please wait and sorry for the inconvenience</span>. 
       </h1>
       <br>
       <div class="d-flex flex-column flex-md-row" data-aos="fade-up" data-aos-delay="200">

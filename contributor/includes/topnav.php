@@ -1,4 +1,27 @@
-
+<style>
+    .nav-link.active {
+        background-color: #262626 !important;
+       color: #17a2b8 !important;
+       font-weight: bold !important;
+        border-color: #17a2b8 !important;
+    }
+    .nav-link:hover {
+    background-color: #262626 !important; /* Changes to a blue background on hover */
+    color: #17a2b8 !important; /* Ensures the text stays readable */
+    border-color: #17a2b8 !important;
+}
+    .btn-info{
+        background-color: #17a2b8 !important;  /* Change to your preferred color */
+        color: white !important;
+        font-weight: bold !important;
+        border-color: #17a2b8 !important;
+    }
+ 
+  
+    /* .app-main{
+    background: rgba(108, 117, 125, 0.1) !important; 
+} */
+</style>
 <nav class="app-header navbar navbar-expand bg-white opacity-90" > <!--begin::Container-->
                 <div class="container-fluid" style="border: 0px !important;"> <!--begin::Start Navbar Links-->
                     <ul class="navbar-nav">

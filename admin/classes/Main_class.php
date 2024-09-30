@@ -29,6 +29,35 @@ class Main_class {
         }
     }
 
+    // admin dashboard 
+    public function getStatusTypeData()
+    {
+        $sql = "SELECT status, COUNT(*) as count 
+                FROM files 
+                WHERE isDeleted = 0 
+                GROUP BY status";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        // Calculate total count for percentage calculation
+        $total = array_sum(array_column($result, 'count'));
+    
+        $data = [];
+        foreach ($result as $row) {
+            $percentage = $total ? ($row['count'] / $total) * 100 : 0;
+            $data[] = [
+                'name' => ucfirst($row['status']),
+                'y' => (int) $row['count'],
+                'percentage' => round($percentage, 2) // Rounded percentage
+            ];
+        }
+    
+        return $data;
+    }
+    
+    
+
     public function is_email_exists($email) {
         $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
         $stmt->execute([':email' => $email]);
@@ -197,31 +226,31 @@ public function getDownloadData($currentMonth, $currentYear, $isSignedIn) {
 }
 
 // end 
-    public function getVisitors() {
-        $stmt = $this->pdo->prepare("
-            SELECT  v.id, v.user_id, v.ip, v.city, v.region, v.country, v.latitude, v.longitude,  v.visit_time, v.visit_count, u.fullname
-             FROM visitor_data v
-            LEFT JOIN 
-                users u ON v.user_id = u.user_id
-            ORDER BY 
-                v.visit_time DESC
-        ");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    // public function getVisitors() {
+    //     $stmt = $this->pdo->prepare("
+    //         SELECT  v.id, v.user_id, v.ip, v.city, v.region, v.country, v.latitude, v.longitude,  v.visit_time, v.visit_count, u.fullname
+    //          FROM visitor_data v
+    //         LEFT JOIN 
+    //             users u ON v.user_id = u.user_id
+    //         ORDER BY 
+    //             v.visit_time DESC
+    //     ");
+    //     $stmt->execute();
+    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // }
     
-    public function getDownloads() {
-        $stmt = $this->pdo->prepare("
-            SELECT d.id, d.file_id, d.user_id, d.download_time, 
-                   u.fullname, f.title
-            FROM downloads d
-            LEFT JOIN users u ON d.user_id = u.user_id
-            LEFT JOIN files f ON d.file_id = f.id
-            ORDER BY d.download_time DESC
-        ");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    // public function getDownloads() {
+    //     $stmt = $this->pdo->prepare("
+    //         SELECT d.id, d.file_id, d.user_id, d.download_time, 
+    //                u.fullname, f.title
+    //         FROM downloads d
+    //         LEFT JOIN users u ON d.user_id = u.user_id
+    //         LEFT JOIN files f ON d.file_id = f.id
+    //         ORDER BY d.download_time DESC
+    //     ");
+    //     $stmt->execute();
+    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // }
     
     
     
@@ -295,17 +324,17 @@ public function getDownloadData($currentMonth, $currentYear, $isSignedIn) {
     
     
     
-    public function getUserNotifications($user_id) {
-        $stmt = $this->pdo->prepare("SELECT id, file_id, message, is_read, created_at FROM user_notifications WHERE user_id = ? ORDER BY created_at DESC");
-        $stmt->execute([$user_id]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    // public function getUserNotifications($user_id) {
+    //     $stmt = $this->pdo->prepare("SELECT id, file_id, message, is_read, created_at FROM user_notifications WHERE user_id = ? ORDER BY created_at DESC");
+    //     $stmt->execute([$user_id]);
+    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // }
     
-    public function getUnreadNotificationCount($user_id) {
-        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM user_notifications WHERE user_id = ? AND is_read = 0");
-        $stmt->execute([$user_id]);
-        return $stmt->fetchColumn();
-    }
+    // public function getUnreadNotificationCount($user_id) {
+    //     $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM user_notifications WHERE user_id = ? AND is_read = 0");
+    //     $stmt->execute([$user_id]);
+    //     return $stmt->fetchColumn();
+    // }
     
 
     public function approveFile($file_id, $remarks) {
@@ -486,7 +515,8 @@ public function getDownloadData($currentMonth, $currentYear, $isSignedIn) {
 
     // for login
     public function login_user($emailOrUsername, $password) {
-        $stmt = $this->pdo->prepare("SELECT admin_id, email, username, password FROM admin WHERE email = :emailOrUsername OR username = :emailOrUsername");
+        $stmt = $this->pdo->prepare("SELECT admin_id, email, username, password FROM admin WHERE email = :emailOrUsername OR 
+        username = :emailOrUsername");
         $stmt->bindParam(':emailOrUsername', $emailOrUsername);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -854,23 +884,6 @@ public function delete_member($member_id) {
     exit();
 }
 
-public function get_unique_visitor_count() {
-    try {
-        $stmt = $this->pdo->prepare("
-            SELECT COUNT(*) AS unique_visitors
-            FROM (
-                SELECT DISTINCT user_id ip, city, region, country, latitude, longitude
-                FROM visitor_data
-            ) AS unique_visitors_data
-        ");
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result['unique_visitors'];
-    } catch (PDOException $e) {
-        // Handle error appropriately
-        return 0;
-    }
-}
 
 public function delete_user($user_id) {
     try {
@@ -1029,26 +1042,24 @@ public function get_products() {
         return [];
     }
 }
-public function register_user($fullname, $email, $password, $activation_token_hash) {
+public function register_user($fullname, $email, $password, $activation_token_hash, $username,$country_flag) {
     try {
-        $random_number = rand(10000, 99999);  // Generates a random number between 10000 and 99999
-        $username = 'user_' . $random_number;
-
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
         $date_created = date('Y-m-d H:i:s');
 
-        $stmt = $this->pdo->prepare("INSERT INTO users (fullname, email, password, username, account_activation_hash, date_created) 
-                                     VALUES (:fullname, :email, :password, :username, :activation_token_hash, :date_created)");
+        $stmt = $this->pdo->prepare("INSERT INTO users (fullname, email, password, username, country_flag, account_activation_hash, date_created) 
+                                     VALUES (:fullname, :email, :password, :username, :country_flag, :activation_token_hash, :date_created)");
         $stmt->execute([
             ':fullname' => $fullname,
             ':email' => $email,
             ':password' => $hashed_password,
             ':username' => $username,
+            ':country_flag' => $country_flag,
             ':activation_token_hash' => $activation_token_hash,
             ':date_created' => $date_created
         ]);
 
-        $_SESSION['status'] = "User successfully registered! Please check your email to activate your account.";
+        $_SESSION['status'] = "Please confirm your email by clicking on the link weve sent.";
         $_SESSION['status_icon'] = "success";
         return true;
     } catch (PDOException $e) {
@@ -1058,6 +1069,7 @@ public function register_user($fullname, $email, $password, $activation_token_ha
         return false;
     }
 }
+
 
 
 // Method to check if token exists
@@ -1221,30 +1233,32 @@ public function update_password($user_id, $password_hash) {
     
     public function user_login($email, $password) {
         try {
-            $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+            $stmt = $this->pdo->prepare("
+                SELECT * FROM users 
+                WHERE email = :email 
+                AND account_activation_hash IS NULL 
+                AND status = 'enabled' 
+                LIMIT 1
+            ");
             $stmt->execute([':email' => $email]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
             if ($user) {
-                if ($user['account_activation_hash'] !== null) {
-                  
-                    return 'account_not_activated';
-                }
                 if (password_verify($password, $user['password'])) {
-                    
                     $this->update_last_login($user['user_id']);
                     return $user;
                 } else {
-                    return false; 
+                    return false; // Invalid password
                 }
             } else {
-                return false; 
+                return 'account_not_activated_or_disabled'; // Account not activated or status not enabled
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
             return false;
         }
     }
+    
     
     public function update_last_login($user_id) {
         try {
@@ -1269,7 +1283,8 @@ public function update_password($user_id, $password_hash) {
         }
 
 //file crud contiebutorrs
-        public function saveFileInfo($userId, $title, $description, $filePath, $coverPath = '') {
+        public function saveFileInfo($userId, $title, $description, $filePath, $coverPath = '') 
+        {
             try {
                 $uploadDate = date('Y-m-d H:i:s');
 
@@ -1294,6 +1309,55 @@ public function update_password($user_id, $password_hash) {
                 return false;
             }
         }
+
+        public function fetch_current_contributor_files($user_id) {
+            $stmt = $this->pdo->prepare("SELECT * FROM files WHERE user_id = :user_id");
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function fetch_contributor_pending_files($user_id) {
+            $stmt = $this->pdo->prepare("SELECT * FROM files WHERE user_id = :user_id AND status='Pending' ");
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function fetch_contributor_approved_files($user_id) {
+            $stmt = $this->pdo->prepare("SELECT * FROM files WHERE user_id = :user_id AND status='Approved' ");
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function fetch_contributor_declined_files($user_id) {
+            $stmt = $this->pdo->prepare("SELECT * FROM files WHERE user_id = :user_id AND status='Declined' ");
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function fetch_contributor_recently_deleted_files($user_id) {
+            $stmt = $this->pdo->prepare("SELECT * FROM files WHERE user_id = :user_id AND isDeletedByUser=1 ");
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        public function fetch_contributor_recent_submissions($user_id) {
+            $stmt = $this->pdo->prepare("
+                SELECT * FROM files 
+                WHERE user_id = :user_id 
+                AND isDeletedByUser = 0 
+                AND upload_date >= NOW() - INTERVAL 48 HOUR
+            ");
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+       
+
+      
 
 
 // file crud contributors end /

@@ -12,7 +12,7 @@ if (isset($_GET['token'])) {
         $update_result = $main->update_activation_hash($token_hash);
         
         if ($update_result) {
-            $_SESSION['status'] = "Account Activated.";
+            $_SESSION['status'] = "The admins will now review your registration entry. Please wait and Sorry for the inconvenience. ";
             $_SESSION['status_icon'] = "success";
             header("Location: c-login.php");
             exit;

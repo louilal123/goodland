@@ -34,28 +34,26 @@
   
   <div class="container">
     <div class="row gy-4">
-      <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center ">
-        <h1 data-aos="fade-down">Reset Password!</h1>
-
-      </div>
-      <div class="col-lg-6 order-2 order-lg-1 "  data-aos="fade-up" data-aos-delay="100">
+     
+      <div class="col-lg-12 d-flex justify-content-center"  data-aos="fade-up" data-aos-delay="100">
                <!-- Sign Up Form -->
 
         <div class="card" style="border-radius: 1rem; background-color: #060606 !important; opacity: 0.9;">
           <div class="p-5 text-center">
            
-              <img src="assets/img/logogoodland.png" style="width: 200px; height: 75px; margin: auto;">
-              
-           <h5 class="mb-5 mt-2 text-white">Well sent a password reset link to your email.</h5>
+              <img src="assets/img/logogoodland.png" style="width: 200px; height: 55px; margin: auto;">
+              <h2>Reset Password</h2>
+           <h5 class="mb-5 mt-2 text-white">Well send a password reset link to your email.</h5>
             <form action="send-password-reset.php" method="post" >
 
                   <div data-mdb-input-init class="form-outline form-white opacity-75 mb-4">
-                    <input type="email" name="email" class="form-control form-control-lg"   />
+                    <input type="email" name="email" class="form-control form-control-lg "   />
                     <label class="form-label" for="typeEmailX-2">Email</label>
                   </div>
 
 
                   <button  data-mdb-ripple-init class="btn btn-info btn-lg btn-block" type="submit">Send Reset Link</button>
+                  <p class="mt-3"><a href="c-login">Return</a></p>
             </form>
           </div>
         </div>

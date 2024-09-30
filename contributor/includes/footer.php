@@ -42,3 +42,48 @@
             }
         });
     </script> <!--end::OverlayScrollbars Configure--> <!--end::Script-->
+
+    
+<script>
+    $(document).ready(function() {
+        $('#myTable').DataTable({
+           
+        });
+        $('#myTable1').DataTable({
+           
+        });
+    
+    });
+
+    
+</script>
+
+<script>
+    $(document).ready(function() {
+      
+        $('#myTable2').DataTable({
+           
+        });
+        $('#myTable3').DataTable({
+           
+        });
+    });
+
+    
+</script>
+<script
+    disable-devtool-auto
+    src='https://cdn.jsdelivr.net/npm/disable-devtool'
+    md5='xxx'
+    url='xxx'
+    tk-name='xxx'
+    interval='xxx'
+    disable-menu='xxx'
+    detectors='xxx'
+    clear-log='true'
+    disable-select='true'
+    disable-copy='true'
+    disable-cut='true'
+    disable-paste='true'
+></script>
+

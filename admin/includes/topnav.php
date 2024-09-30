@@ -2,9 +2,7 @@
     .app-main{
     background: rgba(108, 117, 125, 0.2) !important; 
 }
-body{
-    overflow: hidden !important;
-}
+
 </style>
 <nav class="app-header navbar navbar-expand bg-white" > <!--begin::Container-->
                 <div class="container-fluid" style="border: 0px !important;"> <!--begin::Start Navbar Links-->

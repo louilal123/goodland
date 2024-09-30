@@ -40,7 +40,7 @@
                             <div class="card mb-4 card-outline-primary">
                             <div class="card-header d-flex ">
                                 <h3>List of Admins</h3>
-                                <a class="btn btn-primary ms-auto btn-lg custombtn" data-bs-toggle="modal" data-bs-target="#addItemModal">Add New Admin</a>
+                                <a class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#addItemModal"><span class="fas fa-user-plus"></span> Add New</a>
                             </div>
  
                                 <div class="card-body">

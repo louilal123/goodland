@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="dist/css/adminlte.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <link rel="stylesheet" href="../admin/mdbfolder/css/mdb.min.css" />
+    <link rel="stylesheet" href="../mdbfolder/mdb.min.css" />
 
     
 <link rel="stylesheet" href="dist/custom.css">
@@ -21,35 +21,13 @@
      
      <!-- datatable  -->
      <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
-<!-- 
-     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css"> -->
-    <script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
-    <!-- <script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script> -->
+
+     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css">
+    <!-- <script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script> -->
+    <script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
     <!-- end datatabke  -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
     crossorigin="anonymous"></script>
-
-
-    
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['File Type', 'Count'],
-          <?php echo $mediaData; ?>
-        ]);
-
-        var options = {
-          title: 'All Files',
-          is3D: true,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-        chart.draw(data, options);
-      }
-    </script>
 
 </head>

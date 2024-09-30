@@ -10,15 +10,17 @@ $mainClass = new Main_class();
 // $fileCounts = $mainClass->count_user_files($userId);
 
 
-$members = $mainClass->get_all_members();
-$documents = $mainClass->fetchApprovedDocuments();
-$images = $mainClass->fetchApprovedImages();
-$arts = $mainClass->fetchApprovedArts();
-$maps = $mainClass->fetchApprovedMaps();
-$audio = $mainClass->fetchApprovedAudio();
+// $members = $mainClass->get_all_members();
+// $documents = $mainClass->fetchApprovedDocuments();
+// $images = $mainClass->fetchApprovedImages();
+// $arts = $mainClass->fetchApprovedArts();
+// $maps = $mainClass->fetchApprovedMaps();
+// $audio = $mainClass->fetchApprovedAudio();
 
 // Track the visitor
 // $mainClass->trackVisitor();
+
+// $countries = $mainClass->get_countries();
 
 
 ?>

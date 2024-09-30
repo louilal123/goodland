@@ -9,8 +9,8 @@
   <script  src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
      
 
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="uploads/image.png" rel="icon">
+  <link href="uploads/image.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -25,8 +25,9 @@
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/custom.css">
   <!-- <script  src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+   
+  <link href="assets/css/main.css" rel="stylesheet">
      
 <!-- </head> -->

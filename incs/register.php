@@ -116,11 +116,13 @@
                                         ?>" name="cpswd"
                                         value="<?php echo $_SESSION['form_data']['cpswd'] ?? ''; ?>">
                                         <?php if (!empty($_SESSION['error_confirm_password'])): ?>
-                                            <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_confirm_password']; unset($_SESSION['error_confirm_password']); ?></div>
+                                            <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_confirm_password']; 
+                                            unset($_SESSION['error_confirm_password']); ?></div>
                                         <?php endif; ?>
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary btn-block z-depth-0 mb-2 mt-4" data-mdb-ripple-init>Signup</button>
+                                    <button type="submit" class="btn btn-primary btn-block z-depth-0 mb-2 mt-4"
+                                     data-mdb-ripple-init>Signup</button>
 
                                     <p class="text-center py-2">Already have an account?
                                         <a href="get-started">Signin</a>

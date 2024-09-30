@@ -18,8 +18,8 @@
                     <div class="row mt-2" >
                         <div class="col-md-12">
                             <div class="card  card-outline-primary">
-                                <div class="card-header d-flex">
-                                    <h2 class="card-title mb-0">Profile Information</h2>
+                                <div class="card-title d-flex">
+                                    <h2 class="m-4">Profile Information</h2>
                                     
                                 </div>
                                 <div class="card-body">

@@ -11,7 +11,7 @@ if (empty($_POST["name"])) {
 }
 
 if ($main->is_email_exists($_POST["email"])) {
-    $_SESSION['status'] = "Email already taken.";
+    $_SESSION['status'] = "Email already taken. Please login with your account.";
     $_SESSION['status_icon'] = "error";
     header('Location: ../c-signup.php');
     exit;
@@ -43,6 +43,11 @@ if (!preg_match("/[0-9]/", $_POST["password"])) {
 
 if ($_POST["password"] !== $_POST["password_confirmation"]) {
     $_SESSION['confirm_password_err'] = "Passwords must match.";
+    header('Location: ../c-signup.php');
+    exit;
+}
+if (empty($_POST["country"])) {
+    $_SESSION['country_err'] = "Country is required.";
     header('Location: ../c-signup.php');
     exit;
 }

@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $hasError = true;
             } else {
                 // Update filePath to be relative for saving in the database
-                $filePath = 'uploads/' . $fileNewName;
+                $filePath = $fileNewName;
             }
         } else {
             $_SESSION['error_file'] = "File type not allowed.";
@@ -95,7 +95,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     } else {
         // Save file and cover image paths in the database
-        $mainClass->saveFileInfo($userId, $title, $description, $coverPath, $filePath);
+        $mainClass->saveFileInfo($userId, $title, $description, $filePath, $coverPath);
+
 
         unset($_SESSION['form_data']);
         $_SESSION['status'] = "File successfully uploaded!";

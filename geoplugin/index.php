@@ -3,7 +3,7 @@ require_once('geoplugin.class.php');
 
 // $ip = $_SERVER['REMOTE_ADDR'];
 
-$geoplugin = new geoPlugin();
+// $geoplugin = new geoPlugin();
 
 $geoplugin->locate('112.198.194.108');
 

@@ -50,24 +50,10 @@ $documents = $mainClass->get_all_documents();
 $uploadedDocumentsCount =$mainClass->count_all_documents();
 $downloadsCount = $mainClass->count_downloads();
 
-// total visitors count 
-$uniqueVisitorCount = $mainClass->get_unique_visitor_count();
 
-$visitors = $mainClass->getVisitors();
 
-$downloads =$mainClass->getDownloads();
-//chart data
-$chartData = $mainClass->getVisitorData();
-// header('Content-Type: application/json');
-return json_encode($chartData);
-//end 
-// pie chart data 
-// Fetch data for the charts
-$pieChartData = $mainClass->getFileTypeData();
-
-// Encode the data as JSON for use in JavaScript
-return json_encode($pieChartData);
-
+// Fetch the pie chart data
+$pieChartData = $mainClass->getStatusTypeData();
 
 ?>
 

@@ -22,6 +22,15 @@ $pending_file = $mainClass->getPendingFileCount($user_id);
 $approved_file = $mainClass->getApprovedFileCount($user_id);
 $declined_file = $mainClass->getDeclinedFileCount($user_id);
 
+$get_all_files = $mainClass->fetch_current_contributor_files($user_id);
+
+$pending_files =$mainClass->fetch_contributor_pending_files($user_id);
+$approved_files =$mainClass->fetch_contributor_approved_files($user_id);
+$declined_files =$mainClass->fetch_contributor_declined_files($user_id);
+$deleted_files =$mainClass->fetch_contributor_recently_deleted_files($user_id);
+
+$recent_submissions = $mainClass->fetch_contributor_recent_submissions($user_id);
+
 
 ?>
 

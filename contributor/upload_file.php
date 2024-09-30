@@ -13,15 +13,15 @@
             
             <main class="app-main">
                 <div class="app-content"> 
-               <div class="row gy-4">
-               <div class="card mt-5">
-                               <div class="card-header"> 
-                                <h3 class=" text-center">Submit A Document</h3>
-                                <p class="card-text text-center">
+               <div class="row">
+               <div class="card p-5 h-full">
+                        <div class="card-header"> 
+                                <h3 class="fw-bold text-center">Submit A Document</h3>
+                                <p class="card-text text-center ">
                                     Contribute to our open source library. Once approved by our system, your document will be visible to our website.
                                 </p></div>
-                                <div class="card-body shadow">
-                                <form style="color: #757575;" action="classes/upload.php" method="post" enctype="multipart/form-data">
+                                <div class="card-body">
+                                <form  action="classes/upload.php" method="post" enctype="multipart/form-data">
                                     <!-- Title Field -->
                                     <div class="md-form mb-3">
                                         <label class="text-dark" for="materialFileTitle">Title</label>
@@ -110,7 +110,7 @@
             </div>
             <div class="modal-body">
                 <p><strong>Effective Date:</strong> July 2024</p>
-                <p><strong>Introduction</strong><br>By uploading content to GoodlandPh ("Platform"), you agree to the following terms.</p>
+                <p><strong>Introduction</strong><br>By uploading content to GoodlandPh, you agree to the following terms.</p>
                 <p><strong>Grant of License</strong><br>You grant GoodlandPh a non-exclusive, worldwide, royalty-free license to use, reproduce, distribute, and display your content.</p>
                 <p><strong>Ownership and Rights</strong><br>You retain ownership of your content. You confirm that:
                     <ul>

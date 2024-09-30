@@ -4,3 +4,16 @@
     color: var(--contrast-color) !important;
   }
   
+  
+
+  /* this is for all butons that have custom-btn class */
+.custom-btn{
+  background-color: var(--accent-color) !important;
+  color: var(--contrast-color) !important;
+}
+
+.btn-info{
+  color:var(--contrast-color) !important;
+
+}
+

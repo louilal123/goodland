@@ -1,0 +1,151 @@
+<?php
+session_start();
+$error_message = $_SESSION['error_message'] ?? '';
+unset($_SESSION['error_message']);
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="mdbfolder/mdb.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert -->
+</head>
+<style>
+    body {
+        overflow: hidden !important;
+    }
+    .main-blur {
+    background: rgba(108, 117, 125, 0.5); 
+}
+</style>
+<body class="bg-light main-blur">
+    <section class="vh-100 bg-secondary">
+        <div class="container py-5 h-100 bg-secondary">
+            <div class="row d-flex align-items-center justify-content-center h-100">
+                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 mt-5 mb-5">
+                    <div class="card">
+                        <div class="card-header text-center">
+                            <img src="uploads/logogoodland.png" style="display: flex; margin: auto; width: 150px; height: 60px;">
+                        </div>
+                        <h2 class="info-color white-text text-center py-4">
+                            <strong>Login Administrator</strong>
+                        </h2>
+                        <div class="card-body px-lg-5 pt-0">
+                            <form style="color: #757575;" action="classes/login.php" method="post">
+                                <!-- Display inline error for required fields -->
+                                <?php if (!empty($error_message)): ?>
+                                    <div class="alert bg-danger text-white" id="alert">
+                                        <i class="fas fa-triangle-exclamation"></i>
+                                        <?php echo $error_message; ?>
+                                    </div>
+                                <?php endif; ?>
+
+                                <!-- Email or Username input -->
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <i class="fas fa-user trailing" id="toggleEmailOrUsername"></i>
+                                    <input type="text" name="emailOrUsername" class="form-control form-control-lg form-icon-trailing
+                                    <?php echo !empty($_SESSION['error_emailOrUsername']) ? 'is-invalid' : ''; ?>" id="materialLoginFormEmailOrUsername" 
+                                    value="<?php echo $_SESSION['form_data']['emailOrUsername'] ?? ''; ?>" />
+                                    <label class="form-label" for="materialLoginFormEmailOrUsername">Email or Username</label>
+                                    <?php if (!empty($_SESSION['error_emailOrUsername'])): ?>
+                                        <div class="invalid-feedback"><?php echo $_SESSION['error_emailOrUsername']; unset($_SESSION['error_emailOrUsername']); ?></div>
+                                    <?php endif; ?>
+                                </div>
+
+                                <!-- Password input -->
+                                <div data-mdb-input-init class="form-outline mb-4" style="position: relative;">
+                                    <i class="fas fa-lock trailing" id="togglePassword" 
+                                    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; z-index: 999;"></i>
+                                    <input type="password" name="password" class="form-control form-control-lg form-icon-trailing
+                                    <?php echo !empty($_SESSION['error_password']) ? 'is-invalid' : ''; ?>" 
+                                    id="validationCustomPassword" aria-describedby="inputGroupPrepend" />
+                                    <label class="form-label" for="validationCustomPassword">Password</label>
+                                    <?php if (!empty($_SESSION['error_password'])): ?>
+                                        <div class="invalid-feedback"><?php echo $_SESSION['error_password']; unset($_SESSION['error_password']); ?></div>
+                                    <?php endif; ?>
+                                </div>
+
+                                <div class="d-flex justify-content-around align-items-center mb-4">
+                                    <!-- Checkbox -->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="showPasswordCheckbox" />
+                                        <label class="form-check-label" for="showPasswordCheckbox">Show Password</label>
+                                    </div>
+                                    <a href="forgot_password.php">Forgot password?</a>
+                                </div>
+
+                                <!-- Submit button -->
+                                <button type="submit" class="btn btn-primary btn-lg btn-block mb-4">Sign in</button>
+                            </form>
+
+                            <div class="d-flex justify-content-around align-items-center mt-4">
+                                <a href="../index">Go To Website</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SweetAlert display script -->
+    <?php if (isset($_SESSION['status']) && $_SESSION['status'] != ''): ?>
+        <script>
+            Swal.fire({
+                icon: "<?php echo $_SESSION['status_icon']; ?>",
+                title: "<?php echo $_SESSION['status']; ?>",
+                confirmButtonText: "Ok"
+            });
+        </script>
+        <?php
+        unset($_SESSION['status']);
+        unset($_SESSION['status_icon']);
+        ?>
+    <?php endif; ?>
+
+    <script type="text/javascript" src="mdbfolder/mdb.umd.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var alertElement = document.getElementById('alert');
+            if (alertElement) {
+                setTimeout(function () {
+                    alertElement.classList.remove('show');
+                    alertElement.classList.add('fade-out');
+                    setTimeout(function () {
+                        alertElement.remove();
+                    }, 500);
+                }, 5000);
+            }
+
+            document.getElementById('showPasswordCheckbox').addEventListener('change', function () {
+                var passwordInput = document.getElementById('validationCustomPassword');
+                if (this.checked) {
+                    passwordInput.type = 'text';
+                } else {
+                    passwordInput.type = 'password';
+                }
+            });
+        });
+    </script>
+      
+<script
+    disable-devtool-auto
+    src='https://cdn.jsdelivr.net/npm/disable-devtool'
+    md5='xxx'
+    url='xxx'
+    tk-name='xxx'
+    interval='xxx'
+    disable-menu='xxx'
+    detectors='xxx'
+    clear-log='true'
+    disable-select='true'
+    disable-copy='true'
+    disable-cut='true'
+    disable-paste='true'
+></script>
+
+</body>
+</html>
