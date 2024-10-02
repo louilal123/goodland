@@ -110,7 +110,7 @@
                                     </div>
                                     <!-- <input type="text" value="ph" name="country_flag"> -->
 
-                                    <button data-mdb-input-init class="btn btna btn-info btn-lg btn-block" type="submit">Signup</button>
+                                    <button data-mdb-input-init class="btn btna custom-btn btn-info btn-lg btn-block" type="submit">Signup</button>
                                 </form>
                             </div>
                         </div>

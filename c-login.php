@@ -91,7 +91,7 @@ unset($_SESSION['error_message']);
                                         </div>
                                     </div>
 
-                                    <button data-mdb-ripple-init class="btn btn-info btn-lg btn-block" type="submit">Login</button>
+                                    <button data-mdb-ripple-init class="btn custom-btn btn-info btn-lg btn-block" type="submit">Login</button>
                                 </form>
                             </div>
                         </div>

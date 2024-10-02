@@ -9,19 +9,6 @@ $valid = true;
 // $country_flag = "ph"; 
 
 // require_once  __DIR__ . '/../geoplugin/geoplugin.class.php';
-$geoplugin = new geoPlugin();
-        
-$ip = $_SERVER['REMOTE_ADDR'];
-if ($ip == '127.0.0.1' || $ip == '::1') {
-    $ip = '112.198.194.108';
-}
-$geoplugin->locate($ip);
-$city = $geoplugin->city;
-$region = $geoplugin->region;
-$country = $geoplugin->countryCode;
-$country_flag = $country;
-// end 
-
 // Validate input
 if (empty(trim($_POST["name"]))) {
     $_SESSION['name_err'] = "Name is required.";
@@ -93,7 +80,7 @@ $activation_token_hash = hash("sha256", $activation_token);
 $random_number = rand(10000, 99999);
 $username = 'user_' . $random_number;
 
-if ($main->register_user($name, $email, $password, $activation_token_hash, $username, $country_flag)) {
+if ($main->register_user($name, $email, $password, $activation_token_hash, $username)) {
      // Send activation email
      $mail = require __DIR__ . "/../mailer.php";
      $mail->setFrom("rubinlouie41@gmail.com");

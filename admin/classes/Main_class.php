@@ -1042,7 +1042,7 @@ public function get_products() {
         return [];
     }
 }
-public function register_user($fullname, $email, $password, $activation_token_hash, $username,$country_flag) {
+public function register_user($fullname, $email, $password, $activation_token_hash, $username) {
     try {
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
         $date_created = date('Y-m-d H:i:s');
