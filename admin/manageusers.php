@@ -53,8 +53,7 @@
                                                             <td><img src="../uploads/<?php echo $user['user_photo'] ?: 'default_photo.jpg'; ?>" alt="" style="width: 40px; height: 40px;"> <?php echo htmlspecialchars($user['fullname']); ?></td>
                                                             <td>
                                                               <?php echo htmlspecialchars($user['email']); ?></td>
-                                                            <td>  <img src="../assets/flags/<?php echo $user['country_flag'] . '.png'; ?> " 
-                                                            alt="" style="width: 20px; height: 20px;">  <?php echo htmlspecialchars($user['username']); ?></td>
+                                                            <td>  <?php echo htmlspecialchars($user['username']); ?></td>
                                                             <td>
                                                             <?php if ($user['status'] == 'enabled'): ?>
                                                                 <span class="badge bg-success">Enabled</span>
@@ -135,32 +134,40 @@
 </div>
 
 <!-- Edit Member Status Modal -->
-<div class="modal fade" id="deleteuserBtn" tabindex="-1" aria-labelledby="editMemberStatusModalLabel" aria-hidden="true">
+<!-- Edit Member Status Modal -->
+<div class="modal fade" id="editMemberStatusModal" tabindex="-1" aria-labelledby="editMemberStatusModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editMemberStatusModalLabel">Confirm?</h5>
-        <p>All data related to this user will be deleted.</p>
+        <h5 class="modal-title" id="editMemberStatusModalLabel">Edit User Status</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="editMemberStatusForm" method="post" action="classes/delete_user.php">
-          <input type="hidden" id="UserId" name="user_id">
+        <form id="editMemberStatusForm" method="post" action="classes/update_user_status.php">
+          <input type="hidden" id="editUserId" name="user_id">
           <div class="mb-3">
             <label for="editUserPhoto" class="form-label">User Photo</label>
             <div id="editUserPhotoContainer">
-              <img id="UserPhoto" src="" alt="User Photo" style="display: flex; margin:auto; width: 100px; height: 100px;">
+              <img id="editUserPhoto" src="" alt="User Photo" style="display: flex; margin:auto; width: 100px; height: 100px;">
             </div>
           </div>
           <div class="mb-3">
-            <label for="UserName" class="form-label">Full Name</label>
-            <input type="text" class="form-control" id="UserName" readonly>
+            <label for="editUserName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="editUserName" readonly>
+          </div>
+          
+          <div class="mb-3">
+            <label for="editStatus" class="form-label">Status</label>
+            <select class="form-select" id="editStatus" name="status">
+              <option value="enabled">Enabled</option>
+              <option value="disabled">Disabled</option>
+            </select>
           </div>
         
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> Delete</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
         </form>
       </div>
     </div>
@@ -235,6 +242,74 @@
         </div>
     </div>
     <?php include "includes/footer.php"; ?>
-   
+   <script>
+    // Edit button functionality
+$(document).on('click', '.editMemberBtn', function() {
+    // Get the current row data
+    var row = $(this).closest('tr');
+    var userId = row.find('td:eq(0)').text().trim(); // Get the User ID
+    var userName = row.find('td:eq(1)').text().trim(); // Get Full Name
+    var userStatus = row.find('td:eq(4)').text().trim(); // Get the Status (Enabled/Disabled)
+
+    // Set the data to the modal
+    $('#editUserId').val(userId);
+    $('#editUserPhoto').attr('src', userPhoto);
+    $('#editUserName').val(userName);
+    
+    // Select the status in the dropdown
+    if (userStatus === 'Enabled') {
+        $('#editStatus').val('enabled');
+    } else {
+        $('#editStatus').val('disabled');
+    }
+
+    // Show the modal
+    $('#editMemberStatusModal').modal('show');
+});
+
+   </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    // View Member Modal
+    document.querySelectorAll('.viewMemberBtn').forEach(button => {
+        button.addEventListener('click', function() {
+            const userId = this.getAttribute('data-id');
+            const fullname = this.getAttribute('data-fullname');
+            const photo = this.getAttribute('data-photo');
+            const email = this.getAttribute('data-email');
+            const username = this.getAttribute('data-username');
+            const status = this.getAttribute('data-status');
+            const dateCreated = this.getAttribute('data-date-created');
+            const lastLogin = this.getAttribute('data-last-login');
+
+            // Populate the modal fields
+            document.getElementById('viewUserName').value = fullname;
+            document.getElementById('viewUserPhoto').src = '../uploads/' + photo;
+            document.getElementById('viewUserEmail').value = email;
+            document.getElementById('viewUserUsername').value = username;
+            document.getElementById('viewUserStatus').value = status;
+            document.getElementById('viewDateCreated').value = dateCreated;
+            document.getElementById('viewLastLogin').value = lastLogin;
+        });
+    });
+
+
+
+    // Delete Member Modal
+    document.querySelectorAll('.deleteuserBtn').forEach(button => {
+        button.addEventListener('click', function() {
+            const userId = this.getAttribute('data-id');
+            const fullname = this.getAttribute('data-fullname');
+            const photo = this.getAttribute('data-photo');
+
+            // Populate the modal fields
+            document.getElementById('UserId').value = userId;
+            document.getElementById('UserName').value = fullname;
+            document.getElementById('UserPhoto').src = '../uploads/' + photo;
+        });
+    });
+});
+
+    </script>
 </body>
 </html>
