@@ -133,8 +133,6 @@
   </div>
 </div>
 
-<!-- Edit Member Status Modal -->
-<!-- Edit Member Status Modal -->
 <div class="modal fade" id="editMemberStatusModal" tabindex="-1" aria-labelledby="editMemberStatusModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -145,30 +143,30 @@
       <div class="modal-body">
         <form id="editMemberStatusForm" method="post" action="classes/update_user_status.php">
           <input type="hidden" id="editUserId" name="user_id">
+          
           <div class="mb-3">
             <label for="editUserPhoto" class="form-label">User Photo</label>
             <div id="editUserPhotoContainer">
               <img id="editUserPhoto" src="" alt="User Photo" style="display: flex; margin:auto; width: 100px; height: 100px;">
             </div>
           </div>
+          
           <div class="mb-3">
             <label for="editUserName" class="form-label">Full Name</label>
             <input type="text" class="form-control" id="editUserName" readonly>
           </div>
-          
+
+          <!-- Remove the dropdown and add a button for status -->
           <div class="mb-3">
-            <label for="editStatus" class="form-label">Status</label>
-            <select class="form-select" id="editStatus" name="status">
-              <option value="enabled">Enabled</option>
-              <option value="disabled">Disabled</option>
-            </select>
+            <label for="statusToggle" class="form-label">Status</label>
+            <button type="button" class="btn" id="statusToggle"></button>
           </div>
-        
+
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
-        </form>
+        <button type="submit" class="btn btn-primary" id="saveChangesBtn">Save changes</button>
       </div>
     </div>
   </div>
@@ -243,29 +241,42 @@
     </div>
     <?php include "includes/footer.php"; ?>
    <script>
-    // Edit button functionality
+
 $(document).on('click', '.editMemberBtn', function() {
     // Get the current row data
     var row = $(this).closest('tr');
     var userId = row.find('td:eq(0)').text().trim(); // Get the User ID
-    var userName = row.find('td:eq(1)').text().trim(); // Get Full Name
+    var userName = row.find('td:eq(1)').contents().filter(function() {
+        return this.nodeType === Node.TEXT_NODE;
+    }).text().trim(); // Get Full Name after the image
+    var userPhoto = row.find('td:eq(1) img').attr('src'); // Get the User Photo source
     var userStatus = row.find('td:eq(4)').text().trim(); // Get the Status (Enabled/Disabled)
 
     // Set the data to the modal
     $('#editUserId').val(userId);
     $('#editUserPhoto').attr('src', userPhoto);
     $('#editUserName').val(userName);
-    
-    // Select the status in the dropdown
+
+    // Set button text and class based on current status
     if (userStatus === 'Enabled') {
-        $('#editStatus').val('enabled');
+        $('#statusToggle').text('Disable').removeClass('btn-success').addClass('btn-danger');
     } else {
-        $('#editStatus').val('disabled');
+        $('#statusToggle').text('Enable').removeClass('btn-danger').addClass('btn-success');
     }
+
+    // Toggle the status when the button is clicked
+    $('#statusToggle').off('click').on('click', function() {
+        if ($(this).text() === 'Enable') {
+            $(this).text('Disable').removeClass('btn-success').addClass('btn-danger');
+        } else {
+            $(this).text('Enable').removeClass('btn-danger').addClass('btn-success');
+        }
+    });
 
     // Show the modal
     $('#editMemberStatusModal').modal('show');
 });
+
 
    </script>
     <script>

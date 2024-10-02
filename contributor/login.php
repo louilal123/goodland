@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: dashboard.php');
         exit();
     } elseif ($user === 'account_not_activated_or_disabled') {
-        $_SESSION['status'] = "Please confirm your email and wait for the admins to verify your signup application.";
+        $_SESSION['status'] = "Please wait for the admins to verify your signup application.";
         $_SESSION['status_icon'] = "error";
         header('Location: ../c-login.php');
         exit();
