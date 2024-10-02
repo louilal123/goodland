@@ -1071,7 +1071,7 @@ public function register_user($fullname, $email, $password, $activation_token_ha
         // $_SESSION['status'] = "Error registering user: " . $e->getMessage();
         // $_SESSION['status_icon'] = "error";
         // header("Location: ../../../c-signup.php");
-        return false;
+       exit();
     }
 }
 

@@ -87,12 +87,14 @@ if (!$valid) {
     exit;
 }
 
+// If all validations pass, proceed with user registration
 $activation_token = bin2hex(random_bytes(16));
 $activation_token_hash = hash("sha256", $activation_token);
 $random_number = rand(10000, 99999);
 $username = 'user_' . $random_number;
 
 if ($main->register_user($name, $email, $password, $activation_token_hash, $username, $country_flag)) {
+     // Send activation email
      $mail = require __DIR__ . "/../mailer.php";
      $mail->setFrom("rubinlouie41@gmail.com");
      $mail->addAddress($email); 
@@ -114,10 +116,14 @@ if ($main->register_user($name, $email, $password, $activation_token_hash, $user
          exit;
      }
 } else {
-    // signup fails 
+    // $_SESSION['status'] = "Error registering user";
+    // $_SESSION['status_icon'] = "error";
+    // header('Location: ../c-signup.php');
+    // exit;
     $_SESSION['status'] = "The admins will now verify your signup application. ";
     $_SESSION['status_icon'] = "success";
     header('Location: ../c-signup.php');
     exit;
+
 }
 ?>
