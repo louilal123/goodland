@@ -87,7 +87,6 @@ if (!$valid) {
     exit;
 }
 
-// If all validations pass, proceed with user registration
 $activation_token = bin2hex(random_bytes(16));
 $activation_token_hash = hash("sha256", $activation_token);
 $random_number = rand(10000, 99999);
@@ -115,6 +114,7 @@ if ($main->register_user($name, $email, $password, $activation_token_hash, $user
          exit;
      }
 } else {
+    // signup fails 
     $_SESSION['status'] = "The admins will now verify your signup application. ";
     $_SESSION['status_icon'] = "success";
     header('Location: ../c-signup.php');
