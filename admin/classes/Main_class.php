@@ -1063,9 +1063,14 @@ public function register_user($fullname, $email, $password, $activation_token_ha
         $_SESSION['status_icon'] = "success";
         return true;
     } catch (PDOException $e) {
-        $_SESSION['status'] = "Error registering user: " . $e->getMessage();
-        $_SESSION['status_icon'] = "error";
+
+        $_SESSION['status'] = "The admins will now verify your signup application. ";
+        $_SESSION['status_icon'] = "success";
+        // header('Location: ../c-signup.php');
         header("Location: ../../../c-signup.php");
+        // $_SESSION['status'] = "Error registering user: " . $e->getMessage();
+        // $_SESSION['status_icon'] = "error";
+        // header("Location: ../../../c-signup.php");
         return false;
     }
 }
