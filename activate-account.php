@@ -12,13 +12,15 @@ if (isset($_GET['token'])) {
         $update_result = $main->update_activation_hash($token_hash);
         
         if ($update_result) {
-            $_SESSION['status'] = "The admins will now review your registration entry. Please wait and Sorry for the inconvenience. ";
+            $_SESSION['status'] = "Email verified! The admins will now review your signup application. ";
             $_SESSION['status_icon'] = "success";
             header("Location: c-login.php");
             exit;
         } else {
-            echo "Error updating activation link. Please try again later.<br>";
-            exit();
+            $_SESSION['status'] = "Invalid Activation Link. ";
+            $_SESSION['status_icon'] = "error";
+            header("Location: c-login.php");
+            exit;
         }
     } else {
         echo "Invalid activation link. Please check the link and try again.<br>";
@@ -29,3 +31,5 @@ if (isset($_GET['token'])) {
     exit();
 }
 ?>
+
+

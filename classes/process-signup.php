@@ -87,9 +87,9 @@ if ($main->register_user($name, $email, $password, $activation_token_hash, $user
      $mail->addAddress($email); 
      $mail->Subject = "Account Activation";
      $mail->Body = <<<END
-       Click <a href="http://localhost/goodland/activate-account.php?token={$activation_token_hash}">
-       Confirm your email. You received this message because you provided a legitimate email.
-       </a> to activate your account.
+       Click <a href="https://goodlandv2.com/activate-account.php?token='$activation_token_hash' ">
+       Confirm your email.  </a> You received this message because you provided a legitimate email.
+      to activate your account, click the highlighted link to activate your account.
      END;
  
      try {
@@ -103,14 +103,14 @@ if ($main->register_user($name, $email, $password, $activation_token_hash, $user
          exit;
      }
 } else {
-    // $_SESSION['status'] = "Error registering user";
-    // $_SESSION['status_icon'] = "error";
-    // header('Location: ../c-signup.php');
-    // exit;
-    $_SESSION['status'] = "The admins will now verify your signup application. ";
-    $_SESSION['status_icon'] = "success";
+    $_SESSION['status'] = "Error registering user";
+    $_SESSION['status_icon'] = "error";
     header('Location: ../c-signup.php');
     exit;
+    // $_SESSION['status'] = "The admins will now verify your signup application. ";
+    // $_SESSION['status_icon'] = "success";
+    // header('Location: ../c-signup.php');
+    // exit;
 
 }
 ?>

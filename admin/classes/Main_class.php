@@ -1047,14 +1047,14 @@ public function register_user($fullname, $email, $password, $activation_token_ha
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
         $date_created = date('Y-m-d H:i:s');
 
-        $stmt = $this->pdo->prepare("INSERT INTO users (fullname, email, password, username, country_flag, account_activation_hash, date_created) 
-                                     VALUES (:fullname, :email, :password, :username, :country_flag, :activation_token_hash, :date_created)");
+        $stmt = $this->pdo->prepare("INSERT INTO users (fullname, email, password, username,  account_activation_hash, date_created) 
+                                     VALUES (:fullname, :email, :password, :username, :activation_token_hash, :date_created)");
         $stmt->execute([
             ':fullname' => $fullname,
             ':email' => $email,
             ':password' => $hashed_password,
             ':username' => $username,
-            ':country_flag' => $country_flag,
+            // ':country_flag' => $country_flag,
             ':activation_token_hash' => $activation_token_hash,
             ':date_created' => $date_created
         ]);
@@ -1067,7 +1067,7 @@ public function register_user($fullname, $email, $password, $activation_token_ha
         $_SESSION['status'] = "The admins will now verify your signup application. ";
         $_SESSION['status_icon'] = "success";
         // header('Location: ../c-signup.php');
-        header("Location: ../../c-signup.php");
+        header("Location: ../c-signup.php");
         // $_SESSION['status'] = "Error registering user: " . $e->getMessage();
         // $_SESSION['status_icon'] = "error";
         // header("Location: ../../../c-signup.php");
