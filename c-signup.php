@@ -9,6 +9,12 @@
 </head>
 
 <style>
+     .custom-btn {
+        background-color: transparent !important;
+        border-color: var(--accent-color) !important;
+        color: var(--contrast-color) !important;
+        cursor: pointer !important;
+    }
     .custom-btn:hover {
         background-color: var(--accent-color) !important;
         border-color: var(--accent-color) !important;
