@@ -115,7 +115,7 @@
               <li><a href="#">Dropdown 4</a></li>
             </ul>
           </li>
-          <li><a href="" class=" <?= $page == 'archives.php' ? 'active':'' ?>">Archives</a></li>
+          <li><a href="archive" class=" <?= $page == 'archive.php' ? 'active':'' ?>">Archives</a></li>
           <!-- -->
           
         </ul>
