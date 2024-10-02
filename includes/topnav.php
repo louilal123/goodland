@@ -123,8 +123,8 @@
       </nav>
       
       <div class="d-flex align-items-center buttonss">
-        <a class="text-light lognin-btn fw-bold" href="c-login.php">Login</a>
-        <a class="btn-getstarted flex-md-shrink-0 fw-bold" href="c-signup.php">Get Started</a>
+        <a class="text-light lognin-btn fw-bold" href="admin/">Login</a>
+        <a class="btn-getstarted flex-md-shrink-0 fw-bold" href="admin/">Get Started</a>
       </div>
     </div>
   </header>
