@@ -74,7 +74,7 @@ unset($_SESSION['error_message']);
                                         <input class="form-check-input" type="checkbox" value="" id="showPasswordCheckbox" />
                                         <label class="form-check-label" for="showPasswordCheckbox">Show Password</label>
                                     </div>
-                                    <a href="forgot_password.php">Forgot password?</a>
+                                    <!-- <a href="forgot_password.php">Forgot password?</a> -->
                                 </div>
 
                                 <!-- Submit button -->
