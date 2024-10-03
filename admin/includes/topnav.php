@@ -17,16 +17,16 @@
 
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                    <img src="<?php echo $adminDetails['admin_photo'] ?: 'default_photo.jpg'; ?>" class="user-image rounded-circle shadow" style="width: 40px; height: 40px;">
-                    <span class="d-none d-md-inline"> <?php echo $adminDetails['fullname']; ?></span> 
+                    <img src="<?php echo htmlspecialchars($adminDetails['admin_photo']) ?: 'default_photo.jpg'; ?>" class="user-image rounded-circle shadow" style="width: 40px; height: 40px;">
+                    <span class="d-none d-md-inline"> <?php echo htmlspecialchars($adminDetails['fullname']); ?></span> 
                     <i class="fas fa-chevron-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end" style="width: 300px !important;">
                     <li class="d-flex flex-column align-items-center text-center">
                         <a class="dropdown-item text-center mt-2" href="#">
-                            <img class="logo" src="uploads/<?php echo $adminDetails['admin_photo'] ?? 'default_photo.jpg'; ?>" style="width: 70px; height: 70px; border-radius: 50%;">
-                            <h4 class="mt-2 mb-0"><small><?php echo $adminDetails['fullname']; ?></small></h4>
-                            <p class="mt-2 mb-0"><small><?php echo $adminDetails['role']; ?></small></p>
+                            <img class="logo" src="<?php echo htmlspecialchars($adminDetails['admin_photo']) ?: 'default_photo.jpg'; ?>" style="width: 70px; height: 70px; border-radius: 50%;">
+                            <h4 class="mt-2 mb-0"><small><?php echo htmlspecialchars($adminDetails['fullname']); ?></small></h4>
+                            <p class="mt-2 mb-0"><small><?php echo htmlspecialchars($adminDetails['role']); ?></small></p>
                         </a>
                     </li>
                     <li><hr class="dropdown-divider"></li>

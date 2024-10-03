@@ -19,7 +19,7 @@
             <div class="sidebar-wrapper">
                 <nav class="mt-2"> <!--begin::Sidebar Menu-->
                     <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
-                        <li class="nav-item pb-2"> <a href="dashboard" class="nav-link text-light active<?= $page == 'dashboard.php' ? '  bg-primary  ':'' ?>"> <i class="nav-icon fas fa-dashboard"></i>
+                        <li class="nav-item pb-2"> <a href="dashboard" class="nav-link text-light <?= $page == 'dashboard.php' ? '  bg-primary  ':'' ?>"> <i class="nav-icon fas fa-dashboard"></i>
                                 <p class="text-light">Dashboard</p>
                             </a> </li>
                             <li class="nav-header text-light">Manage</li>
@@ -31,20 +31,20 @@
                             </a>
                             <ul class="nav nav-treeview ">
                                
-                                <li class="nav-item ml-2"> <a href="pending_files" class="nav-link text-light <?= $page == 'pending_files.php' ? '  bg-primary  ':'' ?>"> 
+                                <li class="nav-item"> <a href="pending_files" class="nav-link text-light <?= $page == 'pending_files.php' ? '  bg-primary  ':'' ?>"> 
                                     <i class="nav-icon fas fa-hourglass"></i>
                                         <p>Pending Files</p>
                                     </a> </li>
-                                <li class="nav-item ml-2"> <a href="approved_files" class="nav-link text-light <?= $page == 'approved_files.php' ? '  bg-primary  ':'' ?>"> 
+                                <li class="nav-item"> <a href="approved_files" class="nav-link text-light <?= $page == 'approved_files.php' ? '  bg-primary  ':'' ?>"> 
                                     <i class="nav-icon fas fa-circle"></i>
                                         <p>Approved Files</p>
                                     </a> </li>
-                                <li class="nav-item ml-2"> <a href="declined_files" class="nav-link text-light <?= $page == 'declined_files.php' ? '  bg-primary  ':'' ?>"> 
+                                <li class="nav-item"> <a href="declined_files" class="nav-link text-light <?= $page == 'declined_files.php' ? '  bg-primary  ':'' ?>"> 
                                     <i class="nav-icon fas fa-x"></i>
                                         <p>Declined Files</p>
                                     </a> </li>
                               
-                                <li class="nav-item ml-2"> <a href="archived_files.php" class="nav-link text-light  <?= $page == 'archived_files.php' ? '  bg-primary  ':'' ?>"> 
+                                <li class="nav-item"> <a href="archived_files.php" class="nav-link text-light  <?= $page == 'archived_files.php' ? '  bg-primary  ':'' ?>"> 
                                     <i class="nav-icon fas fa-book"></i>
                                         <p>Archived Files</p>
                                 </a> </li>

@@ -87,7 +87,7 @@ unset($_SESSION['error_message']);
 
                                         <div class="col-6">
                                             <!-- Simple link -->
-                                            <a href="c-forgotpassword" target="_blank" class="text-info">Forgot password?</a>
+                                            <!-- <a href="c-forgotpassword" target="_blank" class="text-info">Forgot password?</a> -->
                                         </div>
                                     </div>
 
