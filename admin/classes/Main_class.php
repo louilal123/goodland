@@ -28,7 +28,114 @@ class Main_class {
             echo $e->getMessage();
         }
     }
+    //PROJECTS
+   // Create: Insert a new section
+   public function insertSection($project_id, $content_type, $content, $order)
+   {
+       $sql = "INSERT INTO project_sections (project_id, content_type, content, `order`) 
+               VALUES (:project_id, :content_type, :content, :order)";
+       try {
+           $stmt = $this->pdo->prepare($sql);
+           $stmt->bindParam(':project_id', $project_id);
+           $stmt->bindParam(':content_type', $content_type);
+           $stmt->bindParam(':content', $content);
+           $stmt->bindParam(':order', $order);
+           $stmt->execute();
+           return true;
+       } catch (PDOException $e) {
+           echo "Error: " . $e->getMessage();
+           return false;
+       }
+   }
 
+   // Read: Retrieve sections for a specific project
+   public function getSectionsByProject($project_id)
+   {
+       $sql = "SELECT * FROM project_sections WHERE project_id = :project_id ORDER BY `order` ASC";
+       try {
+           $stmt = $this->pdo->prepare($sql);
+           $stmt->bindParam(':project_id', $project_id);
+           $stmt->execute();
+           return $stmt->fetchAll(PDO::FETCH_ASSOC);
+       } catch (PDOException $e) {
+           echo "Error: " . $e->getMessage();
+           return [];
+       }
+   }
+
+   // Update: Update a section's content or order
+   public function updateSection($section_id, $content, $order)
+   {
+       $sql = "UPDATE project_sections 
+               SET content = :content, `order` = :order, updated_at = CURRENT_TIMESTAMP 
+               WHERE section_id = :section_id";
+       try {
+           $stmt = $this->pdo->prepare($sql);
+           $stmt->bindParam(':section_id', $section_id);
+           $stmt->bindParam(':content', $content);
+           $stmt->bindParam(':order', $order);
+           $stmt->execute();
+           return true;
+       } catch (PDOException $e) {
+           echo "Error: " . $e->getMessage();
+           return false;
+       }
+   }
+   public function deleteSection($section_id)
+   {
+       $sql = "DELETE FROM project_sections WHERE section_id = :section_id";
+       try {
+           $stmt = $this->pdo->prepare($sql);
+           $stmt->bindParam(':section_id', $section_id);
+           $stmt->execute();
+           return true;
+       } catch (PDOException $e) {
+           echo "Error: " . $e->getMessage();
+           return false;
+       }
+   }
+
+    // END PROJECTS
+
+    public function delete_all_messages() {
+        $sql = "DELETE FROM messages";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+    }
+    
+    public function delete_message($messageId) {
+        $sql = "DELETE FROM messages WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':id', $messageId, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+    
+    
+    public function save_contact_message($name, $email, $subject, $message) {
+        $sql = "INSERT INTO messages (name, email, subject, message) VALUES (:name, :email, :subject, :message)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->bindParam(':subject', $subject, PDO::PARAM_STR);
+        $stmt->bindParam(':message', $message, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+//notifications messages
+    public function get_unread_messages() {
+        $sql = "SELECT * FROM messages WHERE status = 'unread' ORDER BY date_sent DESC";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function get_unread_message_count() {
+        $sql = "SELECT COUNT(*) FROM messages WHERE status = 'unread'";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+    
+    // notifications messaeges end 
+    
     // admin dashboard 
     public function getStatusTypeData()
     {
@@ -751,20 +858,6 @@ public function get_all_registeredUsers() {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-
-public function get_all_members() {
-    $stmt = $this->pdo->prepare("SELECT * FROM members");
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
-public function count_all_members() {
-    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM members");
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $result['total'];
-}
-
 public function count_registered_users(){
     $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM users");
     $stmt->execute();
@@ -914,6 +1007,12 @@ public function delete_user($user_id) {
 
 public function get_all_documents() {
     $stmt = $this->pdo->prepare("SELECT * FROM documents");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+public function get_all_messages() {
+    $stmt = $this->pdo->prepare("SELECT * FROM messages");
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

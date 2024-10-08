@@ -31,7 +31,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
            <?php 
             include "includes/topnav.php"; ?>
             <main class="app-main">
-            <div class="app-content-header"> 
+            <!-- <div class="app-content-header"> 
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
@@ -47,59 +47,66 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="app-content"> 
                 <div class="container-fluid"> 
-                    <div class="row">
+                    <div class="row mt-4">
                         <div class="col-md-12">
-                                <div class="card mb-4 card-outline-primary">
-                                    <div class="card-header d-flex ">
-                                        <h3 class="card-title mb-0">List of Approved Files</h3>
-                                         </div>
-    
-                                    <div class="card-body">
-                                        <div class="container-fluid">
-                                        <table id="myTable" class="table-responsive table table-hover table-striped w-100">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>File Path</th>
-                            <th width="150px">File Type</th>
-                            <th width="150px">Uploaded By</th>
-                            <th width="150px">Upload Date</th>
-                            <th width="255px">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-    <?php foreach ($approved_files as $file): ?>
-    <tr>
-        <td><?php echo htmlspecialchars($file['id']); ?></td>
-        <td><?php echo htmlspecialchars($file['title']); ?></td>
-        <td><?php echo htmlspecialchars($file['description']); ?></td>
-        <td><?php echo htmlspecialchars($file['file_path']); ?></td>
-       
-        <td><?php echo htmlspecialchars($file['fullname']); ?></td>
-        <td><?php echo date("M d, Y h:i A", strtotime($file['upload_date'])); ?></td>
-        <td>
-        <a href="../uploads/<?php echo htmlspecialchars($file['file_path']); ?>" class="btn btn-info btn-sm viewBtn ml-1" name="viewPdf">
-            <i class="bi bi-search"></i> View
-        </a>
-   
-        <button class="btn btn-warning btn-sm declineBtn ml-1">
-            <i class="bi bi-x-lg"></i> Add to Pending
-        </button>
-    </td>
-    </tr>
-    <?php endforeach; ?>
-</tbody>
-
-
-                </table>
-                                        </div> 
-                                    </div>
-                                </div> 
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                <div class="card-header d-flex ">
+                                  <h3 class="fw-bold">List of Approved Files</h3>
+                                      <button type="button" class="btn btn-success ms-auto btn-rounded me-1" onclick="location.reload(); return false;">
+                                          <i class="fas fa-refresh"></i> Refresh
+                                      </button>
+                                      <button type="button" class="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#addItemModal">
+                                          <i class="fas fa-user-plus"></i> Delete All
+                                      </button>
+                                </div>
+                                    <table id="myTable" class="table-responsive table text-sm table-hover table-striped w-100">
+                                        <thead class="table-secondary fw-bold">
+                                            <tr>
+                                                <th style="font-weight: bold;">ID</th>
+                                                <th style="font-weight: bold;">Title</th>
+                                                <th style="font-weight: bold;">Description</th>
+                                                <th style="font-weight: bold;">File Path</th>
+                                                <th style="font-weight: bold;" >Uploaded By</th>
+                                                <th style="font-weight: bold;" >Upload Date</th>
+                                                <th style="font-weight: bold;">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php if (empty($approved_files)): ?>
+                                            <tr>
+                                                <td colspan="8" class="text-center">
+                                                    No records to show.
+                                                </td>
+                                            </tr>
+                                        <?php else: ?>
+                                            <?php foreach ($approved_files as $file): ?>
+                                            <tr>
+                                                <td><?php echo htmlspecialchars($file['id']); ?></td>
+                                                <td><?php echo htmlspecialchars($file['title']); ?></td>
+                                                <td><?php echo htmlspecialchars($file['description']); ?></td>
+                                                <td><?php echo htmlspecialchars($file['file_path']); ?></td>
+                                                <td><?php echo htmlspecialchars($file['fullname']); ?></td>
+                                                <td><?php echo date("M d, Y h:i A", strtotime($file['upload_date'])); ?></td>
+                                                <td>
+                                                    <a href="../uploads/<?php echo htmlspecialchars($file['file_path']); ?>" class="btn btn-info btn-sm viewBtn ml-1" name="viewPdf">
+                                                        <i class="bi bi-search"></i> View
+                                                    </a>
+                                                    <button class="btn btn-warning btn-sm declineBtn ml-1">
+                                                        <i class="bi bi-x-lg"></i> Add to Pending
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <?php endforeach; ?>
+                                            
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                         
                     </div> 

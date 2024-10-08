@@ -10,30 +10,22 @@
         <div class="app-main-wrapper main-blur">
             <?php include "includes/topnav.php"; ?>
             <main class="app-main">
-                <div class="app-content-header">
-                    <div class="container-fluid">
-                        <div class="row">
-                        <div class="col-sm-6">
-                                <h3 class="mb-0">Manage Contributors</h3>
-                            </div>
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-end">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Contributors</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              
                 <div class="app-content">
                     <div class="container-fluid">
-                        <div class="row">
+                        <div class="row mt-4">
                             <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="card-title">
-                                        <h3 class="fw-bold">Registered Users</h3>
-                                    </div>
+                                <div class="card-header d-flex ">
+                                <h3 class="fw-bold">Registered Users</h3>
+                                      <button type="button" class="btn btn-success ms-auto btn-rounded me-1" onclick="location.reload(); return false;">
+                                          <i class="fas fa-refresh"></i> Refresh
+                                      </button>
+                                      <button type="button" class="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#addItemModal">
+                                          <i class="fas fa-trash"></i> Delete All
+                                      </button>
+                                </div>
                                     <table id="myTable" class="table-responsive table text-sm table-hover table-striped w-100">
                                         <thead class="table-secondary fw-bold">
                                             <tr>

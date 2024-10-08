@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Include the mailer and your classes if needed
 require_once __DIR__ . '/../admin/classes/Main_class.php';
 $main = new Main_class();
 
@@ -55,38 +54,21 @@ if (!$valid) {
         'subject' => $subject,
         'message' => $message
     ];
-    header('Location: ../contact.php');
+    header('Location: ../index.php#contact');
     exit;
 }
 
-// Send email using PHPMailer (or any email library)
-$mail = require __DIR__ . "/../mailer.php";  // Your mailer setup
-$mail->setFrom("rubinlouie41@gmail.com");
-$mail->addAddress("rubinlouie41@gmail.com"); // The email you want to receive messages at
-$mail->Subject = "New Contact Form Message: $subject";
-$mail->Body = <<<EOT
-Name: $name
-Email: $email
-Subject: $subject
-
-Message:
-$message
-EOT;
-
 try {
-    $mail->send();
+    $main->save_contact_message($name, $email, $subject, $message);
     $_SESSION['status'] = "Your message has been sent!";
     $_SESSION['status_icon'] = "success";
+    header("Location: ../index.php#contact");
+exit;
 } catch (Exception $e) {
-    $_SESSION['status'] = "Message could not be sent. Mailer error: {$mail->ErrorInfo}";
+    $_SESSION['status'] = "Message could not be sent. Database error: {$e->getMessage()}";
     $_SESSION['status_icon'] = "error";
+    header("Location: ../index.php#contact");
+exit;
 }
 
-// Optionally save the message to the database
-/*
-$main->save_contact_message($name, $email, $subject, $message);
-*/
-
-header("Location: ../");
-exit;
 ?>

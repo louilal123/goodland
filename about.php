@@ -128,99 +128,69 @@
 
           <div class="container">
 
-            <div class="row gy-4">
-
-              <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-                <div class="team-member">
-                  <div class="member-img member-img12" style="">
-                    <img src="images/mayett.jpg" class="img-fluid" alt="">
-                   
-                  </div>
-                  <div class="member-info">
-                    <h2>Martha Atienza</h2>
-                  <p>Visual artist focusing on environmental, social and economical issues.</p> 
-                  <a href="#" class="read-more stretched-link" style="color: #28747c;"><span>Read More <i class="bi bi-arrow-right"></i></span> </a>
-                
+          <div class="row row-cols-1 row-cols-md-4 g-4">
+            <div class="col">
+              <div class="card h-100 text-white bg-dark">
+                <img src="images/mayett.jpg" class="card-img-top" alt="Martha Atienza" style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                  <h5 class="card-title">Martha Atienza</h5>
+                  <p class="card-text">Visual artist focusing on environmental, social, and economical issues.</p>
+                  <a href="#" class="btn custom-btn">Read More</a>
                 </div>
-                </div>
-              </div><!-- End Team Member -->
-              <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-                <div class="team-member">
-                  <div class="member-img member-img12" style="">
-                    <img src="images/jake.jpg" class="img-fluid" alt="">
-                   
-                  </div>
-                  <div class="member-info">
-                    <h2>Jake Atienza</h2>
-                  <p>Interdisciplinary Researcher
-                  ​& Artist.</p> 
-                  <a href="https://www.jakeatienza.com/home" class="read-more stretched-link" style="color: #28747c;"><span>Read More <i class="bi bi-arrow-right"></i></span> </a>
-                
-                </div>
-                </div>
-              </div><!-- End Team Member -->
-              <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-                <div class="team-member">
-                  <div class="member-img member-img12" style="">
-                    <img src="images/bihiyaa.jpg" class="img-fluid" alt="">
-                   
-                  </div>
-                  <div class="member-info">
-                    <h2>Bihiya Warriors
-                  </h2>
-                  <p> Youth-lead Community Group.</p> 
-                  <a href="images/bihiyaa.jpg" class="read-more stretched-link" style="color: #28747c;"><span>Read More <i class="bi bi-arrow-right"></i></span> </a>
-                
-                </div>
-                </div>
-              </div><!-- End Team Member -->
-              <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-                <div class="team-member">
-                  <div class="member-img member-img12" style="">
-                    <img src="images/caster.jpg" class="img-fluid" alt="">
-                   
-                  </div>
-                  <div class="member-info">
-                    <h2>John Ortega
-                  </h2>
-                  <p> Community Organizer, Radio Broadcaster / Fisherfolk People's Organization Leader/ Mentor.</p> 
-                  <a href="#" class="read-more stretched-link" style="color: #28747c;"><span>Read More <i class="bi bi-arrow-right"></i></span> </a>
-                
-                </div>
-                </div>
-              </div><!-- End Team Member -->
-              <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-                <div class="team-member">
-                  <div class="member-img member-img12" style="">
-                    <img src="images/joni.jpg" class="img-fluid" alt="">
-                   
-                  </div>
-                  <div class="member-info">
-                    <h2>Ramon Alontaga
-                    </h2>
-                  <p>Innovative artist specialized in mechanical and DIY island technology.</p> 
-                  <a href="#" class="read-more stretched-link" style="color: #28747c;"><span>Read More <i class="bi bi-arrow-right"></i></span> </a>
-                
-                </div>
-                </div>
-              </div><!-- End Team Member -->
-              <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-                <div class="team-member">
-                  <div class="member-img member-img12" style="">
-                    <img src="images/dakogamay.jpg" class="img-fluid" alt="">
-                   
-                  </div>
-                  <div class="member-info">
-                    <h2>​DAKOgamay
-                  </h2>
-                  <p> Dakogamay is an experimental platform established by siblings Martha Atienza and Jake Atienza.</p> 
-                  <a href="#" class="read-more stretched-link" style="color: #28747c;"><span>Read More <i class="bi bi-arrow-right"></i></span> </a>
-                
-                </div>
-                </div>
-              </div><!-- End Team Member -->
-
+              </div>
             </div>
+            <div class="col">
+              <div class="card h-100 text-white bg-dark">
+                <img src="images/jake.jpg" class="card-img-top" alt="Jake Atienza" style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                  <h5 class="card-title">Jake Atienza</h5>
+                  <p class="card-text">Interdisciplinary Researcher & Artist.</p>
+                  <a href="https://www.jakeatienza.com/home" class="btn custom-btn">Read More</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100 text-white bg-dark">
+                <img src="images/bihiyaa.jpg" class="card-img-top" alt="Bihiya Warriors" style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                  <h5 class="card-title">Bihiya Warriors</h5>
+                  <p class="card-text">Youth-lead Community Group.</p>
+                  <a href="images/bihiyaa.jpg" class="btn custom-btn">Read More</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100 text-white bg-dark">
+                <img src="images/caster.jpg" class="card-img-top" alt="John Ortega" style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                  <h5 class="card-title">John Ortega</h5>
+                  <p class="card-text">Community Organizer, Radio Broadcaster, Fisherfolk People's Organization Leader, Mentor.</p>
+                  <a href="#" class="btn custom-btn">Read More</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100 text-white bg-dark">
+                <img src="images/joni.jpg" class="card-img-top" alt="Ramon Alontaga" style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                  <h5 class="card-title">Ramon Alontaga</h5>
+                  <p class="card-text">Innovative artist specializing in mechanical and DIY island technology.</p>
+                  <a href="#" class="btn custom-btn">Read More</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100 text-white bg-dark">
+                <img src="images/dakogamay.jpg" class="card-img-top" alt="DAKOgamay" style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                  <h5 class="card-title">DAKOgamay</h5>
+                  <p class="card-text">Experimental platform by Martha and Jake Atienza.</p>
+                  <a href="#" class="btn custom-btn">Read More</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
 
           </div>
 

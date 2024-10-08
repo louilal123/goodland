@@ -32,7 +32,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
            <?php 
             include "includes/topnav.php"; ?>
             <main class="app-main">
-            <div class="app-content-header"> 
+            <!-- <div class="app-content-header"> 
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
@@ -48,67 +48,74 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="app-content"> 
                 <div class="container-fluid"> 
-                    <div class="row">
+                    <div class="row mt-4">
                         <div class="col-md-12">
-                                <div class="card mb-4 card-outline-primary">
-                                    <div class="card-header d-flex ">
-                                        <h3 class="card-title mb-0">List of Archived Files</h3>
-                                         </div>
-    
-                                    <div class="card-body">
-                                        <div class="container-fluid">
-                                        <table id="myTable" class="table-responsive table table-hover table-striped w-100">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>File Path</th>
-                            <th width="150px">Uploaded By</th>
-                            <th width="150px">Upload Date</th>
-                            <th width="315px">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-    <?php foreach ($recycled_files as $file): ?>
-    <tr>
-        <td><?php echo htmlspecialchars($file['id']); ?></td>
-        <td><?php echo htmlspecialchars($file['title']); ?></td>
-        <td><?php echo htmlspecialchars($file['description']); ?></td>
-        <td><?php echo htmlspecialchars($file['file_path']); ?></td>
-      
-        <td><?php echo htmlspecialchars($file['fullname']); ?></td>
-        <td><?php echo htmlspecialchars($file['upload_date']); ?></td>
-        <td>
-        <a href="../uploads/<?php echo htmlspecialchars($file['file_path']); ?>" class="btn btn-info btn-sm viewBtn ml-1" name="viewPdf">
-            <i class="bi bi-search"></i> View
-        </a>
-       
-        <button class="btn btn-danger btn-sm declineBtn ml-1"
-            data-id="<?php echo htmlspecialchars($file['id']); ?>"
-            data-title="<?php echo htmlspecialchars($file['title']); ?>"
-            data-description="<?php echo htmlspecialchars($file['description']); ?>"
-            data-filepath="<?php echo htmlspecialchars($file['file_path']); ?>"
-           
-            data-uploaded_by="<?php echo htmlspecialchars($file['fullname']) ?? ''; ?>"
-            data-upload_date="<?php echo htmlspecialchars($file['upload_date']); ?>"
-            data-bs-toggle="modal"
-            data-bs-target="#declineModal">
-            <i class="bi bi-trash-fill"></i> Delete
-        </button>
-    </td>
-    </tr>
-    <?php endforeach; ?>
-</tbody>
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                <div class="card-header d-flex ">
+                                  <h3 class="fw-bold">List of Messages</h3>
+                                      <button type="button" class="btn btn-success ms-auto btn-rounded me-1" onclick="location.reload(); return false;">
+                                          <i class="fas fa-refresh"></i> Refresh
+                                      </button>
+                                      <button type="button" class="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#addItemModal">
+                                          <i class="fas fa-user-plus"></i> Delete All
+                                      </button>
+                                </div>
+                                    <table id="recycledTable" class="table-responsive table text-sm table-hover table-striped w-100">
+                                        <thead class="table-secondary fw-bold">
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Title</th>
+                                                <th>Description</th>
+                                                <th>File Path</th>
+                                                <th>Uploaded By</th>
+                                                <th>Upload Date</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (empty($recycled_files)): ?>
+                                                <tr>
+                                                    <td colspan="7" class="text-center">
+                                                        No records to show.
+                                                    </td>
+                                                </tr>
+                                            <?php else: ?>
+                                                <?php foreach ($recycled_files as $file): ?>
+                                                <tr>
+                                                    <td><?php echo htmlspecialchars($file['id']); ?></td>
+                                                    <td><?php echo htmlspecialchars($file['title']); ?></td>
+                                                    <td><?php echo htmlspecialchars($file['description']); ?></td>
+                                                    <td><?php echo htmlspecialchars($file['file_path']); ?></td>
+                                                    <td><?php echo htmlspecialchars($file['fullname']); ?></td>
+                                                    <td><?php echo htmlspecialchars($file['upload_date']); ?></td>
+                                                    <td>
+                                                        <a href="../uploads/<?php echo htmlspecialchars($file['file_path']); ?>" class="btn btn-info btn-sm viewBtn ml-1" name="viewPdf">
+                                                            <i class="bi bi-search"></i> View
+                                                        </a>
+                                                        <button class="btn btn-danger btn-sm declineBtn ml-1"
+                                                            data-id="<?php echo htmlspecialchars($file['id']); ?>"
+                                                            data-title="<?php echo htmlspecialchars($file['title']); ?>"
+                                                            data-description="<?php echo htmlspecialchars($file['description']); ?>"
+                                                            data-filepath="<?php echo htmlspecialchars($file['file_path']); ?>"
+                                                            data-uploaded_by="<?php echo htmlspecialchars($file['fullname']); ?>"
+                                                            data-upload_date="<?php echo htmlspecialchars($file['upload_date']); ?>"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#declineModal">
+                                                            <i class="bi bi-trash-fill"></i> Delete
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
 
-
-                </table>
-                                        </div> 
-                                    </div>
-                                </div> 
                         </div>
                         
                     </div> 

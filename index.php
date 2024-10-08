@@ -28,7 +28,7 @@
 </p>
         <div class="d-flex flex-column flex-md-row" data-aos="fade-up" data-aos-delay="200">
           <a href="#about" class="btn-get-started me-4">Explore <i class="bi bi-arrow-right"></i></a>
-          <a href="#about" class="btn-get-started2 me-4">Watch Video <i class="bi bi-play-circle"></i></a>
+          <a href="https://youtu.be/v3KTAD1NKas?si=vMHL--EJXYfbwqbx" class="glightbox btn-get-started2 me-4">Watch Video <i class="bi bi-play-circle"></i></a>
         </div>
       </div>
       <div class="col-lg-6 order-1 order-lg-2 hero-img d-flex flex-column justify-content-center" data-aos="zoom-out">
@@ -102,6 +102,66 @@
 
     </section><!-- /Values Section -->
 
+        <!-- Clients Section -->
+        <section id="clients" class="clients section">
+
+<!-- Section Title -->
+<div class="container section-title" data-aos="fade-up">
+  <h2>Collaborators</h2>
+  <p>In Collaboration with..<br></p>
+</div><!-- End Section Title -->
+
+<div class="container" data-aos="fade-up" data-aos-delay="100">
+
+  <div class="swiper init-swiper">
+    <script type="application/json" class="swiper-config">
+      {
+        "loop": true,
+        "speed": 600,
+        "autoplay": {
+          "delay": 5000
+        },
+        "slidesPerView": "auto",
+        "pagination": {
+          "el": ".swiper-pagination",
+          "type": "bullets",
+          "clickable": true
+        },
+        "breakpoints": {
+          "320": {
+            "slidesPerView": 2,
+            "spaceBetween": 40
+          },
+          "480": {
+            "slidesPerView": 3,
+            "spaceBetween": 60
+          },
+          "640": {
+            "slidesPerView": 4,
+            "spaceBetween": 80
+          },
+          "992": {
+            "slidesPerView": 6,
+            "spaceBetween": 120
+          }
+        }
+      }
+    </script>
+    <div class="swiper-wrapper align-items-center">
+      <div class="swiper-slide"><img src="assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
+      <div class="swiper-slide"><img src="assets/img/clients/client-2.png" class="img-fluid" alt=""></div>
+      <div class="swiper-slide"><img src="assets/img/clients/client-3.png" class="img-fluid" alt=""></div>
+      <div class="swiper-slide"><img src="assets/img/clients/client-4.png" class="img-fluid" alt=""></div>
+      <div class="swiper-slide"><img src="assets/img/clients/client-5.png" class="img-fluid" alt=""></div>
+      <div class="swiper-slide"><img src="assets/img/clients/client-6.png" class="img-fluid" alt=""></div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+
+</div>
+
+</section><!-- /Clients Section -->
+
 
     <!-- Contact Section -->
     <section id="contact" class="contact section">
@@ -158,9 +218,9 @@
             </div>
 
           </div>
-
+<!-- 
           <div class="col-lg-6">
-            <form action="classes/contact.php" method="post"  data-aos="fade-up" data-aos-delay="200">
+            <form action="classes/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
               <div class="row gy-4">
 
                 <div class="col-md-6">
@@ -180,12 +240,17 @@
                 </div>
 
                 <div class="col-12 text-center">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
+
                   <button type="submit">Send Message</button>
                 </div>
 
               </div>
-            </form>
+            </form> -->
           </div><!-- End Contact Form -->
+
 
         </div>
 

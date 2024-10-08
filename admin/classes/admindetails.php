@@ -32,13 +32,11 @@ $count_declined_files = $mainClass->count_all_declined_files();
 $recycled_files = $mainClass->get_all_recycled_files();
 $count_recycled_files = $mainClass->count_all_recycled_files();
 
-
+$messages = $mainClass->get_all_messages();
 //table populate
 $admins = $mainClass->get_all_admins();
 $adminCount = $mainClass->count_all_admins();
 
-$members = $mainClass->get_all_members();
-$memberCount = $mainClass->count_all_members();
 
 $events = $mainClass->get_all_events();
 
@@ -50,6 +48,10 @@ $documents = $mainClass->get_all_documents();
 $uploadedDocumentsCount =$mainClass->count_all_documents();
 $downloadsCount = $mainClass->count_downloads();
 
+// notifications msgs 
+$unread_msgs_count = $mainClass->get_unread_message_count();
+$unread_msgs = $mainClass->get_unread_messages();
+// end 
 
 
 // Fetch the pie chart data

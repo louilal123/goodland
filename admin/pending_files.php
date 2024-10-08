@@ -31,94 +31,88 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
            <?php 
             include "includes/topnav.php"; ?>
             <main class="app-main">
-            <div class="app-content-header"> 
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h3 class="mb-0">Manage Pending Files</h3>
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-end">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">
-                                Pending Files
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <div class="app-content"> 
                 <div class="container-fluid"> 
-                    <div class="row">
+                    <div class="row mt-4">
                         <div class="col-md-12">
-                                <div class="card mb-4 card-outline-primary">
-                                    <div class="card-header d-flex ">
-                                        <h3 class="card-title mb-0">List of Recycled Files</h3>
-                                         </div>
-    
-                                    <div class="card-body">
-                                        <div class="container-fluid">
-                                        <table id="myTable" class="table-responsive table table-hover table-striped w-100">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>File Path</th>
-                            <th width="140px">Uploaded By</th>
-                            <th width="150px">Upload Date</th>
-                            <th width="320px">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-    <?php foreach ($pending_files as $file): ?>
-    <tr>
-        <td><?php echo htmlspecialchars($file['id']); ?></td>
-        <td><?php echo htmlspecialchars($file['title']); ?></td>
-        <td><?php echo htmlspecialchars($file['description']); ?></td>
-        <td><?php echo htmlspecialchars($file['file_path']); ?></td>
-       
-        <td><?php echo htmlspecialchars($file['fullname']); ?></td>
-        <td><?php echo date("M d, Y h:i A", strtotime($file['upload_date'])); ?></td>
-        <td>
-        <a href="../uploads/<?php echo htmlspecialchars($file['file_path']); ?>" class="btn btn-info btn-sm viewBtn ml-1" name="viewPdf">
-            <i class="bi bi-search"></i> View
-        </a>
-        <button class="btn btn-success btn-sm approveBtn ml-1"
-            data-id="<?php echo htmlspecialchars($file['id']); ?>"
-            data-title="<?php echo htmlspecialchars($file['title']); ?>"
-            data-description="<?php echo htmlspecialchars($file['description']); ?>"
-            data-filepath="<?php echo htmlspecialchars($file['file_path']); ?>"
-          
-            data-uploaded_by="<?php echo htmlspecialchars($file['fullname']); ?>"
-            data-upload_date="<?php echo date("M d, Y h:i A", strtotime($file['upload_date'])); ?>"
-            data-bs-toggle="modal"
-            data-bs-target="#approveModal">
-            <i class="bi bi-check-lg"></i> Approve
-        </button>
-        <button class="btn btn-warning btn-sm declineBtn ml-1"
-            data-id="<?php echo htmlspecialchars($file['id']); ?>"
-            data-title="<?php echo htmlspecialchars($file['title']); ?>"
-            data-description="<?php echo htmlspecialchars($file['description']); ?>"
-            data-filepath="<?php echo htmlspecialchars($file['file_path']); ?>"
-           
-            data-uploaded_by="<?php echo htmlspecialchars($file['fullname']); ?>"
-            data-upload_date="<?php echo date("M d, Y h:i A", strtotime($file['upload_date'])); ?>"
-            data-bs-toggle="modal"
-            data-bs-target="#declineModal">
-            <i class="bi bi-x-lg"></i> Decline
-        </button>
-    </td>
-    </tr>
-    <?php endforeach; ?>
-</tbody>
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                <div class="card-header d-flex ">
+                                <h3 class="fw-bold text-primary p-0 m-0 "><span class="fas fa-hourglass"></span> List of Pending Files</h3>
+                                      <button type="button" class="btn btn-success ms-auto btn-rounded me-1" onclick="location.reload(); return false;">
+                                          <i class="fas fa-refresh"></i> Refresh
+                                      </button>
+                                      <button type="button" class="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#addItemModal">
+                                          <i class="fas fa-user-plus"></i> Delete All
+                                      </button>
+                                </div>
+                                    <table id="myTable" class="table-responsive table text-sm table-hover table-striped w-100">
+                                        <thead class="table-secondary fw-bold">
+                                            <tr>
+                                                <th style="font-weight: bold;">ID</th>
+                                                <th style="font-weight: bold;">Title</th>
+                                                <th style="font-weight: bold;">Description</th>
+                                                <th style="font-weight: bold;">File</th>
+                                                <th style="font-weight: bold;">Uploaded By</th>
+                                                <th style="font-weight: bold;">Upload Date</th>
+                                                <th style="font-weight: bold;" width="auto">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php if (empty($approved_files)): ?>
+                                            <tr>
+                                                <td colspan="8" class="text-center">
+                                                    No records to show.
+                                                </td>
+                                            </tr>
+                                        <?php else: ?>
+                                            <?php foreach ($pending_files as $file): ?>
+                                            <tr>
+                                                <td><?php echo htmlspecialchars($file['id']); ?></td>
+                                                <td><img src="../contributor/<?php echo $file['cover_path']; ?>" style="width: 50px; height: 50px;"> <?php echo htmlspecialchars($file['title']); ?></td>
+                                                <td><?php echo htmlspecialchars($file['description']); ?></td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($file['file_path']); ?>
+                                                </td>
+                                                <td><?php echo htmlspecialchars($file['fullname']); ?></td>
+                                                <td><?php echo date("M d, Y h:i A", strtotime($file['upload_date'])); ?></td>
+                                                <td>
+                                                    <a href="../uploads/<?php echo htmlspecialchars($file['file_path']); ?>" class="btn btn-info btn-sm btn-rounded viewBtn ml-1" name="viewPdf">
+                                                        <i class="bi bi-search"></i> View
+                                                    </a>
+                                                    <button class="btn btn-success btn-sm btn-rounded approveBtn ml-1"
+                                                            data-id="<?php echo htmlspecialchars($file['id']); ?>"
+                                                            data-title="<?php echo htmlspecialchars($file['title']); ?>"
+                                                            data-description="<?php echo htmlspecialchars($file['description']); ?>"
+                                                            data-filepath="<?php echo htmlspecialchars($file['file_path']); ?>"
+                                                            data-uploaded_by="<?php echo htmlspecialchars($file['fullname']); ?>"
+                                                            data-upload_date="<?php echo date("M d, Y h:i A", strtotime($file['upload_date'])); ?>"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#approveModal">
+                                                        <i class="bi bi-check-lg"></i> Approve
+                                                    </button>
+                                                    <button class="btn btn-warning btn-sm btn-rounded declineBtn ml-1"
+                                                            data-id="<?php echo htmlspecialchars($file['id']); ?>"
+                                                            data-title="<?php echo htmlspecialchars($file['title']); ?>"
+                                                            data-description="<?php echo htmlspecialchars($file['description']); ?>"
+                                                            data-filepath="<?php echo htmlspecialchars($file['file_path']); ?>"
+                                                            data-uploaded_by="<?php echo htmlspecialchars($file['fullname']); ?>"
+                                                            data-upload_date="<?php echo date("M d, Y h:i A", strtotime($file['upload_date'])); ?>"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#declineModal">
+                                                        <i class="bi bi-x-lg"></i> Decline
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <?php endforeach; ?>
+                                            
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
 
-
-                </table>
-                                        </div> 
-                                    </div>
-                                </div> 
                         </div>
                         
                     </div> 

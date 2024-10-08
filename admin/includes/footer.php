@@ -188,7 +188,12 @@ unset($_SESSION['status_icon']);
 });
 
     </script>
+<script>
+    // Initialization for ES Users
+import { Modal, Ripple, initMDB } from "mdb-ui-kit";
 
+initMDB({ Modal, Ripple });
+</script>
     
 <script
     disable-devtool-auto
