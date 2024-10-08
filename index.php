@@ -218,6 +218,7 @@
             </div>
 
           </div>
+          
 <!-- 
           <div class="col-lg-6">
             <form action="classes/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
