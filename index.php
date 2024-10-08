@@ -219,8 +219,26 @@
 
           </div>
           
-<!-- 
-          <div class="col-lg-6">
+
+        
+
+
+        </div>
+
+      </div>
+
+    </section><!-- /Contact Section -->
+
+  <!-- </main> -->
+
+  <?php include "includes/footer.php"?>
+
+</body>
+
+</html>
+
+         <!-- <div class="col-lg-6">
+
             <form action="classes/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
               <div class="row gy-4">
 
@@ -249,20 +267,5 @@
                 </div>
 
               </div>
-            </form> -->
-          </div><!-- End Contact Form -->
-
-
-        </div>
-
-      </div>
-
-    </section><!-- /Contact Section -->
-
-  <!-- </main> -->
-
-  <?php include "includes/footer.php"?>
-
-</body>
-
-</html>
+            </form>
+          </div> -->
