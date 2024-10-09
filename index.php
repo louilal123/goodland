@@ -205,7 +205,6 @@
                   <p>contact@example.com</p>
                 </div>
               </div><!-- End Info Item -->
-
               <div class="col-md-6">
                 <div class="info-item" data-aos="fade" data-aos-delay="500">
                   <i class="bi bi-clock"></i>
