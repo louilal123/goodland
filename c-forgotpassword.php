@@ -31,7 +31,6 @@
       Your browser does not support the video tag.
     </video>
   </div>
-  
   <div class="container">
     <div class="row gy-4">
      
