@@ -60,7 +60,6 @@
                 </div>
               </div>
              </div>
-
              <div class="col-3">
              <div class="card" >
                 <img src="uploads/default_photo.jpg" class="card-img-top" alt="...">
