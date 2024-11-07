@@ -4,58 +4,26 @@ require_once __DIR__ . '/../admin/classes/Main_class.php';
 
 $mainClass = new Main_class();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $title = $_POST['title'];
-    $description = $_POST['description'];
-    
-    $userId = $_SESSION['user_id'];
+$visitor_id = $_SESSION['visitor_id'] ?? null; 
+$file_id = $_POST['file_id'];
+$email = $_POST['email'];
 
-    $hasError = false;
-
-    // Validate title
-    if (empty($title)) {
-        $_SESSION['error_title'] = "Title is required.";
-        $hasError = true;
-    }
-
-    // Validate description
-    if (empty($description)) {
-        $_SESSION['error_description'] = "Description is required.";
-        $hasError = true;
-    }
+// add a validation for empty email input 
+// add valiation for email Format
 
 
-    // Validate file
-    if (empty($_FILES['file']['name'])) {
-        $_SESSION['error_file'] = "File is required.";
-        $hasError = true;
-    } else {
-        $fileTmpPath = $_FILES['file']['tmp_name'];
-        $fileName = $_FILES['file']['name'];
-        $fileNameCmps = explode(".", $fileName);
-        $fileExtension = strtolower(end($fileNameCmps));
-
-        $allowedExtensions = [
-            'Documents' => ['pdf'],
-            'Images' => ['jpg', 'jpeg', 'png'],
-            'Arts' => ['jpg', 'jpeg', 'png'],
-            'Audio' => ['mp3'],
-            'Maps' => ['jpg', 'jpeg', 'png']
-        ];
-
+if ($visitor_id && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $stmt = $mainClass->pdo->prepare("INSERT INTO file_requests (file_id, visitor_id, email, status) VALUES (?, ?, ?, 'pending')");
+    $stmt->execute([$file_id, $visitor_id, $email]);
      
-    }
-
-    if ($hasError) {
-        $_SESSION['form_data'] = $_POST;
-        header('Location: ../upload_file.php');
-        exit();
-    } else {
-        unset($_SESSION['form_data']);
-        $_SESSION['status'] = "File successfully uploaded!";
-        $_SESSION['status_icon'] = "success";
-        header('Location: ../upload_file.php');
-        exit();
-    }
+    $_SESSION['status'] = "File Requested successfully.";
+    $_SESSION['status_icon'] = "success";
+    header("Location: library.php");
+    exit;
+} else {
+    $_SESSION['status'] = "File Requested successfully.";
+    $_SESSION['status_icon'] = "success";
+    header("Location: library.php");
+    exit;
 }
 ?>

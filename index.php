@@ -14,7 +14,7 @@
 <section id="hero" class="hero section">
   <div class="background-video-container">
     <video autoplay muted loop id="hero-background-video">
-      <source src="https://cdn.arcgis.com/sharing/rest/content/items/8af5121e605a4ae684a1862a51a68b26/resources/6Kc_MpmZPtZWn8QiKobhi.mp4" type="video/mp4">
+      <source src="https://cdn.arcgis.com/sharing/rest/content/items/6c20302d52284f858afbb2ace066abb4/resources/2Dc0FAcVaYwjGSXsz8kpz.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
   </div>
@@ -22,17 +22,21 @@
   <div class="container">
     <div class="row gy-4">
       <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center ">
-        <h1 data-aos="fade-up "> FINDING LOCAL SOLUTIONS TO GLOBAL PROBLEMS<span style="font-size: 80px !important; color:#28747c !important; font-weight: bold !important;">.</span></h1>
+        <h1 data-aos="fade-up "> <span class="text-warning">FINDING</span> LOCAL SOLUTIONS TO GLOBAL PROBLEMS<span style="font-size: 80px !important; color:#0062cc !important; font-weight: bold !important;">.</span></h1>
         <p data-aos="fade-up" data-aos-delay="100">
         Our mission is to facilitate the realization of an empowered, self-sufficient, and resilient community by using art and collaborations to address the social, economic, and environmental issues on Bantayan Island. ​
 </p>
         <div class="d-flex flex-column flex-md-row" data-aos="fade-up" data-aos-delay="200">
-          <a href="#about" class="btn-get-started me-4">Explore <i class="bi bi-arrow-right"></i></a>
-          <a href="https://youtu.be/v3KTAD1NKas?si=vMHL--EJXYfbwqbx" class="glightbox btn-get-started2 me-4">Watch Video <i class="bi bi-play-circle"></i></a>
-        </div>
+        <a href="#about" class="btn-get-started" style="background: linear-gradient(to right, #144D53,#0062cc) !important;"
+         data-aos="fade-in" data-aos-delay="200">EXPLORE <i class="bi bi-arrow-right"></i></a>
+              <a href="https://youtu.be/v3KTAD1NKas?si=vMHL--EJXYfbwqbx" 
+              class="glightbox btn-watch-video d-flex align-items-center justify-content-center ms-0 ms-md-4 mt-4 mt-md-0 text-light">
+              <i class="bi bi-play-circle"></i><span>WATCH VIDEO</span></a>
+           </div>
       </div>
       <div class="col-lg-6 order-1 order-lg-2 hero-img d-flex flex-column justify-content-center" data-aos="zoom-out">
-        <img src="assets/img/landingbg.png"  class="img-fluid" >
+      <div class="lightning-strike"></div>
+        <img src="assets/img/landingbg.png"  class="img-fluid broken-img" >
       </div>
     </div>
   </div>
@@ -83,14 +87,14 @@
         <div class="row gy-4">
 
           <div class="col-lg-6 " data-aos="fade-up" data-aos-delay="100">
-            <div class="card bg-dark ">
+            <div class="card  ">
               <img src="images/vision.jpg" style="height: 375px !important;" class="img-fluid" alt="">
               <h3>Our vision is an empowered community of Bantayan islanders enjoying the quality of life in an ecologically balanced environment through their shared dreams.</h3>
                </div>
           </div><!-- End Card Item -->
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="card bg-dark">
+            <div class="card ">
               <img src="images/missionn.jpg"style="height: 375px !important;" class="img-fluid" alt="">
               <h3>Our mission is to facilitate the realization of an empowered, self-sufficient, and resilient community by using art and collaborations to address the social, economic, and environmental issues on Bantayan Island.</h3>
             </div>
@@ -103,164 +107,16 @@
     </section><!-- /Values Section -->
 
         <!-- Clients Section -->
-        <section id="clients" class="clients section">
-
-<!-- Section Title -->
-<div class="container section-title" data-aos="fade-up">
-  <h2>Collaborators</h2>
-  <p>In Collaboration with..<br></p>
-</div><!-- End Section Title -->
-
-<div class="container" data-aos="fade-up" data-aos-delay="100">
-
-  <div class="swiper init-swiper">
-    <script type="application/json" class="swiper-config">
-      {
-        "loop": true,
-        "speed": 600,
-        "autoplay": {
-          "delay": 5000
-        },
-        "slidesPerView": "auto",
-        "pagination": {
-          "el": ".swiper-pagination",
-          "type": "bullets",
-          "clickable": true
-        },
-        "breakpoints": {
-          "320": {
-            "slidesPerView": 2,
-            "spaceBetween": 40
-          },
-          "480": {
-            "slidesPerView": 3,
-            "spaceBetween": 60
-          },
-          "640": {
-            "slidesPerView": 4,
-            "spaceBetween": 80
-          },
-          "992": {
-            "slidesPerView": 6,
-            "spaceBetween": 120
-          }
-        }
-      }
-    </script>
-    <div class="swiper-wrapper align-items-center">
-      <div class="swiper-slide"><img src="assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
-      <div class="swiper-slide"><img src="assets/img/clients/client-2.png" class="img-fluid" alt=""></div>
-      <div class="swiper-slide"><img src="assets/img/clients/client-3.png" class="img-fluid" alt=""></div>
-      <div class="swiper-slide"><img src="assets/img/clients/client-4.png" class="img-fluid" alt=""></div>
-      <div class="swiper-slide"><img src="assets/img/clients/client-5.png" class="img-fluid" alt=""></div>
-      <div class="swiper-slide"><img src="assets/img/clients/client-6.png" class="img-fluid" alt=""></div>
-    </div>
-    <div class="swiper-pagination"></div>
-  </div>
-
-</div>
-
-</section><!-- /Clients Section -->
-
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact section">
-
-      
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
-        <p>Contact Us</p>
-      </div>
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-6">
-
-            <div class="row gy-4">
-              <div class="col-md-6">
-                <div class="info-item" data-aos="fade" data-aos-delay="200">
-                  <i class="bi bi-geo-alt"></i>
-                  <h3>Purok Brgy Mambacayao</h3>
-                  <p>A108 Adam Street</p>
-                  <p>Bantayan Island Philipppines</p>
-                </div>
-              </div><!-- End Info Item -->
-
-              <div class="col-md-6">
-                <div class="info-item" data-aos="fade" data-aos-delay="300">
-                  <i class="bi bi-telephone"></i>
-                  <h3>Call Us</h3>
-                  <p>+1 5589 55488 55</p>
-                  <p>+1 6678 254445 41</p>
-                </div>
-              </div><!-- End Info Item -->
-
-              <div class="col-md-6">
-                <div class="info-item" data-aos="fade" data-aos-delay="400">
-                  <i class="bi bi-envelope"></i>
-                  <h3>Email Us</h3>
-                  <p>info@goodlandv2@gmail.com</p>
-                  <p>contact@example.com</p>
-                </div>
-              </div><!-- End Info Item -->
-              <div class="col-md-6">
-                <div class="info-item" data-aos="fade" data-aos-delay="500">
-                  <i class="bi bi-clock"></i>
-                  <h3>Open Hours</h3>
-                  <p>Monday - Friday</p>
-                  <p>9:00AM - 05:00PM</p>
-                </div>
-              </div><!-- End Info Item -->
-
-            </div>
-
-          </div>
-          
-        </div>
-
-      </div>
-
-    </section><!-- /Contact Section -->
+    
 
   <!-- </main> -->
 
+<!-- End of Cookie Banner -->
   <?php include "includes/footer.php"?>
+
+
+<!-- Modal frame bottom example-->
 
 </body>
 
 </html>
-
-         <!-- <div class="col-lg-6">
-
-            <form action="classes/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-              <div class="row gy-4">
-
-                <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
-                </div>
-
-                <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
-                </div>
-
-                <div class="col-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
-                </div>
-
-                <div class="col-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-                </div>
-
-                <div class="col-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit">Send Message</button>
-                </div>
-
-              </div>
-            </form>
-          </div> -->

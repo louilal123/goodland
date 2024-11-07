@@ -4,20 +4,24 @@
 <head>
 <?php include "includes/header.php"; ?>
 </head>
-
-<body class="blog-page">
+<style>
+  .custom-btn{
+    border-radius: 0px !important;
+  }
+</style>
+<body class="index-page">
 
 <?php include "includes/topnav.php";?>
-  <main class="main mt-4">
+  <main class="main ">
 
     <!-- Page Title -->
-    <div class="page-title mt-4 bg-dark">
-      <div class="heading mt-4"style="background-image: url('uploads/image.png'); background-size: cover; background-position: center;">
+    <div class="page-title ">
+      <div class="heading "style="background-size: cover; background-position: center;background: linear-gradient(to top, rgba(38, 37, 37, 1), rgba(22, 22, 22, 0.8));z-index: -1;">
         <div class="container ">
           <div class="row d-flex justify-content-center text-center">
             <div class="col-lg-8">
               <br><br>
-              <h1>Get to know GOODLand</h1>
+              <h1 class="text-warning">Get To Know Goodland</h1>
               <!-- <p class="mb-0"></p> -->
             </div>
           </div>
@@ -26,7 +30,7 @@
       <nav class="breadcrumbs ">
         <div class="container">
           <ol>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="">Home</a></li>
             <li class="current">About</li>
           </ol>
         </div>
@@ -52,7 +56,7 @@
               </div>
               <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center ">
                 <h1 data-aos="fade-up " style="font-weight: bold !important;">What We Do.</h1>
-                <p data-aos="fade-up" data-aos-delay="100" style="font-size:1.3rem; ">
+                <p data-aos="fade-up" data-aos-delay="100" style="font-size:1.1rem; ">
                 GOODLand is a platform under Martha Atienza’s Art Lab that develops and applies a creative and collaborative methodology utilized to tackle social, economic and environmental issues on Bantayan Island in the Visayas, Philippines. As a platform, it does this by organizing with communities and collaborating with individuals, collectives, and/or institutions in various fields of expertise. Centered around art projects, it is the main driver throughout GOODLand’s methodological approach to community-based projects (see our Place, People, and Art-based Model).    
                 </p>
                
@@ -129,63 +133,63 @@
           <div class="container">
 
           <div class="row row-cols-1 row-cols-md-4 g-4">
-            <div class="col">
-              <div class="card h-100 text-white bg-dark">
+            <div class="col" >
+              <div class="card  ">
                 <img src="images/mayett.jpg" class="card-img-top" alt="Martha Atienza" style="height: 250px; object-fit: cover;">
                 <div class="card-body">
                   <h5 class="card-title">Martha Atienza</h5>
                   <p class="card-text">Visual artist focusing on environmental, social, and economical issues.</p>
-                  <a href="#" class="btn custom-btn">Read More</a>
+                  <a href="#" class="btn custom-btn">Learn More <i class="bi bi-arrow-right"></i></a>
                 </div>
               </div>
             </div>
             <div class="col">
-              <div class="card h-100 text-white bg-dark">
+              <div class="card  ">
                 <img src="images/jake.jpg" class="card-img-top" alt="Jake Atienza" style="height: 250px; object-fit: cover;">
                 <div class="card-body">
                   <h5 class="card-title">Jake Atienza</h5>
                   <p class="card-text">Interdisciplinary Researcher & Artist.</p>
-                  <a href="https://www.jakeatienza.com/home" class="btn custom-btn">Read More</a>
+                  <a href="https://www.jakeatienza.com/home" class="btn custom-btn">Learn More <i class="bi bi-arrow-right"></i></a>
                 </div>
               </div>
             </div>
             <div class="col">
-              <div class="card h-100 text-white bg-dark">
+              <div class="card  ">
                 <img src="images/bihiyaa.jpg" class="card-img-top" alt="Bihiya Warriors" style="height: 250px; object-fit: cover;">
                 <div class="card-body">
                   <h5 class="card-title">Bihiya Warriors</h5>
                   <p class="card-text">Youth-lead Community Group.</p>
-                  <a href="images/bihiyaa.jpg" class="btn custom-btn">Read More</a>
+                  <a href="images/bihiyaa.jpg" class="btn custom-btn">Learn More <i class="bi bi-arrow-right"></i></a>
                 </div>
               </div>
             </div>
             <div class="col">
-              <div class="card h-100 text-white bg-dark">
+              <div class="card  ">
                 <img src="images/caster.jpg" class="card-img-top" alt="John Ortega" style="height: 250px; object-fit: cover;">
                 <div class="card-body">
                   <h5 class="card-title">John Ortega</h5>
                   <p class="card-text">Community Organizer, Radio Broadcaster, Fisherfolk People's Organization Leader, Mentor.</p>
-                  <a href="#" class="btn custom-btn">Read More</a>
+                  <a href="#" class="btn custom-btn">Learn More <i class="bi bi-arrow-right"></i></a>
                 </div>
               </div>
             </div>
             <div class="col">
-              <div class="card h-100 text-white bg-dark">
+              <div class="card  ">
                 <img src="images/joni.jpg" class="card-img-top" alt="Ramon Alontaga" style="height: 250px; object-fit: cover;">
                 <div class="card-body">
                   <h5 class="card-title">Ramon Alontaga</h5>
                   <p class="card-text">Innovative artist specializing in mechanical and DIY island technology.</p>
-                  <a href="#" class="btn custom-btn">Read More</a>
+                  <a href="#" class="btn custom-btn">Learn More <i class="bi bi-arrow-right"></i></a>
                 </div>
               </div>
             </div>
             <div class="col">
-              <div class="card h-100 text-white bg-dark">
+              <div class="card  ">
                 <img src="images/dakogamay.jpg" class="card-img-top" alt="DAKOgamay" style="height: 250px; object-fit: cover;">
                 <div class="card-body">
                   <h5 class="card-title">DAKOgamay</h5>
                   <p class="card-text">Experimental platform by Martha and Jake Atienza.</p>
-                  <a href="#" class="btn custom-btn">Read More</a>
+                  <a href="#" class="btn custom-btn">Learn More <i class="bi bi-arrow-right"></i></a>
                 </div>
               </div>
             </div>

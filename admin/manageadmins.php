@@ -2,82 +2,81 @@
 <!DOCTYPE html>
 <html lang="en"> 
 <?php include "includes/header.php"; ?>
-<link rel="stylesheet" href="dist/custom.css">
+<!-- <link rel="stylesheet" href="dist/custom.css"> -->
 
 <body class="layout-fixed-complete sidebar-expand-lg sidebar-mini bg-body-tertiary">
 
     <div class="app-wrapper">
 
        <?php include "includes/sidebar.php" ?>
-        <div class="app-main-wrapper main-blur"> 
+        <div class="app-main-wrapper"> 
            <?php 
             include "includes/topnav.php"; ?>
             <main class="app-main">
 
             <div class="app-content"> 
-                <div class="container-fluid"> 
-                    <div class="row mt-4">
+                <div class="container-fluid "> 
+                    <div class="row mt-3">
+                        <div class="col-md-12">
                         <div class="card">
-                            <div class="card-body">
-                                <div class="card-header d-flex ">
-                                    <h3 class="fw-bold">List of Admins</h3>
-                                    <button class="btn btn-primary ms-auto btn-rounded" data-bs-toggle="modal" data-bs-target="#addItemModal">
-                                        <i class="fas fa-user-plus"></i> Add New
-                                    </button>
-                                </div>
-                                <div class="table-responsive"> <!-- Move table-responsive here -->
-                                    <table id="myTable" class="table text-sm table-hover table-striped w-100">
-                                        <thead class="table-secondary">
-                                            <tr class="text-black fw-bold">
-                                                <th>#</th>
-                                                <th>Fullname</th>
-                                                <th>Username</th>
-                                                <th>Email</th>
-                                                <th>Date Created</th>
-                                                <th>Modified</th>
-                                                <th>Status</th>
-                                                <th width="auto">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php foreach ($admins as $index => $admin): ?>
-                                                <tr>
-                                                    <td><?php echo $index + 1; ?></td>
-                                                    <td>
-                                                        <img src="uploads/<?php echo $admin['admin_photo'] ?: 'default_photo.jpg'; ?>" 
-                                                            style="height: 50px; display: block; margin: auto;"> <!-- Changed display to block -->
-                                                        <?php echo htmlspecialchars($admin['fullname']); ?>
-                                                    </td>
-                                                    <td><?php echo htmlspecialchars($admin['username']); ?></td>
-                                                    <td><?php echo htmlspecialchars($admin['email']); ?></td>
-                                                    <td><?php echo date("M d, Y h:i A", strtotime($admin['date_created'])); ?></td>
-                                                    <td><?php echo date("M d, Y h:i A", strtotime($admin['date_updated'])); ?></td>
-                                                    <td>
-                                                        <?php if ($admin['status'] == 'Active'): ?>
-                                                            <span class="badge bg-success">Active</span>
-                                                        <?php else: ?>
-                                                            <span class="badge bg-secondary">Inactive</span>
-                                                        <?php endif; ?>
-                                                    </td>
-                                                    <td>
-                                                        <button class="btn btn-info btn-sm viewAdminDetailBtn" data-id="<?php echo $admin['admin_id']; ?>" 
-                                                                data-bs-toggle="modal" data-bs-target="#viewAdminModal">
-                                                            <i class="bi bi-eye-fill"></i>
-                                                        </button>
-                                                        <a href="#" class="btn btn-success btn-sm editAdminBtn" data-bs-toggle="modal" data-bs-target="#editAdminModal">
-                                                            <i class="bi bi-pencil-square"></i>
-                                                        </a>
-                                                        <a href="classes/delete_admin.php?id=<?php echo $admin['admin_id']; ?>" class="btn btn-danger btn-sm deleteBtn">
-                                                            <i class="bi bi-trash-fill"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+    <div class="card-body">
+        <div class="d-flex">
+            <h3 class="fw-bold">List of Admins</h3>
+            <button class="btn btn-primary ms-auto btn-rounded btn-sm" data-bs-toggle="modal" data-bs-target="#addItemModal">
+                <i class="fas fa-user-plus"></i> Add New
+            </button>
+        </div>
+        <table id="myTable" class="table table-bordered table-hover table-striped text-center w-100">
+            <thead class="table-secondary">
+                <tr class="text-black fw-bold">
+                    <th>#</th>
+                    <th>Fullname</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Photo</th>
+                    <th>Date Created</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($admins as $index => $admin): ?>
+                    <tr>
+                        <td><?php echo $index + 1; ?></td>
+                        <td><?php echo htmlspecialchars($admin['fullname']); ?></td>
+                        <td><?php echo htmlspecialchars($admin['username']); ?></td>
+                        <td><?php echo htmlspecialchars($admin['email']); ?></td>
+                        <td>
+                            <img src="uploads/<?php echo $admin['admin_photo'] ?: 'default_photo.jpg'; ?>" 
+                                 style="height: 50px; display: block; margin: auto;">
+                        </td>
+                        <td><?php echo date("M d, Y h:i A", strtotime($admin['date_created'])); ?></td>
+                        <td>
+                            <?php if ($admin['status'] == 'Active'): ?>
+                                <span class="badge bg-success">Active</span>
+                            <?php else: ?>
+                                <span class="badge bg-secondary">Inactive</span>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <button class="btn btn-info btn-sm viewAdminDetailBtn" data-id="<?php echo $admin['admin_id']; ?>" 
+                                    data-bs-toggle="modal" data-bs-target="#viewAdminModal">
+                                <i class="bi bi-eye-fill"></i>
+                            </button>
+                            <a href="#" class="btn btn-success btn-sm editAdminBtn" data-bs-toggle="modal" data-bs-target="#editAdminModal">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                            <a href="classes/delete_admin.php?id=<?php echo $admin['admin_id']; ?>" class="btn btn-danger btn-sm deleteBtn">
+                                <i class="bi bi-trash-fill"></i>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div></div>
+
 
                     </div> 
                 </div>

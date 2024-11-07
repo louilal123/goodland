@@ -11,13 +11,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $main->delete_message($messageId);
             $_SESSION['status'] = "Message deleted successfully!";
             $_SESSION['status_icon'] = "success";
+            header("Location: ../messages.php");
+            exit;
         } catch (Exception $e) {
             $_SESSION['status'] = "Error: Could not delete the message. {$e->getMessage()}";
             $_SESSION['status_icon'] = "error";
+            header("Location: ../messages.php");
+            exit;
         }
     }
+   
     // Check if the request is to delete all messages
-    elseif (!empty($_POST['delete_all'])) {
+    if (!empty($_POST['delete_all'])) {
         try {
             $main->delete_all_messages();
             $_SESSION['status'] = "All messages deleted successfully!";

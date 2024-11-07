@@ -1,66 +1,99 @@
 <?php
 session_start();
-
-$error_message = isset($_SESSION['error_message']) ? $_SESSION['error_message'] : '';
-unset($_SESSION['error_message']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Login </title>
-    <!-- MDB icon -->
-    <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <!-- Google Fonts Roboto -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"/>
-    <!-- MDB -->
-    <link rel="stylesheet" href="mdbfolder/css/mdb.min.css" />
-  </head>
-  <body>
-    <!-- Start your project here-->
-    <section class="vh-100">
-      <div class="container py-5 h-100">
-        <div class="row d-flex align-items-center justify-content-center h-100">
-          <div class="col-md-8 col-lg-7 col-xl-6">
-            <img src="bac.png"
-              class="img-fluid" style="height: max-content;" alt="Phone image">
-          </div>
-
-          <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-            <div class="card-body p-5 shadow-5 text-center">
-              <h4 class="fw-bold mb-3">Forgot Password</h4>
-              <h5 class="fw-light mb-5">Enter your email address and we'll send otp code to your email address.</h5>
-             
-            <form action="classes/request_reset.php" method="post">
-              <!-- Email input -->
-              <div data-mdb-input-init class="form-outline mb-4">
-                <input type="email" id="form1Example13" name="email" class="form-control form-control-lg" />
-                <label class="form-label" for="form1Example13">Email address</label>
-              </div>
-    
-              <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-lg btn-block mb-4">Submit</button>
-    
-              <div class="d-flex justify-content-around align-items-center mb-4">
-              
-                <a href="index">Back to Login</a>
-              </div>
-            </form>
-          </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="mdbfolder/mdb.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="../mdbfolder/mdb.min.css" />
+</head>
+<style>
+    body {
+        overflow: hidden !important;
+    }
+    .main-blur {
+    background: rgba(108, 117, 125, 0.5); 
+}
+.card{
+    border-radius: 0px;
+}
+</style>
+<body class="bg-light main-blur">
+    <section class="vh-100 bg-light">
+        <div class="container py-5 h-100 ">
+            <div class="row d-flex align-items-center justify-content-center h-100">
+                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 mt-5 mb-5">
+                    <div class="card ">
+                        <div class="mt-4 text-center">
+                            <!-- <img src="uploads/logogoodland.png" style="display: flex; margin: auto; width: 150px; height: 60px;"> -->
+                        </div>
+                        <h2 class="info-color text-primary text-center py-4">
+                            <strong>Forgot Password</strong>
+                            
+                        </h2>
+                        <p class="text-dark text-center  mb-4">Enter your email address, and we'll send you an OTP to reset your password.</p>
+                        <div class="card-body px-lg-5 pt-0 mt-2">
+                         <form action="classes/request_otp.php" method="POST">
+      
+                            <!-- Email or Username input -->
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                    <i class="fas fa-envelope trailing" id="toggleEmailOrUsername"></i>
+                                    <input type="text" name="email" class="form-control form-control-lg form-icon-trailing" />
+                                    <label class="form-label" for="materialLoginFormEmailOrUsername">Email</label>
+                                   
+                                </div>
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block mb-4">Send OTP</button>
+                                </form>
+                            <div class="d-flex justify-content-around align-items-center mt-4">
+                                <a href="index">Return</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        </div>
-      </div>
     </section>
-    <!-- End e-->
 
-    <script type="text/javascript" src="mdbfolder/js/mdb.umd.min.js"></script>
-    <!-- Custom scripts -->
-    <script type="text/javascript"></script>
-  </body>
+    <?php include "includes/footer.php" ?>
+    <!-- SweetAlert display script -->
+    <?php if (isset($_SESSION['status']) && $_SESSION['status'] != ''): ?>
+        <script>
+            Swal.fire({
+                icon: "<?php echo $_SESSION['status_icon']; ?>",
+                title: "<?php echo $_SESSION['status']; ?>",
+                confirmButtonText: "Ok"
+            });
+        </script>
+        <?php
+        unset($_SESSION['status']);
+        unset($_SESSION['status_icon']);
+        ?>
+    <?php endif; ?>
+
+    <script type="text/javascript" src="mdbfolder/mdb.umd.min.js"></script>
+  
+      
+<script
+    disable-devtool-auto
+    src='https://cdn.jsdelivr.net/npm/disable-devtool'
+    md5='xxx'
+    url='xxx'
+    tk-name='xxx'
+    interval='xxx'
+    disable-menu='xxx'
+    detectors='xxx'
+    clear-log='true'
+    disable-select='true'
+    disable-copy='true'
+    disable-cut='true'
+    disable-paste='true'
+></script>
+
+</body>
 </html>

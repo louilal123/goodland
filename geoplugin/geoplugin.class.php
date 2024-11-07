@@ -1,4 +1,5 @@
 <?php
+// namespace GeoPlugin;
 class geoPlugin {
     // the geoPlugin server
     var $host = 'http://www.geoplugin.net/php.gp?ip=';

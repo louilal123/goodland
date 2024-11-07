@@ -1,0 +1,8 @@
+// Custom.scss
+// Option A: Include all of Bootstrap
+$primary: #bb4a60;
+// Include any default variable overrides here (though functions won't be available)
+
+@import "../dist/css/scss";
+
+// Then add additional custom code here

@@ -48,7 +48,7 @@ if (!isset($_SESSION['user_logged_in']) || $_SESSION['user_logged_in'] !== true)
     exit();
 }
 
-$userId = $_SESSION['user_id'];
+// $userId = $_SESSION['user_id'];
 
 $fileCounts = $mainClass->count_user_files($userId);
 

@@ -1,3 +1,64 @@
+
+/*data table*/
+.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter {
+  margin-bottom: 15px;
+}
+.dataTables_wrapper .dataTables_length select, .dataTables_wrapper .dataTables_length input, .dataTables_wrapper .dataTables_filter select, .dataTables_wrapper .dataTables_filter input {
+  border-color: #e5e5e5;
+  outline: none;
+}
+.dataTables_wrapper .dataTables_length select:focus, .dataTables_wrapper .dataTables_length input:focus, .dataTables_wrapper .dataTables_filter select:focus, .dataTables_wrapper .dataTables_filter input:focus {
+  border-color: #e5e5e5;
+  outline: none;
+}
+.dataTables_wrapper .dataTables_info {
+  margin-top: 15px;
+}
+.dataTables_wrapper .dt-button {
+  background-color: var(--primary-bg-color);
+  border-color: var(--primary-bg-color);
+  color: #ffffff;
+}
+.dataTables_wrapper .dt-button:hover {
+  background-color: var(--primary-bg-color) !important;
+}
+.dataTables_wrapper .dataTables_paginate {
+  margin-top: 15px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  border: 1px solid #e5e5e5;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background: var(--primary-bg-color) !important;
+  color: #ffffff !important;
+  border-color: var(--primary-bg-color) !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover, .dataTables_wrapper .dataTables_paginate .paginate_button:hover:hover {
+  background: var(--primary-bg-color) !important;
+  color: #ffffff !important;
+  border-color: var(--primary-bg-color) !important;
+}
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+  border-color: #e5e5e5;
+}
+
+table.dataTable thead th {
+  border: 1px solid #e5e5e5;
+}
+table.dataTable tfoot {
+  margin-top: 15px;
+}
+table.dataTable tfoot th, table.dataTable tfoot td {
+  border: 1px solid #e5e5e5;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* end datatabkes  */
 /* this is for all butons that have custom-btn class */
 .custom-btn:hover{
     background-color: var(--accent-color) !important;
@@ -8,12 +69,13 @@
 
   /* this is for all butons that have custom-btn class */
 .custom-btn{
-  background-color: var(--accent-color) !important;
+  background-color: #0062cc !important;
   color: var(--contrast-color) !important;
 }
 
 .btn-info{
   color:var(--contrast-color) !important;
-
+border-radius: 0px !important;
 }
+
 

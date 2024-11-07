@@ -8,16 +8,16 @@
 <body class="blog-page">
 
 <?php include "includes/topnav.php";?>
-  <main class="main mt-4">
+  <main class="main ">
 
     <!-- Page Title -->
-    <div class="page-title mt-4 bg-dark">
-      <div class="heading mt-4"style="background-image: url('uploads/image.png'); background-size: cover; background-position: center;">
-        <div class="container ">
+    <div class="page-title">
+    <div class="heading "style="background-size: cover; background-position: center;background: linear-gradient(to top, rgba(38, 37, 37, 1), rgba(22, 22, 22, 0.8));z-index: -1;">
+    <div class="container ">
           <div class="row d-flex justify-content-center text-center">
             <div class="col-lg-8">
               <br><br>
-              <h1>Methodology</h1>
+              <h1 class="text-warning">Methodology</h1>
               <!-- <p class="mb-0"></p> -->
             </div>
           </div>
@@ -127,5 +127,5 @@
 
   <?php include "includes/footer.php";?>
 </body>
-
+<?php include "includes/cookie.php";?>
 </html>

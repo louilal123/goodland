@@ -1,11 +1,11 @@
 <?php
 require_once('geoplugin.class.php');
 
-// $ip = $_SERVER['REMOTE_ADDR'];
+$ip = $_SERVER['REMOTE_ADDR'];
 
-// $geoplugin = new geoPlugin();
+$geoplugin = new geoPlugin();
 
-$geoplugin->locate('112.198.194.108');
+$geoplugin->locate('$ip');
 
 echo "Geolocation results for {$geoplugin->ip}: <br />\n".
     "City: {$geoplugin->city} <br />\n".

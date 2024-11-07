@@ -7,7 +7,7 @@
 <body class="layout-fixed-complete sidebar-expand-lg sidebar-mini bg-body-tertiary">
     <div class="app-wrapper">
         <?php include "includes/sidebar.php"; ?>
-        <div class="app-main-wrapper main-blur">
+        <div class="app-main-wrapper">
             <?php include "includes/topnav.php"; ?>
             <main class="app-main">
 
@@ -17,26 +17,26 @@
                             <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                <div class="card-header d-flex ">
+                                <div class="d-flex mb-3">
                                   <h3 class="fw-bold">List of Messages</h3>
-                                      <button type="button" class="btn btn-success ms-auto btn-rounded me-1" onclick="location.reload(); return false;">
+                                      <button type="button" class="btn btn-sm btn-success ms-auto btn-rounded me-1" onclick="location.reload(); return false;">
                                           <i class="fas fa-refresh"></i> Refresh
                                       </button>
                                       <button type="button" class="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#deleteAllMessagesModal">
-    <i class="fas fa-trash"></i> Delete All
-</button>
+                                          <i class="fas fa-trash"></i> Delete All
+                                      </button>
 
                                 </div>
-                                    <table id="myTable" class="table-responsive table text-sm table-hover table-striped w-100">
-                                        <thead class="table-secondary fw-bold">
+                                    <table id="myTable" class="table table-bordered table-hover table-stripe text-center w-100">
+                                        <thead class="table-secondary">
                                             <tr>
-                                                <th style="font-weight: bold;">Message ID</th>
-                                                <th style="font-weight: bold;">Full Name</th>
-                                                <th style="font-weight: bold;">Email</th>
-                                                <th style="font-weight: bold;">Subject</th>
-                                                <th style="font-weight: bold;">Message</th>
-                                                <th style="font-weight: bold;">Date Sent</th>
-                                                <th style="font-weight: bold;" width="auto">Action</th>
+                                                <th >Message ID</th>
+                                                <th >Full Name</th>
+                                                <th >Email</th>
+                                                <th >Subject</th>
+                                                <th >Message</th>
+                                                <th >Date Sent</th>
+                                                <th  width="auto">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -72,75 +72,99 @@
                 </div>
 
         <!-- Modal for Delete Confirmation -->
-<!-- Modal for Individual Delete Confirmation -->
-<div class="modal fade" id="deleteMessageModal" data-mdb-backdrop="static" data-mdb-keyboard="false" tabindex="-1" aria-labelledby="deleteMessageModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title fw-bold" id="deleteMessageModalLabel">Confirm Deletion</h5>
-        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body fw-bold">
-        Are you sure you want to delete this message?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-rounded" data-mdb-dismiss="modal"> <span class="fas fa-x"></span> Cancel</button>
-        <form method="POST" action="classes/delete_message.php">
-          <input type="hidden" name="delete_message_id" id="delete_message_id">
-          <button type="submit" class="btn btn-danger btn-rounded "> <span class="fas fa-trash"></span> Delete</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+        <script>
+    $(document).ready(function() {
+        $('#myTable').DataTable({
+           
+        });
+    });
 
-<!-- Modal for Deleting All Messages -->
-<div class="modal fade" id="deleteAllMessagesModal" data-mdb-backdrop="static" data-mdb-keyboard="false" tabindex="-1" aria-labelledby="deleteAllMessagesModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteAllMessagesModalLabel">Confirm Deletion of All Messages</h5>
-                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete all messages? This action cannot be undone.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Cancel</button>
-                <form method="POST" action="classes/delete_message.php">
-                    <input type="hidden" name="delete_all" value="1">
-                    <button type="submit" class="btn btn-danger">Delete All</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-            </main>
-        </div>
-    </div>
-    <?php include "includes/footer.php"; ?>
-  
-    <script>
+    
+</script>
+        <script>
 document.querySelectorAll('.deleteMessageBtn').forEach(button => {
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function(e) {
+        e.preventDefault(); // Prevent default form submission
+
         var messageId = this.getAttribute('data-message-id');
-        document.getElementById('delete_message_id').value = messageId;
-        document.getElementById('delete_all').value = ''; // Clear the delete all flag
-        document.getElementById('modal-body-text').textContent = 'Are you sure you want to delete this message?';
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You are about to delete this message!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Delete',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If confirmed, create a form and submit it
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = 'classes/delete_message.php';
+                
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'delete_message_id';
+                input.value = messageId;
+                form.appendChild(input);
+                
+                document.body.appendChild(form);
+                form.submit(); // Submit the form
+            }
+        });
     });
 });
 
 // For deleting all messages
-document.querySelector('.deleteAllMessagesBtn').addEventListener('click', function() {
-    document.getElementById('delete_message_id').value = ''; // Clear individual message ID
-    document.getElementById('delete_all').value = 'true'; // Set flag for deleting all
-    document.getElementById('modal-body-text').textContent = 'Are you sure you want to delete all messages?';
+document.querySelector('.deleteAllMessagesBtn').addEventListener('click', function(e) {
+    e.preventDefault(); // Prevent default form submission
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You are about to delete all messages! This action cannot be undone.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Delete All',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // If confirmed, create a form and submit it
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'classes/delete_message.php';
+            
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'delete_all';
+            input.value = '1';
+            form.appendChild(input);
+            
+            document.body.appendChild(form);
+            form.submit(); // Submit the form
+        }
+    });
 });
 </script>
+<?php
+if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+?>
+<script>
+Swal.fire({
+    icon: "<?php echo $_SESSION['status_icon']; ?>",
+    title: "<?php echo $_SESSION['status']; ?>",
+    confirmButtonText: "Ok"
+});
+</script>
+<?php
+unset($_SESSION['status']);
+unset($_SESSION['status_icon']);
+}
+?>
+
 
 </body>
 </html>

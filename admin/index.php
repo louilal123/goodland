@@ -12,6 +12,8 @@ unset($_SESSION['error_message']);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet" href="mdbfolder/mdb.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="../mdbfolder/mdb.min.css" />
 </head>
 <style>
     body {
@@ -20,20 +22,23 @@ unset($_SESSION['error_message']);
     .main-blur {
     background: rgba(108, 117, 125, 0.5); 
 }
+.card{
+    border-radius: 0px;
+}
 </style>
 <body class="bg-light main-blur">
-    <section class="vh-100 bg-secondary">
-        <div class="container py-5 h-100 bg-secondary">
+    <section class="vh-100 bg-light">
+        <div class="container py-5 h-100 ">
             <div class="row d-flex align-items-center justify-content-center h-100">
                 <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 mt-5 mb-5">
-                    <div class="card">
-                        <div class="card-header text-center">
-                            <img src="uploads/logogoodland.png" style="display: flex; margin: auto; width: 150px; height: 60px;">
+                    <div class="card ">
+                        <div class="mt-4 text-center">
+                            <!-- <img src="uploads/logogoodland.png" style="display: flex; margin: auto; width: 150px; height: 60px;"> -->
                         </div>
-                        <h2 class="info-color white-text text-center py-4">
-                            <strong>Login Administrator</strong>
+                        <h2 class="info-color white-text text-center py-4 mb-2">
+                            <strong>Login to Goodland </strong>
                         </h2>
-                        <div class="card-body px-lg-5 pt-0">
+                        <div class="card-body px-lg-5 pt-0 mt-2">
                             <form style="color: #757575;" action="classes/login.php" method="post">
                                 <!-- Display inline error for required fields -->
                                 <?php if (!empty($error_message)): ?>
@@ -75,7 +80,7 @@ unset($_SESSION['error_message']);
                                         <label class="form-check-label" for="showPasswordCheckbox">Show Password</label>
                                     </div>
                                    
-                                    <!-- <a href="forgot_password.php">Forgot password?</a> -->
+                                    <a href="forgot_password.php">Forgot password?</a>
                                 </div>
 
                                 <!-- Submit button -->

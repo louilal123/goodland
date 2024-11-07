@@ -60,7 +60,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <?php if (empty($approved_files)): ?>
+                                        <?php if (empty($published_files)): ?>
                                             <tr>
                                                 <td colspan="8" class="text-center">
                                                     No records to show.
@@ -78,7 +78,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                                                 <td><?php echo htmlspecialchars($file['fullname']); ?></td>
                                                 <td><?php echo date("M d, Y h:i A", strtotime($file['upload_date'])); ?></td>
                                                 <td>
-                                                    <a href="../uploads/<?php echo htmlspecialchars($file['file_path']); ?>" class="btn btn-info btn-sm btn-rounded viewBtn ml-1" name="viewPdf">
+                                                    <a href="../<?php echo htmlspecialchars($file['file_path']); ?>" class="btn btn-info btn-sm btn-rounded viewBtn ml-1" name="viewPdf">
                                                         <i class="bi bi-search"></i> View
                                                     </a>
                                                     <button class="btn btn-success btn-sm btn-rounded approveBtn ml-1"
@@ -149,7 +149,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-warning" name="declineBtn">Decline</button>
+                        <button type="submit" class="btn btn-warning" name="recycleBtn">Decline</button>
                     </div>
                 </form>
             </div>

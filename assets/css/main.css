@@ -19,37 +19,38 @@
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
 :root { 
-  --background-color: #161616; /* Background color for the entire website, including individual sections */
-  --default-color: #f3f3f3; /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #f3f3f3; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #28747c !important; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --background-color: #ffffff; /* Background color for the entire website, including individual sections */
+  --default-color: #262525; /* Default color used for the majority of the text content across the entire website */
+  --heading-color: #262525; /* Color for headings, subheadings and title throughout the website */
+  --accent-color:#0062cc;   /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
 }
+/* linear-gradient(to right, #144D53,#117A8B) !important; */
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
-  --nav-color: #f3f3f3;  /* The default color of the main navmenu links */
-  --nav-hover-color: #28747c; /* Applied to main navmenu links when they are hovered over or active */
-  --nav-mobile-background-color: #161616; /* Used as the background color for mobile navigation menu */
-  --nav-dropdown-background-color: #161616; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
-  --nav-dropdown-color: #f3f3f3; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #28747c; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --nav-color: #ffffff;  /* The default color of the main navmenu links */
+  --nav-hover-color: #0062cc; /* Applied to main navmenu links when they are hovered over or active */
+  --nav-mobile-background-color: #262525; /* Used as the background color for mobile navigation menu */
+  --nav-dropdown-background-color: #262525; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
+  --nav-dropdown-color: #ffffff; /* Used for navigation links of the dropdown items in the navigation menu. */
+  --nav-dropdown-hover-color: #0062cc; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
 
 .light-background {
   --background-color: #f9f9f9;
-  --surface-color: #f3f3f3;
+  --surface-color: #ffffff;
 }
 
 .dark-background {
-  --background-color: #161616;
-  --default-color: #f3f3f3;
-  --heading-color: #f3f3f3;
-  --surface-color: #161616;
-  --contrast-color: #f3f3f3;
+  --background-color: #262525;
+  --default-color: #ffffff;
+  --heading-color: #ffffff;
+  --surface-color: #262525;
+  --contrast-color: #ffffff;
 }
 
 /* Smooth scroll */
@@ -149,6 +150,7 @@ h6 {
   padding: 8px 0;
   transition: all 0.5s;
   z-index: 997;
+  
 }
 
 .header .logo {
@@ -170,11 +172,13 @@ h6 {
 .header .btn-getstarted,
 .header .btn-getstarted:focus {
   color: var(--contrast-color);
-  background: var(--accent-color);
+  /* background: var(--accent-color); */
+  background: linear-gradient(to right, #144D53,#0062cc) !important;
   font-size: 15px;
-  padding: 8px 25px;
+  padding: 8px 24px;
   margin: 0 0 0 30px;
   border-radius: 4px;
+  /* opacity: 0.8; */
   transition: 0.3s;
 }
 
@@ -184,6 +188,9 @@ h6 {
   background: color-mix(in srgb, var(--accent-color), transparent 15%);
 }
 
+
+
+
 @media (max-width: 1200px) {
   .header .logo {
     order: 1;
@@ -192,7 +199,7 @@ h6 {
   .header .btn-getstarted {
     order: 2;
     margin: 0 15px 0 0;
-    padding: 6px 15px;
+    padding: 6px 10px;
   }
 
   .header .navmenu {
@@ -201,7 +208,7 @@ h6 {
 }
 
 .scrolled .header {
-  box-shadow: 0px 0 18px rgba(187, 184, 184, 0.1);
+  box-shadow: 0px 0 18px rgba(187, 184, 184, 0.5);
 }
 
 /* Index Page Header
@@ -215,6 +222,8 @@ h6 {
 .index-page.scrolled .header {
   --background-color: #000000;
 }
+
+
 
 /*--------------------------------------------------------------
 # Navigation Menu
@@ -240,10 +249,12 @@ h6 {
   .navmenu a,
   .navmenu a:focus {
     color: var(--nav-color);
-    padding: 24px 12px;
+    opacity: 0.8;
+    /* padding: 24px 12px; orig*/
+padding: 20px 12px;
     font-size: 16px;
     font-family: var(--nav-font);
-    font-weight: 500;
+    font-weight: 500 !important;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -255,18 +266,33 @@ h6 {
   .navmenu a::after {
     content: "";
     display: block;
-    height: 2px;
-   font-weight: lighter;
+    height: 3px;
+   font-weight: bolder !important;
     background-color: var(--nav-hover-color);
+    
     width: 100%;
-    transform: scaleX(0); /* Initially hidden */
-    transform-origin: center; /* Spread from the center */
-    transition: transform 0.5s ease; /* Smooth transition */
+    transform: scaleX(0); 
+    transform-origin: center;
+    transition: transform 0.5s ease; 
     position: absolute;
     bottom: -8px !important;
     left: 0;
-    border-radius: 10px; /* Rounded ends */
+    border-radius: 20px 20px 0 0; 
   }
+  /* .navmenu a::after {
+    content: "";
+    display: block;
+    height: 3px;
+    background: linear-gradient(to bottom, var(--nav-hover-color), transparent);
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.5s ease; 
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    border-radius: 10px 10px 0 0; 
+} */
 
   .navmenu a:hover::after,
   .navmenu .active::after {
@@ -360,8 +386,8 @@ h6 {
 @media (max-width: 1199px) {
 
   /* Hide Login and Signup buttons on mobile */
-  .btn-getstarted1, .lognin-btn {
-    display: none;
+  .btn-hide, .lognin-btn {
+    display: none !important;
   }
   .mobile-nav-toggle {
     color: var(--nav-color);
@@ -776,7 +802,7 @@ h6 {
 
 .page-title {
   color: var(--default-color);
-  background-color: var(--background-color);
+  /* background-color: var(--background-color); */
   position: relative;
 
 }
@@ -784,12 +810,12 @@ h6 {
 
 
 .page-title .heading {
-  padding: 80px 0;
+  padding: 200px 0px;
   border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
 }
 
 .page-title .heading h1 {
-  font-size: 38px;
+  font-size: 56px !important;
   font-weight: 700;
 }
 
@@ -823,8 +849,10 @@ h6 {
 --------------------------------------------------------------*/
 section,
 .section {
-  color: var(--default-color);
-  background-color: var(--background-color);
+  /* color: var(--default-color); */
+  color: rgb(38, 37, 37);
+  /* background-color: var(--background-color); */
+  background-color: #ffffff;
   padding: 60px 0;
   scroll-margin-top: 98px;
   overflow: clip;
@@ -928,16 +956,18 @@ section,
   font-size: 48px;
   font-weight: 700;
   line-height: 56px;
+  color: var(--contrast-color);
 }
 
 .hero p {
-  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  color: color-mix(in srgb, var(--surface-color), transparent 30%);
   margin: 5px 0 30px 0;
   font-size: 20px;
   font-weight: 400;
 }
 
 .hero .btn-get-started {
+  /* text-transform: uppercase; */
   color: var(--contrast-color);
   background: var(--accent-color);
   font-family: var(--heading-font);
@@ -950,7 +980,7 @@ section,
   padding: 8px 40px;
   border-radius: 4px;
   transition: 0.5s;
-  box-shadow: 0 8px 28px rgba(168, 166, 166, 0.5);
+  box-shadow: 0 8px 28px rgba(168, 166, 166, 0.1);
 }
 
 .hero .btn-get-started i {
@@ -962,7 +992,7 @@ section,
 .hero .btn-get-started:hover {
   color: var(--contrast-color);
   background: color-mix(in srgb, var(--accent-color), transparent 15%);
-  box-shadow: 0 8px 8px rgba(168, 166, 166, 0.1);
+  box-shadow:none !important;
 }
 
 .hero .btn-get-started:hover i {
@@ -985,7 +1015,7 @@ section,
   padding: 15px 40px;
   border-radius: 4px;
   transition: 0.5s;
-  box-shadow: 0 8px 8px rgba(168, 166, 166, 0.1);
+  box-shadow: none !important;
 }
 
 .hero .btn-get-started2 i {
@@ -996,127 +1026,11 @@ section,
 .hero .btn-get-started2:hover {
   color: var(--contrast-color);
   background: var(--accent-color);
-  box-shadow: 0 8px 8px rgba(168, 166, 166, 0.1);
+  box-shadow: none !important;
 }
 
 
 /* end watch video btn  */
-
-/* start customize for login btn  */
-/* Login Button Styling */
-.hero .btnlogin {
-  color: var(--contrast-color); /* Use accent color for the text initially */
-  background: transparent; /* No background initially */
-  border: 2px solid var(--accent-color); /* Add an outline with the accent color */
-  font-family: var(--heading-font);
-  font-weight: 500;
-  font-size: 16px;
-  letter-spacing: 1px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 30px;
-  border-radius: 4px;
-  transition: 0.5s;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
-}
-
-.hero .btnlogin i {
-  margin-left: 5px;
-  font-size: 18px;
-  transition: 0.3s;
-}
-
-.hero .btnlogin:hover {
-  color: var(--contrast-color); /* Change text color on hover */
-  background: var(--accent-color); /* Apply the background color on hover */
-  border: 2px solid transparent; /* Remove the border on hover (optional) */
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
-}
-
-.hero .btnlogin:hover i {
-  transform: translateX(5px);
-}
-
-/* Signup Form Styling */
-.signup-form {
-  background-color:#161616; /* White background with slight transparency */
-  padding: 40px; /* Padding around the form */
-  /* border-radius: 10px;  */
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-  width: 100%; /* Full width on smaller screens */
-  max-width: 500px; /* Limiting the form width */
-  margin: auto; /* Center the form */
-}
-
-.signup-form label {
-  margin-bottom: 12px;
-  display: block;
-  color: #f3f3f3; /* Darker text for better readability */
-}
-
-.signup-form .form-control {
-  padding: 12px 15px;
-  /* border: 1px solid #ddd; */
-  border-radius: 6px;
-  margin-bottom: 20px;
-  font-size: 16px;
-  color:#f3f3f3;
-  transition: border-color 0.3s ease;
-  background-color: var(--background-color);
-}
-
-.signup-form .form-control:focus {
-  border-color: var(--nav-hover-color); /* Highlight the field when focused */
-  outline: none;
-  box-shadow: var(--nav-dropdown-hover-color); 
-  background-color: var(--background-color);/* Soft shadow on focus */
-}
-
-.signup-form .btn-get-started {
-  background-color: var(--accent-color); /* Primary blue color */
-  color: #fff;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 6px;
-  font-size: 18px;
-  cursor: pointer;
-  width: 100%; /* Make the button full-width */
-  transition: background-color 0.3s ease;
-}
-
-.signup-form .btn-get-started:hover {
-  background-color: var(--accent-color); /* Darken on hover */
-}
-
-/* Ensure autofilled input fields maintain dark background */
-.signup-form .form-control:-webkit-autofill {
-  background-color: var(--background-color)!important;
-  color: var(--default-color) !important;
-  -webkit-box-shadow: 0 0 0px 1000px var(--background-color) inset;
-  transition: background-color 5000s ease-in-out 0s;  
-}
-
-.signup-form .form-control:-webkit-autofill:focus {
-  background-color: var(--background-color) !important;
-  -webkit-box-shadow: 0 0 0px 1000px var(--background-color) inset;
-  color: var(--default-color) !important;
-}
-
-.signup-form .form-control:-webkit-autofill:hover {
-  background-color: var(--background-color) !important;
-  -webkit-box-shadow: 0 0 0px 1000px var(--background-color) inset;
-  color: var(--default-color) !important;
-}
-
-
-@media (max-width: 768px) {
-  .signup-form {
-    padding: 20px;
-    max-width: 100%;
-  }
-}
-
 
 /* end custo mize fr loig==g btn  */
 
@@ -1262,55 +1176,6 @@ BTN GCONTRIBUTE CUSTOMIZED BY ME
 .about .content .btn-read-more:hover i {
   transform: translateX(5px);
 }
-
-/* SIGN UP SECTION  */
-/* Style the form and section */
-.signup .content {
-  background-color: color-mix(in srgb, var(--accent-color), transparent 95%);
-  padding: 40px;
-}
-
-.signup .content h3 {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--accent-color);
-  text-transform: uppercase;
-}
-
-.signup .content h2 {
-  font-size: 24px;
-  font-weight: 700;
-}
-
-.signup .content p {
-  margin: 15px 0 30px 0;
-  line-height: 24px;
-}
-
-.signup .form-control {
-  border-radius: 4px;
-  padding: 10px;
-  box-shadow: none;
-}
-
-.signup .btn {
-  background-color: var(--accent-color);
-  border: none;
-  padding: 12px 20px;
-  font-size: 16px;
-  border-radius: 4px;
-}
-
-.signup .btn:hover {
-  background-color: darken(var(--accent-color), 10%);
-}
-
-.bg-light {
-  background-color: #f8f9fa !important;
-}
-
-
-/* END SIGNUP */
 
 /*--------------------------------------------------------------
 # Values Section
@@ -2003,10 +1868,10 @@ BTN GCONTRIBUTE CUSTOMIZED BY ME
 # Team Section
 --------------------------------------------------------------*/
 .team .team-member {
-  box-shadow: 0px 0 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0 30px rgba(0, 0, 0, 0.3);
   overflow: hidden;
   text-align: center;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   transition: 0.3s;
 }
 
@@ -2022,7 +1887,7 @@ BTN GCONTRIBUTE CUSTOMIZED BY ME
   right: -1px;
   bottom: -1px;
   height: 100%;
-  background-color: var(--surface-color);
+  background-color: var(--contrast-color);
   -webkit-mask: url("../img/team-shape.svg") no-repeat center bottom;
   mask: url("../img/team-shape.svg") no-repeat center bottom;
   -webkit-mask-size: contain;

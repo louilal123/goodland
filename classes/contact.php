@@ -54,7 +54,7 @@ if (!$valid) {
         'subject' => $subject,
         'message' => $message
     ];
-    header('Location: ../index.php#contact');
+    header('Location: ../contactus.php#contact');
     exit;
 }
 
@@ -62,12 +62,12 @@ try {
     $main->save_contact_message($name, $email, $subject, $message);
     $_SESSION['status'] = "Your message has been sent!";
     $_SESSION['status_icon'] = "success";
-    header("Location: ../index.php#contact");
+    header("Location: ../contactus.php#contact");
 exit;
 } catch (Exception $e) {
     $_SESSION['status'] = "Message could not be sent. Database error: {$e->getMessage()}";
     $_SESSION['status_icon'] = "error";
-    header("Location: ../index.php#contact");
+    header("Location: ../contactus.php#contact");
 exit;
 }
 

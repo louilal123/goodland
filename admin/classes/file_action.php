@@ -19,38 +19,28 @@ if (isset($_POST['file_id'])) {
         }
         header('Location: ../pending_files.php');
         exit();
-    } elseif (isset($_POST['declineBtn'])) {
-        $result = $mainClass->declineFile($file_id, $remarks);
+    // } elseif (isset($_POST['declineBtn'])) {
+    //     $result = $mainClass->declineFile($file_id, $remarks);
+    //     if ($result) {
+    //         $_SESSION['status'] = "File declined successfully";
+    //         $_SESSION['status_icon'] = "success";
+    //     } else {
+    //         $_SESSION['status'] = "Error declining file";
+    //         $_SESSION['status_icon'] = "error";
+    //     }
+    //     header('Location: ../pending_files.php');
+    //     exit();
+  
+    } elseif (isset($_POST['recycleBtn'])) {
+        $result = $mainClass->recycleFile($file_id);
         if ($result) {
-            $_SESSION['status'] = "File declined successfully";
-            $_SESSION['status_icon'] = "success";
-        } else {
-            $_SESSION['status'] = "Error declining file";
-            $_SESSION['status_icon'] = "error";
-        }
-        header('Location: ../pending_files.php');
-        exit();
-    } elseif (isset($_POST['addToPendingBtn'])) {
-        $result = $mainClass->addToPending($file_id, $remarks);
-        if ($result) {
-            $_SESSION['status'] = "File moved back to pending successfully";
+            $_SESSION['status'] = "File moved to archives successfully. ";
             $_SESSION['status_icon'] = "success";
         } else {
             $_SESSION['status'] = "Error moving the file";
             $_SESSION['status_icon'] = "error";
         }
-        header('Location: ../approved_files.php');
-        exit();
-    } elseif (isset($_POST['recycleBtn'])) {
-        $result = $mainClass->recycleFile($file_id);
-        if ($result) {
-            $_SESSION['status'] = "Declined file recycled successfully";
-            $_SESSION['status_icon'] = "success";
-        } else {
-            $_SESSION['status'] = "Error recycling the file";
-            $_SESSION['status_icon'] = "error";
-        }
-        header('Location: ../declined_files.php');
+        header('Location: ../pending_files.php');
         exit();
     } elseif (isset($_POST['restoreBtn'])) {
         $result = $mainClass->restoreFile($file_id);

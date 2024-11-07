@@ -1,5 +1,0 @@
-.main-blur {
-    backdrop-filter: blur(5px);
-    background: rgba(108, 117, 125, 0.1); 
-    transition: none !important;
-}

@@ -1,27 +1,22 @@
 <?php
-
+// require_once('geoplugin/geoplugin.class.php');
 require_once __DIR__ . '/../admin/classes/Main_class.php';
 
 $mainClass = new Main_class();
 
-// $userId = $_SESSION['user_id'];
+// user tracking 
+$mainClass->trackVisitor();
+//end
+$projects = $mainClass->getAllPublishedProjects(); 
 
-// Get the file counts
-// $fileCounts = $mainClass->count_user_files($userId);
-
-
-// $members = $mainClass->get_all_members();
-// $documents = $mainClass->fetchApprovedDocuments();
-// $images = $mainClass->fetchApprovedImages();
-// $arts = $mainClass->fetchApprovedArts();
-// $maps = $mainClass->fetchApprovedMaps();
-// $audio = $mainClass->fetchApprovedAudio();
-
-// Track the visitor
-// $mainClass->trackVisitor();
-
-// $countries = $mainClass->get_countries();
-
+$approvedFiles = $mainClass->getPublishedFiles();
+// $catchments = $mainClass->getAllCatchments();
+$monthlyData = $mainClass->getMonthlyData();
+$dailyData = $mainClass->getDailyData();
+$hourlyData = $mainClass->getHourlyData();
+// $scheduledEvents = $mainClass->getScheduledEvents();
+// $ongoingEvents = $mainClass->getOngoingEvents();
+// $finishedEvents = $mainClass->getFinishedEvents();
 
 ?>
 

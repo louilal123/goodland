@@ -76,13 +76,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <?php if (empty($declined_files)): ?>
-                                            <tr>
-                                                <td colspan="8" class="text-center">
-                                                    No records to show.
-                                                </td>
-                                            </tr>
-                                        <?php else: ?>
+                                       
                                             <?php foreach ($declined_files as $file): ?>
                                             <tr>
                                                 <td><?php echo htmlspecialchars($file['id']); ?></td>
@@ -92,7 +86,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                                                 <td><?php echo htmlspecialchars($file['fullname']); ?></td>
                                                 <td><?php echo date("M d, Y h:i A", strtotime($file['upload_date'])); ?></td>
                                                 <td>
-                                                    <a href="../uploads/<?php echo htmlspecialchars($file['file_path']); ?>" class="btn btn-info btn-sm viewBtn ml-1" name="viewPdf">
+                                                    <a href="../contributor/uploads/<?php echo htmlspecialchars($file['file_path']); ?>" class="btn btn-info btn-sm viewBtn ml-1" name="viewPdf">
                                                         <i class="bi bi-search"></i> View
                                                     </a>
                                                     <button class="btn btn-dark btn-sm declineBtn ml-1"
@@ -110,7 +104,6 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                                             </tr>
                                             <?php endforeach; ?>
                                             
-                                            <?php endif; ?>
                                         </tbody>
                                     </table>
                                 </div>

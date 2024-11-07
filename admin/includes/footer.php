@@ -26,7 +26,7 @@
                 });
             }
         });
-    </script>> <!--end::OverlayScrollbars Configure--> <!--end::Script-->
+    </script> <!--end::OverlayScrollbars Configure--> <!--end::Script-->
     
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
@@ -72,30 +72,27 @@
         });
     </script>
      <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
-     <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-import { Input, Ripple, initMDB } from "mdb-ui-kit";
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation');
 
-initMDB({ Input, Ripple });
+    forms.forEach((form) => {
+        form.addEventListener('submit', (event) => {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
 
-(() => {
-  'use strict';
+            // Only add Bootstrap's validation class if custom validation passed
+            if (!form.classList.contains('was-validated')) {
+                form.classList.add('was-validated');
+            }
+        }, false);
+    });
+});
 
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  const forms = document.querySelectorAll('.needs-validation');
-
-  // Loop over them and prevent submission
-  Array.prototype.slice.call(forms).forEach((form) => {
-    form.addEventListener('submit', (event) => {
-      if (!form.checkValidity()) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-      form.classList.add('was-validated');
-    }, false);
-  });
-})();
-   </script>
+    </script>
 <!-- ajax codes  for viwing modals etc autopopulate-->
 <script src="dist\js\customajax.js"></script>
 
@@ -195,7 +192,7 @@ import { Modal, Ripple, initMDB } from "mdb-ui-kit";
 initMDB({ Modal, Ripple });
 </script>
     
-<script
+<!-- <script
     disable-devtool-auto
     src='https://cdn.jsdelivr.net/npm/disable-devtool'
     md5='xxx'
@@ -209,5 +206,5 @@ initMDB({ Modal, Ripple });
     disable-copy='true'
     disable-cut='true'
     disable-paste='true'
-></script>
+></script> -->
 

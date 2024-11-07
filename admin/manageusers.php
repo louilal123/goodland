@@ -26,7 +26,7 @@
                                           <i class="fas fa-trash"></i> Delete All
                                       </button>
                                 </div>
-                                    <table id="myTable" class="table-responsive table text-sm table-hover table-striped w-100">
+                                    <table id="myTable" class=" table table-responsive table text-sm table-hover table-striped w-100">
                                         <thead class="table-secondary fw-bold">
                                             <tr>
                                             <th style="font-weight: bold;">User ID</th>
