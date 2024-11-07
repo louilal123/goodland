@@ -30,7 +30,7 @@
         <div class="row d-flex justify-content-center text-center">
           <div class="col-lg-8">
             
-            <h1 class="text-warning">Library</h1>
+            <h1 class="text-warning">Archives</h1>
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@
       <div class="container">
         <ol>
           <li><a href="index.html">Home</a></li>
-          <li class="current">Library</li>
+          <li class="current">Archives</li>
         </ol>
       </div>
     </nav>

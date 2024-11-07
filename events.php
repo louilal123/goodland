@@ -34,7 +34,7 @@ require_once "classes/user_view.php";
         <div class="container">
           <ol>
             <li><a href="index.html">Home</a></li>
-            <li class="current">Contact Us</li>
+            <li class="current">Events</li>
           </ol>
         </div>
       </nav>
