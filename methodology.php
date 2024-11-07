@@ -3,6 +3,7 @@
 
 <head>
 <?php include "includes/header.php"; ?>
+<title>Methodology</title>
 </head>
 
 <body class="blog-page">

@@ -6,6 +6,7 @@ require_once "classes/user_view.php";
 
 <head>
 <?php include "includes/header.php"; ?>
+<title>Goodland - Events</title>
 </head>
 <style>
   .custom-btn{
@@ -24,7 +25,7 @@ require_once "classes/user_view.php";
           <div class="row d-flex justify-content-center text-center">
             <div class="col-lg-8">
               <br><br>
-              <h1 class="text-warning">Events</h1>
+              <h1 class="text-warning ">Events</h1>
               <!-- <p class="mb-0"></p> -->
             </div>
           </div>
@@ -41,8 +42,8 @@ require_once "classes/user_view.php";
       
     </div><!-- End Page Title -->
 
-    <div class="container">
-    <h2 class="text-warning">Incoming Events</h2>
+    <div class="container ">
+    <h2 class="">Incoming Events</h2>
     <?php if (!empty($scheduledEvents)): ?>
         <?php foreach ($scheduledEvents as $event): ?>
             <div class="event-card">
@@ -56,7 +57,7 @@ require_once "classes/user_view.php";
         <p>No incoming events.</p>
     <?php endif; ?>
 
-    <h2 class="text-warning">Ongoing Events</h2>
+    <h2 class="">Ongoing Events</h2>
     <?php if (!empty($ongoingEvents)): ?>
         <?php foreach ($ongoingEvents as $event): ?>
             <div class="event-card">
@@ -71,7 +72,7 @@ require_once "classes/user_view.php";
         <p>No ongoing events.</p>
     <?php endif; ?>
 
-    <h2 class="text-warning">Finished Events</h2>
+    <h2 class="">Finished Events</h2>
     <?php if (!empty($finishedEvents)): ?>
         <?php foreach ($finishedEvents as $event): ?>
             <div class="event-card">

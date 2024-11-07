@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <?php include "includes/header.php"?>
+<title>Welcome to Goodland</title>
 </head>
 
 <body class="index-page">
@@ -104,12 +105,7 @@
 
       </div>
 
-    </section><!-- /Values Section -->
-
-        <!-- Clients Section -->
-    
-
-  <!-- </main> -->
+    </section>
 
 <!-- End of Cookie Banner -->
   <?php include "includes/footer.php"?>

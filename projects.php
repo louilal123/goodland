@@ -1,11 +1,10 @@
-<?php
 
-require_once "classes/config.php";?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 <?php include "includes/header.php"; ?>
+<title>Projects</title>
 </head>
 <style>
   .custom-btn{

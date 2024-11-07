@@ -6,6 +6,7 @@ require_once "classes/config.php";
 
 <head>
 <?php include "includes/header.php"; ?>
+<title>Contact Us</title>
 </head>
 <style>
   .custom-btn{
