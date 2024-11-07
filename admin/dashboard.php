@@ -167,7 +167,7 @@
                             <div class="small-box">
                                 <div class="inner ml-2">
                                     <h3> <?php echo $count_files ?? '0'; ?></h3>
-                                    <p>Total Files</p>
+                                    <p>Archive Files</p>
                                 </div> 
                                 <div class="small-box-icon text-primary"><i class="fas fa-folder"></i></div> 
                             </div> 

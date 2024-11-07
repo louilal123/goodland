@@ -65,7 +65,7 @@
                             <!-- <li class="nav-header ">Manage</li> -->
                         <li class="nav-item pb-1"> <a href="#" class="nav-link  "> <i class="nav-icon ml-2 "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FAF9F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></i>
                                 <p>
-                                    Library Files
+                                    Archive Files
                                     <i class="nav-arrow fas fa-chevron-right"></i>
                                 </p>
                             </a>
