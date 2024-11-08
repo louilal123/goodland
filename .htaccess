@@ -1,12 +1,11 @@
 RewriteEngine On
 
-# Redirect all requests to non-www version of the site
-RewriteCond %{HTTP_HOST} ^www\.goodlandv2\.com [NC]
+# Redirect to the domain itself without www (if needed)
+RewriteCond %{HTTP_HOST} ^goodlandv2\.com$ [NC]
 RewriteRule ^(.*)$ http://goodlandv2.com/$1 [L,R=301]
 
-# Remove .php extension from URLs (only applies to files without an extension)
+# Remove .php extension from URLs
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
 
 # Custom 404 and 403 error handling (internal redirect)
