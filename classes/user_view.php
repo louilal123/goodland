@@ -11,9 +11,9 @@ $projects = $mainClass->getAllPublishedProjects();
 
 $approvedFiles = $mainClass->getPublishedFiles();
 // $catchments = $mainClass->getAllCatchments();
-$monthlyData = $mainClass->getMonthlyData();
-$dailyData = $mainClass->getDailyData();
-$hourlyData = $mainClass->getHourlyData();
+// $monthlyData = $mainClass->getMonthlyData();
+// $dailyData = $mainClass->getDailyData();
+// $hourlyData = $mainClass->getHourlyData();
 // $scheduledEvents = $mainClass->getScheduledEvents();
 // $ongoingEvents = $mainClass->getOngoingEvents();
 // $finishedEvents = $mainClass->getFinishedEvents();
