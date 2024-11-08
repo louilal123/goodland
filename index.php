@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <?php include "includes/header.php"?>
-<title>Welcome to Goodland</title>
+
 </head>
 
 <body class="index-page">
@@ -19,7 +19,7 @@
       Your browser does not support the video tag.
     </video>
   </div>
-  
+
   
   <div class="container">
     <div class="row gy-4">
