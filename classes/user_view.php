@@ -5,7 +5,7 @@ require_once __DIR__ . '/../admin/classes/Main_class.php';
 $mainClass = new Main_class();
 
 // user tracking 
-$mainClass->trackVisitor();
+// $mainClass->trackVisitor();
 //end
 $projects = $mainClass->getAllPublishedProjects(); 
 
