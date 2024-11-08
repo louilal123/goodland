@@ -67,17 +67,20 @@ require_once "classes/config.php";
               <div class="col-md-6">
                 <div class="info-item" data-aos="fade" data-aos-delay="200">
                   <i class="bi bi-geo-alt"></i>
-                  <h3>Purok Brgy Mambacayao</h3>
-                  <p>A108 Adam Street</p>
-                  <p>Bantayan Island Philipppines</p>
+                  
+
+
+                  <h3>Sitio 37st, Atop Atop</h3>
+                  <p>Bantayan Island, Cebu</p>
+                  <p> Philippines</p>
                 </div>
               </div><!-- End Info Item -->
 
               <div class="col-md-6">
                 <div class="info-item" data-aos="fade" data-aos-delay="300">
-                  <i class="bi bi-telephone"></i>
-                  <h3>Call Us</h3>
-                  <p>+1 5589 55488 55</p>
+                  <i class="bi bi-facebook"></i>
+                  <h3>Social Media</h3>
+                  <p>https://www.facebook.com/goodland.philippines</p>
                   <p>+1 6678 254445 41</p>
                 </div>
               </div><!-- End Info Item -->
@@ -86,8 +89,8 @@ require_once "classes/config.php";
                 <div class="info-item" data-aos="fade" data-aos-delay="400">
                   <i class="bi bi-envelope"></i>
                   <h3>Email Us</h3>
-                  <p>info@goodlandv2@gmail.com</p>
-                  <p>contact@example.com</p>
+                  <p>goodland.philippines@gmail.com</p>
+                  <!-- <p>contact@example.com</p> -->
                 </div>
               </div><!-- End Info Item -->
               <div class="col-md-6">

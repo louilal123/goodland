@@ -191,7 +191,7 @@ window.cb_declineCookies = () => hideCookieBanner("decline"); -->
 
 </script>
 
-
+<!-- 
 <script
     disable-devtool-auto
     src='https://cdn.jsdelivr.net/npm/disable-devtool'
@@ -206,4 +206,4 @@ window.cb_declineCookies = () => hideCookieBanner("decline"); -->
     disable-copy='true'
     disable-cut='true'
     disable-paste='true'
-></script>
+></script> -->
