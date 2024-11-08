@@ -4,7 +4,7 @@
 
 <head>
 <?php include "includes/header.php"; ?>
-<title>Projects</title>
+
 </head>
 <style>
   .custom-btn{
