@@ -43,18 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $mail->isHTML(true); // Enable HTML if your mail body is HTML-formatted
 
     $mail->Body = "
-    <html>
-        <body style='font-family: Arial, sans-serif;'>
-            <div style='font-size: 18px; background-color: #e0f7fa;  color: #333333; padding: 20px; '>
-                <p>Hello,</p>
-                <p style='font-size: 20px; color: #0062cc; font-weight: bold;'>You requested a copy of the file titled: 
-                <strong>'$file_title'</strong> from our platform.</p>
-                <p style='font-size: 16px;'>Below is the attached file. You can download it at your convenience.</p>
-                <p style='font-size: 16px;'>Thank you for using our service!</p>
-                <p style='font-size: 14px; color: #888888;'>Best regards, <br>GOODLAND.PH</p>
-            </div>
-        </body>
-    </html>
+   <p> hi</p>
 ";
 
 
