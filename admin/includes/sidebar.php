@@ -59,39 +59,17 @@
                             </a> </li>
                             <li class="nav-item pb-1"> <a href="manage_water_catchments"
                              class="nav-link   <?= $page == 'manage_water_catchments.php' ? '  bg-primary text-white  ':'' ?>"> 
-                           <i class="nav-icon ml-2"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FAF9F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg></i>    <p class="">Water Readings</p>
+                           <i class="nav-icon ml-2"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="#FAF9F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/>
+                            <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg></i>    <p class="">Water Level</p>
                             </a> </li>
                         
-                            <!-- <li class="nav-header ">Manage</li> -->
-                        <li class="nav-item pb-1"> <a href="#" class="nav-link  "> <i class="nav-icon ml-2 "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FAF9F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></i>
+                        <li class="nav-item pb-1"> <a href="all_files" class="nav-link  <?= $page == 'all_files.php' ? '  bg-primary text-white  ':'' ?>"> <i class="nav-icon ml-2 "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FAF9F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></i>
                                 <p>
                                     Archive Files
-                                    <i class="nav-arrow fas fa-chevron-right"></i>
+                                    
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                               
-                                <li class="nav-item"> <a href="all_files" class="nav-link   <?= $page == 'all_files.php' ? '
-                                  bg-primary text-white  ':'' ?>"> 
-                                    <!-- <i class="nav-icon ml-2 fas fa-hourglass"></i> -->
-                                        <p>All Files</p>
-                                    </a> </li>
-                             
-                                <li class="nav-item"> <a href="archived_files.php" class="nav-link    <?= $page == 'archived_files.php' ? '  bg-primary text-white  ':'' ?>"> 
-                                    <!-- <i class="nav-icon ml-2 fas fa-book"></i> -->
-                                        <p>Published Files</p>
-                                </a> </li>
-                                <li class="nav-item"> <a href="pending_files" class="nav-link   <?= $page == 'pending_files.php' ? '
-                                  bg-primary text-white  ':'' ?>"> 
-                                    <!-- <i class="nav-icon ml-2 fas fa-hourglass"></i> -->
-                                        <p>Unpublished Files</p>
-                                    </a> </li>
-                             
-                                <li class="nav-item"> <a href="archived_files.php" class="nav-link    <?= $page == 'archived_files.php' ? '  bg-primary text-white  ':'' ?>"> 
-                                    <!-- <i class="nav-icon ml-2 fas fa-book"></i> -->
-                                        <p>Archived Files</p>
-                                </a> </li>
-                            </ul>
                         </li>
                         
                         <li class="nav-item pb-1"> <a href="file_requests" class="nav-link   <?= $page == 'file_requests.php' ? '  bg-primary text-white  ':'' ?>"> 
@@ -102,35 +80,14 @@
                             </svg></i>
                                 <p class="">File Requests</p>
                             </a> </li>
-                        <li class="nav-item pb-1"> <a href="#" class="nav-link "> 
+                        <li class="nav-item pb-1"> <a href="projects" class="nav-link  <?= $page == 'projects.php' ? ' bg-primary text-white  ':'' ?>"> 
                             <i class="nav-icon ml-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FAF9F6"
                              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
                              <line x1="12" y1="11" x2="12" y2="17"></line><line x1="9" y1="14" x2="15" y2="14"></line></svg></i> <p class="">Projects
-                                <i class="nav-arrow fas fa-chevron-right"></i>
+                               
                                 </p>
                             </a> 
-                            <ul class="nav nav-treeview ">
-                            <li class="nav-item"> <a href="projects" class="nav-link   <?= $page == '.php' ? ' bg-primary text-white  ':'' ?>"> 
-                                   <!-- <i class="nav-icon ml-2 fas fa-hourglass"></i> -->
-                                       <p>All Projects</p>
-                                   </a> </li>
-                                   <li class="nav-item"> <a href="published_projects" class="nav-link   <?= $page == 'published_projects.php' ? '  bg-primary text-white  ':'' ?>"> 
-                                   <!-- <i class="nav-icon ml-2 fas fa-circle"></i> -->
-                                       <p>Published</p>
-                                   </a> </li>
-                                   <li class="nav-item"> <a href="unpublished_projects" class="nav-link   <?= $page == 'unpublished_projects.php' ? '  bg-primary text-white  ':'' ?>"> 
-                                   <!-- <i class="nav-icon ml-2 fas fa-circle"></i> -->
-                                       <p>Unpublished</p>
-                                   </a> </li>
-                               
-                               <li class="nav-item"> <a href="archived_projects" class="nav-link   <?= $page == 'archived_projects.php' ? '  bg-primary text-white  ':'' ?>"> 
-                                   <!-- <i class="nav-icon ml-2 fas fa-circle"></i> -->
-                                       <p>Archived</p>
-                                   </a> </li>
-                               
-                           </ul>
-
                         </li>
                         
                             <li class="nav-item pb-1"> <a href="events" class="nav-link   <?= $page == 'events.php' ? '  bg-primary text-white  ':'' ?>"> 
@@ -145,10 +102,7 @@
                             <i class="nav-icon ml-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FAF9F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></i>
                                 <p class="">Messages</p>
                             </a> </li>
-                            <li class="nav-item pb-1"> <a href="subscribers" class="nav-link   <?= $page == 'subscribers.php' ? '  bg-primary text-white  ':'' ?>"> 
-                            <i class="nav-icon ml-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></i>
-                                <p class="">Subscriptions</p>
-                            </a> </li>
+                          
                             <li class="nav-item pb-1"> <a href="#" class="nav-link "> 
                             <i class="nav-icon ml-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FAF9F6" 
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/>

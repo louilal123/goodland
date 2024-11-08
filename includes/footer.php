@@ -162,12 +162,8 @@ initMDB({ Input, Ripple });
     let cookieBanner = document.getElementById("cb-cookie-banner");
     cookieBanner.style.display = "block";
     cookieBanner.classList.add("slide-in");
-    document.getElementById("header").style.pointerEvents = "none"; 
-    document.querySelector(".section").style.pointerEvents = "none"; 
-    document.getElementById("footer").style.pointerEvents = "none"; 
-    document.getElementById("hero").style.pointerEvents = "none"; 
-    document.getElementById("scroll-top").style.display = "none";
-    document.body.style.overflow = "hidden";
+   
+   
 
 }
 

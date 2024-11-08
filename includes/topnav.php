@@ -112,7 +112,7 @@
         <ul>
           <li><a href="index"  class=" <?= $page == 'index.php' ? 'active':'' ?>">HOME<br></a></li>
           <li><a href="about" class=" <?= $page == 'about.php' ? 'active':'' ?>">ABOUT US</a></li>
-          <li><a href="projects" class=" <?= $page == 'projects.php' ? 'active':'' ?>">PROJECTS</a></li>
+          <li><a href="project" class=" <?= $page == 'project.php' ? 'active':'' ?>">PROJECTS</a></li>
           <li><a href="methodology" class=" <?= $page == 'methodology.php' ? 'active':'' ?>">METHODOLOGY</a></li>
          
         <li><a href="catchments_locations" class=" <?= $page == 'catchments_locations.php' ? 'active':'' ?>" >WATER DATA</a> </li>

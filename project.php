@@ -1,4 +1,4 @@
-
+<?php include "classes/config.php";?>
 <!DOCTYPE html>
 <html lang="en">
 
