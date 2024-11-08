@@ -18,4 +18,3 @@ function encryptor($action, $string) {
 
     return $output;
 }
-?>
