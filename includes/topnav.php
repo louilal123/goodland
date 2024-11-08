@@ -1,4 +1,4 @@
-<?php include "classes/user_view.php";?>
+<?php //include "classes/user_view.php";?>
 <?php// include "classes/visitor_logs.php";?>
 <?php $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/")+1); ?>
 <style>
