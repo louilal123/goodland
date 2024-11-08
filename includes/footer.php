@@ -9,8 +9,8 @@
             <span class="sitename">GOODLand</span>
           </a>
           <div class="footer-contact pt-3">
-            <p>Sitio 37, Example Brgy.</p>
-            <p>Bantayan Island, Philippines</p>
+            <p>Sitio 37st, Atop Atop</p>
+            <p>Bantayan Island, Cebu, Philippines</p>
             <p class="mt-3"><strong>Phone:</strong> <span>09451295199</span></p>
             <p><strong>Email:</strong> <span>goodland.phillipines@gmail.com</span></p>
           </div>
@@ -29,8 +29,8 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4 style="color: #000 !important;">.</h4>
           <ul>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Stories</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Story Maps</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Water Data</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Events</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Archives</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#contact">Contact Us</a></li>
           </ul>
@@ -157,7 +157,7 @@ initMDB({ Input, Ripple });
 })();
    </script>
 
-<script>
+<!-- <script>
   function showCookieBanner() {
     let cookieBanner = document.getElementById("cb-cookie-banner");
     cookieBanner.style.display = "block";
@@ -187,7 +187,7 @@ function initializeCookieBanner() {
 window.onload = initializeCookieBanner();
 window.cb_acceptAllCookies = () => hideCookieBanner("all");
 window.cb_acceptNecessaryCookies = () => hideCookieBanner("necessary");
-window.cb_declineCookies = () => hideCookieBanner("decline");
+window.cb_declineCookies = () => hideCookieBanner("decline"); -->
 
 </script>
 
