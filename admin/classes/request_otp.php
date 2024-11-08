@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($otp) {
         $mail = require __DIR__ . "/../mailer.php";
-        $mail->setFrom("goodland.phillippines@example.com", "GOODLAND.PH");
+        $mail->setFrom("rubinlouie41@gmail.com", "GOODLAND.PH");
         $mail->addAddress($email);
         $mail->Subject = "Password Reset OTP";
         $mail->Body = 
