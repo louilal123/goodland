@@ -155,41 +155,7 @@ initMDB({ Input, Ripple });
     }, false);
   });
 })();
-   </script>
-
-<!-- <script>
-  function showCookieBanner() {
-    let cookieBanner = document.getElementById("cb-cookie-banner");
-    cookieBanner.style.display = "block";
-    cookieBanner.classList.add("slide-in");
-   
-   
-
-}
-
-function hideCookieBanner(choice) {
-    localStorage.setItem("cb_isCookieAccepted", choice);
-    let cookieBanner = document.getElementById("cb-cookie-banner");
-    cookieBanner.style.display = "none";
-}
-
-function initializeCookieBanner() {
-    let isCookieAccepted = localStorage.getItem("cb_isCookieAccepted");
-    if (isCookieAccepted === null) {
-        localStorage.setItem("cb_isCookieAccepted", "no");
-        setTimeout(showCookieBanner, 2000);
-    }
-    if (isCookieAccepted === "no") {
-        setTimeout(showCookieBanner, 2000);
-    }
-}
-
-window.onload = initializeCookieBanner();
-window.cb_acceptAllCookies = () => hideCookieBanner("all");
-window.cb_acceptNecessaryCookies = () => hideCookieBanner("necessary");
-window.cb_declineCookies = () => hideCookieBanner("decline"); -->
-
-</script>
+  
 
 <!-- 
 <script
