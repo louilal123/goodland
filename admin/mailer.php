@@ -8,6 +8,7 @@ require __DIR__ . "/vendor/autoload.php";
 
 $mail = new PHPMailer(true);
 
+
 try {
     //Server settings
     // $mail->SMTPDebug = SMTP::DEBUG_SERVER;  // Enable to see the debug output
