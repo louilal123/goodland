@@ -105,8 +105,7 @@
   <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <!-- <script src="mdbfolder\mdb.umd.min.js"></script> -->
 
@@ -155,9 +154,43 @@ initMDB({ Input, Ripple });
     }, false);
   });
 })();
-  
+   </script>
 
-<!-- 
+<script>
+  function showCookieBanner() {
+    let cookieBanner = document.getElementById("cb-cookie-banner");
+    cookieBanner.style.display = "block";
+    cookieBanner.classList.add("slide-in");
+   
+   
+
+}
+
+function hideCookieBanner(choice) {
+    localStorage.setItem("cb_isCookieAccepted", choice);
+    let cookieBanner = document.getElementById("cb-cookie-banner");
+    cookieBanner.style.display = "none";
+}
+
+function initializeCookieBanner() {
+    let isCookieAccepted = localStorage.getItem("cb_isCookieAccepted");
+    if (isCookieAccepted === null) {
+        localStorage.setItem("cb_isCookieAccepted", "no");
+        setTimeout(showCookieBanner, 2000);
+    }
+    if (isCookieAccepted === "no") {
+        setTimeout(showCookieBanner, 2000);
+    }
+}
+
+window.onload = initializeCookieBanner();
+window.cb_acceptAllCookies = () => hideCookieBanner("all");
+window.cb_acceptNecessaryCookies = () => hideCookieBanner("necessary");
+window.cb_declineCookies = () => hideCookieBanner("decline");
+
+</script>
+
+
 <script
     disable-devtool-auto
     src='https://cdn.jsdelivr.net/npm/disable-devtool'
@@ -172,4 +205,4 @@ initMDB({ Input, Ripple });
     disable-copy='true'
     disable-cut='true'
     disable-paste='true'
-></script> -->
+></script>
