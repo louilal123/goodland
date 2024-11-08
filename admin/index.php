@@ -88,7 +88,7 @@ unset($_SESSION['error_message']);
                             </form>
 
                             <div class="d-flex justify-content-around align-items-center mt-4">
-                                <a href="../index">Go To Website</a>
+                                <a href="../index">Return To Website</a>
                             </div>
                         </div>
                     </div>
