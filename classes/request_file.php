@@ -5,8 +5,10 @@ require_once __DIR__ . '/../admin/classes/Main_class.php';
 $mainClass = new Main_class();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Retrieve visitor_id from session
-    $visitor_id = $_SESSION['visitor_id'] ?? '1';
+  
+    if (!isset($_SESSION['visitor_id'])) {
+        $_SESSION['visitor_id'] = 1;  
+    }
     
     // Get form inputs
     $email = trim($_POST['email']);
@@ -35,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Initialize PHPMailer
     $mail = require __DIR__ . "/../admin/mailer.php";
-    $mail->setFrom("your_email@example.com", "GOODLAND.PH");
+    $mail->setFrom("rubinlouie41@gmail.com", "GOODLAND.PH");
     $mail->addAddress($email);
     $mail->Subject = "Requested File Copy";
     $mail->isHTML(true); // Enable HTML if your mail body is HTML-formatted
