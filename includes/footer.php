@@ -118,8 +118,8 @@
             Swal.fire({
                 icon: "<?php echo $_SESSION['status_icon']; ?>", // e.g., 'warning', 'error', 'success'
                 title: "<?php echo $_SESSION['status']; ?>",
-                color: 'white',  
-                background: '#161616',
+                color: '#0062cc',  
+                background: '#fff',
                 confirmButtonColor: "#0062cc",  // The message (like 'Account not activated')
                 confirmButtonText: "Ok"
             });
