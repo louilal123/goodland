@@ -50,7 +50,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                                                 <th>Title</th>
                                                 <th>Image</th>
                                                 <th>File Path</th>
-                                                <th>Uploaded By</th>
+                                                <th>Status</th>
                                                 <th width="15%">Upload Date</th>
                                                 <th>Action</th>
                                             </tr>
@@ -69,11 +69,11 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                                                     <td><?php echo htmlspecialchars($file['title']); ?></td>
                                                     <td><img src="<?php echo htmlspecialchars($file['cover_path']); ?>" style="width: 60px; height: 35px;"></td>
                                                     <td><?php echo htmlspecialchars($file['file_path']); ?></td>
-                                                    <?php if ($file['status'] == 'Active'): ?>
+                                                    <td><?php if ($file['status'] == 'Active'): ?>
                                 <span class="badge bg-success">Published</span>
                             <?php else: ?>
                                 <span class="badge bg-secondary">Unpublished</span>
-                            <?php endif; ?>
+                            <?php endif; ?></td>
                                                     <td><?php echo date("M d, Y h:i A", strtotime($file['upload_date'])); ?></td>
                                                     <td>
                                                         <a href="../uploads/<?php echo htmlspecialchars($file['file_path']); ?>" class="btn btn-info btn-sm viewBtn" name="viewPdf">
