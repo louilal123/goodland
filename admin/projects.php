@@ -16,14 +16,13 @@
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <div class="card">
-                                <div class="d-flex mb-3">
+                                    <div class="card-body">
+                                        <div class="d-flex mb-3">
                                             <h3 class="fw-bold"><i class="fas fa-folder-plus"></i> List of Projects</h3>
                                             <button type="button" class="btn btn-primary ms-auto btn-rounded" onclick="window.location.href='project_add'">
                                                 <i class="fas fa-folder-plus"></i> Create New
                                             </button>
                                         </div>
-                                    <div class="card-body">
-                                       
                                         <table id="myTable" class="table table-bordered table-hover table-striped text-center w-100">
                                             <thead class="table-secondary fw-bold">
                                                 <tr>
