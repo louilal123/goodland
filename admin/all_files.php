@@ -93,6 +93,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
 </button>
 
 
+
                                                     </td>
                                                 </tr>
                                                 <?php endforeach; ?>
@@ -310,25 +311,23 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
 
 </body>
 <script>
-    $(document).ready(function() {
-        // When a delete button is clicked
-        $('.deleteBtn').on('click', function() {
-            // Get the file ID and title from the data attributes of the clicked button
-            var fileId = $(this).data('file-id');
-            var fileTitle = $(this).data('file-title');
-
-            // Set the file ID and title in the modal
-            $('#file-id').val(fileId);  // Set the hidden input value for file ID
-            $('#file-title').text(fileTitle);  // Set the file title in the modal body
-        });
-
-        // When the delete confirmation button is clicked
-        $('#confirm-delete-btn').on('click', function() {
-            var fileId = $('#file-id').val(); // Get the file ID from the hidden input
-            // Redirect to the delete_file.php with the file ID in the URL
-            window.location.href = 'classes/delete_file.php?id=' + fileId;
-        });
+   $(document).ready(function() {
+    $('.deleteBtn').on('click', function() {
+        var fileId = $(this).data('file-id');
+        var fileTitle = $(this).data('file-title');
+        $('#file-id').val(fileId);
+        $('#file-title').text(fileTitle);
+        // Open the modal (for Bootstrap 5+ use the correct method)
+        var myModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        myModal.show();
     });
+
+    $('#confirm-delete-btn').on('click', function() {
+        var fileId = $('#file-id').val();
+        window.location.href = 'classes/delete_file.php?id=' + fileId;
+    });
+});
+
 </script>
 
 <?php include "includes/footer.php"; ?>
@@ -379,32 +378,6 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
         endif; ?>
     });
 </script>
-<!-- <script>
-    $(document).ready(function() {
-    $('.deleteBtn').on('click', function(e) {
-        e.preventDefault(); 
-
-        const href = $(this).attr('href'); 
-        Swal.fire({
-            title: 'Are you sure?',
-            text: 'This file will be deleted!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Delete'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = href;
-            }
-        });
-    });
-});
-
-</script> -->
-
-
-
 
 
 </html>
