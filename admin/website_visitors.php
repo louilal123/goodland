@@ -37,14 +37,14 @@
                                         <thead class="table-secondary fw-bold">
                                             <tr>
                                                 <th>Visitor ID</th>
-                                                <th width="20%">IP Address</th>
+                                                <!-- <th width="20%">IP Address</th> -->
                                                 <th width="20%">User Agent</th>
                                                 <th width="20%">Country</th>
                                                 <th width="15%">Date Added</th>
                                                 <th width="20%"cc>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody class="">
                                             <?php if (empty($visitors)): ?>
                                                 <tr>
                                                     <td colspan="6" class="text-center">
@@ -55,7 +55,6 @@
                                                 <?php foreach ($visitors as $visitor): ?>
                                                 <tr>
                                                     <td><?php echo htmlspecialchars($visitor['visitor_id']); ?></td>
-                                                    <td><?php echo htmlspecialchars($visitor['ip_address']); ?></td>
                                                     <td><?php echo htmlspecialchars($visitor['user_agent']); ?></td>
                                                     <td><?php echo htmlspecialchars($visitor['country']); ?></td>
                                                     <td><?php echo date("M d, Y h:i A", strtotime($visitor['date_added'])); ?></td>
