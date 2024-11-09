@@ -49,7 +49,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $mail->addAddress($email);
     $mail->Subject = "Requested File Copy";
     $mail->isHTML(true);
-    $mail->Body = "<p> hi</p>";
+    $mail->Body = '
+    <div style="font-family:Arial,sans-serif">
+        <div class="adM"></div>
+        <div style="font-size:18px;background-color:#e0f7fa;color:#333333;padding:20px">
+            <div class="adM"></div>
+            <p>Hello,</p>
+            <p style="font-size:20px;color:#0062cc;font-weight:bold">
+                You requested a copy of the file titled: 
+                <strong>\'' . htmlspecialchars($file_title) . '\'</strong> from our platform.
+            </p>
+            <p style="font-size:16px">Below is the attached file. You can download it at your convenience.</p>
+            <p style="font-size:16px">Thank you for using our service!</p>
+            <p style="font-size:14px;color:#888888">
+                Best regards, <br>
+                <a href="http://goodlandv2.com" target="_blank">GOODLAND.PH</a>
+            </p>
+            <div class="yj6qo"></div>
+            <div class="adL"></div>
+        </div>
+        <div class="adL"></div>
+    </div>';
+    
+    
     $mail->addAttachment($full_file_path);
 
     try {
