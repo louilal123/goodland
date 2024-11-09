@@ -39,9 +39,9 @@
                                                 <th>Visitor ID</th>
                                                 <th width="20%">IP Address</th>
                                                 <th width="20%">User Agent</th>
-                                                <th>Country</th>
+                                                <th width="20%">Country</th>
                                                 <th width="15%">Date Added</th>
-                                                <th>Action</th>
+                                                <th width="20%"cc>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
