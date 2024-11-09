@@ -85,13 +85,12 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
         <i class="bi bi-pencil-square fw-bold"></i> 
                     </button>
                     <button class="btn btn-danger btn-sm deleteBtn" 
-   data-toggle="modal" 
-   data-target="#deleteModal" 
-   data-file-id="<?php echo $file['id']; ?>" 
-   data-file-title="<?php echo htmlspecialchars($file['title']); ?>">
+    data-toggle="modal" 
+    data-target="#deleteModal" 
+    data-file-id="<?php echo $file['id']; ?>" 
+    data-file-title="<?php echo htmlspecialchars($file['title']); ?>">
     <i class="bi bi-trash-fill"></i>
 </button>
-
 
 
                                                     </td>
@@ -310,8 +309,6 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
   
 
 </body>
-
-<?php include "includes/footer.php"; ?>
 <script>
     $(document).ready(function() {
         // When a delete button is clicked
@@ -333,6 +330,9 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
         });
     });
 </script>
+
+<?php include "includes/footer.php"; ?>
+
 
 <script type="text/javascript" src="mdbfolder/mdb.umd.min.js"></script>
 <script>
