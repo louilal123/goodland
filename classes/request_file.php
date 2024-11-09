@@ -65,10 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 Best regards, <br>
                 <a href="http://goodlandv2.com" target="_blank">GOODLAND.PH</a>
             </p>
-            <div class="yj6qo"></div>
-            <div class="adL"></div>
+            
         </div>
-        <div class="adL"></div>
     </div>';
     
     
