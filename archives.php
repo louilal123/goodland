@@ -84,7 +84,17 @@
 
 </main>
 
-<form action="classes/request_file.php" method="POST">
+<!-- Request Copy Modal -->
+<div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title  fw-bold text-center" id="requestModalLabel" style="color: #0062cc !important;"> Request a Copy</h3>
+        <button type="button" class="btn-close fw-bold" data-dismiss="modal" aria-label="Close">
+         
+        </button>
+      </div>
+      <form action="classes/request_file.php" method="POST">
     <div class="modal-body">
         <input type="hidden" name="file_id" id="fileId" value="<?php echo $_SESSION['form_data']['file_id'] ?? ''; ?>">
         <input type="hidden" name="file_path" id="filePath" value="<?php echo $_SESSION['form_data']['file_path'] ?? ''; ?>">
@@ -114,6 +124,10 @@
     </div>
 </form>
 
+
+    </div>
+  </div>
+</div>
 <br><br><br><br>
 <?php include "includes/footer.php";?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
