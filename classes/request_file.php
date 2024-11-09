@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Initialize PHPMailer
-    $mail = require __DIR__ . "/../admin/mailer.php";
+    $mail = require __DIR__ . "../mailer.php";
     $mail->setFrom("rubinlouie41@gmail.com", "GOODLAND.PH");
     $mail->addAddress($email);
     $mail->Subject = "Requested File Copy";
