@@ -1,10 +1,11 @@
 RewriteEngine On
 
-# Exclude image files from PHP extension removal
+# Exclude image files and other static resources from redirection
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !\.(jpg|jpeg|png|gif)$ [NC]
-RewriteRule ^([^\.]+)$ $1.php [NC,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !\.(jpg|jpeg|png|gif|css|js|woff|woff2|ttf|otf|svg|ico)$ [NC]
+RewriteRule ^([^\.]+)$ $1.php [L]
 
-# Custom 404 error handling (internal redirect)
-ErrorDocument 404 /goodland/404.html
-ErrorDocument 403 /goodland/404.html
+# Custom 404 and 403 error handling
+ErrorDocument 404 /404.html
+ErrorDocument 403 /404.html
