@@ -16,8 +16,7 @@
                         <div class="row mt-4">
                             <div class="col-md-12">
                             <div class="card">
-                                <div class="card-body">
-                                <div class="card-header d-flex ">
+                            <div class="card-header d-flex ">
                                   <h3 class="fw-bold">Website Visitors</h3>
                                       <button  class="btn btn-success ms-auto btn-rounded me-1" onclick="location.reload(); return false;">
                                           <i class="fas fa-refresh"></i> Refresh
@@ -27,6 +26,8 @@
                                       </button>
 
                                 </div>
+                                <div class="card-body">
+                               
                                     <table id="myTable" class=" table table-bordered table-hover table-stripe w-100">
                                         <thead class="table-secondary fw-bold">
                                             <tr>
