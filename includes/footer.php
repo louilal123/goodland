@@ -191,6 +191,51 @@ window.cb_declineCookies = () => hideCookieBanner("decline");
 
 </script>
 
+<!-- crud sweetalerts  this is included inside all the pages below uaing include-->
+<?php
+if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+?>
+<script>
+Swal.fire({
+    icon: "<?php echo $_SESSION['status_icon']; ?>",
+    title: "<?php echo $_SESSION['status']; ?>",
+    confirmButtonText: "Ok"
+});
+</script>
+<?php
+unset($_SESSION['status']);
+unset($_SESSION['status_icon']);
+}
+?>
+
+<!-- end  -->
+
+<?php if (isset($_SESSION['status1']) && $_SESSION['status1'] != '') { ?>
+  <script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: false,
+        didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+        }
+    });
+
+    Toast.fire({
+      icon: "<?php echo $_SESSION['status_icon1']; ?>",
+        title: "<?php echo $_SESSION['status1']; ?>"
+    });
+</script>
+        <?php
+        unset($_SESSION['status1']);
+        unset($_SESSION['status_icon1']);
+    }
+    ?> 
+    <!-- end  -->
+
 
 <script
     disable-devtool-auto
