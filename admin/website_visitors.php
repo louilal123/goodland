@@ -37,8 +37,8 @@
                                         <thead class="table-secondary fw-bold">
                                             <tr>
                                                 <th>Visitor ID</th>
-                                                <th>IP Address</th>
-                                                <th>User Agent</th>
+                                                <th width="20%">IP Address</th>
+                                                <th width="20%">User Agent</th>
                                                 <th>Country</th>
                                                 <th width="15%">Date Added</th>
                                                 <th>Action</th>
