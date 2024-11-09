@@ -379,7 +379,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
         endif; ?>
     });
 </script>
-<script>
+<!-- <script>
     $(document).ready(function() {
     $('.deleteBtn').on('click', function(e) {
         e.preventDefault(); 
@@ -401,7 +401,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
     });
 });
 
-</script>
+</script> -->
 
 
 
