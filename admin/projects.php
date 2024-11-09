@@ -53,7 +53,7 @@
                                                             <a href="classes/delete_project.php?project_id=<?php echo $project['id']; ?>" 
        class="btn btn-danger btn-sm deleteBtn">
         <i class="fas fa-trash"></i>
-        
+
     </a>
                                                         </td>
                                                     </tr>
@@ -98,21 +98,5 @@
     });
 </script>
 
-    <?php
-    // session_start();
-if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
-?>
-<script>
-Swal.fire({
-    icon: "<?php echo $_SESSION['status_icon']; ?>",
-    title: "<?php echo $_SESSION['status']; ?>",
-    confirmButtonText: "Ok"
-});
-</script>
-<?php
-unset($_SESSION['status']);
-unset($_SESSION['status_icon']);
-}
-?>
 </body>
 </html>

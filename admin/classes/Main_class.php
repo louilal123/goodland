@@ -1742,14 +1742,29 @@ public function update_password($admin_id, $password_hash) {
        
         public function deleteProject($projectId) {
             try {
-                // Prepare the SQL query to delete the project
-                $stmt = $this->pdo->prepare("DELETE FROM projects WHERE id = :id");
-                $stmt->bindParam(':id', $projectId);
+                // Start a transaction to ensure both deletions are handled together
+                $this->pdo->beginTransaction();
+        
+                // First, delete the related sections from the project_sections table
+                $stmt = $this->pdo->prepare("DELETE FROM `project_sections` WHERE `project_id` = :project_id");
+                $stmt->bindParam(':project_id', $projectId);
                 $stmt->execute();
+        
+                // Then, delete the project itself from the projects table
+                $stmt = $this->pdo->prepare("DELETE FROM `projects` WHERE `id` = :project_id");
+                $stmt->bindParam(':project_id', $projectId);
+                $stmt->execute();
+        
+                // Commit the transaction
+                $this->pdo->commit();
+        
             } catch (PDOException $e) {
+                // Rollback the transaction if there was an error
+                $this->pdo->rollBack();
                 throw new Exception("Error deleting project: " . $e->getMessage());
             }
         }
+        
         
 
 
