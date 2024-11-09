@@ -24,7 +24,7 @@
                             <div class="col-md-12">
                                 <div class="card mt-2">
                                     <div class="card-body">
-                                        <div class="card-header d-flex mb-3">
+                                        <div class="d-flex mb-3">
                                             <h3 class="fw-bold">Website Visitors</h3>
                                             <button class="btn btn-success ms-auto me-1" onclick="location.reload(); return false;">
                                                 <i class="fas fa-refresh"></i> Refresh
@@ -33,7 +33,7 @@
                                                 <i class="fas fa-trash"></i> Delete All
                                             </button>
                                         </div>
-                                        <table id="myTable" class="table table-bordered table-hover  text-center w-100">
+                                        <table id="myTable" class="table table-bordered table-hover w-100">
                                             <thead class="table-secondary fw-bold">
                                                 <tr>
                                                     <!-- <th>Visitor ID</th> -->
