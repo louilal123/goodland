@@ -16,21 +16,21 @@ if (isset($_GET['project_id']) && !empty($_GET['project_id'])) {
         // Set success message in session and redirect
         $_SESSION['status'] = 'Project and associated sections deleted successfully.';
         $_SESSION['status_icon'] = 'success';
-        header('Location: ../archives.php'); // Redirect back to the project list page
+        header('Location: ../projects.php'); // Redirect back to the project list page
         exit();
 
     } catch (Exception $e) {
         // Set error message in session and redirect
         $_SESSION['status'] = 'Failed to delete project: ' . $e->getMessage();
         $_SESSION['status_icon'] = 'error';
-        header('Location: ../archives.php');
+        header('Location: ../projects.php');
         exit();
     }
 } else {
     // Handle case when no project_id is passed
     $_SESSION['status'] = 'No project selected for deletion.';
     $_SESSION['status_icon'] = 'error';
-    header('Location: ../archives.php');
+    header('Location: ../projects.php');
     exit();
 }
 ?>
