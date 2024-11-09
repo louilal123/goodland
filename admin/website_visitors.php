@@ -36,7 +36,7 @@
                                         <table id="myTable" class="table table-bordered table-hover table-striped text-center w-100">
                                             <thead class="table-secondary fw-bold">
                                                 <tr>
-                                                    <th>Visitor ID</th>
+                                                    <!-- <th>Visitor ID</th> -->
                                                     <th>IP Address</th>
                                                     <th>User Agent</th>
                                                     <th>Country</th>
@@ -52,7 +52,6 @@
                                                 <?php else: ?>
                                                     <?php foreach ($visitors as $items): ?>
                                                     <tr>
-                                                        <td><?php echo htmlspecialchars($items['visitor_id']); ?></td>
                                                         <td><?php echo htmlspecialchars($items['ip_address']); ?></td>
                                                         <td><?php echo htmlspecialchars($items['user_agent']); ?></td>
                                                         <td><?php echo htmlspecialchars($items['country']); ?></td>
