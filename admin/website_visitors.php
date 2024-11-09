@@ -45,29 +45,25 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php if (empty($visitors)): ?>
-                                                    <tr>
-                                                        <td colspan="6" class="text-center">No records to show.</td>
-                                                    </tr>
-                                                <?php else: ?>
-                                                    <?php foreach ($visitors as $items): ?>
-                                                    <tr>
-                                                        <td><?php echo htmlspecialchars($items['ip_address']); ?></td>
-                                                        <td><?php echo htmlspecialchars($items['user_agent']); ?></td>
-                                                        <td><?php echo htmlspecialchars($items['country']); ?></td>
-                                                        <td><?php echo date("M d, Y h:i A", strtotime($items['date_added'])); ?></td>
-                                                        <td>
-                                                            <button class="btn btn-danger btn-sm deleteMessageBtn" 
-                                                                    data-message-id="<?php echo $items['visitor_id']; ?>" 
-                                                                    data-bs-toggle="modal" 
-                                                                    data-bs-target="#deleteMessageModal">
-                                                                <i class="fas fa-trash"></i> 
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <?php endforeach; ?>
-                                                <?php endif; ?>
-                                            </tbody>
+    <?php foreach ($visitors as $items): ?>
+        <tr>
+            <td><?php echo htmlspecialchars($items['visitor_id']); ?></td>
+            <td><?php echo htmlspecialchars($items['ip_address']); ?></td>
+            <td><?php echo htmlspecialchars($items['user_agent']); ?></td>
+            <td><?php echo htmlspecialchars($items['country']); ?></td>
+            <td><?php echo date("M d, Y h:i A", strtotime($items['date_added'])); ?></td>
+            <td>
+                <button class="btn btn-danger btn-sm deleteMessageBtn" 
+                        data-message-id="<?php echo $items['visitor_id']; ?>" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#deleteMessageModal">
+                    <i class="fas fa-trash"></i> 
+                </button>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</tbody>
+
                                         </table>
                                     </div>
                                 </div>
