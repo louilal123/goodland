@@ -3,7 +3,7 @@
 <html lang="en">
 <?php include "includes/header.php"; ?>
 
-<link rel="stylesheet" href="dist/custom.css">
+<!-- <link rel="stylesheet" href="dist/custom.css"> -->
 
 <style>
     body {
@@ -76,49 +76,6 @@
                 </div>
             </div>
 
-            <!-- Modal for Deleting All Messages -->
-            <div class="modal fade" id="deleteAllMessagesModal" tabindex="-1" aria-labelledby="deleteAllMessagesModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="deleteAllMessagesModalLabel">Confirm Deletion of All Messages</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Are you sure you want to delete all messages? This action cannot be undone.
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <form method="POST" action="classes/delete_message.php">
-                                <input type="hidden" name="delete_all" value="1">
-                                <button type="submit" class="btn btn-danger">Delete All</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal for Individual Delete Confirmation -->
-            <div class="modal fade" id="deleteMessageModal" tabindex="-1" aria-labelledby="deleteMessageModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="deleteMessageModalLabel">Confirm Deletion</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Are you sure you want to delete this message?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <form method="POST" action="classes/delete_message.php">
-                                <input type="hidden" name="delete_message_id" id="delete_message_id">
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         </div>
     </main>
