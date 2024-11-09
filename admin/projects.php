@@ -50,9 +50,10 @@
                                                             <a href="#" class="btn btn-success btn-sm editProjectBtn" data-bs-toggle="modal" data-bs-target="#editProjectModal">
                                                                 <i class="bi bi-pencil-square"></i>
                                                             </a>
-                                                            <a href="#" class="btn btn-danger btn-sm deleteProjectBtn" data-bs-toggle="modal" data-bs-target="#deleteProjectModal">
-                                                                <i class="bi bi-trash"></i>
-                                                            </a>
+                                                            <a href="classes/delete_project.php?project_id=<?php echo $project['id']; ?>" 
+       class="btn btn-danger btn-sm deleteBtn">
+        <i class="fas fa-trash"></i>
+    </a>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>
@@ -71,6 +72,31 @@
         </div>
     </div>
     <?php include "includes/footer.php"; ?>
+    <script>
+    $(document).ready(function() {
+        $('.deleteBtn').on('click', function(e) {
+            e.preventDefault(); // Prevent default link behavior
+
+            const href = $(this).attr('href'); // Get the href of the delete button (delete URL)
+
+            // Trigger SweetAlert confirmation
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'This project will be deleted!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Delete'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = href; // Redirect to delete_project.php if confirmed
+                }
+            });
+        });
+    });
+</script>
+
     <?php
     // session_start();
 if (isset($_SESSION['status']) && $_SESSION['status'] != '') {

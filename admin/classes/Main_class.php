@@ -1740,7 +1740,16 @@ public function update_password($admin_id, $password_hash) {
         }
 
        
-        
+        public function deleteProject($projectId) {
+            try {
+                // Prepare the SQL query to delete the project
+                $stmt = $this->pdo->prepare("DELETE FROM projects WHERE id = :id");
+                $stmt->bindParam(':id', $projectId);
+                $stmt->execute();
+            } catch (PDOException $e) {
+                throw new Exception("Error deleting project: " . $e->getMessage());
+            }
+        }
         
 
 
