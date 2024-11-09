@@ -1017,20 +1017,28 @@ public function getCatchmentById($data_id) {
         }
     }
 
-
-
-         
     public function deleteFile($file_id) {
         try {
-            $query = "delete from files  WHERE id = ?";
-            $stmt = $this->pdo->prepare($query);
+            // First, check if the file has relevant data before deleting
+            $checkQuery = "SELECT id FROM files WHERE id = ? AND title != '' AND file_path != '' AND description != ''";
+            $stmt = $this->pdo->prepare($checkQuery);
             $stmt->execute([$file_id]);
     
-            return true;
+            // If a row is found, delete it
+            if ($stmt->rowCount() > 0) {
+                $query = "DELETE FROM files WHERE id = ?";
+                $stmt = $this->pdo->prepare($query);
+                $stmt->execute([$file_id]);
+                
+                return true; // File deleted successfully
+            } else {
+                return false; // No file found with non-empty fields
+            }
         } catch (PDOException $e) {
-            return false;
+            return false; // Handle any database errors
         }
     }
+    
     
     
     public function changePassword($userId, $currentPassword, $newPassword) {
