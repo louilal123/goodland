@@ -26,7 +26,7 @@
                                       </button>
 
                                 </div>
-                                    <table id="myTable" class="table table-responsive table-bordered table-hover table-stripe w-100">
+                                    <table id="myTable" class=" table table-bordered table-hover table-stripe w-100">
                                         <thead class="table-secondary fw-bold">
                                             <tr>
                                                 <th>Visitor_id</th>
