@@ -33,7 +33,7 @@
                                                 <i class="fas fa-trash"></i> Delete All
                                             </button>
                                         </div>
-                                        <table id="myTable" class="table table-bordered table-hover w-100">
+                                        <table id="myTable" class="table table-bordered table-hover table-responsive">
                                             <thead class="table-secondary fw-bold">
                                                 <tr>
                                                     <!-- <th>Visitor ID</th> -->
