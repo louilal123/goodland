@@ -24,7 +24,7 @@
                             <div class="col-md-12">
                                 <div class="card mt-2">
                                     <div class="card-body">
-                                        <div class="d-flex mb-3">
+                                        <div class="card-header d-flex mb-3">
                                             <h3 class="fw-bold">Website Visitors</h3>
                                             <button class="btn btn-success ms-auto me-1" onclick="location.reload(); return false;">
                                                 <i class="fas fa-refresh"></i> Refresh
