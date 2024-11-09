@@ -50,7 +50,7 @@
                                                             <a href="#" class="btn btn-success btn-sm editProjectBtn" data-bs-toggle="modal" data-bs-target="#editProjectModal">
                                                                 <i class="bi bi-pencil-square"></i>
                                                             </a>
-                                                            <a href="classes/delete_project.php?project_id=<?php echo $project['id']; ?>" 
+                                                            <a href="classes/delete_project.php?<?php echo $project['project_id']; ?>" 
        class="btn btn-danger btn-sm deleteBtn">
         <i class="fas fa-trash"></i>
 
