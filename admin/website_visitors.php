@@ -33,14 +33,14 @@
                                             <i class="fas fa-trash"></i> Delete All
                                         </button>
                                     </div>
-                                    <table id="myTable" class="table-bordered table-hover table-striped text-center w-100">
+                                    <table id="myTable" class=" table-bordered table-hover table-striped text-center w-100">
                                         <thead class="table-secondary fw-bold">
                                             <tr>
                                                 <th>Visitor ID</th>
                                                 <th>IP Address</th>
                                                 <th>User Agent</th>
                                                 <th>Country</th>
-                                                <th>Date Added</th>
+                                                <th width="15%">Date Added</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
