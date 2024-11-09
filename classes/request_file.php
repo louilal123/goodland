@@ -74,22 +74,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     $mail->addAttachment($full_file_path);
 
-    try {
-        if ($mail->send()) {
-            $mainClass->saveFileRequest($file_id, $visitor_id, $email);
-            $_SESSION['status'] = "The file has been sent to your email.";
-            $_SESSION['status_icon'] = "success";
-            unset($_SESSION['form_data']); // Clear form data on success
-            header("Location: ../archives.php");
-            exit();
-        } else {
-            throw new Exception($mail->ErrorInfo);
-        }
-    } catch (Exception $e) {
-        $_SESSION['status'] = "There was an error sending your file request: " . $e->getMessage();
-        $_SESSION['status_icon'] = "error";
-        header("Location: ../archives.php#error#requestModal");
-        exit();
+  
+try {
+    // Attempt to send the email
+    if (!$mail->send()) {
+        throw new Exception($mail->ErrorInfo); // Throw an exception if sending fails
     }
+
+    // Log the file request if email is sent successfully
+    $mainClass->saveFileRequest($file_id, $visitor_id, $email);
+
+    // Set success session status and redirect
+    $_SESSION['status'] = "The file has been sent to your email.";
+    $_SESSION['status_icon'] = "success";
+    header("Location: ../archives.php");
+    exit();
+} catch (Exception $e) {
+    // Set error session status and redirect with error message
+    $_SESSION['status'] = "Error sending your file request: " . $e->getMessage();
+    $_SESSION['status_icon'] = "error";
+    header("Location: ../archives.php#error#requestModal");
+    exit();
+}
 }
 ?>
