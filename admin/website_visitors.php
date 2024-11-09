@@ -3,8 +3,6 @@
 <html lang="en">
 <?php include "includes/header.php"; ?>
 
-<!-- <link rel="stylesheet" href="dist/custom.css"> -->
-
 <style>
     body {
         overflow: hidden;
