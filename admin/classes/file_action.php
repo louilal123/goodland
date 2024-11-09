@@ -53,17 +53,7 @@ if (isset($_POST['file_id'])) {
         }
         header('Location: ../recycled_files.php');
         exit();
-    } elseif (isset($_POST['deleteBtn'])) {
-        $result = $mainClass->deleteFile($file_id); // Assuming you have a method to delete a file
-        if ($result) {
-            $_SESSION['status'] = "File deleted successfully";
-            $_SESSION['status_icon'] = "success";
-        } else {
-            $_SESSION['status'] = "Error deleting the file";
-            $_SESSION['status_icon'] = "error";
-        }
-        header('Location: ../recycled_files.php');
-        exit();
+    
     } else {
         $_SESSION['status'] = "Invalid action";
         $_SESSION['status_icon'] = "error";
