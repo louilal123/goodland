@@ -45,7 +45,7 @@
 
         <ul class="navbar-nav ms-auto">
 
-                    <li class="nav-item dropdown  me-3"> 
+                    <li class="nav-item dropdown"> 
                        <a class="nav-link" data-bs-toggle="dropdown" href="#"> 
                             <i class="fas fa-envelope fa-lg"></i> 
                             <span class="badge rounded-pill badge-notification bg-danger"><?php if (isset($unread_msgs_count) && $unread_msgs_count > 0): ?>
@@ -90,7 +90,7 @@
                               </div>
 
                     </li> 
-                    <li class="nav-item dropdown  me-3"> 
+                    <li class="nav-item dropdown"> 
                        <a class="nav-link" data-bs-toggle="dropdown" href="#"> 
                             <i class="fas fa-bell fa-lg"></i> 
                             <span class="badge rounded-pill badge-notification bg-danger">1</span>
