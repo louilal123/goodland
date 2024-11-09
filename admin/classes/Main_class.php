@@ -180,7 +180,7 @@ public function emailIsExists($email) {
     }
     // In Main_class.php
 public function getFileById($fileId) {
-    $stmt = $this->pdo->prepare("SELECT * FROM files WHERE id = :id AND isDeleted = 0");
+    $stmt = $this->pdo->prepare("SELECT * FROM files WHERE id = :id ");
     $stmt->execute([':id' => $fileId]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -1022,7 +1022,7 @@ public function getCatchmentById($data_id) {
          
     public function deleteFile($file_id) {
         try {
-            $query = "delete * from files ";
+            $query = "delete from files  WHERE id = ?";
             $stmt = $this->pdo->prepare($query);
             $stmt->execute([$file_id]);
     
