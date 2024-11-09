@@ -84,13 +84,13 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
             data-status="<?php echo htmlspecialchars($file['status']); ?>">
         <i class="bi bi-pencil-square fw-bold"></i> 
                     </button>
-                    <a class="btn btn-danger btn-sm deleteBtn" 
+                    <button class="btn btn-danger btn-sm deleteBtn" 
    data-toggle="modal" 
    data-target="#deleteModal" 
    data-file-id="<?php echo $file['id']; ?>" 
    data-file-title="<?php echo htmlspecialchars($file['title']); ?>">
     <i class="bi bi-trash-fill"></i>
-</a>
+</button>
 
 
 
