@@ -1396,6 +1396,18 @@ public function get_all_published_files() {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+public function deleteFileRequest($request_id) {
+    try {
+        // Prepare the SQL query to delete the file request
+        $query = "DELETE FROM file_requests WHERE request_id = ?";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([$request_id]);
+
+        return true;
+    } catch (PDOException $e) {
+        return false;
+    }
+}
 
 
 public function all_files() {
