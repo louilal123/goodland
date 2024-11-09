@@ -2,6 +2,7 @@
 session_start();
 require_once __DIR__ . '/../admin/classes/Main_class.php';
 
+
 $mainClass = new Main_class();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -12,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $visitor_id = $_SESSION['visitor_id'];
 
     // Get form inputs
-    $email = trim($_POST['email']);
+    $email = $_POST['email'];
     $file_id = $_POST['file_id'];
     $file_path = $_POST['file_path'];
     $file_title = $_POST['file-title'];
