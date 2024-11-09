@@ -47,7 +47,6 @@
                                             <tbody>
     <?php foreach ($visitors as $items): ?>
         <tr>
-            <td><?php echo htmlspecialchars($items['visitor_id']); ?></td>
             <td><?php echo htmlspecialchars($items['ip_address']); ?></td>
             <td><?php echo htmlspecialchars($items['user_agent']); ?></td>
             <td><?php echo htmlspecialchars($items['country']); ?></td>
