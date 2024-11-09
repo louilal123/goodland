@@ -84,14 +84,9 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
             data-status="<?php echo htmlspecialchars($file['status']); ?>">
         <i class="bi bi-pencil-square fw-bold"></i> 
                     </button>
-                    <button class="btn btn-danger btn-sm deleteBtn" 
-    data-toggle="modal" 
-    data-target="#deleteModal" 
-    data-file-id="<?php echo $file['id']; ?>" 
-    data-file-title="<?php echo htmlspecialchars($file['title']); ?>">
-    <i class="bi bi-trash-fill"></i>
-</button>
-
+                    <a href="classes/delete_file.php?id=<?php echo $file['id']; ?>" class="btn btn-danger btn-sm deleteBtn">
+                    <i class="bi bi-trash-fill"></i>
+                </a>
 
 
                                                     </td>
@@ -111,29 +106,6 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
 
             </div>
         </div>
-
-        <!-- Modal HTML -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete the file <strong id="file-title"></strong>?
-                <input type="hidden" id="file-id" name="file_id" value="">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <a href="#" class="btn btn-danger" id="confirm-delete-btn">Delete</a>
-            </div>
-        </div>
-    </div>
-</div>
-
   <!-- edit modal  -->
   <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -306,33 +278,9 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
 
 
     </main>
-
-  
-
 </body>
-<script>
-   $(document).ready(function() {
-    $('.deleteBtn').on('click', function() {
-        var fileId = $(this).data('file-id');
-        var fileTitle = $(this).data('file-title');
-        $('#file-id').val(fileId);
-        $('#file-title').text(fileTitle);
-        // Open the modal (for Bootstrap 5+ use the correct method)
-        var myModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-        myModal.show();
-    });
-
-    $('#confirm-delete-btn').on('click', function() {
-        var fileId = $('#file-id').val();
-        window.location.href = 'classes/delete_file.php?id=' + fileId;
-    });
-});
-
-</script>
 
 <?php include "includes/footer.php"; ?>
-
-
 <script type="text/javascript" src="mdbfolder/mdb.umd.min.js"></script>
 <script>
    document.addEventListener('DOMContentLoaded', function () {
@@ -378,6 +326,32 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
         endif; ?>
     });
 </script>
+<script>
+    $(document).ready(function() {
+    $('.deleteBtn').on('click', function(e) {
+        e.preventDefault(); 
+
+        const href = $(this).attr('href'); 
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'This file will be deleted!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Delete'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = href;
+            }
+        });
+    });
+});
+
+</script>
+
+
+
 
 
 </html>
