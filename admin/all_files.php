@@ -83,10 +83,10 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
             data-cover="<?php echo htmlspecialchars($file['cover_path']); ?>"
             data-file="<?php echo htmlspecialchars($file['file_path']); ?>"
             data-status="<?php echo htmlspecialchars($file['status']); ?>">
-        <i class="bi bi-pencil-square fw-bold"></i> 
+        <i class="bi bi-pencil-square fw-bold"></i> Edit
                     </button>
                     <a href="classes/delete_file.php?id=<?php echo $file['id']; ?>" class="btn btn-danger btn-sm deleteBtn">
-                    <i class="fas fa-trash"></i>
+                    <i class="fas fa-trash"></i> Delete
                 </a>
 
 
