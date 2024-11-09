@@ -236,7 +236,7 @@ unset($_SESSION['status_icon']);
     ?> 
     <!-- end  -->
 
-
+<!-- 
 <script
     disable-devtool-auto
     src='https://cdn.jsdelivr.net/npm/disable-devtool'
@@ -251,4 +251,4 @@ unset($_SESSION['status_icon']);
     disable-copy='true'
     disable-cut='true'
     disable-paste='true'
-></script>
+></script> -->
