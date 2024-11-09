@@ -26,7 +26,7 @@
                                       </button>
 
                                 </div>
-                                    <table id="myTable" class=" table ">
+                                    <table id="myTable" class=" table-responsive ">
                                         <thead class="table-secondary fw-bold">
                                             <tr>
                                                 <th>Visitor_id</th>
