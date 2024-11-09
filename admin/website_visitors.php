@@ -33,8 +33,7 @@
                                             <i class="fas fa-trash"></i> Delete All
                                         </button>
                                     </div>
-                                 <div class="table table-responsive">
-                                 <table id="myTable" class=" table-bordered table-hover table-striped ">
+                                    <table id="myTable" class="table table-bordered table-hover table-striped text-center w-100">
                                         <thead class="table-secondary fw-bold">
                                             <tr>
                                                 <th>Visitor ID</th>
@@ -70,7 +69,6 @@
                                             <?php endif; ?>
                                         </tbody>
                                     </table>
-                                 </div>
                                 </div>
                             </div>
                         </div>
