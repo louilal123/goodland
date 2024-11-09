@@ -53,6 +53,7 @@
                                                             <a href="classes/delete_project.php?project_id=<?php echo $project['id']; ?>" 
        class="btn btn-danger btn-sm deleteBtn">
         <i class="fas fa-trash"></i>
+        
     </a>
                                                         </td>
                                                     </tr>
