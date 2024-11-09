@@ -84,7 +84,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
             data-status="<?php echo htmlspecialchars($file['status']); ?>">
         <i class="bi bi-pencil-square fw-bold"></i> 
                     </button>
-                    <a href="#" class="btn btn-danger btn-sm deleteBtn" 
+                    <a class="btn btn-danger btn-sm deleteBtn" 
    data-toggle="modal" 
    data-target="#deleteModal" 
    data-file-id="<?php echo $file['id']; ?>" 
