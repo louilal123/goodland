@@ -47,7 +47,7 @@
 
                     <li class="nav-item dropdown"> 
                        <a class="nav-link" data-bs-toggle="dropdown" href="#"> 
-                            <i class="fas fa-envelope fa-lg"></i> 
+                            <i class="bi bi-envelope fa-lg"></i> 
                             <span class="badge rounded-pill badge-notification bg-danger"><?php if (isset($unread_msgs_count) && $unread_msgs_count > 0): ?>
     <?php echo htmlspecialchars($unread_msgs_count); ?>
 <?php endif; ?>
@@ -57,7 +57,7 @@
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-4 bg-white" style="width: 800px !important;">
                                 <div class="d-flex justify-content-between align-items-center w-100">
                                     <h4 class="fw-bold text-dark">New Messages</h4>
-                                    <h4><span class="fas fa-envelope fa-lg"></span></h4>
+                                    <h4><span class="bi bi-envelope fa-lg"></span></h4>
                                 </div>
 
                             <div class="dropdown-divider"></div>
