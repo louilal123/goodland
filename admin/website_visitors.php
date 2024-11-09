@@ -34,7 +34,7 @@
                                                 <th>Ip_address</th>
                                                 <th>User_agent</th>
                                                 <th>Country</th>
-                                                <th>Date added</th>
+                                                <th width="15%">Date added</th>
                                                 <th width="auto">Action</th>
                                             </tr>
                                         </thead>
