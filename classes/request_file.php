@@ -50,9 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $mail->addAttachment($full_file_path);
 
     try {
-        // Attempt to send the email
         if ($mail->send()) {
-            // Save the request in the database
             $mainClass->saveFileRequest($file_id, $visitor_id, $email); // Log the request
 
             // Success message
