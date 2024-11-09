@@ -1,7 +1,8 @@
 RewriteEngine On
 
-# Remove .php extension from URLs
+# Exclude image files from PHP extension removal
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !\.(jpg|jpeg|png|gif)$ [NC]
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
 
 # Custom 404 error handling (internal redirect)
