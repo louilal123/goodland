@@ -69,7 +69,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                                                     <td><?php echo htmlspecialchars($file['title']); ?></td>
                                                     <td><img src="<?php echo htmlspecialchars($file['cover_path']); ?>" style="width: 60px; height: 35px;"></td>
                                                     <td><?php echo htmlspecialchars($file['file_path']); ?></td>
-                                                    <td><?php if ($file['status'] == 'Active'): ?>
+                                                    <td><?php if ($file['status'] == 'published'): ?>
                                 <span class="badge bg-success">Published</span>
                             <?php else: ?>
                                 <span class="badge bg-secondary">Unpublished</span>
