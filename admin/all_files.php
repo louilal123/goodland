@@ -76,7 +76,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                             <?php endif; ?></td>
                                                     <td><?php echo date("M d, Y h:i A", strtotime($file['upload_date'])); ?></td>
                                                     <td>
-                                                        <button class="btn btn-success btn-sm editBtn" 
+                                                        <button class="btn btn-success  editBtn" 
             data-id="<?php echo htmlspecialchars($file['id']); ?>"
             data-title="<?php echo htmlspecialchars($file['title']); ?>"
             data-description="<?php echo htmlspecialchars($file['description']); ?>"
@@ -85,7 +85,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
             data-status="<?php echo htmlspecialchars($file['status']); ?>">
         <i class="bi bi-pencil-square fw-bold"></i> Edit
                     </button>
-                    <a href="classes/delete_file.php?id=<?php echo $file['id']; ?>" class="btn btn-danger btn-sm deleteBtn">
+                    <a href="classes/delete_file.php?id=<?php echo $file['id']; ?>" class="btn btn-danger  deleteBtn">
                     <i class="fas fa-trash"></i> Delete
                 </a>
 
