@@ -188,7 +188,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                     </div>
 
                     <div class="modal-footer">
-                    <button  type="submit" class="btn btn-primary btn-end">Save <i class="fas fa-arrow-right"></i></button>
+                    <button  type="submit" class="btn btn-lg btn-primary btn-end">Save <i class="fas fa-arrow-right"></i></button>
               
                     </div>
 
