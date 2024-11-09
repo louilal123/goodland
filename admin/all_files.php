@@ -84,9 +84,14 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
             data-status="<?php echo htmlspecialchars($file['status']); ?>">
         <i class="bi bi-pencil-square fw-bold"></i> 
                     </button>
-                    <a href="classes/delete_file.php?id=<?php echo $file['id']; ?>" class="btn btn-danger btn-sm deleteBtn">
-                    <i class="bi bi-trash-fill"></i>
-                </a>
+                    <a href="#" class="btn btn-danger btn-sm deleteBtn" 
+   data-toggle="modal" 
+   data-target="#deleteModal" 
+   data-file-id="<?php echo $file['id']; ?>" 
+   data-file-title="<?php echo htmlspecialchars($file['title']); ?>">
+    <i class="bi bi-trash-fill"></i>
+</a>
+
 
 
                                                     </td>
@@ -106,6 +111,29 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
 
             </div>
         </div>
+
+        <!-- Modal HTML -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete the file <strong id="file-title"></strong>?
+                <input type="hidden" id="file-id" name="file_id" value="">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a href="#" class="btn btn-danger" id="confirm-delete-btn">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
   <!-- edit modal  -->
   <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -278,9 +306,34 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
 
 
     </main>
+
+    <script>
+    $(document).ready(function() {
+        // When a delete button is clicked
+        $('.deleteBtn').on('click', function() {
+            // Get the file ID and title from the data attributes of the clicked button
+            var fileId = $(this).data('file-id');
+            var fileTitle = $(this).data('file-title');
+
+            // Set the file ID and title in the modal
+            $('#file-id').val(fileId);  // Set the hidden input value for file ID
+            $('#file-title').text(fileTitle);  // Set the file title in the modal body
+        });
+
+        // When the delete confirmation button is clicked
+        $('#confirm-delete-btn').on('click', function() {
+            var fileId = $('#file-id').val(); // Get the file ID from the hidden input
+            // Redirect to the delete_file.php with the file ID in the URL
+            window.location.href = 'classes/delete_file.php?id=' + fileId;
+        });
+    });
+</script>
+
+
 </body>
 
 <?php include "includes/footer.php"; ?>
+
 <script type="text/javascript" src="mdbfolder/mdb.umd.min.js"></script>
 <script>
    document.addEventListener('DOMContentLoaded', function () {
