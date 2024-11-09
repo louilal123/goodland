@@ -284,61 +284,74 @@
     </div>
     <?php include "includes/footer.php" ?>
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Define custom colors for each status
-        const statusColors = {
-            'Unpublished': '#495057',  // bg-secondary
-            // 'Declined': '#dc3545', 
-            'Published': '#0062cc',  // bg-success
-            // 'Archived': '#ffc107'    
-        };
+document.addEventListener('DOMContentLoaded', function () {
+    // Define custom colors for each status
+    const statusColors = {
+        'Unpublished': '#495057',  // bg-secondary
+        // 'Declined': '#dc3545', 
+        'Published': '#0062cc',  // bg-success
+        // 'Archived': '#ffc107'    
+    };
 
-        // Map your data to include the colors and slicing
-        const dataWithColors = <?php echo json_encode($pieChartData); ?>.map(item => ({
-            name: item.name,
-            y: item.y,
-            color: statusColors[item.name] || '#dc3545', 
-            sliced: item.name === 'Unpublished', 
-            selected: item.name === 'Published' 
-        }));
+    // Your original pie chart data
+    const pieChartData = <?php echo json_encode($pieChartData); ?>;
 
-        Highcharts.chart('container', {
-            chart: {
+    // Ensure both "Unpublished" and "Published" statuses are always included
+    const statuses = ['Unpublished', 'Published'];  // Add other statuses if needed
+    statuses.forEach(status => {
+        if (!pieChartData.some(item => item.name === status)) {
+            // Add the status with 0 if it's not in the data
+            pieChartData.push({ name: status, y: 0 });
+        }
+    });
+
+    // Map your data to include the colors and slicing
+    const dataWithColors = pieChartData.map(item => ({
+        name: item.name,
+        y: item.y,
+        color: statusColors[item.name] || '#dc3545',  // Default color if no match
+        sliced: item.name === 'Unpublished', 
+        selected: item.name === 'Published'
+    }));
+
+    Highcharts.chart('container', {
+        chart: {
             type: 'pie',
             options3d: {
-            enabled: true,
-            alpha: 10,
-            beta: 0
+                enabled: true,
+                alpha: 10,
+                beta: 0
             }
         },
-            title: {
-                text: 'Library Files Overview'
-            },
-            tooltip: {
-                pointFormat: '{point.name}: <b>{point.y} ({point.percentage:.1f}%)</b>'
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    depth: 70,
-                    dataLabels: {
-                        enabled: true,
-                        format: '{point.name}: {point.y} ({point.percentage:.1f}%)'
-                    },
-                    showInLegend: true
-                }
-            },
-            credits: {
-                enabled: false
-            },
-            series: [{
-                name: 'Files',
-                colorByPoint: false, // Set to false since we are specifying colors directly
-                data: dataWithColors // Use the modified data with colors and slicing
-            }]
-        });
+        title: {
+            text: 'Library Files Overview'
+        },
+        tooltip: {
+            pointFormat: '{point.name}: <b>{point.y} ({point.percentage:.1f}%)</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 70,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}: {point.y} ({point.percentage:.1f}%)'
+                },
+                showInLegend: true
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Files',
+            colorByPoint: false,  // Set to false since we are specifying colors directly
+            data: dataWithColors  // Use the modified data with colors and slicing
+        }]
     });
+});
+
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
