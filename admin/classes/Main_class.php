@@ -1751,7 +1751,7 @@ public function update_password($admin_id, $password_hash) {
                 $stmt->execute();
         
                 // Then, delete the project itself from the projects table
-                $stmt = $this->pdo->prepare("DELETE FROM `projects` WHERE `id` = :project_id");
+                $stmt = $this->pdo->prepare("DELETE FROM `projects` WHERE `project_id` = :project_id");
                 $stmt->bindParam(':project_id', $projectId);
                 $stmt->execute();
         
