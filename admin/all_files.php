@@ -67,7 +67,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                                                 <tr>
                                                     <td><?php echo htmlspecialchars($file['id']); ?></td>
                                                     <td><?php echo htmlspecialchars($file['title']); ?></td>
-                                                    <td><img src="uploads/<?php echo htmlspecialchars($file['cover_path']); ?>" style="width: 60px; height: 35px;"></td>
+                                                    <td><img src="<?php echo htmlspecialchars($file['cover_path']); ?>" style="width: 60px; height: 35px;"></td>
                                                     <td><a href="<?php echo ($file['file_path']); ?>" class="fw-bold text-primary">View File</a></td>
                                                     <td><?php if ($file['status'] == 'published'): ?>
                                 <span class="badge bg-success">Published</span>
@@ -76,9 +76,6 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                             <?php endif; ?></td>
                                                     <td><?php echo date("M d, Y h:i A", strtotime($file['upload_date'])); ?></td>
                                                     <td>
-                                                        <a href="../uploads/<?php echo htmlspecialchars($file['file_path']); ?>" class="btn btn-info btn-sm viewBtn" name="viewPdf">
-                                                            <i class="bi bi-search"></i> 
-                                                        </a>
                                                         <button class="btn btn-success btn-sm editBtn" 
             data-id="<?php echo htmlspecialchars($file['id']); ?>"
             data-title="<?php echo htmlspecialchars($file['title']); ?>"
