@@ -1022,7 +1022,7 @@ public function getCatchmentById($data_id) {
          
     public function deleteFile($file_id) {
         try {
-            $query = "UPDATE files SET isDeleted = 2 WHERE id = ?";
+            $query = "delete from files  WHERE id = ?";
             $stmt = $this->pdo->prepare($query);
             $stmt->execute([$file_id]);
     
@@ -1699,7 +1699,35 @@ public function update_password($admin_id, $password_hash) {
             }
         }
 
-     
+        public function updateFileInfo($id, $adminId, $title, $description, $filePath, $coverPath, $status) 
+        {
+            try {
+                $updateDate = date('Y-m-d H:i:s');
+        
+                $stmt = $this->pdo->prepare("UPDATE files SET admin_id = :admin_id, title = :title, cover_path = :cover_path, description = :description, file_path = :file_path, status = :status, upload_date = :upload_date WHERE id = :id");
+        
+                $stmt->bindParam(':admin_id', $adminId);
+                $stmt->bindParam(':title', $title);
+                $stmt->bindParam(':cover_path', $coverPath);
+                $stmt->bindParam(':description', $description);
+                $stmt->bindParam(':file_path', $filePath);
+                $stmt->bindParam(':status', $status);
+                $stmt->bindParam(':upload_date', $updateDate);
+                $stmt->bindParam(':id', $id);
+        
+                $stmt->execute();
+        
+                $_SESSION['status'] = "File successfully updated!";
+                $_SESSION['status_icon'] = "success";
+                return true;
+            } catch (PDOException $e) {
+                $_SESSION['status'] = "Error updating file: " . $e->getMessage();
+                $_SESSION['status_icon'] = "error";
+                return false;
+            }
+        }
+
+       
         
         
 

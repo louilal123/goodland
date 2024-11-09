@@ -75,12 +75,20 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                                                         <a href="../uploads/<?php echo htmlspecialchars($file['file_path']); ?>" class="btn btn-info btn-sm viewBtn" name="viewPdf">
                                                             <i class="bi bi-search"></i> 
                                                         </a>
-                                                        <button class="btn btn-success btn-sm editBtn">
-                                                            <i class="bi bi-pencil-square fw-bold"></i> 
-                                                        </button>
-                                                        <button class="btn btn-danger btn-sm deleteBtn">
-                                                            <i class="fas fa-trash"></i> 
-                                                        </button>
+                                                        <button class="btn btn-success btn-sm editBtn" 
+            data-id="<?php echo htmlspecialchars($file['id']); ?>"
+            data-title="<?php echo htmlspecialchars($file['title']); ?>"
+            data-description="<?php echo htmlspecialchars($file['description']); ?>"
+            data-cover="<?php echo htmlspecialchars($file['cover_path']); ?>"
+            data-file="<?php echo htmlspecialchars($file['file_path']); ?>"
+            data-status="<?php echo htmlspecialchars($file['status']); ?>">
+        <i class="bi bi-pencil-square fw-bold"></i> 
+                    </button>
+                    <a href="classes/delete_file.php?id=<?php echo $file['id']; ?>" class="btn btn-danger btn-sm deleteBtn">
+                    <i class="bi bi-trash-fill"></i>
+                </a>
+
+
                                                     </td>
                                                 </tr>
                                                 <?php endforeach; ?>
@@ -98,7 +106,72 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
 
             </div>
         </div>
-  
+  <!-- edit modal  -->
+  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content bg-white">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Library File</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close-circle"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm" method="POST" action="classes/update_file.php" enctype="multipart/form-data">
+                    <!-- ID (Hidden) -->
+                    <input type="hidden" name="id" id="editId">
+
+                    <!-- Title Field -->
+                    <div class="md-form mb-2">
+                        <label class="text-dark" for="editTitle">Title</label>
+                        <input type="text" id="editTitle" class="form-control" name="title">
+                    </div>
+
+                    <!-- Description Field -->
+                    <div class="md-form mb-2">
+                        <label class="text-dark" for="editDescription">Description</label>
+                        <textarea id="editDescription" rows="6" class="form-control" name="description"></textarea>
+                    </div>
+
+                    <!-- Cover Image Preview -->
+                    <div class="mb-2">
+                        <label class="text-dark">Current Cover Image</label>
+                        <div>
+                            <img id="editCoverPreview" src="#" alt="Cover Image" class="img-fluid mb-3" style="max-width: 200px; max-height: 200px;">
+                        </div>
+                        <label class="text-dark" for="editCover">Change Cover Image</label>
+                        <input type="file" id="editCover" class="form-control" name="cover">
+                    </div>
+
+                    <!-- File Path Display -->
+                    <div class="md-form mb-2">
+                        <label class="text-dark">Current File</label>
+                        <p id="editFilePath" class="form-control" readonly></p>
+                    </div>
+
+                    <!-- File Upload -->
+                    <div class="md-form mb-2">
+                        <label class="text-dark" for="editFile">Change File</label>
+                        <input type="file" id="editFile" class="form-control" name="file">
+                    </div>
+
+                    <!-- Status Field -->
+                    <div class="md-form mb-2">
+                        <label for="editStatus" class="form-label">Status</label>
+                        <select id="editStatus" name="status" class="form-control form-select">
+                            <option value="published">Published</option>
+                            <option value="unpublished">Unpublished</option>
+                        </select>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-lg btn-primary btn-end">Save Changes <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- View Modal -->
 <div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -110,7 +183,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
             <div class="modal-body">
                 <form  action="classes/upload.php" method="post" enctype="multipart/form-data">
                     <!-- Title Field -->
-                    <div class="md-form mb-4">
+                    <div class="md-form mb-2">
                         <label class="text-dark" for="materialFileTitle">Title</label>
                         <input type="text" id="materialFileTitle" class="form-control 
                         <?php 
@@ -121,13 +194,13 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                             }
                         ?>" name="title" value="<?php echo $_SESSION['form_data']['title'] ?? ''; ?>">
                         <?php if (!empty($_SESSION['error_title'])): ?>
-                            <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_title']; unset($_SESSION['error_title']); ?></div>
+                            <div class="invalid-feedback mb-2"><?php echo $_SESSION['error_title']; unset($_SESSION['error_title']); ?></div>
                         <?php endif; ?>
                     </div>
                     <!-- Description Field -->
-                    <div class="md-form mb-4">
+                    <div class="md-form mb-2">
                         <label class="text-dark" for="materialFileDescription">Description</label>
-                        <textarea id="materialFileDescription" rows="6" class="form-control 
+                        <textarea id="materialFileDescription" rows="" class="form-control 
                         <?php 
                             if (!empty($_SESSION['error_description'])) {
                                 echo 'is-invalid';
@@ -136,11 +209,11 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                             }
                         ?>" name="description"><?php echo $_SESSION['form_data']['description'] ?? ''; ?></textarea>
                         <?php if (!empty($_SESSION['error_description'])): ?>
-                            <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_description']; unset($_SESSION['error_description']); ?></div>
+                            <div class="invalid-feedback mb-2"><?php echo $_SESSION['error_description']; unset($_SESSION['error_description']); ?></div>
                         <?php endif; ?>
                     </div>
                     <!-- Cover Image Field -->
-                    <div class="md-form mb-4">
+                    <div class="md-form mb-2">
                         <label class="text-dark" for="coverImage">Cover Image</label>
                         <input type="file" id="coverImage" class="form-control 
                         <?php 
@@ -151,11 +224,11 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                             }
                         ?>" name="cover">
                         <?php if (!empty($_SESSION['error_cover'])): ?>
-                            <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_cover']; unset($_SESSION['error_cover']); ?></div>
+                            <div class="invalid-feedback mb-2"><?php echo $_SESSION['error_cover']; unset($_SESSION['error_cover']); ?></div>
                         <?php endif; ?>
                     </div>
                     <!-- File Field -->
-                    <div class="md-form mb-4">
+                    <div class="md-form mb-2">
                         <label class="text-dark" for="file">File</label>
                         <input type="file" id="file" class="form-control 
                         <?php 
@@ -166,7 +239,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                             }
                         ?>" name="file">
                         <?php if (!empty($_SESSION['error_file'])): ?>
-                            <div class="invalid-feedback mb-4"><?php echo $_SESSION['error_file']; unset($_SESSION['error_file']); ?></div>
+                            <div class="invalid-feedback mb-2"><?php echo $_SESSION['error_file']; unset($_SESSION['error_file']); ?></div>
                         <?php endif; ?>
                     </div>
                     <div class="md-form mb">
@@ -199,38 +272,6 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
     </div>
 </div>
 
-<!-- View Modal -->
-<div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="approveModalLabel">Approve File</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <embed src="" id="approveFilePathEmbed" type="application/pdf" class="custom-card-img mb-1" style="display: flex; margin: auto; overflow: hidden !important; width: 50% !important; height: 360px;">
-                <p><strong>Title:</strong> <span id="approveFileTitle"></span></p>
-                <p><strong>Description:</strong> <span id="approveFileDescription"></span></p>
-                <p><strong>File Path:</strong> <span id="approveFilePath"></span></p>
-                <p><strong>File Type:</strong> <span id="approveFileType"></span></p>
-                <p><strong>Uploaded By:</strong> <span id="approveUploadedBy"></span></p>
-                <p><strong>Upload Date:</strong> <span id="approveUploadDate"></span></p>
-                <form method="POST" action="classes/file_action.php">
-                    <input type="hidden" name="file_id" id="approveFileId">
-                    <div class="mb-4">
-                        <p><strong>Remarks:</strong></p>
-                        <textarea class="form-control" id="approveRemarks" name="remarks" rows="3" required>File Approved! Thank you for sharing your resource on our platform.</textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success" name="approveBtn">Approve</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 </div>
 
@@ -241,7 +282,37 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
 
 <?php include "includes/footer.php"; ?>
 <script type="text/javascript" src="mdbfolder/mdb.umd.min.js"></script>
+<script>
+   document.addEventListener('DOMContentLoaded', function () {
+    // Edit Button Click Event
+    document.querySelectorAll('.editBtn').forEach(button => {
+        button.addEventListener('click', function () {
+            const id = this.getAttribute('data-id');
+            const title = this.getAttribute('data-title');
+            const description = this.getAttribute('data-description');
+            const cover = this.getAttribute('data-cover');
+            const file = this.getAttribute('data-file');
+            const status = this.getAttribute('data-status');
 
+            // Set modal fields
+            document.getElementById('editId').value = id;
+            document.getElementById('editTitle').value = title;
+            document.getElementById('editDescription').value = description;
+            document.getElementById('editStatus').value = status;
+
+            // Display file path
+            document.getElementById('editFilePath').textContent = file;
+
+            // Display cover image
+            document.getElementById('editCoverPreview').src = `${cover}`;
+
+            // Show the modal
+            new bootstrap.Modal(document.getElementById('editModal')).show();
+        });
+    });
+});
+
+</script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Show the modal if there is form data from session
@@ -255,6 +326,30 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
         endif; ?>
     });
 </script>
+<script>
+    $(document).ready(function() {
+    $('.deleteBtn').on('click', function(e) {
+        e.preventDefault(); 
+
+        const href = $(this).attr('href'); 
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'This file will be deleted!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Delete'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = href;
+            }
+        });
+    });
+});
+
+</script>
+
 
 
 
