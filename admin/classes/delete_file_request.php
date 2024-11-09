@@ -22,7 +22,7 @@ if (isset($_GET['id'])) {
     $_SESSION['status_icon'] = "error";
 }
 
-// Redirect back to the file requests page
+// Redirect back to the manage file requests page
 header('Location: ../file_requests.php'); 
 exit();
 ?>

@@ -55,10 +55,11 @@
                 </button>
 
                 <!-- Delete Request Button -->
-                <button class="btn btn-danger btn-sm deleteRequestBtn" data-id="<?php echo $request['request_id']; ?>" 
-                        data-bs-toggle="modal" data-bs-target="#deleteRequestModal">
-                    <i class="bi bi-trash-fill"></i>
-                </button>
+                <a href="classes/delete_file_request.php?id=<?php echo $request['request_id']; ?>" class="btn btn-danger btn-sm deleteBtn">
+    <i class="bi bi-trash-fill"></i>
+</a>
+
+
             </td>
         </tr>
     <?php endforeach; ?>
@@ -72,27 +73,7 @@
                     </div> 
                 </div>
 
-              <!-- Delete Request Modal -->
-<div class="modal fade" id="deleteRequestModal" tabindex="-1" role="dialog" aria-labelledby="deleteRequestModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteRequestModalLabel">Confirm Deletion</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete the request for the file <strong id="request-title"></strong>?
-                <input type="hidden" id="request-id" name="request_id" value="">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <a href="#" class="btn btn-danger" id="confirm-delete-request-btn">Delete</a>
-            </div>
-        </div>
-    </div>
-</div>
+       
 
             
 
@@ -105,21 +86,26 @@
     <?php include "includes/footer.php" ?>
     <script>
     $(document).ready(function() {
-        // When the delete button is clicked
-        $('.deleteRequestBtn').on('click', function() {
-            var requestId = $(this).data('id'); // Get the request ID from the button's data attribute
-            var requestTitle = $(this).closest('tr').find('td').eq(1).text(); // Get the title from the table row
-
-            // Set the request ID and title in the modal
-            $('#request-id').val(requestId);
-            $('#request-title').text(requestTitle);
-        });
-
-        // Confirm request deletion
-        $('#confirm-delete-request-btn').on('click', function() {
-            var requestId = $('#request-id').val(); // Get the request ID from the hidden input
-            // Redirect to the delete_file_request.php with the request ID
-            window.location.href = 'classes/delete_file_request.php?id=' + requestId;
+        $('.deleteBtn').on('click', function(e) {
+            e.preventDefault(); // Prevent the default link action (i.e., redirection)
+            
+            const href = $(this).attr('href');  // Get the href (link) of the delete button
+            
+            // Show confirmation popup using SweetAlert
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'This file request will be deleted!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Delete'
+            }).then((result) => {
+                // If user confirms the deletion
+                if (result.isConfirmed) {
+                    window.location.href = href; // Redirect to the link (delete action)
+                }
+            });
         });
     });
 </script>
