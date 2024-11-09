@@ -40,7 +40,7 @@
                                                     <th>IP Address</th>
                                                     <th>User Agent</th>
                                                     <th>Country</th>
-                                                    <th width="15%">Date Added</th>
+                                                    <th >Date Added</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
