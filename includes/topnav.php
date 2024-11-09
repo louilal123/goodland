@@ -124,7 +124,6 @@
       
       <div class="d-flex align-items-center">
       <!-- <a class="btn btn-getstarted btn-hide" href="admin/" style="
- 
 ">LOGIN</a> -->
  <a class="btn btn-getstarted "  
  style="font-weight: 500 !important; background-color: linear-gradient(to right, #144D53,#0062cc) !important;opacity: 0.8; " 
