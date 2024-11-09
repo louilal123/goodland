@@ -85,7 +85,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
         <i class="bi bi-pencil-square fw-bold"></i> 
                     </button>
                     <a href="classes/delete_file.php?id=<?php echo $file['id']; ?>" class="btn btn-danger btn-sm deleteBtn">
-                    <i class="bi bi-trash-fill"></i>
+                    <i class="bi bi-trash"></i>
                 </a>
 
 
