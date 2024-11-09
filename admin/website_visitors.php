@@ -35,7 +35,7 @@
                                                 <th>User_agent</th>
                                                 <th>Country</th>
                                                 <th width="15%">Date added</th>
-                                                <th width="auto">Action</th>
+                                                <th width="15%">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
