@@ -39,7 +39,7 @@
                                                         <td><?php echo htmlspecialchars($project['title']); ?></td>
                                                         <td><?php echo htmlspecialchars($project['banner_quote']); ?></td>
                                                         <td>
-                                                            <img src="/../<?php echo htmlspecialchars($project['project_image']) ?: 'default_image.jpg'; ?>" 
+                                                            <img src="<?php echo htmlspecialchars($project['project_image']) ?: 'default_image.jpg'; ?>" 
                                                                 style="height: 50px; width: 100px;">
                                                         </td>
                                                         <td><?php echo date("M d, Y h:i A", strtotime($project['created_at'])); ?></td>
