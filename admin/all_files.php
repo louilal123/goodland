@@ -307,7 +307,12 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
 
     </main>
 
-    <script>
+  
+
+</body>
+
+<?php include "includes/footer.php"; ?>
+<script>
     $(document).ready(function() {
         // When a delete button is clicked
         $('.deleteBtn').on('click', function() {
@@ -328,11 +333,6 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
         });
     });
 </script>
-
-
-</body>
-
-<?php include "includes/footer.php"; ?>
 
 <script type="text/javascript" src="mdbfolder/mdb.umd.min.js"></script>
 <script>
