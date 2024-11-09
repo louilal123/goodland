@@ -190,7 +190,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                     
 
                     <!-- Submit Button -->
-                    <button data-mdb-ripple-init type="submit" class="btn btn-primary">Save <i class="fas fa-arrow-right"></i></button>
+                    <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-end">Save <i class="fas fa-arrow-right"></i></button>
                 </form>
             </div>
         </div>
