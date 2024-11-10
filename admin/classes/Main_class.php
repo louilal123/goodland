@@ -29,6 +29,55 @@ class Main_class {
         }
     }
     
+    public function insertRandomData()
+    {
+        $tankNames = ['esawod_1', 'esawod_2'];
+        foreach ($tankNames as $tankName) {
+            // Generate random data for level, humidity, and temperature with float values
+            $level = mt_rand(0, 3600) / 100;  // Random level in cm (0 to 36) as float
+            $humidity = mt_rand(200, 400) / 10;  // Random humidity (20% to 40%) as float
+            $temperature = mt_rand(200, 400) / 10;  // Random temperature (20°C to 40°C) as float
+            $timestamp = date('Y-m-d H:i:s');  // Current timestamp
+    
+            // Prepare SQL query to insert data
+            $sql = "INSERT INTO sensor_data (kit_name, level_cm, humidity, temperature) 
+                    VALUES (:kit_name, :level_cm, :humidity, :temperature)";
+    
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(':kit_name', $tankName);
+            $stmt->bindParam(':level_cm', $level);
+            $stmt->bindParam(':humidity', $humidity);
+            $stmt->bindParam(':temperature', $temperature);
+            $stmt->bindParam(':timestamp', $timestamp);
+    
+            // Execute the statement
+            if ($stmt->execute()) {
+                echo "Random data inserted for $tankName.<br>";
+            } else {
+                echo "Failed to insert data for $tankName.<br>";
+            }
+        }
+    }
+    
+    public function getSensorData() {
+        $query = "
+            (SELECT `kit_name`, `level_cm`, `humidity`, `temperature`, `timestamp`
+            FROM `sensor_data`
+            WHERE `kit_name` = 'Kit A'
+            ORDER BY `timestamp` DESC LIMIT 1) 
+            UNION ALL 
+            (SELECT `kit_name`, `level_cm`, `humidity`, `temperature`, `timestamp`
+            FROM `sensor_data`
+            WHERE `kit_name` = 'Kit B'
+            ORDER BY `timestamp` DESC LIMIT 1)
+        ";  // Fetch the most recent data for Kit A and Kit B separately
+
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $data;  // Return the most recent data for both kits
+    }
     // calendar 
     public function getFileRequestsByVisitor($visitor_id) {
         $stmt = $this->pdo->prepare("SELECT request_id, file_id, email, status, request_date FROM file_requests WHERE visitor_id = ?");

@@ -115,7 +115,7 @@
           <li><a href="project" class=" <?= $page == 'project.php' ? 'active':'' ?>">PROJECTS</a></li>
           <li><a href="methodology" class=" <?= $page == 'methodology.php' ? 'active':'' ?>">METHODOLOGY</a></li>
          
-        <li><a href="catchments_locations" class=" <?= $page == 'catchments_locations.php' ? 'active':'' ?>" >WATER DATA</a> </li>
+        <li><a href="e-sawod-sensor" class=" <?= $page == 'e-sawod-sensor.php' ? 'active':'' ?>" >E-SAWOD</a> </li>
         <li><a href="events" class=" <?= $page == 'events.php' ? 'active':'' ?>">EVENTS</a></li>
           <li><a href="archives" class=" <?= $page == 'archives.php' ? 'active':'' ?>">ARCHIVES</a></li>
         </ul>
@@ -123,8 +123,7 @@
       </nav>
       
       <div class="d-flex align-items-center">
-      <!-- <a class="btn btn-getstarted btn-hide" href="admin/" style="
-">LOGIN</a> -->
+    
  <a class="btn btn-getstarted "  
  style="font-weight: 500 !important; background-color: linear-gradient(to right, #144D53,#0062cc) !important;opacity: 0.8; " 
  href="contactus"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"  viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
