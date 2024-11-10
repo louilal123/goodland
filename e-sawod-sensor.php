@@ -38,7 +38,7 @@
     <div class="row gy-4">
 
     <div class="col-md-6">
-    <div class="card bg-success">
+    <div class="card ">
         <div class="card-body">
             <h5>E-SAWOD 1</h5>
             <p id="esawod1-water-level">Water Level: -- cm</p>
@@ -49,7 +49,7 @@
 </div>
 
 <div class="col-md-6">
-    <div class="card bg-success">
+    <div class="card ">
         <div class="card-body">
             <h5>E-SAWOD 2</h5>
             <p id="esawod2-water-level">Water Level: -- cm</p>
