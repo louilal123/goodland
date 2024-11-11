@@ -1,3 +1,26 @@
+<?php
+
+include('classes/connection.php');
+
+// SQL query to fetch the latest data from sensor_data table
+$sql = "SELECT kit_name, level_cm, humidity, temperature, timestamp FROM sensor_data ORDER BY timestamp DESC ";
+$result = $conn->query($sql);
+
+// Check if there are results
+if ($result->num_rows > 0) {
+    // Output data of each row
+    $data = [];
+    while($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
+    echo json_encode($data); // Send data as JSON
+} else {
+    echo json_encode([]); // No data found
+}
+
+// Close the connection
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -112,43 +135,6 @@
 
   <?php include "includes/footer.php"; ?>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-  <script>
-        // Function to load data from PHP script
-        function fetchData() {
-            $.ajax({
-                url: 'classes/node_db.php', // PHP script that fetches data
-                method: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    // Clear existing table rows before inserting new data
-                    $('#sensorDataTable tbody').empty();
-
-                    // Loop through the data and append rows to the table
-                    data.forEach(function(row) {
-                        var newRow = '<tr>' +
-                            '<td>' + row.kit_name + '</td>' +
-                            '<td>' + row.level_cm + ' cm</td>' +
-                            '<td>' + row.humidity + ' %</td>' +
-                            '<td>' + row.temperature + ' °C</td>' +
-                            '<td>' + new Date(row.timestamp).toLocaleString() + '</td>' +
-                            '</tr>';
-                        $('#sensorDataTable tbody').append(newRow);
-                    });
-                },
-                error: function() {
-                    console.log("Error fetching data.");
-                }
-            });
-        }
-
-        // Fetch data initially
-        fetchData();
-
-        // Fetch new data every 5 seconds to keep the table updated
-        setInterval(fetchData, 5000);
-    </script>
-
  <script>
 $(document).ready(function() {
     // Function to fetch and display the latest data for esawod_1
@@ -207,75 +193,42 @@ $(document).ready(function() {
 });
 
 </script>
-  
- 
-  <script type="text/javascript">
-    $(document).ready(function() {
-    
-      var chartObj = new FusionCharts({
-        type: 'cylinder',
-        dataFormat: 'json',
-        renderAt: 'container',
-        width: '400',
-        height: '600',
-        dataSource: {
-          "chart": {
-            "theme": "fusion",
-            "caption": "Water Tank Level",
-            "captionFontColor": "#0062cc",
-            "subcaption": "Live Monitoring",
-            "lowerLimit": "0",
-            "upperLimit": "36",
-            "lowerLimitDisplay": "Empty",
-            "upperLimitDisplay": "Full",
-            "numberSuffix": " cm",
-            "showValue": "1",
-            "valueFontSize": "18",
-            "chartBottomMargin": "45",
-            "cylFillColor": "#87CEEB",
-            "cyloriginy": "300",
-            "use3DLighting": "0"
-          },
-          "value": "0" 
+  <script>
+        // Function to load data from PHP script
+        function fetchData() {
+            $.ajax({
+                url: 'classes/node_db.php', // PHP script that fetches data
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Clear existing table rows before inserting new data
+                    $('#sensorDataTable tbody').empty();
+
+                    // Loop through the data and append rows to the table
+                    data.forEach(function(row) {
+                        var newRow = '<tr>' +
+                            '<td>' + row.kit_name + '</td>' +
+                            '<td>' + row.level_cm + ' cm</td>' +
+                            '<td>' + row.humidity + ' %</td>' +
+                            '<td>' + row.temperature + ' °C</td>' +
+                            '<td>' + new Date(row.timestamp).toLocaleString() + '</td>' +
+                            '</tr>';
+                        $('#sensorDataTable tbody').append(newRow);
+                    });
+                },
+                error: function() {
+                    console.log("Error fetching data.");
+                }
+            });
         }
-      });
-      chartObj.render();
 
-      function updateChart() {
-        $.ajax({
-          url: 'https://localhost:3000/getLatestData', 
-          method: 'GET',
-          success: function(response) {
-            var level = response.level;
-            var color = level >= 31 ? '#dc3545' : (level <= 6 ? '#ffc107' : '#28a745');
-            
-            chartObj.setJSONData({
-              "chart": {
-                "value": level
-              }
-            });
+        // Fetch data initially
+        fetchData();
 
-            var annotations = chartObj.annotations;
-            annotations && annotations.update('rangeText', {
-              "text": "WL: " + level + " cm",
-              "bgAlpha": "100",
-              "bgColor": color
-            });
-            
-            annotations && annotations.update('rangeBg', {
-              "fillcolor": color
-            });
-          },
-          error: function() {
-            console.error('Error fetching data');
-          }
-        });
-      }
-
-      setInterval(updateChart, 5000);
-    });
-  </script>
-
+        // Fetch new data every 5 seconds to keep the table updated
+        setInterval(fetchData, 5000);
+    </script>
+ 
 </body>
 
 </html>
