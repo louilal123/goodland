@@ -40,8 +40,8 @@ class Main_class {
             $timestamp = date('Y-m-d H:i:s');  // Current timestamp
     
             // Prepare SQL query to insert data
-            $sql = "INSERT INTO sensor_data (kit_name, level_cm, humidity, temperature) 
-                    VALUES (:kit_name, :level_cm, :humidity, :temperature)";
+            $sql = "INSERT INTO sensor_data (kit_name, level_cm, humidity, temperature, timestamp) 
+                    VALUES (:kit_name, :level_cm, :humidity, :temperature, :timestamp)";
     
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindParam(':kit_name', $tankName);
