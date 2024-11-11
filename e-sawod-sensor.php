@@ -86,20 +86,7 @@
   </div>
 </section>
 
-    <!-- Values Section -->
-    <section id="" class="values section">
-      <div class="container">
-        <div class="row gy-4">
-          
-         <div class="col-md-6">
-            <div class="card">
-              <div class="card-body">
-                <!-- FusionCharts container -->
-                <div id="container"></div>
-              </div>
-            </div>
-          </div>
-         
+    
 
           
         </div>
@@ -112,33 +99,42 @@
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-        // Function to load data from PHP script
-        function fetchData() {
-            $.ajax({
-                url: 'classes/node_db.php', // PHP script that fetches data
-                method: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    // Clear existing table rows before inserting new data
-                    $('#sensorDataTable tbody').empty();
+       // Function to load data from PHP script
+function fetchData() {
+    $.ajax({
+        url: 'classes/node_db.php', // PHP script that fetches data
+        method: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            // Log the data for debugging
+            console.log('Data fetched from node_db.php:', data);
+            
+            // Clear existing table rows before inserting new data
+            $('#sensorDataTable tbody').empty();
 
-                    // Loop through the data and append rows to the table
-                    data.forEach(function(row) {
-                        var newRow = '<tr>' +
-                            '<td>' + row.kit_name + '</td>' +
-                            '<td>' + row.level_cm + ' cm</td>' +
-                            '<td>' + row.humidity + ' %</td>' +
-                            '<td>' + row.temperature + ' °C</td>' +
-                            '<td>' + new Date(row.timestamp).toLocaleString() + '</td>' +
-                            '</tr>';
-                        $('#sensorDataTable tbody').append(newRow);
-                    });
-                },
-                error: function() {
-                    console.log("Error fetching data.");
-                }
-            });
+            // Check if data is an array and contains items
+            if (Array.isArray(data) && data.length > 0) {
+                // Loop through the data and append rows to the table
+                data.forEach(function(row) {
+                    var newRow = '<tr>' +
+                        '<td>' + row.kit_name + '</td>' +
+                        '<td>' + (row.level_cm !== null ? row.level_cm + ' cm' : '--') + '</td>' +
+                        '<td>' + (row.humidity !== null ? row.humidity + ' %' : '--') + '</td>' +
+                        '<td>' + (row.temperature !== null ? row.temperature + ' °C' : '--') + '</td>' +
+                        '<td>' + new Date(row.timestamp).toLocaleString() + '</td>' +
+                        '</tr>';
+                    $('#sensorDataTable tbody').append(newRow);
+                });
+            } else {
+                console.log("No data to display.");
+            }
+        },
+        error: function(xhr, status, error) {
+            console.log("Error fetching data:", error);
         }
+    });
+}
+
 
         // Fetch data initially
         fetchData();
@@ -198,7 +194,7 @@ $(document).ready(function() {
     // Fetch data for both esawod_1 and esawod_2 on page load and update every 10 seconds
     fetchEsawod1Data();
     fetchEsawod2Data();
-    
+
     setInterval(function() {
         fetchEsawod1Data();
         fetchEsawod2Data();
