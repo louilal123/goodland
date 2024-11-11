@@ -1,5 +1,6 @@
 <?php
-// Include database connection
+
+header('Content-Type: application/json');
 include('connection.php');
 
 // SQL query to fetch the latest data from sensor_data table
