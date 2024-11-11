@@ -13,7 +13,7 @@ header('Content-Type: application/json');
 // define('DB_NAME', 'u510162695_goodland_db');
 // define('DB_CHARSET', 'utf8mb4'); 
 
-$servername = ""; 
+$servername = "157.230.193.209"; 
 $username = "root";               
 $password = "1goodland_v2";      
 $dbname = "u510162695_goodland_db"; 
