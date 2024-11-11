@@ -3,7 +3,7 @@
 
 <head>
   <?php include "includes/header.php"; ?>
-  <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body class="blog-page">
@@ -110,6 +110,7 @@
 
   <?php include "includes/footer.php"; ?>
 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
         // Function to load data from PHP script
         function fetchData() {
@@ -197,6 +198,7 @@ $(document).ready(function() {
     // Fetch data for both esawod_1 and esawod_2 on page load and update every 10 seconds
     fetchEsawod1Data();
     fetchEsawod2Data();
+    
     setInterval(function() {
         fetchEsawod1Data();
         fetchEsawod2Data();
