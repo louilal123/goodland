@@ -4,6 +4,8 @@
 <head>
   <?php include "includes/header.php"; ?>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+    <script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
 </head>
 
 <body class="blog-page">
@@ -86,7 +88,20 @@
   </div>
 </section>
 
-    
+    <!-- Values Section -->
+    <section id="" class="values section">
+      <div class="container">
+        <div class="row gy-4">
+          
+         <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <!-- FusionCharts container -->
+                <div id="container"></div>
+              </div>
+            </div>
+          </div>
+         
 
           
         </div>
@@ -96,45 +111,36 @@
   </main>
 
   <?php include "includes/footer.php"; ?>
-
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <script>
-       // Function to load data from PHP script
-function fetchData() {
-    $.ajax({
-        url: '/classes/node_db.php', // PHP script that fetches data
-        method: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            // Log the data for debugging
-            console.log('Data fetched from node_db.php:', data);
-            
-            // Clear existing table rows before inserting new data
-            $('#sensorDataTable tbody').empty();
+        // Function to load data from PHP script
+        function fetchData() {
+            $.ajax({
+                url: 'classes/node_db.php', // PHP script that fetches data
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Clear existing table rows before inserting new data
+                    $('#sensorDataTable tbody').empty();
 
-            // Check if data is an array and contains items
-            if (Array.isArray(data) && data.length > 0) {
-                // Loop through the data and append rows to the table
-                data.forEach(function(row) {
-                    var newRow = '<tr>' +
-                        '<td>' + row.kit_name + '</td>' +
-                        '<td>' + (row.level_cm !== null ? row.level_cm + ' cm' : '--') + '</td>' +
-                        '<td>' + (row.humidity !== null ? row.humidity + ' %' : '--') + '</td>' +
-                        '<td>' + (row.temperature !== null ? row.temperature + ' °C' : '--') + '</td>' +
-                        '<td>' + new Date(row.timestamp).toLocaleString() + '</td>' +
-                        '</tr>';
-                    $('#sensorDataTable tbody').append(newRow);
-                });
-            } else {
-                console.log("No data to display.");
-            }
-        },
-        error: function(xhr, status, error) {
-            console.log("Error fetching data:", error);
+                    // Loop through the data and append rows to the table
+                    data.forEach(function(row) {
+                        var newRow = '<tr>' +
+                            '<td>' + row.kit_name + '</td>' +
+                            '<td>' + row.level_cm + ' cm</td>' +
+                            '<td>' + row.humidity + ' %</td>' +
+                            '<td>' + row.temperature + ' °C</td>' +
+                            '<td>' + new Date(row.timestamp).toLocaleString() + '</td>' +
+                            '</tr>';
+                        $('#sensorDataTable tbody').append(newRow);
+                    });
+                },
+                error: function() {
+                    console.log("Error fetching data.");
+                }
+            });
         }
-    });
-}
-
 
         // Fetch data initially
         fetchData();
@@ -143,8 +149,132 @@ function fetchData() {
         setInterval(fetchData, 5000);
     </script>
 
+ <script>
+$(document).ready(function() {
+    // Function to fetch and display the latest data for esawod_1
+    function fetchEsawod1Data() {
+        $.ajax({
+            url: 'classes/fetch_esawod1.php',  // Path to the PHP file that fetches esawod_1 data
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                if (data['esawod_1']) {
+                    $('#esawod1-water-level').text('Water Level: ' + data['esawod_1'].level_cm + ' cm');
+                    $('#esawod1-temp').text('Temperature: ' + data['esawod_1'].temperature + '°C');
+                    $('#esawod1-humidity').text('Humidity: ' + data['esawod_1'].humidity + '%');
+                } else {
+                    $('#esawod1-water-level').text('No data for esawod_1');
+                    $('#esawod1-temp').text('No data for esawod_1');
+                    $('#esawod1-humidity').text('No data for esawod_1');
+                }
+            },
+            error: function(err) {
+                console.log('Error fetching esawod_1 data:', err);
+            }
+        });
+    }
+
+    // Function to fetch and display the latest data for esawod_2
+    function fetchEsawod2Data() {
+        $.ajax({
+            url: 'classes/fetch_esawod2.php',  // Path to the PHP file that fetches esawod_2 data
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                if (data['esawod_2']) {
+                    $('#esawod2-water-level').text('Water Level: ' + data['esawod_2'].level_cm + ' cm');
+                    $('#esawod2-temp').text('Temperature: ' + data['esawod_2'].temperature + '°C');
+                    $('#esawod2-humidity').text('Humidity: ' + data['esawod_2'].humidity + '%');
+                } else {
+                    $('#esawod2-water-level').text('No data for esawod_2');
+                    $('#esawod2-temp').text('No data for esawod_2');
+                    $('#esawod2-humidity').text('No data for esawod_2');
+                }
+            },
+            error: function(err) {
+                console.log('Error fetching esawod_2 data:', err);
+            }
+        });
+    }
+
+    // Fetch data for both esawod_1 and esawod_2 on page load and update every 10 seconds
+    fetchEsawod1Data();
+    fetchEsawod2Data();
+    setInterval(function() {
+        fetchEsawod1Data();
+        fetchEsawod2Data();
+    }, 10000);  // Refresh every 10 seconds
+});
+
+</script>
   
  
+  <script type="text/javascript">
+    $(document).ready(function() {
+    
+      var chartObj = new FusionCharts({
+        type: 'cylinder',
+        dataFormat: 'json',
+        renderAt: 'container',
+        width: '400',
+        height: '600',
+        dataSource: {
+          "chart": {
+            "theme": "fusion",
+            "caption": "Water Tank Level",
+            "captionFontColor": "#0062cc",
+            "subcaption": "Live Monitoring",
+            "lowerLimit": "0",
+            "upperLimit": "36",
+            "lowerLimitDisplay": "Empty",
+            "upperLimitDisplay": "Full",
+            "numberSuffix": " cm",
+            "showValue": "1",
+            "valueFontSize": "18",
+            "chartBottomMargin": "45",
+            "cylFillColor": "#87CEEB",
+            "cyloriginy": "300",
+            "use3DLighting": "0"
+          },
+          "value": "0" 
+        }
+      });
+      chartObj.render();
+
+      function updateChart() {
+        $.ajax({
+          url: 'https://localhost:3000/getLatestData', 
+          method: 'GET',
+          success: function(response) {
+            var level = response.level;
+            var color = level >= 31 ? '#dc3545' : (level <= 6 ? '#ffc107' : '#28a745');
+            
+            chartObj.setJSONData({
+              "chart": {
+                "value": level
+              }
+            });
+
+            var annotations = chartObj.annotations;
+            annotations && annotations.update('rangeText', {
+              "text": "WL: " + level + " cm",
+              "bgAlpha": "100",
+              "bgColor": color
+            });
+            
+            annotations && annotations.update('rangeBg', {
+              "fillcolor": color
+            });
+          },
+          error: function() {
+            console.error('Error fetching data');
+          }
+        });
+      }
+
+      setInterval(updateChart, 5000);
+    });
+  </script>
 
 </body>
 
