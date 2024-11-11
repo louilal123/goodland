@@ -1,6 +1,7 @@
 <?php
 // Database connection settings
 
+header('Content-Type: application/json');
 // $servername = "157.230.193.209"; 
 // $username = "root";               
 // $password = "1goodland_v2";      
