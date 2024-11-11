@@ -18,6 +18,5 @@ if ($result->num_rows > 0) {
     echo json_encode([]); // No data found
 }
 
-// Close the connection
 $conn->close();
 ?>
