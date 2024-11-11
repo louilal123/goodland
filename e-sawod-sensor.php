@@ -102,7 +102,7 @@
        // Function to load data from PHP script
 function fetchData() {
     $.ajax({
-        url: 'classes/node_db.php', // PHP script that fetches data
+        url: '/classes/node_db.php', // PHP script that fetches data
         method: 'GET',
         dataType: 'json',
         success: function(data) {
