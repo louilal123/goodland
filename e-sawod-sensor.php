@@ -479,7 +479,7 @@ $(document).ready(function() {
                 data.forEach(function(row) {
                     // Convert UTC timestamp to Cebu local time (UTC+8)
                     var localTime = new Date(row.timestamp);
-                    localTime.setHours(localTime.getHours() + 7); // Add 8 hours to convert to UTC+8
+                    localTime.setHours(localTime.getHours() + 8); // Add 8 hours to convert to UTC+8
 
                     var newRow = '<tr>' +
                         '<td>' + row.kit_name + '</td>' +
