@@ -348,7 +348,7 @@
             data.forEach(entry => {
                 // Add 7 hours to timestamp
                 const timestamp = new Date(entry.timestamp);
-                timestamp.setHours(timestamp.getHours() + 7);
+                timestamp.setHours(timestamp.getHours() + 8);
 
                 // Structure data based on kit_name
                 if (entry.kit_name === 'esawod_1') {
