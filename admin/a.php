@@ -94,7 +94,7 @@
                     } else {
                         colorVal = "#28a745"; // Green for mid level
                     }
-                    
+
                     annotations && annotations.update('rangeText', {
                         "text": "WL: " + dataVal + " cm",
                         "bgAlpha": "100",
@@ -113,6 +113,7 @@
         chartObj.render();
     });
 </script>
+<div id="container" style="width: 300px !important;"></div>
 
 <style>
     .fusioncharts-label {

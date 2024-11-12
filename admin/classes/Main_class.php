@@ -33,8 +33,9 @@ class Main_class {
     {
         $tankNames = ['esawod_1', 'esawod_2'];
         foreach ($tankNames as $tankName) {
-            // Generate random data for level, humidity, and temperature with float values
-            $level = mt_rand(0, 3600) / 100;  // Random level in cm (0 to 36) as float
+            // Generate random data for level, humidity, and temperature
+            // Ensure level is a whole number (integer) between 0 and 36
+            $level = mt_rand(0, 36);  // Random level in cm (0 to 36) as an integer
             $humidity = mt_rand(200, 400) / 10;  // Random humidity (20% to 40%) as float
             $temperature = mt_rand(200, 400) / 10;  // Random temperature (20°C to 40°C) as float
             $timestamp = date('Y-m-d H:i:s');  // Current timestamp
@@ -45,7 +46,7 @@ class Main_class {
     
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindParam(':kit_name', $tankName);
-            $stmt->bindParam(':level_cm', $level);
+            $stmt->bindParam(':level_cm', $level, PDO::PARAM_INT);  // Bind as integer
             $stmt->bindParam(':humidity', $humidity);
             $stmt->bindParam(':temperature', $temperature);
             $stmt->bindParam(':timestamp', $timestamp);
@@ -58,6 +59,7 @@ class Main_class {
             }
         }
     }
+    
     
     public function getSensorData() {
         $query = "
