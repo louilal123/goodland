@@ -29,6 +29,64 @@ class Main_class {
         }
     }
     
+    public function deleteVisitor($visitorId) {
+        try {
+            // Start a transaction to ensure all operations are executed together
+            $this->pdo->beginTransaction();
+
+            // Delete associated file requests first (to avoid foreign key constraint violation)
+            $stmt = $this->pdo->prepare("DELETE FROM file_requests WHERE visitor_id = :visitor_id");
+            $stmt->bindParam(':visitor_id', $visitorId);
+            $stmt->execute();
+
+            // Delete associated sessions
+            $stmt = $this->pdo->prepare("DELETE FROM sessions WHERE visitor_id = :visitor_id");
+            $stmt->bindParam(':visitor_id', $visitorId);
+            $stmt->execute();
+
+            // Delete the visitor record from the visitor_logs table
+            $stmt = $this->pdo->prepare("DELETE FROM visitor_logs WHERE visitor_id = :visitor_id");
+            $stmt->bindParam(':visitor_id', $visitorId);
+            $stmt->execute();
+
+            // Commit the transaction
+            $this->pdo->commit();
+        } catch (Exception $e) {
+            // Rollback in case of an error
+            $this->pdo->rollBack();
+            throw $e;
+        }
+    }
+
+    public function deleteAllFileRequests() {
+        try {
+            $stmt = $this->pdo->prepare("DELETE FROM file_requests");
+            $stmt->execute();
+        } catch (Exception $e) {
+            throw new Exception('Failed to delete file requests: ' . $e->getMessage());
+        }
+    }
+
+    // Method to delete all sessions
+    public function deleteAllSessions() {
+        try {
+            $stmt = $this->pdo->prepare("DELETE FROM sessions");
+            $stmt->execute();
+        } catch (Exception $e) {
+            throw new Exception('Failed to delete sessions: ' . $e->getMessage());
+        }
+    }
+
+    // Method to delete all visitors
+    public function deleteAllVisitors() {
+        try {
+            $stmt = $this->pdo->prepare("DELETE FROM visitor_logs");
+            $stmt->execute();
+        } catch (Exception $e) {
+            throw new Exception('Failed to delete visitors: ' . $e->getMessage());
+        }
+    }
+
     public function insertRandomData()
     {
         $tankNames = ['esawod_1', 'esawod_2'];
