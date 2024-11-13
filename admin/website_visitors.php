@@ -74,6 +74,8 @@
 </body>
 
 <?php include "includes/footer.php"; ?><script>
+    
+    
 $(document).ready(function() {
     $('.deleteBtn').on('click', function(e) {
         e.preventDefault(); // Prevent default link behavior
