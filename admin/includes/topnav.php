@@ -46,51 +46,52 @@
 
         <ul class="navbar-nav ms-auto">
 
-                    <li class="nav-item dropdown  me-2"> 
-                       <a class="nav-link" data-bs-toggle="dropdown" href="#"> 
-                            <i class="fas fa-envelope fa-lg"></i> 
-                            <span class="badge rounded-pill badge-notification bg-danger"><?php if (isset($unread_msgs_count) && $unread_msgs_count > 0): ?>
-    <?php echo htmlspecialchars($unread_msgs_count); ?>
-<?php endif; ?>
-</span>
-                        </a>
+        <li class="nav-item dropdown me-2"> 
+    <a class="nav-link" data-bs-toggle="dropdown" href="#"> 
+        <i class="fas fa-envelope fa-lg"></i> 
+        <span class="badge rounded-pill badge-notification bg-danger">
+            <?php if (isset($unread_msgs_count) && $unread_msgs_count > 0): ?>
+                <?php echo htmlspecialchars($unread_msgs_count); ?>
+            <?php endif; ?>
+        </span>
+    </a>
 
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-4 bg-white" style="width: 800px !important;">
-                                <div class="d-flex justify-content-between align-items-center w-100">
-                                    <h4 class="fw-bold text-dark">New Messages</h4>
-                                    <h4><span class="fas fa-envelope fa-lg"></span></h4>
-                                </div>
+    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-4 bg-white" style="width: 800px !important;">
+        <!-- Header Section -->
+        <div class="d-flex justify-content-between align-items-center w-100">
+            <h4 class="fw-bold text-primary">New Messages</h4>
+            <span class="fas fa-envelope fa-lg"></span>
+        </div>
 
-                            <div class="dropdown-divider"></div>
-                            
-                          <?php if (!empty($unread_msgs)): ?>
-                                <?php foreach ($unread_msgs as $message): ?>
-                                    <a href="#" class="dropdown-item bg-secondary-subtle" data-timestamp="<?= htmlspecialchars($message['date_sent']); ?>">
-                                        <div class="d-flex ">
-                                            <div class="flex-grow-1 ">
-                                                <h3 class="dropdown-item-title">
-                                                    <?= htmlspecialchars($message['name']); ?>
-                                                    <span class="float-end fs-7 text-danger"><i class="fas fa-star-fill"></i></span>
-                                                </h3>
-                                                <p class="fs-7"><?= htmlspecialchars($message['message']); ?></p>
-                                                <p class="fs-7 text-secondary  d-flex justify-content-end time-ago" data-datesent="<?= $message['date_sent']; ?>"></p>
-                                            </div>
-                                        </div> 
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <div class="dropdown-divider"></div> 
-                           
-                                <?php endforeach; ?>
-                                <a href="messages.php" class="btn btn-rounded btn-primary d-flex justify-content-center pt-2">See All Messages</a>
-                      
-                            <?php else: ?>
-                                <p class="dropdown-item d-flex justify-content-center p-4">No unread messages</p>
-                            <?php endif; ?>
+        <div class="dropdown-divider"></div>
+        
+        <!-- Message Items -->
+        <?php if (!empty($unread_msgs)): ?>
+            <?php foreach ($unread_msgs as $message): ?>
+                <a href="#" class="dropdown-item"> <!-- Begin Message -->
+                    <div class="d-flex">
+                        <div class="flex-grow-1">
+                            <h3 class="dropdown-item-title">
+                                <?= htmlspecialchars($message['name']); ?>
+                                <span class="float-end fs-7 text-danger"><i class="fas fa-star-fill"></i></span>
+                            </h3>
+                            <p class="fs-7"><?= htmlspecialchars($message['message']); ?></p>
+                            <p class="fs-7 text-secondary">
+                                <i class="fas fa-clock me-1"></i> 
+                                <span class="time-ago" data-datesent="<?= $message['date_sent']; ?>"></span>
+                            </p>
+                        </div>
+                    </div> 
+                </a>
+                <div class="dropdown-divider"></div>
+            <?php endforeach; ?>
+            <a href="messages.php" class="dropdown-item dropdown-footer text-primary justify-content-center">See All Messages</a>
+        <?php else: ?>
+            <p class="dropdown-item d-flex justify-content-center p-4">No unread messages</p>
+        <?php endif; ?>
+    </div>
+</li>
 
-                            
-                              </div>
-
-                    </li> 
                     <li class="nav-item dropdown"> 
                        <a class="nav-link" data-bs-toggle="dropdown" href="#"> 
                             <i class="fas fa-bell fa-lg"></i> 
