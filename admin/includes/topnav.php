@@ -73,11 +73,11 @@
                         <div class="flex-grow-1">
                             <h3 class="dropdown-item-title">
                                 <?= htmlspecialchars($message['name']); ?>
-                                <span class="float-end fs-7 text-danger"><i class="fas fa-star-fill"></i></span>
+                                <span class="float-end fs-7 text-danger"></span>
                             </h3>
                             <p class="fs-7"><?= htmlspecialchars($message['message']); ?></p>
                             <p class="fs-7 text-secondary">
-                                <i class="fas fa-clock me-1"></i> 
+                                <i class="bi bi-clock me-1"></i> 
                                 <span class="time-ago" data-datesent="<?= $message['date_sent']; ?>"></span>
                             </p>
                         </div>

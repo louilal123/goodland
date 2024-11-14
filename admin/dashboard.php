@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/lafeber/world-flags-sprite/stylesheets/flags32-both.css" />
       <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
 <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+ <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
    
 </head>
 <style>
@@ -373,105 +373,95 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    // Pass the PHP data to JavaScript
+    let visitorMonthlyData = <?php echo json_encode($visitorMonthlyData); ?>;
+    
     // Fetch monthly data from PHP
-    let monthlyData = <?php echo json_encode($monthlyData); ?>;
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get the current month (0 for January, 11 for December)
+        const currentMonth = new Date().getMonth(); // 0-based index for months
 
-    // Get the current month (0 for January, 11 for December)
-    const currentMonth = new Date().getMonth(); // 0-based index for months
+        // Define all month names
+        const allMonths = [
+            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        ];
 
-    // Define all month names
-    const allMonths = [
-        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-    ];
+        // Create a new array of categories that only includes months up to the current month
+        const categories = allMonths.slice(0, currentMonth + 1); // +1 to include the current month
 
-    // Create a new array of categories that only includes months up to the current month
-    const categories = allMonths.slice(0, currentMonth + 1); // +1 to include the current month
+        // Adjust monthly data to only include the relevant months
+        const adjustedNewVisitors = visitorMonthlyData.newVisitors.slice(0, currentMonth + 1);
+        const adjustedReturningVisitors = visitorMonthlyData.returningVisitors.slice(0, currentMonth + 1);
 
-    // Adjust monthly data to only include the relevant months
-    const adjustedWaterLevel = monthlyData.waterLevel.slice(0, currentMonth + 1);
-    const adjustedTemperature = monthlyData.temperature.slice(0, currentMonth + 1);
-    const adjustedHumidity = monthlyData.humidity.slice(0, currentMonth + 1);
-
-    // Render the chart
-    Highcharts.chart('containe', {
-        chart: {
-            zooming: {
-                type: 'xy'
-            },
-          
+        // Render the chart
+        Highcharts.chart('containe', {
+            chart: {
+                zooming: {
+                    type: 'xy'
+                },
                 options3d: {
-                enabled: true,
-                alpha: 10,
-                beta: 0}
-        },
-        title: {
-            text: 'Average Monthly Data from Water Catchment',
-            align: 'center'
-        },
-        subtitle: {
-            text: 'Source: <a href="#" target="_blank">GoodLand</a>',
-            align: 'center'
-        },
-        xAxis: [{
-            categories: categories,
-            crosshair: true
-        }],
-        yAxis: {
-            title: {
-                text: 'Measurements'
-            },
-            labels: {
-                formatter: function () {
-                    return this.value; // Show the raw values
+                    enabled: true,
+                    alpha: 10,
+                    beta: 0
                 }
-            }
-        },
-        tooltip: {
-            shared: true,
-            valueSuffix: ' units' // Adjust the suffix based on your data type
-        },
-        legend: {
-            align: 'center',
-            verticalAlign: 'top',
-            layout: 'horizontal',
-            backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
-        },
-        credits: {
-            enabled: false
-        },
-        series: [{
-            name: 'Water Level (cm)',
-            type: 'area',
-            color: '#0062cc',
-            data: adjustedWaterLevel,
+            },
+            title: {
+                text: 'Monthly Visitors (New vs Returning)',
+                align: 'center'
+            },
+            subtitle: {
+                text: 'Source: <a href="#" target="_blank">GoodLand</a>',
+                align: 'center'
+            },
+            xAxis: [{
+                categories: categories,
+                crosshair: true
+            }],
+            yAxis: {
+                title: {
+                    text: 'Visitor Count'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value; // Show the raw values
+                    }
+                }
+            },
             tooltip: {
-                valueSuffix: ' cm'
-            }
-        }, {
-            name: 'Temperature (°C)',
-            type: 'line',
-            color: '#dc3545',
-            data: adjustedTemperature,
-            tooltip: {
-                valueSuffix: ' °C'
-            }
-        }, {
-            name: 'Humidity (%)',
-            type: 'line',
-           color: '#ffc107',
-            data: adjustedHumidity,
-            tooltip: {
-                valueSuffix: ' %'
-            }
-        }]
+                shared: true,
+                valueSuffix: ' visitors' // Adjust the suffix based on your data type
+            },
+            legend: {
+                align: 'center',
+                verticalAlign: 'top',
+                layout: 'horizontal',
+                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'New Visitors',
+                type: 'column',
+                color: '#495057', // Green for new visitors
+                data: adjustedNewVisitors,
+                tooltip: {
+                    valueSuffix: ' visitors'
+                }
+            }, {
+                name: 'Returning Visitors',
+                type: 'column',
+                color: '#0062cc', // Red for returning visitors
+                data: adjustedReturningVisitors,
+                tooltip: {
+                    valueSuffix: ' visitors'
+                }
+            }]
+        });
     });
-});
-
 </script>
 
-  
 
 <script>
     // Fetch data from PHP

@@ -4,12 +4,11 @@
 <html lang="en"> 
 <?php include "includes/header.php"; ?>
 
-    <link rel="stylesheet" href="fullcalendar/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="fullcalendar/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="fullcalendar/fullcalendar/lib/main.min.css">
-    <script src="./fullcalendar/js/bootstrap.min.js"></script>
+    <!-- <script src="./fullcalendar/js/bootstrap.min.js"></script> -->
     <script src="./fullcalendar/fullcalendar/lib/main.min.js"></script>
    
-
 </head>
 <style>
     .btn-info.text-light:hover,
@@ -39,13 +38,13 @@
                     <div class="card">
                         <div class="card-body">
                         <div class=" card-header d-flex mb-3">
-                                <h1 class="fw-bold ">List Of Events</h1>
+                                <h3 class="fw-bold ">List Of Events</h3>
                                 <button type="button" class="btn btn-sm btn-primary ms-auto btn-rounded" data-bs-toggle="modal" data-bs-target="#addItemModal">
                                     <i class="fas fa-folder-plus"></i> Add New
                                 </button>
                             </div>
                             <hr>
-                            <div id="calendar" style="height: 50px !important;"></div>
+                            <div id="calendar"></div>
                         </div>
                     </div>
                 </div>

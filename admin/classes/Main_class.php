@@ -9,12 +9,81 @@ class Main_class extends Database {
         parent::__construct(); // Initialize the database connection
     }
     
+
+    public function getVisitorMonthlyData()
+{
+    // Query to get monthly new and returning visitors
+    $sql = "
+        SELECT 
+            MONTH(s.visit_time) AS month, 
+            COUNT(DISTINCT CASE WHEN s.visit_count = 1 THEN s.visitor_id ELSE NULL END) AS new_visitors,
+            COUNT(DISTINCT CASE WHEN s.visit_count > 1 THEN s.visitor_id ELSE NULL END) AS returning_visitors
+        FROM sessions s
+        LEFT JOIN visitor_logs vl ON s.visitor_id = vl.visitor_id
+        WHERE YEAR(s.visit_time) = YEAR(CURDATE())
+        GROUP BY MONTH(s.visit_time)";
+    
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Initialize arrays to store new and returning visitor counts for each month (1 to 12)
+    $visitorData = [
+        'newVisitors' => array_fill(0, 12, 0), // Initialize with 0 for all months
+        'returningVisitors' => array_fill(0, 12, 0)
+    ];
+
+    // Populate the data arrays with the actual results
+    foreach ($result as $row) {
+        $monthIndex = (int)$row['month'] - 1; // Convert to zero-based index
+        $visitorData['newVisitors'][$monthIndex] = (int)$row['new_visitors'];
+        $visitorData['returningVisitors'][$monthIndex] = (int)$row['returning_visitors'];
+    }
+
+    return $visitorData;
+}
+
+
+
     public function fetchEvents()
 {
     $sql = "SELECT event_id, event_name AS title, date_start AS start, date_end AS end FROM events "; // Adjust as needed
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+public function fetchMonthlyVisitorStats() {
+    // Query to count new and returning visitors grouped by month
+    $sql = "
+        SELECT 
+            MONTH(s.visit_time) AS month,
+            SUM(CASE WHEN s.visit_count = 1 THEN 1 ELSE 0 END) AS new_visitors,
+            SUM(CASE WHEN s.visit_count > 1 THEN 1 ELSE 0 END) AS returning_visitors
+        FROM 
+            sessions AS s
+        GROUP BY 
+            MONTH(s.visit_time)
+        ORDER BY 
+            MONTH(s.visit_time)";
+
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Prepare data arrays for chart
+    $monthlyData = [
+        'newVisitors' => array_fill(0, 12, 0), // Initialize with 12 months
+        'returningVisitors' => array_fill(0, 12, 0)
+    ];
+
+    foreach ($data as $row) {
+        $monthIndex = $row['month'] - 1; // Adjust month to 0-based index
+        $monthlyData['newVisitors'][$monthIndex] = (int)$row['new_visitors'];
+        $monthlyData['returningVisitors'][$monthIndex] = (int)$row['returning_visitors'];
+    }
+
+    return $monthlyData;
 }
 
     public function deleteVisitor($visitorId) {

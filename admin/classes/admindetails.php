@@ -24,17 +24,6 @@ $count_files = $mainClass->count_all_files();
 //FILES
 $all_files = $mainClass->all_files();
 $published_files = $mainClass->get_all_published_files();
-// $count_approved_files = $mainClass->count_all_approved_files();
-
-// $pending_files = $mainClass->get_all_pending_files();
-// $count_pending_files = $mainClass->count_all_pending_files();
-
-$unpublished_files = $mainClass->get_all_unpublished_files();
-// $count_declined_files = $mainClass->count_all_declined_files();
-
-
-// $recycled_files = $mainClass->get_all_recycled_files();
-// $count_recycled_files = $mainClass->count_all_recycled_files();
 
 $messages = $mainClass->get_all_messages();
 //table populate
@@ -79,5 +68,10 @@ $monthlyData = $mainClass->getMonthlyData();
 
 $data = $mainClass->getCatchmentData();
 $subscribers = $mainClass->getAllSubscribers();
+$visitorMonthlyData = $mainClass->getVisitorMonthlyData();
+
+?>
+
+
 
 
