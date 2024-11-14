@@ -6,7 +6,7 @@
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
           <a href="index.html" class="d-flex align-items-center">
-            <span class="sitename">GOODLand</span>
+            <span class="sitename text-light">GOODLand</span>
           </a>
           <div class="footer-contact pt-3">
             <p>Sitio 37st, Atop Atop</p>
@@ -209,21 +209,4 @@ unset($_SESSION['status_icon']);
         unset($_SESSION['status_icon1']);
     }
     ?> 
-    <!-- end  -->
-
-<!-- 
-<script
-    disable-devtool-auto
-    src='https://cdn.jsdelivr.net/npm/disable-devtool'
-    md5='xxx'
-    url='xxx'
-    tk-name='xxx'
-    interval='xxx'
-    disable-menu='xxx'
-    detectors='xxx'
-    clear-log='true'
-    disable-select='true'
-    disable-copy='true'
-    disable-cut='true'
-    disable-paste='true'
-></script> -->
+   

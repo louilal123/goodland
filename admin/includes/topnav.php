@@ -15,7 +15,8 @@
        border: 0px;
         border-radius: 0px !important;
     }
-   .card,  .small-box{
+   .card,
+      .small-box{
     border-radius: 0px !important;
    }
    

@@ -36,23 +36,24 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                     <div class="row mt-2">
                         <div class="col-md-12">
                             <div class="card mt-2">
-                                <div class="card-body">
-                                    <div class="d-flex mb-3">
+                            <div class="card-header bg-light d-flex ">
                                         <h3 class="fw-bold">List of Library Files</h3>
                                         <button type="button" class="btn btn-primary ms-auto me-1" data-bs-toggle="modal" data-bs-target="#addItemModal">
                                             <i class="fas fa-folder-plus"></i> ADD NEW
                                         </button>
                                     </div>
-                                    <table id="myTable" class="table table-bordered table-hover table-striped text-center w-100">
-                                        <thead class="table-secondary fw-bold">
+                                <div class="card-body">
+                                    
+                                    <table id="myTable" class=" table table-hover table-striped text-center w-100">
+                                        <thead class="">
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Title</th>
-                                                <th>Image</th>
-                                                <th>File Path</th>
-                                                <th>Status</th>
-                                                <th width="15%">Upload Date</th>
-                                                <th>Action</th>
+                                                <th style="font-weight: bold !important;">ID</th>
+                                                <th style="font-weight: bold !important;">Title</th>
+                                                <th style="font-weight: bold !important;">Image</th>
+                                                <th style="font-weight: bold !important;">File Path</th>
+                                                <th style="font-weight: bold !important;">Status</th>
+                                                <th style="font-weight: bold !important;" width="15%">Upload Date</th>
+                                                <th style="font-weight: bold !important;">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -262,7 +263,8 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                     </div>
 
                     <div class="modal-footer">
-                    <button  type="submit" class="btn btn-lg btn-primary btn-end">Save <i class="fas fa-arrow-right"></i></button>
+                         <button type="button" class="btn btn-secondary custombtn" data-bs-dismiss="modal">Close</button>
+                    <button  type="submit" class="btn  btn-primary btn-end">Save <i class="fas fa-arrow-right"></i></button>
               
                     </div>
 
@@ -336,7 +338,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
         Swal.fire({
             title: 'Are you sure?',
             text: 'This file will be deleted!',
-            icon: 'warning',
+            icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',

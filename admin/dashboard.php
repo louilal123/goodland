@@ -13,9 +13,11 @@
 
 <!-- Flag sprites service provided by Martijn Lafeber,
     https://github.com/lafeber/world-flags-sprite/blob/master/LICENSE -->
-    <link rel="stylesheet" type="text/css"
-      href="https://cdn.jsdelivr.net/gh/lafeber/world-flags-sprite/stylesheets/flags32-both.css" />
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/lafeber/world-flags-sprite/stylesheets/flags32-both.css" />
+      <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+<script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+   
 </head>
 <style>
 
@@ -261,16 +263,30 @@
                     </div> <!-- Close the first row -->
 
                     <div class="row mt-4"> <!-- New row for the next columns -->
-                        <div class="col-lg-7">
-                            <div class="card char p-4">
-                                <div id="container12"></div> <!-- Changed ID to be unique -->
-                            </div>
-                        </div> 
-                        <div class="col-lg-5">
-                            <div class="card char p-4">
-                                <div id="container1"></div> <!-- Changed ID to be unique -->
-                            </div>
-                        </div> 
+                    <div class="col-md-6 d-flex">
+      <div class="card">
+      <div  id="cylinder1"></div>
+      </div>
+      <div class="card ">
+          <div class="card-body">
+          
+              <!-- <p id="esawod1-water-level">Water Level: -- cm</p> -->
+              <h5 id="esawod1-temp"><span class="text-danger">Temperature: -- °C</span> </h5>
+              <h5 id="esawod1-humidity" ><span class="text-warning">Humidity: -- %</span></h5>
+          </div>
+      </div>
+  </div>
+
+<div class="col-md-6">
+    <div class="card ">
+        <div class="card-body">
+            <h5>E-SAWOD 2</h5>
+            <p id="esawod2-water-level">Water Level: -- cm</p>
+            <p id="esawod2-temp">Temperature: -- °C</p>
+            <p id="esawod2-humidity">Humidity: -- RH %</p>
+        </div>
+    </div>
+</div>
                     </div> 
 
 
@@ -283,6 +299,8 @@
         </div>
     </div>
     <?php include "includes/footer.php" ?>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+   
     <script>
 document.addEventListener('DOMContentLoaded', function () {
     // Define custom colors for each status
@@ -353,6 +371,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 </script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
     // Fetch monthly data from PHP
@@ -452,60 +471,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 </script>
 
-    <!-- container1  -->
-    <script>
-  Highcharts.chart('container1', {
-    chart: {
-        type: 'line'
-    },
-    title: {
-        text: 'Corn vs wheat estimated production for 2023',
-        align: 'left'
-    },
-    subtitle: {
-        text:
-            'Source: <a target="_blank" ' +
-            'href="https://www.indexmundi.com/agriculture/?commodity=corn">indexmundi</a>',
-        align: 'left'
-    },
-    xAxis: {
-        categories: ['USA', 'China', 'Brazil', 'EU', 'Argentina', 'India'],
-        crosshair: true,
-        accessibility: {
-            description: 'Countries'
-        }
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            text: '1000 metric tons (MT)'
-        }
-    },
-    tooltip: {
-        valueSuffix: ' (1000 MT)'
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
-        }
-    },
-    credits: {
-            enabled: false
-        },
-    series: [
-        {
-            name: 'Email-Verified',
-            data: [2, 4, 8, 1, 3, 2]
-        },
-        {
-            name: 'Non-Verified',
-            data: [2, 4, 5, 2, 3, 6]
-        }
-    ]
-});
-
-</script>
+  
 
 <script>
     // Fetch data from PHP
@@ -587,326 +553,225 @@ document.addEventListener('DOMContentLoaded', function () {
     renderChart(monthlyData);
 </script>
 
-<script>
-    // Data retrieved from https://gs.statcounter.com/browser-market-share#monthly-202201-202201-bar
 
-// Create the chart
-Highcharts.chart('container12', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        align: 'left',
-        text: 'Browser market shares. January, 2022'
-    },
-    subtitle: {
-        align: 'left',
-        text: 'Click the columns to view versions. Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
-    },
-    accessibility: {
-        announceNewData: {
-            enabled: true
-        }
-    },
-    xAxis: {
-        type: 'category'
-    },
-    yAxis: {
-        title: {
-            text: 'Total percent market share'
-        }
-
-    },
-    legend: {
-        enabled: false
-    },
-    plotOptions: {
-        series: {
-            borderWidth: 0,
-            dataLabels: {
-                enabled: true,
-                format: '{point.y:.1f}%'
-            }
-        }
-    },
-
-    tooltip: {
-        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-        pointFormat: '<span style="color:{point.color}">{point.name}</span>: ' +
-            '<b>{point.y:.2f}%</b> of total<br/>'
-    },
-
-    series: [
-        {
-            name: 'Browsers',
-            colorByPoint: true,
-            data: [
-                {
-                    name: 'Chrome',
-                    y: 63.06,
-                    drilldown: 'Chrome'
+<!-- FusionCharts -->
+<script type="text/javascript">
+    FusionCharts.ready(function(){
+        var chartObj = new FusionCharts({
+            type: 'cylinder',
+            dataFormat: 'json',
+            renderAt: 'cylinder1',
+            width: '200',
+            height: '350',
+            dataSource: {
+                "chart": {
+                    "theme": "fusion",
+                    "caption": "E-SAWOD 1",
+                    "captionFontColor": "#0062cc",
+                    "subcaption": "Live Monitoring",
+                    "lowerLimit": "0",
+                    "upperLimit": "30", // Maximum water level of 30 cm
+                    "lowerLimitDisplay": "Empty",
+                    "upperLimitDisplay": "Full",
+                    "numberSuffix": " cm",
+                    "showValue": "1",
+                    "valueFontSize": "18",
+                    "chartBottomMargin": "45",
+                    "cylFillColor": "#87CEEB", // Sky Blue color
+                    "cyloriginy": "300",
+                    "use3DLighting": "0"
                 },
-                {
-                    name: 'Safari',
-                    y: 19.84,
-                    drilldown: 'Safari'
-                },
-                {
-                    name: 'Firefox',
-                    y: 4.18,
-                    drilldown: 'Firefox'
-                },
-                {
-                    name: 'Edge',
-                    y: 4.12,
-                    drilldown: 'Edge'
-                },
-                {
-                    name: 'Opera',
-                    y: 2.33,
-                    drilldown: 'Opera'
-                },
-                {
-                    name: 'Internet Explorer',
-                    y: 0.45,
-                    drilldown: 'Internet Explorer'
-                },
-                {
-                    name: 'Other',
-                    y: 1.582,
-                    drilldown: null
+                "value": "18", // Initial value
+                "annotations": {
+                    "origw": "500",
+                    "origh": "40",
+                    "autoscale": "1",
+                    "groups": [{
+                        "id": "range",
+                        "items": [{
+                            "id": "rangeBg",
+                            "type": "rectangle",
+                            "x": "$canvasCenterX-45",
+                            "y": "$chartEndY-30",
+                            "tox": "$canvasCenterX +45",
+                            "toy": "$chartEndY-75",
+                            "fillcolor": "#0062cc"
+                        }, {
+                            "id": "rangeText",
+                            "type": "Text",
+                            "fontSize": "11",
+                            "fillcolor": "#333333",
+                            "text": "Current Level",
+                            "x": "$chartCenterX-45",
+                            "y": "$chartEndY-50"
+                        }]
+                    }]
                 }
-            ]
-        }
-    ],
-    drilldown: {
-        breadcrumbs: {
-            position: {
-                align: 'right'
+            },
+            "events": {
+                "rendered": function(evtObj, argObj) {
+                    var gaugeRef = evtObj.sender;
+
+                    // Function to update the water level on the FusionCharts cylinder
+                    function updateWaterLevel() {
+                        $.ajax({
+                            url: '../classes/fetch1.php',  // PHP file for e-sawod_1 data
+                            type: 'GET',
+                            success: function(response) {
+                                var data = JSON.parse(response);
+                                var newLevel = data.value;  // The water level data returned from PHP
+                                
+                                // Ensure the value is within the acceptable range (0–30)
+                                if (newLevel < 0) newLevel = 0;
+                                if (newLevel > 30) newLevel = 30;
+
+                                // Update the FusionCharts gauge with the new water level value
+                                gaugeRef.feedData("&value=" + newLevel);
+                                updateAnnotations(gaugeRef, newLevel);  // Update annotations (optional)
+                            }
+                        });
+                    }
+
+                    // Initial update
+                    updateWaterLevel();
+
+                    // Update the water level every 5 seconds (5000ms)
+                    setInterval(updateWaterLevel, 5000);  // Update every 5 seconds
+                },
+                "realTimeUpdateComplete": function(evt, arg) {
+                    // This function updates the annotation and color based on the water level value
+                    var annotations = evt.sender.annotations,
+                        dataVal = evt.sender.getData(),
+                        colorVal;
+
+                    // Assign colors based on water level
+                    if (dataVal >= 30) {
+                        colorVal = "#dc3545"; // Red for full level
+                    } else if (dataVal <= 12) {
+                        colorVal = "#ffc107"; // Yellow for low level
+                    } else {
+                        colorVal = "#28a745"; // Green for mid level
+                    }
+
+                    // Update annotations and background color of the cylinder
+                    annotations && annotations.update('rangeText', {
+                        "text": "WL: " + dataVal + " cm",
+                        "bgAlpha": "100",
+                        "bgColor": colorVal
+                    });
+                    
+                    annotations && annotations.update('rangeBg', {
+                        "fillcolor": colorVal
+                    });
+                },
+                "disposed": function(evt, arg) {
+                    clearInterval(evt.sender.chartInterval);
+                }
             }
-        },
-        series: [
-            {
-                name: 'Chrome',
-                id: 'Chrome',
-                data: [
-                    [
-                        'v65.0',
-                        0.1
-                    ],
-                    [
-                        'v64.0',
-                        1.3
-                    ],
-                    [
-                        'v63.0',
-                        53.02
-                    ],
-                    [
-                        'v62.0',
-                        1.4
-                    ],
-                    [
-                        'v61.0',
-                        0.88
-                    ],
-                    [
-                        'v60.0',
-                        0.56
-                    ],
-                    [
-                        'v59.0',
-                        0.45
-                    ],
-                    [
-                        'v58.0',
-                        0.49
-                    ],
-                    [
-                        'v57.0',
-                        0.32
-                    ],
-                    [
-                        'v56.0',
-                        0.29
-                    ],
-                    [
-                        'v55.0',
-                        0.79
-                    ],
-                    [
-                        'v54.0',
-                        0.18
-                    ],
-                    [
-                        'v51.0',
-                        0.13
-                    ],
-                    [
-                        'v49.0',
-                        2.16
-                    ],
-                    [
-                        'v48.0',
-                        0.13
-                    ],
-                    [
-                        'v47.0',
-                        0.11
-                    ],
-                    [
-                        'v43.0',
-                        0.17
-                    ],
-                    [
-                        'v29.0',
-                        0.26
-                    ]
-                ]
+        });
+
+        // Render the FusionCharts gauge
+        chartObj.render();
+    });
+</script>
+
+<script>
+$(document).ready(function() {
+    // Function to fetch and display the latest data for esawod_1
+    function fetchEsawod1Data() {
+        $.ajax({
+            url: '/../classes/fetch_esawod1.php',  // Path to the PHP file that fetches esawod_1 data
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                if (data['esawod_1']) {
+                    $('#esawod1-water-level').text('Water Level: ' + data['esawod_1'].level_cm + ' cm');
+                    $('#esawod1-temp').text('Temperature: ' + data['esawod_1'].temperature + '°C');
+                    $('#esawod1-humidity').text('Humidity: ' + data['esawod_1'].humidity + '%');
+                } else {
+                    $('#esawod1-water-level').text('No data for esawod_1');
+                    $('#esawod1-temp').text('No data for esawod_1');
+                    $('#esawod1-humidity').text('No data for esawod_1');
+                }
             },
-            {
-                name: 'Firefox',
-                id: 'Firefox',
-                data: [
-                    [
-                        'v58.0',
-                        1.02
-                    ],
-                    [
-                        'v57.0',
-                        7.36
-                    ],
-                    [
-                        'v56.0',
-                        0.35
-                    ],
-                    [
-                        'v55.0',
-                        0.11
-                    ],
-                    [
-                        'v54.0',
-                        0.1
-                    ],
-                    [
-                        'v52.0',
-                        0.95
-                    ],
-                    [
-                        'v51.0',
-                        0.15
-                    ],
-                    [
-                        'v50.0',
-                        0.1
-                    ],
-                    [
-                        'v48.0',
-                        0.31
-                    ],
-                    [
-                        'v47.0',
-                        0.12
-                    ]
-                ]
-            },
-            {
-                name: 'Internet Explorer',
-                id: 'Internet Explorer',
-                data: [
-                    [
-                        'v11.0',
-                        6.2
-                    ],
-                    [
-                        'v10.0',
-                        0.29
-                    ],
-                    [
-                        'v9.0',
-                        0.27
-                    ],
-                    [
-                        'v8.0',
-                        0.47
-                    ]
-                ]
-            },
-            {
-                name: 'Safari',
-                id: 'Safari',
-                data: [
-                    [
-                        'v11.0',
-                        3.39
-                    ],
-                    [
-                        'v10.1',
-                        0.96
-                    ],
-                    [
-                        'v10.0',
-                        0.36
-                    ],
-                    [
-                        'v9.1',
-                        0.54
-                    ],
-                    [
-                        'v9.0',
-                        0.13
-                    ],
-                    [
-                        'v5.1',
-                        0.2
-                    ]
-                ]
-            },
-            {
-                name: 'Edge',
-                id: 'Edge',
-                data: [
-                    [
-                        'v16',
-                        2.6
-                    ],
-                    [
-                        'v15',
-                        0.92
-                    ],
-                    [
-                        'v14',
-                        0.4
-                    ],
-                    [
-                        'v13',
-                        0.1
-                    ]
-                ]
-            },
-            {
-                name: 'Opera',
-                id: 'Opera',
-                data: [
-                    [
-                        'v50.0',
-                        0.96
-                    ],
-                    [
-                        'v49.0',
-                        0.82
-                    ],
-                    [
-                        'v12.1',
-                        0.14
-                    ]
-                ]
+            error: function(err) {
+                console.log('Error fetching esawod_1 data:', err);
             }
-        ]
+        });
     }
+
+    // Function to fetch and display the latest data for esawod_2
+    function fetchEsawod2Data() {
+        $.ajax({
+            url: '/../classes/fetch_esawod2.php',  // Path to the PHP file that fetches esawod_2 data
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                if (data['esawod_2']) {
+                    $('#esawod2-water-level').text('Water Level: ' + data['esawod_2'].level_cm + ' cm');
+                    $('#esawod2-temp').text('Temperature: ' + data['esawod_2'].temperature + '°C');
+                    $('#esawod2-humidity').text('Humidity: ' + data['esawod_2'].humidity + '%');
+                } else {
+                    $('#esawod2-water-level').text('No data for esawod_2');
+                    $('#esawod2-temp').text('No data for esawod_2');
+                    $('#esawod2-humidity').text('No data for esawod_2');
+                }
+            },
+            error: function(err) {
+                console.log('Error fetching esawod_2 data:', err);
+            }
+        });
+    }
+
+    fetchEsawod1Data();
+    fetchEsawod2Data();
+    setInterval(function() {
+        fetchEsawod1Data();
+        fetchEsawod2Data();
+    }, 5000);  // Refresh every 10 seconds
 });
 
 </script>
+<script>
+    // Function to load data from PHP script
+    function fetchData() {
+        $.ajax({
+            url: '../classes/node_db.php', // PHP script that fetches data
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                // Clear existing table rows before inserting new data
+                $('#sensorDataTable tbody').empty();
+
+                // Loop through the data and append rows to the table
+                data.forEach(function(row) {
+                    // Convert UTC timestamp to Cebu local time (UTC+8)
+                    var localTime = new Date(row.timestamp);
+                    localTime.setHours(localTime.getHours() + 8); // Add 8 hours to convert to UTC+8
+
+                    var newRow = '<tr>' +
+                        '<td>' + row.kit_name + '</td>' +
+                        '<td>' + row.level_cm + ' cm</td>' +
+                        '<td>' + row.humidity + ' %</td>' +
+                        '<td>' + row.temperature + ' °C</td>' +
+                        '<td>' + localTime.toLocaleString() + '</td>' + // Show local time
+                        '</tr>';
+                    $('#sensorDataTable tbody').append(newRow);
+                });
+            },
+            error: function() {
+                console.log("Error fetching data.");
+            }
+        });
+    }
+
+    // Fetch data initially
+    fetchData();
+
+    // Fetch new data every 5 seconds to keep the table updated
+    setInterval(fetchData, 5000);
+</script>
+
 
     <script>
        document.addEventListener("DOMContentLoaded", function() {

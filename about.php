@@ -16,11 +16,12 @@
 
     <!-- Page Title -->
     <div class="page-title ">
-      <div class="heading "style="background-size: cover; background-position: center;background: linear-gradient(to top, rgba(38, 37, 37, 1), rgba(22, 22, 22, 0.8));z-index: -1;">
+      <div class="heading "style=" background-position: center;
+      background: url(images/trytrytry.png);background-repeat: no-repeat; background-size: cover;z-index: -1;">
         <div class="container ">
           <div class="row d-flex justify-content-center text-center">
             <div class="col-lg-8">
-              <br><br>
+              
               <h1 class="text-warning">Get To Know Goodland</h1>
               <!-- <p class="mb-0"></p> -->
             </div>
@@ -51,7 +52,7 @@
    <div class="container">
             <div class="row gy-4">
              
-              <div class="col-lg-6 order-1 order-lg-2 hero-img d-flex flex-column justify-content-center" data-aos="zoom-out">
+              <div class="col-lg-6 order-1 order-lg-2 hero-img d-flex flex-column justify-content-center" data-aos="zoom-in-left">
                 <img src="assets/img/landingbg.png"  class="img-fluid" >
               </div>
               <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center ">
@@ -72,7 +73,7 @@
     <section id="team" class="team section">
 
       <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
+      <div class="container section-title" data-aos="fade-right">
         <h1 style="font-size:1.5rem; ">In this intersection of artistic practice and resiliency-building, the Art Lab draws on art’s capacity to bring people together and foster dialogue about big issues ​while GOODLand furthers this sense of collective action to work with communities turning dialogue into tangible results.</h1>
       </div><!-- End Section Title -->
 
@@ -82,7 +83,7 @@
 
           <div class="col-lg-4 col-md-12 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="team-member">
-              <div class="member-img1">
+              <div class="member-img1 p-2 bg-primary border-2">
                 <img src="assets/img/team/a1.png" style="height: 100px; width: 100px;" class="img-fluid" alt="">
             
               </div>
@@ -95,7 +96,7 @@
 
           <div class="col-lg-4 col-md-12 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
             <div class="team-member">
-              <div class="member-img1">
+              <div class="member-img1 p-2 bg-primary border-2">
                 <img src="assets/img/team/a2.png" style="height: 100px; width: 100px;" class="img-fluid" alt="">
             
               </div>
@@ -107,7 +108,7 @@
 
           <div class="col-lg-4 col-md-12 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
             <div class="team-member">
-              <div class="member-img1">
+              <div class="member-img1 p-2 bg-primary border-2">
                 <img src="assets/img/team/a3.png" style="height: 100px; width: 100px;" class="img-fluid" alt="">
             
               </div>
@@ -134,7 +135,7 @@
 
           <div class="row row-cols-1 row-cols-md-4 g-4">
             <div class="col" >
-              <div class="card  ">
+              <div class="card  " data-aos="zoom-out-down">
                 <img src="images/mayett.jpg" class="card-img-top" alt="Martha Atienza" style="height: 250px; object-fit: cover;">
                 <div class="card-body">
                   <h5 class="card-title">Martha Atienza</h5>
@@ -144,7 +145,7 @@
               </div>
             </div>
             <div class="col">
-              <div class="card  ">
+              <div class="card  "data-aos="zoom-out-down">
                 <img src="images/jake.jpg" class="card-img-top" alt="Jake Atienza" style="height: 250px; object-fit: cover;">
                 <div class="card-body">
                   <h5 class="card-title">Jake Atienza</h5>
@@ -154,7 +155,7 @@
               </div>
             </div>
             <div class="col">
-              <div class="card  ">
+              <div class="card  " data-aos="zoom-out-down">
                 <img src="images/bihiyaa.jpg" class="card-img-top" alt="Bihiya Warriors" style="height: 250px; object-fit: cover;">
                 <div class="card-body">
                   <h5 class="card-title">Bihiya Warriors</h5>
@@ -164,7 +165,7 @@
               </div>
             </div>
             <div class="col">
-              <div class="card  ">
+              <div class="card  " data-aos="zoom-out-down">
                 <img src="images/caster.jpg" class="card-img-top" alt="John Ortega" style="height: 250px; object-fit: cover;">
                 <div class="card-body">
                   <h5 class="card-title">John Ortega</h5>
@@ -174,7 +175,7 @@
               </div>
             </div>
             <div class="col">
-              <div class="card  ">
+              <div class="card  " data-aos="zoom-out-down">
                 <img src="images/joni.jpg" class="card-img-top" alt="Ramon Alontaga" style="height: 250px; object-fit: cover;">
                 <div class="card-body">
                   <h5 class="card-title">Ramon Alontaga</h5>

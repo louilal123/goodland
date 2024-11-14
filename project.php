@@ -22,7 +22,6 @@
     <div class="container ">
           <div class="row d-flex justify-content-center text-center">
             <div class="col-lg-8">
-              <br><br>
               <h1 class="text-warning">Our Projects</h1>
               <!-- <p class="mb-0"></p> -->
             </div>

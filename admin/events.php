@@ -1,14 +1,27 @@
-﻿<?php include "classes/admindetails.php";
-?>
+﻿<?php include "classes/admindetails.php";?>
 
 <!DOCTYPE html>
 <html lang="en"> 
 <?php include "includes/header.php"; ?>
 
-
+    <link rel="stylesheet" href="fullcalendar/css/bootstrap.min.css">
+    <link rel="stylesheet" href="fullcalendar/fullcalendar/lib/main.min.css">
+    <script src="./fullcalendar/js/bootstrap.min.js"></script>
+    <script src="./fullcalendar/fullcalendar/lib/main.min.js"></script>
+   
 
 </head>
-
+<style>
+    .btn-info.text-light:hover,
+        .btn-info.text-light:focus {
+            background: #000;
+        }
+        table, tbody, td, tfoot, th, thead, tr {
+            border-color: #ededed !important;
+            border-style: solid;
+            border-width: 1px !important;
+        }
+</style>
 <body class="layout-fixed-complete sidebar-expand-lg sidebar-mini bg-body-tertiary" style="overflow: hidden !important;" >
 
     <div class="app-wrapper">
@@ -25,14 +38,14 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                        <div class=" -header d-flex mb-3">
+                        <div class=" card-header d-flex mb-3">
                                 <h1 class="fw-bold ">List Of Events</h1>
                                 <button type="button" class="btn btn-sm btn-primary ms-auto btn-rounded" data-bs-toggle="modal" data-bs-target="#addItemModal">
                                     <i class="fas fa-folder-plus"></i> Add New
                                 </button>
                             </div>
                             <hr>
-                            <div id="calendar" style="height: 100px !important;"></div>
+                            <div id="calendar" style="height: 50px !important;"></div>
                         </div>
                     </div>
                 </div>
@@ -46,15 +59,13 @@
                             <table id="myTable" class="table ed table-hover table-striped text-center w-100">
                                 <thead class="table-secondary">
                                     <tr class="text-black fw-bold">
-                                        <th style="font-weight: bold !important;">Id</th>
+                                      
                                         <th style="font-weight: bold !important;">Event Name</th>
-                                        <th style="font-weight: bold !important;">Event Photo</th>
-                                        <th style="font-weight: bold !important;">Description</th>
+                                      
                                         <th style="font-weight: bold !important;">Start Date</th>
                                         <th style="font-weight: bold !important;">End Date</th>
                                         <th style="font-weight: bold !important;">Status</th>
-                                        <th style="font-weight: bold !important;">Organized By:</th>
-                                        <th style="font-weight: bold !important;">Location</th>
+                                      
                                         <th style="font-weight: bold !important;">Action</th>
                                     </tr>
                                 </thead>
@@ -62,13 +73,9 @@
                                     <?php foreach ($events_list as $item): ?>
                                         <tr>
                                             <!-- SELECT `event_id`, `event_name`, `description`, `location`, `created_at`, `updated_at`, `event_photo`, `status`, `date_start`, `date_end` FROM `events` WHERE 1 -->
-                                            <td><?php echo htmlspecialchars($item['event_id']); ?></td>
+                                           
                                             <td><?php echo htmlspecialchars($item['event_name']); ?></td>
-                                            <td>
-                                                <img src="<?php echo htmlspecialchars($item['event_photo']); ?>" style="width: 50px; height: 35px;">
-                                            </td>
-                                            <td><?php echo htmlspecialchars($item['description']); ?></td>
-                                            <td><?php echo date("M d, Y", strtotime($item['date_start'])); ?></td>
+                                           <td><?php echo date("M d, Y", strtotime($item['date_start'])); ?></td>
                                             <td><?php echo date("M d, Y", strtotime($item['date_end'])); ?></td>
                                            
                                             <td>  
@@ -82,8 +89,7 @@
                                                 <span class="badge bg-danger">Cancelled</span>
                                             <?php endif; ?> 
                                         </td>
-                                        <td><?php echo htmlspecialchars($item['organizer']); ?></td>
-                                            <td><?php echo htmlspecialchars($item['location']); ?></td>
+                                       
                                             <td>
                                                 <a href="" class="btn btn-info btn-sm deleteMessageBtn" 
                                                     data-message-id="" data-bs-toggle="modal" 
@@ -207,12 +213,10 @@
         </div>
     </div>
     <?php include "includes/footer.php" ?>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.min.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
    
-   // Show the modal if there is form data from session
    <?php if (isset($_SESSION['form_data'])): ?>
    var myModal = new bootstrap.Modal(document.getElementById('addItemModal'), {
        backdrop: 'static'
@@ -225,49 +229,24 @@
 });
 
 </script>
+<?php
+$event = $mainClass->fetchEvents();
+$events = [];
+foreach($event as $row){
+    // Prepare raw datetime for start and end in ISO format
+    $row['start_datetime'] = date("Y-m-d\TH:i:s", strtotime($row['start_datetime']));
+    $row['end_datetime'] = date("Y-m-d\TH:i:s", strtotime($row['end_datetime']));
+    $events[] = $row;
+}
+?>
 
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const calendarEl = document.getElementById('calendar');
-    
-    const calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        height: 400,
-        events: 'classes/get_events.php', // Load events via AJAX
-        
-        // Customize event display
-        eventContent: function(arg) {
-            const { title, extendedProps } = arg.event;
-            const { location, description } = extendedProps;
-            
-            // Create a container for custom content
-            const contentEl = document.createElement('div');
-            contentEl.classList.add('fc-event-content');
-
-            // Add the event title, location, and description
-            contentEl.innerHTML = `
-                <div><strong>${title}</strong></div>
-                <div>${location}</div>
-                <div>${description}</div>
-            `;
-            return { domNodes: [contentEl] };
-        },
-        
-        // Optional: Click to see event details
-        eventClick: function(info) {
-            alert('Event: ' + info.event.title + 
-                  '\nLocation: ' + info.event.extendedProps.location + 
-                  '\nDescription: ' + info.event.extendedProps.description);
-        }
-    });
-
-    calendar.render();
-});
+    // Directly pass the events to JavaScript (no need for parseJSON)
+    var calendarEvents = <?= json_encode($events) ?>;
 </script>
 
+<script src="./fullcalendar/js/script.js"></script>
 
-   
 </body>
 
 </html>
