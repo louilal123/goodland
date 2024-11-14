@@ -42,6 +42,20 @@ class Main_class extends Database {
 
     return $visitorData;
 }
+public function getTotalReturningVisitors()
+{
+    // Query to count the total number of returning visitors (those with visit_count > 1)
+    $sql = "
+        SELECT COUNT(DISTINCT s.visitor_id) AS returning_visitors_count
+        FROM sessions s
+        LEFT JOIN visitor_logs vl ON s.visitor_id = vl.visitor_id
+        WHERE s.visit_count > 1 AND YEAR(s.visit_time) = YEAR(CURDATE())";
+    
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return (int)$result['returning_visitors_count'];
+}
 
 
 
