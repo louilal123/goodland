@@ -42,6 +42,17 @@ class Main_class extends Database {
 
     return $visitorData;
 }
+
+
+// Inside the class
+public function getSessionsByVisitorId($visitorId) {
+    $sql = "SELECT * FROM sessions WHERE visitor_id = :visitor_id";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute(['visitor_id' => $visitorId]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
 public function getTotalReturningVisitors()
 {
     // Query to count the total number of returning visitors (those with visit_count > 1)
@@ -410,12 +421,48 @@ public function getFileById($fileId) {
         return $result['count'];
     }
     
-    public function getAllVisitors() {
-        $sql = "SELECT * FROM visitor_logs ORDER BY date_added asc";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+
+    // Method to fetch messages based on visitor_id
+public function getMessagesByVisitorId($visitorId) {
+    $sql = "SELECT * FROM messages WHERE visitor_id = :visitor_id ORDER BY created_at DESC";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute(['visitor_id' => $visitorId]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+public function getFileRequestsByVisitorId($visitorId) {
+    // SQL query with JOIN to fetch file details along with the file requests
+    $sql = "
+        SELECT fr.request_id, fr.file_id, fr.visitor_id, fr.email, fr.request_date, f.title, f.file_path 
+        FROM file_requests fr
+        JOIN files f ON fr.file_id = f.id
+        WHERE fr.visitor_id = :visitor_id
+    ";
+    
+    // Prepare and execute the query
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute(['visitor_id' => $visitorId]);
+    
+    // Return the results as an associative array
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+
+  public function getAllVisitors() {
+    $sql = "
+        SELECT vl.visitor_id, vl.ip_address, vl.user_agent, vl.country, vl.date_added,
+               s.session_id, s.visit_time, s.last_visit, s.visit_count
+        FROM visitor_logs vl
+        LEFT JOIN sessions s ON vl.visitor_id = s.visitor_id
+        WHERE DATE(s.visit_time) = CURDATE() -- Fetch only today's sessions
+        ORDER BY vl.date_added ASC
+    ";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
     // <!-- SELECT `data_id`, `water_level`, `humidity`, `temperature`, `date_time` FROM `catchment_data` WHERE 1 -->
                    
     public function  getCatchmentData() {
