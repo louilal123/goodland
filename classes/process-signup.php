@@ -11,7 +11,7 @@ $username = 'user_' . $random_number;
 
 if ($main->register_user($name, $email, $password, $activation_token_hash, $username)) {
      // Send activation email
-     $mail = require __DIR__ . "/../mailer.php";
+     $mail = require __DIR__ . "/mailer.php";
      $mail->setFrom("rubinlouie41@gmail.com");
      $mail->addAddress($email); 
      $mail->Subject = "Account Activation";
