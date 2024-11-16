@@ -22,8 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['error_description'] = "Description is required.";
         $hasError = true;
     }
-       // Validate description
-       if (empty($status)) {
+
+    // Validate status
+    if (empty($status)) {
         $_SESSION['error_status'] = "Status is required.";
         $hasError = true;
     }
@@ -32,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $coverPath = '';
     $filePath = '';
 
-    // Validate cover image
+    // Validate cover image (no change here)
     if (!empty($_FILES['cover']['name'])) {
         $coverTmpPath = $_FILES['cover']['tmp_name'];
         $coverName = $_FILES['cover']['name'];
@@ -60,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $hasError = true;
     }
 
+    // Validate file (changed path to goodland_studies/)
     if (!empty($_FILES['file']['name'])) {
         $fileTmpPath = $_FILES['file']['tmp_name'];
         $fileName = $_FILES['file']['name'];
@@ -70,12 +72,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (in_array($fileExtension, $allowedFileExtensions)) {
             $fileNewName = uniqid('file_', true) . '.' . $fileExtension;
-            $filePath = __DIR__ . '/../uploads/' . $fileNewName;
+            $filePath = __DIR__ . '/../goodland_studies/' . $fileNewName; // Updated directory for file
+
             if (!move_uploaded_file($fileTmpPath, $filePath)) {
                 $_SESSION['error_file'] = "Error moving file.";
                 $hasError = true;
             } else {
-                $filePath = $fileNewName;
+                $filePath = 'goodland_studies/' . $fileNewName; // Updated directory for file
             }
         } else {
             $_SESSION['error_file'] = "File type not allowed.";
@@ -86,13 +89,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $hasError = true;
     }
 
+    // If there are errors, redirect back to the form
     if ($hasError) {
         $_SESSION['form_data'] = $_POST;
         header('Location: ../all_files.php#addItemModal');
         exit();
     } else {
+        // Save file info to the database
         $mainClass->saveFileInfo($adminId, $title, $description, $filePath, $coverPath, $status);
-
 
         unset($_SESSION['form_data']);
         $_SESSION['status'] = "File successfully uploaded!";
@@ -100,6 +104,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: ../all_files.php');
         exit();
     }
-    
 }
 ?>
