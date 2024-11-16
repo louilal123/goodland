@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once __DIR__ . '/../admin/classes/Main_class.php';
+require_once __DIR__ . '/mailer.php';
 
 $mainClass = new Main_class();
 
@@ -34,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
-    $full_file_path = __DIR__ . "/../admin/uploads/" . $file_path;
+    $full_file_path = __DIR__ . "/admin/uploads/" . $file_path;
 
     // Check if the file exists
     if (!file_exists($full_file_path)) {
@@ -45,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Initialize PHPMailer
-    $mail = require __DIR__ . "/../mailer.php";
+    $mail = require __DIR__ . "/mailer.php";
     $mail->setFrom("rubinlouie41@gmail.com", "GOODLAND.PH");
     $mail->addAddress($email);
     $mail->Subject = "Requested File Copy";
