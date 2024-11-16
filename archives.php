@@ -83,50 +83,7 @@
 
 </main>
 
-<!-- Request Copy Modal -->
-<div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg ">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title  fw-bold text-center" id="requestModalLabel" style="color: #0062cc !important;"> Request a Copy</h3>
-        <button type="button" class="btn-close fw-bold" data-dismiss="modal" aria-label="Close">
-         
-        </button>
-      </div>
-      <form action="classes/request_file.php" method="POST">
-    <div class="modal-body">
-        <input type="hidden" name="file_id" id="fileId" value="<?php echo $_SESSION['form_data']['file_id'] ?? ''; ?>">
-        <input type="hidden" name="file_path" id="filePath" value="<?php echo $_SESSION['form_data']['file_path'] ?? ''; ?>">
 
-        <!-- Modal Body -->
-        <div class="form-group">
-            <h5 class="text-muted">File Title:</h5>
-            <h4 id="file-title-element"><?php echo $_SESSION['form_data']['file_title'] ?? ''; ?></h4>
-            <input type="hidden" name="file-title" class="form-control text-dark form-lg" id="file-title" 
-                value="<?php echo $_SESSION['form_data']['file_title'] ?? ''; ?>" required>
-        </div>
-
-        <!-- Error message if status is set -->
-        <div class="form-group">
-            <?php if (isset($_SESSION['status']) && $_SESSION['status_icon'] === 'error'): ?>
-                <div class="alert alert-danger"><?php echo $_SESSION['status']; ?></div>
-            <?php unset($_SESSION['status']); unset($_SESSION['status_icon']); endif; ?>
-
-            <label for="email" class="text-success mb-2">We will send you an email containing the file.</label>
-            <input type="email" name="email" class="form-control text-dark form-lg" id="email" 
-                   placeholder="Enter your email address" 
-                   value="<?php echo $_SESSION['form_data']['email'] ?? ''; ?>" required>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button type="submit" class="btn btn-primary custom-btn btn-lg">Send Me a Copy</button>
-    </div>
-</form>
-
-
-    </div>
-  </div>
-</div>
 <br><br><br><br>
 <?php include "includes/footer.php";?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
