@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $mail->addAddress($email);
     $mail->Subject = "Requested File Copy";
     $mail->isHTML(true);
-    $mail->Body = "Here is your reus==quested file $file_title";
+    $mail->Body = "Here is your reus==quested file ";
     
     $mail->addAttachment($full_file_path);
 
