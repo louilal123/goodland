@@ -126,8 +126,7 @@
     
  <a class="btn btn-getstarted "  
  style="font-weight: 500 !important; background-color: linear-gradient(to right, #144D53,#0062cc) !important;opacity: 0.8; " 
- href="contactus"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"  viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
- <polyline points="20,6 12,13 2,6"></polyline></svg> CONTACT US</a>
+ href="contactus"><i class="bi bi-phone"></i> CONTACT US</a>
       </div>
     </div>
   </header>
