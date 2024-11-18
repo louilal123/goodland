@@ -13,7 +13,7 @@
 /* Fonts */
 :root {
   --default-font: "Montserrat",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "Nunito",  sans-serif;
+  --heading-font: "Nunito", sans-serif;
   --nav-font: "Poppins",  sans-serif;
 }
 
@@ -65,6 +65,7 @@ body {
   color: var(--default-color);
   background-color: var(--background-color);
   font-family: var(--default-font);
+  
 }
 
 a {
@@ -148,6 +149,7 @@ h6 {
   color: var(--default-color);
   background-color: var(--background-color);
   padding: 8px 0;
+  border: none ;
   transition: all 0.5s;
   z-index: 997;
   
@@ -208,19 +210,31 @@ h6 {
 }
 
 .scrolled .header {
-  box-shadow: 0px 0 18px rgba(187, 184, 184, 0.5);
+ 
+  --background-color: white !important; 
+   color:#040404 !important;
+    border-bottom: 1px solid rgba(38, 37, 37, 0.2) !important; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important; 
 }
 
 /* Index Page Header
 ------------------------------*/
 .index-page .header {
-  --background-color: rgba(255, 255, 255, 0);
+ 
+  --background-color: white !important; 
+   color:#040404 !important;
+    border-bottom: 1px solid rgba(38, 37, 37, 0.2) !important; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important; 
 }
 
 /* Index Page Header on Scroll
 ------------------------------*/
 .index-page.scrolled .header {
-  --background-color: #000000;
+ 
+  --background-color: white !important; 
+   color:#040404 !important;
+    border-bottom: 1px solid rgba(38, 37, 37, 0.2) !important; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important; 
 }
 
 
@@ -248,7 +262,7 @@ h6 {
 
   .navmenu a,
   .navmenu a:focus {
-    color: var(--nav-color);
+    color: var(--default-color);
     opacity: 0.8;
     /* padding: 24px 12px; orig*/
 padding: 20px 12px;
@@ -386,11 +400,10 @@ padding: 20px 12px;
 @media (max-width: 1199px) {
 
   /* Hide Login and Signup buttons on mobile */
-  .btn-hide, .lognin-btn {
-    display: none !important;
-  }
+ 
   .mobile-nav-toggle {
-    color: var(--nav-color);
+    color: var(--accent-color);
+    font-weight: 700;
     font-size: 28px;
     line-height: 0;
     margin-left: 2rem;
@@ -408,10 +421,10 @@ padding: 20px 12px;
     list-style: none;
     position: absolute;
     inset: 60px 20px 20px 20px;
-    padding: 10px 0;
+    padding: 0px 0;
     margin: 0;
     border-radius: 6px;
-    background-color: var(--nav-mbile-background-color);
+    background-color: var(--nav-mobile-background-color);
     overflow-y: auto;
     transition: 0.3s;
     z-index: 9998;
@@ -954,7 +967,7 @@ section,
 .hero h1 {
   margin: 0;
   font-size: 48px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 56px;
   color: var(--contrast-color);
 }
@@ -970,7 +983,7 @@ section,
   /* text-transform: uppercase; */
   color: var(--contrast-color);
   background: var(--accent-color);
-  font-family: var(--heading-font);
+  font-family: var(--nav-font);
   font-weight: 500;
   font-size: 16px;
   letter-spacing: 1px;
@@ -1005,7 +1018,7 @@ section,
 .hero .btn-get-started2 {
   color: var(--default-color);
   background: var(--background-color);
-  font-family: var(--heading-font);
+  font-family: var(--nav-font);
   font-weight: 500;
   font-size: 16px;
   letter-spacing: 1px;
@@ -1041,7 +1054,7 @@ BTN GCONTRIBUTE CUSTOMIZED BY ME
 .hero .btn-get-started1 {
   color: var(--contrast-color);
   background:none;
-  font-family: var(--heading-font);
+  font-family: var(--nav-font);
   font-weight: 500;
   font-size: 16px;
   letter-spacing: 1px;

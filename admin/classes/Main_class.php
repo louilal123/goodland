@@ -8,7 +8,93 @@ class Main_class extends Database {
     public function __construct() {
         parent::__construct(); // Initialize the database connection
     }
+  
+   
+    public function fetchEvents()
+{
+    $sql = "SELECT event_id, event_name AS title, date_start AS start, date_end AS end FROM events "; // Adjust as needed
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+public function update_event($event_id, $event_name, $description, $location, $photoPath, $start_date, $end_date, $organizer) {
+    // Prepare the SQL query to update the event
+    $sql = "UPDATE events SET event_name = :event_name, description = :description, location = :location, 
+            date_start = :start_date, date_end = :end_date, organizer = :organizer";
+
+    // If there is a new photo, add it to the query
+    if ($photoPath !== null) {
+        $sql .= ", event_photo = :event_photo";
+    }
+
+    $sql .= " WHERE event_id = :event_id";
+
+    // Prepare the statement
+    $stmt = $this->pdo->prepare($sql);
+
+    // Bind the parameters
+    $stmt->bindParam(':event_name', $event_name);
+    $stmt->bindParam(':description', $description);
+    $stmt->bindParam(':location', $location);
+    $stmt->bindParam(':start_date', $start_date);
+    $stmt->bindParam(':end_date', $end_date);
+    $stmt->bindParam(':organizer', $organizer);
     
+    // Bind the photo if available
+    if ($photoPath !== null) {
+        $stmt->bindParam(':event_photo', $photoPath);
+    }
+
+    // Bind the event ID
+    $stmt->bindParam(':event_id', $event_id);
+
+    // Execute the query and return success or failure
+    return $stmt->execute();
+}
+
+public function deleteEvent($eventId) {
+    $sql = "DELETE FROM events WHERE event_id = :event_id";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindParam(':event_id', $eventId, PDO::PARAM_INT);
+    return $stmt->execute();
+}
+ 
+public function updateEventStatus() {
+    try {
+        // Get current date and time
+        $now = date("Y-m-d H:i:s"); // Current timestamp
+
+        $sqlFinished = "UPDATE events 
+                        SET status = 'finished' 
+                        WHERE date_end < ? 
+                          AND status != 'finished' 
+                          AND status != 'canceled'";
+        $stmtFinished = $this->pdo->prepare($sqlFinished);
+        $stmtFinished->execute([$now]);
+
+        $sqlOngoing = "UPDATE events 
+                       SET status = 'ongoing' 
+                       WHERE date_start <= ? 
+                         AND date_end >= ? 
+                         AND status != 'ongoing' 
+                         AND status != 'canceled'";
+        $stmtOngoing = $this->pdo->prepare($sqlOngoing);
+        $stmtOngoing->execute([$now, $now]);
+
+        $sqlUpcoming = "UPDATE events 
+                        SET status = 'upcoming' 
+                        WHERE date_start > ? 
+                          AND status != 'upcoming' 
+                          AND status != 'canceled'";
+        $stmtUpcoming = $this->pdo->prepare($sqlUpcoming);
+        $stmtUpcoming->execute([$now]);
+
+        return "Event statuses updated successfully!";
+    } catch (PDOException $e) {
+        return "Error updating event statuses: " . $e->getMessage();
+    }
+}
 
     public function getVisitorMonthlyData()
 {
@@ -70,13 +156,6 @@ public function getTotalReturningVisitors()
 
 
 
-    public function fetchEvents()
-{
-    $sql = "SELECT event_id, event_name AS title, date_start AS start, date_end AS end FROM events "; // Adjust as needed
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
 
 public function fetchMonthlyVisitorStats() {
     // Query to count new and returning visitors grouped by month
@@ -1154,7 +1233,7 @@ public function get_all_events1() {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 public function count_all_events() {
-    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM events");
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM events WHERE status='upcoming' ");
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result['total'];

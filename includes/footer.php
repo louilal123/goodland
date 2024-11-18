@@ -17,7 +17,7 @@
         </div>
 
         <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Useful Links</h4>
+          <h4 class="text-light">Useful Links</h4>
           <ul>
             <li><i class="bi bi-chevron-right"></i> <a href="/">Home</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">About</a></li>
@@ -29,7 +29,7 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4 style="color: #000 !important;">.</h4>
           <ul>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Water Data</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">E-SAWOD</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Events</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Archives</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#contact">Contact Us</a></li>
@@ -37,7 +37,7 @@
         </div>
 
         <div class="col-lg-4 col-md-12">
-          <h4>CONNECT WITH US</h4>
+          <h4 class="text-light">CONNECT WITH US</h4>
           <p>You dont have to follow us into the ocean. But you can always follow us on social media.</p>
           <div class="social-links d-flex">
             <a href="https://www.facebook.com/goodland.philippines/"><i class="bi bi-facebook"></i></a>

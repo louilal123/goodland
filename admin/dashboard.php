@@ -196,7 +196,7 @@
                             <div class="small-box bg-info1-gradient">
                                 <div class="inner ml-2">
                                     <h3> <?php echo $events_count ?? '0'; ?></h3>
-                                    <p>Events</p>
+                                    <p>Upcoming Events</p>
                                 </div> 
                                 <div class="small-box-icon text-primary"><i class="fas fa-chart-line"></i></div> 
                             </div> 
@@ -228,10 +228,10 @@
                         <div class="col-lg-3 col-md-6"> 
                             <div class="small-box">
                                 <div class="inner ml-2">
-                                    <h3><?php echo $catchments_count ?? '0'; ?></h3>
-                                    <p>Water Catchments</p>
+                                    <h3><?php echo $unread_msgs_count ?? '0'; ?></h3>
+                                    <p>Unread Messages</p>
                                 </div> 
-                                <div class="small-box-icon text-primary"><i class="fas fa-chart-line"></i></div> 
+                                <div class="small-box-icon text-primary"><i class="fas fa-message"></i></div> 
                             </div> 
                         </div> 
                         <div class="col-lg-3 col-md-6"> 
@@ -342,7 +342,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         },
         title: {
-            text: 'Library Files Overview'
+            text: 'Archive Files Overview'
         },
         tooltip: {
             pointFormat: '{point.name}: <b>{point.y} ({point.percentage:.1f}%)</b>'

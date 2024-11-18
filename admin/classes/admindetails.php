@@ -37,7 +37,7 @@ $adminCount = $mainClass->count_all_admins();
 
 // $documents = $mainClass->get_all_documents();
 
-
+$mainClass->updateEventStatus();
 // notifications msgs 
 $unread_msgs_count = $mainClass->get_unread_message_count();
 $unread_msgs = $mainClass->get_unread_messages();

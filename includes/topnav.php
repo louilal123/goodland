@@ -3,12 +3,7 @@
 <?php $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/")+1); ?>
 <style>
 
-.header{
-  background-color: #262525 !important; 
-   color:#f8f8f8 !important;
-    border-bottom: 1px solid rgba(38, 37, 37, 0.2) !important; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important; 
-}
+
   .background-video-container {
   position: absolute;
   top: 0;
@@ -40,7 +35,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to top, rgba(38, 37, 37, 1), rgba(22, 22, 22, 0.7)); 
+  background: linear-gradient(to top, rgba(38, 37, 37, 1), rgba(0, 0, 0, 0.6)); 
   z-index: -1; 
 }
 
@@ -99,25 +94,27 @@
   color: #f8f8f8; 
 }
 
-
+.header .sitename{
+  font-family: var(--nav-font);
+}
 </style>
 <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
       <a href="" class="logo d-flex align-items-center me-auto">
-        <h1 class="sitename"><span class="fw-bold  text-light">GOOD</span><span class="fw-light text-light"><i>Land</i></span></h1>
+        <h1 class="sitename fw-bold" ><span class="fw-bold">GOOD</strong></span><span class="fw-light"><i>Land</i></span></h1>
       </a>
 
       <nav id="navmenu" class="navmenu mx-auto">
         <ul>
-          <li><a href="index"  class=" <?= $page == 'index.php' ? 'active':'' ?>">HOME<br></a></li>
-          <li><a href="about" class=" <?= $page == 'about.php' ? 'active':'' ?>">ABOUT US</a></li>
-          <li><a href="project" class=" <?= $page == 'project.php' ? 'active':'' ?>">PROJECTS</a></li>
-          <li><a href="methodology" class=" <?= $page == 'methodology.php' ? 'active':'' ?>">METHODOLOGY</a></li>
+          <li><a href="index"  class=" <?= $page == 'index.php' ? 'active':'' ?>"><strong>HOME</strong><br></a></li>
+          <li><a href="about" class=" <?= $page == 'about.php' ? 'active':'' ?>"><strong>ABOUT US</strong></a></li>
+          <li><a href="project" class=" <?= $page == 'project.php' ? 'active':'' ?>"><strong>PROJECTS</strong></a></li>
+          <li><a href="methodology" class=" <?= $page == 'methodology.php' ? 'active':'' ?>"><strong>METHODOLOGY</strong></a></li>
          
-        <li><a href="e-sawod-sensor" class=" <?= $page == 'e-sawod-sensor.php' ? 'active':'' ?>" >E-SAWOD</a> </li>
-        <li><a href="events" class=" <?= $page == 'events.php' ? 'active':'' ?>">EVENTS</a></li>
-          <li><a href="archives" class=" <?= $page == 'archives.php' ? 'active':'' ?>">ARCHIVES</a></li>
+        <li><a href="e-sawod-sensor" class=" <?= $page == 'e-sawod-sensor.php' ? 'active':'' ?>" ><strong>E-SAWOD</strong></a> </li>
+        <li><a href="events" class=" <?= $page == 'events.php' ? 'active':'' ?>"><strong>EVENTS</strong></a></li>
+          <li><a href="archives" class=" <?= $page == 'archives.php' ? 'active':'' ?>"><strong>ARCHIVES</strong></a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -126,7 +123,7 @@
     
  <a class="btn btn-getstarted "  
  style="font-weight: 500 !important; background-color: linear-gradient(to right, #144D53,#0062cc) !important;opacity: 0.8; " 
- href="contactus"><i class="bi bi-phone"></i> CONTACT US</a>
+ href="contactus"><strong> CONTACT US</strong></a>
       </div>
     </div>
   </header>
