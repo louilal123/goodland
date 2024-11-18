@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <title>Welcome To Goodland</title>
 <?php include "includes/header.php"?>
 
 </head>
@@ -186,7 +187,7 @@
     <!-- Values Section -->
     <section id="values" class="values section">
 
-    <div class="container section-title" data-aos="fade-up">
+      <div class="container section-title" data-aos="fade-up">
         <h2>Mission and Vision</h2>
         <p>Our Mission and Vision</p>
       </div>

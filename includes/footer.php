@@ -6,7 +6,7 @@
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
           <a href="index.html" class="d-flex align-items-center">
-            <span class="sitename text-light">GOODLand</span>
+            <span class=" text-light">GOODLand</span>
           </a>
           <div class="footer-contact pt-3">
             <p>Sitio 37st, Atop Atop</p>
@@ -50,7 +50,7 @@
     </div>
 
     <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">GOODLand Version 2</strong> <span>All Rights Reserved</span></p>
+      <p>© <span>Copyright</span> <strong class="px-1 ">GOODLand Version 2</strong> <span>All Rights Reserved</span></p>
       <div class="credits">
         Team <a href="https://bootstrapmade.com/">4SOUTH</a>
       </div>

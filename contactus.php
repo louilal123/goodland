@@ -80,7 +80,7 @@ require_once "classes/config.php";
                 <div class="info-item" data-aos="fade" data-aos-delay="300">
                   <i class="bi bi-facebook"></i>
                   <h3>Social Media</h3>
-                  <p>https://www.facebook.com/goodland.philippines</p>
+                  <p>@goodland.philippines</p>
                   <p>+1 6678 254445 41</p>
                 </div>
               </div><!-- End Info Item -->

@@ -5,92 +5,109 @@ require_once "classes/user_view.php";
 <html lang="en">
 
 <head>
-<?php include "includes/header.php"; ?>
-<title>Goodland - Events</title>
+  <?php include "includes/header.php"; ?>
+  <title>Goodland - Events</title>
 </head>
 <style>
-  .custom-btn{
-    border-radius: 0px !important;
-  }
-</style>
-<body class="blog-page">
+  .event-card {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
 
-<?php include "includes/topnav.php";?>
+
+.date-box {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+.date-box:hover{
+  background-color: #0062cc;
+}
+
+.date-number {
+    font-size: 48px;
+    font-weight: bold;
+    color: white;
+}
+
+.date-month {
+    font-size: 20px;
+    color: white;
+}
+
+.content-box {
+    padding: 20px;
+}
+
+.content-box h4 {
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    background-color: #0062cc;
+    border-color: #0062cc;
+}
+
+</style>
+
+<body class="blog-page">
+  <?php include "includes/topnav.php";?>
   <main class="main ">
 
     <!-- Page Title -->
-    <div class="page-title  ">
-    <div class="heading "style="background-size: cover; background-position: center;background: linear-gradient(to top, rgba(38, 37, 37, 1), rgba(22, 22, 22, 0.8));z-index: -1;">
-    <div class="container ">
+    <div class="page-title">
+      <div class="heading">
+        <div class="container">
           <div class="row d-flex justify-content-center text-center">
             <div class="col-lg-8">
-              <br><br>
-              <h1 class="text-warning ">Events</h1>
-              <!-- <p class="mb-0"></p> -->
             </div>
           </div>
         </div>
       </div>
-      <nav class="breadcrumbs ">
-        <div class="container">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li class="current">Events</li>
-          </ol>
-        </div>
-      </nav>
       
     </div><!-- End Page Title -->
+    <section>
 
-    <div class="container ">
-    <h2 class="">Incoming Events</h2>
-    <?php if (!empty($scheduledEvents)): ?>
-        <?php foreach ($scheduledEvents as $event): ?>
-            <div class="event-card">
-                <h3><?= htmlspecialchars($event['event_name']) ?></h3>
-                <p><?= htmlspecialchars($event['description']) ?></p>
-                <p><strong>Date:</strong> <?= htmlspecialchars($event['event_date']) ?></p>
-                <p><strong>Location:</strong> <?= htmlspecialchars($event['location']) ?></p>
+    <div class="container">
+      <div class="row gy-4">
+
+   
+      <div class="row event-card mb-4 align-items-center">
+            <div class="col-md-3 date-box">
+                <h1 class="date-number">27</h1>
+                <p class="date-month">May</p>
             </div>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <p>No incoming events.</p>
-    <?php endif; ?>
-
-    <h2 class="">Ongoing Events</h2>
-    <?php if (!empty($ongoingEvents)): ?>
-        <?php foreach ($ongoingEvents as $event): ?>
-            <div class="event-card">
-                <h3><?= htmlspecialchars($event['event_name']) ?></h3>
-                <p><?= htmlspecialchars($event['description']) ?></p>
-                <p><strong>Start:</strong> <?= htmlspecialchars($event['date_start']) ?></p>
-                <p><strong>End:</strong> <?= htmlspecialchars($event['date_end']) ?></p>
-                <p><strong>Location:</strong> <?= htmlspecialchars($event['location']) ?></p>
+            <div class="col-md-9 content-box">
+                <h4>Where is the event happening?</h4>
+                <p>Join us to explore the future of AI and technology in the industry. A day full of insightful talks and networking...</p>
+                <a href="#" class="btn btn-primary">View Details</a>
             </div>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <p>No ongoing events.</p>
-    <?php endif; ?>
+        </div>
 
-    <h2 class="">Finished Events</h2>
-    <?php if (!empty($finishedEvents)): ?>
-        <?php foreach ($finishedEvents as $event): ?>
-            <div class="event-card">
-                <h3><?= htmlspecialchars($event['event_name']) ?></h3>
-                <p><?= htmlspecialchars($event['description']) ?></p>
-                <p><strong>Date:</strong> <?= htmlspecialchars($event['event_date']) ?></p>
-                <p><strong>Location:</strong> <?= htmlspecialchars($event['location']) ?></p>
+        <!-- Event Card 3 -->
+        <div class="row event-card mb-4 align-items-center">
+            <div class="col-md-3 date-box">
+                <h1 class="date-number">12</h1>
+                <p class="date-month">August</p>
             </div>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <p>No finished events.</p>
-    <?php endif; ?>
-</div>
+            <div class="col-md-9 content-box">
+                <h4>Where is the event happening?</h4>
+                <p>Experience the best in tech with hands-on workshops and keynote speeches from industry experts...</p>
+                <a href="#" class="btn btn-primary">View Details</a>
+            </div>
+        </div>
+    
 
 
+      </div>
+    </div>
+
+    </section>
   </main>
 
   <?php include "includes/footer.php";?>
 </body>
-
 </html>
