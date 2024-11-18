@@ -595,8 +595,8 @@ padding: 20px 12px;
 # Global Footer
 --------------------------------------------------------------*/
 .footer {
-  color: var(--surface-color);
-  background-color: var(--default-color);
+  color: var(--surface-color) !important;
+  background-color: var(--default-color) !important;
   font-size: 18px;
   padding-bottom: 50px;
   position: relative;
