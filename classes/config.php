@@ -1,4 +1,5 @@
 <?php
+session_start();
 function encryptor($action, $string) {
     $output = false;
     $encrypt_method = "AES-256-CBC";
