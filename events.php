@@ -1,6 +1,7 @@
 <?php 
 require_once "classes/user_view.php";
 ?>
+<?php include "classes/config.php";?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -112,8 +113,10 @@ require_once "classes/user_view.php";
                           <small>
                               Event Duration: <?php echo date("M d, Y", $startDate); ?> - <?php echo date("M d, Y", $endDate); ?>
                           </small>
-                          <a href="event_details.php?event_id=<?php echo $event['event_id']; ?>" class="btn btn-primary mt-2">View Details</a>
-                      </div>
+                          <a href="event_details.php?event_id=<?php echo encryptor('encrypt', $event['event_id']); ?>" 
+   class="btn btn-primary mt-2">View Details</a>
+       
+                        </div>
                   </div>
               <?php endforeach; ?>
           <?php else: ?>
@@ -153,9 +156,11 @@ require_once "classes/user_view.php";
                         <p><?php echo htmlspecialchars($event['description']); ?> <br><small>
                           <?php echo date("M d, Y", $startDate); ?> - <?php echo date("M d, Y", $endDate); ?>
                         </small></p>
-                        
-                        <a href="event_details.php?event_id=<?php echo $event['event_id']; ?>" class="btn btn-primary mt-2">View Details</a>
-                    </div>
+                        <a href="event_details.php?event_id=<?php echo encryptor('encrypt', $event['event_id']); ?>" 
+   class="btn btn-primary mt-2">View Details</a>
+  
+                       
+                      </div>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
@@ -200,8 +205,10 @@ require_once "classes/user_view.php";
                     <small>
                         Event Duration: <?php echo date("M d, Y", $startDate); ?> - <?php echo date("M d, Y", $endDate); ?>
                     </small>
-                    <a href="event_details.php?event_id=<?php echo $event['event_id']; ?>" class="btn btn-primary mt-2">View Details</a>
-                </div>
+                    <a href="event_details.php?event_id=<?php echo encryptor('encrypt', $event['event_id']); ?>" 
+   class="btn btn-primary mt-2">View Details</a>
+
+                  </div>
             </div>
         <?php endforeach; ?>
     <?php else: ?>

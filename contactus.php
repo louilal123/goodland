@@ -1,4 +1,4 @@
-<?php 
+<?php session_start();
 require_once "classes/config.php";
 ?>
 <!DOCTYPE html>
@@ -7,6 +7,8 @@ require_once "classes/config.php";
 <head>
 <?php include "includes/header.php"; ?>
 <title>Contact Us</title>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert -->
 </head>
 <style>
   .custom-btn{

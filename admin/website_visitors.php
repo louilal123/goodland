@@ -90,7 +90,7 @@
 
 <!-- Modal for viewing visitor details -->
 <div class="modal fade" id="visitorModal" tabindex="-1" aria-labelledby="visitorModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="visitorModalLabel">Visitor Details</h5>
@@ -105,34 +105,10 @@
         <p><strong>Visit Time:</strong> <span id="modalVisitTime"></span></p>
         <p><strong>Last Visit:</strong> <span id="modalLastVisit"></span></p>
         
-        <!-- Messages Table -->
-        <h6>Messages</h6>
-        <p id="messagesNotice" class="text-muted"></p> <!-- No messages notice -->
-        <table id="modalMessagesTable" class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Subject</th>
-              <th>Message</th>
-              <th>Date Sent</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-
-        <!-- File Requests Table -->
-        <h6>File Requests</h6>
-        <p id="fileRequestsNotice" class="text-muted"></p> <!-- No file requests notice -->
-        <table id="modalFileRequestsTable" class="table table-bordered">
-          <thead>
-            <tr>
-              <th>File Title</th>
-              <th>Email</th>
-              <th>Request Date</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
+      
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>    
     </div>
   </div>
 </div>

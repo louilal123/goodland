@@ -76,7 +76,7 @@
           <div class="row d-flex justify-content-center text-center">
             <div class="col-lg-8">
               <br><br>
-              <h1 class="text-dark"> <i class="bi bi-calendar-check text-secondary"></i> GoodLand E-Sawod</h1>
+              <h1 class="text-dark"> <i class="bi bi-measure text-secondary"></i>E-Sawod</h1>
             </div>
           </div>
         </div>

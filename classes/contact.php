@@ -2,73 +2,83 @@
 session_start();
 
 require_once __DIR__ . '/../admin/classes/Main_class.php';
-$main = new Main_class();
 
-// Default form values
-$name = $email = $subject = $message = "";
-$valid = true;
+$mainClass = new Main_class();
 
-// Validate Name
-if (empty(trim($_POST["name"]))) {
-    $_SESSION['name_err'] = "Name is required.";
-    $valid = false;
-} else {
-    $name = trim($_POST["name"]);
-    if (!preg_match("/^[a-zA-Z\s]+$/", $name)) {
-        $_SESSION['name_err'] = "Name should only contain letters and spaces.";
-        $valid = false;
-    } elseif (strlen($name) > 100) {
-        $_SESSION['name_err'] = "Name is too long.";
-        $valid = false;
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $name = trim($_POST['name']);
+    $email = trim($_POST['email']);
+    $subject = trim($_POST['subject']);
+    $message = trim($_POST['message']);
+
+    // Validate inputs
+    if (empty($name) || empty($email) || empty($subject) || empty($message)) {
+        $_SESSION['status'] = "All fields are required.";
+        $_SESSION['status_icon'] = "error";
+        header("Location: ../contactus.php");
+        exit;
     }
-}
 
-// Validate Email
-$email = trim($_POST["email"]);
-if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $_SESSION['email_err'] = "Valid email is required.";
-    $valid = false;
-}
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['status'] = "Please enter a valid email address.";
+        $_SESSION['status_icon'] = "error";
+        header("Location: ../contactus.php");
+        exit;
+    }
 
-// Validate Subject
-if (empty(trim($_POST["subject"]))) {
-    $_SESSION['subject_err'] = "Subject is required.";
-    $valid = false;
-} else {
-    $subject = trim($_POST["subject"]);
-}
+    // Save contact message to the database
+    try {
+        $mainClass->save_contact_message($name, $email, $subject, $message);
+    } catch (Exception $e) {
+        $_SESSION['status'] = "Failed to save the message to the database. Error: {$e->getMessage()}";
+        $_SESSION['status_icon'] = "error";
+        header("Location: ../contactus.php");
+        exit;
+    }
 
-// Validate Message
-if (empty(trim($_POST["message"]))) {
-    $_SESSION['message_err'] = "Message is required.";
-    $valid = false;
-} else {
-    $message = trim($_POST["message"]);
-}
+    // Prepare PHPMailer
+    $mail = require __DIR__ . "/../mailer.php";
 
-// If any validation fails, redirect back to the form
-if (!$valid) {
-    $_SESSION['form_data'] = [
-        'name' => $name,
-        'email' => $email,
-        'subject' => $subject,
-        'message' => $message
-    ];
-    header('Location: ../contactus.php#contact');
+    // Set user's email as sender
+    try {
+        $mail->setFrom($email, htmlspecialchars($name)); // Dynamic sender
+    } catch (Exception $e) {
+        $_SESSION['status'] = "Invalid sender email: {$e->getMessage()}";
+        $_SESSION['status_icon'] = "error";
+        header("Location: ../contactus.php");
+        exit;
+    }
+
+    $mail->addAddress("aralouierubin@gmail.com"); // Replace with your receiver email
+    $mail->Subject = htmlspecialchars($subject);
+    $mail->isHTML(true);
+
+    $mail->Body = "
+        <html>
+        <body style='font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;'>
+            <div style='max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);'>
+                <h2 style='color: #0062cc; text-align: center;'>Contact Form Submission</h2>
+                <p><strong>Name:</strong> " . htmlspecialchars($name) . "</p>
+                <p><strong>Email:</strong> " . htmlspecialchars($email) . "</p>
+                <p><strong>Subject:</strong> " . htmlspecialchars($subject) . "</p>
+                <p><strong>Message:</strong> " . nl2br(htmlspecialchars($message)) . "</p>
+            </div>
+        </body>
+        </html>
+    ";
+
+    // Send the email
+    try {
+        $mail->send();
+        $_SESSION['status'] = "Your message has been sent successfully.";
+        $_SESSION['status_icon'] = "success";
+    } catch (Exception $e) {
+        $_SESSION['status'] = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        $_SESSION['status_icon'] = "error";
+    }
+
+    // Redirect to the contact page
+    header("Location: ../contactus.php");
     exit;
 }
-
-try {
-    $main->save_contact_message($name, $email, $subject, $message);
-    $_SESSION['status'] = "Your message has been sent!";
-    $_SESSION['status_icon'] = "success";
-    header("Location: ../contactus.php#contact");
-exit;
-} catch (Exception $e) {
-    $_SESSION['status'] = "Message could not be sent. Database error: {$e->getMessage()}";
-    $_SESSION['status_icon'] = "error";
-    header("Location: ../contactus.php#contact");
-exit;
-}
-
 ?>

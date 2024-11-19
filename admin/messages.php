@@ -1,4 +1,5 @@
 <?php include "classes/admindetails.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en"> 
 <?php include "includes/header.php"; ?>
@@ -19,10 +20,8 @@
                                 <div class="card-body">
                                 <div class="d-flex mb-3">
                                   <h3 class="fw-bold">List of Messages</h3>
-                                      <button type="button" class="btn btn-sm btn-success ms-auto btn-rounded me-1" onclick="location.reload(); return false;">
-                                          <i class="fas fa-refresh"></i> Refresh
-                                      </button>
-                                      <button type="button" class="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#deleteAllMessagesModal">
+                                      
+                                      <button type="button" class="btn btn-danger btn-rounded ms-auto btn-rounded" data-bs-toggle="modal" data-bs-target="#deleteAllMessagesModal">
                                           <i class="fas fa-trash"></i> Delete All
                                       </button>
 
@@ -51,11 +50,26 @@
                                                     <td><?php echo date("M d, Y h:i A", strtotime($message['date_sent'])); ?></td>
                                                     
                                                     <td>
+
+                                                    <button class="btn btn-success btn-sm viewMessageBtn" 
+                                                            data-message-id="<?php echo htmlspecialchars($message['id']); ?>" 
+                                                            data-name="<?php echo htmlspecialchars($message['name']); ?>" 
+                                                            data-email="<?php echo htmlspecialchars($message['email']); ?>" 
+                                                            data-subject="<?php echo htmlspecialchars($message['subject']); ?>" 
+                                                            data-message="<?php echo htmlspecialchars($message['message']); ?>" 
+                                                            data-date-sent="<?php echo date("M d, Y h:i A", strtotime($message['date_sent'])); ?>">
+                                                        <i class="fas fa-eye"></i> View
+                                                    </button>
+
+
+
                                                     <a href="#" class="btn btn-danger btn-sm deleteMessageBtn" 
                                                     data-message-id="<?php echo $message['id']; ?>" data-bs-toggle="modal" 
                                                     data-bs-target="#deleteMessageModal">
-                                                        <i class="fas fa-trash"></i>
+                                                        <i class="fas fa-trash"></i> Delete
                                                     </a>
+
+                                                    
                                                 
                                                     </td>
                                                 </tr>
@@ -70,8 +84,44 @@
                         </div> 
                     </div>
                 </div>
-
+        
         <!-- Modal for Delete Confirmation -->
+        <div class="modal fade" id="viewMessageModal" tabindex="-1" aria-labelledby="viewMessageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="viewMessageModalLabel">Message Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Name:</strong> <span id="modalName"></span></p>
+                        <p><strong>Email:</strong> <span id="modalEmail"></span></p>
+                        <p><strong>Subject:</strong> <span id="modalSubject"></span></p>
+                        <p><strong>Date Sent:</strong> <span id="modalDateSent"></span></p>
+                        <p><strong>Message:</strong> <p id="modalMessage"></p>
+                        </p>
+                    
+                        <!-- Reply Section -->
+                        <form action="classes/send_reply.php" method="POST">
+                            <input type="hidden" id="replyMessageId" name="message_id">
+                            HOW TO ALSO PUT THE EMAIL HERE AS THE VALUE?<input type="hidden" id="replyEmail" name="email">
+                            <div class="mb-3">
+                                <label for="replyMessage" class="form-label"><strong>Your Reply</strong></label>
+                                <textarea class="form-control" id="replyMessage" name="reply_message" rows="4" required></textarea>
+                            </div>
+                        <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary btn-end">Send Reply</button>
+                        
+                        </div>   
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
         <script>
     $(document).ready(function() {
         $('#myTable').DataTable({
@@ -81,7 +131,34 @@
 
     
 </script>
-        <script>
+       
+<script>
+   document.querySelectorAll('.viewMessageBtn').forEach(button => {
+    button.addEventListener('click', function () {
+        const messageId = this.getAttribute('data-message-id');
+        const name = this.getAttribute('data-name');
+        const email = this.getAttribute('data-email');
+        const subject = this.getAttribute('data-subject');
+        const message = this.getAttribute('data-message');
+        const dateSent = this.getAttribute('data-date-sent');
+
+        // Populate modal fields
+        document.getElementById('modalName').textContent = name;
+        document.getElementById('modalEmail').textContent = email;
+        document.getElementById('modalSubject').textContent = subject;
+        document.getElementById('modalMessage').textContent = message;
+        document.getElementById('modalDateSent').textContent = dateSent;
+        document.getElementById('replyMessageId').value = messageId;
+
+        // Show the modal
+        new bootstrap.Modal(document.getElementById('viewMessageModal')).show();
+    });
+});
+
+</script>
+       
+       <script>
+
 document.querySelectorAll('.deleteMessageBtn').forEach(button => {
     button.addEventListener('click', function(e) {
         e.preventDefault(); // Prevent default form submission

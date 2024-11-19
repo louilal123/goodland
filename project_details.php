@@ -54,27 +54,19 @@ if (isset($_GET['project_id'])) {
 
     <div class="page-title ">
         <div class="heading " style="background-image: url('<?php echo htmlspecialchars($project['project_image']); ?>'); background-size: cover; background-position: center;">
-            <div class="container">
+            <div class="container ">
                 <div class="row d-flex justify-content-center text-center">
                     <div class="col-lg-8">
                         <br><br>
-                        <h1 class="text-warning"><?php echo htmlspecialchars($project['banner_quote']); ?></h1>
+                        <h1 class="text-light bg-secondary bg-opacity-50 p-5"><?php echo htmlspecialchars($project['banner_quote']); ?></h1>
                     </div>
                 </div>
             </div>
         </div>
-        <nav class="breadcrumbs">
-            <div class="container">
-                <ol>
-                    <li><a href="index">Home</a></li>
-                    <li><a href="index">Projects</a></li>
-                    <li class="current"><?php echo htmlspecialchars($project['title']); ?></li> 
-                </ol>
-            </div>
-        </nav>
+      
     </div>
 
-    <div class="container">
+    <div class="container mt-3">
         <div class="row">
             <div class="col-lg-12">
                 <section id="projects" class="projects_details section">
@@ -125,6 +117,7 @@ if (isset($_GET['project_id'])) {
         </div>
     </div>
 
+    <br><br><br><br> <br><br><br>
 </main>
 
 <?php include "includes/footer.php"; ?>

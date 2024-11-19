@@ -42,7 +42,7 @@
                                     <i class="fas fa-folder-plus"></i> Add New
                                 </button>
                             </div>
-                        <div class="card-body d-flex mx-auto">
+                        <div class="card-body ">
                       
                             <hr>
                             <div id="calendar"></div>

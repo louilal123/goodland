@@ -675,6 +675,33 @@ public function delete_catchment($data_id) {
     return $stmt->execute();
 }
 
+public function getEventById($eventId) {
+    $sql = "
+        SELECT 
+            e.event_id, 
+            e.event_name, 
+            e.description, 
+            e.location, 
+            e.organizer, 
+            e.date_start, 
+            e.date_end, 
+            e.event_photo, 
+            e.status, 
+            e.created_at, 
+            e.updated_at
+        FROM 
+            events e
+        WHERE 
+            e.event_id = :event_id";
+    
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindParam(':event_id', $eventId, PDO::PARAM_INT);
+    $stmt->execute();
+    
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
 public function getProjectById($projectId) {
     $sql = "
         SELECT 
@@ -771,6 +798,12 @@ public function getCatchmentById($data_id) {
         } catch (PDOException $e) {
             throw new Exception("Failed to save file request: " . $e->getMessage());
         }
+    }
+    
+    public function mark_all_messages_as_read() {
+        $sql = "UPDATE messages SET status = 'read' WHERE status != 'read'"; 
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
     }
     
     

@@ -71,12 +71,13 @@
     transform: translateY(0);
 }
 .custom-btn{
-  background-color: #0062cc !important;
+ 
+  background: linear-gradient(to right, #144D53,#0062cc) !important;
   color: #f8f8f8; 
 }
 .custom-btn:hover{
   border: 1px solid #0062cc !important;
-  background-color: transparent !important;
+  background-color: #0062cc !important;
   color: #141414 !important;
 }
 .header .btn-getstarted:hover{

@@ -23,29 +23,22 @@
 <?php include "includes/topnav.php";?>
 <main class="main ">
 
-  <!-- Page Title -->
-  <div class="page-title">
-    <div class="heading" style="background-size: cover; background-position: center;background: linear-gradient(to top, rgba(38, 37, 37, 1), rgba(22, 22, 22, 0.8));z-index: -1;">
-      <div class="container">
-        <div class="row d-flex justify-content-center text-center">
-          <div class="col-lg-8">
-            
-            <h1 class="text-warning">Archives</h1>
+  
+   <!-- Page Title -->
+   <div class="page-title">
+      <div class="heading "style="background-size: cover; background-position: center;background: linear-gradient(to top, rgba(38, 37, 37, 0.1), rgba(22, 22, 22, 0.1));z-index: -1;">
+        <div class="container ">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-8">
+              <br><br>
+              <h1 class="text-dark"> <i class="bi bi-paper text-secondary"></i> Archives</h1>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <nav class="breadcrumbs">
-      <div class="container">
-        <ol>
-          <li><a href="index.html">Home</a></li>
-          <li class="current">Archives</li>
-        </ol>
-      </div>
-    </nav>
-  </div><!-- End Page Title -->
+    </div><!-- End Page Title -->
 
-  <div class="container">
+  <div class="container mt-5">
     <div class="row">
       <div class="col-lg-12">
        
@@ -59,8 +52,7 @@
                       <h5 class="card-title"><?php echo htmlspecialchars($file['title']); ?></h5>
                       <input type="hidden"  value="<?php echo htmlspecialchars($file['file_path']); ?>">
                       <p class="card-text"><i><?php echo htmlspecialchars($file['description']); ?></i></p>
-                      <p class="card-text"><small><?php echo date('F j, Y', strtotime($file['upload_date'])); ?></small></p>
-                      <button data-toggle="modal" 
+                     <button data-toggle="modal" 
         data-target="#requestModal" 
         data-file-id="<?php echo $file['id']; ?>" 
         data-file-path="<?php echo $file['file_path']; ?>"
@@ -84,9 +76,8 @@
 </main>
 
 
-<br><br><br><br>
+<br><br><br><br> <br><br><br>
 <?php include "includes/footer.php";?>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
