@@ -71,7 +71,15 @@
                                 </p>
                             </a>
                         </li>
-
+                        
+                        <li class="nav-item pl-2 pb-1"> <a href="file_requests" class="nav-link   <?= $page == 'file_requests.php' ? '  bg-primary text-white  ':'' ?>"> 
+                            <i class="nav-icon ml-2"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FAF9F6" 
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 14l6 6 6-6"/>
+                                <path d="M4 4h7a4 4 0 0 1 4 4v11"/>
+                            </svg></i>
+                                <p class="">File Requests</p>
+                            </a> </li>
                         <li class="nav-item pl-2 pb-1"> <a href="projects" class="nav-link  <?= $page == 'projects.php' ? ' bg-primary text-white  ':'' ?>"> 
                             <i class="nav-icon ml-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FAF9F6"
                              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

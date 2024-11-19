@@ -109,6 +109,7 @@ if (isset($_GET['project_id'])) {
                         <div class="video-wrapper">
                             <iframe src="<?php echo htmlspecialchars($project['youtube_link']); ?>" ></iframe>
                         </div>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/v3KTAD1NKas?si=wU64-jNGQ5fjhvI_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <?php } ?>
 
                     </div>
