@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-lg-6 order-2 d-flex flex-column justify-content-center">
                             <h1 data-aos="fade-up" style="font-weight: bold !important;">
-                                <?php echo $project['title']; ?>
+                                <?php echo htmlspecialchars($project['title']); ?>
                             </h1>
                             <!-- Project Header -->
                             <h3 data-aos="fade-up" data-aos-delay="50" style="font-style: italic;">
