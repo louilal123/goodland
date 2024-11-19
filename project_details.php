@@ -107,7 +107,7 @@ if (isset($_GET['project_id'])) {
 
                         <?php if (!empty($project['youtube_link'])) { ?>
                         <div class="video-wrapper">
-                            <?php echo htmlspecialchars($project['youtube_link']); ?>
+                            <?php echo($project['youtube_link']); ?>
                           
                         </div>
                        <?php } ?>
