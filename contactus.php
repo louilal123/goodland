@@ -96,7 +96,7 @@ require_once "classes/config.php";
           </div>
           <div class="col-lg-6">
 
-            <form action="classes/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+            <form action="contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
               <div class="row gy-4">
 
                 <div class="col-md-6">
