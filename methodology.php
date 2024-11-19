@@ -12,27 +12,18 @@
   <main class="main ">
 
     <!-- Page Title -->
-    <div class="page-title">
-    <div class="heading "style="background-size: cover; background-position: center;background: linear-gradient(to top, rgba(38, 37, 37, 1), rgba(22, 22, 22, 0.8));z-index: -1;">
-    <div class="container ">
+     <!-- Page Title -->
+   <div class="page-title">
+      <div class="heading "style="background-size: cover; background-position: center;background: linear-gradient(to top, rgba(38, 37, 37, 0.1), rgba(22, 22, 22, 0.1));z-index: -1;">
+        <div class="container ">
           <div class="row d-flex justify-content-center text-center">
             <div class="col-lg-8">
               <br><br>
-              <h1 class="text-warning">Methodology</h1>
-              <!-- <p class="mb-0"></p> -->
+              <h1 class="text-dark"> <i class="bi bi-book text-secondary"></i> Methodology</h1>
             </div>
           </div>
         </div>
       </div>
-      <nav class="breadcrumbs ">
-        <div class="container">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li class="current">Methodology</li>
-          </ol>
-        </div>
-      </nav>
-      
     </div><!-- End Page Title -->
 
     
@@ -123,7 +114,7 @@
 
       </div>
     </div>
-
+<br><br><br><br><br><br><br><br><br><br>
   </main>
 
   <?php include "includes/footer.php";?>

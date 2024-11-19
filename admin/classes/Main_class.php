@@ -1238,6 +1238,33 @@ public function count_all_events() {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result['total'];
 }
+public function fetchUpcomingEvents() {
+    $sql = "SELECT event_id, event_name, description, date_start, date_end 
+            FROM events 
+            WHERE status='upcoming' 
+            ORDER BY date_start ASC"; // Order by date_start for chronological display
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+public function fetchFinishedEvents(){
+    $sql = "SELECT event_id, event_name, description, date_start, date_end 
+    FROM events 
+    WHERE status='finished' 
+    ORDER BY date_start ASC"; // Order by date_start for chronological display
+$stmt = $this->pdo->prepare($sql);
+$stmt->execute();
+return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+public function fetchOngoingEvents() {
+    $sql = "SELECT event_id, event_name, description, date_start, date_end 
+            FROM events 
+            WHERE status='ongoing' 
+            ORDER BY date_start ASC"; // Order by date_start for chronological display
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
 
 public function insert_member($member_name, $description, $photo) {

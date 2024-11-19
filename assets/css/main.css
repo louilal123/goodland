@@ -222,9 +222,7 @@ h6 {
 .index-page .header {
  
   --background-color: white !important; 
-   color:#fff !important;
-    border-bottom: 1px solid rgba(38, 37, 37, 0.2) !important; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important; 
+ 
 }
 
 .sitename {

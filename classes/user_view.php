@@ -14,6 +14,13 @@ $approvedFiles = $mainClass->getPublishedFiles();
 $monthlyData = $mainClass->getMonthlyData();
 $dailyData = $mainClass->getDailyData();
 $hourlyData = $mainClass->getHourlyData();
+
+$upcoming_events =  $mainClass->fetchUpcomingEvents();
+
+$ongoing_events =  $mainClass->fetchOngoingEvents();
+
+$finished_events =  $mainClass->fetchFinishedEvents();
+// $ongoing
 // $scheduledEvents = $mainClass->getScheduledEvents();
 // $ongoingEvents = $mainClass->getOngoingEvents();
 // $finishedEvents = $mainClass->getFinishedEvents();

@@ -59,46 +59,154 @@ require_once "classes/user_view.php";
 
     <!-- Page Title -->
     <div class="page-title">
-      <div class="heading">
-        <div class="container">
+      <div class="heading "style="background-size: cover; background-position: center;background: linear-gradient(to top, rgba(38, 37, 37, 0.1), rgba(22, 22, 22, 0.1));z-index: -1;">
+        <div class="container ">
           <div class="row d-flex justify-content-center text-center">
             <div class="col-lg-8">
+              <br><br>
+              <h1 class="text-dark"> <i class="bi bi-calendar-check text-secondary"></i> GoodLand Events</h1>
             </div>
           </div>
         </div>
       </div>
-      
     </div><!-- End Page Title -->
     <section>
 
     <div class="container">
       <div class="row gy-4">
 
-   
-      <div class="row event-card mb-4 align-items-center">
-            <div class="col-md-3 date-box">
-                <h1 class="date-number">27</h1>
-                <p class="date-month">May</p>
-            </div>
-            <div class="col-md-9 content-box">
-                <h4>Where is the event happening?</h4>
-                <p>Join us to explore the future of AI and technology in the industry. A day full of insightful talks and networking...</p>
-                <a href="#" class="btn btn-primary">View Details</a>
-            </div>
-        </div>
+      <div class="container mt-5">
+    <h2 class="mb-4">
+       
+        <span class="text-dark"><strong>ONGOING EVENTS</strong></span>
+    </h2>
 
-        <!-- Event Card 3 -->
-        <div class="row event-card mb-4 align-items-center">
-            <div class="col-md-3 date-box">
-                <h1 class="date-number">12</h1>
-                <p class="date-month">August</p>
+    <?php if (!empty($ongoing_events)): ?>
+        <?php foreach ($ongoing_events as $event): ?>
+            <div class="row event-card mb-4 align-items-center">
+                <div class="col-md-3 date-box text-center">
+                    <?php
+                        // Extract day and month from date_start and date_end
+                        $startDate = strtotime($event['date_start']);
+                        $endDate = strtotime($event['date_end']);
+                        
+                        $startDay = date("d", $startDate);
+                        $startMonth = date("F", $startDate);
+                        
+                        $endDay = date("d", $endDate);
+                        $endMonth = date("F", $endDate);
+                    ?>
+                    <h1 class="date-number">
+                        <?php echo $startDay; ?><?php if ($startMonth != $endMonth): ?><span class="small">-<?php echo $endDay; ?></span><?php endif; ?>
+                    </h1>
+                    <p class="date-month">
+                        <?php echo $startMonth; ?>
+                        <?php if ($startMonth != $endMonth): ?> to <?php echo $endMonth; ?><?php endif; ?>
+                    </p>
+                </div>
+                <div class="col-md-9 content-box">
+                    <h4><?php echo htmlspecialchars($event['event_name']); ?></h4>
+                    <p><?php echo htmlspecialchars($event['description']); ?></p>
+                    <small>
+                        Event Duration: <?php echo date("M d, Y", $startDate); ?> - <?php echo date("M d, Y", $endDate); ?>
+                    </small>
+                    <a href="event_details.php?event_id=<?php echo $event['event_id']; ?>" class="btn btn-primary mt-2">View Details</a>
+                </div>
             </div>
-            <div class="col-md-9 content-box">
-                <h4>Where is the event happening?</h4>
-                <p>Experience the best in tech with hands-on workshops and keynote speeches from industry experts...</p>
-                <a href="#" class="btn btn-primary">View Details</a>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <h4 class="text-center">Coming Soon..</h4>
+    <?php endif; ?>
+</div>
+<br><br>
+      <div class="container mt-5">
+          <h2 class="mb-4"><span class="text-dark"><strong>UPCOMING EVENTS</strong></span></h2>
+        
+        <?php if (!empty($upcoming_events)): ?>
+            <?php foreach ($upcoming_events as $event): ?>
+                <div class="row event-card mb-4 align-items-center">
+                    <div class="col-md-3 date-box text-center">
+                        <?php
+                            // Extract day and month from date_start and date_end
+                            $startDate = strtotime($event['date_start']);
+                            $endDate = strtotime($event['date_end']);
+                            
+                            $startDay = date("d", $startDate);
+                            $startMonth = date("F", $startDate);
+                            
+                            $endDay = date("d", $endDate);
+                            $endMonth = date("F", $endDate);
+                        ?>
+                        <h1 class="date-number">
+                            <?php echo $startDay; ?><?php if ($startMonth != $endMonth): ?><span class="small">-<?php echo $endDay; ?></span><?php endif; ?>
+                        </h1>
+                        <p class="date-month">
+                            <?php echo $startMonth; ?>
+                            <?php if ($startMonth != $endMonth): ?> to <?php echo $endMonth; ?><?php endif; ?>
+                        </p>
+                    </div>
+                    <div class="col-md-9 content-box">
+                        <h4><?php echo htmlspecialchars($event['event_name']); ?></h4>
+                        <p><?php echo htmlspecialchars($event['description']); ?> <br><small>
+                          <?php echo date("M d, Y", $startDate); ?> - <?php echo date("M d, Y", $endDate); ?>
+                        </small></p>
+                        
+                        <a href="event_details.php?event_id=<?php echo $event['event_id']; ?>" class="btn btn-primary mt-2">View Details</a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <h4 class="text-center">No upcoming events at the moment.</h4>
+        <?php endif; ?>
+    </div>
+
+
+    <br><br>
+    <div class="container mt-5">
+    <h2 class="mb-4">
+       
+        <span class="text-dark"><strong>FINISHED EVENTS</strong></span>
+    </h2>
+
+    <?php if (!empty($finished_events)): ?>
+        <?php foreach ($finished_events as $event): ?>
+            <div class="row event-card mb-4 align-items-center">
+                <div class="col-md-3 date-box text-center">
+                    <?php
+                        // Extract day and month from date_start and date_end
+                        $startDate = strtotime($event['date_start']);
+                        $endDate = strtotime($event['date_end']);
+                        
+                        $startDay = date("d", $startDate);
+                        $startMonth = date("F", $startDate);
+                        
+                        $endDay = date("d", $endDate);
+                        $endMonth = date("F", $endDate);
+                    ?>
+                    <h1 class="date-number">
+                        <?php echo $startDay; ?><?php if ($startMonth != $endMonth): ?><span class="small">-<?php echo $endDay; ?></span><?php endif; ?>
+                    </h1>
+                    <p class="date-month">
+                        <?php echo $startMonth; ?>
+                        <?php if ($startMonth != $endMonth): ?> to <?php echo $endMonth; ?><?php endif; ?>
+                    </p>
+                </div>
+                <div class="col-md-9 content-box">
+                    <h4><?php echo htmlspecialchars($event['event_name']); ?></h4>
+                    <p><?php echo htmlspecialchars($event['description']); ?></p>
+                    <small>
+                        Event Duration: <?php echo date("M d, Y", $startDate); ?> - <?php echo date("M d, Y", $endDate); ?>
+                    </small>
+                    <a href="event_details.php?event_id=<?php echo $event['event_id']; ?>" class="btn btn-primary mt-2">View Details</a>
+                </div>
             </div>
-        </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <h4 class="text-center">No finished events at the moment.</h4>
+    <?php endif; ?>
+</div>
+
+
     
 
 
@@ -106,6 +214,7 @@ require_once "classes/user_view.php";
     </div>
 
     </section>
+    <br><br><br><br><br><br><br><br><br><br><br>
   </main>
 
   <?php include "includes/footer.php";?>
