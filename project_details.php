@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once __DIR__ . '/admin/classes/Main_class.php';
 require_once "classes/config.php"; 
 $mainClass = new Main_class();
@@ -105,24 +105,11 @@ if (isset($_GET['project_id'])) {
                         </div>
                         <hr>
 
-                            <?php
-                                if (!empty($project['youtube_link'])) {
-                                    // Convert shortened YouTube URL to embed URL
-                                    $embedUrl = str_replace('youtu.be/', 'www.youtube.com/embed/', $project['youtube_link']);
-                                    $embedUrl = strtok($embedUrl, '?'); // Remove query parameters
-                                ?>
-                                    <div class="video-wrapper">
-                                        <iframe 
-                                            src="<?php echo htmlspecialchars($embedUrl); ?>" 
-                                            width="560" 
-                                            height="315" 
-                                            frameborder="0" 
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                            allowfullscreen>
-                                        </iframe>
-                                    </div>
-                                <?php } ?>
-
+                        <?php if (!empty($project['youtube_link'])) { ?>
+                        <div class="video-wrapper">
+                            <iframe src="<?php echo htmlspecialchars($project['youtube_link']); ?>" ></iframe>
+                        </div>
+                        <?php } ?>
 
                     </div>
                 </section>
