@@ -170,54 +170,50 @@ require_once "classes/user_view.php";
 
 
     <br><br>
-    <div class="container mt-5">
-    <h2 class="mb-4">
-       
-        <span class="text-dark"><strong>FINISHED EVENTS</strong></span>
-    </h2>
-
-    <?php if (!empty($finished_events)): ?>
-        <?php foreach ($finished_events as $event): ?>
-            <div class="row event-card mb-4 align-items-center">
-                <div class="col-md-3 date-box text-center">
-                    <?php
-                        // Extract day and month from date_start and date_end
-                        $startDate = strtotime($event['date_start']);
-                        $endDate = strtotime($event['date_end']);
-                        
-                        $startDay = date("d", $startDate);
-                        $startMonth = date("F", $startDate);
-                        
-                        $endDay = date("d", $endDate);
-                        $endMonth = date("F", $endDate);
-                    ?>
-                    <h1 class="date-number">
-                        <?php echo $startDay; ?><?php if ($startMonth != $endMonth): ?><span class="small">-<?php echo $endDay; ?></span><?php endif; ?>
-                    </h1>
-                    <p class="date-month">
-                        <?php echo $startMonth; ?>
-                        <?php if ($startMonth != $endMonth): ?> to <?php echo $endMonth; ?><?php endif; ?>
-                    </p>
-                </div>
-                <div class="col-md-9 content-box">
-                    <h4><?php echo htmlspecialchars($event['event_name']); ?></h4>
-                    <p><?php echo htmlspecialchars($event['description']); ?></p>
-                    <small>
-                        Event Duration: <?php echo date("M d, Y", $startDate); ?> - <?php echo date("M d, Y", $endDate); ?>
-                    </small>
-                    <a href="event_details.php?event_id=<?php echo encryptor('encrypt', $event['event_id']); ?>" 
-   class="btn btn-primary mt-2">View Details</a>
-
-                  </div>
-            </div>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <h4 class="text-center">No finished events at the moment.</h4>
-    <?php endif; ?>
-</div>
-
-
     
+
+    <div class="container mt-5">
+          <h2 class="mb-4"><span class="text-dark"><strong>FINISHED EVENTS</strong></span></h2>
+        
+        <?php if (!empty($finished_events)): ?>
+            <?php foreach ($finished_events as $event): ?>
+                <div class="row event-card mb-4 align-items-center">
+                    <div class="col-md-3 date-box text-center">
+                        <?php
+                            // Extract day and month from date_start and date_end
+                            $startDate = strtotime($event['date_start']);
+                            $endDate = strtotime($event['date_end']);
+                            
+                            $startDay = date("d", $startDate);
+                            $startMonth = date("F", $startDate);
+                            
+                            $endDay = date("d", $endDate);
+                            $endMonth = date("F", $endDate);
+                        ?>
+                        <h1 class="date-number">
+                            <?php echo $startDay; ?><?php if ($startMonth != $endMonth): ?><span class="small">-<?php echo $endDay; ?></span><?php endif; ?>
+                        </h1>
+                        <p class="date-month">
+                            <?php echo $startMonth; ?>
+                            <?php if ($startMonth != $endMonth): ?> to <?php echo $endMonth; ?><?php endif; ?>
+                        </p>
+                    </div>
+                    <div class="col-md-9 content-box">
+                        <h4><?php echo htmlspecialchars($event['event_name']); ?></h4>
+                        <p><?php echo htmlspecialchars($event['description']); ?> <br><small>
+                          <?php echo date("M d, Y", $startDate); ?> - <?php echo date("M d, Y", $endDate); ?>
+                        </small></p>
+                        <a href="event_details.php?event_id=<?php echo encryptor('encrypt', $event['event_id']); ?>" 
+   class="btn btn-primary mt-2">View Details</a>
+  
+                       
+                      </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <h4 class="text-center">No upcoming events at the moment.</h4>
+        <?php endif; ?>
+    </div>
 
 
       </div>
