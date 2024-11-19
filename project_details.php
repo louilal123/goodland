@@ -105,11 +105,25 @@ if (isset($_GET['project_id'])) {
                         </div>
                         <hr>
 
-                        <?php if (!empty($project['youtube_link'])) { ?>
-                        <div class="video-wrapper">
-                            <iframe src="<?php echo htmlspecialchars($project['youtube_link']); ?>" allowfullscreen></iframe>
-                        </div>
-                        <?php } ?>
+                        <?php if (!empty($project['youtube_link'])) { 
+    // Ensure the URL is in the correct format
+    $youtube_url = $project['youtube_link'];
+
+    // If the URL is not in the embed format, convert it
+    if (strpos($youtube_url, 'youtube.com/watch') !== false) {
+        // Extract the video ID from the URL
+        preg_match('/(?:v=|\/)([0-9A-Za-z_-]{11})/', $youtube_url, $matches);
+        if (isset($matches[1])) {
+            // Convert to the embed format
+            $youtube_url = "https://www.youtube.com/embed/" . $matches[1];
+        }
+    }
+?>
+    <div class="video-wrapper">
+        <iframe src="<?php echo htmlspecialchars($youtube_url); ?>" allowfullscreen></iframe>
+    </div>
+<?php } ?>
+
 
                     </div>
                 </section>
