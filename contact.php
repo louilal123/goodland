@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Prepare PHPMailer
-    $mail = require __DIR__ . "/../mailer.php";
+    $mail = require __DIR__ . "/mailer.php";
 
     // Set user's email as sender
     try {
