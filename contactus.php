@@ -1,5 +1,6 @@
 
 <?php 
+session_start();
 require_once "classes/config.php";
 ?>
 <!DOCTYPE html>
