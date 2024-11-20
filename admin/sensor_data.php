@@ -66,7 +66,8 @@
                                             <?php if (!empty($data)): ?>
                                                 <?php foreach ($data as $entry): ?>
                                                     <tr>
-                                                        <td><?php echo date("M d, h:i A", strtotime($entry['timestamp'])); ?></td>
+                                                    <td><?php echo date("M d, h:i:s A", strtotime($entry['timestamp'])); ?></td>
+
                                                         <td><?php echo htmlspecialchars($entry['kit_name']); ?> cm</td>
                                                         <td><?php echo htmlspecialchars($entry['level_cm']); ?> cm</td>
                                                         <td><?php echo htmlspecialchars($entry['humidity']); ?>%</td>
