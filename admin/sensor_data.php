@@ -51,7 +51,8 @@
                                                 include '../classes/connection.php';
 
                                                 // Fetch data from the sensor_data table
-                                                $sql = "SELECT `id`, `kit_name`, `level_cm`, `humidity`, `temperature`, `timestamp` FROM `sensor_data` ORDER BY `timestamp` DESC";
+                                                $sql = "SELECT `id`, `kit_name`, `level_cm`, `humidity`, `temperature`,
+                                                 `timestamp` FROM `sensor_data` ORDER BY `timestamp` ASC";
                                                 $result = $conn->query($sql);
 
                                                 // Check if data exists
