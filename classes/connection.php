@@ -18,6 +18,12 @@ $username = "root";
 $password = "1goodland_v2";      
 $dbname = "u510162695_goodland_db"; 
 
+
+// $servername = "127.0.0.1"; 
+// $username = "root";               
+// $password = "";      
+// $dbname = "u510162695_goodland_db"; 
+
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 

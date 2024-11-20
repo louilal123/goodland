@@ -68,7 +68,6 @@ $pending_request = $mainClass->getAllFileRequests();//get pending
 $monthlyData = $mainClass->getMonthlyData();
 
 $data = $mainClass->getCatchmentData();
-$subscribers = $mainClass->getAllSubscribers();
 $visitorMonthlyData = $mainClass->getVisitorMonthlyData();
 $totalReturningVisitors = $mainClass->getTotalReturningVisitors();
 

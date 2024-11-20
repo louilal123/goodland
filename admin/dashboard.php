@@ -1,10 +1,12 @@
 ﻿<?php include "classes/admindetails.php";
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en"> 
 <?php include "includes/header.php"; ?>
-
+<title>Admin-Panel</title>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
@@ -244,6 +246,17 @@
                             </div> 
                         </div> 
                     </div> <!--end::Row--> <!--begin::Row-->
+
+
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card p-2 pt-4 char">
+                                 <div id="kit1" ></div> 
+                            </div>
+                        </div> 
+                    </div>
+
                     <div class="row"> <!-- Start col -->
                         <div class="col-lg-5">
                             <div class="card char p-2 pt-4">
@@ -251,43 +264,17 @@
                             </div>
                         </div> 
                         <div class="col-lg-7">
-                        <div class="card p-2 pt-4 char">
-                        
+                            <div class="card p-2 pt-4 char">
                             
-                            <div id="containe" >
-                               
-                            </div> 
-                        </div>
-
+                                
+                                <div id="containe" >
+                                
+                                </div> 
+                            </div>
                         </div> 
                     </div> <!-- Close the first row -->
 
-                    <div class="row mt-4"> <!-- New row for the next columns -->
-                    <div class="col-md-6 d-flex">
-      <div class="card">
-      <div  id="cylinder1"></div>
-      </div>
-      <div class="card ">
-          <div class="card-body">
-          
-              <!-- <p id="esawod1-water-level">Water Level: -- cm</p> -->
-              <h5 id="esawod1-temp"><span class="text-danger">Temperature: -- °C</span> </h5>
-              <h5 id="esawod1-humidity" ><span class="text-warning">Humidity: -- %</span></h5>
-          </div>
-      </div>
-  </div>
-
-<div class="col-md-6">
-    <div class="card ">
-        <div class="card-body">
-            <h5>E-SAWOD 2</h5>
-            <p id="esawod2-water-level">Water Level: -- cm</p>
-            <p id="esawod2-temp">Temperature: -- °C</p>
-            <p id="esawod2-humidity">Humidity: -- RH %</p>
-        </div>
-    </div>
-</div>
-                    </div> 
+                    
 
 
                     
@@ -302,75 +289,75 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
    
     <script>
-document.addEventListener('DOMContentLoaded', function () {
-    // Define custom colors for each status
-    const statusColors = {
-        'Unpublished': '#495057',  // bg-secondary
-        // 'Declined': '#dc3545', 
-        'Published': '#0062cc',  // bg-success
-        // 'Archived': '#ffc107'    
-    };
+        document.addEventListener('DOMContentLoaded', function () {
+            // Define custom colors for each status
+            const statusColors = {
+                'Unpublished': '#495057',  // bg-secondary
+                // 'Declined': '#dc3545', 
+                'Published': '#0062cc',  // bg-success
+                // 'Archived': '#ffc107'    
+            };
 
-    // Your original pie chart data
-    const pieChartData = <?php echo json_encode($pieChartData); ?>;
+            // Your original pie chart data
+            const pieChartData = <?php echo json_encode($pieChartData); ?>;
 
-    // Ensure both "Unpublished" and "Published" statuses are always included
-    const statuses = ['Unpublished', 'Published'];  // Add other statuses if needed
-    statuses.forEach(status => {
-        if (!pieChartData.some(item => item.name === status)) {
-            // Add the status with 0 if it's not in the data
-            pieChartData.push({ name: status, y: 0 });
-        }
-    });
+            // Ensure both "Unpublished" and "Published" statuses are always included
+            const statuses = ['Unpublished', 'Published'];  // Add other statuses if needed
+            statuses.forEach(status => {
+                if (!pieChartData.some(item => item.name === status)) {
+                    // Add the status with 0 if it's not in the data
+                    pieChartData.push({ name: status, y: 0 });
+                }
+            });
 
-    // Map your data to include the colors and slicing
-    const dataWithColors = pieChartData.map(item => ({
-        name: item.name,
-        y: item.y,
-        color: statusColors[item.name] || '#dc3545',  // Default color if no match
-        sliced: item.name === 'Unpublished', 
-        selected: item.name === 'Published'
-    }));
+            // Map your data to include the colors and slicing
+            const dataWithColors = pieChartData.map(item => ({
+                name: item.name,
+                y: item.y,
+                color: statusColors[item.name] || '#dc3545',  // Default color if no match
+                sliced: item.name === 'Unpublished', 
+                selected: item.name === 'Published'
+            }));
 
-    Highcharts.chart('container', {
-        chart: {
-            type: 'pie',
-            options3d: {
-                enabled: true,
-                alpha: 10,
-                beta: 0
-            }
-        },
-        title: {
-            text: 'Archive Files Overview'
-        },
-        tooltip: {
-            pointFormat: '{point.name}: <b>{point.y} ({point.percentage:.1f}%)</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                depth: 70,
-                dataLabels: {
-                    enabled: true,
-                    format: '{point.name}: {point.y} ({point.percentage:.1f}%)'
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'pie',
+                    options3d: {
+                        enabled: true,
+                        alpha: 10,
+                        beta: 0
+                    }
                 },
-                showInLegend: true
-            }
-        },
-        credits: {
-            enabled: false
-        },
-        series: [{
-            name: 'Files',
-            colorByPoint: false,  // Set to false since we are specifying colors directly
-            data: dataWithColors  // Use the modified data with colors and slicing
-        }]
-    });
-});
+                title: {
+                    text: 'Archive Files Overview'
+                },
+                tooltip: {
+                    pointFormat: '{point.name}: <b>{point.y} ({point.percentage:.1f}%)</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        depth: 70,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name}: {point.y} ({point.percentage:.1f}%)'
+                        },
+                        showInLegend: true
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Files',
+                    colorByPoint: false,  // Set to false since we are specifying colors directly
+                    data: dataWithColors  // Use the modified data with colors and slicing
+                }]
+            });
+        });
 
-</script>
+    </script>
 
 <script>
     // Pass the PHP data to JavaScript
@@ -462,306 +449,73 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 </script>
 
-
 <script>
-    // Fetch data from PHP
-    let monthlyData = <?php echo json_encode($this->getMonthlyData()); ?>;
+    document.addEventListener('DOMContentLoaded', function () {
+        // Fetch data from the PHP file
+        fetch('../classes/fetchSensorData.php')
+            .then(response => response.json())  // Parse JSON response
+            .then(data => {
+                // Check if data is available
+                if (data.length === 0) {
+                    console.log('No data available');
+                    return;
+                }
 
-    function renderChart(data) {
-        Highcharts.chart('containe', {
-            chart: {
-                zooming: {
-                    type: 'xy'
-                }
-            },
-            title: {
-                text: 'Average Monthly Data from Water Catchment Tank',
-                align: 'left'
-            },
-            subtitle: {
-                text: 'Source: <a href="#" target="_blank">GoodLand</a>',
-                align: 'left'
-            },
-            xAxis: [{
-                categories: [
-                    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-                ],
-                crosshair: true
-            }],
-            yAxis: {
-                title: {
-                    text: 'Measurements'
-                },
-                labels: {
-                    formatter: function () {
-                        return this.value;
-                    }
-                }
-            },
-            tooltip: {
-                shared: true,
-                valueSuffix: ' units'
-            },
-            legend: {
+                // Process the data (for example, organizing it for the chart)
+                const levelData = [];
+                const humidityData = [];
+                const tempData = [];
+                const timestamps = [];
+
+                data.forEach(entry => {
+                    const timestamp = new Date(entry.timestamp);
+                    timestamps.push(timestamp.toLocaleTimeString());  // Format timestamp if needed
+                    levelData.push(entry.level_cm);
+                    humidityData.push(entry.humidity);
+                    tempData.push(entry.temperature);
+                });
+
+                // Create the chart (for example, using Highcharts)
+                Highcharts.chart('kit1', {
+                    chart: {
+                        type: 'line'
+                    },
+                    legend: {
                 align: 'center',
-                verticalAlign: 'bottom',
+                verticalAlign: 'top',
                 layout: 'horizontal',
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
-            credits: {
-                enabled: false
-            },
-            series: [{
-                name: 'Water Level (cm)',
-                type: 'column',
-                data: data.waterLevel,
-                color: '#0062cc',
-                tooltip: {
-                    valueSuffix: ' cm'
-                }
-            }, {
-                name: 'Temperature (°C)',
-                type: 'spline',
-                data: data.temperature,
-                color: '#dc3545',
-                tooltip: {
-                    valueSuffix: '°C'
-                }
-            }, {
-                name: 'Humidity (%)',
-                type: 'spline',
-                data: data.humidity,
-                tooltip: {
-                    valueSuffix: ' %'
-                }
-            }]
-        });
-    }
-
-    // Initial render
-    renderChart(monthlyData);
-</script>
-
-
-<!-- FusionCharts -->
-<script type="text/javascript">
-    FusionCharts.ready(function(){
-        var chartObj = new FusionCharts({
-            type: 'cylinder',
-            dataFormat: 'json',
-            renderAt: 'cylinder1',
-            width: '200',
-            height: '350',
-            dataSource: {
-                "chart": {
-                    "theme": "fusion",
-                    "caption": "E-SAWOD 1",
-                    "captionFontColor": "#0062cc",
-                    "subcaption": "Live Monitoring",
-                    "lowerLimit": "0",
-                    "upperLimit": "30", // Maximum water level of 30 cm
-                    "lowerLimitDisplay": "Empty",
-                    "upperLimitDisplay": "Full",
-                    "numberSuffix": " cm",
-                    "showValue": "1",
-                    "valueFontSize": "18",
-                    "chartBottomMargin": "45",
-                    "cylFillColor": "#87CEEB", // Sky Blue color
-                    "cyloriginy": "300",
-                    "use3DLighting": "0"
-                },
-                "value": "18", // Initial value
-                "annotations": {
-                    "origw": "500",
-                    "origh": "40",
-                    "autoscale": "1",
-                    "groups": [{
-                        "id": "range",
-                        "items": [{
-                            "id": "rangeBg",
-                            "type": "rectangle",
-                            "x": "$canvasCenterX-45",
-                            "y": "$chartEndY-30",
-                            "tox": "$canvasCenterX +45",
-                            "toy": "$chartEndY-75",
-                            "fillcolor": "#0062cc"
-                        }, {
-                            "id": "rangeText",
-                            "type": "Text",
-                            "fontSize": "11",
-                            "fillcolor": "#333333",
-                            "text": "Current Level",
-                            "x": "$chartCenterX-45",
-                            "y": "$chartEndY-50"
-                        }]
-                    }]
-                }
-            },
-            "events": {
-                "rendered": function(evtObj, argObj) {
-                    var gaugeRef = evtObj.sender;
-
-                    // Function to update the water level on the FusionCharts cylinder
-                    function updateWaterLevel() {
-                        $.ajax({
-                            url: '../classes/fetch1.php',  // PHP file for e-sawod_1 data
-                            type: 'GET',
-                            success: function(response) {
-                                var data = JSON.parse(response);
-                                var newLevel = data.value;  // The water level data returned from PHP
-                                
-                                // Ensure the value is within the acceptable range (0–30)
-                                if (newLevel < 0) newLevel = 0;
-                                if (newLevel > 30) newLevel = 30;
-
-                                // Update the FusionCharts gauge with the new water level value
-                                gaugeRef.feedData("&value=" + newLevel);
-                                updateAnnotations(gaugeRef, newLevel);  // Update annotations (optional)
-                            }
-                        });
-                    }
-
-                    // Initial update
-                    updateWaterLevel();
-
-                    // Update the water level every 5 seconds (5000ms)
-                    setInterval(updateWaterLevel, 5000);  // Update every 5 seconds
-                },
-                "realTimeUpdateComplete": function(evt, arg) {
-                    // This function updates the annotation and color based on the water level value
-                    var annotations = evt.sender.annotations,
-                        dataVal = evt.sender.getData(),
-                        colorVal;
-
-                    // Assign colors based on water level
-                    if (dataVal >= 30) {
-                        colorVal = "#dc3545"; // Red for full level
-                    } else if (dataVal <= 12) {
-                        colorVal = "#ffc107"; // Yellow for low level
-                    } else {
-                        colorVal = "#28a745"; // Green for mid level
-                    }
-
-                    // Update annotations and background color of the cylinder
-                    annotations && annotations.update('rangeText', {
-                        "text": "WL: " + dataVal + " cm",
-                        "bgAlpha": "100",
-                        "bgColor": colorVal
-                    });
-                    
-                    annotations && annotations.update('rangeBg', {
-                        "fillcolor": colorVal
-                    });
-                },
-                "disposed": function(evt, arg) {
-                    clearInterval(evt.sender.chartInterval);
-                }
-            }
-        });
-
-        // Render the FusionCharts gauge
-        chartObj.render();
+                    title: {
+                        text: 'Sensor Data - Water Level, Humidity, and Temperature'
+                    },
+                    xAxis: {
+                        categories: timestamps
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Value'
+                        }
+                    },
+                    series: [
+                        {
+                            name: 'Water Level (cm)',
+                            data: levelData
+                        },
+                        {
+                            name: 'Humidity (%)',
+                            data: humidityData
+                        },
+                        {
+                            name: 'Temperature (°C)',
+                            data: tempData
+                        }
+                    ]
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
     });
 </script>
-
-<script>
-$(document).ready(function() {
-    // Function to fetch and display the latest data for esawod_1
-    function fetchEsawod1Data() {
-        $.ajax({
-            url: '/../classes/fetch_esawod1.php',  // Path to the PHP file that fetches esawod_1 data
-            method: 'GET',
-            dataType: 'json',
-            success: function(data) {
-                if (data['esawod_1']) {
-                    $('#esawod1-water-level').text('Water Level: ' + data['esawod_1'].level_cm + ' cm');
-                    $('#esawod1-temp').text('Temperature: ' + data['esawod_1'].temperature + '°C');
-                    $('#esawod1-humidity').text('Humidity: ' + data['esawod_1'].humidity + '%');
-                } else {
-                    $('#esawod1-water-level').text('No data for esawod_1');
-                    $('#esawod1-temp').text('No data for esawod_1');
-                    $('#esawod1-humidity').text('No data for esawod_1');
-                }
-            },
-            error: function(err) {
-                console.log('Error fetching esawod_1 data:', err);
-            }
-        });
-    }
-
-    // Function to fetch and display the latest data for esawod_2
-    function fetchEsawod2Data() {
-        $.ajax({
-            url: '/../classes/fetch_esawod2.php',  // Path to the PHP file that fetches esawod_2 data
-            method: 'GET',
-            dataType: 'json',
-            success: function(data) {
-                if (data['esawod_2']) {
-                    $('#esawod2-water-level').text('Water Level: ' + data['esawod_2'].level_cm + ' cm');
-                    $('#esawod2-temp').text('Temperature: ' + data['esawod_2'].temperature + '°C');
-                    $('#esawod2-humidity').text('Humidity: ' + data['esawod_2'].humidity + '%');
-                } else {
-                    $('#esawod2-water-level').text('No data for esawod_2');
-                    $('#esawod2-temp').text('No data for esawod_2');
-                    $('#esawod2-humidity').text('No data for esawod_2');
-                }
-            },
-            error: function(err) {
-                console.log('Error fetching esawod_2 data:', err);
-            }
-        });
-    }
-
-    fetchEsawod1Data();
-    fetchEsawod2Data();
-    setInterval(function() {
-        fetchEsawod1Data();
-        fetchEsawod2Data();
-    }, 5000);  // Refresh every 10 seconds
-});
-
-</script>
-<script>
-    // Function to load data from PHP script
-    function fetchData() {
-        $.ajax({
-            url: '../classes/node_db.php', // PHP script that fetches data
-            method: 'GET',
-            dataType: 'json',
-            success: function(data) {
-                // Clear existing table rows before inserting new data
-                $('#sensorDataTable tbody').empty();
-
-                // Loop through the data and append rows to the table
-                data.forEach(function(row) {
-                    // Convert UTC timestamp to Cebu local time (UTC+8)
-                    var localTime = new Date(row.timestamp);
-                    localTime.setHours(localTime.getHours() + 8); // Add 8 hours to convert to UTC+8
-
-                    var newRow = '<tr>' +
-                        '<td>' + row.kit_name + '</td>' +
-                        '<td>' + row.level_cm + ' cm</td>' +
-                        '<td>' + row.humidity + ' %</td>' +
-                        '<td>' + row.temperature + ' °C</td>' +
-                        '<td>' + localTime.toLocaleString() + '</td>' + // Show local time
-                        '</tr>';
-                    $('#sensorDataTable tbody').append(newRow);
-                });
-            },
-            error: function() {
-                console.log("Error fetching data.");
-            }
-        });
-    }
-
-    // Fetch data initially
-    fetchData();
-
-    // Fetch new data every 5 seconds to keep the table updated
-    setInterval(fetchData, 5000);
-</script>
-
 
     <script>
        document.addEventListener("DOMContentLoaded", function() {

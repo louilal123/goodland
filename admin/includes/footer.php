@@ -118,6 +118,18 @@
 
     
 </script>
+<script>
+    $(document).ready(function() {
+        $('#myTable2').DataTable({
+            dom: 'Bfrtip',
+    buttons: ['copy','excel','csv','print','pdf']
+
+        });
+    });
+
+    
+</script>
+
 
 <!-- modal sweet alert  -->
 
