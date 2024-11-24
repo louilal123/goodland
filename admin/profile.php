@@ -118,6 +118,36 @@
 </div>
 
 <!-- Edit Profile Modal -->
+<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editProfileModalLabel">Edit Profile Information</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="classes/update_admin_info.php" method="post">
+          <div class="mb-3">
+            <label for="modalFullname" class="form-label modal-label">Full Name</label>
+            <input type="text" class="form-control" id="modalFullname" name="fullname" value="<?php echo $adminDetails['fullname']; ?>">
+          </div>
+          <div class="mb-3">
+            <label for="modalUsername" class="form-label modal-label">Username</label>
+            <input type="text" class="form-control" id="modalUsername" name="username" value="<?php echo $adminDetails['username']; ?>">
+          </div>
+          <div class="mb-3">
+            <label for="modalEmail" class="form-label modal-label">Email</label>
+            <input type="email" class="form-control" id="modalEmail" name="email" value="<?php echo $adminDetails['email']; ?>">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
