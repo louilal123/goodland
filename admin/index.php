@@ -2,7 +2,7 @@
 session_start();
 
 // Allowed IP addresses
-$allowed_ips = ['112.208.72.214', '::1', '127.0.0.1'];
+$allowed_ips = ['112.208.72.214', '::1'];
 
 // Get the user's IP address
 $user_ip = $_SERVER['REMOTE_ADDR'];
