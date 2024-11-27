@@ -122,8 +122,6 @@ unset($_SESSION['error_message']);
         ?>
     <?php endif; ?>
 
-
-
     <script type="text/javascript" src="mdbfolder/mdb.umd.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
