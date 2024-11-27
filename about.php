@@ -14,7 +14,6 @@
 <?php include "includes/topnav.php";?>
   <main class="main ">
 
-   <!-- Page Title -->
    <div class="page-title">
       <div class="heading "style="background-size: cover; background-position: center;background: linear-gradient(to top, rgba(38, 37, 37, 0.1), rgba(22, 22, 22, 0.1));z-index: -1;">
         <div class="container ">
