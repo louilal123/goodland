@@ -96,11 +96,11 @@
         
        </p>
         <div class="d-flex flex-column flex-md-row" data-aos="fade-up" data-aos-delay="200">
-        <a href="#about" class="btn-get-started" style="background: linear-gradient(to right, #144D53,#0062cc) !important;"
-         data-aos="fade-in" data-aos-delay="200"><strong>EXPLORE</strong> <i class="bi bi-arrow-right"></i></a>
+        <a href="#about" class="btn-get-started btn" style="background: linear-gradient(to right, #144D53,#0062cc) !important;"
+         data-aos="fade-in" data-aos-delay="200">EXPLORE<i class="bi bi-arrow-right"></i></a>
               <a href="https://youtu.be/v3KTAD1NKas?si=vMHL--EJXYfbwqbx" 
               class="glightbox btn-watch-video d-flex align-items-center justify-content-center ms-0 ms-md-4 mt-4 mt-md-0 text-light">
-              <i class="bi bi-play-circle"></i><span><strong>WATCH VIDEO</strong></span></a>
+              <i class="bi bi-play-circle"></i><span>WATCH VIDEO</span></a>
            </div>
       </div>
       <div class="col-lg-6 order-1 order-lg-2 hero-img d-flex flex-column justify-content-center" data-aos="zoom-out">

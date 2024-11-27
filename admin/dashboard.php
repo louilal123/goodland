@@ -1,8 +1,8 @@
 ﻿<?php include "classes/admindetails.php";
 ?>
-
-
-
+<?php
+include 'classes/average_chart.php';
+?>
 <!DOCTYPE html>
 <html lang="en"> 
 <?php include "includes/header.php"; ?>
@@ -231,7 +231,7 @@
                             <div class="small-box">
                                 <div class="inner ml-2">
                                     <h3><?php echo $unread_msgs_count ?? '0'; ?></h3>
-                                    <p>Unread Messages</p>
+                                    <p>Messages</p>
                                 </div> 
                                 <div class="small-box-icon text-primary"><i class="fas fa-message"></i></div> 
                             </div> 
@@ -246,16 +246,21 @@
                             </div> 
                         </div> 
                     </div> <!--end::Row--> <!--begin::Row-->
+         
 
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card p-2 pt-4 char">
+            <div id="kit1"></div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card p-2 pt-4 char">
+            <div id="kit2"></div>
+        </div>
+    </div>
+</div>
 
-
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="card p-2 pt-4 char">
-                                 <div id="kit1" ></div> 
-                            </div>
-                        </div> 
-                    </div>
 
                     <div class="row"> <!-- Start col -->
                         <div class="col-lg-5">
@@ -272,10 +277,7 @@
                                 </div> 
                             </div>
                         </div> 
-                    </div> <!-- Close the first row -->
-
-                    
-
+                    </div> 
 
                     
                 </div> 
@@ -288,6 +290,104 @@
     <?php include "includes/footer.php" ?>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
    
+
+    
+
+    <script type="text/javascript">
+    // Chart for Kit 1 (esawod_1)
+    Highcharts.chart('kit1', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'E-SAWOD1 Average Data for <?php echo $monthName; ?>'
+        },
+        xAxis: {
+            categories: Array.from({ length: 31 }, (v, k) => k + 1), // Create an array from 1 to 31
+            title: {
+                text: 'Day of the Month'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Values'
+            }
+        },
+        legend: {
+                align: 'center',
+                verticalAlign: 'top',
+                layout: 'horizontal',
+                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
+            },
+            credits: {
+                enabled: false
+            },
+        series: [{
+            name: 'Water Level (cm)',
+            type: 'column',
+            data: <?php echo json_encode($chart_data_1['level_data']); ?>
+        }, {
+            name: 'Humidity (%)',
+            data: <?php echo json_encode($chart_data_1['humidity_data']); ?>
+        }, {
+            name: 'Temperature (°C)',
+            color: '#495057',
+            data: <?php echo json_encode($chart_data_1['temperature_data']); ?>
+        }],
+        tooltip: {
+            shared: true,
+            valueSuffix: ' units'
+        }
+    });
+
+    Highcharts.chart('kit2', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'E-SAWOD2 Average Data for <?php echo $monthName; ?>'
+        },
+        xAxis: {
+            categories: Array.from({ length: 31 }, (v, k) => k + 1), // Create an array from 1 to 31
+            title: {
+                text: 'Day of the Month'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Values'
+            }
+        },
+        legend: {
+                align: 'center',
+                verticalAlign: 'top',
+                layout: 'horizontal',
+                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
+            },
+            credits: {
+                enabled: false
+            },
+        series: [{
+            name: 'Water Level (cm)',
+            type: 'column',
+            data: <?php echo json_encode($chart_data_2['level_data']); ?>
+        }, {
+            name: 'Humidity (%)',
+            data: <?php echo json_encode($chart_data_2['humidity_data']); ?>
+        }, {
+            name: 'Temperature (°C)',
+            color: '#495057',
+            data: <?php echo json_encode($chart_data_2['temperature_data']); ?>
+        }],
+        tooltip: {
+            shared: true,
+            valueSuffix: ' units'
+        }
+    });
+</script>
+
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Define custom colors for each status
@@ -359,27 +459,18 @@
 
     </script>
 
+
+
 <script>
     // Pass the PHP data to JavaScript
-    let visitorMonthlyData = <?php echo json_encode($visitorMonthlyData); ?>;
-    
-    // Fetch monthly data from PHP
+    let visitorDailyData = <?php echo json_encode($visitorDailyData); ?>;
+
     document.addEventListener('DOMContentLoaded', function () {
-        // Get the current month (0 for January, 11 for December)
-        const currentMonth = new Date().getMonth(); // 0-based index for months
+        // Get the number of days in the current month
+        const daysInMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
 
-        // Define all month names
-        const allMonths = [
-            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-        ];
-
-        // Create a new array of categories that only includes months up to the current month
-        const categories = allMonths.slice(0, currentMonth + 1); // +1 to include the current month
-
-        // Adjust monthly data to only include the relevant months
-        const adjustedNewVisitors = visitorMonthlyData.newVisitors.slice(0, currentMonth + 1);
-        const adjustedReturningVisitors = visitorMonthlyData.returningVisitors.slice(0, currentMonth + 1);
+        // Generate categories for days of the month
+        const categories = Array.from({ length: daysInMonth }, (_, i) => (i + 1).toString());
 
         // Render the chart
         Highcharts.chart('containe', {
@@ -394,7 +485,7 @@
                 }
             },
             title: {
-                text: 'Monthly Visitors (New vs Returning)',
+                text: 'Daily Visitors (New vs Returning)',
                 align: 'center'
             },
             subtitle: {
@@ -417,7 +508,7 @@
             },
             tooltip: {
                 shared: true,
-                valueSuffix: ' visitors' // Adjust the suffix based on your data type
+                valueSuffix: ' visitors'
             },
             legend: {
                 align: 'center',
@@ -430,17 +521,17 @@
             },
             series: [{
                 name: 'New Visitors',
-                type: 'column',
-                color: '#495057', // Green for new visitors
-                data: adjustedNewVisitors,
+                type: 'line',
+                color: '#495057',
+                data: visitorDailyData.newVisitors,
                 tooltip: {
                     valueSuffix: ' visitors'
                 }
             }, {
                 name: 'Returning Visitors',
-                type: 'column',
-                color: '#0062cc', // Red for returning visitors
-                data: adjustedReturningVisitors,
+                type: 'line',
+                color: '#0062cc',
+                data: visitorDailyData.returningVisitors,
                 tooltip: {
                     valueSuffix: ' visitors'
                 }
@@ -449,73 +540,6 @@
     });
 </script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Fetch data from the PHP file
-        fetch('../classes/fetchSensorData.php')
-            .then(response => response.json())  // Parse JSON response
-            .then(data => {
-                // Check if data is available
-                if (data.length === 0) {
-                    console.log('No data available');
-                    return;
-                }
-
-                // Process the data (for example, organizing it for the chart)
-                const levelData = [];
-                const humidityData = [];
-                const tempData = [];
-                const timestamps = [];
-
-                data.forEach(entry => {
-                    const timestamp = new Date(entry.timestamp);
-                    timestamps.push(timestamp.toLocaleTimeString());  // Format timestamp if needed
-                    levelData.push(entry.level_cm);
-                    humidityData.push(entry.humidity);
-                    tempData.push(entry.temperature);
-                });
-
-                // Create the chart (for example, using Highcharts)
-                Highcharts.chart('kit1', {
-                    chart: {
-                        type: 'line'
-                    },
-                    legend: {
-                align: 'center',
-                verticalAlign: 'top',
-                layout: 'horizontal',
-                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
-            },
-                    title: {
-                        text: 'Sensor Data - Water Level, Humidity, and Temperature'
-                    },
-                    xAxis: {
-                        categories: timestamps
-                    },
-                    yAxis: {
-                        title: {
-                            text: 'Value'
-                        }
-                    },
-                    series: [
-                        {
-                            name: 'Water Level (cm)',
-                            data: levelData
-                        },
-                        {
-                            name: 'Humidity (%)',
-                            data: humidityData
-                        },
-                        {
-                            name: 'Temperature (°C)',
-                            data: tempData
-                        }
-                    ]
-                });
-            })
-            .catch(error => console.error('Error fetching data:', error));
-    });
-</script>
 
     <script>
        document.addEventListener("DOMContentLoaded", function() {

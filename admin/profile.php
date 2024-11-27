@@ -11,28 +11,14 @@
     <div class="app-main-wrappe main-blurr">
         <?php include "includes/topnav.php"; ?>
         <main class="app-main">
-            <div class="app-content-header">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h3 class="mb-0">Profile Information</h3>
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-end">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Profile</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          
             <div class="app-content flat">
                 <div class="container-fluid">
                     <div class="row" style="min-height: 80vh;">
                         <div class="col-md-12">
                             <div class="card  card-outline-primary">
                                 <div class="card-header d-flex">
-                                    <h3 class="card-title mb-0">Profile Information</h3>
+                                    <h2 > <span class="bi bi-info"></span>Profile Information</h2>
                                     <a data-bs-toggle="modal" data-bs-target="#editProfileModal"  class="btn btn-success ms-auto btn-end">Edit Profile</a>
                                       
                                 </div>
@@ -118,8 +104,8 @@
 </div>
 
 <!-- Edit Profile Modal -->
-<!-- <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="editProfileModalLabel">Edit Profile Information</h5>
@@ -147,14 +133,14 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>
 
 <!-- Change Password Modal -->
-<!-- <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+        <h5 class="modal-title" id="changePasswordModalLabel"><span class="bi bi-lock"></span> Change Password</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -179,7 +165,7 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>
 
 <!-- Edit Profile Picture Modal -->
 <div class="modal fade" id="editProfilePicModal" tabindex="-1" aria-labelledby="editProfilePicModalLabel" aria-hidden="true">

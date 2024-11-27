@@ -1,5 +1,16 @@
 <?php
 session_start();
+
+$allowed_ips = ['112.208.72.214', '::1', '127.0.0.1'];
+
+$user_ip = $_SERVER['REMOTE_ADDR'];
+
+if (!in_array($user_ip, $allowed_ips)) {
+    http_response_code(404); 
+    include('../404.html'); 
+    exit();
+}
+
 $error_message = $_SESSION['error_message'] ?? '';
 unset($_SESSION['error_message']);
 ?>
@@ -12,6 +23,7 @@ unset($_SESSION['error_message']);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet" href="mdbfolder/mdb.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert -->
+   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="../mdbfolder/mdb.min.css" />
 </head>
@@ -25,18 +37,26 @@ unset($_SESSION['error_message']);
 .card{
     border-radius: 0px;
 }
+.sitename{
+    font-size: 44px; /* Adjust size as needed */
+  background-image: linear-gradient(to right, #144D53, #0062cc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 </style>
 <body class="bg-light main-blur">
     <section class="vh-100 bg-light">
-        <div class="container py-5 h-100 ">
+        <div class="container  h-100 ">
             <div class="row d-flex align-items-center justify-content-center h-100">
-                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 mt-5 mb-5">
+                <div class="col-md-7 col-lg-5   mt-5 mb-5">
                     <div class="card ">
                         <div class="mt-4 text-center">
-                            <!-- <img src="uploads/logogoodland.png" style="display: flex; margin: auto; width: 150px; height: 60px;"> -->
+                        <span class=" fw-bold sitename ">GOOD</strong><i class="fw-light">Land</i></span>
+                      
                         </div>
-                        <h2 class="info-color white-text text-center py-4 mb-2">
-                            <strong>Login to Goodland </strong>
+                        <h2 class="info-color white-text text-center mt-2 mb-4">
+                            
+                            <strong>Welcome Back!</strong>
                         </h2>
                         <div class="card-body px-lg-5 pt-0 mt-2">
                             <form style="color: #757575;" action="classes/login.php" method="post">
@@ -50,13 +70,13 @@ unset($_SESSION['error_message']);
 
                                 <!-- Email or Username input -->
                                 <div data-mdb-input-init class="form-outline mb-4">
-                                    <i class="fas fa-user trailing" id="toggleEmailOrUsername"></i>
-                                    <input type="text" name="emailOrUsername" class="form-control form-control-lg form-icon-trailing
-                                    <?php echo !empty($_SESSION['error_emailOrUsername']) ? 'is-invalid' : ''; ?>" id="materialLoginFormEmailOrUsername" 
-                                    value="<?php echo $_SESSION['form_data']['emailOrUsername'] ?? ''; ?>" />
-                                    <label class="form-label" for="materialLoginFormEmailOrUsername">Email or Username</label>
-                                    <?php if (!empty($_SESSION['error_emailOrUsername'])): ?>
-                                        <div class="invalid-feedback"><?php echo $_SESSION['error_emailOrUsername']; unset($_SESSION['error_emailOrUsername']); ?></div>
+                                    <i class="fas fa-user trailing" id="toggleemail"></i>
+                                    <input type="text" name="email" class="form-control form-control-lg form-icon-trailing
+                                    <?php echo !empty($_SESSION['error_email']) ? 'is-invalid' : ''; ?>" id="materialLoginFormemail" 
+                                    value="<?php echo $_SESSION['form_data']['email'] ?? ''; ?>" />
+                                    <label class="form-label" for="materialLoginFormemail">Email or Username</label>
+                                    <?php if (!empty($_SESSION['error_email'])): ?>
+                                        <div class="invalid-feedback"><?php echo $_SESSION['error_email']; unset($_SESSION['error_email']); ?></div>
                                     <?php endif; ?>
                                 </div>
 
@@ -73,6 +93,7 @@ unset($_SESSION['error_message']);
                                     <?php endif; ?>
                                 </div>
 
+
                                 <div class="d-flex justify-content-around align-items-center mb-4">
                                     <!-- Checkbox -->
                                     <div class="form-check">
@@ -84,7 +105,7 @@ unset($_SESSION['error_message']);
                                 </div>
 
                                 <!-- Submit button -->
-                                <button type="submit" class="btn btn-primary btn-lg btn-block mb-4">Sign in</button>
+                                <button type="submit" id="submitButton" class="btn btn-primary btn-lg btn-block mb-4">Sign in</button>
                             </form>
 
                             <div class="d-flex justify-content-around align-items-center mt-4">
@@ -111,6 +132,8 @@ unset($_SESSION['error_message']);
         unset($_SESSION['status_icon']);
         ?>
     <?php endif; ?>
+
+
 
     <script type="text/javascript" src="mdbfolder/mdb.umd.min.js"></script>
     <script>

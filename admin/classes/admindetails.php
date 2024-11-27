@@ -60,16 +60,14 @@ $events_count = $mainClass->count_all_events();
 $visitors_count = $mainClass->countAllWebsiteVisitors();
 $visitors = $mainClass->getAllVisitors();
 
-// file requests start 
-$request_count = $mainClass->getFileRequestsCount();
-$pending_request = $mainClass->getAllFileRequests();//get pending
 
-// $monthlyWaterLevels = $mainclass->getMonthlyAverageWaterLevel();
-$monthlyData = $mainClass->getMonthlyData();
 
-$data = $mainClass->getCatchmentData();
-$visitorMonthlyData = $mainClass->getVisitorMonthlyData();
+$visitorDailyData = $mainClass->getVisitorDailyData();
+
 $totalReturningVisitors = $mainClass->getTotalReturningVisitors();
+
+$settings = $mainClass->fetchSettings();
+$backups = $mainClass->fetchBackups();
 
 ?>
 

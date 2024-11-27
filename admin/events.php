@@ -92,7 +92,7 @@
                                        
                                             <td>
                                                
-                                                <button class="btn btn-success editBtn" 
+                                                <button class="btn btn-sm btn-success editBtn" 
                                                     data-id="<?php echo htmlspecialchars($item['event_id']); ?>"
                                                     data-name="<?php echo htmlspecialchars($item['event_name']); ?>"
                                                     data-description="<?php echo htmlspecialchars($item['description']); ?>"
@@ -108,7 +108,7 @@
 
 
 
-                                                    <button  class="btn btn-danger deleteMessageBtn " 
+                                                    <button  class="btn btn-sm btn-danger deleteMessageBtn " 
                                                     data-event-id="<?php echo htmlspecialchars($item['event_id']); ?>" 
                                                     data-event-name="<?php echo htmlspecialchars($item['event_name']); ?>" 
                                                     data-bs-toggle="modal" 

@@ -37,7 +37,7 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                         <div class="col-md-12">
                             <div class="card mt-2">
                             <div class="card-header bg-light d-flex ">
-                                        <h3 class="fw-bold">List of Library Files</h3>
+                                        <h3 class="fw-bold">List of Archives</h3>
                                         <button type="button" class="btn btn-primary ms-auto me-1" data-bs-toggle="modal" data-bs-target="#addItemModal">
                                             <i class="fas fa-folder-plus"></i> ADD NEW
                                         </button>
@@ -71,26 +71,25 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                                                     <td><img src="<?php echo ($file['cover_path']); ?>" style="width: 60px; height: 35px;"></td>
                                                     <td><a href="uploads/<?php echo ($file['file_path']); ?>" class="fw-bold text-primary">View File</a></td>
                                                     <td><?php if ($file['status'] == 'published'): ?>
-                                <span class="badge bg-success">Published</span>
-                            <?php else: ?>
-                                <span class="badge bg-secondary">Unpublished</span>
-                            <?php endif; ?></td>
+                                                            <span class="badge bg-success">Published</span>
+                                                        <?php else: ?>
+                                                            <span class="badge bg-secondary">Unpublished</span>
+                                                        <?php endif; ?>
+                                                    </td>
                                                     <td><?php echo date("M d, Y h:i A", strtotime($file['upload_date'])); ?></td>
                                                     <td>
-                                                        <button class="btn btn-success  editBtn" 
-            data-id="<?php echo htmlspecialchars($file['id']); ?>"
-            data-title="<?php echo htmlspecialchars($file['title']); ?>"
-            data-description="<?php echo htmlspecialchars($file['description']); ?>"
-            data-cover="<?php echo htmlspecialchars($file['cover_path']); ?>"
-            data-file="<?php echo htmlspecialchars($file['file_path']); ?>"
-            data-status="<?php echo htmlspecialchars($file['status']); ?>">
-        <i class="bi bi-pencil-square fw-bold"></i> Edit
-                    </button>
-                    <a href="classes/delete_file.php?id=<?php echo $file['id']; ?>" class="btn btn-danger  deleteBtn">
-                    <i class="fas fa-trash"></i> Delete
-                </a>
-
-
+                                                        <button class="btn btn-sm btn-success  editBtn" 
+                                                            data-id="<?php echo htmlspecialchars($file['id']); ?>"
+                                                            data-title="<?php echo htmlspecialchars($file['title']); ?>"
+                                                            data-description="<?php echo htmlspecialchars($file['description']); ?>"
+                                                            data-cover="<?php echo htmlspecialchars($file['cover_path']); ?>"
+                                                            data-file="<?php echo htmlspecialchars($file['file_path']); ?>"
+                                                            data-status="<?php echo htmlspecialchars($file['status']); ?>">
+                                                            <i class="bi bi-pencil-square fw-bold"></i> Edit
+                                                        </button>
+                                                                    <a href="classes/delete_file.php?id=<?php echo $file['id']; ?>" class="btn btn-sm btn-danger  deleteBtn">
+                                                                        <i class="fas fa-trash"></i> Delete
+                                                                    </a>
                                                     </td>
                                                 </tr>
                                                 <?php endforeach; ?>

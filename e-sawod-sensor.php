@@ -16,10 +16,7 @@
 
 </head>
 <style>
-  #water_level {
-    height: 400px;
-    min-width: 310px;
-}
+ 
 
   .highcharts-figure,
 .highcharts-data-table table {
@@ -71,54 +68,67 @@
   <main class="main">
     <!-- Page Title -->
     <div class="page-title">
-      <div class="heading "style="background-size: cover; background-position: center;background: linear-gradient(to top, rgba(38, 37, 37, 0.1), rgba(22, 22, 22, 0.1));z-index: -1;">
-        <div class="container ">
-          <div class="row d-flex justify-content-center text-center">
-            <div class="col-lg-8">
-              <br><br>
-              <h1 class="text-dark"> <i class="bi bi-measure text-secondary"></i>E-Sawod</h1>
+      <br><br>
+    
+    </div><!-- End Page Title -->
+    <!-- Values Section -->
+    
+    <section id="" class="values">
+  <div class="container">
+    <div class="row gy-4">
+      <!-- Title Section -->
+      <div class="col-md-12">
+        <div class="card bg-body-secondary text-center">
+          <h1><span class="bi bi-chart"></span> E-SAWOD SENSOR REAL-TIME DATA</h1>
+        </div>
+      </div>
+
+      <!-- E-SAWOD 1 -->
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title text-center">E-SAWOD 1</h5>
+            <!-- Cylinder Chart -->
+            <div id="cylinder1" class="mb-4"></div>
+            <!-- Temperature and Humidity Charts -->
+            <div class="row">
+              <div class="col-md-6">
+                <div id="temperature1"></div>
+              </div>
+              <div class="col-md-6">
+                <div id="humidity1"></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    
-    </div><!-- End Page Title -->
-    <!-- Values Section -->
-<section id="" class="values section">
-  <div class="container">
-    <div class="row gy-4">
-   
-    <div class="col-md-6 d-flex">
-      <div class="card">
-      <div  id="cylinder1"></div>
-      </div>
-      <div class="card ">
+
+      <!-- E-SAWOD 2 -->
+      <div class="col-md-6">
+        <div class="card">
           <div class="card-body">
-          
-              <!-- <p id="esawod1-water-level">Water Level: -- cm</p> -->
-              <h5 id="esawod1-temp"><span class="text-danger">Temperature: -- °C</span> </h5>
-              <h5 id="esawod1-humidity" ><span class="text-warning">Humidity: -- %</span></h5>
+            <h5 class="card-title text-center">E-SAWOD 2</h5>
+            <!-- Cylinder Chart -->
+            <div id="cylinder2" class="mb-4"></div>
+            <!-- Temperature and Humidity Charts -->
+            <div class="row">
+              <div class="col-md-6">
+                <div id="temperature2"></div>
+              </div>
+              <div class="col-md-6">
+                <div id="humidity2"></div>
+              </div>
+            </div>
           </div>
-      </div>
-  </div>
-
-<div class="col-md-6">
-    <div class="card ">
-        <div class="card-body">
-            <h5>E-SAWOD 2</h5>
-            <p id="esawod2-water-level">Water Level: -- cm</p>
-            <p id="esawod2-temp">Temperature: -- °C</p>
-            <p id="esawod2-humidity">Humidity: -- RH %</p>
         </div>
-    </div>
-</div>
-
-
-    
+      </div>
 
     </div>
   </div>
 </section>
+
+
+
 
     <!-- Values Section -->
     <section id="" class="values section">
@@ -153,29 +163,28 @@
    
           </div>
          
-          <div class="col-md-12">
+          <!-- <div class="col-md-12">
         <div class="card">
           <div class="card-body">
             <h3>Complete Data Table</h3>
-            <!-- Data Table container -->
-            <table id="sensorDataTable" border="1" class="table table-responsive">
-                <thead>
-                    <tr>
-                        <th>Kit Name</th>
-                        <th>Water Level (cm)</th>
-                        <th>Humidity (%)</th>
-                        <th>Temperature (°C)</th>
-                        <th>Timestamp</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Data rows will be inserted here -->
-                </tbody>
-            </table>
+                <table id="sensorDataTable" border="1" class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Kit Name</th>
+                            <th>Water Level (cm)</th>
+                            <th>Humidity (%)</th>
+                            <th>Temperature (°C)</th>
+                            <th>Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    
+                    </tbody>
+                </table>
   
           </div>
         </div>
-      </div>
+      </div> -->
           
         </div>
       </div>
@@ -399,6 +408,183 @@
         })();
     
 </script>
+<script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+<script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+
+<script type="text/javascript">
+    FusionCharts.ready(function () {
+        // Initialize the chart
+        var chartObj = new FusionCharts({
+            type: 'angulargauge',
+            renderAt: 'humidity1', // ID of the container div
+            width: '100%', // Makes the chart responsive
+            height: '300', // Chart height
+            dataFormat: 'json',
+            dataSource: {
+                "chart": {
+                    "caption": "Humidity Level",
+                    "subcaption": "Real-Time Monitor",
+                    "lowerLimit": "0",
+                    "upperLimit": "70",
+                    "numberSuffix": "%",
+                    "theme": "fusion",
+                    "showValue": "1", // Show value on the gauge
+                    "valueFontSize": "14" // Font size for the displayed value
+                },
+                "colorRange": {
+                    "color": [
+                        {
+                            "minValue": "0",
+                            "maxValue": "30",
+                            "code": "#e44a00" // Red for low humidity
+                        },
+                        {
+                            "minValue": "30",
+                            "maxValue": "60",
+                            "code": "#f8bd19" // Yellow for moderate humidity
+                        },
+                        {
+                            "minValue": "60",
+                            "maxValue": "100",
+                            "code": "#6baa01" // Green for high humidity
+                        }
+                    ]
+                },
+                "dials": {
+                    "dial": [
+                        {
+                            "value": "0" // Initial value; this will update dynamically
+                        }
+                    ]
+                }
+            }
+        });
+
+        // Render the chart
+        chartObj.render();
+
+        // Real-time update mechanism
+        setInterval(() => {
+            fetch('classes/speedometer1.php') // Path to the PHP file providing real-time data
+                .then(response => {
+                    // Check if response is OK (status 200)
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok " + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Validate the returned data
+                    if (data.humidity !== undefined && !isNaN(data.humidity)) {
+                        var newHumidity = data.humidity;
+
+                        // Update the gauge value
+                        chartObj.feedData("&value=" + newHumidity);
+                        console.log("Updated Humidity:", newHumidity);
+                    } else {
+                        console.error("Invalid humidity data:", data);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching humidity data:", error);
+                });
+        }, 3000); // Fetch new data every 3 seconds
+    });
+</script>
+
+
+<script type="text/javascript">
+    FusionCharts.ready(function(){
+        var chartObj = new FusionCharts({
+            type: 'thermometer',
+            renderAt: 'temperature1',
+            width: '240',
+            height: '310',
+            dataFormat: 'json',
+            dataSource: {
+                "chart": {
+                    "caption": "E-SAWOD 1",
+                    "subcaption": "TEMPERATURE",
+                    "lowerLimit": "0",
+                    "upperLimit": "50",
+                    "decimals": "1",
+                    "numberSuffix": "°C",
+                    "showhovereffect": "1",
+                    "thmFillColor": "#008ee4",
+                    "showGaugeBorder": "1",
+                    "gaugeBorderColor": "#008ee4",
+                    "gaugeBorderThickness": "2",
+                    "gaugeBorderAlpha": "30",
+                    "thmOriginX": "100",
+                    "chartBottomMargin": "20",
+                    "valueFontColor": "#000000",
+                    "theme": "fusion"
+                },
+                // Initial temperature value fetched from PHP
+                "value": 0,
+                "annotations": {
+                    "showbelow": "0",
+                    "groups": [{
+                        "id": "indicator",
+                        "items": [
+                            {
+                                "id": "background",
+                                "type": "rectangle",
+                                "alpha": "50",
+                                "fillColor": "#AABBCC",
+                                "x": "$gaugeEndX-40",
+                                "tox": "$gaugeEndX",
+                                "y": "$gaugeEndY+54",
+                                "toy": "$gaugeEndY+72"
+                            }
+                        ]
+                    }]
+                },
+            },
+           "events": {
+    "rendered": function(evt, arg) {
+        // Fetch new temperature data every 3 seconds from PHP
+        evt.sender.dataUpdate = setInterval(function() {
+            fetch('classes/thermometer1.php')  // Fetch latest temperature from PHP
+                .then(response => response.json())
+                .then(data => {
+                    // Update the thermometer value with the fetched data
+                    var newTemp = data.value;
+                    evt.sender.feedData("&value=" + newTemp);
+
+                    // Update the annotation color based on the temperature value
+                    var code;
+                    if (newTemp >= 30) {
+                        code = "#FF0000";  // Red for high temperatures (above 30°C)
+                    } else if (newTemp >= 20) {
+                        code = "#FF9900";  // Yellow for moderate temperatures (20°C to 29°C)
+                    } else {
+                        code = "#00FF00";  // Green for low temperatures (below 20°C)
+                    }
+
+                    // Update the annotation background color
+                    evt.sender.updateAnnotation("background", {
+                        "fillColor": code
+                    });
+                });
+        });
+    },
+
+                'renderComplete': function(evt, arg) {
+                    evt.sender.updateAnnotation(evt, arg);
+                },
+                'realtimeUpdateComplete': function(evt, arg) {
+                    evt.sender.updateAnnotation(evt, arg);
+                },
+                'disposed': function(evt, arg) {
+                    clearInterval(evt.sender.dataUpdate);
+                }
+            }
+        });
+        chartObj.render();
+    });
+</script>
+
 
  <script>
 $(document).ready(function() {
@@ -510,7 +696,127 @@ $(document).ready(function() {
             dataSource: {
                 "chart": {
                     "theme": "fusion",
-                    "caption": "E-SAWOD 1",
+                    "caption": "E-SAWOD 1 LIVE MONITORING",
+                    "captionFontColor": "#0062cc",
+                    "subcaption": "WATER LEVEL",
+                    "lowerLimit": "0",
+                    "upperLimit": "30", // Maximum water level of 30 cm
+                    "lowerLimitDisplay": "Empty",
+                    "upperLimitDisplay": "Full",
+                    "numberSuffix": " cm",
+                    "showValue": "1",
+                    "valueFontSize": "18",
+                    "chartBottomMargin": "45",
+                    "cylFillColor": "#87CEEB", // Sky Blue color
+                    "cyloriginy": "300",
+                    "use3DLighting": "0"
+                },
+                "value": "18", // Initial value
+                "annotations": {
+                    "origw": "500",
+                    "origh": "40",
+                    "autoscale": "1",
+                    "groups": [{
+                        "id": "range",
+                        "items": [{
+                            "id": "rangeBg",
+                            "type": "rectangle",
+                            "x": "$canvasCenterX-45",
+                            "y": "$chartEndY-30",
+                            "tox": "$canvasCenterX +45",
+                            "toy": "$chartEndY-75",
+                            "fillcolor": "#0062cc"
+                        }, {
+                            "id": "rangeText",
+                            "type": "Text",
+                            "fontSize": "11",
+                            "fillcolor": "#333333",
+                            "text": "Current Level",
+                            "x": "$chartCenterX-45",
+                            "y": "$chartEndY-50"
+                        }]
+                    }]
+                }
+            },
+            "events": {
+                "rendered": function(evtObj, argObj) {
+                    var gaugeRef = evtObj.sender;
+
+                    // Function to update the water level on the FusionCharts cylinder
+                    function updateWaterLevel() {
+                        $.ajax({
+                            url: 'classes/fetch1.php',  // PHP file for e-sawod_1 data
+                            type: 'GET',
+                            success: function(response) {
+                                var data = JSON.parse(response);
+                                var newLevel = data.value;  // The water level data returned from PHP
+                                
+                                // Ensure the value is within the acceptable range (0–30)
+                                if (newLevel < 0) newLevel = 0;
+                                if (newLevel > 30) newLevel = 30;
+
+                                // Update the FusionCharts gauge with the new water level value
+                                gaugeRef.feedData("&value=" + newLevel);
+                                updateAnnotations(gaugeRef, newLevel);  // Update annotations (optional)
+                            }
+                        });
+                    }
+
+                    // Initial update
+                    updateWaterLevel();
+
+                    // Update the water level every 5 seconds (5000ms)
+                    setInterval(updateWaterLevel, 5000);  // Update every 5 seconds
+                },
+                "realTimeUpdateComplete": function(evt, arg) {
+                    // This function updates the annotation and color based on the water level value
+                    var annotations = evt.sender.annotations,
+                        dataVal = evt.sender.getData(),
+                        colorVal;
+
+                    // Assign colors based on water level
+                    if (dataVal >= 30) {
+                        colorVal = "#dc3545"; // Red for full level
+                    } else if (dataVal <= 12) {
+                        colorVal = "#ffc107"; // Yellow for low level
+                    } else {
+                        colorVal = "#28a745"; // Green for mid level
+                    }
+
+                    // Update annotations and background color of the cylinder
+                    annotations && annotations.update('rangeText', {
+                        "text": "WL: " + dataVal + " cm",
+                        "bgAlpha": "100",
+                        "bgColor": colorVal
+                    });
+                    
+                    annotations && annotations.update('rangeBg', {
+                        "fillcolor": colorVal
+                    });
+                },
+                "disposed": function(evt, arg) {
+                    clearInterval(evt.sender.chartInterval);
+                }
+            }
+        });
+
+        // Render the FusionCharts gauge
+        chartObj.render();
+    });
+</script>
+
+<script type="text/javascript">
+    FusionCharts.ready(function(){
+        var chartObj = new FusionCharts({
+            type: 'cylinder',
+            dataFormat: 'json',
+            renderAt: 'cylinder2',
+            width: '200',
+            height: '350',
+            dataSource: {
+                "chart": {
+                    "theme": "fusion",
+                    "caption": "E-SAWOD 2",
                     "captionFontColor": "#0062cc",
                     "subcaption": "Live Monitoring",
                     "lowerLimit": "0",
@@ -559,7 +865,7 @@ $(document).ready(function() {
                     // Function to update the water level on the FusionCharts cylinder
                     function updateWaterLevel() {
                         $.ajax({
-                            url: 'classes/fetch1.php',  // PHP file for e-sawod_1 data
+                            url: 'classes/fetch2.php',  // PHP file for e-sawod_1 data
                             type: 'GET',
                             success: function(response) {
                                 var data = JSON.parse(response);

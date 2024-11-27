@@ -14,14 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($name) || empty($email) || empty($subject) || empty($message)) {
         $_SESSION['status'] = "All fields are required.";
         $_SESSION['status_icon'] = "error";
-        header("Location: ../contactus.php");
+        header("Location: contactus.php");
         exit;
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $_SESSION['status'] = "Please enter a valid email address.";
         $_SESSION['status_icon'] = "error";
-        header("Location: ../contactus.php");
+        header("Location: contactus.php");
         exit;
     }
 
@@ -31,7 +31,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } catch (Exception $e) {
         $_SESSION['status'] = "Failed to save the message to the database. Error: {$e->getMessage()}";
         $_SESSION['status_icon'] = "error";
-        header("Location: ../contactus.php");
+        header("Location: contactus.php");
+        exit;
+    }
+
+    // Fetch the receiving email from the settings table
+    try {
+        $settings = $mainClass->fetchSettings(); // Using your fetchSettings method
+        $receiverEmail = $settings['email']; // Assuming 'contact_email' is the column in your settings table
+    } catch (Exception $e) {
+        $_SESSION['status'] = "Failed to fetch contact email from settings. Error: {$e->getMessage()}";
+        $_SESSION['status_icon'] = "error";
+        header("Location: contactus.php");
         exit;
     }
 
@@ -44,11 +55,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } catch (Exception $e) {
         $_SESSION['status'] = "Invalid sender email: {$e->getMessage()}";
         $_SESSION['status_icon'] = "error";
-        header("Location: ../contactus.php");
+        header("Location: contactus.php");
         exit;
     }
 
-    $mail->addAddress("aralouierubin@gmail.com"); // Replace with your receiver email
+    // Set the recipient email from the settings table
+    $mail->addAddress($receiverEmail); // Use the email fetched from the settings table
+
     $mail->Subject = htmlspecialchars($subject);
     $mail->isHTML(true);
 
@@ -77,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Redirect to the contact page
-    header("Location: ../contactus.php");
+    header("Location: contactus.php");
     exit;
 }
 ?>

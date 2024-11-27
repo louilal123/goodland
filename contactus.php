@@ -40,6 +40,8 @@ require_once "classes/config.php";
     <div class="container">
       <div class="row">
 
+
+      
         <div class="col-lg-12">
 
 
@@ -50,51 +52,39 @@ require_once "classes/config.php";
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
         <div class="row gy-4">
+        <div class="col-lg-6">
 
-          <div class="col-lg-6">
+<div class="row gy-4">
+  <div class="col-md-6">
+      <div class="info-item" data-aos="fade" data-aos-delay="200">
+          <i class="bi bi-geo-alt"></i>
+          <h3>Address</h3>
+          <p><?php echo htmlspecialchars($settings['address'] ?? 'Not Available'); ?></p>
+          
+      </div>
+  </div><!-- End Info Item -->
 
-            <div class="row gy-4">
-              <div class="col-md-6">
-                <div class="info-item" data-aos="fade" data-aos-delay="200">
-                  <i class="bi bi-geo-alt"></i>
-                  
+  <!-- Facebook and Contact Section -->
+  <div class="col-md-6">
+      <div class="info-item" data-aos="fade" data-aos-delay="300">
+          <i class="bi bi-facebook"></i>
+          <h3>Social Media</h3>
+          <p><?php echo htmlspecialchars($settings['facebook_url'] ?? '@notavailable'); ?></p>
+          <p><?php echo htmlspecialchars($settings['contact'] ?? 'No Contact'); ?></p>
+      </div>
+  </div><!-- End Info Item -->
 
+  <!-- Email Section -->
+  <div class="col-md-6">
+      <div class="info-item" data-aos="fade" data-aos-delay="400">
+          <i class="bi bi-envelope"></i>
+          <h3>Email Us</h3>
+          <p><?php echo htmlspecialchars($settings['email'] ?? 'No Email'); ?></p>
+      </div>
+  </div><!-- End Info Item -->
+</div>
 
-                  <h3>Sitio 37st, Atop Atop</h3>
-                  <p>Bantayan Island, Cebu</p>
-                  <p> Philippines</p>
-                </div>
-              </div><!-- End Info Item -->
-
-              <div class="col-md-6">
-                <div class="info-item" data-aos="fade" data-aos-delay="300">
-                  <i class="bi bi-facebook"></i>
-                  <h3>Social Media</h3>
-                  <p>@goodland.philippines</p>
-                  <p>+1 6678 254445 41</p>
-                </div>
-              </div><!-- End Info Item -->
-
-              <div class="col-md-6">
-                <div class="info-item" data-aos="fade" data-aos-delay="400">
-                  <i class="bi bi-envelope"></i>
-                  <h3>Email Us</h3>
-                  <p>goodland.philippines@gmail.com</p>
-                  <!-- <p>contact@example.com</p> -->
-                </div>
-              </div><!-- End Info Item -->
-              <div class="col-md-6">
-                <div class="info-item" data-aos="fade" data-aos-delay="500">
-                  <i class="bi bi-clock"></i>
-                  <h3>Open Hours</h3>
-                  <p>Monday - Friday</p>
-                  <p>9:00AM - 05:00PM</p>
-                </div>
-              </div><!-- End Info Item -->
-
-            </div>
-
-          </div>
+</div>
           <div class="col-lg-6">
 
             <form action="contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">

@@ -103,17 +103,17 @@
                     
                         <!-- Reply Section -->
                         <form action="classes/send_reply.php" method="POST">
-                            <input type="hidden" id="replyMessageId" name="message_id">
-                            HOW TO ALSO PUT THE EMAIL HERE AS THE VALUE?<input type="hidden" id="replyEmail" name="email">
-                            <div class="mb-3">
-                                <label for="replyMessage" class="form-label"><strong>Your Reply</strong></label>
-                                <textarea class="form-control" id="replyMessage" name="reply_message" rows="4" required></textarea>
-                            </div>
-                        <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary btn-end">Send Reply</button>
-                        
-                        </div>   
-                        </form>
+    <input type="hidden" id="replyMessageId" name="id"> <!-- Updated name to "id" -->
+    <input type="hidden" id="replyEmail" name="email">
+    <div class="mb-3">
+        <label for="replyMessage" class="form-label"><strong>Your Reply</strong></label>
+        <textarea class="form-control" id="replyMessage" name="reply_message" rows="4" required></textarea>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-end">Send Reply</button>
+    </div>
+</form>
+
                     </div>
                 </div>
             </div>

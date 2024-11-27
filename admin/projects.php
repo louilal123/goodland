@@ -19,7 +19,7 @@
                                     <div class="card-body">
                                         <div class="d-flex mb-3">
                                             <h3 class="fw-bold"><i class="fas fa-folder-plus"></i> List of Projects</h3>
-                                            <button type="button" class="btn btn-primary ms-auto btn-rounded" onclick="window.location.href='project_add'">
+                                            <button type="button" class="btn btn-sm btn-primary ms-auto btn-rounded" onclick="window.location.href='project_add'">
                                                 <i class="fas fa-folder-plus"></i> Create New
                                             </button>
                                         </div>
@@ -44,14 +44,16 @@
                                                         </td>
                                                         <td><?php echo date("M d, Y h:i A", strtotime($project['created_at'])); ?></td>
                                                         <td>
-                                                            <button class="btn btn-info btn-sm viewProjectBtn" data-bs-toggle="modal" data-bs-target="#viewProjectModal">
-                                                                <i class="bi bi-search"></i>
+                                                            <button class="btn btn-sm btn-info btn-sm viewProjectBtn" data-bs-toggle="modal" data-bs-target="#viewProjectModal">
+                                                                <i class="bi bi-search"></i> View
                                                             </button>
-                                                            <a href="#" class="btn btn-success btn-sm editProjectBtn" data-bs-toggle="modal" data-bs-target="#editProjectModal">
-                                                                <i class="bi bi-pencil-square"></i>
+                                                            <a href="#" class="btn btn-sm btn-success btn-sm editProjectBtn" 
+                                                            data-bs-toggle="modal" data-bs-target="#editProjectModal">
+                                                                <i class="bi bi-pencil-square"></i> Edit
                                                             </a>
-                                                            <a href="classes/delete_project.php?project_id=<?php echo $project['project_id']; ?>" class="btn btn-danger btn-sm deleteBtn">
-        <i class="fas fa-trash"></i>
+                                                            <a href="classes/delete_project.php?project_id=
+                                                            <?php echo $project['project_id']; ?>" class="btn btn-sm btn-danger btn-sm deleteBtn">
+        <i class="fas fa-trash"></i> Delete
     </a>
                                                         </td>
                                                     </tr>

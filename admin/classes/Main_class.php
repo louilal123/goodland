@@ -18,6 +18,109 @@ class Main_class extends Database {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+public function fetchSettings() {
+    $sql = "SELECT * FROM settings LIMIT 1"; // Adjust to fetch a single row or all rows as needed
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+public function updateSettings($address, $contact, $email, $facebook_url) {
+    try {
+        // Prepare an SQL query to update the settings
+        $query = "UPDATE settings SET address = :address, contact = :contact, email = :email, facebook_url = :facebook_url WHERE id = 1";
+        $stmt = $this->pdo->prepare($query);
+
+        // Bind the values to the query parameters
+        $stmt->bindParam(':address', $address);
+        $stmt->bindParam(':contact', $contact);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':facebook_url', $facebook_url);
+
+        // Execute the statement
+        return $stmt->execute();
+    } catch (Exception $e) {
+        // In case of an error, return false
+        return false;
+    }
+}
+
+public function createBackup() {
+    // Define the backup directory where the SQL files will be stored
+    $backupDir = 'backups/';
+    if (!file_exists($backupDir)) {
+        mkdir($backupDir, 0777, true); // Create backup directory if it doesn't exist
+    }
+
+    // Get the current date and time to name the backup file
+    $date = date('Y-m-d_H-i-s');
+    $backupFileName = "database_backup_{$date}.sql";
+    $backupFile = $backupDir . $backupFileName; // Set the full path for the backup file
+
+    // Get database connection details
+    $dbname = DB_NAME;
+    $username = DB_USERNAME;
+    $password = DB_PASSWORD;
+    $host = DB_HOST;
+
+    // Create the command to dump the database
+    $command = "mysqldump --opt --user={$username} --password={$password} --host={$host} {$dbname} > {$backupFile}";
+
+    // Execute the backup command
+    exec($command);
+
+    // Check if the backup file was created successfully
+    if (file_exists($backupFile)) {
+        // Save the backup details into the database
+        $this->saveBackupDetails($backupFileName, $backupFile);
+    } else {
+        throw new Exception("Backup creation failed.");
+    }
+}
+
+// Method to save the backup details to the database
+private function saveBackupDetails($fileName, $filePath) {
+    $backupDate = date('Y-m-d H:i:s');
+
+    // Insert the backup details into the backups table
+    $stmt = $this->pdo->prepare("INSERT INTO backups (file_name, backup_date, file_path) VALUES (?, ?, ?)");
+    $stmt->execute([$fileName, $backupDate, $filePath]);
+}
+
+public function deleteBackup($backupId) {
+    // Retrieve the backup file path from the database
+    $stmt = $this->pdo->prepare("SELECT file_path FROM backups WHERE backup_id = ?");
+    $stmt->execute([$backupId]);
+    $backup = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($backup) {
+        // Delete the backup file from the backups folder
+        $backupFilePath = $backup['file_path'];
+        if (file_exists($backupFilePath)) {
+            unlink($backupFilePath); // Remove the file
+        }
+
+        // Delete the backup record from the database
+        $deleteStmt = $this->pdo->prepare("DELETE FROM backups WHERE backup_id = ?");
+        $deleteStmt->execute([$backupId]);
+
+        // Return true if the deletion is successful
+        return true;
+    } else {
+        // Return false if backup not found
+        return false;
+    }
+}
+
+
+
+public function fetchBackups() {
+    $sql = "SELECT * FROM backups ORDER BY backup_date DESC";
+    $stmt = $this->pdo->query($sql);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
 public function update_event($event_id, $event_name, $description, $location, $photoPath, $start_date, $end_date, $organizer) {
     // Prepare the SQL query to update the event
     $sql = "UPDATE events SET event_name = :event_name, description = :description, location = :location, 
@@ -96,38 +199,41 @@ public function updateEventStatus() {
     }
 }
 
-    public function getVisitorMonthlyData()
+public function getVisitorDailyData()
 {
-    // Query to get monthly new and returning visitors
+    // Query to get daily new and returning visitors for the current month
     $sql = "
         SELECT 
-            MONTH(s.visit_time) AS month, 
+            DAY(s.visit_time) AS day, 
             COUNT(DISTINCT CASE WHEN s.visit_count = 1 THEN s.visitor_id ELSE NULL END) AS new_visitors,
             COUNT(DISTINCT CASE WHEN s.visit_count > 1 THEN s.visitor_id ELSE NULL END) AS returning_visitors
         FROM sessions s
         LEFT JOIN visitor_logs vl ON s.visitor_id = vl.visitor_id
-        WHERE YEAR(s.visit_time) = YEAR(CURDATE())
-        GROUP BY MONTH(s.visit_time)";
+        WHERE YEAR(s.visit_time) = YEAR(CURDATE()) 
+          AND MONTH(s.visit_time) = MONTH(CURDATE())
+        GROUP BY DAY(s.visit_time)";
     
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Initialize arrays to store new and returning visitor counts for each month (1 to 12)
+    // Initialize arrays to store new and returning visitor counts for each day (1 to 31)
+    $daysInMonth = cal_days_in_month(CAL_GREGORIAN, date('m'), date('Y'));
     $visitorData = [
-        'newVisitors' => array_fill(0, 12, 0), // Initialize with 0 for all months
-        'returningVisitors' => array_fill(0, 12, 0)
+        'newVisitors' => array_fill(0, $daysInMonth, 0), // Initialize with 0 for all days
+        'returningVisitors' => array_fill(0, $daysInMonth, 0)
     ];
 
     // Populate the data arrays with the actual results
     foreach ($result as $row) {
-        $monthIndex = (int)$row['month'] - 1; // Convert to zero-based index
-        $visitorData['newVisitors'][$monthIndex] = (int)$row['new_visitors'];
-        $visitorData['returningVisitors'][$monthIndex] = (int)$row['returning_visitors'];
+        $dayIndex = (int)$row['day'] - 1; // Convert to zero-based index
+        $visitorData['newVisitors'][$dayIndex] = (int)$row['new_visitors'];
+        $visitorData['returningVisitors'][$dayIndex] = (int)$row['returning_visitors'];
     }
 
     return $visitorData;
 }
+
 
 
 // Inside the class
@@ -194,9 +300,6 @@ public function fetchMonthlyVisitorStats() {
         try {
             $this->pdo->beginTransaction();
 
-            $stmt = $this->pdo->prepare("DELETE FROM file_requests WHERE visitor_id = :visitor_id");
-            $stmt->bindParam(':visitor_id', $visitorId);
-            $stmt->execute();
 
             $stmt = $this->pdo->prepare("DELETE FROM sessions WHERE visitor_id = :visitor_id");
             $stmt->bindParam(':visitor_id', $visitorId);
@@ -213,14 +316,6 @@ public function fetchMonthlyVisitorStats() {
         }
     }
 
-    public function deleteAllFileRequests() {
-        try {
-            $stmt = $this->pdo->prepare("DELETE FROM file_requests");
-            $stmt->execute();
-        } catch (Exception $e) {
-            throw new Exception('Failed to delete file requests: ' . $e->getMessage());
-        }
-    }
 
     // Method to delete all sessions
     public function deleteAllSessions() {
@@ -293,12 +388,7 @@ public function fetchMonthlyVisitorStats() {
 
         return $data;  // Return the most recent data for both kits
     }
-    // calendar 
-    public function getFileRequestsByVisitor($visitor_id) {
-        $stmt = $this->pdo->prepare("SELECT request_id, file_id, email, status, request_date FROM file_requests WHERE visitor_id = ?");
-        $stmt->execute([$visitor_id]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+  
     
     //
     public function getEvents()
@@ -345,6 +435,134 @@ public function emailIsExists($email) {
     
         return false; // Email not found
     }
+
+// VERIFY FOR SINGIN 
+public function sendSmsOtp($admin_id, $phone) {
+    $otp = rand(100000, 999999); // Generate a 6-digit OTP
+    $expiry = date("Y-m-d H:i:s", strtotime("+1 day")); // OTP valid for 1 day
+
+    try {
+        // Insert OTP into the database
+        $insertStmt = $this->pdo->prepare("
+            INSERT INTO mfa_tokens (admin_id, otp, type, expiration_time, created_at, verified)
+            VALUES (:admin_id, :otp, 'sms', :expiration_time, NOW(), 0)
+            ON DUPLICATE KEY UPDATE
+                otp = :otp, expiration_time = :expiration_time, created_at = NOW(), verified = 0
+        ");
+        $insertStmt->execute([
+            'admin_id' => $admin_id,
+            'otp' => $otp,
+            'expiration_time' => $expiry,
+        ]);
+
+        return $otp; // Return OTP for use in the message
+    } catch (Exception $e) {
+        error_log("Error saving OTP to the database: " . $e->getMessage());
+        return false;
+    }
+}
+
+public function verifyEmailOtp($email, $otp) {
+    // Fetch user information using the email
+    $stmt = $this->pdo->prepare("SELECT admin_id, email FROM admin WHERE email = :email");
+    $stmt->execute(['email' => $email]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+        // Check the latest unverified OTP of type 'email' in the mfa_tokens table
+        $stmt = $this->pdo->prepare("
+            SELECT otp, expiration_time, verified 
+            FROM mfa_tokens 
+            WHERE admin_id = :admin_id AND verified = 0 AND type = 'email'
+            ORDER BY created_at DESC 
+            LIMIT 1
+        ");
+        $stmt->execute(['admin_id' => $user['admin_id']]);
+        $token = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($token) {
+            // Verify OTP and expiration
+            if ($token['otp'] == $otp && strtotime($token['expiration_time']) > time()) {
+                // OTP is valid and not expired, mark as verified
+                $updateStmt = $this->pdo->prepare("
+                    UPDATE mfa_tokens 
+                    SET verified = 1 
+                    WHERE admin_id = :admin_id AND otp = :otp AND type = 'email'
+                ");
+                $updateStmt->execute([
+                    'admin_id' => $user['admin_id'],
+                    'otp' => $otp,
+                ]);
+
+                // Return user info for session setup
+                return $user;
+            }
+        }
+    }
+
+    return false;  // OTP is invalid or expired, or user does not exist
+}
+
+public function verifySmsOtp($email, $otp) {
+    // Fetch user information using the email
+    $stmt = $this->pdo->prepare("SELECT admin_id, email, phone FROM admin WHERE email = :email");
+    $stmt->execute(['email' => $email]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+        // Check the latest unverified OTP of type 'sms' in the mfa_tokens table
+        $stmt = $this->pdo->prepare("
+            SELECT otp, expiration_time, verified 
+            FROM mfa_tokens 
+            WHERE admin_id = :admin_id AND verified = 0 AND type = 'sms'
+            ORDER BY created_at DESC 
+            LIMIT 1
+        ");
+        $stmt->execute(['admin_id' => $user['admin_id']]);
+        $token = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($token) {
+            // Verify OTP and expiration
+            if ($token['otp'] == $otp && strtotime($token['expiration_time']) > time()) {
+                // OTP is valid and not expired, mark as verified
+                $updateStmt = $this->pdo->prepare("
+                    UPDATE mfa_tokens 
+                    SET verified = 1 
+                    WHERE admin_id = :admin_id AND otp = :otp AND type = 'sms'
+                ");
+                $updateStmt->execute([
+                    'admin_id' => $user['admin_id'],
+                    'otp' => $otp,
+                ]);
+
+                // Return user info for session setup
+                return $user;
+            }
+        }
+    }
+
+    return false;  // OTP is invalid or expired, or user does not exist
+}
+
+
+
+public function getUserPhoneAndAdminByEmail($email) {
+    $stmt = $this->pdo->prepare("SELECT phone, admin_id FROM admin WHERE email = :email");
+    $stmt->execute(['email' => $email]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    // Return both phone and admin_id if found, otherwise return null values
+    if ($user) {
+        return [
+            'phone' => $user['phone'] ?? null,
+            'admin_id' => $user['admin_id'] ?? null,
+        ];
+    }
+    return ['phone' => null, 'admin_id' => null];
+}
+
+
+// END VERIFY SIGNIN 
 
     public function verifyOtp($email, $otp) {
         $stmt = $this->pdo->prepare("SELECT admin_id FROM admin WHERE email = :email");
@@ -402,28 +620,7 @@ public function emailIsExists($email) {
     
     // end 
 
-    public function getAllFileRequests() {
-        $sql = "
-            SELECT fr.request_id, fr.visitor_id, fr.email, fr.request_date, 
-                   f.title, f.description, f.upload_date, f.status AS file_status
-            FROM file_requests AS fr
-            JOIN files AS f ON fr.file_id = f.id
-            ORDER BY fr.request_date ASC
-        ";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
     
-    
-    //count pending re  q
-    public function getFileRequestsCount()  {
-        $stmt = $this->pdo->prepare("SELECT COUNT(*) as count FROM file_requests ");
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-        return $result['count'];
-    }
     // In Main_class.php
 public function getFileById($fileId) {
     $stmt = $this->pdo->prepare("SELECT * FROM files WHERE id = :id ");
@@ -509,23 +706,6 @@ public function getMessagesByVisitorId($visitorId) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-public function getFileRequestsByVisitorId($visitorId) {
-    // SQL query with JOIN to fetch file details along with the file requests
-    $sql = "
-        SELECT fr.request_id, fr.file_id, fr.visitor_id, fr.email, fr.request_date, f.title, f.file_path 
-        FROM file_requests fr
-        JOIN files f ON fr.file_id = f.id
-        WHERE fr.visitor_id = :visitor_id
-    ";
-    
-    // Prepare and execute the query
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->execute(['visitor_id' => $visitorId]);
-    
-    // Return the results as an associative array
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
 
 
   public function getAllVisitors() {
@@ -543,20 +723,7 @@ public function getFileRequestsByVisitorId($visitorId) {
 }
 
     // <!-- SELECT `data_id`, `water_level`, `humidity`, `temperature`, `date_time` FROM `catchment_data` WHERE 1 -->
-                   
-    public function  getCatchmentData() {
-        $sql = "SELECT * FROM catchment_data ORDER BY date_time asc";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-    // getAllSubscribers
-    public function  getAllSubscribers() {
-        $sql = "SELECT * FROM subscriptions ORDER BY subscribed_at asc";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+   
     public function storeDHT11Data($temperature, $humidity, $water_level)
     {
         try {
@@ -782,23 +949,7 @@ public function getCatchmentById($data_id) {
         $stmt->execute();
     }
    
-    
-    public function saveFileRequest($file_id, $visitor_id, $email) {
-        try {
-            // Prepare the SQL query
-            $stmt = $this->pdo->prepare("INSERT INTO file_requests (file_id, visitor_id, email) VALUES (:file_id, :visitor_id, :email)");
-    
-            // Bind parameters
-            $stmt->bindParam(':file_id', $file_id);
-            $stmt->bindParam(':visitor_id', $visitor_id);
-            $stmt->bindParam(':email', $email);
-    
-            // Execute the query
-            $stmt->execute();
-        } catch (PDOException $e) {
-            throw new Exception("Failed to save file request: " . $e->getMessage());
-        }
-    }
+   
     
     public function mark_all_messages_as_read() {
         $sql = "UPDATE messages SET status = 'read' WHERE status != 'read'"; 
@@ -858,111 +1009,7 @@ public function getCatchmentById($data_id) {
     
         return $data;
     }
-    
-    // water level daata 
-    public function getHourlyData()
-    {
-        $sqlHourly = "SELECT 
-                        HOUR(date_time) AS hour, 
-                        AVG(water_level) AS avg_water_level,
-                        AVG(humidity) AS avg_humidity,
-                        AVG(temperature) AS avg_temperature
-                    FROM catchment_data
-                    WHERE YEAR(date_time) = YEAR(CURDATE()) AND MONTH(date_time) = MONTH(CURDATE())
-                    GROUP BY HOUR(date_time)";
-        
-        $stmtHourly = $this->pdo->prepare($sqlHourly);
-        $stmtHourly->execute();
-        $hourlyResult = $stmtHourly->fetchAll(PDO::FETCH_ASSOC);
-    
-        // Prepare data for Highcharts (hourly)
-        $data = [
-            'waterLevel' => array_fill(0, 24, 0), // Initialize with 0 for all 24 hours
-            'temperature' => array_fill(0, 24, 0),
-            'humidity' => array_fill(0, 24, 0),
-            'hourly' => []
-        ];
-    
-        // Fill hourly data (for 0 to 23 hours)
-        foreach ($hourlyResult as $row) {
-            $hourIndex = (int)$row['hour']; // Index for hour 0-23
-            $data['waterLevel'][$hourIndex] = (float)$row['avg_water_level'];
-            $data['temperature'][$hourIndex] = (float)$row['avg_temperature'];
-            $data['humidity'][$hourIndex] = (float)$row['avg_humidity'];
-        }
-    
-        return $data;
-    }
-    
-    public function getDailyData()
-    {
-        $sqlDaily = "SELECT 
-                        DAY(date_time) AS day, 
-                        AVG(water_level) AS avg_water_level,
-                        AVG(humidity) AS avg_humidity,
-                        AVG(temperature) AS avg_temperature
-                    FROM catchment_data
-                    WHERE YEAR(date_time) = YEAR(CURDATE()) AND MONTH(date_time) = MONTH(CURDATE())
-                    GROUP BY DAY(date_time)";
-        
-        $stmtDaily = $this->pdo->prepare($sqlDaily);
-        $stmtDaily->execute();
-        $dailyResult = $stmtDaily->fetchAll(PDO::FETCH_ASSOC);
-    
-        // Prepare data for Highcharts (daily)
-        $data = [
-            'waterLevel' => array_fill(0, 31, 0), // Initialize with 0 for all 31 days
-            'temperature' => array_fill(0, 31, 0),
-            'humidity' => array_fill(0, 31, 0),
-            'daily' => []
-        ];
-    
-        // Fill daily data (for 1 to 30/31 days)
-        foreach ($dailyResult as $row) {
-            $dayIndex = (int)$row['day'] - 1; // Convert to zero-based index
-            $data['waterLevel'][$dayIndex] = (float)$row['avg_water_level'];
-            $data['temperature'][$dayIndex] = (float)$row['avg_temperature'];
-            $data['humidity'][$dayIndex] = (float)$row['avg_humidity'];
-        }
-    
-        return $data;
-    }
-    
-
-  public function getMonthlyData()
-  {
-      $sql = "SELECT 
-                  MONTH(date_time) AS month, 
-                  AVG(water_level) AS avg_water_level,
-                  AVG(humidity) AS avg_humidity,
-                  AVG(temperature) AS avg_temperature
-              FROM catchment_data
-              WHERE YEAR(date_time) = YEAR(CURDATE())
-              GROUP BY MONTH(date_time)";
-  
-      $stmt = $this->pdo->prepare($sql);
-      $stmt->execute();
-      $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-  
-      // Prepare data for Highcharts
-      $data = [
-          'waterLevel' => array_fill(0, 12, null), // Initialize with nulls for all 12 months
-          'temperature' => array_fill(0, 12, null),
-          'humidity' => array_fill(0, 12, null),
-      ];
-  
-      // Fill the data arrays with averages for each month
-      foreach ($result as $row) {
-          // row['month'] will be between 1 (January) to 12 (December)
-          $monthIndex = (int)$row['month'] - 1; // Convert to zero-based index
-          $data['waterLevel'][$monthIndex] = (float)$row['avg_water_level'];
-          $data['temperature'][$monthIndex] = (float)$row['avg_temperature'];
-          $data['humidity'][$monthIndex] = (float)$row['avg_humidity'];
-      }
-  
-      return $data;
-  }
-  
+ 
     // end 
 
     public function is_email_exists($email) {
@@ -1068,30 +1115,70 @@ public function getCatchmentById($data_id) {
         }
     }
 
-    // for login
-    public function login_user($emailOrUsername, $password) {
-        $stmt = $this->pdo->prepare("SELECT admin_id, email, username, password FROM admin WHERE email = :emailOrUsername OR 
-        username = :emailOrUsername");
-        $stmt->bindParam(':emailOrUsername', $emailOrUsername);
-        $stmt->execute();
+    
+    public function login_user($email, $password) {
+        // Check if the email exists and fetch user data
+        $stmt = $this->pdo->prepare("SELECT admin_id, password FROM admin WHERE email = :email");
+        $stmt->execute(['email' => $email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
         if ($user) {
+            // Verify password
             if (password_verify($password, $user['password'])) {
-                $_SESSION['admin_id'] = htmlentities($user['admin_id']);
-                $_SESSION['email'] = htmlentities($user['email']);
-                $_SESSION['username'] = htmlentities($user['username']);
-                $_SESSION['status'] = "Login Successful!";
-                $_SESSION['status_icon'] = "success";
-                header("Location: ../dashboard.php");
-                exit();
+                // Generate OTP for Multi-Factor Authentication (MFA)
+                $otp = rand(100000, 999999);
+                $expiry = date("Y-m-d H:i:s", strtotime("+1 day")); // OTP valid for 1 day
+    
+                // Insert OTP into `mfa_tokens` table
+                $insertStmt = $this->pdo->prepare("
+                    INSERT INTO mfa_tokens (admin_id, otp, expiration_time, created_at, verified)
+                    VALUES (:admin_id, :otp, :expiration_time, NOW(), 0)
+                    ON DUPLICATE KEY UPDATE
+                        otp = :otp, expiration_time = :expiration_time, created_at = NOW(), verified = 0
+                ");
+                $insertStmt->execute([
+                    'admin_id' => $user['admin_id'],
+                    'otp' => $otp,
+                    'email' => $email,
+                    'expiration_time' => $expiry,
+                ]);
+    
+                // Return OTP for email sending
+                return $otp;
             } else {
                 return false; // Invalid password
             }
         } else {
-            return false; // User not found
+            return false; // Email not found
         }
     }
+    
+
+
+    // for login
+    // public function login_user($emailOrUsername, $password) {
+    //     $stmt = $this->pdo->prepare("SELECT admin_id, email, username, password FROM admin WHERE email = :emailOrUsername OR 
+    //     username = :emailOrUsername");
+    //     $stmt->bindParam(':emailOrUsername', $emailOrUsername);
+    //     $stmt->execute();
+    //     $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    //     if ($user) {
+    //         if (password_verify($password, $user['password'])) {
+    //             $_SESSION['admin_id'] = htmlentities($user['admin_id']);
+    //             $_SESSION['email'] = htmlentities($user['email']);
+    //             $_SESSION['username'] = htmlentities($user['username']);
+    //             $_SESSION['status'] = "Login Successful!";
+    //             $_SESSION['status_icon'] = "success";
+    //             header("Location: ../dashboard.php");
+    //             exit();
+    //         } else {
+    //             return false; 
+    //         }
+    //     } else {
+    //         return false; 
+    //     }
+    // }
     
     
  //admin details currently login
@@ -1406,11 +1493,37 @@ public function delete_member($member_id) {
 }
 
 
+// public function get_all_messages() {
+//     $stmt = $this->pdo->prepare("SELECT * FROM messages");
+//     $stmt->execute();
+//     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+// }
+
 public function get_all_messages() {
-    $stmt = $this->pdo->prepare("SELECT * FROM messages");
+    $stmt = $this->pdo->prepare("
+        SELECT 
+            m.id AS id,
+            m.name,
+            m.email,
+            m.subject,
+            m.message,
+            m.date_sent,
+            m.status,
+            r.reply_id,
+            r.reply,
+            r.date_replied,
+            a.fullname AS admin_name
+        FROM 
+            messages m
+        LEFT JOIN 
+            message_replies r ON m.id = r.message_id
+        LEFT JOIN 
+            admin a ON r.admin_id = a.admin_id
+    ");
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
 
 
 public function get_all_unpublished_files() {
@@ -1435,18 +1548,7 @@ public function get_all_published_files() {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-public function deleteFileRequest($request_id) {
-    try {
-        // Prepare the SQL query to delete the file request
-        $query = "DELETE FROM file_requests WHERE request_id = ?";
-        $stmt = $this->pdo->prepare($query);
-        $stmt->execute([$request_id]);
 
-        return true;
-    } catch (PDOException $e) {
-        return false;
-    }
-}
 
 
 public function all_files() {

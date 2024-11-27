@@ -141,6 +141,7 @@
                     </li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item text-start" href="profile.php"><i class="fa fas-person"></i> Profile</a></li>
+                    <li><a class="dropdown-item text-start" href="profile.php"><i class="fa fas-gear"></i> Activity Log</a></li>
                     <li><a class="dropdown-item mb-2" href="classes/logout.php"><i class="fa fas-power"></i> Logout</a></li>
                 </ul>
             </li>
