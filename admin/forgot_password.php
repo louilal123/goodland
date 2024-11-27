@@ -1,5 +1,19 @@
 <?php
 session_start();
+
+// Allowed IP addresses
+$allowed_ips = ['112.208.72.214', '::1', '127.0.0.1'];
+
+// Get the user's IP address
+$user_ip = $_SERVER['REMOTE_ADDR'];
+
+// Check if the user's IP address matches any allowed IPs
+if (!in_array($user_ip, $allowed_ips)) {
+    http_response_code(404); // Set the 404 status code
+    include('../404.html'); // Include the 404 page content
+    exit();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

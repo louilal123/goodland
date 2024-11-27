@@ -1,16 +1,5 @@
 <?php
 session_start();
-
-$allowed_ips = ['112.208.72.214', '::1', '127.0.0.1'];
-
-$user_ip = $_SERVER['REMOTE_ADDR'];
-
-if (!in_array($user_ip, $allowed_ips)) {
-    http_response_code(404); 
-    include('../404.html'); 
-    exit();
-}
-
 $error_message = $_SESSION['error_message'] ?? '';
 unset($_SESSION['error_message']);
 ?>
