@@ -31,12 +31,6 @@ $messages = $mainClass->get_all_messages();
 $admins = $mainClass->get_all_admins();
 $adminCount = $mainClass->count_all_admins();
 
-// Output JSON for FullCalendar
-// header('Content-Type: application/json');
-// echo json_encode($calendarEvents);
-
-
-// $documents = $mainClass->get_all_documents();
 
 $mainClass->updateEventStatus();
 // notifications msgs 
@@ -50,9 +44,6 @@ $projectsCount = $mainClass->countAllProjects();
 // Fetch the pie chart data  pie chart library files
 $pieChartData = $mainClass->getStatusTypeData();
 
-// $catchments = $mainClass->getAllCatchments();
-
-// $catchments_count = $mainClass->countAllCatchments();
 
 $events = $mainClass->get_all_events();
 $events_count = $mainClass->count_all_events();
