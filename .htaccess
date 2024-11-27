@@ -3,6 +3,7 @@ RewriteEngine On
 # Remove .php extension from URLs
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
+RewriteRule ^goodland_studies/(.+)$ view_file.php?file=$1 [L]
 
 # Custom 404 error handling (internal redirect)
 ErrorDocument 404 /goodland/404.html
