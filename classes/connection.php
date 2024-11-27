@@ -13,16 +13,16 @@
 // define('DB_NAME', 'u510162695_goodland_db');
 // define('DB_CHARSET', 'utf8mb4'); 
 
-$servername = "157.230.193.209"; 
-$username = "root";               
-$password = "1goodland_v2";      
-$dbname = "u510162695_goodland_db"; 
-
-
-// $servername = "127.0.0.1"; 
+// $servername = "157.230.193.209"; 
 // $username = "root";               
-// $password = "";      
+// $password = "1goodland_v2";      
 // $dbname = "u510162695_goodland_db"; 
+
+
+$servername = "127.0.0.1"; 
+$username = "root";               
+$password = "";      
+$dbname = "u510162695_goodland_db"; 
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
