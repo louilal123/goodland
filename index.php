@@ -76,7 +76,7 @@
 }
 
 </style>
-<body class="index-page">
+<body class="index-page in">
 
  <?php include "includes/topnav.php"?>
 
