@@ -15,6 +15,8 @@ $ongoing_events =  $mainClass->fetchOngoingEvents();
 
 $finished_events =  $mainClass->fetchFinishedEvents();
 
+$settings = $mainClass->fetchSettings();
+
 
 ?>
 

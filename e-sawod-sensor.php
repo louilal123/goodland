@@ -131,7 +131,7 @@
 
 
     <!-- Values Section -->
-    <section id="" class="values section">
+    <section id="" class=" section">
       <div class="container">
         <div class="row gy-4">
           
@@ -489,6 +489,182 @@
                     console.error("Error fetching humidity data:", error);
                 });
         }, 3000); // Fetch new data every 3 seconds
+    });
+</script>
+
+
+<script type="text/javascript">
+    FusionCharts.ready(function () {
+        // Initialize the chart
+        var chartObj = new FusionCharts({
+            type: 'angulargauge',
+            renderAt: 'humidity2', // ID of the container div
+            width: '100%', // Makes the chart responsive
+            height: '300', // Chart height
+            dataFormat: 'json',
+            dataSource: {
+                "chart": {
+                    "caption": "Humidity Level",
+                    "subcaption": "Real-Time Monitor",
+                    "lowerLimit": "0",
+                    "upperLimit": "70",
+                    "numberSuffix": "%",
+                    "theme": "fusion",
+                    "showValue": "1", // Show value on the gauge
+                    "valueFontSize": "14" // Font size for the displayed value
+                },
+                "colorRange": {
+                    "color": [
+                        {
+                            "minValue": "0",
+                            "maxValue": "30",
+                            "code": "#e44a00" // Red for low humidity
+                        },
+                        {
+                            "minValue": "30",
+                            "maxValue": "60",
+                            "code": "#f8bd19" // Yellow for moderate humidity
+                        },
+                        {
+                            "minValue": "60",
+                            "maxValue": "100",
+                            "code": "#6baa01" // Green for high humidity
+                        }
+                    ]
+                },
+                "dials": {
+                    "dial": [
+                        {
+                            "value": "0" // Initial value; this will update dynamically
+                        }
+                    ]
+                }
+            }
+        });
+
+        // Render the chart
+        chartObj.render();
+
+        // Real-time update mechanism
+        setInterval(() => {
+            fetch('classes/speedometer1.php') // Path to the PHP file providing real-time data
+                .then(response => {
+                    // Check if response is OK (status 200)
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok " + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Validate the returned data
+                    if (data.humidity !== undefined && !isNaN(data.humidity)) {
+                        var newHumidity = data.humidity;
+
+                        // Update the gauge value
+                        chartObj.feedData("&value=" + newHumidity);
+                        console.log("Updated Humidity:", newHumidity);
+                    } else {
+                        console.error("Invalid humidity data:", data);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching humidity data:", error);
+                });
+        }, 3000); // Fetch new data every 3 seconds
+    });
+</script>
+
+
+
+<script type="text/javascript">
+    FusionCharts.ready(function(){
+        var chartObj = new FusionCharts({
+            type: 'thermometer',
+            renderAt: 'temperature2',
+            width: '240',
+            height: '310',
+            dataFormat: 'json',
+            dataSource: {
+                "chart": {
+                    "caption": "E-SAWOD 1",
+                    "subcaption": "TEMPERATURE",
+                    "lowerLimit": "0",
+                    "upperLimit": "50",
+                    "decimals": "1",
+                    "numberSuffix": "°C",
+                    "showhovereffect": "1",
+                    "thmFillColor": "#008ee4",
+                    "showGaugeBorder": "1",
+                    "gaugeBorderColor": "#008ee4",
+                    "gaugeBorderThickness": "2",
+                    "gaugeBorderAlpha": "30",
+                    "thmOriginX": "100",
+                    "chartBottomMargin": "20",
+                    "valueFontColor": "#000000",
+                    "theme": "fusion"
+                },
+                // Initial temperature value fetched from PHP
+                "value": 0,
+                "annotations": {
+                    "showbelow": "0",
+                    "groups": [{
+                        "id": "indicator",
+                        "items": [
+                            {
+                                "id": "background",
+                                "type": "rectangle",
+                                "alpha": "50",
+                                "fillColor": "#AABBCC",
+                                "x": "$gaugeEndX-40",
+                                "tox": "$gaugeEndX",
+                                "y": "$gaugeEndY+54",
+                                "toy": "$gaugeEndY+72"
+                            }
+                        ]
+                    }]
+                },
+            },
+           "events": {
+    "rendered": function(evt, arg) {
+        // Fetch new temperature data every 3 seconds from PHP
+        evt.sender.dataUpdate = setInterval(function() {
+            fetch('classes/thermometer2.php')  // Fetch latest temperature from PHP
+                .then(response => response.json())
+                .then(data => {
+                    // Update the thermometer value with the fetched data
+                    var newTemp = data.value;
+                    evt.sender.feedData("&value=" + newTemp);
+
+                    // Update the annotation color based on the temperature value
+                    var code;
+                    if (newTemp >= 30) {
+                        code = "#FF0000";  // Red for high temperatures (above 30°C)
+                    } else if (newTemp >= 20) {
+                        code = "#FF9900";  // Yellow for moderate temperatures (20°C to 29°C)
+                    } else {
+                        code = "#00FF00";  // Green for low temperatures (below 20°C)
+                    }
+
+                    // Update the annotation background color
+                    evt.sender.updateAnnotation("background", {
+                        "fillColor": code
+                    });
+                });
+        });
+    },
+
+                'renderComplete': function(evt, arg) {
+                    evt.sender.updateAnnotation(evt, arg);
+                },
+                'realtimeUpdateComplete': function(evt, arg) {
+                    evt.sender.updateAnnotation(evt, arg);
+                },
+                'disposed': function(evt, arg) {
+                    clearInterval(evt.sender.dataUpdate);
+                }
+            }
+        });
+        chartObj.render();
     });
 </script>
 

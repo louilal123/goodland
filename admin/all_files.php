@@ -39,12 +39,12 @@ if (isset($_GET['viewPdf']) && isset($_GET['file_path'])) {
                             <div class="card-header bg-light d-flex ">
                                         <h3 class="fw-bold">List of Archives</h3>
                                         <button type="button" class="btn btn-primary ms-auto me-1" data-bs-toggle="modal" data-bs-target="#addItemModal">
-                                            <i class="fas fa-folder-plus"></i> ADD NEW
+                                            <i class="fas fa-folder-plus"></i> Add New
                                         </button>
                                     </div>
                                 <div class="card-body">
                                     
-                                    <table id="myTable" class=" table table-hover table-striped text-center w-100">
+                                    <table id="myTable" class=" table table-hover table-bordered table-striped text-center w-100">
                                         <thead class="">
                                             <tr>
                                                 <th style="font-weight: bold !important;">ID</th>

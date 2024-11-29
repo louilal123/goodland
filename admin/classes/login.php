@@ -63,8 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         try {
             $mail->send();
-            $_SESSION['status1'] = "We've sent an OTP to your email.";
-            $_SESSION['status_icon1'] = "success";
+          
             header("Location: ../verify_signin.php"); 
             exit;
         } catch (Exception $e) {

@@ -63,10 +63,21 @@
                             stroke="#FAF9F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/>
                             <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg></i>    <p class="">E-Sawod Readings</p>
                             </a> </li>
+
+                          
                         
                         <li class="nav-item pl-2 pb-1"> <a href="all_files" class="nav-link  <?= $page == 'all_files.php' ? '  bg-primary text-white  ':'' ?>"> <i class="nav-icon ml-2 "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FAF9F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></i>
                                 <p>
-                                Manage Archives
+                                Manage Archive Files
+                                    
+                                </p>
+                            </a>
+                        </li>
+
+                        
+                        <li class="nav-item pl-2 pb-1"> <a href="file_requests" class="nav-link  <?= $page == 'file_requests.php' ? '  bg-primary text-white  ':'' ?>"> <i class="nav-icon ml-2 "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FAF9F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></i>
+                                <p>
+                                Manage File Requests
                                     
                                 </p>
                             </a>

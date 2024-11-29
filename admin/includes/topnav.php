@@ -127,21 +127,20 @@
 
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                    <img src="<?php echo htmlspecialchars($adminDetails['admin_photo']) ?: 'default_photo.jpg'; ?>" class="user-image rounded-circle shadow" style="width: 40px; height: 40px;">
-                    <span class="d-none d-md-inline"> <?php echo htmlspecialchars($adminDetails['fullname']); ?></span> 
+                    <img src="uploads/<?php echo htmlspecialchars($adminDetails['admin_photo']) ?: 'default_photo.jpg'; ?>" class="user-image rounded-circle shadow" style="width: 40px; height: 40px;">
+                    <span class="d-none d-md-inline"> <?php echo ($adminDetails['fullname']); ?></span> 
                     <i class="fas fa-chevron-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end" style="width: 300px !important;">
                     <li class="d-flex flex-column align-items-center text-center">
                         <a class="dropdown-item text-center mt-2" href="#">
-                            <img class="logo" src="<?php echo htmlspecialchars($adminDetails['admin_photo']) ?: 'default_photo.jpg'; ?>" style="width: 70px; height: 70px; border-radius: 50%;">
+                            <img class="logo" src="uploads/<?php echo htmlspecialchars($adminDetails['admin_photo']) ?: 'default_photo.jpg'; ?>" style="width: 70px; height: 70px; border-radius: 50%;">
                             <h4 class="mt-2 mb-0"><small><?php echo htmlspecialchars($adminDetails['fullname']); ?></small></h4>
                             <p class="mt-2 mb-0"><small><?php echo htmlspecialchars($adminDetails['role']); ?></small></p>
                         </a>
                     </li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item text-start" href="profile.php"><i class="fa fas-person"></i> Profile</a></li>
-                    <li><a class="dropdown-item text-start" href="profile.php"><i class="fa fas-gear"></i> Activity Log</a></li>
                     <li><a class="dropdown-item mb-2" href="classes/logout.php"><i class="fa fas-power"></i> Logout</a></li>
                 </ul>
             </li>

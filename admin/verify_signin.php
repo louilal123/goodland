@@ -54,36 +54,6 @@
 
 
                             </form>
-                            <?php
-session_start();
-require_once 'classes/Main_class.php'; // Assuming Main_class.php handles database interactions
-
-$mainClass = new Main_class();
-$email = $_SESSION['email']; // Assuming the email is stored in session after login
-
-// Fetch the phone number and admin ID using the method from Main_class
-$userData = $mainClass->getUserPhoneAndAdminByEmail($email);
-$phone = $userData['phone'];
-$admin_id = $userData['admin_id'];
-?>
-
-<form action="send_sms_otp.php" method="POST">
-    <input type="hidden" name="admin_id" value="<?php echo htmlspecialchars($admin_id, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="phone" value="<?php echo htmlspecialchars($phone, ENT_QUOTES, 'UTF-8'); ?>">
-
-    <?php if ($phone): ?>
-        <div class="card-footer">
-            Did not receive verification code? 
-            <button type="submit" class="btn btn-info btn-lg mt-2">Get Code via SMS</button>
-            <span class="badge badge-danger">
-                <?php 
-                    $maskedPhone = substr($phone, 0, 4) . '****' . substr($phone, -4);
-                    echo htmlspecialchars($maskedPhone, ENT_QUOTES, 'UTF-8');
-                ?>
-            </span>
-        </div>
-    <?php endif; ?>
-</form>
 
 
                             <div class="d-flex justify-content-around align-items-center mt-4">

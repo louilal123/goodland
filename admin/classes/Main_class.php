@@ -10,6 +10,11 @@ class Main_class extends Database {
     }
   
    
+    // public function saveFileRequest(){
+    //     $sql = "INSERT INTO  "
+  
+    // }
+
     public function fetchEvents()
 {
     $sql = "SELECT event_id, event_name AS title, date_start AS start, date_end AS end FROM events "; // Adjust as needed
@@ -233,6 +238,74 @@ public function getVisitorDailyData()
 
     return $visitorData;
 }
+//THIS IS FOR REPORTS
+public function getVisitorDailyData1($dateFrom, $dateTo)
+{
+    // Query to get daily new and returning visitors for the selected date range
+    $sql = "
+        SELECT 
+            DATE(s.visit_time) AS date, 
+            COUNT(DISTINCT CASE WHEN s.visit_count = 1 THEN s.visitor_id ELSE NULL END) AS new_visitors,
+            COUNT(DISTINCT CASE WHEN s.visit_count > 1 THEN s.visitor_id ELSE NULL END) AS returning_visitors
+        FROM sessions s
+        LEFT JOIN visitor_logs vl ON s.visitor_id = vl.visitor_id
+        WHERE s.visit_time BETWEEN :date_from AND :date_to
+        GROUP BY DATE(s.visit_time)";
+
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindParam(':date_from', $dateFrom);
+    $stmt->bindParam(':date_to', $dateTo);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Process data
+    $visitorData = ['newVisitors' => [], 'returningVisitors' => [], 'dates' => []];
+    foreach ($result as $row) {
+        $visitorData['dates'][] = $row['date'];
+        $visitorData['newVisitors'][] = (int)$row['new_visitors'];
+        $visitorData['returningVisitors'][] = (int)$row['returning_visitors'];
+    }
+
+    return $visitorData;
+}
+
+
+public function getVisitorDailyDataForRange($dateFrom, $dateTo)
+{
+    // Query to get visitor data for the given range
+    $sql = "
+        SELECT 
+            DATE(s.visit_time) AS date,
+            COUNT(DISTINCT CASE WHEN s.visit_count = 1 THEN s.visitor_id ELSE NULL END) AS new_visitors,
+            COUNT(DISTINCT CASE WHEN s.visit_count > 1 THEN s.visitor_id ELSE NULL END) AS returning_visitors
+        FROM sessions s
+        WHERE DATE(s.visit_time) BETWEEN :dateFrom AND :dateTo
+        GROUP BY DATE(s.visit_time)";
+    
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindParam(':dateFrom', $dateFrom);
+    $stmt->bindParam(':dateTo', $dateTo);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Format the data for Highcharts
+    $dates = [];
+    $newVisitors = [];
+    $returningVisitors = [];
+
+    foreach ($result as $row) {
+        $dates[] = $row['date'];
+        $newVisitors[] = (int)$row['new_visitors'];
+        $returningVisitors[] = (int)$row['returning_visitors'];
+    }
+
+    return [
+        'dates' => $dates,
+        'newVisitors' => $newVisitors,
+        'returningVisitors' => $returningVisitors,
+    ];
+}
+
 
 
 
