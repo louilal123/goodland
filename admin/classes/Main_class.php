@@ -8,12 +8,6 @@ class Main_class extends Database {
     public function __construct() {
         parent::__construct(); // Initialize the database connection
     }
-  
-   
-    // public function saveFileRequest(){
-    //     $sql = "INSERT INTO  "
-  
-    // }
 
     public function fetchEvents()
 {
