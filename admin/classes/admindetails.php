@@ -52,13 +52,16 @@ $visitors_count = $mainClass->countAllWebsiteVisitors();
 $visitors = $mainClass->getAllVisitors();
 
 
-
 $visitorDailyData = $mainClass->getVisitorDailyData();
 
 $totalReturningVisitors = $mainClass->getTotalReturningVisitors();
 
 $settings = $mainClass->fetchSettings();
 $backups = $mainClass->fetchBackups();
+
+$loginLogs = $mainClass->get_login_logs_with_admin_info();
+
+// $pending_request = $mainClass->getFileRequests();
 
 ?>
 

@@ -20,7 +20,7 @@
                             <div class="card">
                                 <div class="card-header d-flex">
                                     <h3 class="fw-bold">Esawod Readings</h3>
-                                    <a href="" class="btn btn-primary ms-auto">Refresh</a>
+                                    <a href="sensor_delete.php" class="btn btn-danger ms-auto deleteBtn"><i class="fas fa-trash"></i> Delete All</a>
                                 </div>
 
                                 <div class="card-body">
@@ -63,6 +63,8 @@
         </main>
     </div>
 </div>
+
+<?php include "includes/footer.php" ?>
 <script type="module" src="https://cdn.datatables.net/buttons/3.2.0/js/buttons.print.min.js"></script>
 <script type="module" src="https://cdn.datatables.net/buttons/3.2.0/js/dataTables.buttons.js"></script>
 <script type="module" src="https://cdn.datatables.net/buttons/3.2.0/js/buttons.dataTables.js"></script>
@@ -71,7 +73,29 @@
 <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 <script type="module" src="https://cdn.datatables.net/buttons/3.2.0/js/buttons.html5.min.js"></script>
 
+<script>
+    $(document).ready(function() {
+        $('.deleteBtn').on('click', function(e) {
+            e.preventDefault(); // Prevent default link behavior
 
+            const href = $(this).attr('href'); // Get the link
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'All sensor data will be deleted!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = href; // Redirect to delete script
+                }
+            });
+        });
+    });
+</script>
 
 <script>
     $(document).ready(function () {

@@ -17,6 +17,7 @@ class Main_class extends Database {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+
 public function fetchSettings() {
     $sql = "SELECT * FROM settings LIMIT 1"; // Adjust to fetch a single row or all rows as needed
     $stmt = $this->pdo->prepare($sql);
@@ -535,6 +536,10 @@ public function verifyEmailOtp($email, $otp) {
     $stmt->execute(['email' => $email]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    // Capture IP address and User-Agent
+    $ip_address = $_SERVER['REMOTE_ADDR'];
+    $user_agent = $_SERVER['HTTP_USER_AGENT'];
+
     if ($user) {
         // Check the latest unverified OTP of type 'email' in the mfa_tokens table
         $stmt = $this->pdo->prepare("
@@ -561,14 +566,45 @@ public function verifyEmailOtp($email, $otp) {
                     'otp' => $otp,
                 ]);
 
+                // Log successful login attempt
+                $logStmt = $this->pdo->prepare("
+                    INSERT INTO login_logs (admin_id, email, status, ip_address, user_agent) 
+                    VALUES (:admin_id, :email, 'success', :ip_address, :user_agent)
+                ");
+                $logStmt->execute([
+                    'admin_id' => $user['admin_id'],
+                    'email' => $email,
+                    'ip_address' => $ip_address,
+                    'user_agent' => $user_agent,
+                ]);
+
                 // Return user info for session setup
                 return $user;
             }
         }
     }
 
+    // Log failed login attempt
+    if ($user) {
+        $admin_id = $user['admin_id'];
+    } else {
+        $admin_id = null; // User not found
+    }
+
+    $logStmt = $this->pdo->prepare("
+        INSERT INTO login_logs (admin_id, email, status, ip_address, user_agent) 
+        VALUES (:admin_id, :email, 'failure', :ip_address, :user_agent)
+    ");
+    $logStmt->execute([
+        'admin_id' => $admin_id,
+        'email' => $email,
+        'ip_address' => $ip_address,
+        'user_agent' => $user_agent,
+    ]);
+
     return false;  // OTP is invalid or expired, or user does not exist
 }
+
 
 public function verifySmsOtp($email, $otp) {
     // Fetch user information using the email
@@ -1367,6 +1403,29 @@ public function deleteAdmin($admin_id) {
     }
     header('Location: ../manageadmins.php');
     exit();
+}
+
+public function get_login_logs_with_admin_info() {
+    $stmt = $this->pdo->prepare("
+        SELECT 
+            login_logs.id,
+            login_logs.admin_id,
+            login_logs.email,
+            login_logs.login_time,
+            login_logs.status,
+            login_logs.ip_address,
+            login_logs.user_agent,
+            admin.fullname,
+            admin.email AS admin_email
+        FROM 
+            login_logs
+        JOIN 
+            admin ON login_logs.admin_id = admin.admin_id
+        ORDER BY 
+            login_logs.login_time DESC
+    ");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 

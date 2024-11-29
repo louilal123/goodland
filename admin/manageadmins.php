@@ -47,7 +47,7 @@
                         <td><?php echo htmlspecialchars($admin['username']); ?></td>
                         <td><?php echo htmlspecialchars($admin['email']); ?></td>
                         <td>
-                            <img src="uploads/<?php echo $admin['admin_photo'] ?: 'default_photo.jpg'; ?>" 
+                            <img src="<?php echo $admin['admin_photo'] ?: 'default_photo.jpg'; ?>" 
                                  style="height: 50px; display: block; margin: auto;">
                         </td>
                         <td><?php echo date("M d, Y h:i A", strtotime($admin['date_created'])); ?></td>

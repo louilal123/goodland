@@ -76,11 +76,10 @@
     <script>
     $(document).ready(function() {
         $('.deleteBtn').on('click', function(e) {
-            e.preventDefault(); // Prevent default link behavior
+            e.preventDefault(); 
 
-            const href = $(this).attr('href'); // Get the href of the delete button (delete URL)
+            const href = $(this).attr('href'); 
 
-            // Trigger SweetAlert confirmation
             Swal.fire({
                 title: 'Are you sure?',
                 text: 'This project will be deleted!',
@@ -91,7 +90,7 @@
                 confirmButtonText: 'Delete'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = href; // Redirect to delete_project.php if confirmed
+                    window.location.href = href; 
                 }
             });
         });

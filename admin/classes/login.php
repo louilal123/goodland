@@ -4,9 +4,32 @@ require_once "Main_class.php";
 
 $mainClass = new Main_class();
 
+if (!isset($_SESSION['login_attempts'])) {
+    $_SESSION['login_attempts'] = 0;
+}
+if (!isset($_SESSION['lockout_time'])) {
+    $_SESSION['lockout_time'] = null;
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = trim($_POST['email']);
     $password = $_POST['password'];
+
+    if ($_SESSION['login_attempts'] >= 3) {
+        $current_time = time();
+        $lockout_time = $_SESSION['lockout_time'];
+
+        if ($lockout_time && ($current_time - $lockout_time) < 180) {
+            $remaining_time = 180 - ($current_time - $lockout_time);
+            $_SESSION['status'] = "Too many failed login attempts. Please try again in $remaining_time seconds.";
+            $_SESSION['status_icon'] = "error";
+            header("Location: ../");
+            exit;
+        } else {
+            $_SESSION['login_attempts'] = 0;
+            $_SESSION['lockout_time'] = null;
+        }
+    }
 
     if (empty($email) || empty($password)) {
         $_SESSION['status'] = "Please fill out both fields.";
@@ -18,21 +41,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $otp = $mainClass->login_user($email, $password);  
 
     if ($otp) {
+        // Reset login attempts and lockout timer on successful login
+        $_SESSION['login_attempts'] = 0;
+        $_SESSION['lockout_time'] = null;
+
         // Regenerate the session ID to avoid session fixation
         session_regenerate_id(true);
 
         // Generate a secure session token for added security
-        $_SESSION['session_token'] = bin2hex(random_bytes(32));  // Store a secure session token
-        $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];  // Store the user's IP
-        $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];  // Store the user's User-Agent
-        $_SESSION['email'] = $email;  // Store the email in session
+        $_SESSION['session_token'] = bin2hex(random_bytes(32)); 
+        $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];  
+        $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];  
+        $_SESSION['email'] = $email;  
         $_SESSION['admin_id'] = $admin_id; 
 
-        // Get the IP and User-Agent
         $user_ip = $_SESSION['ip_address'];
         $user_agent = $_SESSION['user_agent'];
 
-        // Prepare the email
         $mail = require __DIR__ . "/../../mailer.php"; 
 
         $mail->setFrom("rubinlouie41@gmail.com", "GOODLAND.PH");
@@ -63,7 +88,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         try {
             $mail->send();
-          
             header("Location: ../verify_signin.php"); 
             exit;
         } catch (Exception $e) {
@@ -73,8 +97,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit;
         }
     } else {
-        $_SESSION['status'] = "Invalid email or password. Please try again.";
-        $_SESSION['status_icon'] = "error";
+        $_SESSION['login_attempts']++;
+
+        if ($_SESSION['login_attempts'] >= 3) {
+            $_SESSION['lockout_time'] = time();
+            $_SESSION['status'] = "Too many failed login attempts. Please try again in 3 minutes.";
+            $_SESSION['status_icon'] = "error";
+        } else {
+            $_SESSION['status'] = "Invalid email or password. Please try again.";
+            $_SESSION['status_icon'] = "error";
+        }
+
         header("Location: ../");
         exit;
     }
