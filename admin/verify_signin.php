@@ -50,14 +50,11 @@
 
                                 <button type="submit" class="btn btn-primary btn-lg btn-block mb-4">Verify OTP</button>
 
-        
-
-
                             </form>
 
 
                             <div class="d-flex justify-content-around align-items-center mt-4">
-                                <a href="index">Return</a>
+                                <a href="resend.php">Resend OTP</a>
                             </div>
                         </div>
                     </div>
