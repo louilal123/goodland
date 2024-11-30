@@ -1,5 +1,5 @@
-<?php include "classes/user_view.php";?>
-<?php include "classes/visitor_logs.php";?>
+<?php //include "classes/user_view.php";?>
+<?php //include "classes/visitor_logs.php";?>
 <?php $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/")+1); ?>
 <style>
 
@@ -19,7 +19,7 @@
   overflow: hidden;
   z-index: -2; /* Video behind everything */
 }
-
+/* Hello  */
 #hero-background-video {
   position: absolute;
   top: 50%;
