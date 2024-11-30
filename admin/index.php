@@ -27,12 +27,7 @@ unset($_SESSION['error_message']);
 .card{
     border-radius: 0px;
 }
-.sitename{
-    font-size: 44px; /* Adjust size as needed */
-  background-image: linear-gradient(to right, #144D53, #0062cc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+
 </style>
 <body class="bg-light main-blur">
     <section class="vh-100 bg-light">
