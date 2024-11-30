@@ -8,8 +8,7 @@ class Main_class extends Database {
     public function __construct() {
         parent::__construct(); // Initialize the database connection
 
-         // Set the timezone for the Philippines
-         date_default_timezone_set('Asia/Manila');
+        
     }
 
     public function fetchEvents()
