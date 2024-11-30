@@ -85,9 +85,6 @@
                                             <hr>
                                         </div>
 
-                                        <button type="button" class="btn btn-success mb-4 btn-rounded" id="add_section">
-                                            <i class="fas fa-folder-plus"></i> Add Another Section
-                                        </button>
 
                                         <div class="row mb-3 mt-2">
                                             <label class="col-sm-2 col-form-label" for="youtube_link">
@@ -119,66 +116,6 @@
         </div>
     </div>
     <?php include "includes/footer.php"; ?>
-<script>
-    let sectionCount = 1;
 
-document.getElementById('add_section').addEventListener('click', function() {
-    sectionCount++;
-
-    // Create a new section div
-    const newSection = document.createElement('div');
-    newSection.className = 'section mb-3';
-    
-    // Create the content for the new section
-    newSection.innerHTML = `
-        <h5>Section ${sectionCount}  
-            <button type="button" class="btn btn-sm btn-rounded btn-danger delete_section mt-4" 
-            onclick="deleteSection(this)">
-                <i class="fas fa-trash"></i>
-            </button>
-        </h5>
-        <div class="row mb-3">
-            <label class=" text-uppercase col-sm-2 col-form-label" for="content_type_${sectionCount}">Content Type:</label>
-            <div class="col-sm-10">
-                <select class="form-control" id="content_type_${sectionCount}" name="content_type[]" >
-                    <option value="text">Text</option>
-                    <option value="image">Image</option>
-                </select>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class=" text-uppercase col-sm-2 col-form-label" for="content_${sectionCount}">Content:</label>
-            <div class="col-sm-10">
-                <textarea class="form-control" id="content_${sectionCount}" name="content[]" rows="2" ></textarea>
-                <input type="file" class="form-control mt-2" id="image_${sectionCount}" name="images[]" accept="image/*" style="display:none;">
-            </div>
-        </div>
-    `;
-
-    document.getElementById('sections').appendChild(newSection);
-
-    const contentTypeSelect = newSection.querySelector(`#content_type_${sectionCount}`);
-    contentTypeSelect.addEventListener('change', function() {
-        const contentTextarea = newSection.querySelector(`#content_${sectionCount}`);
-        const imageInput = newSection.querySelector(`#image_${sectionCount}`);
-        
-        if (this.value === 'image') {
-            contentTextarea.style.display = 'none';
-            imageInput.style.display = 'block';
-        } else {
-            contentTextarea.style.display = 'block';
-            imageInput.style.display = 'none';
-        }
-    });
-});
-
-// Function to delete the entire section
-function deleteSection(button) {
-    const section = button.closest('.section'); // Find the closest section div
-    section.remove(); // Remove the entire section from the DOM
-    sectionCount--; // Optionally decrease section count
-}
-
-</script>
 </body>
 </html>

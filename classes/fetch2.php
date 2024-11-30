@@ -15,7 +15,6 @@ if ($result->num_rows > 0) {
     $data['value'] = 0;  // Default if no data is found
 }
 
-// Send the data as JSON response
 echo json_encode($data);
 
 // Close the connection

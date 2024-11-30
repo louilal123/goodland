@@ -9,14 +9,6 @@
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script src="https://code.highcharts.com/highcharts-3d.js"></script>
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
- <style>
-    .modal-body-wrapper {
-  overflow-y: scroll;
-  height: 60vh;
-}
- </style>
-
 <body class="layout-fixed-complete sidebar-expand-lg sidebar-mini bg-body-tertiary">
     <div class="app-wrapper">
         <?php include "includes/sidebar.php"; ?>
@@ -28,7 +20,7 @@
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <div class="card">
-                                    <!-- Card Header -->
+
                                     <div class="card-header">
                                         <h3 class="fw-bold">
                                             <span class="fas fa-chart-line"></span> Manage Reports
@@ -53,7 +45,6 @@
                                         </form>
                                     </div>
 
-                                    <!-- Card Footer -->
                                     <div class="card-footer text-muted">
                                         Select a date range to generate a report of the desired period.
                                     </div>
@@ -66,7 +57,6 @@
         </div>
     </div>
 
-    <!-- Modal for Report Preview -->
     <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true" role="document">
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
@@ -79,8 +69,6 @@
                     <h5>E-Sawod Data Report</h5>
                     <p>Date From: <span id="modal-dateFrom"></span> - Date To: <span id="modal-dateTo"></span></p>
 
-                    
-                    <!-- Chart for Water Level, Temperature, and Humidity -->
                     <div class="card mb-2">
                     <div id="kit1"></div>
                     </div>

@@ -47,6 +47,7 @@ $pieChartData = $mainClass->getStatusTypeData();
 
 $events = $mainClass->get_all_events();
 $events_count = $mainClass->count_all_events();
+$request_count = $mainClass->count_all_request();
 
 $visitors_count = $mainClass->countAllWebsiteVisitors();
 $visitors = $mainClass->getAllVisitors();
@@ -61,6 +62,7 @@ $backups = $mainClass->fetchBackups();
 
 $loginLogs = $mainClass->get_login_logs_with_admin_info();
 
+$requests = $mainClass->getFileRequests();
 // $pending_request = $mainClass->getFileRequests();
 
 ?>

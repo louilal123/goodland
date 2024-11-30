@@ -11,10 +11,12 @@
         
         
     }
-    .modal-dialog .modal .modal-body .modal-content{
-       border: 0px;
-        border-radius: 0px !important;
-    }
+    .modal-dialog .modal-content {
+    border: 0px;
+    border-radius: 0px !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Add shadow */
+}
+
    .card,
       .small-box{
     border-radius: 0px !important;

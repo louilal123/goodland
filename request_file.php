@@ -4,18 +4,48 @@ require_once __DIR__ . '/admin/classes/Main_class.php';
 
 $mainClass = new Main_class();
 
+// Check if the visitor's request data exists in session
+if (!isset($_SESSION['file_requests'])) {
+    $_SESSION['file_requests'] = [];
+}
+
+// File-specific limit and time window
+$request_limit = 3;
+$time_window = 86400; // 24 hours in seconds
+
+// Get the file ID from the POST request
+$file_id = $_POST['file_id'];
+
+// Initialize the request data for this file if not already set
+if (!isset($_SESSION['file_requests'][$file_id])) {
+    $_SESSION['file_requests'][$file_id] = [
+        'request_count' => 0,
+        'last_request_time' => time(),
+    ];
+}
+
+// Check if the time window has passed for this file, reset the count if needed
+if (time() - $_SESSION['file_requests'][$file_id]['last_request_time'] > $time_window) {
+    $_SESSION['file_requests'][$file_id]['request_count'] = 0; // Reset count after 24 hours
+    $_SESSION['file_requests'][$file_id]['last_request_time'] = time(); // Update time
+}
+
+// If the visitor has exceeded the request limit for this file
+if ($_SESSION['file_requests'][$file_id]['request_count'] >= $request_limit) {
+    $_SESSION['status'] = "You have reached the maximum number of requests for this file. Please try again later.";
+    $_SESSION['status_icon'] = "error";
+    header("Location: archives.php#error#requestModal");
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (!isset($_SESSION['visitor_id'])) {
-        $_SESSION['visitor_id'] = 1;
-    }
 
     $visitor_id = $_SESSION['visitor_id'];
 
     // Get form inputs
     $email = $_POST['email'];
-    $file_id = $_POST['file_id'];
     $file_path = $_POST['file_path'];
-    $file_title = $_POST['file-title'];
+    $file_title = $_POST['file_title'];
 
     // Store form data in session in case of error
     $_SESSION['form_data'] = [
@@ -29,21 +59,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $_SESSION['status'] = "Please enter a valid email address.";
         $_SESSION['status_icon'] = "error";
-        header("Location: ../archives.php#error#requestModal");
+        header("Location: archives.php#error#requestModal");
         exit();
     }
 
-    $full_file_path = __DIR__ . "/../admin/uploads/" . $file_path;
+    $full_file_path = $file_path;
 
     if (!file_exists($full_file_path)) {
         $_SESSION['status'] = "The requested file does not exist.";
         $_SESSION['status_icon'] = "error";
-        header("Location: ../archives.php#error#requestModal");
+        header("Location: archives.php#error#requestModal");
         exit();
     }
 
-    // Initialize PHPMailer
-    $mail = require __DIR__ . "../mailer.php";
+    $mail = require __DIR__ . "/mailer.php";
     $mail->setFrom("rubinlouie41@gmail.com", "GOODLAND.PH");
     $mail->addAddress($email);
     $mail->Subject = "Requested File Copy";
@@ -69,31 +98,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
         <div class="adL"></div>
     </div>';
-    
-    
+
     $mail->addAttachment($full_file_path);
 
-  
-try {
-    // Attempt to send the email
-    if (!$mail->send()) {
-        throw new Exception($mail->ErrorInfo); // Throw an exception if sending fails
+    try {
+        if (!$mail->send()) {
+            throw new Exception($mail->ErrorInfo); 
+        }
+
+        // Increment the request count for the specific file
+        $_SESSION['file_requests'][$file_id]['request_count']++;
+
+        // Save the request details in the database
+        $mainClass->saveFileRequest($file_id, $visitor_id, $email);
+
+        $_SESSION['status'] = "The file has been sent to your email.";
+        $_SESSION['status_icon'] = "success";
+        header("Location: archives.php");
+        exit();
+    } catch (Exception $e) {
+        $_SESSION['status'] = "Error sending your file request: " . $e->getMessage();
+        $_SESSION['status_icon'] = "error";
+        header("Location: archives.php#error#requestModal");
+        exit();
     }
-
-    // Log the file request if email is sent successfully
-    $mainClass->saveFileRequest($file_id, $visitor_id, $email);
-
-    // Set success session status and redirect
-    $_SESSION['status'] = "The file has been sent to your email.";
-    $_SESSION['status_icon'] = "success";
-    header("Location: ../archives.php");
-    exit();
-} catch (Exception $e) {
-    // Set error session status and redirect with error message
-    $_SESSION['status'] = "Error sending your file request: " . $e->getMessage();
-    $_SESSION['status_icon'] = "error";
-    header("Location: ../archives.php#error#requestModal");
-    exit();
-}
 }
 ?>

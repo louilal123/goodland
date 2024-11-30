@@ -7,6 +7,9 @@ class Main_class extends Database {
 
     public function __construct() {
         parent::__construct(); // Initialize the database connection
+
+         // Set the timezone for the Philippines
+         date_default_timezone_set('Asia/Manila');
     }
 
     public function fetchEvents()
@@ -851,6 +854,47 @@ public function getMessagesByVisitorId($visitorId) {
         }
     }
     //PROJECTS
+    public function editProject($project_id, $title, $header, $image_path, $summary, $banner_quote, $youtube_link)
+    {
+        // SQL query for updating project details
+        $sql = "UPDATE projects 
+                SET title = :title, 
+                    header = :header, 
+                    project_image = :project_image, 
+                    summary = :summary, 
+                    banner_quote = :banner_quote, 
+                    youtube_link = :youtube_link, 
+                    updated_at = NOW()
+                WHERE project_id = :project_id"; // Use 'project_id' instead of 'id'
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            ':title' => $title,
+            ':header' => $header,
+            ':project_image' => $image_path,
+            ':summary' => $summary,
+            ':banner_quote' => $banner_quote,
+            ':youtube_link' => $youtube_link,
+            ':project_id' => $project_id // Ensure this binds correctly
+        ]);
+        return $stmt->rowCount(); // Returns the number of affected rows
+    }
+    public function insert_reply($id, $admin_id, $reply_message) {
+        $stmt = $this->pdo->prepare("
+            INSERT INTO message_replies (id, admin_id, reply, date_replied)
+            VALUES (:id, :admin_id, :reply, NOW())
+        ");
+        
+        // Bind the parameters to match the placeholders in the SQL query
+        $stmt->bindParam(':id', $id);           // Use 'id' for the message reply
+        $stmt->bindParam(':admin_id', $admin_id);
+        $stmt->bindParam(':reply', $reply_message);
+        
+        // Execute the query and return the result
+        return $stmt->execute();  // Returns true on success, false on failure
+    }
+    
+    
+
  
     public function addProject($title, $header, $image_path, $summary, $banner_quote, $youtube_link)
     {
@@ -881,6 +925,55 @@ public function getMessagesByVisitorId($visitorId) {
         ]);
     }
 
+    public function saveFileRequest($file_id, $visitor_id, $email) {
+       
+        $sql = "INSERT INTO file_requests (file_id, visitor_id, email, request_date) 
+                VALUES (:file_id, :visitor_id, :email, NOW())";
+        
+        $stmt = $this->pdo->prepare($sql);
+        
+        $stmt->bindParam(':file_id', $file_id, PDO::PARAM_INT);
+        $stmt->bindParam(':visitor_id', $visitor_id, PDO::PARAM_INT);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        return $stmt->execute();
+    }
+    public function getFileRequests() {
+        $sql = "SELECT fr.request_id, f.title, fr.email, fr.request_date, vl.ip_address
+                FROM file_requests fr
+                LEFT JOIN files f ON fr.file_id = f.id 
+                LEFT JOIN visitor_logs vl ON fr.visitor_id = vl.visitor_id 
+                ORDER BY fr.request_date DESC";
+    
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+    
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteFileRequest($request_id) {
+        $sql = "DELETE FROM file_requests WHERE request_id = :request_id";
+    
+        $stmt = $this->pdo->prepare($sql);
+    
+        $stmt->bindParam(':request_id', $request_id, PDO::PARAM_INT);
+    
+        if ($stmt->execute()) {
+            return true;  
+        } else {
+            return false; 
+        }
+    }
+    public function deleteAllFileRequests() {
+        $sql = "DELETE FROM file_requests"; // Deletes all records from file_requests table
+        
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute();  // Execute the delete query
+    }
+    
+    
+    
+    
+
     public function getPublishedFiles() {
         $sql = "SELECT f.`id`, f.`admin_id`, f.`title`, f.`cover_path`, f.`description`, f.`file_path`, f.`upload_date`, 
                        f.`status`,  u.`fullname` 
@@ -892,6 +985,34 @@ public function getMessagesByVisitorId($visitorId) {
         $stmt->execute();
         
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function updateProject($project_id, $title, $header, $image_path, $summary, $banner_quote, $youtube_link) {
+        // Initialize SQL query
+        $query = "UPDATE projects SET 
+                  project_name = ?, 
+                  project_header = ?, 
+                  project_description = ?, 
+                  project_quotation = ?, 
+                  youtube_link = ?";
+        
+        // If a new image is uploaded, include it in the update
+        if ($image_path) {
+            $query .= ", project_image = ?";
+        }
+        
+        $query .= " WHERE project_id = ?";
+    
+        // Prepare and bind
+        $stmt = $this->db->prepare($query);
+        if ($image_path) {
+            $stmt->bind_param("ssssssi", $title, $header, $summary, $banner_quote, $youtube_link, $image_path, $project_id);
+        } else {
+            $stmt->bind_param("sssssi", $title, $header, $summary, $banner_quote, $youtube_link, $project_id);
+        }
+    
+        // Execute and return success status
+        return $stmt->execute();
     }
     
 
@@ -1072,7 +1193,7 @@ public function getCatchmentById($data_id) {
     }
 //notifications messages
     public function get_unread_messages() {
-        $sql = "SELECT * FROM messages WHERE status = 'unread' ORDER BY date_sent DESC";
+        $sql = "SELECT * FROM messages  ORDER BY date_sent DESC";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -1484,6 +1605,13 @@ public function count_all_events() {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result['total'];
 }
+
+public function count_all_request() {
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) AS total FROM file_requests  ");
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total'];
+}
 public function fetchUpcomingEvents() {
     $sql = "SELECT event_id, event_name, description, date_start, date_end 
             FROM events 
@@ -1618,13 +1746,6 @@ public function delete_member($member_id) {
     exit();
 }
 
-
-// public function get_all_messages() {
-//     $stmt = $this->pdo->prepare("SELECT * FROM messages");
-//     $stmt->execute();
-//     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-// }
-
 public function get_all_messages() {
     $stmt = $this->pdo->prepare("
         SELECT 
@@ -1635,20 +1756,20 @@ public function get_all_messages() {
             m.message,
             m.date_sent,
             m.status,
-            r.reply_id,
             r.reply,
             r.date_replied,
             a.fullname AS admin_name
         FROM 
             messages m
         LEFT JOIN 
-            message_replies r ON m.id = r.message_id
+            message_replies r ON m.id = r.id  -- Fix this part based on actual schema
         LEFT JOIN 
             admin a ON r.admin_id = a.admin_id
     ");
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
 
 
 

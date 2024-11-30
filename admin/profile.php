@@ -15,8 +15,8 @@
                 <div class="col-md-12">
                     <div class="card card-outline-primary">
                         <div class="card-header d-flex">
-                            <h2><span class="bi bi-info"></span> Profile Information</h2>
-                            <a data-bs-toggle="modal" data-bs-target="#editProfileModal" class="btn btn-success ms-auto btn-end">Edit Profile</a>
+                        <span class="bi bi-info"></span> Profile Information
+                            <a data-bs-toggle="modal" data-bs-target="#editProfileModal" class="btn btn-success ms-auto btn-end"><i class="fas fa-edit"></i> Edit Profile</a>
                         </div>
                         <div class="card-body">
                             <div class="container-fluid">
@@ -98,7 +98,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editProfileModalLabel">Edit Profile Information</h5>
+        <h5 class="modal-title fw-bold" id="editProfileModalLabel">Edit Profile Information</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

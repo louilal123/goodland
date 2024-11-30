@@ -290,10 +290,7 @@ include 'classes/average_chart.php';
     <?php include "includes/footer.php" ?>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
    
-
-    
-
-    <script type="text/javascript">
+<script type="text/javascript">
     // Chart for Kit 1 (esawod_1)
     Highcharts.chart('kit1', {
         chart: {
@@ -385,8 +382,6 @@ include 'classes/average_chart.php';
         }
     });
 </script>
-
-
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {

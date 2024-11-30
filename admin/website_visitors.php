@@ -3,17 +3,13 @@
 <html lang="en">
 <?php include "includes/header.php"; ?>
 
-<style>
-    body {
-        overflow: hidden;
-    }
-</style>
+
 <body class="layout-fixed-complete sidebar-expand-lg sidebar-mini">
 
     <div class="app-wrapper">
 
        <?php include "includes/sidebar.php"; ?>
-        <div class="app-main-wrapper main-blur">
+        <div class="app-main-wrapper ">
            <?php include "includes/topnav.php"; ?>
             <main class="app-main">
             <div class="app-content">
@@ -24,13 +20,10 @@
                                 <div class="card-body">
                                     <div class="d-flex mb-3">
                                         <h3 class="fw-bold">Website Visitors</h3>
-                                        <button type="button" class="btn btn-success ms-auto me-1" onclick="location.reload(); return false;">
-                                            <i class="fas fa-refresh"></i> Refresh
+                                     
+                                        <button class="btn btn-danger ms-auto" id="deleteAllBtn">
+                                            <i class="fas fa-trash"></i> Delete All
                                         </button>
-                                        <button class="btn btn-danger" id="deleteAllBtn">
-    <i class="fas fa-trash"></i> Delete All
-</button>
-
                                     </div>
                                     <table id="myTable" class="table  table-hover table-striped text-center w-100">
                                         <thead class="bg-primary fw-bold">
@@ -57,20 +50,22 @@
                                                     <td><?php echo date("M d, Y h:i A", strtotime($visitor['visit_time'])); ?></td>
                                                   
                                                     <td>
-                                                        <a href="classes/delete_visitor.php?visitor_id=<?php echo $visitor['visitor_id']; ?>" class="btn btn-danger btn-sm deleteBtn">
-                                                            <i class="fas fa-trash"></i>
-                                                        </a>
+                                                     
                                                         <button class="btn btn-info btn-sm infoBtn" 
-                            data-session-id="<?php echo htmlspecialchars($visitor['session_id']); ?>"
-                            data-user-agent="<?php echo htmlspecialchars($visitor['user_agent']); ?>"
-                            data-ip-address="<?php echo htmlspecialchars($visitor['ip_address']); ?>"  
-                            data-country="<?php echo htmlspecialchars($visitor['country']); ?>"
-                            data-visit-time="<?php echo date("M d, Y h:i A", strtotime($visitor['visit_time'])); ?>"
-                            data-last-visit="<?php echo date("M d, Y h:i A", strtotime($visitor['last_visit'])); ?>"
-                            data-visit-count="<?php echo htmlspecialchars($visitor['visit_count']); ?>"
-                            data-visitor-id="<?php echo htmlspecialchars($visitor['visitor_id']); ?>">
-                        <i class="fas fa-info-circle"></i> Info
-                    </button>
+                                                                data-session-id="<?php echo htmlspecialchars($visitor['session_id']); ?>"
+                                                                data-user-agent="<?php echo htmlspecialchars($visitor['user_agent']); ?>"
+                                                                data-ip-address="<?php echo htmlspecialchars($visitor['ip_address']); ?>"  
+                                                                data-country="<?php echo htmlspecialchars($visitor['country']); ?>"
+                                                                data-visit-time="<?php echo date("M d, Y h:i A", strtotime($visitor['visit_time'])); ?>"
+                                                                data-last-visit="<?php echo date("M d, Y h:i A", strtotime($visitor['last_visit'])); ?>"
+                                                                data-visit-count="<?php echo htmlspecialchars($visitor['visit_count']); ?>"
+                                                                data-visitor-id="<?php echo htmlspecialchars($visitor['visitor_id']); ?>">
+                                                            <i class="fas fa-info-circle"></i> Info
+                                                        </button>
+                                                        <a href="classes/delete_visitor.php?visitor_id=<?php echo $visitor['visitor_id']; ?>" 
+                                                        class="btn btn-danger btn-sm deleteBtn">
+                                                            <i class="fas fa-trash"></i> Delete
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>

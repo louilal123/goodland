@@ -80,7 +80,6 @@ function prepare_chart_data($data, $daysInMonth, $currentMonth, $currentYear) {
     ];
 }
 
-// Prepare chart data for both kits
 $chart_data_1 = prepare_chart_data($data_1, $daysInMonth, $currentMonth, $currentYear);
 $chart_data_2 = prepare_chart_data($data_2, $daysInMonth, $currentMonth, $currentYear, $currentYear);
 

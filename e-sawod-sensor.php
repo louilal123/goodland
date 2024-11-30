@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,10 +62,15 @@
     background: #f1f7ff;
 }
 
+.nav-link {
+        font-size: 18px;
+        color: gray;
+    }
+
 </style>
 <body class="blog-page">
   <?php include "includes/topnav.php"; ?>
-  
+  <?php include "classes/fetch_last_minute_data.php"; ?>
   <main class="main">
     <!-- Page Title -->
     <div class="page-title">
@@ -128,286 +134,244 @@
 </section>
 
 
-
-
-    <!-- Values Section -->
-    <section id="" class=" section">
-      <div class="container">
+<section id="charts" class="section values">
+    <div class="container">
         <div class="row gy-4">
-          
-         <div class="col-md-12">
+        <div class="col-md-12">
             <div class="card">
-              <div class="card-body">
-                     <div id="water_level"></div>
-              </div>
-            </div>
-          </div>
+                <ul class="nav nav-underline">
+                    <li class="nav-item">
+                        <a class="nav-link disabled text-primary fw-bold" id="selectTab" href="#">Select:</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" id="lastMinuteTab" href="#" data-timeframe="lastminute">Last Minute</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="lastHourTab" href="#" data-timeframe="last24hours">Last Hour</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="lastDayTab" href="#" data-timeframe="last7days">Last Day</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="lastWeekTab" href="#" data-timeframe="lastweek">Last Week</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="lastMonthTab" href="#" data-timeframe="lastmonth">Last Month</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="allTimeTab" href="#" data-timeframe="alltime">All Time</a>
+                    </li>
+                </ul>
+                <hr>
+                <div class="tab-content mt-3">
+                    <!-- Last Minute Content -->
+                    <div class="tab-pane fade show active" id="lastMinuteContent" role="tabpanel">
+                        <h5>Last Minute Data</h5>
+                        <div id="kit1_minute" style="height: 400px;"></div> 
+                        <div id="kit2_minute" style="height: 400px;"></div> 
+                    </div>
 
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-body">
-                     <div id="humidity"></div>
-              </div>
-            </div>
-   
-   
-          </div>
+                    <!-- Last Hour Content -->
+                    <div class="tab-pane fade" id="lastHourContent" role="tabpanel">
+                        <h5>Last Hour Data</h5>
+                        <div id="kit1-hour" style="height: 400px;"></div> 
+                        <div id="kit2-hour" style="height: 400px;"></div> 
+                    </div>
 
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-body">
-                     <div id="temperature"></div>
-              </div>
+                    <!-- Last Day Content -->
+                    <div class="tab-pane fade" id="lastDayContent" role="tabpanel">
+                        <h5>Last Day Data</h5>
+                        <div id="kit1-day" style="height: 400px;"></div> 
+                        <div id="kit2-day" style="height: 400px;"></div> 
+                    </div>
+
+                    <!-- Last Week Content -->
+                    <div class="tab-pane fade" id="lastWeekContent" role="tabpanel">
+                        <h5>Last Week Data</h5>
+                        <div id="kit1-week" style="height: 400px;"></div> 
+                        <div id="kit2-week" style="height: 400px;"></div> 
+                    </div>
+
+                    <!-- Last Month Content -->
+                    <div class="tab-pane fade" id="lastMonthContent" role="tabpanel">
+                        <h5>Last Month Data</h5>
+                        <div id="kit1-month" style="height: 400px;"></div> 
+                        <div id="kit2-month" style="height: 400px;"></div> 
+                    </div>
+
+                    <!-- All Time Content -->
+                    <div class="tab-pane fade" id="allTimeContent" role="tabpanel">
+                        <h5>All Time Data</h5>
+                        <div id="kit1-alltime" style="height: 400px;"></div> 
+                        <div id="kit2-alltime" style="height: 400px;"></div> 
+                    </div>
+                </div>
             </div>
-   
-   
-          </div>
-         
-          <!-- <div class="col-md-12">
-        <div class="card">
-          <div class="card-body">
-            <h3>Complete Data Table</h3>
-                <table id="sensorDataTable" border="1" class="table table-responsive">
-                    <thead>
-                        <tr>
-                            <th>Kit Name</th>
-                            <th>Water Level (cm)</th>
-                            <th>Humidity (%)</th>
-                            <th>Temperature (°C)</th>
-                            <th>Timestamp</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    
-                    </tbody>
-                </table>
-  
-          </div>
         </div>
-      </div> -->
-          
+
         </div>
-      </div>
-    </section>
-   
+    </div>
+</section>
+
   </main>
 
   <?php include "includes/footer.php"; ?>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-        (async () => {
-            // Fetch temperature data from PHP
-            const response = await fetch('classes/fetchtemperature.php');
-            const data = await response.json();
+    document.querySelectorAll('.nav-link').forEach(function(tab) {
+    tab.addEventListener('click', function(event) {
+        event.preventDefault();
 
-            if (!data || data.length === 0) {
-                console.error('No data found.');
-                return;
+        document.querySelectorAll('.nav-link').forEach(function(link) {
+            link.classList.remove('active');
+        });
+
+        tab.classList.add('active');
+
+        var timeframe = tab.getAttribute('data-timeframe');
+
+        document.querySelectorAll('.tab-pane').forEach(function(content) {
+            content.classList.remove('show', 'active');
+        });
+
+        var contentId = `#${tab.id.replace('Tab', 'Content')}`;
+        document.querySelector(contentId).classList.add('show', 'active');
+
+        fetchDataForTimeframe(timeframe, contentId);
+    });
+});
+  </script>
+
+<script type="text/javascript">
+   
+    const chart1 = Highcharts.chart('kit1_minute', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'E-SAWOD1'
+        },
+        xAxis: {
+            categories: ['Last Minute'],
+            title: {
+                text: 'Time'
             }
-
-            // Process the data to adjust timestamps and organize by kit_name
-            const esawod1Temp = [];
-            const esawod2Temp = [];
-
-            data.forEach(entry => {
-                const timestamp = new Date(entry.timestamp);
-                timestamp.setHours(timestamp.getHours() + 7); // Add 7 hours
-
-                // Structure data for each kit
-                if (entry.kit_name === 'esawod_1') {
-                    esawod1Temp.push([timestamp.getTime(), entry.temperature]);
-                } else if (entry.kit_name === 'esawod_2') {
-                    esawod2Temp.push([timestamp.getTime(), entry.temperature]);
-                }
-            });
-
-            // Create the chart for temperature comparison
-            Highcharts.stockChart('temperature', {
-                rangeSelector: {
-                    selected: 1
-                },
-
-                title: {
-                    text: 'Temperature Comparison - esawod_1 vs esawod_2'
-                },
-
-                yAxis: {
-                    title: {
-                        text: 'Temperature (°C)'
-                    },
-                    labels: {
-                        formatter: function () {
-                            return this.value + ' °C';
-                        }
-                    }
-                },
-
-                tooltip: {
-                    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y} °C</b><br/>',
-                    valueDecimals: 2,
-                    split: true
-                },
-
-                series: [
-                    {
-                        name: 'esawod_1 Temperature',
-                        data: esawod1Temp,
-                        tooltip: { valueSuffix: ' °C' }
-                    },
-                    {
-                        name: 'esawod_2 Temperature',
-                        data: esawod2Temp,
-                        tooltip: { valueSuffix: ' °C' }
-                    }
-                ]
-            });
-        })();
-    </script>
-  <script>
-        (async () => {
-            // Fetch humidity data from PHP
-            const response = await fetch('classes/fetchhumidity.php');
-            const data = await response.json();
-
-            if (!data || data.length === 0) {
-                console.error('No data found.');
-                return;
+        },
+        yAxis: {
+            title: {
+                text: 'Values'
             }
+        },
+        legend: {
+            align: 'center',
+            verticalAlign: 'top',
+            layout: 'horizontal',
+            backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Water Level (cm)',
+            type: 'column',
+            color: '#0d6efd',
+            data: []
+        }, {
+            name: 'Humidity (%)',
+            type: 'column',
+            color: '#6c757d',
+            data: []
+        }, {
+            name: 'Temperature (°C)',
+            type: 'column', 
+            color: '#dc3545',
+            data: []
+        }],
+        tooltip: {
+            shared: true,
+            valueSuffix: ' units'
+        }
+    });
 
-            // Process the data to adjust timestamp and organize by kit_name
-            const esawod1Humidity = [];
-            const esawod2Humidity = [];
-
-            data.forEach(entry => {
-                const timestamp = new Date(entry.timestamp);
-                timestamp.setHours(timestamp.getHours() + 7); // Add 7 hours
-
-                // Structure data for each kit
-                if (entry.kit_name === 'esawod_1') {
-                    esawod1Humidity.push([timestamp.getTime(), entry.humidity]);
-                } else if (entry.kit_name === 'esawod_2') {
-                    esawod2Humidity.push([timestamp.getTime(), entry.humidity]);
-                }
-            });
-
-            // Create the chart for humidity comparison
-            Highcharts.stockChart('humidity', {
-                rangeSelector: {
-                    selected: 1
-                },
-
-                title: {
-                    text: 'Humidity Comparison - esawod_1 vs esawod_2'
-                },
-
-                yAxis: {
-                    title: {
-                        text: 'Humidity (%)'
-                    },
-                    labels: {
-                        formatter: function () {
-                            return this.value + ' %';
-                        }
-                    }
-                },
-
-                tooltip: {
-                    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y} %</b><br/>',
-                    valueDecimals: 2,
-                    split: true
-                },
-
-                series: [
-                    {
-                        name: 'esawod_1 Humidity',
-                        data: esawod1Humidity,
-                        tooltip: { valueSuffix: ' %' }
-                    },
-                    {
-                        name: 'esawod_2 Humidity',
-                        data: esawod2Humidity,
-                        tooltip: { valueSuffix: ' %' }
-                    }
-                ]
-            });
-        })();
-    </script>
-<script>
-        (async () => {
-            // Fetch water level data from PHP
-            const response = await fetch('classes/fetchwaterlevel.php');
-            const data = await response.json();
-
-            // Check if data is available
-            if (!data || data.length === 0) {
-                console.error('No data found.');
-                return;
+    const chart2 = Highcharts.chart('kit2_minute', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'E-SAWOD2'
+        },
+        xAxis: {
+            categories: ['Last Minute'],
+            title: {
+                text: 'Time'
             }
+        },
+        yAxis: {
+            title: {
+                text: 'Values'
+            }
+        },
+        legend: {
+            align: 'center',
+            verticalAlign: 'top',
+            layout: 'horizontal',
+            backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Water Level (cm)',
+            type: 'column',
+            color: '#0d6efd',
+            data: []
+        }, {
+            name: 'Humidity (%)',
+            type: 'column',
+            color: '#6c757d',
+            data: []
+        }, {
+            name: 'Temperature (°C)',
+            type: 'column', 
+            color: '#dc3545',
+            data: []
+        }],
+        tooltip: {
+            shared: true,
+            valueSuffix: ' units'
+        }
+    });
 
-            // Process the data to add 7 hours to the timestamp and organize by kit_name
-            const esawod1Data = [];
-            const esawod2Data = [];
+    // Function to fetch the last minute's data and update the charts
+    function fetchAndUpdateCharts() {
+        // Send an AJAX request to the PHP endpoint
+        $.ajax({
+            url: 'classes/fetch_last_minute_data.php', // PHP script to fetch last minute data
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                // Update Kit 1 chart
+                chart1.series[0].setData(response.kit1.level_data); // Update Water Level
+                chart1.series[1].setData(response.kit1.humidity_data); // Update Humidity
+                chart1.series[2].setData(response.kit1.temperature_data); // Update Temperature
 
-            data.forEach(entry => {
-                // Add 7 hours to timestamp
-                const timestamp = new Date(entry.timestamp);
-                timestamp.setHours(timestamp.getHours() + 8);
+                // Update Kit 2 chart
+                chart2.series[0].setData(response.kit2.level_data); // Update Water Level
+                chart2.series[1].setData(response.kit2.humidity_data); // Update Humidity
+                chart2.series[2].setData(response.kit2.temperature_data); // Update Temperature
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+    }
 
-                // Structure data based on kit_name
-                if (entry.kit_name === 'esawod_1') {
-                    esawod1Data.push([timestamp.getTime(), entry.level_cm]);
-                } else if (entry.kit_name === 'esawod_2') {
-                    esawod2Data.push([timestamp.getTime(), entry.level_cm]);
-                }
-            });
+    setInterval(fetchAndUpdateCharts, 1000); 
 
-            // Create the chart
-            Highcharts.stockChart('water_level', {
-                rangeSelector: {
-                    selected: 1
-                },
-
-                title: {
-                    text: 'Water Level Comparison - esawod_1 vs esawod_2'
-                },
-
-                yAxis: {
-                    title: {
-                        text: 'Water Level (cm)'
-                    },
-                    labels: {
-                        formatter: function () {
-                            return this.value + ' cm';
-                        }
-                    }
-                },
-
-                tooltip: {
-                    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y} cm</b><br/>',
-                    valueDecimals: 2,
-                    split: true
-                },
-
-                series: [
-                    {
-                        name: 'esawod_1',
-                        data: esawod1Data,
-                        tooltip: {
-                            valueSuffix: ' cm'
-                        }
-                    },
-                    {
-                        name: 'esawod_2',
-                        data: esawod2Data,
-                        tooltip: {
-                            valueSuffix: ' cm'
-                        }
-                    }
-                ]
-            });
-        })();
-    
+    fetchAndUpdateCharts();
 </script>
+
 <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
 <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
 
@@ -495,12 +459,12 @@
 
 <script type="text/javascript">
     FusionCharts.ready(function () {
-        // Initialize the chart
+        
         var chartObj = new FusionCharts({
             type: 'angulargauge',
-            renderAt: 'humidity2', // ID of the container div
-            width: '100%', // Makes the chart responsive
-            height: '300', // Chart height
+            renderAt: 'humidity2', 
+            width: '100%', 
+            height: '300', 
             dataFormat: 'json',
             dataSource: {
                 "chart": {
