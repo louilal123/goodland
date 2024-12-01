@@ -1,5 +1,12 @@
 <?php include "classes/admindetails.php"; ?>
+<?php
+require_once 'classes/Main_class.php';
 
+$mainClass = new Main_class();
+
+$mainClass->mark_all_messages_as_read();
+
+?>
 <!DOCTYPE html>
 <html lang="en"> 
 <?php include "includes/header.php"; ?>

@@ -30,7 +30,7 @@
    
   <link href="assets/css/main.css" rel="stylesheet">
   
-  <!-- <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+  <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
      <!-- <link rel="stylesheet" href="mdbfolder\mdb.min.css"> -->
   <!-- 5.3 css latest  -->

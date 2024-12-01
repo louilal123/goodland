@@ -41,14 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $otp = $mainClass->login_user($email, $password);  
 
     if ($otp) {
-        // Reset login attempts and lockout timer on successful login
         $_SESSION['login_attempts'] = 0;
         $_SESSION['lockout_time'] = null;
 
-        // Regenerate the session ID to avoid session fixation
         session_regenerate_id(true);
 
-        // Generate a secure session token for added security
         $_SESSION['session_token'] = bin2hex(random_bytes(32)); 
         $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];  
         $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];  

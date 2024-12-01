@@ -1,7 +1,4 @@
 <?php include "classes/admindetails.php"; ?>
-<?php
-include 'classes/average_chart.php';
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +18,8 @@ include 'classes/average_chart.php';
   .text-primary{color: #0062cc !important;}
 </style>
 <body>
-    <div class="container my-4">
+    <section>
+    <div class="container py-4">
         <header class="text-center mb-4">
             <h1 class="text-primary"> GOOD</strong><i class="fw-light">Land</i></h1>
             <h5>E-Sawod Data Report</h5>
@@ -44,7 +42,7 @@ include 'classes/average_chart.php';
         </section>
 
 <!-- Summary Table Section -->
-<section>
+
     <div class="card">
         <div class="card-body">
             <table class="table table-sm table-bordered" id="summaryTable">
@@ -87,6 +85,7 @@ include 'classes/average_chart.php';
             </table>
         </div>
     </div>
+
 </section>
 
     </div>

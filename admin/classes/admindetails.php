@@ -36,6 +36,9 @@ $mainClass->updateEventStatus();
 //  msgs 
 $unread_msgs_count = $mainClass->get_unread_message_count();
 $unread_msgs = $mainClass->get_unread_messages();
+
+$unread_notifications = $mainClass->get_notifications();
+$unread_notifications_count = $mainClass->get_unread_notifications_count();
 // end 
 // projects 
 $projects = $mainClass->getAllProjects(); 

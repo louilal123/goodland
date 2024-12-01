@@ -1173,14 +1173,34 @@ public function getCatchmentById($data_id) {
         $stmt->execute();
     }
    
-   
-    
     public function mark_all_messages_as_read() {
         $sql = "UPDATE messages SET status = 'read' WHERE status != 'read'"; 
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
     }
-    
+    public function get_notifications() {
+        $sql = "SELECT * FROM notifications ORDER BY time_stamp DESC";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function get_unread_notifications_count() {
+        $sql = "SELECT COUNT(*) FROM notifications WHERE status = 'unread'";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+    public function get_unread_messages_count() {
+        $sql = "SELECT COUNT(*) FROM notifications WHERE status = 'unread'";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+        public function mark_notifications_as_read() {
+    $sql = "UPDATE notifications SET status = 'read' WHERE status = 'unread'";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+}
     
     public function save_contact_message($name, $email, $subject, $message) {
         $sql = "INSERT INTO messages (name, email, subject, message) VALUES (:name, :email, :subject, :message)";
@@ -1340,6 +1360,29 @@ public function getCatchmentById($data_id) {
     }
 
     
+    public function update_otp($email) {
+        // Generate a new OTP
+        $otp = rand(100000, 999999);  // Generate 6-digit OTP
+        $expiry = date("Y-m-d H:i:s", strtotime("+1 day"));  // OTP valid for 1 day
+
+        // Prepare and execute the SQL statement to update the OTP in the mfa_tokens table
+        $stmt = $this->pdo->prepare("
+            UPDATE mfa_tokens 
+            SET otp = :otp, expiration_time = :expiration_time, verified = 0, created_at = NOW()
+            WHERE admin_id = (SELECT admin_id FROM admin WHERE email = :email)
+        ");
+
+        // Execute the statement with the necessary parameters
+        $stmt->execute([
+            'otp' => $otp,
+            'expiration_time' => $expiry,
+            'email' => $email
+        ]);
+
+        // Return the generated OTP for further use (e.g., sending it via email)
+        return $otp;
+    }
+
     public function login_user($email, $password) {
         // Check if the email exists and fetch user data
         $stmt = $this->pdo->prepare("SELECT admin_id, password FROM admin WHERE email = :email");
@@ -1377,8 +1420,6 @@ public function getCatchmentById($data_id) {
         }
     }
     
-
-
     // for login
     // public function login_user($emailOrUsername, $password) {
     //     $stmt = $this->pdo->prepare("SELECT admin_id, email, username, password FROM admin WHERE email = :emailOrUsername OR 

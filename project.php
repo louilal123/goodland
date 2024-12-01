@@ -43,7 +43,7 @@
                                 <?php if ($index % 2 == 0): ?>
                                     <!-- Even projects: Image on the left, text on the right -->
                                     <div class="col-lg-6 order-1 d-flex flex-column justify-content-center">
-                                        <img src="<?php echo htmlspecialchars($project['project_image']); ?>" class="img-fluid" alt="Project Image">
+                                        <img src="<?php echo $project['project_image']; ?>" class="img-fluid" alt="Project Image">
                                     </div>
                                     <div class="col-lg-6 order-2 d-flex flex-column justify-content-center">
                                         <h1 data-aos="fade-up" style="font-weight: bold !important;">
@@ -55,14 +55,7 @@
                                         <p data-aos="fade-up" data-aos-delay="100">
                                             <?php echo htmlspecialchars($project['summary']); ?>
                                         </p>
-                                        <!-- YouTube Link -->
-                                        <?php if (!empty($project['youtube_link'])): ?>
-                                            <p data-aos="fade-up" data-aos-delay="150">
-                                                <a href="<?php echo htmlspecialchars($project['youtube_link']); ?>" target="_blank" class="btn btn-primary">
-                                                    Watch Video <i class="bi bi-youtube"></i>
-                                                </a>
-                                            </p>
-                                        <?php endif; ?>
+                                       
                                         <div class="d-flex flex-column flex-md-row" data-aos="fade-up" data-aos-delay="200">
                                             <span class="badge-secondary">
                                                 <a href="project_details.php?project_id=<?php echo encryptor('encrypt', $project['project_id']); ?>" class="btn custom-btn">
@@ -84,13 +77,7 @@
                                             <?php echo htmlspecialchars($project['summary']); ?>
                                         </p>
                                         <!-- YouTube Link -->
-                                        <?php if (!empty($project['youtube_link'])): ?>
-                                            <p data-aos="fade-up" data-aos-delay="150">
-                                                <a href="<?php echo htmlspecialchars($project['youtube_link']); ?>" target="_blank" class="btn btn-primary">
-                                                    Watch Video <i class="bi bi-youtube"></i>
-                                                </a>
-                                            </p>
-                                        <?php endif; ?>
+                                       
                                         <div class="d-flex flex-column flex-md-row" data-aos="fade-up" data-aos-delay="200">
                                             <span class="badge-secondary">
                                                 <a href="project_details.php?project_id=<?php echo encryptor('encrypt', $project['project_id']); ?>" class="btn custom-btn">

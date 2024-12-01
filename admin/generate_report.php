@@ -1,10 +1,15 @@
 <?php
-
 include '../classes/connection.php'; // Adjust the path as needed
 
-// Assuming the date range and database connection are properly set
-$dateFrom = $_POST['date_from'];
-$dateTo = $_POST['date_to'];
+// Fetch the date range from POST parameters
+$dateFrom = isset($_POST['date_from']) ? $_POST['date_from'] : null;
+$dateTo = isset($_POST['date_to']) ? $_POST['date_to'] : null;
+
+// Validate if both date parameters are provided
+if (!$dateFrom || !$dateTo) {
+    echo json_encode(['error' => 'Date range is required']);
+    exit;
+}
 
 // Query to fetch data for both kits (esawod_1 and esawod_2)
 $query = "

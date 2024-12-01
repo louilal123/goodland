@@ -105,12 +105,14 @@ if (isset($_GET['project_id'])) {
                         </div>
                         <hr>
 
-                        <?php if (!empty($project['youtube_link'])) { ?>
-                        <div class="video-wrapper">
-                            <?php echo ($project['youtube_link']); ?>
-                          
-                        </div>
-                       <?php } ?>
+                        <?php if (!empty($project['youtube_link'])): ?>
+                                            <p data-aos="fade-up" data-aos-delay="150">
+                                                <a href="<?php echo htmlspecialchars($project['youtube_link']); ?>" target="_blank" 
+                                                class="btn btn-danger">
+                                                    Watch Video <i class="bi bi-youtube"></i>
+                                                </a>
+                                            </p>
+                                        <?php endif; ?>
 
                     </div>
                 </section>

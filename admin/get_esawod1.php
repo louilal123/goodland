@@ -2,12 +2,13 @@
 
 include '../classes/connection.php'; // Adjust the path as needed
 
-// Check if date range is provided
-if (isset($_POST['date_from']) && isset($_POST['date_to'])) {
-    $dateFrom = $_POST['date_from'];
-    $dateTo = $_POST['date_to'];
+// Check if date range is provided in the URL
+if (isset($_GET['date_from']) && isset($_GET['date_to'])) {
+    $dateFrom = $_GET['date_from'];
+    $dateTo = $_GET['date_to'];
 
     try {
+        // Fetch chart data for esawod_1
         $query = "
             SELECT 
                 DAY(timestamp) AS day,
@@ -15,7 +16,7 @@ if (isset($_POST['date_from']) && isset($_POST['date_to'])) {
                 AVG(temperature) AS avg_temp,
                 AVG(humidity) AS avg_humidity
             FROM sensor_data
-            WHERE kit_name = 'esawod_2' AND DATE(timestamp) BETWEEN ? AND ?
+            WHERE kit_name = 'esawod_1' AND DATE(timestamp) BETWEEN ? AND ? 
             GROUP BY DAY(timestamp)
             ORDER BY day
         ";
