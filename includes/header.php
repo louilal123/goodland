@@ -5,9 +5,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
 
-  <!-- Favicons -->
-  <script  src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-     
+   
 
   <link href="uploads/image.png" rel="icon">
   <link href="uploads/image.png" rel="apple-touch-icon">
@@ -26,7 +24,7 @@
 
   <!-- Main CSS File -->
   <link rel="stylesheet" href="assets/css/custom.css">
-  <!-- <script  src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+  <script  src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
    
   <link href="assets/css/main.css" rel="stylesheet">
   
