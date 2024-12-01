@@ -72,24 +72,21 @@
   <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <!-- <script src="mdbfolder\mdb.umd.min.js"></script> -->
 
-  <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
 
   <?php if (isset($_SESSION['status']) && $_SESSION['status'] != ''): ?>
         <script>
             Swal.fire({
-                icon: "<?php echo $_SESSION['status_icon']; ?>", // e.g., 'warning', 'error', 'success'
+                icon: "<?php echo $_SESSION['status_icon']; ?>",
                 title: "<?php echo $_SESSION['status']; ?>",
                 color: '#0062cc',  
                 background: '#fff',
-                confirmButtonColor: "#0062cc",  // The message (like 'Account not activated')
+                confirmButtonColor: "#0062cc",  
                 confirmButtonText: "Ok"
             });
         </script>
         <?php
-        // Clear the session status after showing the message
         unset($_SESSION['status']);
         unset($_SESSION['status_icon']);
         ?>
