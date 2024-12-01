@@ -5,8 +5,6 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
 
-   
-
   <link href="uploads/image.png" rel="icon">
   <link href="uploads/image.png" rel="apple-touch-icon">
 

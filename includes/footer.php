@@ -62,38 +62,6 @@
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center" 
   style="background-color: #0062cc !important;"><i class="bi bi-arrow-up-short"></i></a>
 <!-- Cookie Banner -->
-<div id="cb-cookie-banner" class="alert alert-dark text-center mb-0 bg-dark text-white" role="alert" data-aos="fade-up">
-    🍪 We use cookies to ensure you get the best experience on our website.
-    <a href="#" data-bs-toggle="modal" data-bs-target="#cookieModal">Learn more</a>
-    <br><br>
-    <button type="button" class="btn btn-success btn-sm ms-3" onclick="window.cb_acceptAllCookies()">
-        Accept All
-    </button>
-    
-    <button type="button" class="btn btn-danger btn-sm ms-3" onclick="window.cb_declineCookies()">
-        Decline
-    </button>
-</div>
-
-<!-- Bootstrap Modal -->
-<div class="modal fade" id="cookieModal" tabindex="-1" aria-labelledby="cookieModalLabel" aria-hidden="true" data-aos="slide-up"data-aos-delay="100">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content bg-dark text-light">
-            <div class="modal-header text-light">
-                <h5 class="modal-title" id="cookieModalLabel">What are Cookies?</h5>
-                <button type="button" class="btn-close text-light" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Cookies are small text files stored on your browser. They help enhance user experience by remembering preferences, login information, and other settings.</p>
-                <p>Some cookies are essential for the website's functionality, while others help us analyze how visitors use the website.</p>
-                <p>By accepting cookies, you help us provide a more personalized and functional experience.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 
   <!-- Vendor JS Files -->
@@ -105,9 +73,6 @@
   <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <!-- <script src="mdbfolder\mdb.umd.min.js"></script> -->
 
   <!-- Main JS File -->
