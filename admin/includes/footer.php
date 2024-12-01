@@ -99,7 +99,7 @@
 
     </script>
 <!-- ajax codes  for viwing modals etc autopopulate-->
-<script src="dist\js\customajax.js"></script>
+
 
    <script>
   $(window).on('load', function() {

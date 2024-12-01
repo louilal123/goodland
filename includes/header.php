@@ -25,5 +25,3 @@
    
   <link href="assets/css/main.css" rel="stylesheet">
   
-  <!-- <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-  <!-- <link rel="stylesheet" href="assets/css/style.css"> -->

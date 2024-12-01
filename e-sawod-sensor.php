@@ -3,7 +3,6 @@
 
 <head>
   <?php include "includes/header.php"; ?>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
     <script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
     <script src="https://code.highcharts.com/stock/highstock.js"></script>
