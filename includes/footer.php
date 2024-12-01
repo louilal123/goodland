@@ -52,7 +52,7 @@
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 ">GOODLand Version 2</strong> <span>All Rights Reserved</span></p>
       <div class="credits">
-        Team <a href="https://bootstrapmade.com/">4SOUTH</a>
+        Team <a href="">4SOUTH</a>
       </div>
     </div>
 
@@ -62,7 +62,6 @@
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center" 
   style="background-color: #0062cc !important;"><i class="bi bi-arrow-up-short"></i></a>
 <!-- Cookie Banner -->
-
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -97,39 +96,7 @@
     <?php endif; ?>
 
 
-<script>
-  function showCookieBanner() {
-    let cookieBanner = document.getElementById("cb-cookie-banner");
-    cookieBanner.style.display = "block";
-    cookieBanner.classList.add("slide-in");
-   
-   
 
-}
-
-function hideCookieBanner(choice) {
-    localStorage.setItem("cb_isCookieAccepted", choice);
-    let cookieBanner = document.getElementById("cb-cookie-banner");
-    cookieBanner.style.display = "none";
-}
-
-function initializeCookieBanner() {
-    let isCookieAccepted = localStorage.getItem("cb_isCookieAccepted");
-    if (isCookieAccepted === null) {
-        localStorage.setItem("cb_isCookieAccepted", "no");
-        setTimeout(showCookieBanner, 2000);
-    }
-    if (isCookieAccepted === "no") {
-        setTimeout(showCookieBanner, 2000);
-    }
-}
-
-window.onload = initializeCookieBanner();
-window.cb_acceptAllCookies = () => hideCookieBanner("all");
-window.cb_acceptNecessaryCookies = () => hideCookieBanner("necessary");
-window.cb_declineCookies = () => hideCookieBanner("decline");
-
-</script>
 
 <!-- crud sweetalerts  this is included inside all the pages below uaing include-->
 <?php
