@@ -217,11 +217,8 @@
 
     </section>
 
-<!-- End of Cookie Banner -->
   <?php include "includes/footer.php"?>
 
-
-<!-- Modal frame bottom example-->
 
 </body>
 
