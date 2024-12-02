@@ -1,8 +1,8 @@
 <?php
 session_start();
-http_response_code(404); // Send a 404 status code
-include('../404.html'); // Load the 404 page
-exit();
+// http_response_code(404); 
+// include('../404.html'); 
+// exit();
 
 
 $error_message = $_SESSION['error_message'] ?? '';
@@ -53,7 +53,8 @@ unset($_SESSION['error_message']);
                             <strong>Welcome Back!</strong>
                         </h2>
                         <div class="card-body px-lg-5 pt-0 mt-2">
-                            <form style="color: #757575;" action="classes/login.php" method="post">
+                            <!-- <form style="color: #757575;" action="classes/login.php" method="post"> -->
+                            <form style="color: #757575;">
                                 <!-- Display inline error for required fields -->
                                 <?php if (!empty($error_message)): ?>
                                     <div class="alert bg-danger text-white" id="alert">
