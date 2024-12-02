@@ -92,7 +92,7 @@ unset($_SESSION['error_message']);
                                         <label class="form-check-label" for="showPasswordCheckbox">Show Password</label>
                                     </div>
                                    
-                                    <a href="forgot_password.php">Forgot password?</a>
+                                    <a href="forgot_password">Forgot password?</a>
                                 </div>
 
                                 <!-- Submit button -->
