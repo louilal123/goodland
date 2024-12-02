@@ -2,13 +2,15 @@
 session_start();
 
 if (!isset($_SESSION['otp_verified']) || !isset($_SESSION['email'])) {
-    http_response_code(404); // Set the 404 status code
-    include('../404.html'); // Include the 404 page content
-    exit(); exit;
+    http_response_code(404); 
+    include('../404.html'); 
+    exit;
 }
 
-$email = $_SESSION['email'];
+$email = $_SESSION['email']; 
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
