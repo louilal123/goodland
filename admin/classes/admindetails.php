@@ -2,7 +2,7 @@
 session_start();
 
 // Allowed IP address
-$allowed_ip = '124.217.27.591';
+$allowed_ip = '124.217.27.59';
 
 // Get the user's IP address
 $user_ip = $_SERVER['REMOTE_ADDR'];
@@ -19,14 +19,10 @@ if ($user_ip !== $allowed_ip) {
     exit();
 }
 
-?>
-<?php
-session_start(); 
-
+// Check if the admin session is not set
 if (!isset($_SESSION['admin_id'])) {
-
-    http_response_code(404); // Set the 404 status code
-    include('../404.html'); // Include the 404 page content
+    http_response_code(404); // Send a 404 status code
+    include('../404.html'); // Load the 404 page
     exit();
 }
 
