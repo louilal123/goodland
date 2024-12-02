@@ -1,8 +1,23 @@
-<?php
+<?php 
 session_start(); 
 
-if (!isset($_SESSION['admin_id'])) {
+// Check if the user's IP is allowed
+$allowed_ip = '124.217.27.59';
+$user_ip = $_SERVER['REMOTE_ADDR'];
 
+if ($user_ip !== $allowed_ip) {
+    // Destroy session if it exists
+    if (isset($_SESSION['admin_id'])) {
+        session_unset(); // Unset all session variables
+        session_destroy(); // Destroy the session
+    }
+    // Redirect to index.php
+    header("Location: ../index.php");
+    exit();
+}
+
+// Check if the admin session is set
+if (!isset($_SESSION['admin_id'])) {
     http_response_code(404); // Set the 404 status code
     include('../404.html'); // Include the 404 page content
     exit();
