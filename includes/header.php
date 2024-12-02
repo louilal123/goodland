@@ -12,11 +12,11 @@ if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on') {
 
 // Validate URL function
 function isValidUrl($url) {
-    return preg_match('/^https?:\/\/(www\.)?itinventorymanagement\.com/', $url);
+    return preg_match('/^https?:\/\/(www\.)?goodlandv2\.com/', $url);
 }
 
 // Example usage of the function
-$link = "https://itinventorymanagement.com";
+$link = "https://goodlandv2.com";
 if (isValidUrl($link)) {
     // Do something if URL is valid
 } else {
@@ -30,7 +30,7 @@ if (basename($_SERVER['PHP_SELF']) == 'header.php') {
 }
 
 // Add security headers
-header("Content-Security-Policy: default-src 'self'; script-src 'self' https://itinventorymanagement.com;");
+header("Content-Security-Policy: default-src 'self'; script-src 'self' https://goodlandv2.com;");
 header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
 header("X-Content-Type-Options: nosniff");
 header("X-Frame-Options: DENY");
