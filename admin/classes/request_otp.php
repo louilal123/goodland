@@ -7,7 +7,6 @@ $mainClass = new Main_class();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = trim($_POST['email']);
 
-    // Check if the email is empty
     if (empty($email)) {
         $_SESSION['status'] = "Please enter your email address.";
         $_SESSION['status_icon'] = "error";
@@ -21,16 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    // Check if email exists
     if (!$mainClass->emailExists($email)) {
         $_SESSION['status'] = "The email you provided isn't associated with any account.";
         $_SESSION['status_icon'] = "error";
         header("Location: ../forgot_password.php");
         exit;
     }
-
-    $_SESSION['email'] = $email;
-    $_SESSION['otp'] = $otp;
 
     $otp = $mainClass->initiatePasswordReset($email);
 

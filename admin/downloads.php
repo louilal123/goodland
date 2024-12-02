@@ -3,8 +3,6 @@
 <html lang="en"> 
 <?php include "includes/header.php"; ?>
 
-<!-- <link rel="stylesheet" href="dist/custom.css"> -->
-
 <body class="layout-fixed-complete sidebar-expand-lg sidebar-mini bg-body-tertiary">
 
     <div class="app-wrapper">
