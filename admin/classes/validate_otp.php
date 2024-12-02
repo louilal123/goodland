@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Check if the OTP matches and if it has expired
     if ($otpVerification['otp'] !== $otp) {
-        $_SESSION['status'] = "Invalid OTP. Please check your email: '$email'.";
+        $_SESSION['status'] = "Invalid OTP. Please check your email.";
         $_SESSION['status_icon'] = "error";
         header("Location: ../verify_user.php");
         exit;
