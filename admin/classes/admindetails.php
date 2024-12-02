@@ -44,7 +44,6 @@ $unread_notifications_count = $mainClass->get_unread_notifications_count();
 $projects = $mainClass->getAllProjects(); 
 $projectsCount = $mainClass->countAllProjects();
 
-// Fetch the pie chart data  pie chart library files
 $pieChartData = $mainClass->getStatusTypeData();
 
 
@@ -61,12 +60,10 @@ $visitorDailyData = $mainClass->getVisitorDailyData();
 $totalReturningVisitors = $mainClass->getTotalReturningVisitors();
 
 $settings = $mainClass->fetchSettings();
-$backups = $mainClass->fetchBackups();
 
 $loginLogs = $mainClass->get_login_logs_with_admin_info();
 
 $requests = $mainClass->getFileRequests();
-// $pending_request = $mainClass->getFileRequests();
 
 ?>
 

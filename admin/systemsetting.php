@@ -14,48 +14,7 @@
 
             <div class="app-content"> 
                 <div class="container-fluid"> 
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <div class="card">
-                                    <div class="card-header bg-light d-flex ">
-                                        <h3 class="fw-bold"><span class="fas fa-gear"></span> System Setting </h3>
-                                        <button type="button" class="btn btn-primary ms-auto me-1" data-bs-toggle="modal" data-bs-target="#backupModal">
-                                            <i class="fas fa-folder-plus"></i> Create Backup
-                                        </button>
-                                    </div>
-                                <div class="card-body">
-                               
-                                    <table id="myTable" class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>File Name</th>
-                                                <th>Backup Date</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php foreach ($backups as $backup): ?>
-                                            <tr>
-                                                <td><?= $backup['backup_id'] ?></td>
-                                                <td><?= $backup['file_name'] ?></td>
-                                                <td><?= $backup['backup_date'] ?></td>
-                                                <td>
-                                                    <a href="classes/<?= $backup['file_path'] ?>" download class="btn btn-primary btn-sm">Download</a>
-                                                    
-                                                    <a href="classes/delete_backup.php?id=<?= $backup['backup_id'] ?>" class="btn btn-danger btn-sm deleteBtn">Delete</a>
-
-                                                </td>
-                                            </tr>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                              
-                            </div>
-                        </div>
-                    </div>
+                   
                    
                     <div class="row mt-2">
     <div class="col-md-6">

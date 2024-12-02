@@ -48,80 +48,8 @@ public function updateSettings($address, $contact, $email, $facebook_url) {
     }
 }
 
-public function createBackup() {
-    // Define the backup directory where the SQL files will be stored
-    $backupDir = 'backups/';
-    if (!file_exists($backupDir)) {
-        mkdir($backupDir, 0777, true); // Create backup directory if it doesn't exist
-    }
-
-    // Get the current date and time to name the backup file
-    $date = date('Y-m-d_H-i-s');
-    $backupFileName = "database_backup_{$date}.sql";
-    $backupFile = $backupDir . $backupFileName; // Set the full path for the backup file
-
-    // Get database connection details
-    $dbname = DB_NAME;
-    $username = DB_USERNAME;
-    $password = DB_PASSWORD;
-    $host = DB_HOST;
-
-    // Create the command to dump the database
-    $command = "mysqldump --opt --user={$username} --password={$password} --host={$host} {$dbname} > {$backupFile}";
-
-    // Execute the backup command
-    exec($command);
-
-    // Check if the backup file was created successfully
-    if (file_exists($backupFile)) {
-        // Save the backup details into the database
-        $this->saveBackupDetails($backupFileName, $backupFile);
-    } else {
-        throw new Exception("Backup creation failed.");
-    }
-}
-
-// Method to save the backup details to the database
-private function saveBackupDetails($fileName, $filePath) {
-    $backupDate = date('Y-m-d H:i:s');
-
-    // Insert the backup details into the backups table
-    $stmt = $this->pdo->prepare("INSERT INTO backups (file_name, backup_date, file_path) VALUES (?, ?, ?)");
-    $stmt->execute([$fileName, $backupDate, $filePath]);
-}
-
-public function deleteBackup($backupId) {
-    // Retrieve the backup file path from the database
-    $stmt = $this->pdo->prepare("SELECT file_path FROM backups WHERE backup_id = ?");
-    $stmt->execute([$backupId]);
-    $backup = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($backup) {
-        // Delete the backup file from the backups folder
-        $backupFilePath = $backup['file_path'];
-        if (file_exists($backupFilePath)) {
-            unlink($backupFilePath); // Remove the file
-        }
-
-        // Delete the backup record from the database
-        $deleteStmt = $this->pdo->prepare("DELETE FROM backups WHERE backup_id = ?");
-        $deleteStmt->execute([$backupId]);
-
-        // Return true if the deletion is successful
-        return true;
-    } else {
-        // Return false if backup not found
-        return false;
-    }
-}
 
 
-
-public function fetchBackups() {
-    $sql = "SELECT * FROM backups ORDER BY backup_date DESC";
-    $stmt = $this->pdo->query($sql);
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
 
 
 public function update_event($event_id, $event_name, $description, $location, $photoPath, $start_date, $end_date, $organizer) {

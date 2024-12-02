@@ -46,7 +46,7 @@ $dateTo = isset($_GET['date_to']) ? $_GET['date_to'] : null;
  <section>
  <div class="card">
         <div class="card-body text-center">
-            <h4>GoodLand Philippines</h4>
+            <h4>GoodLand Association</h4>
             <h5>E-Sawod Data Report</h5>
             <p>Date From: <span id="modal-dateFrom"><?php echo $dateFrom; ?></span> - Date To: <span id="modal-dateTo"><?php echo $dateTo; ?></span></p>
            <section>
@@ -57,7 +57,7 @@ $dateTo = isset($_GET['date_to']) ? $_GET['date_to'] : null;
                 <div id="kit2"></div>
             </div>
            </section>
-     <?php      // Fetch date range from GET parameters
+     <?php     
 $dateFrom = isset($_GET['date_from']) ? $_GET['date_from'] : null;
 $dateTo = isset($_GET['date_to']) ? $_GET['date_to'] : null;
 ?>
@@ -86,7 +86,6 @@ $dateTo = isset($_GET['date_to']) ? $_GET['date_to'] : null;
                 </table>
             </div>
            </div>
-            <!-- Print Button -->
             <center>
                 <br><br>
                 <button class="print-button" id="printButton">Print Report</button>
