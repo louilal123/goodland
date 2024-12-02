@@ -4,6 +4,7 @@ require_once "Main_class.php";
 
 $mainClass = new Main_class();
 
+// Initialize login attempt and lockout time if not already set
 if (!isset($_SESSION['login_attempts'])) {
     $_SESSION['login_attempts'] = 0;
 }
@@ -15,22 +16,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = trim($_POST['email']);
     $password = $_POST['password'];
 
+    // Check if the user has exceeded the maximum login attempts (3 attempts)
     if ($_SESSION['login_attempts'] >= 3) {
         $current_time = time();
         $lockout_time = $_SESSION['lockout_time'];
 
-        if ($lockout_time && ($current_time - $lockout_time) < 180) {
+        // If locked out, check the time remaining before they can try again
+        if ($lockout_time && ($current_time - $lockout_time) < 180) { // 3 minutes lockout
             $remaining_time = 180 - ($current_time - $lockout_time);
             $_SESSION['status'] = "Too many failed login attempts. Please try again in $remaining_time seconds.";
             $_SESSION['status_icon'] = "error";
             header("Location: ../");
             exit;
         } else {
+            // Reset attempts and lockout time after 3 minutes
             $_SESSION['login_attempts'] = 0;
             $_SESSION['lockout_time'] = null;
         }
     }
 
+    // Validate the email and password fields
     if (empty($email) || empty($password)) {
         $_SESSION['status'] = "Please fill out both fields.";
         $_SESSION['status_icon'] = "error";
@@ -38,20 +43,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
+    // Attempt login
     $otp = $mainClass->login_user($email, $password);  
 
     if ($otp) {
+        // Reset login attempts after successful login
         $_SESSION['login_attempts'] = 0;
         $_SESSION['lockout_time'] = null;
 
-        session_regenerate_id(true);
+        session_regenerate_id(true);  // Regenerate session ID for security
 
-        $_SESSION['session_token'] = bin2hex(random_bytes(32)); 
-        $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];  
-        $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];  
-        $_SESSION['email'] = $email;  
-        $_SESSION['admin_id'] = $admin_id; 
+        // Store session data
+        $_SESSION['session_token'] = bin2hex(random_bytes(32)); // Generate unique session token
+        $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];  // Store user's IP
+        $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];  // Store user agent
+        $_SESSION['email'] = $email;  // Store email for further checks
+        $_SESSION['admin_id'] = $admin_id;  // If available, store the admin ID
 
+        // Send OTP to user's email
         $user_ip = $_SESSION['ip_address'];
         $user_agent = $_SESSION['user_agent'];
 
@@ -85,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         try {
             $mail->send();
-            header("Location: ../verify_signin.php"); 
+            header("Location: ../verify_signin.php");  // Redirect to OTP verification page
             exit;
         } catch (Exception $e) {
             $_SESSION['status1'] = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
@@ -94,8 +103,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit;
         }
     } else {
+        // Increment login attempts after a failed login
         $_SESSION['login_attempts']++;
 
+        // If 3 failed attempts, lock out the user
         if ($_SESSION['login_attempts'] >= 3) {
             $_SESSION['lockout_time'] = time();
             $_SESSION['status'] = "Too many failed login attempts. Please try again in 3 minutes.";
