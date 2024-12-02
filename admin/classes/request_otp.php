@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $_SESSION['email'] = $email;
+    $_SESSION['otp'] = $otp;
 
     $otp = $mainClass->initiatePasswordReset($email);
 
