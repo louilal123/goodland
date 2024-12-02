@@ -1,9 +1,9 @@
 {
     "platform": {
-        "php": "8.3.11"
+        "php": "8.2.0"
     },
     "require": {
-          "php": "8.3.11",
+        "php": ">=8.2.0",
         "phpmailer/phpmailer": "^6.9"
     }
 }
