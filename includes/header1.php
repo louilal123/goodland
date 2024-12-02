@@ -25,7 +25,7 @@ if (!isValidUrl($link)) {
 }
 
 // Prevent direct access to the header.php file
-if (basename($_SERVER['PHP_SELF']) === 'header.php') {
+if (basename($_SERVER['PHP_SELF']) === 'header1.php') {
     header("HTTP/1.1 403 Forbidden");
     exit("Access denied.");
 }
