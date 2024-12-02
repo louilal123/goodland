@@ -1,29 +1,24 @@
 <?php
-// Security measures in PHP
+
 ini_set('session.cookie_httponly', 1);
 ini_set('session.cookie_secure', 1); 
 ini_set('session.use_strict_mode', 1);
 
-// Force HTTPS
 if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on') {
     header("Location: https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
     exit();
 }
 
-// Validate URL function
 function isValidUrl($url) {
     return preg_match('/^https?:\/\/(www\.)?goodlandv2\.com/', $url);
 }
 
-// Example usage of the function
 $link = "https://goodlandv2.com";
 if (isValidUrl($link)) {
-    // Do something if URL is valid
 } else {
     echo "Invalid URL.";
 }
 
-// Prevent access to the header.php file directly
 if (basename($_SERVER['PHP_SELF']) == 'header.php') {
     header("HTTP/1.1 403 Forbidden");
     exit("Access denied.");
