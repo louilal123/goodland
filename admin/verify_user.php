@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+// Check if the necessary session information exists, otherwise redirect to forgot password page
+if (!isset($_SESSION['email']) || !isset($_SESSION['otp'])) {
+    // Redirect to forgot password page if email or otp is missing
+    header("Location: forgotpassword.php"); // Change this to the correct forgot password page
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,11 +25,11 @@ session_start();
         overflow: hidden !important;
     }
     .main-blur {
-    background: rgba(108, 117, 125, 0.5); 
-}
-.card{
-    border-radius: 0px;
-}
+        background: rgba(108, 117, 125, 0.5); 
+    }
+    .card{
+        border-radius: 0px;
+    }
 </style>
 <body class="bg-light main-blur">
     <section class="vh-100 bg-light">
@@ -35,20 +42,17 @@ session_start();
                         </div>
                         <h2 class="info-color text-success text-center py-4">
                             <strong>Verify Your Email</strong>
-                            
                         </h2>
-                        <p class="text-dark text-center  mb-4">Weve sent a 6-digit OTP to your email.</p>
+                        <p class="text-dark text-center mb-4">We have sent a 6-digit OTP to your email.</p>
                         <div class="card-body px-lg-5 pt-0 mt-2">
-                        <form action="classes/validate_otp.php" method="POST">
-    <div data-mdb-input-init class="form-outline mb-4">
-        <i class="fas fa-lock trailing"></i>
-        <input type="text" name="otp" class="form-control form-control-lg form-icon-trailing" />
-        <label class="form-label" for="materialLoginFormOtp">Enter OTP</label>
-    </div>
-    <button type="submit" class="btn btn-primary btn-lg btn-block mb-4">Verify OTP</button>
-</form>
-
-
+                            <form action="classes/validate_otp.php" method="POST">
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <i class="fas fa-lock trailing"></i>
+                                    <input type="text" name="otp" class="form-control form-control-lg form-icon-trailing" />
+                                    <label class="form-label" for="materialLoginFormOtp">Enter OTP</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block mb-4">Verify OTP</button>
+                            </form>
                             <div class="d-flex justify-content-around align-items-center mt-4">
                                 <a href="index">Return</a>
                             </div>
@@ -76,23 +80,5 @@ session_start();
     <?php endif; ?>
 
     <script type="text/javascript" src="mdbfolder/mdb.umd.min.js"></script>
-  
-      
-<!-- <script
-    disable-devtool-auto
-    src='https://cdn.jsdelivr.net/npm/disable-devtool'
-    md5='xxx'
-    url='xxx'
-    tk-name='xxx'
-    interval='xxx'
-    disable-menu='xxx'
-    detectors='xxx'
-    clear-log='true'
-    disable-select='true'
-    disable-copy='true'
-    disable-cut='true'
-    disable-paste='true'
-></script> -->
-
 </body>
 </html>
