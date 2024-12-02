@@ -1,6 +1,10 @@
 
 <?php
 session_start();
+http_response_code(404); // Send a 404 status code
+include('404.html'); // Load the 404 page
+exit();
+
 
 $error_message = $_SESSION['error_message'] ?? '';
 unset($_SESSION['error_message']);
