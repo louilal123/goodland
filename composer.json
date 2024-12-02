@@ -3,7 +3,7 @@
         "php": "8.3.11"
     },
     "require": {
-        "php": ">=8.2.0",
+          "php": "8.3.11",
         "phpmailer/phpmailer": "^6.9"
     }
 }
