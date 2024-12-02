@@ -8,6 +8,7 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['otp'])) {
     exit();
 }
 ?>
+<?php include "header.php"?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -1,9 +1,11 @@
+
 <?php
 session_start();
 
 $error_message = $_SESSION['error_message'] ?? '';
 unset($_SESSION['error_message']);
 ?>
+<?php include "header.php"?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
