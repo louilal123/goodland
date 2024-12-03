@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['email']) || !isset($_SESSION['otp'])) {
+if (!isset($_SESSION['email'])) {
     http_response_code(404);
     include('../404.html'); 
     exit(); 
