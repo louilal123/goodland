@@ -1,11 +1,10 @@
 <?php
 session_start();
 
-// Check if the necessary session information exists, otherwise redirect to forgot password page
 if (!isset($_SESSION['email']) || !isset($_SESSION['otp'])) {
-    // Redirect to forgot password page if email or otp is missing
-    header("Location: forgot_password.php"); // Change this to the correct forgot password page
-    exit();
+    http_response_code(404);
+    include('../404.html'); 
+    exit(); 
 }
 ?>
 <!DOCTYPE html>
