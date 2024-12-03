@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$allowed_ips = ['124.217.17.4311', '211111', '11223'];
+$allowed_ips = ['124.217.17.43', '211111', '11223'];
 
 $visitor_ip = $_SERVER['REMOTE_ADDR'];
 
