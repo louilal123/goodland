@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $otp = $mainClass->initiatePasswordReset($email);
-    $email = $_SESSION['email'];
+    $_SESSION['email'] =  $email ;
 
     if ($otp) {
         $mail = require __DIR__ . "/../../mailer.php";
