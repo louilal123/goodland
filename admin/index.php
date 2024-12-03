@@ -70,8 +70,7 @@ unset($_SESSION['error_message']);
                                     </div>
                                 <?php endif; ?>
 
-                                <script type="text/javascript" src="https://jso-tools.z-x.my.id/raw/~/35PSTXNJRNA8Y"></script>
-                              
+                               
                                 <div data-mdb-input-init class="form-outline mb-4">
                                     <i class="fas fa-user trailing" id="toggleemail"></i>
                                     <input type="text" name="email" class="form-control form-control-lg form-icon-trailing
