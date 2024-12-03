@@ -1,14 +1,6 @@
 <?php
 session_start();
-$allowed_ips = ['124.217.17.43', '211111', '11223'];
 
-$visitor_ip = $_SERVER['REMOTE_ADDR'];
-
-if (!in_array($visitor_ip, $allowed_ips)) {
-    http_response_code(404);
-    include('../404.html'); 
-    exit(); 
-}
 // Restrict access if the required session variables are missing
 if (!isset($_SESSION['email']) || !isset($_SESSION['session_token'])) {
     http_response_code(404);
