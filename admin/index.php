@@ -107,9 +107,13 @@ unset($_SESSION['error_message']);
 
                                 <div class="d-flex justify-content-around align-items-center mb-4">
 <div class="form-outline">
-<div class="g-recaptcha" data-sitekey="6Lcx85EqAAAAAJOZNdnDwc7oBsBjLXUFEcsULDRT"></div>
-      <br/>
-      <input type="submit" value="Submit">
+<div class="d-flex justify-content-around align-items-center mb-4">
+    <div class="form-outline">
+        <!-- Google reCAPTCHA widget -->
+        <div class="g-recaptcha" data-sitekey="6Lcx85EqAAAAAJOZNdnDwc7oBsBjLXUFEcsULDRT"></div>
+    </div>
+</div>
+
       </div>
                                 </div>
 
@@ -141,9 +145,18 @@ unset($_SESSION['error_message']);
         unset($_SESSION['status_icon']);
         ?>
     <?php endif; ?>
-    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-        async defer>
-    </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+        var recaptchaResponse = grecaptcha.getResponse();
+
+        if (recaptchaResponse.length === 0) {
+            e.preventDefault(); // Stop the form from submitting
+            alert('Please complete the reCAPTCHA to proceed.');
+        }
+    });
+</script>
+
     <script type="text/javascript" src="mdbfolder/mdb.umd.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
