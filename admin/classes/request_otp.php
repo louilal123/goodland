@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $mail->send();
                 $_SESSION['status1'] = "Password reset link has been sent to your email.";
                 $_SESSION['status_icon1'] = "success";
-                header("Location: ../verify_user.php");
+                header("Location: ../verify_user_link.php");
                 exit;
             } catch (Exception $e) {
                 $_SESSION['status1'] = "Mailer Error: {$mail->ErrorInfo}";
