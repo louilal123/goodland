@@ -146,33 +146,22 @@ unset($_SESSION['error_message']);
     <?php endif; ?>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-<script>
-    function enableSubmitButton() {
-        // Check if reCAPTCHA response is filled
-        if (grecaptcha.getResponse()) {
-            document.getElementById('submitButton').disabled = false;
-        } else {
-            document.getElementById('submitButton').disabled = true;
+    <script>
+        function enableSubmitButton() {
+            if (grecaptcha.getResponse()) {
+                document.getElementById('submitButton').disabled = false;
+            } else {
+                document.getElementById('submitButton').disabled = true;
+            }
         }
-    }
 
-    // Ensure form submission is blocked if reCAPTCHA is not solved
-    document.getElementById('loginForm').addEventListener('submit', function (e) {
-        if (!grecaptcha.getResponse()) {
-            e.preventDefault(); // Prevent form submission
-            alert("Please complete the reCAPTCHA.");
-        }
-    });
-
-    // This will run once the page loads and the reCAPTCHA is initialized
-    window.onload = function() {
-        // Initialize reCAPTCHA
-        grecaptcha.render(document.querySelector('.g-recaptcha'), {
-            sitekey: '6LeC9ZEqAAAAAAFFPtw_LOYMSqGUQqbyZpivSZwm',
-            callback: enableSubmitButton, // This is called once the reCAPTCHA is solved
-        });
-    };
-</script>
+        window.onload = function() {
+            grecaptcha.render(document.querySelector('.g-recaptcha'), {
+                sitekey: '6LeC9ZEqAAAAAAFFPtw_LOYMSqGUQqbyZpivSZwm',
+                callback: enableSubmitButton,
+            });
+        };
+    </script>
 
     <script type="text/javascript" src="mdbfolder/mdb.umd.min.js"></script>
     <script>
