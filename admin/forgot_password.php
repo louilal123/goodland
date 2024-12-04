@@ -53,9 +53,9 @@ unset($_SESSION['error_message']);
                                    
                                 </div>
                     
-    <button type="submit" name="send_otp" class="btn btn-primary btn-lg btn-block mb-4">Send Link Reset</button>
+    <button type="submit" name="send_otp" class="btn btn-success btn-lg btn-block mb-4">Send Otp</button>
     
-    <button type="submit" name="send_link" class="btn btn-primary btn-lg btn-block mb-4">Send Otp</button>
+    <button type="submit" name="send_link" class="btn btn-secondary btn-lg btn-block mb-4">Send Link Reset</button>
 
                                 </form>
                             <div class="d-flex justify-content-around align-items-center mt-4">

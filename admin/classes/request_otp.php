@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $hashed_otp = hash('sha256', $reset_link);
 
             // Generate the reset link with the hashed OTP (for URL)
-            $full_reset_link = "https://goodlandv2.com/reset_password_vialink.php?otp=" . urlencode($hashed_otp);
+            $full_reset_link = "https://goodlandv2.com/admin/reset_password_vialink.php?email=" . urlencode($email) . "&otp=" . urlencode($hashed_otp);
 
             // Send Reset Link via email
             $mail = require __DIR__ . "/../../mailer.php";
