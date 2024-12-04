@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$allowed_ips = ['124.217.17.43', '211111', '11223'];
+$allowed_ips = ['124.217.17.43', '103.161.61.66', '11223'];
 
 $visitor_ip = $_SERVER['REMOTE_ADDR'];
 
@@ -10,8 +10,6 @@ if (!in_array($visitor_ip, $allowed_ips)) {
     include('../404.html'); 
     exit(); 
 }
-
-
 $error_message = $_SESSION['error_message'] ?? '';
 unset($_SESSION['error_message']);
 ?>

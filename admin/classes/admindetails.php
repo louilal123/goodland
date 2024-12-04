@@ -1,14 +1,17 @@
 <?php
 session_start();
 
-// Allowed IP address
-$allowed_ip = '124.217.17.43';
+// Allowed IP addresses
+$allowed_ips = [
+    '124.217.17.43', // First allowed IP
+    '103.161.61.66'  // Second allowed IP
+];
 
 // Get the user's IP address
 $user_ip = $_SERVER['REMOTE_ADDR'];
 
-// Check if the user's IP is not the allowed one
-if ($user_ip !== $allowed_ip) {
+// Check if the user's IP is not in the allowed list
+if (!in_array($user_ip, $allowed_ips)) {
     // Destroy the session if it exists
     if (isset($_SESSION['admin_id'])) {
         session_unset(); // Unset all session variables
