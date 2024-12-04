@@ -1,18 +1,6 @@
 <?php
 session_start();
 
-// Restrict access if the required session variables are missing
-if (!isset($_SESSION['email']) || !isset($_SESSION['session_token'])) {
-    http_response_code(404);
-    include('../404.html'); // Your custom 404 error page
-    exit;
-}
-if ($_SESSION['ip_address'] !== $_SERVER['REMOTE_ADDR'] || 
-    $_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT']) {
-    http_response_code(404);
-    include('../404.html');
-    exit;
-}
 ?>
 
 <!DOCTYPE html>

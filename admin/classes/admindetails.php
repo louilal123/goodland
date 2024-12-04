@@ -1,22 +1,6 @@
 <?php
 session_start();
 
-$allowed_ips = ['124.217.17.43', '103.161.61.66', '11223'];
-// Get the user's IP address
-$user_ip = $_SERVER['REMOTE_ADDR'];
-
-// Check if the user's IP is not in the allowed list
-if (!in_array($user_ip, $allowed_ips)) {
-    // Destroy the session if it exists
-    if (isset($_SESSION['admin_id'])) {
-        session_unset(); // Unset all session variables
-        session_destroy(); // Destroy the session
-    }
-    // Redirect to index.php
-    header("Location: ../index.php");
-    exit();
-}
-
 // Check if the admin session is not set
 if (!isset($_SESSION['admin_id'])) {
     http_response_code(404); // Send a 404 status code
