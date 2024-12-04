@@ -6,6 +6,7 @@ $mainClass = new Main_class();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = trim($_POST['email']);
+    $reset_option = $_POST['reset_option']; // Get the reset option (otp or link)
 
     if (empty($email)) {
         $_SESSION['status'] = "Please enter your email address.";
@@ -27,49 +28,68 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    $otp = $mainClass->initiatePasswordReset($email);
-    $_SESSION['email'] =  $email ;
-
-    if ($otp) {
+    if ($reset_option == 'otp') {
+        $otp = $mainClass->initiatePasswordReset($email, 'otp');
+        
+        // Send OTP via email
         $mail = require __DIR__ . "/../../mailer.php";
         $mail->setFrom("rubinlouie41@gmail.com", "GOODLAND.PH");
         $mail->addAddress($email);
         $mail->Subject = "Password Reset OTP";
-        $mail->Body = 
-        "
-         <html>
-        <body style='font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;'>
-            <div style='max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);'>
-                <h2 style='color: #0062cc; text-align: center;'>Password Reset Request</h2>
-                <p style='font-size: 16px; color: #333;'>Hello,</p>
-                <p style='font-size: 16px; color: #333;'>We received a request to reset your password. To complete the process, please use the following OTP (One-Time Password) to reset your password:</p>
-                <p style='font-size: 18px; color: #333; font-weight: bold; text-align: center; padding: 10px; background-color: #e0f7fa; border-radius: 4px;'>
-                    <strong>$otp</strong>
-                </p>
-                <p style='font-size: 16px; color: #333;'>This OTP is valid for 24 hours. </p>
-                <p style='font-size: 16px; color: #333;'>If you need further assistance, feel free to contact via this email.</p>
-                <p style='font-size: 16px; color: #333;'>Best regards, <br> The GOODLAND.PH Team</p>
-                
-            </div>
-        </body>
-    </html>
+        $mail->Body = "
+        <html>
+            <body style='font-family: Arial, sans-serif;'>
+                <h2>Password Reset Request</h2>
+                <p>We received a request to reset your password. Please use the following OTP:</p>
+                <p><strong>$otp</strong></p>
+                <p>This OTP is valid for 24 hours.</p>
+            </body>
+        </html>
         ";
 
         try {
             $mail->send();
-            $_SESSION['status1'] = "We've sent an OTP to your email.";
+            $_SESSION['status1'] = "OTP has been sent to your email.";
             $_SESSION['status_icon1'] = "success";
             header("Location: ../verify_user.php");
             exit;
         } catch (Exception $e) {
-            $_SESSION['status1'] = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            $_SESSION['status1'] = "Mailer Error: {$mail->ErrorInfo}";
             $_SESSION['status_icon1'] = "error";
+            header("Location: ../forgot_password.php");
+            exit;
         }
-    } else {
-        $_SESSION['status'] = "Failed to generate OTP. Please try again.";
-        $_SESSION['status_icon'] = "error";
-        header("Location: ../forgot_password.php");
-        exit;
+    } elseif ($reset_option == 'link') {
+        $reset_link = $mainClass->initiatePasswordReset($email, 'link');
+        
+        // Send Reset Link via email
+        $mail = require __DIR__ . "/../../mailer.php";
+        $mail->setFrom("rubinlouie41@gmail.com", "GOODLAND.PH");
+        $mail->addAddress($email);
+        $mail->Subject = "Password Reset Link";
+        $mail->Body = "
+        <html>
+            <body style='font-family: Arial, sans-serif;'>
+                <h2>Password Reset Request</h2>
+                <p>We received a request to reset your password. To reset your password, please click the following link:</p>
+                <p><a href='$reset_link'>Reset Password</a></p>
+                <p>This link is valid for 24 hours.</p>
+            </body>
+        </html>
+        ";
+
+        try {
+            $mail->send();
+            $_SESSION['status1'] = "Password reset link has been sent to your email.";
+            $_SESSION['status_icon1'] = "success";
+            header("Location: ../verify_user.php");
+            exit;
+        } catch (Exception $e) {
+            $_SESSION['status1'] = "Mailer Error: {$mail->ErrorInfo}";
+            $_SESSION['status_icon1'] = "error";
+            header("Location: ../forgot_password.php");
+            exit;
+        }
     }
 }
 ?>
