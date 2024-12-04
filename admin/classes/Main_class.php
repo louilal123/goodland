@@ -561,6 +561,27 @@ public function getUserPhoneAndAdminByEmail($email) {
         return false;
     }
     
+
+    public function verifyOtpByHash($otpHash) {
+        // Prepare SQL to match hashed OTP and check expiration
+        $stmt = $this->pdo->prepare("
+            SELECT admin.email 
+            FROM password_resets
+            JOIN admin ON password_resets.admin_id = admin.admin_id
+            WHERE password_resets.otp_hash = :otp_hash AND password_resets.expires_at > NOW()
+            ORDER BY password_resets.date_created DESC
+            LIMIT 1
+        ");
+        $stmt->execute(['otp_hash' => $otpHash]);
+    
+        // Fetch the result
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        // Return the email if the OTP hash matches and is not expired
+        return $result ? $result['email'] : false;
+    }
+    
+
     public function resetPassword($email, $new_password) {
         $hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
         
