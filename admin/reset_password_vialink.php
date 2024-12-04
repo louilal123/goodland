@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (!$email || !$otp) {
         $_SESSION['status'] = "Invalid or missing link parameters.";
         $_SESSION['status_icon'] = "error";
-        header("Location: ../forgot_password.php");
+        header("Location: forgot_password.php");
         exit;
     }
 
@@ -22,12 +22,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if ($otpData) {
         // OTP is valid, redirect to reset password form
         $_SESSION['email'] = $email; // Pass email to the reset password process
-        header("Location: ../reset_password.php");
+        header("Location: reset_password.php");
         exit;
     } else {
         $_SESSION['status'] = "Invalid OTP or email.";
         $_SESSION['status_icon'] = "error";
-        header("Location: ../forgot_password.php");
+        header("Location: forgot_password.php");
         exit;
     }
 }
