@@ -1,9 +1,5 @@
 <?php
 session_start();
-
-// $allowed_ips = ['124.217.17.43', '103.161.61.66', '11223'];
-
-
 $error_message = $_SESSION['error_message'] ?? '';
 unset($_SESSION['error_message']);
 ?>
