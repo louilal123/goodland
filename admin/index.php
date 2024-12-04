@@ -106,16 +106,15 @@ unset($_SESSION['error_message']);
                                 </div>
 
                                 <div class="d-flex justify-content-around align-items-center mb-4">
-                                    <div class="form-outline">
-                                            <div class="d-flex justify-content-around align-items-center mb-4">
-                                                <div class="form-outline">
-                                                    <!-- Google reCAPTCHA widget -->
-                                                    <div class="g-recaptcha" data-sitekey="6LeC9ZEqAAAAAAFFPtw_LOYMSqGUQqbyZpivSZwm"></div>
-                                                </div>
-                                            </div>
-
-                                    </div>
-                                </div>
+        <div class="form-outline">
+            <div class="d-flex justify-content-around align-items-center mb-4">
+                <div class="form-outline">
+                    <!-- Google reCAPTCHA widget -->
+                    <div class="g-recaptcha" data-sitekey="6LeC9ZEqAAAAAAFFPtw_LOYMSqGUQqbyZpivSZwm"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
                                 <!-- Submit button -->
                                 <button type="submit" id="submitButton" class="btn btn-primary btn-lg btn-block mb-4">Sign in</button>
@@ -145,15 +144,11 @@ unset($_SESSION['error_message']);
         unset($_SESSION['status_icon']);
         ?>
     <?php endif; ?>
-
-
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-   
-<script>
-    // Wait for the reCAPTCHA widget to load
-    var recaptchaLoaded = false;
 
+<script>
     function enableSubmitButton() {
+        // Check if reCAPTCHA response is filled
         if (grecaptcha.getResponse()) {
             document.getElementById('submitButton').disabled = false;
         } else {
@@ -169,12 +164,14 @@ unset($_SESSION['error_message']);
         }
     });
 
-    // Check if reCAPTCHA is solved on change
-    var recaptchaElement = document.querySelector('.g-recaptcha');
-    grecaptcha.render(recaptchaElement, {
-        sitekey: '6LeC9ZEqAAAAAAFFPtw_LOYMSqGUQqbyZpivSZwm',
-        callback: enableSubmitButton,
-    });
+    // This will run once the page loads and the reCAPTCHA is initialized
+    window.onload = function() {
+        // Initialize reCAPTCHA
+        grecaptcha.render(document.querySelector('.g-recaptcha'), {
+            sitekey: '6LeC9ZEqAAAAAAFFPtw_LOYMSqGUQqbyZpivSZwm',
+            callback: enableSubmitButton, // This is called once the reCAPTCHA is solved
+        });
+    };
 </script>
 
     <script type="text/javascript" src="mdbfolder/mdb.umd.min.js"></script>
