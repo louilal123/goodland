@@ -81,7 +81,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];  // Store user's IP
         $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];  // Store user agent
         $_SESSION['email'] = $email;  // Store email for further checks
-       // $_SESSION['admin_id'] = $admin_id;  // If available, store the admin ID
 
         // Send OTP to user's email
         $user_ip = $_SESSION['ip_address'];
