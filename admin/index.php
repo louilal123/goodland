@@ -24,8 +24,8 @@ unset($_SESSION['error_message']);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet" href="mdbfolder/mdb.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert -->
-    <script src="https://www.google.com/recaptcha/api.js"></script>
-    <link rel="stylesheet" href="../mdbfolder/mdb.min.css" />
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+   
 </head>
 <style>
     body {
