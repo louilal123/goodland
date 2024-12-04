@@ -107,11 +107,9 @@ unset($_SESSION['error_message']);
 
                                 <div class="d-flex justify-content-around align-items-center mb-4">
 <div class="form-outline">
-<button class="g-recaptcha" 
-        data-sitekey="6Lcx85EqAAAAAJOZNdnDwc7oBsBjLXUFEcsULDRT" 
-        data-callback='onSubmit' 
-        data-action='submit'>Submit</button>
-</div>
+<div class="g-recaptcha" data-sitekey="6Lcx85EqAAAAAJOZNdnDwc7oBsBjLXUFEcsULDRT"></div>
+      <br/>
+      <input type="submit" value="Submit">
                                 </div>
 
                                 <!-- Submit button -->
