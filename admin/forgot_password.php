@@ -16,7 +16,6 @@ unset($_SESSION['error_message']);
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="../mdbfolder/mdb.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
 <style>
     body {
@@ -55,11 +54,12 @@ unset($_SESSION['error_message']);
                                 </div>
                                 <div data-mdb-input-init class="form-outline mb-4">
         <label class="form-label" for="reset_option">Choose a reset option:</label>
-        <select data-mdb-select-init class="form-control form-control-lg" name="reset_option" id="reset_option">
+        <select data-mdb-input-init class="form-control form-control-lg" name="reset_option" id="reset_option">
             <option value="otp">Send OTP</option>
             <option value="link">Send Reset Link</option>
         </select>
     </div>
+    <button type="submit" class="btn btn-primary btn-lg btn-block mb-4">Send Reset Option</button>
                                 </form>
                             <div class="d-flex justify-content-around align-items-center mt-4">
                                 <a href="index">Return</a>
