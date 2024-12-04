@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "Main_class.php";
+require_once "classes/Main_class.php";
 
 $mainClass = new Main_class();
 
