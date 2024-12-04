@@ -1,15 +1,15 @@
 <?php
 session_start();
 
-$allowed_ips = ['124.217.17.43', '103.161.61.66', '103.161.61.64', '122.54.73.139', '111'];
+// $allowed_ips = ['124.217.17.43', '103.161.61.66', '103.161.61.64', '122.54.73.139', '111'];
 
-$visitor_ip = $_SERVER['REMOTE_ADDR'];
+// $visitor_ip = $_SERVER['REMOTE_ADDR'];
 
-if (!in_array($visitor_ip, $allowed_ips)) {
-    http_response_code(404);
-    include('../404.html'); 
-    exit(); 
-}
+// if (!in_array($visitor_ip, $allowed_ips)) {
+//     http_response_code(404);
+//     include('../404.html'); 
+//     exit(); 
+// }
 
 $error_message = $_SESSION['error_message'] ?? '';
 unset($_SESSION['error_message']);
