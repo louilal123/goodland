@@ -106,15 +106,15 @@ unset($_SESSION['error_message']);
                                 </div>
 
                                 <div class="d-flex justify-content-around align-items-center mb-4">
-        <div class="form-outline">
-            <div class="d-flex justify-content-around align-items-center mb-4">
-                <div class="form-outline">
-                    <!-- Google reCAPTCHA widget -->
-                    <div class="g-recaptcha" data-sitekey="6LeC9ZEqAAAAAAFFPtw_LOYMSqGUQqbyZpivSZwm"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+                                    <div class="form-outline">
+                                        <div class="d-flex justify-content-around align-items-center mb-4">
+                                            <div class="form-outline">
+                                                <!-- Google reCAPTCHA widget -->
+                                                <div class="g-recaptcha" data-sitekey="6LeC9ZEqAAAAAAFFPtw_LOYMSqGUQqbyZpivSZwm" data-callback="enablesubmitbutton"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <!-- Submit button -->
                                 <button type="submit" id="submitButton" class="btn btn-primary btn-lg btn-block mb-4">Sign in</button>

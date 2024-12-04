@@ -15,6 +15,7 @@ if (!isset($_SESSION['lockout_time'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = trim($_POST['email']);
     $password = $_POST['password'];
+    $recaptcha_response = $_POST['g-recaptcha-response']; // Get the reCAPTCHA response
 
     // Check if the user has exceeded the maximum login attempts (3 attempts)
     if ($_SESSION['login_attempts'] >= 3) {
@@ -35,9 +36,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // Validate the email and password fields
+    // Validate the email, password, and reCAPTCHA
     if (empty($email) || empty($password)) {
         $_SESSION['status'] = "Please fill out both fields.";
+        $_SESSION['status_icon'] = "error";
+        header("Location: ../");
+        exit;
+    }
+
+    // Validate reCAPTCHA
+    if (empty($recaptcha_response)) {
+        $_SESSION['status'] = "Please complete the reCAPTCHA to continue.";
+        $_SESSION['status_icon'] = "error";
+        header("Location: ../");
+        exit;
+    }
+
+    // Verify reCAPTCHA response with Google
+    $recaptcha_secret = '6LeC9ZEqAAAAAAFFPtw_LOYMSqGUQqbyZpivSZwm'; // Your secret key
+    $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+    $response = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+    $responseKeys = json_decode($response, true);
+
+    // Check if reCAPTCHA verification was successful
+    if (intval($responseKeys['success']) !== 1) {
+        $_SESSION['status'] = "reCAPTCHA verification failed. Please try again.";
         $_SESSION['status_icon'] = "error";
         header("Location: ../");
         exit;
