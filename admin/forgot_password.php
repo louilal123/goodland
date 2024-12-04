@@ -52,14 +52,11 @@ unset($_SESSION['error_message']);
                                     <label class="form-label" for="materialLoginFormEmailOrUsername">Email</label>
                                    
                                 </div>
-                                <div data-mdb-input-init class="form-outline mb-4">
-        <label class="form-label" for="reset_option">Choose a reset option:</label>
-        <select data-mdb-input-init class="form-control form-control-lg" name="reset_option" id="reset_option">
-            <option value="otp">Send OTP</option>
-            <option value="link">Send Reset Link</option>
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary btn-lg btn-block mb-4">Send Reset Option</button>
+                    
+    <button type="submit" name="send_otp" class="btn btn-primary btn-lg btn-block mb-4">Send Link Reset</button>
+    
+    <button type="submit" name="send_link" class="btn btn-primary btn-lg btn-block mb-4">Send Otp</button>
+
                                 </form>
                             <div class="d-flex justify-content-around align-items-center mt-4">
                                 <a href="index">Return</a>

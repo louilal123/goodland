@@ -353,18 +353,18 @@ public function emailIsExists($email) {
     $stmt->execute(['email' => $email]);
     return $stmt->fetchColumn() ? true : false;
 }
-public function initiatePasswordReset($email, $type = 'otp') {
-    // Check if the email exists in the `admin` table
-    $stmt = $this->pdo->prepare("SELECT admin_id FROM admin WHERE email = :email");
-    $stmt->execute(['email' => $email]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($user) {
-        // If OTP is requested
-        if ($type == 'otp') {
+    public function initiatePasswordReset($email) {
+        // Check if the email exists in the `admin` table
+        $stmt = $this->pdo->prepare("SELECT admin_id FROM admin WHERE email = :email");
+        $stmt->execute(['email' => $email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($user) {
+            // Generate a 6-digit OTP and set expiration
             $otp = rand(100000, 999999);
             $expiry = date("Y-m-d H:i:s", strtotime("+1 day"));
-
+            
             // Insert OTP and expiration into `password_resets` table
             $insertStmt = $this->pdo->prepare("
                 INSERT INTO password_resets (admin_id, otp, expires_at, date_created) 
@@ -376,34 +376,12 @@ public function initiatePasswordReset($email, $type = 'otp') {
                 'otp' => $otp,
                 'expires_at' => $expiry,
             ]);
-
+    
             return $otp; // Return OTP for email sending
         }
-        
-        if ($type == 'link') {
-            $reset_token = bin2hex(random_bytes(32)); // 64-character token
-            $expiry = date("Y-m-d H:i:s", strtotime("+1 day"));
-            $reset_url = "https://goodlandv2.com/reset_password_link.php?token=$reset_token"; // URL with the token
-            
-            $hashed_token = password_hash($reset_token, PASSWORD_DEFAULT);
-            $insertStmt = $this->pdo->prepare("
-                INSERT INTO password_resets (admin_id, reset_token, expires_at, date_created) 
-                VALUES (:admin_id, :reset_token, :expires_at, NOW())
-                ON DUPLICATE KEY UPDATE reset_token = :reset_token, expires_at = :expires_at, date_created = NOW()
-            ");
-            $insertStmt->execute([
-                'admin_id' => $user['admin_id'],
-                'reset_token' => $hashed_token,
-                'expires_at' => $expiry,
-            ]);
-
-            return $reset_url; // Return the reset link for email sending
-        }
+    
+        return false; // Email not found
     }
-
-    return false; // Email not found
-}
-
 
 // VERIFY FOR SINGIN 
 public function sendSmsOtp($admin_id, $phone) {
