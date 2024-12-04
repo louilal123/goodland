@@ -54,7 +54,7 @@ unset($_SESSION['error_message']);
                                 </div>
                                 <div data-mdb-input-init class="form-outline mb-4">
         <label class="form-label" for="reset_option">Choose a reset option:</label>
-        <select class="form-control form-control-lg" name="reset_option" id="reset_option">
+        <select data-mdb-select-init class="form-control form-control-lg" name="reset_option" id="reset_option">
             <option value="otp">Send OTP</option>
             <option value="link">Send Reset Link</option>
         </select>
