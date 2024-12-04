@@ -4,12 +4,18 @@ require_once "Main_class.php";
 
 $mainClass = new Main_class();
 
-// Initialize login attempt and lockout time if not already set
-if (!isset($_SESSION['login_attempts'])) {
-    $_SESSION['login_attempts'] = 0;
-}
-if (!isset($_SESSION['lockout_time'])) {
-    $_SESSION['lockout_time'] = null;
+// Cookie name for lockout data
+$cookie_name = 'login_lockout_data';
+
+// Check if the lockout data cookie exists
+if (isset($_COOKIE[$cookie_name])) {
+    $lockout_data = json_decode($_COOKIE[$cookie_name], true);
+    $login_attempts = $lockout_data['login_attempts'];
+    $lockout_time = $lockout_data['lockout_time'];
+} else {
+    // If no cookie exists, initialize values
+    $login_attempts = 0;
+    $lockout_time = null;
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -18,21 +24,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $recaptcha_response = $_POST['g-recaptcha-response']; // Get the reCAPTCHA response
 
     // Check if the user has exceeded the maximum login attempts (3 attempts)
-    if ($_SESSION['login_attempts'] >= 3) {
+    if ($login_attempts >= 3) {
         $current_time = time();
-        $lockout_time = $_SESSION['lockout_time'];
 
         // If locked out, check the time remaining before they can try again
         if ($lockout_time && ($current_time - $lockout_time) < 180) { // 3 minutes lockout
             $remaining_time = 180 - ($current_time - $lockout_time);
             $_SESSION['status'] = "Too many failed login attempts. Please try again in $remaining_time seconds.";
             $_SESSION['status_icon'] = "error";
-            header("Location: ../");
+            header("Location: ../");  // Redirect to the login page or locked-out page
             exit;
         } else {
             // Reset attempts and lockout time after 3 minutes
-            $_SESSION['login_attempts'] = 0;
-            $_SESSION['lockout_time'] = null;
+            $login_attempts = 0;
+            $lockout_time = null;
+
+            // Update the lockout cookie with the new values
+            setcookie($cookie_name, json_encode(['login_attempts' => $login_attempts, 'lockout_time' => $lockout_time]), time() - 3600, "/");
         }
     }
 
@@ -52,14 +60,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-
     // Attempt login
     $otp = $mainClass->login_user($email, $password);  
 
     if ($otp) {
         // Reset login attempts after successful login
-        $_SESSION['login_attempts'] = 0;
-        $_SESSION['lockout_time'] = null;
+        $login_attempts = 0;
+        $lockout_time = null;
 
         session_regenerate_id(true);  // Regenerate session ID for security
 
@@ -113,11 +120,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     } else {
         // Increment login attempts after a failed login
-        $_SESSION['login_attempts']++;
+        $login_attempts++;
 
         // If 3 failed attempts, lock out the user
-        if ($_SESSION['login_attempts'] >= 3) {
-            $_SESSION['lockout_time'] = time();
+        if ($login_attempts >= 3) {
+            $lockout_time = time();
             $_SESSION['status'] = "Too many failed login attempts. Please try again in 3 minutes.";
             $_SESSION['status_icon'] = "error";
         } else {
@@ -125,6 +132,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['status_icon'] = "error";
         }
 
+        // Update the lockout cookie with the new values
+        setcookie($cookie_name, json_encode(['login_attempts' => $login_attempts, 'lockout_time' => $lockout_time]), time() + 3600, "/");
+        
         header("Location: ../");
         exit;
     }
