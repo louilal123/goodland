@@ -110,7 +110,7 @@ unset($_SESSION['error_message']);
 <div class="d-flex justify-content-around align-items-center mb-4">
     <div class="form-outline">
         <!-- Google reCAPTCHA widget -->
-        <div class="g-recaptcha" data-sitekey="6LeC9ZEqAAAAAHcmJjeUBTzh4wIVUc2UoNCvvMDL"></div>
+        <div class="g-recaptcha" data-sitekey="6LeC9ZEqAAAAAAFFPtw_LOYMSqGUQqbyZpivSZwm"></div>
     </div>
 </div>
 
