@@ -141,7 +141,9 @@ unset($_SESSION['error_message']);
         unset($_SESSION['status_icon']);
         ?>
     <?php endif; ?>
-
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+    </script>
     <script type="text/javascript" src="mdbfolder/mdb.umd.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
