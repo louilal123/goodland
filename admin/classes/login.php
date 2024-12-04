@@ -52,19 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    // Verify reCAPTCHA response with Google
-    $recaptcha_secret = '6LeC9ZEqAAAAAAFFPtw_LOYMSqGUQqbyZpivSZwm'; // Your secret key
-    $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
-    $response = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
-    $responseKeys = json_decode($response, true);
-
-    // Check if reCAPTCHA verification was successful
-    if (intval($responseKeys['success']) !== 1) {
-        $_SESSION['status'] = "reCAPTCHA verification failed. Please try again.";
-        $_SESSION['status_icon'] = "error";
-        header("Location: ../");
-        exit;
-    }
 
     // Attempt login
     $otp = $mainClass->login_user($email, $password);  
