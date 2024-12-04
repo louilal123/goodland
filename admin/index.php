@@ -110,6 +110,7 @@ unset($_SESSION['error_message']);
 <div class="g-recaptcha" data-sitekey="6Lcx85EqAAAAAJOZNdnDwc7oBsBjLXUFEcsULDRT"></div>
       <br/>
       <input type="submit" value="Submit">
+      </div>
                                 </div>
 
                                 <!-- Submit button -->
