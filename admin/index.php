@@ -106,15 +106,15 @@ unset($_SESSION['error_message']);
                                 </div>
 
                                 <div class="d-flex justify-content-around align-items-center mb-4">
-<div class="form-outline">
-<div class="d-flex justify-content-around align-items-center mb-4">
-    <div class="form-outline">
-        <!-- Google reCAPTCHA widget -->
-        <div class="g-recaptcha" data-sitekey="6LeC9ZEqAAAAAAFFPtw_LOYMSqGUQqbyZpivSZwm"></div>
-    </div>
-</div>
+                                    <div class="form-outline">
+                                            <div class="d-flex justify-content-around align-items-center mb-4">
+                                                <div class="form-outline">
+                                                    <!-- Google reCAPTCHA widget -->
+                                                    <div class="g-recaptcha" data-sitekey="6LeC9ZEqAAAAAAFFPtw_LOYMSqGUQqbyZpivSZwm"></div>
+                                                </div>
+                                            </div>
 
-      </div>
+                                    </div>
                                 </div>
 
                                 <!-- Submit button -->
@@ -145,15 +145,35 @@ unset($_SESSION['error_message']);
         unset($_SESSION['status_icon']);
         ?>
     <?php endif; ?>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script>
-    document.getElementById('loginForm').addEventListener('submit', function (e) {
-        var recaptchaResponse = grecaptcha.getResponse();
 
-        if (recaptchaResponse.length === 0) {
-            e.preventDefault(); // Stop the form from submitting
-            alert('Please complete the reCAPTCHA to proceed.');
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+   
+<script>
+    // Wait for the reCAPTCHA widget to load
+    var recaptchaLoaded = false;
+
+    function enableSubmitButton() {
+        if (grecaptcha.getResponse()) {
+            document.getElementById('submitButton').disabled = false;
+        } else {
+            document.getElementById('submitButton').disabled = true;
         }
+    }
+
+    // Ensure form submission is blocked if reCAPTCHA is not solved
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+        if (!grecaptcha.getResponse()) {
+            e.preventDefault(); // Prevent form submission
+            alert("Please complete the reCAPTCHA.");
+        }
+    });
+
+    // Check if reCAPTCHA is solved on change
+    var recaptchaElement = document.querySelector('.g-recaptcha');
+    grecaptcha.render(recaptchaElement, {
+        sitekey: '6LeC9ZEqAAAAAAFFPtw_LOYMSqGUQqbyZpivSZwm',
+        callback: enableSubmitButton,
     });
 </script>
 
