@@ -1,31 +1,4 @@
-<?php
-session_start();
-require_once "Main_class.php";
 
-$mainClass = new Main_class();
-
-// Check if the OTP is passed in the URL
-if (isset($_GET['otp'])) {
-    $hashed_otp = $_GET['otp'];
-    $is_valid_otp = $mainClass->validateResetOTP($hashed_otp); // Validate OTP against the database
-
-    // If OTP is valid
-    if ($is_valid_otp) {
-        // Show the reset password form
-        $email = $mainClass->getEmailFromOtp($hashed_otp);  // Retrieve email based on OTP (you need to implement this method)
-    } else {
-        $_SESSION['status'] = "Invalid or expired OTP.";
-        $_SESSION['status_icon'] = "error";
-        header("Location: ../forgot_password.php"); // Redirect to the forgot password page or wherever appropriate
-        exit;
-    }
-} else {
-    $_SESSION['status'] = "Invalid request.";
-    $_SESSION['status_icon'] = "error";
-    header("Location: ../forgot_password.php"); // Redirect if no OTP is passed
-    exit;
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en">
