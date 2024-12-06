@@ -29,9 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    // Check if 'send_otp' button was clicked to generate OTP
     if (isset($_POST['send_otp'])) {
-        // Generate OTP and get the plain OTP from Main_class
         $otp = $mainClass->initiatePasswordReset($email, 'otp');
         $_SESSION['email'] = $email;  // Store email in session
 
