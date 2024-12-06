@@ -22,8 +22,7 @@ if (isset($_GET['otp'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Get the new password from the form
     $new_password = trim($_POST['password']);
-    $otp_from_form = $_POST['otp']; // OTP from the form (hidden field)
-
+    
     // Validate the new password
     if (empty($new_password)) {
         $_SESSION['status'] = "New password is required.";
@@ -33,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Validate OTP and update password
-    $result = $mainClass->resetPasswordlink($otp_from_form, $new_password);
+    $result = $mainClass->resetPasswordlink($hashed_otp, $new_password);
 
     if ($result) {
         $_SESSION['status'] = "Your password has been successfully reset.";
