@@ -575,6 +575,26 @@ public function getUserPhoneAndAdminByEmail($email) {
         }
     }
     
+    public function getEmailFromOtp($otp) {
+        // Check if the hashed OTP exists in the database
+        $stmt = $this->pdo->prepare("SELECT email FROM password_resets WHERE reset_token_hash = :otp");
+        $stmt->bindParam(':otp', $otp);
+        $stmt->execute();
+        
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row ? $row['email'] : null;  // Return the email if found, otherwise null
+    }
+
+    // Get admin ID by email
+    public function getAdminIdByEmail($email) {
+        $stmt = $this->pdo->prepare("SELECT admin_id FROM admin WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row ? $row['admin_id'] : null;
+    }
+
     
     
 

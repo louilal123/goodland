@@ -36,10 +36,8 @@
                             <strong>Create A New Password</strong>
                         </h2>
                         <div class="card-body px-lg-5 pt-0 mt-2">
-                            <form action="classes/reset_password_process.php" method="POST">
-                                <input type="hidden" name="email" value="<?php echo htmlspecialchars($email); ?>">
-                                <input type="hidden" name="otp" value="<?php echo htmlspecialchars($hashed_otp); ?>">
-
+                            <form action="classes/reset_password_process1.php" method="POST">
+                               
                                 <div data-mdb-input-init class="form-outline mb-4">
                                     <i class="fas fa-lock trailing"></i>
                                     <input type="password" name="password" class="form-control form-control-lg form-icon-trailing" required />
