@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['email'] = $email;  // Store email in session
 
         if ($otp) {
-            // Send OTP via email
+            // Send OTP via email (plain OTP sent for user convenience)
             $mail = require __DIR__ . "/../../mailer.php";
             $mail->setFrom("rubinlouie41@gmail.com", "GOODLAND.PH");
             $mail->addAddress($email);

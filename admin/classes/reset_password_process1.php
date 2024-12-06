@@ -7,7 +7,11 @@ $mainClass = new Main_class();
 // Check if the OTP exists in the URL (GET request)
 if (isset($_GET['otp'])) {
     $hashed_otp = $_GET['otp']; // Get the hashed OTP from the URL
+    // Debug: check if the OTP is being passed
+    error_log("OTP from URL: " . $hashed_otp); // Log OTP to the error log
 } else {
+    // Debug: If OTP is missing, log the error
+    error_log("OTP is missing from the URL");
     // If OTP is not provided, redirect to the forgot password page
     $_SESSION['status'] = "Invalid request. OTP missing.";
     $_SESSION['status_icon'] = "error";
@@ -27,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    // Step 1: Call the resetPasswordlink method to update the password
+    // Step 1: Retrieve the hashed OTP from the database and compare
     $result = $mainClass->resetPasswordlink($hashed_otp, $new_password);
 
     // Step 2: Handle response based on the result of the password update
@@ -43,6 +47,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 }
-
 ?>
-
