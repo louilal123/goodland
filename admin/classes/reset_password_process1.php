@@ -1,50 +1,53 @@
 <?php
 session_start();
-require_once "Main_class.php";
+require_once "Main_class.php";  // Assuming this class handles database interactions
+$mainClass = new Main_class();  // Creating an instance of the Main_class
 
-$mainClass = new Main_class();
+// Check if the form has been submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Retrieve the OTP and new password from the form
+    $otp_from_url = isset($_GET['otp']) ? $_GET['otp'] : '';
+    $submitted_otp = isset($_POST['otp']) ? $_POST['otp'] : '';  // OTP from the hidden field in the form
+    $new_password = trim($_POST['password']);
 
-// Check if the OTP exists in the URL (GET request)
-if (isset($_GET['otp'])) {
-    $hashed_otp = $_GET['otp']; // Get the hashed OTP from the URL
-    // Debug: check if the OTP is being passed
-    error_log("OTP from URL: " . $hashed_otp); // Log OTP to the error log
+    // Validate the new password
+    if (empty($new_password)) {
+        $_SESSION['status'] = "New password is required.";
+        $_SESSION['status_icon'] = "error";
+        header("Location: ../reset_password_vialink.php?otp=" . urlencode($otp_from_url));
+        exit;
+    }
+
+    // Step 1: Validate OTP
+    // Check if the OTP from the URL matches the one stored in the database
+    $result = $mainClass->validateResetOTP($otp_from_url, $submitted_otp);
+
+    // If the OTP is valid, proceed with resetting the password
+    if ($result) {
+        // Step 2: Update the password in the database
+        $update_result = $mainClass->updatePassword($new_password, $otp_from_url); // Method that updates password
+
+        if ($update_result) {
+            $_SESSION['status'] = "Your password has been successfully reset.";
+            $_SESSION['status_icon'] = "success";
+            header("Location: ../index.php");  // Redirect to login page
+            exit;
+        } else {
+            $_SESSION['status'] = "Failed to reset your password. Please try again.";
+            $_SESSION['status_icon'] = "error";
+            header("Location: ../reset_password_vialink.php?otp=" . urlencode($otp_from_url));
+            exit;
+        }
+    } else {
+        $_SESSION['status'] = "Invalid OTP. Please try again.";
+        $_SESSION['status_icon'] = "error";
+        header("Location: ../reset_password_vialink.php?otp=" . urlencode($otp_from_url));  // Redirect back to the reset form
+        exit;
+    }
 } else {
-    // Debug: If OTP is missing, log the error
-    error_log("OTP is missing from the URL");
-    // If OTP is not provided, redirect to the forgot password page
-    $_SESSION['status'] = "Invalid request. OTP missing.";
+    // If the form is not submitted, redirect to the forgot password page
+    $_SESSION['status'] = "Invalid request.";
     $_SESSION['status_icon'] = "error";
     header("Location: ../forgot_password.php");
     exit;
 }
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Get the new password from the form submission
-    $new_password = trim($_POST['password']);
-
-    // Validate the new password input
-    if (empty($new_password)) {
-        $_SESSION['status'] = "New password is required.";
-        $_SESSION['status_icon'] = "error";
-        header("Location: ../reset_password_vialink.php?otp=" . urlencode($hashed_otp));
-        exit;
-    }
-
-    // Step 1: Retrieve the hashed OTP from the database and compare
-    $result = $mainClass->resetPasswordlink($hashed_otp, $new_password);
-
-    // Step 2: Handle response based on the result of the password update
-    if ($result) {
-        $_SESSION['status'] = "Your password has been successfully reset.";
-        $_SESSION['status_icon'] = "success";
-        header("Location: ../login.php");  // Redirect to login page
-        exit;
-    } else {
-        $_SESSION['status'] = "Failed to reset your password. Please try again.";
-        $_SESSION['status_icon'] = "error";
-        header("Location: ../reset_password_vialink.php?otp=" . urlencode($hashed_otp));  // Redirect back to the reset form
-        exit;
-    }
-}
-?>
