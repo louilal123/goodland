@@ -625,6 +625,17 @@ public function getUserPhoneAndAdminByEmail($email) {
             return false;
         }
     }
+
+    public function getOtpFromDatabase($email) {
+        $sql = "SELECT reset_otp FROM users WHERE email = :email";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        return $result ? $result['reset_otp'] : null; // Return the plain OTP from database
+    }
+    
     
 
     public function resetPassword($email, $new_password) {
