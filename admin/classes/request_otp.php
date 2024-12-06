@@ -7,6 +7,7 @@ $mainClass = new Main_class();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = trim($_POST['email']);
 
+    // Validate email input
     if (empty($email)) {
         $_SESSION['status'] = "Please enter your email address.";
         $_SESSION['status_icon'] = "error";
@@ -28,11 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    // Check which button was clicked: send link or send OTP
+    // Check if 'send_otp' button was clicked to generate OTP
     if (isset($_POST['send_otp'])) {
         // Generate OTP and get the plain OTP from Main_class
         $otp = $mainClass->initiatePasswordReset($email, 'otp');
-        $_SESSION['email'] = $email;
+        $_SESSION['email'] = $email;  // Store email in session
 
         if ($otp) {
             // Send OTP via email
@@ -47,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <h2 style='color: #0062cc; text-align: center;'>Password Reset Request</h2>
                         <p style='font-size: 16px; color: #333;'>Hello,</p>
                         <p style='font-size: 16px; color: #333;'>We received a request to reset your password. To complete the process, please use the following OTP (One-Time Password) to reset your password:</p>
-                        <p style='font-size: 18px; color: #333; font-weight: bold; text-align: center; padding: 10px; background-color: #e0f7fa; border-radius: 4px;'>
+                        <p style='font-size: 18px; color: #333; font-weight: bold; text-align: center; padding: 10px; background-color: #e0f7fa; border-radius: 4px;' >
                             <strong>$otp</strong>
                         </p>
                         <p style='font-size: 16px; color: #333;'>This OTP is valid for 24 hours. </p>
@@ -78,17 +79,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // For sending the reset link
+    // Check if 'send_link' button was clicked to generate reset link (with OTP in the URL)
     if (isset($_POST['send_link'])) {
         $reset_link = $mainClass->initiatePasswordReset($email, 'link');
-        $_SESSION['email'] = $email;
+        $_SESSION['email'] = $email;  // Store email in session
 
         if ($reset_link) {
-            // Hash the reset link for security (you could also hash the link if you prefer)
+            // Hash the reset link (OTP) for security
             $hashed_otp = hash('sha256', $reset_link);
 
             // Generate the reset link with the hashed OTP (for URL)
-            $full_reset_link = "https://goodlandv2.com/admin/classes/reset_password_vialink.php?email=" . urlencode($email) . "&otp=" . urlencode($hashed_otp);
+            $full_reset_link = "https://goodlandv2.com/admin/reset_password_vialink.php?otp=" . urlencode($hashed_otp);
 
             // Send Reset Link via email
             $mail = require __DIR__ . "/../../mailer.php";
