@@ -1,4 +1,4 @@
-<?php session_start();?>
+<?php session_start(); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +37,9 @@
                         </h2>
                         <div class="card-body px-lg-5 pt-0 mt-2">
                             <form action="classes/reset_password_process1.php" method="POST">
-                               
+                                <!-- Hidden input field to store the OTP -->
+                                <input type="hidden" name="otp" value="<?php echo isset($_GET['otp']) ? $_GET['otp'] : ''; ?>">
+
                                 <div data-mdb-input-init class="form-outline mb-4">
                                     <i class="fas fa-lock trailing"></i>
                                     <input type="password" name="password" class="form-control form-control-lg form-icon-trailing" required />
