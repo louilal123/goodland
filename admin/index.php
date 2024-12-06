@@ -10,7 +10,6 @@ session_start();
 //     include('../404.html'); 
 //     exit(); 
 // }
-
 $error_message = $_SESSION['error_message'] ?? '';
 unset($_SESSION['error_message']);
 ?>
