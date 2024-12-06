@@ -596,6 +596,35 @@ public function getUserPhoneAndAdminByEmail($email) {
     }
 
     
+    public function resetPasswordlink($hashed_otp, $new_password) {
+        // Hash the new password
+        $hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
+    
+        try {
+            $stmt = $this->pdo->prepare("SELECT admin_id FROM password_resets WHERE otp = :otp AND expires_at > NOW()");
+            $stmt->execute(['otp' => $hashed_otp]);
+            $row = $stmt->fetch();
+    
+            $admin_id = $row['admin_id'];
+    
+            $stmt = $this->pdo->prepare("UPDATE admin SET password = :password WHERE admin_id = :admin_id");
+            $passwordUpdated = $stmt->execute([
+                'password' => $hashed_password,
+                'admin_id' => $admin_id
+            ]);
+    
+            if ($passwordUpdated) {
+                $updateOtpStmt = $this->pdo->prepare("UPDATE password_resets SET otp = NULL, expires_at = NULL WHERE admin_id = :admin_id");
+                $updateOtpStmt->execute(['admin_id' => $admin_id]);
+            }
+    
+            return $passwordUpdated; // Return true if the password was updated successfully
+        } catch (PDOException $e) {
+            // Error handling
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
     
 
     public function resetPassword($email, $new_password) {
