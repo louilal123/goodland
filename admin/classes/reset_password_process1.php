@@ -4,9 +4,11 @@ require_once "Main_class.php";
 
 $mainClass = new Main_class();
 
+// Get OTP from the URL (GET request)
+$hashed_otp = isset($_GET['otp']) ? $_GET['otp'] : '';
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Get OTP and new password from the form
-    $hashed_otp = trim($_POST['otp']);
+    // Get new password from the form
     $password = trim($_POST['password']);
 
     // Validate input
