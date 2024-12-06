@@ -562,28 +562,19 @@ public function getUserPhoneAndAdminByEmail($email) {
     }
     
     public function verifyOtpByHash($email, $otp) {
-        // Hash the OTP from the URL
-        $hashedOtp = hash('sha256', $otp);
+        // Assuming you have a database connection and a table to store OTPs
+        $hashedOtp = hash('sha256', $otp);  // Hash the OTP for comparison
+        $query = "SELECT * FROM password_resets WHERE email = ? AND otp = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([$email, $hashedOtp]);
     
-        // Prepare SQL to match hashed OTP and check expiration
-        $stmt = $this->pdo->prepare("
-            SELECT admin.email 
-            FROM password_resets
-            JOIN admin ON password_resets.admin_id = admin.admin_id
-            WHERE password_resets.email = :email 
-            AND password_resets.otp_hash = :otp_hash
-            AND password_resets.expires_at > NOW()
-            ORDER BY password_resets.date_created DESC
-            LIMIT 1
-        ");
-        $stmt->execute(['email' => $email, 'otp_hash' => $hashedOtp]);
-        
-        // Fetch the result
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        // Return the email if the OTP hash matches and is not expired
-        return $result ? $result['email'] : false;
+        if ($stmt->rowCount() > 0) {
+            return true; // OTP is valid
+        } else {
+            return false; // OTP is invalid
+        }
     }
+    
     
     
 

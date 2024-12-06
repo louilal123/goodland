@@ -9,33 +9,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $email = isset($_GET['email']) ? trim($_GET['email']) : null;
     $otp = isset($_GET['otp']) ? trim($_GET['otp']) : null;
 
+    // Check if both parameters exist
     if (!$email || !$otp) {
         $_SESSION['status'] = "Invalid or missing link parameters.";
         $_SESSION['status_icon'] = "error";
-        header("Location: ../forgot_password.php");
+        header("Location: forgot_password.php");
         exit;
     }
 
-    // Verify the OTP and email
-    $otpData = $mainClass->verifyOtp($email, $otp);
+    // Verify the OTP by hashing the OTP from the database and comparing it
+    $otpData = $mainClass->verifyOtpByHash($email, $otp);
 
+    // Check if OTP is valid
     if ($otpData) {
-        // Check if OTP is expired
-        $currentTime = new DateTime();
-        $expiryTime = new DateTime($otpData['expires_at']);
-
-        if ($currentTime > $expiryTime) {
-            $_SESSION['status'] = "The OTP has expired.";
-            $_SESSION['status_icon'] = "error";
-            header("Location: ../forgot_password.php");
-            exit;
-        }
-
-        // OTP is valid, redirect to reset password form
-        $_SESSION['email'] = $email; // Pass email to the reset password process
+        // OTP is valid, proceed to reset the password
+        $_SESSION['email'] = $email; // Store email in session for the reset password process
         header("Location: ../reset_password.php");
         exit;
     } else {
+        // OTP is invalid
         $_SESSION['status'] = "Invalid OTP or email.";
         $_SESSION['status_icon'] = "error";
         header("Location: ../forgot_password.php");
