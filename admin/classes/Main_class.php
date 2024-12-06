@@ -1418,22 +1418,47 @@ public function get_all_files() {
 
 // end forcontriu user 
 
-public function insert_admin($fullname, $username, $email, $password, $photo) {
-    $sql = "INSERT INTO admin (fullname, username, email, password, admin_photo, date_created, role, status) 
-            VALUES (:fullname, :username, :email, :password, :admin_photo, NOW(), 'admin', 'Active')";
-    $stmt = $this->pdo->prepare($sql);
+// public function insert_admin($fullname, $username, $email, $password, $photo) {
+//     $sql = "INSERT INTO admin (fullname, username, email, password, admin_photo, date_created, role, status) 
+//             VALUES (:fullname, :username, :email, :password, :admin_photo, NOW(), 'admin', 'Active')";
+//     $stmt = $this->pdo->prepare($sql);
 
-    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+//     $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-    $stmt->bindParam(':fullname', $fullname);
-    $stmt->bindParam(':username', $username);
-    $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':password', $hashedPassword);
-    $stmt->bindParam(':admin_photo', $photo, PDO::PARAM_STR); 
+//     $stmt->bindParam(':fullname', $fullname);
+//     $stmt->bindParam(':username', $username);
+//     $stmt->bindParam(':email', $email);
+//     $stmt->bindParam(':password', $hashedPassword);
+//     $stmt->bindParam(':admin_photo', $photo, PDO::PARAM_STR); 
 
-    return $stmt->execute();
+//     return $stmt->execute();
+// }
+
+public function insert_random_admin($fullname, $username, $email, $password, $photo) {
+    try {
+        $randomAdminId = bin2hex(random_bytes(16));  
+
+        $sql = "INSERT INTO admin (admin_id, fullname, username, email, password, admin_photo, date_created, role, status) 
+                VALUES (:admin_id, :fullname, :username, :email, :password, :admin_photo, NOW(), 'admin', 'Active')";
+        $stmt = $this->pdo->prepare($sql);
+
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+        $stmt->bindParam(':admin_id', $randomAdminId);
+        $stmt->bindParam(':fullname', $fullname);
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $hashedPassword);
+        $stmt->bindParam(':admin_photo', $photo);
+
+        $stmt->execute();
+
+        return true;  
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
 }
-
 
 
 // end 

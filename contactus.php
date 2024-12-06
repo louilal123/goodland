@@ -2,6 +2,7 @@
 <?php 
 session_start();
 require_once "classes/config.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

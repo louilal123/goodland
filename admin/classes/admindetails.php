@@ -10,8 +10,10 @@ if (!isset($_SESSION['admin_id'])) {
 
 require_once 'Main_class.php';
 
+
 $admin_id = $_SESSION['admin_id']; 
 $mainClass = new Main_class();
+
 
 $mainClass->mark_all_messages_as_read();
 

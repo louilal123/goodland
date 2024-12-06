@@ -61,11 +61,11 @@
   color: white;
 }
 .overlap-cards {
-  margin-top: -50px; /* Adjust this value based on how much overlap you want */
+  margin-top: -100px; 
 }
 
 .card {
-  border-radius: 10px;
+  border-radius: 0px;
   z-index: 1;
 }
 
@@ -95,9 +95,7 @@
       <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center ">
         <h1 data-aos="fade-up "> <span class="text-warning"><strong>FINDING</strong></span> <strong>LOCAL SOLUTIONS TO GLOBAL PROBLEMS</strong><span style="font-size: 80px !important; color:#0062cc !important; font-weight: bold !important;">.</span></h1>
         <p data-aos="fade-up" data-aos-delay="100">
-       
        Our mission is to facilitate the realization of an empowered, self-sufficient, and resilient community by using art and collaborations to address the social, economic, and environmental issues on Bantayan Island. ​
-        
        </p>
         <div class="d-flex flex-column flex-md-row" data-aos="fade-up" data-aos-delay="200">
         <a href="#about" class="btn-get-started btn" style="background: linear-gradient(to right, #144D53,#0062cc) !important;"
@@ -124,11 +122,11 @@
 <div class="section">
 <div class="container">
     <div class="row gy-4">
-    <div class="container mt-5">
+    <div class="container">
   <div class="row overlap-cards">
     <!-- Card 1 -->
     <div class="col-lg-6 col-md-6 col-sm-12 " data-aos="slide-right">
-      <div class="card bg-dark text-light shadow">
+      <div class="card bg-dark text-light shadow-bg">
         <div class="card-body text-center">
           <h4 class="card-title">E-SAWOD 1</h4>
           <p><strong>Water Level:</strong> <span id="waterlevel1" class="text-danger fw-bold">6 cm</span></p>
@@ -140,7 +138,7 @@
 
     <!-- Card 2 -->
     <div class="col-lg-6 col-md-6 col-sm-12" data-aos="slide-left">
-      <div class="card bg-dark text-light shadow">
+      <div class="card bg-dark text-light shadow-bg">
         <div class="card-body text-center">
           <h4 class="card-title">E-SAWOD 2</h4>
           <p><strong>Water Level:</strong> <span id="waterlevel2" class="text-danger fw-bold">6 cm</span></p>

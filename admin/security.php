@@ -24,7 +24,6 @@ if (basename($_SERVER['PHP_SELF']) == 'header.php') {
     exit("Access denied.");
 }
 
-// Add security headers
 header("Content-Security-Policy: default-src 'self'; script-src 'self' https://goodlandv2.com;");
 header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
 header("X-Content-Type-Options: nosniff");
@@ -39,7 +38,6 @@ header("X-Frame-Options: SAMEORIGIN");
 header("Referrer-Policy: strict-origin-when-cross-origin");
 header("Permissions-Policy: geolocation=()");
 
-// Sanitize GET, POST, and COOKIE inputs
 foreach ($_GET as $key => $value) {
     $_GET[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 }
