@@ -33,7 +33,7 @@ unset($_SESSION['error_message']);
         <div class="container py-5 h-100 ">
             <div class="row d-flex align-items-center justify-content-center h-100">
                 <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 mt-5 mb-5">
-                    <div class="card ">
+                    <div class="card bg-outline-primary">
                         <div class="mt-4 text-center">
                             <!-- <img src="uploads/logogoodland.png" style="display: flex; margin: auto; width: 150px; height: 60px;"> -->
                         </div>
@@ -46,21 +46,22 @@ unset($_SESSION['error_message']);
                          <form action="classes/request_otp.php" method="POST">
       
                             <!-- Email or Username input -->
-                            <div data-mdb-input-init class="form-outline mb-4">
+                            <div data-mdb-input-init class="form-outline mb-4 ">
                                     <i class="fas fa-envelope trailing" id="toggleEmailOrUsername"></i>
                                     <input type="text" name="email" class="form-control form-control-lg form-icon-trailing" />
                                     <label class="form-label" for="materialLoginFormEmailOrUsername">Email</label>
                                    
                                 </div>
+                                
                     
-    <button type="submit" name="send_otp" class="btn btn-success btn-lg btn-block mb-4">Send Otp</button>
+    <button type="submit" name="send_otp" class="btn btn-success btn-lg btn-block mt-4">Send Otp</button>
     
-    <button type="submit" name="send_link" class="btn btn-secondary btn-lg btn-block mb-4">Send Link Reset</button>
+    <button type="submit" name="send_link" class="btn btn-danger btn-lg btn-block mb-4">Send Reset Link</button>
 
                                 </form>
-                            <div class="d-flex justify-content-around align-items-center mt-4">
-                                <a href="index">Return</a>
-                            </div>
+                            <!-- <div class="d-flex justify-content-around align-items-center mt-4">
+                                <a href="forgot_password">Return</a>
+                            </div> -->
                         </div>
                     </div>
                 </div>

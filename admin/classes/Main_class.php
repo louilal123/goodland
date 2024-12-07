@@ -1,6 +1,7 @@
 <?php
 require_once('geoplugin.class.php');
 require_once 'database.php';
+require_once "config.php"; 
 
 
 class Main_class extends Database {
@@ -382,6 +383,56 @@ public function emailIsExists($email) {
     
         return false; // Email not found
     }
+   
+    
+    public function initiatePasswordResetLink($email, $otp) {
+        $stmt = $this->pdo->prepare("SELECT admin_id FROM admin WHERE email = :email");
+        $stmt->execute(['email' => $email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($user) {
+            $expiry = date("Y-m-d H:i:s", strtotime("+1 day"));
+            
+            $insertStmt = $this->pdo->prepare("
+                INSERT INTO password_resets (admin_id, otp, expires_at, date_created) 
+                VALUES (:admin_id, :otp, :expires_at, NOW())
+                ON DUPLICATE KEY UPDATE otp = :otp, expires_at = :expires_at, date_created = NOW()
+            ");
+            $insertStmt->execute([
+                'admin_id' => $user['admin_id'],
+                'otp' => $otp,
+                'expires_at' => $expiry,
+            ]);
+            return true; 
+        }
+        return false; 
+    }
+    
+public function validateURLOTP($otp_from_url) {
+    $decrypted_otp = encryptor('decrypt', $otp_from_url);
+
+    if ($decrypted_otp && isset($_SESSION['otp']) && $decrypted_otp == $_SESSION['otp']) {
+        $stmt = $this->pdo->prepare("
+            SELECT * 
+            FROM password_resets 
+            WHERE otp = :otp
+            ORDER BY date_created DESC
+            LIMIT 1
+        ");
+        $stmt->execute(['otp' => $decrypted_otp]);
+        $reset_data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($reset_data) {
+            if (strtotime($reset_data['expires_at']) > time()) {
+               
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+
 
 // VERIFY FOR SINGIN 
 public function sendSmsOtp($admin_id, $phone) {
@@ -626,33 +677,58 @@ public function getUserPhoneAndAdminByEmail($email) {
         }
     }
 
-    public function getOtpFromDatabase($email) {
-        $sql = "SELECT reset_otp FROM users WHERE email = :email";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    public function resetPassword1($admin_id, $new_password) {
+        $hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
+        
+        $stmt = $this->pdo->prepare("UPDATE admin SET password = :password WHERE admin_id = :admin_id");
+        $passwordUpdated = $stmt->execute(['password' => $hashed_password, 'admin_id' => $admin_id]);
     
-        return $result ? $result['reset_otp'] : null; // Return the plain OTP from database
+        if ($passwordUpdated) {
+            $updateOtpStmt = $this->pdo->prepare("UPDATE password_resets SET otp = NULL, expires_at = NULL WHERE admin_id = :admin_id");
+            $updateOtpStmt->execute(['admin_id' => $admin_id]);
+        }
+    
+        return $passwordUpdated;
     }
     
+    public function getMostRecentOtp($otp_from_form) {
+        $stmt = $this->pdo->prepare("SELECT * FROM password_resets WHERE otp = :otp ORDER BY date_created DESC LIMIT 1");
+        $stmt->execute(['otp' => $otp_from_form]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
     
-
     public function resetPassword($email, $new_password) {
         $hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
         
-        // Update the password in the admin table
         $stmt = $this->pdo->prepare("UPDATE admin SET password = :password WHERE email = :email");
         $passwordUpdated = $stmt->execute(['password' => $hashed_password, 'email' => $email]); // Returns true on success
     
         if ($passwordUpdated) {
-            // Update the OTP in the password_resets table to NULL or delete the entry
             $updateOtpStmt = $this->pdo->prepare("UPDATE password_resets SET otp = NULL, expires_at = NULL WHERE admin_id = (SELECT admin_id FROM admin WHERE email = :email)");
             $updateOtpStmt->execute(['email' => $email]);
         }
     
-        return $passwordUpdated; // Return true if the password was updated successfully
+        return $passwordUpdated; 
     }
+
+        // Fetch the most recent OTP and associated admin_id for the given OTP
+        public function getAdminIdFromOtp($hashed_otp_from_url) {
+            // Query to get the admin_id based on the OTP
+            $stmt = $this->pdo->prepare("SELECT admin_id, otp FROM password_resets WHERE otp = :otp ORDER BY date_created DESC LIMIT 1");
+            $stmt->execute(['otp' => $hashed_otp_from_url]);
+            $otp_data = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            return $otp_data; // Return the OTP data (admin_id and otp)
+        }
+    
+        // Fetch the plain OTP from the database based on the admin_id
+        public function getOtpFromDatabase($admin_id) {
+            $stmt = $this->pdo->prepare("SELECT otp FROM password_resets WHERE admin_id = :admin_id ORDER BY date_created DESC LIMIT 1");
+            $stmt->execute(['admin_id' => $admin_id]);
+            $otp_data = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            return $otp_data ? $otp_data['otp'] : null;
+        }
 
     // events start 
     public function getScheduledEvents() {

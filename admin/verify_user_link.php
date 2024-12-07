@@ -35,15 +35,11 @@ session_start();
                             <!-- <img src="uploads/logogoodland.png" style="display: flex; margin: auto; width: 150px; height: 60px;"> -->
                         </div>
                         <h2 class="info-color text-success text-center py-4">
-                            <strong>Verify Your Email. Please check your email.</strong>
+                            <strong>Check Your Email.</strong>
                         </h2>
-                        <p class="text-dark text-center mb-4">We have sent a 6-digit OTP to your email.</p>
+                        <p class="text-dark text-center mb-4">Please check your email. We have sent a password reset link to your email.</p>
                         <div class="card-body px-lg-5 pt-0 mt-2">
                          
-                               
-                            <div class="d-flex justify-content-around align-items-center mt-4">
-                                <a href="index">Return</a>
-                            </div>
                         </div>
                     </div>
                 </div>

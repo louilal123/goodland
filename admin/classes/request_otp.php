@@ -1,13 +1,14 @@
 <?php 
 session_start();
 require_once "Main_class.php";
+require_once "config.php";
+
 
 $mainClass = new Main_class();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = trim($_POST['email']);
 
-    // Validate email input
     if (empty($email)) {
         $_SESSION['status'] = "Please enter your email address.";
         $_SESSION['status_icon'] = "error";
@@ -31,10 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (isset($_POST['send_otp'])) {
         $otp = $mainClass->initiatePasswordReset($email, 'otp');
-        $_SESSION['email'] = $email;  // Store email in session
+        $_SESSION['email'] = $email; 
 
         if ($otp) {
-            // Send OTP via email (plain OTP sent for user convenience)
             $mail = require __DIR__ . "/../../mailer.php";
             $mail->setFrom("rubinlouie41@gmail.com", "GOODLAND.PH");
             $mail->addAddress($email);
@@ -77,19 +77,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // Check if 'send_link' button was clicked to generate reset link (with OTP in the URL)
     if (isset($_POST['send_link'])) {
-        $reset_link = $mainClass->initiatePasswordReset($email, 'link');
-        $_SESSION['email'] = $email;  // Store email in session
-
-        if ($reset_link) {
-            // Hash the reset link (OTP) for security
-            $hashed_otp = hash('sha256', $reset_link);
-
-            // Generate the reset link with the hashed OTP (for URL)
-            $full_reset_link = "https://goodlandv2.com/admin/reset_password_vialink.php?otp=" . urlencode($hashed_otp);
-
-            // Send Reset Link via email
+        $otp = rand(100000, 999999);
+        
+        $user = $mainClass->initiatePasswordResetLink($email, $otp);
+        
+        if ($user !== false) {
+            $encrypted_otp = encryptor('encrypt', $otp);
+            $_SESSION['otp'] = $otp;  
+            
+            $full_reset_link = "https://goodlandv2.com/admin/reset_password_vialink.php?otp=" . urlencode($encrypted_otp);
+    
             $mail = require __DIR__ . "/../../mailer.php";
             $mail->setFrom("rubinlouie41@gmail.com", "GOODLAND.PH");
             $mail->addAddress($email);
@@ -104,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </body>
             </html>
             ";
-
+    
             try {
                 $mail->send();
                 $_SESSION['status1'] = "Password reset link has been sent to your email.";
@@ -124,5 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit;
         }
     }
+    
+    
 }
 ?>
