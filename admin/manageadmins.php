@@ -59,10 +59,7 @@
                             <?php endif; ?>
                         </td>
                         <td>
-                            <button class="btn btn-info btn-sm viewAdminDetailBtn" data-id="<?php echo $admin['admin_id']; ?>" 
-                                    data-bs-toggle="modal" data-bs-target="#viewAdminModal">
-                                <i class="bi bi-eye-fill"></i> View
-                            </button>
+                           
                             <a href="#" class="btn btn-success btn-sm editAdminBtn" data-bs-toggle="modal" data-bs-target="#editAdminModal">
                                 <i class="bi bi-pencil-square"></i> Edit
                             </a>
