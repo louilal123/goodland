@@ -61,13 +61,13 @@
                         <td>
                             <button class="btn btn-info btn-sm viewAdminDetailBtn" data-id="<?php echo $admin['admin_id']; ?>" 
                                     data-bs-toggle="modal" data-bs-target="#viewAdminModal">
-                                <i class="bi bi-eye-fill"></i>
+                                <i class="bi bi-eye-fill"></i> View
                             </button>
                             <a href="#" class="btn btn-success btn-sm editAdminBtn" data-bs-toggle="modal" data-bs-target="#editAdminModal">
-                                <i class="bi bi-pencil-square"></i>
+                                <i class="bi bi-pencil-square"></i> Edit
                             </a>
                             <a href="classes/delete_admin.php?id=<?php echo $admin['admin_id']; ?>" class="btn btn-danger btn-sm deleteBtn">
-                                <i class="bi bi-trash-fill"></i>
+                                <i class="fa fa-trash"></i> Delete
                             </a>
                         </td>
                     </tr>
