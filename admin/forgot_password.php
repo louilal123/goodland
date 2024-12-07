@@ -69,7 +69,19 @@ unset($_SESSION['error_message']);
         </div>
     </section>
 
+
     <?php include "includes/footer.php" ?>
+
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lep8ZIqAAAAAMwIexA0yySzdpGQ_Z0qvSQtjXkv"></script>
+<script>
+      function onClick(e) {
+        e.preventDefault();
+        grecaptcha.ready(function() {
+          grecaptcha.execute('6Lep8ZIqAAAAAMwIexA0yySzdpGQ_Z0qvSQtjXkv', {action: 'submit'}).then(function(token) {
+          });
+        });
+      }
+  </script>
     <!-- SweetAlert display script -->
     <?php if (isset($_SESSION['status']) && $_SESSION['status'] != ''): ?>
         <script>
