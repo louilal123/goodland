@@ -32,7 +32,7 @@ if (isset($_POST['otp']) && isset($_POST['password'])) {
             if ($result) {
                 $_SESSION['status'] = "Your password has been successfully reset.";
                 $_SESSION['status_icon'] = "success";
-                header("Location: ../.php");
+                header("Location: ../");
                 exit;
             } else {
                 $_SESSION['status'] = "Failed to reset your password. Please try again.";
