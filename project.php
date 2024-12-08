@@ -1,5 +1,4 @@
 <?php include "classes/config.php"; ?>
-<?php include "classes/user_view.php"; ?>
 
 <!DOCTYPE html>
 <html lang="en">

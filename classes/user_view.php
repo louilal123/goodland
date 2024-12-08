@@ -5,7 +5,7 @@ $mainClass = new Main_class();
 
 $mainClass->trackVisitor();
 
-$projects = $mainClass->getAllPublishedProjects(); 
+$projects = $mainClass->getAllProjects(); 
 
 $approvedFiles = $mainClass->getPublishedFiles();
 
