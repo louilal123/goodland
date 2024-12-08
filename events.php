@@ -1,5 +1,5 @@
 <?php 
-require_once "classes/user_view.php";
+require_once "admin/classes/user_view.php";
 ?>
 <?php include "classes/config.php";?>
 <!DOCTYPE html>
