@@ -1,6 +1,4 @@
-<?php 
-require_once "classes/user_view.php";
-?>
+
 <?php include "admin/classes/config.php";?>
 <!DOCTYPE html>
 <html lang="en">
