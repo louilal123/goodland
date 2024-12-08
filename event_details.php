@@ -1,6 +1,6 @@
 <?php 
 require_once __DIR__ . '/admin/classes/Main_class.php';
-require_once "classes/config.php"; 
+require_once "admin/classes/config.php"; 
 $mainClass = new Main_class();
 
 if (isset($_GET['event_id'])) {
