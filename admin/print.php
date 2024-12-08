@@ -24,7 +24,7 @@
             <h1 class="text-primary"> GOOD</strong><i class="fw-light">Land</i></h1>
             <h5>E-Sawod Data Report</h5>
             <p>37 St., Brgy Atop-Atop, Bantayan Island, Cebu </p>
-            <p>Date From: 01/11/2024<span id="modal-dateFrom"></span> - Date To: 30/11/2024<span id="modal-dateTo"></span></p>
+            <p>Date From: 01/11/2024<span id="modal-dateFrom"></span> - Date To: 27/11/2024<span id="modal-dateTo"></span></p>
         </header>
 
         <!-- Charts Section -->
@@ -69,7 +69,7 @@
                         <td>0</td>  <!-- Lowest Water Level for E-SAWOD1 -->
                         <td>28</td> <!-- Highest Temperature for E-SAWOD1 -->
                         <td>20</td> <!-- Lowest Temperature for E-SAWOD1 -->
-                        <td>90</td> <!-- Highest Humidity for E-SAWOD1 -->
+                        <td>30</td> <!-- Highest Humidity for E-SAWOD1 -->
                         <td>23</td> <!-- Lowest Humidity for E-SAWOD1 -->
                     </tr>
                     <tr>
@@ -95,7 +95,6 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   
   <script type="text/javascript">
-    // Automatically trigger print dialog when the page loads
     window.onload = function () {
         window.print();
     };
@@ -136,15 +135,17 @@
         series: [{
             name: 'Water Level (cm)',
             type: 'column',
+            color: '#0d6efd',
             data: [15, 20, 18, 22, 25, 30, 28, 26, 20, 18, 24, 29, 15, 18, 21, 
             25, 30, 27, 23, 19, 18, 20, 22, 25, 29, 30, 27, 22, 21, 19, 15]
         }, {
             name: 'Humidity (%)',
+            color: '#6c757d',
             data: [23, 25, 24, 26, 27, 29, 28, 27, 25, 24, 26, 28, 23, 
             24, 25, 27, 29, 28, 26, 24, 24, 25, 26, 27, 28, 29, 28, 26, 25, 24, 23]   
         }, {
             name: 'Temperature (°C)',
-            color: '#495057',
+            color: '#dc3545',
             data: [22, 24, 23, 25, 26, 28, 27, 26, 24, 23, 25, 27, 22, 23, 24, 26, 28, 
             27, 25, 23, 23, 24, 25, 26, 27, 28, 27, 25, 24, 23, 22]
         }],
@@ -189,13 +190,15 @@
         series: [{
             name: 'Water Level (cm)',
             type: 'column',
+            color: '#0d6efd',
             data: [16, 21, 19, 23, 26, 31, 29, 27, 21, 19, 25, 30, 16, 19, 22, 26, 31, 28, 24, 20, 19, 21, 23, 26, 30, 31, 28, 23, 22, 20, 16]
         }, {
             name: 'Humidity (%)',
+            color: '#6c757d',
             data: [22, 24, 23, 25, 26, 28, 27, 26, 24, 23, 25, 27, 22, 23, 24, 26, 28, 27, 25, 23, 23, 24, 25, 26, 27, 28, 27, 25, 24, 23, 22]
         }, {
             name: 'Temperature (°C)',
-            color: '#495057',
+            color: '#dc3545',
             data: [23, 25, 24, 26, 27, 29, 28, 27, 25, 24, 26, 28, 23, 24, 25, 27, 29, 28, 26, 24, 24, 25, 26, 27, 28, 29, 28, 26, 25, 24, 23]
         }],
         tooltip: {

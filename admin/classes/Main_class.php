@@ -9,7 +9,6 @@ class Main_class extends Database {
     public function __construct() {
         parent::__construct(); // Initialize the database connection
 
-         // Set the timezone for the Philippines
          date_default_timezone_set('Asia/Manila');
     }
 
@@ -20,7 +19,6 @@ class Main_class extends Database {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
 
 public function fetchSettings() {
     $sql = "SELECT * FROM settings LIMIT 1"; // Adjust to fetch a single row or all rows as needed
@@ -483,9 +481,8 @@ public function verifyEmailOtp($email, $otp) {
         $token = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($token) {
-            // Verify OTP and expiration
             if ($token['otp'] == $otp && strtotime($token['expiration_time']) > time()) {
-                // OTP is valid and not expired, mark as verified
+               
                 $updateStmt = $this->pdo->prepare("
                     UPDATE mfa_tokens 
                     SET verified = 1 
@@ -496,7 +493,6 @@ public function verifyEmailOtp($email, $otp) {
                     'otp' => $otp,
                 ]);
 
-                // Log successful login attempt
                 $logStmt = $this->pdo->prepare("
                     INSERT INTO login_logs (admin_id, email, status, ip_address, user_agent) 
                     VALUES (:admin_id, :email, 'success', :ip_address, :user_agent)
@@ -508,7 +504,6 @@ public function verifyEmailOtp($email, $otp) {
                     'user_agent' => $user_agent,
                 ]);
 
-                // Return user info for session setup
                 return $user;
             }
         }
@@ -1057,6 +1052,7 @@ public function getMessagesByVisitorId($visitorId) {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
    public function countAllProjects()  {
     $stmt = $this->pdo->prepare("SELECT COUNT(*) as project_count FROM projects ");
     $stmt->execute();

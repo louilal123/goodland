@@ -48,19 +48,15 @@ $dateTo = isset($_GET['date_to']) ? $_GET['date_to'] : null;
         <div class="card-body text-center">
             <h4>GoodLand Association</h4>
             <h5>E-Sawod Data Report</h5>
-            <p>Date From: <span id="modal-dateFrom"><?php echo $dateFrom; ?></span> - Date To: <span id="modal-dateTo"><?php echo $dateTo; ?></span></p>
+            <p>Date From: <span id="modal-dateFrom"><?php echo htmlspecialchars($dateFrom); ?></span> - Date To: 
+            <span id="modal-dateTo"><?php echo htmlspecialchars($dateTo); ?></span></p>
            <section>
-           <div class="card mb-2">
-                <div id="kit1"></div>
-            </div>
-            <div class="card mb-2">
-                <div id="kit2"></div>
-            </div>
+         
            </section>
-     <?php     
-$dateFrom = isset($_GET['date_from']) ? $_GET['date_from'] : null;
-$dateTo = isset($_GET['date_to']) ? $_GET['date_to'] : null;
-?>
+        <?php     
+            $dateFrom = isset($_GET['date_from']) ? $_GET['date_from'] : null;
+            $dateTo = isset($_GET['date_to']) ? $_GET['date_to'] : null;
+        ?>
            <div class="card">
             <div class="card-body">
             <table class="table table-sm table-bordered" id="summaryTable">
@@ -100,47 +96,38 @@ $dateTo = isset($_GET['date_to']) ? $_GET['date_to'] : null;
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
 
     <script type="text/javascript">
-        // Wait for the DOM content to load
         document.addEventListener('DOMContentLoaded', function () {
-            // Attach event listener to the print button
             const printButton = document.getElementById('printButton');
             printButton.addEventListener('click', function() {
-                window.print();  // Trigger the browser's print dialog
+                window.print(); 
             });
         });
     </script>
 
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function() {
-        // Date range values from the PHP code
         var dateFrom = "<?php echo $dateFrom; ?>";
         var dateTo = "<?php echo $dateTo; ?>";
 
-        // Display date range in the modal (if applicable)
         document.getElementById('modal-dateFrom').textContent = dateFrom;
         document.getElementById('modal-dateTo').textContent = dateTo;
 
-        // Make the fetch request to generate the report
         var formData = new FormData();
         formData.append('date_from', dateFrom);
         formData.append('date_to', dateTo);
 
-        // Fetch data for the report from generate_report.php
         fetch('generate_report.php', {
             method: 'POST',
             body: formData
         })
         .then(response => response.json())
         .then(data => {
-            // Assuming you want to fill the table with the fetched data
             var tableBody = document.querySelector('#summaryTable tbody');
-            tableBody.innerHTML = '';  // Clear any existing rows
+            tableBody.innerHTML = '';  
 
-            // Check if there is an error
             if (data.error) {
                 alert(data.error);
             } else {
-                // Populate the table with the fetched data
                 data.forEach(row => {
                     var tr = document.createElement('tr');
                     tr.innerHTML = `
@@ -165,19 +152,16 @@ $dateTo = isset($_GET['date_to']) ? $_GET['date_to'] : null;
 
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function() {
-            // Date range values from the PHP code
             var dateFrom = "<?php echo $dateFrom; ?>";
             var dateTo = "<?php echo $dateTo; ?>";
 
             document.getElementById('modal-dateFrom').textContent = dateFrom;
             document.getElementById('modal-dateTo').textContent = dateTo;
 
-            // Make the fetch requests to generate the charts
             var formData = new FormData();
             formData.append('date_from', dateFrom);
             formData.append('date_to', dateTo);
 
-            // Fetch data for the first kit
             fetch('get_esawod_1_data.php', {
                 method: 'POST',
                 body: formData
@@ -218,7 +202,6 @@ $dateTo = isset($_GET['date_to']) ? $_GET['date_to'] : null;
                     }]
                 });
 
-                // Fetch data for the second kit
                 return fetch('get_esawod_2_data.php', {
                     method: 'POST',
                     body: formData
