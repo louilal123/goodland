@@ -1,4 +1,4 @@
-<?php include "classes/config.php"; ?>
+<?php include "admin/classes/config.php"; ?>
 
 <!DOCTYPE html>
 <html lang="en">
