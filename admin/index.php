@@ -34,14 +34,6 @@ unset($_SESSION['error_message']);
     /* The Modal (background) */
 
 
-/* Modal Content */
-.modal-content {
-  background-color: #fefefe;
-  margin: 5% auto; /* Center the modal */
-  padding: 40px;
-  border: 1px solid #888;
-  width: 30%; /* Could be more or less, depending on screen size */
-}
 
 /* The Close Button */
 .close {
