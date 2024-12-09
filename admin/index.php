@@ -121,7 +121,42 @@ unset($_SESSION['error_message']);
                                 </div>
 
                                <!-- Password input -->
-<div id="termsModal" class="modal">
+<div data-mdb-input-init class="form-outline mb-4" style="position: relative;">
+    <i class="fas fa-eye" id="togglePassword" 
+    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; z-index: 999;"></i>
+    <input type="password" name="password" class="form-control form-control-lg form-icon-trailing
+    <?php echo !empty($_SESSION['error_password']) ? 'is-invalid' : ''; ?>" 
+    id="validationCustomPassword" aria-describedby="inputGroupPrepend" />
+    <label class="form-label" for="validationCustomPassword">Password</label>
+    <?php if (!empty($_SESSION['error_password'])): ?>
+        <div class="invalid-feedback"><?php echo $_SESSION['error_password']; unset($_SESSION['error_password']); ?></div>
+    <?php endif; ?>
+</div>
+<div class="d-flex justify-content-around align-items-center mb-4">
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="on" id="termsCheckbox" name="terms" required />
+        <label class="form-check-label" for="termsCheckbox">
+            <a href="javascript:void(0);" id="openModalBtn">Terms and Conditions</a>
+        </label> </div>
+    <a href="forgot_password">Forgot password?</a>
+</div>
+
+
+                                <button type="submit" id="submitButton" class="btn btn-primary btn-lg btn-block mb-4">Sign in</button>
+                            </form>
+
+                            <div class="d-flex justify-content-around align-items-center mt-4">
+                                <a href="../index">Return To Website</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+ <!-- Modal for Terms and Conditions -->
+ <div id="termsModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Terms and Conditions</h2>
@@ -152,29 +187,6 @@ unset($_SESSION['error_message']);
     </div>
 </div>
 
-
-                                <button type="submit" id="submitButton" class="btn btn-primary btn-lg btn-block mb-4">Sign in</button>
-                            </form>
-
-                            <div class="d-flex justify-content-around align-items-center mt-4">
-                                <a href="../index">Return To Website</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
- <!-- Modal for Terms and Conditions -->
-<div id="termsModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Terms and Conditions</h2>
-        <p>Here are the terms and conditions...</p>
-        <!-- Add more terms content here -->
-    </div>
-</div>
 
     <script>
     // Toggle Password Visibility
