@@ -182,8 +182,6 @@ unset($_SESSION['error_message']);
         
         <p>By clicking "Accept" or signing in, you confirm that you have read, understood, and agree to these Terms and Conditions.</p>
         
-        <button id="acceptTerms">Accept</button>
-        <button id="declineTerms">Decline</button>
     </div>
 </div>
 
