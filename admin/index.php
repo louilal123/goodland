@@ -32,17 +32,7 @@ unset($_SESSION['error_message']);
 
 
     /* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  background-color: rgba(0, 0, 0, 0.4); /* Black with transparency */
-  padding-top: 60px; /* Padding from the top */
-}
+
 
 /* Modal Content */
 .modal-content {
