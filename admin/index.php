@@ -121,24 +121,35 @@ unset($_SESSION['error_message']);
                                 </div>
 
                                <!-- Password input -->
-<div data-mdb-input-init class="form-outline mb-4" style="position: relative;">
-    <i class="fas fa-eye" id="togglePassword" 
-    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; z-index: 999;"></i>
-    <input type="password" name="password" class="form-control form-control-lg form-icon-trailing
-    <?php echo !empty($_SESSION['error_password']) ? 'is-invalid' : ''; ?>" 
-    id="validationCustomPassword" aria-describedby="inputGroupPrepend" />
-    <label class="form-label" for="validationCustomPassword">Password</label>
-    <?php if (!empty($_SESSION['error_password'])): ?>
-        <div class="invalid-feedback"><?php echo $_SESSION['error_password']; unset($_SESSION['error_password']); ?></div>
-    <?php endif; ?>
-</div>
-<div class="d-flex justify-content-around align-items-center mb-4">
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="on" id="termsCheckbox" name="terms" required />
-        <label class="form-check-label" for="termsCheckbox">
-            <a href="javascript:void(0);" id="openModalBtn">Terms and Conditions</a>
-        </label> </div>
-    <a href="forgot_password">Forgot password?</a>
+<div id="termsModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Terms and Conditions</h2>
+        <p>Welcome to Goodland! By signing in, you agree to comply with and be bound by the following terms and conditions. Please read them carefully before proceeding.</p>
+        
+        <h3>1. Acceptance of Terms</h3>
+        <p>By accessing or using our services, you agree to abide by these terms. If you do not agree, please do not sign in or use our services.</p>
+        
+        <h3>2. Privacy</h3>
+        <p>Your information is securely handled in accordance with our Privacy Policy. By signing in, you consent to the collection, use, and storage of your data for providing our services.</p>
+        
+        <h3>3. Account Responsibility</h3>
+        <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.</p>
+        
+        <h3>4. Prohibited Activities</h3>
+        <p>You agree not to misuse our services, including but not limited to unauthorized access, data theft, or any activities that violate applicable laws or regulations.</p>
+        
+        <h3>5. Modifications</h3>
+        <p>Goodland reserves the right to update or modify these terms at any time without prior notice. Continued use of the services implies acceptance of the updated terms.</p>
+        
+        <h3>6. Termination</h3>
+        <p>We reserve the right to suspend or terminate your account if we detect any violations of these terms.</p>
+        
+        <p>By clicking "Accept" or signing in, you confirm that you have read, understood, and agree to these Terms and Conditions.</p>
+        
+        <button id="acceptTerms">Accept</button>
+        <button id="declineTerms">Decline</button>
+    </div>
 </div>
 
 
