@@ -102,6 +102,22 @@
 .header .sitename{
   font-family: var(--nav-font);
 }
+.card {
+      border: none;
+      border-radius: 0px; /* Smooth rounded corners */
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+    
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+    }
+   
+    .card-header {
+      color: white;
+      border-radius: 0px !important;
+    }
+    .card-body {
+      padding: 20px;
+      background-color: #f9f9f9; /* Light background for contrast */
+    }
 </style>
 <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
@@ -132,13 +148,4 @@
       </div>
     </div>
   </header>
-  <script src="https://www.google.com/recaptcha/api.js?render=6Lep8ZIqAAAAAMwIexA0yySzdpGQ_Z0qvSQtjXkv"></script>
-<script>
-      function onClick(e) {
-        e.preventDefault();
-        grecaptcha.ready(function() {
-          grecaptcha.execute('6Lep8ZIqAAAAAMwIexA0yySzdpGQ_Z0qvSQtjXkv', {action: 'submit'}).then(function(token) {
-          });
-        });
-      }
-  </script>
+

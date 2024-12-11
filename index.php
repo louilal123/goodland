@@ -81,78 +81,52 @@
 
   <main class="main">
 
-<section id="hero" class="hero section">
+  
+  <section id="hero" class="hero section">
+    
   <div class="background-video-container">
     <video autoplay muted loop id="hero-background-video">
       <source src="https://cdn.arcgis.com/sharing/rest/content/items/6c20302d52284f858afbb2ace066abb4/resources/2Dc0FAcVaYwjGSXsz8kpz.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
   </div>
-
+  
 
   <div class="container">
     <div class="row gy-4">
-      <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center ">
-        <h1 data-aos="fade-up "> <span class="text-warning"><strong>FINDING</strong></span> <strong>LOCAL SOLUTIONS TO GLOBAL PROBLEMS</strong><span style="font-size: 80px !important; color:#0062cc !important; font-weight: bold !important;">.</span></h1>
+      <!-- Left Section: Content -->
+      <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
+        <h1 data-aos="fade-up">
+          <span class="text-warning"><strong>FINDING</strong></span> 
+          <strong>LOCAL SOLUTIONS TO GLOBAL PROBLEMS</strong><span style="font-size: 80px !important; color:#0062cc !important; font-weight: bold !important;">.</span>
+        </h1>
         <p data-aos="fade-up" data-aos-delay="100">
-       Our mission is to facilitate the realization of an empowered, self-sufficient, and resilient community by using art and collaborations to address the social, economic, and environmental issues on Bantayan Island. ​
-       </p>
+          Our mission is to facilitate the realization of an empowered, self-sufficient, and resilient community by using art and collaborations to address the social, economic, and environmental issues on Bantayan Island. ​
+        </p>
         <div class="d-flex flex-column flex-md-row" data-aos="fade-up" data-aos-delay="200">
-        <a href="#about" class="btn-get-started btn" style="background: linear-gradient(to right, #144D53,#0062cc) !important;"
-         data-aos="fade-in" data-aos-delay="200">EXPLORE<i class="bi bi-arrow-right"></i></a>
-              <a href="https://youtu.be/v3KTAD1NKas?si=vMHL--EJXYfbwqbx" 
-              class="glightbox btn-watch-video d-flex align-items-center justify-content-center ms-0 ms-md-4 mt-4 mt-md-0 text-light">
-              <i class="bi bi-play-circle"></i><span>WATCH VIDEO</span></a>
-           </div>
+          <a href="#about" class="btn-get-started btn" style="background: linear-gradient(to right, #144D53,#0062cc) !important;" data-aos="fade-in" data-aos-delay="200">
+            EXPLORE<i class="bi bi-arrow-right"></i>
+          </a>
+          <a href="https://youtu.be/v3KTAD1NKas?si=vMHL--EJXYfbwqbx" class="glightbox btn-watch-video d-flex align-items-center justify-content-center ms-0 ms-md-4 mt-4 mt-md-0 text-light">
+            <i class="bi bi-play-circle"></i><span>WATCH VIDEO</span>
+          </a>
+        </div>
       </div>
+
+      <!-- Right Section: Image + Table -->
       <div class="col-lg-6 order-1 order-lg-2 hero-img d-flex flex-column justify-content-center" data-aos="zoom-out">
-      <div class="lightning-strike"></div>
-        <img src="assets/img/landingbg.png"  class="img-fluid broken-img " >
-      </div>
+        <!-- Image -->
+        <div class="lightning-strike"></div>
+        <img src="assets/img/landingbg.png" class="img-fluid broken-img mb-4">
 
-
-     
-
-    </div>
-  </div>
- 
-
-
-</section>
-<div class="section">
-<div class="container">
-    <div class="row gy-4">
-    <div class="container">
-  <div class="row overlap-cards">
-    <!-- Card 1 -->
-    <div class="col-lg-6 col-md-6 col-sm-12 " data-aos="slide-right">
-      <div class="card bg-dark text-light shadow-bg">
-        <div class="card-body text-center">
-          <h4 class="card-title">E-SAWOD 1</h4>
-          <p><strong>Water Level:</strong> <span id="waterlevel1" class="text-danger fw-bold">6 cm</span></p>
-          <p><strong>Humidity:</strong> <span id="humidity1" class="text-secondary fw-bold">9 RH</span></p>
-          <p><strong>Temperature:</strong> <span id="temperature1" class="text-warning fw-bold">34 °C</span></p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Card 2 -->
-    <div class="col-lg-6 col-md-6 col-sm-12" data-aos="slide-left">
-      <div class="card bg-dark text-light shadow-bg">
-        <div class="card-body text-center">
-          <h4 class="card-title">E-SAWOD 2</h4>
-          <p><strong>Water Level:</strong> <span id="waterlevel2" class="text-danger fw-bold">6 cm</span></p>
-          <p><strong>Humidity:</strong> <span id="humidity2" class="text-secondary fw-bold">9 RH</span></p>
-          <p><strong>Temperature:</strong> <span id="temperature2" class="text-warning fw-bold">34 °C</span></p>
-        </div>
+        <!-- Table -->
+       
       </div>
       
     </div>
   </div>
-</div>
+</section>
 
-  </div>
-</div>
 <!-- /Hero Section -->
 
     <!-- About Section -->

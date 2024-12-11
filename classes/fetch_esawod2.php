@@ -1,21 +1,22 @@
 <?php
-include "connection.php";
 
-// Query to fetch the most recent data for e-sawod2
-$sql = "SELECT kit_name, level_cm, humidity, temperature, timestamp FROM sensor_data WHERE kit_name = 'esawod_2' ORDER BY timestamp DESC LIMIT 1";
+include('connection.php');
+
+// SQL query to fetch the latest data for esawod_2
+$sql = "SELECT humidity, temperature FROM sensor_data WHERE kit_name = 'esawod_2' ORDER BY timestamp DESC LIMIT 1";
 $result = $conn->query($sql);
 
-// Prepare the response data
-$data = [];
-
+// Check if there are results
 if ($result->num_rows > 0) {
-    $data['esawod_2'] = $result->fetch_assoc();
+    $row = $result->fetch_assoc();
+    // Return the latest temperature and humidity
+    echo json_encode([
+        'temperature' => $row['temperature'],
+        'humidity' => $row['humidity']
+    ]);
 } else {
-    $data['esawod_2'] = null;  // No data for e-sawod2
+    echo json_encode(['error' => 'No data found']);
 }
-
-// Send the data as JSON response
-echo json_encode($data);
 
 // Close the connection
 $conn->close();

@@ -46,7 +46,6 @@ unset($_SESSION['error_message']);
 
 /* Modal Content */
 .modal-content {
-  background-color: #fefefe;
   margin: 5% auto; /* Center the modal */
   padding: 40px;
   border: 1px solid #888;
@@ -156,14 +155,35 @@ unset($_SESSION['error_message']);
     </section>
 
  <!-- Modal for Terms and Conditions -->
-<div id="termsModal" class="modal">
+ <div id="termsModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Terms and Conditions</h2>
-        <p>Here are the terms and conditions...</p>
-        <!-- Add more terms content here -->
+        <p>Welcome to Goodland! By signing in, you agree to comply with and be bound by the following terms and conditions. Please read them carefully before proceeding.</p>
+        
+        <h3>1. Acceptance of Terms</h3>
+        <p>By accessing or using our services, you agree to abide by these terms. If you do not agree, please do not sign in or use our services.</p>
+        
+        <h3>2. Privacy</h3>
+        <p>Your information is securely handled in accordance with our Privacy Policy. By signing in, you consent to the collection, use, and storage of your data for providing our services.</p>
+        
+        <h3>3. Account Responsibility</h3>
+        <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.</p>
+        
+        <h3>4. Prohibited Activities</h3>
+        <p>You agree not to misuse our services, including but not limited to unauthorized access, data theft, or any activities that violate applicable laws or regulations.</p>
+        
+        <h3>5. Modifications</h3>
+        <p>Goodland reserves the right to update or modify these terms at any time without prior notice. Continued use of the services implies acceptance of the updated terms.</p>
+        
+        <h3>6. Termination</h3>
+        <p>We reserve the right to suspend or terminate your account if we detect any violations of these terms.</p>
+        
+        <p>By clicking "Accept" or signing in, you confirm that you have read, understood, and agree to these Terms and Conditions.</p>
+        
     </div>
 </div>
+
 
     <script>
     // Toggle Password Visibility

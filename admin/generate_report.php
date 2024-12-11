@@ -1,15 +1,18 @@
 <?php
 include '../classes/connection.php'; // Adjust the path as needed
 
-// Fetch the date range from POST parameters
-$dateFrom = isset($_POST['date_from']) ? $_POST['date_from'] : null;
-$dateTo = isset($_POST['date_to']) ? $_POST['date_to'] : null;
+// Fetch the selected month from POST parameters
+$monthOf = isset($_POST['month_of']) ? $_POST['month_of'] : null;
 
-// Validate if both date parameters are provided
-if (!$dateFrom || !$dateTo) {
-    echo json_encode(['error' => 'Date range is required']);
+// Validate if the month is provided
+if (!$monthOf) {
+    echo json_encode(['error' => 'Month is required']);
     exit;
 }
+
+// Calculate the first and last day of the selected month
+$first_day_of_month = $monthOf . '-01'; // First day of the month
+$last_day_of_month = date('Y-m-t', strtotime($first_day_of_month)); // Last day of the month
 
 // Query to fetch data for both kits (esawod_1 and esawod_2)
 $query = "
@@ -28,7 +31,7 @@ $query = "
 
 // Prepare and execute the query
 $stmt = $conn->prepare($query);
-$stmt->bind_param("ss", $dateFrom, $dateTo);
+$stmt->bind_param("ss", $first_day_of_month, $last_day_of_month);
 $stmt->execute();
 $result = $stmt->get_result();
 

@@ -24,8 +24,7 @@ $mainClass->mark_all_messages_as_read();
                         <div class="row mt-4">
                             <div class="col-md-12">
                             <div class="card">
-                                <div class="card-body">
-                                <div class="d-flex mb-3">
+                            <div class="card-header d-flex  mb-3">
                                   <h3 class="fw-bold">List of Messages</h3>
                                       
                                       <button type="button" class="btn btn-danger btn-rounded ms-auto btn-rounded" data-bs-toggle="modal" data-bs-target="#deleteAllMessagesModal">
@@ -33,6 +32,8 @@ $mainClass->mark_all_messages_as_read();
                                       </button>
 
                                 </div>
+                                <div class="card-body">
+                              
                                 <table id="myTable" class="table table-bordered table-hover table-stripe text-center w-100">
                                     <thead class="table-secondary">
                                         <tr>

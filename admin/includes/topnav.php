@@ -13,7 +13,7 @@
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Add shadow */
     }
    .card,
-      .small-box{
+      .small-box, .card-header{
     border-radius: 0px !important;
    }
     .modal-content, .dropdown-menu{

@@ -248,5 +248,6 @@ $dateTo = isset($_GET['date_to']) ? $_GET['date_to'] : null;
             });
         });
     </script>
+
 </body>
 </html>

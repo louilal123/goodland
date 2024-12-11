@@ -12,7 +12,7 @@
 
 <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
 <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 <style>
  
@@ -77,135 +77,260 @@
     </div><!-- End Page Title -->
     <!-- Values Section -->
     
-    <section id="" class="values">
+    <section id="" class="section">
   <div class="container">
     <div class="row gy-4">
       <!-- Title Section -->
       <div class="col-md-12">
-        <div class="card bg-body-secondary text-center">
-          <h1><span class="bi bi-chart"></span> E-SAWOD SENSOR REAL-TIME DATA</h1>
+        <div class=" btn-primary text-center">
+            
+          <h1><span class="bi bi-chart"></span> <strong>"E-SAWOD SENSOR REAL-TIME DATA"</strong></h1>
         </div>
       </div>
 
-      <!-- E-SAWOD 1 -->
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title text-center">E-SAWOD 1</h5>
-            <!-- Cylinder Chart -->
-            <div id="cylinder1" class="mb-4"></div>
-            <!-- Temperature and Humidity Charts -->
-            <div class="row">
-              <div class="col-md-6">
-                <div id="temperature1"></div>
-              </div>
-              <div class="col-md-6">
-                <div id="humidity1"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+<!-- E-SAWOD 1 -->
+<div class="col-md-6">
+  <div class="card">
+  <div class="card-header bg-dark text-center">
+    <h3 class="text-light">E-SAWOD 1</h3>
+    </div>
+    <div class="card-body">
+      <!-- Centered Cylinder Chart -->
+      <div id="cylinder1" class="mb-4 d-flex justify-content-center"></div>
+     
+    </div>
+  </div>
+</div>
 
-      <!-- E-SAWOD 2 -->
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title text-center">E-SAWOD 2</h5>
-            <!-- Cylinder Chart -->
-            <div id="cylinder2" class="mb-4"></div>
-            <!-- Temperature and Humidity Charts -->
-            <div class="row">
-              <div class="col-md-6">
-                <div id="temperature2"></div>
-              </div>
-              <div class="col-md-6">
-                <div id="humidity2"></div>
-              </div>
-            </div>
-          </div>
+   <!-- E-SAWOD 2 -->
+<div class="col-md-6">
+  <div class="card">
+    <div class="card-header bg-dark text-center">
+    <h3 class="text-light">E-SAWOD 2</h3>
+    </div>
+    <div class="card-body">
+      
+      <!-- Centered Cylinder Chart -->
+      <div id="cylinder2" class="mb-4 d-flex justify-content-center"></div>
+      <!-- Temperature and Humidity Table -->
+      
+    </div>
+  </div>
+</div>
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-body">
+        <table id="sensorDataTable" class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Kit Name</th>
+           
+            <th>Humidity (%)</th>
+            <th>Temperature (°C)</th>
+            <th>Timestamp</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Data rows will be populated here -->
+    </tbody>
+</table>
         </div>
-      </div>
+    </div>
+</div>
+
 
     </div>
   </div>
 </section>
 
 
-<section id="charts" class="section values">
+<section id="charts" class="section  " style="margin-top: -60px;">
     <div class="container">
         <div class="row gy-4">
         <div class="col-md-12">
             <div class="card">
-                <ul class="nav nav-underline">
-                    <li class="nav-item">
-                        <a class="nav-link disabled text-primary fw-bold" id="selectTab" href="#">Select:</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" id="lastMinuteTab" href="#" data-timeframe="lastminute">Last Minute</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="lastHourTab" href="#" data-timeframe="last24hours">Last Hour</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="lastDayTab" href="#" data-timeframe="last7days">Last Day</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="lastWeekTab" href="#" data-timeframe="lastweek">Last Week</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="lastMonthTab" href="#" data-timeframe="lastmonth">Last Month</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="allTimeTab" href="#" data-timeframe="alltime">All Time</a>
-                    </li>
-                </ul>
-                <hr>
-                <div class="tab-content mt-3">
-                    <!-- Last Minute Content -->
-                    <div class="tab-pane fade show active" id="lastMinuteContent" role="tabpanel">
-                        <h5>Last Minute Data</h5>
+                <div class="card-body">
+                    <ul class="nav nav-underline">
+                        <li class="nav-item">
+                            <a class="nav-link disabled text-primary fw-bold" id="selectTab" href="#">Select:</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" id="lastMinuteTab" href="#" data-timeframe="lastminute">Last Minute</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="lastHourTab" href="#" data-timeframe="last24hours">Last Hour</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="lastDayTab" href="#" data-timeframe="last7days">Last Day</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="lastWeekTab" href="#" data-timeframe="lastweek">Last Week</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="lastMonthTab" href="#" data-timeframe="lastmonth">Last Month</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="allTimeTab" href="#" data-timeframe="alltime">All Time</a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <div class="tab-content mt-3">
+
+                        <div class="tab-pane fade show active" id="lastMinuteContent" role="tabpanel">
+                        
+                        <div class="d-flex ms-auto">
+                            <div class="col-6">
+                                
                         <div id="kit1_minute" style="height: 400px;"></div> 
+                            </div>
+                        <div class="col-6">
                         <div id="kit2_minute" style="height: 400px;"></div> 
-                    </div>
+                        </div>
+                        </div>
+                        </div>
 
-                    <!-- Last Hour Content -->
-                    <div class="tab-pane fade" id="lastHourContent" role="tabpanel">
-                        <h5>Last Hour Data</h5>
-                        <div id="kit1-hour" style="height: 400px;"></div> 
-                        <div id="kit2-hour" style="height: 400px;"></div> 
-                    </div>
+                        <div class="tab-pane fade" id="lastHourContent" role="tabpanel">
+                        <div class="d-flex ms-auto">
+                        <div class="col-6">
+                        <div id="kit1_hour" style="height: 400px;"></div> 
+                        </div>
+                        <div class="col-6">
+                        <div id="kit2_hour" style="height: 400px;"></div> 
+                        </div>
+                        </div>
+                        </div>
 
-                    <!-- Last Day Content -->
-                    <div class="tab-pane fade" id="lastDayContent" role="tabpanel">
-                        <h5>Last Day Data</h5>
-                        <div id="kit1-day" style="height: 400px;"></div> 
-                        <div id="kit2-day" style="height: 400px;"></div> 
-                    </div>
+                        <div class="tab-pane fade" id="lastDayContent" role="tabpanel">
+                        
+                        <div class="d-flex ms-auto">
+                        <div class="col-6">
+                        <div id="kit1_day" style="height: 400px;"></div> 
+                        </div>
+                        <div class="col-6">
+                        <div id="kit2_day" style="height: 400px;"></div> 
+                        </div>
+                        </div>
+                        </div>
 
-                    <!-- Last Week Content -->
-                    <div class="tab-pane fade" id="lastWeekContent" role="tabpanel">
-                        <h5>Last Week Data</h5>
-                        <div id="kit1-week" style="height: 400px;"></div> 
-                        <div id="kit2-week" style="height: 400px;"></div> 
-                    </div>
+                        <div class="tab-pane fade" id="lastWeekContent" role="tabpanel">
+                        <div class="d-flex ms-auto">
+                        <div class="col-6">
+                            <div id="kit1_week" style="height: 400px;"></div> 
+                            </div>
+                            <div class="col-6">
+                            <div id="kit2_week" style="height: 400px;"></div> 
+                            </div>
+                        </div>
+                        </div>
 
-                    <!-- Last Month Content -->
-                    <div class="tab-pane fade" id="lastMonthContent" role="tabpanel">
-                        <h5>Last Month Data</h5>
-                        <div id="kit1-month" style="height: 400px;"></div> 
-                        <div id="kit2-month" style="height: 400px;"></div> 
-                    </div>
+                        <div class="tab-pane fade" id="lastMonthContent" role="tabpanel">
+                            <div class="d-flex ms-auto">
+                                <div class="col-6">
+                                <div id="kit1_month" style="height: 400px;"></div> 
+                                </div>
+                                <div class="col-6">
+                                <div id="kit2_month" style="height: 400px;"></div>
+                                </div>
+                            </div> 
+                        </div>
 
-                    <!-- All Time Content -->
-                    <div class="tab-pane fade" id="allTimeContent" role="tabpanel">
-                        <h5>All Time Data</h5>
-                        <div id="kit1-alltime" style="height: 400px;"></div> 
-                        <div id="kit2-alltime" style="height: 400px;"></div> 
+                        <div class="tab-pane fade" id="allTimeContent" role="tabpanel">
+                        <div class="d-flex ms-auto">
+
+                        
+                        <div class="col-6">
+                            <div id="kit1_alltime" style="height: 400px;"></div> 
+                            </div>
+                            <div class="col-6">
+                            <div id="kit2_alltime" style="height: 400px;"></div> 
+                            </div>
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+                              
+
         </div>
+    </div>
+  
+</section>
+<section class="section"  style="margin-top: -60px;">
+    <div class="container">
+        <div class="row gy-4">
+            <div class="col-md-12">
+
+            <div class="card">
+                                    <div class="card-body">
+                                                <form id="monthYearFilterForm" class="row">
+                                                            <div class="col-md-5">
+                                                        <div class="d-flex align-items-center">
+                                                            <label for="monthYearInput" class="text-dark mb-0 me-2">Month:</label>
+                                                            <input type="month" 
+                                                                name="month_of" 
+                                                                id="monthYearInput" 
+                                                                class="form-control" 
+                                                                value="<?php echo isset($month_of) ? $month_of : date('Y-m'); ?>" 
+                                                                required 
+                                                                title="Select a month for the report">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2 d-flex align-items-center">
+                                                        <button type="submit" class="btn btn-dark w-100" title="Filter data based on the selected month">
+                                                            <i class="bi bi-filter"></i> Filter
+                                                        </button>
+                                                    </div>
+
+                                                    <div class="col-md-5 d-flex align-items-center justify-content-end">
+                                                      
+                                                    </div>
+                                                </form>
+                                                </div>
+                                                    
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex ms-auto">
+                                                    <div class="col-6">
+                                                        <div id="kit1" style="height: 400px;"></div> 
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div id="kit2" style="height: 400px;"></div> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <div class="card-body">
+                                            <div class=" table table-responsive">
+                                            <table class="table  table-sm table-bordered" id="summaryTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th rowspan="2">Kit Name</th>
+                                                        <th colspan="2" class="text-center">Water Level (cm)</th>
+                                                        <th colspan="2" class="text-center">Temperature (°C)</th>
+                                                        <th colspan="2" class="text-center">Humidity (%)</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Highest</th>
+                                                        <th>Lowest</th>
+                                                        <th>Highest</th>
+                                                        <th>Lowest</th>
+                                                        <th>Highest</th>
+                                                        <th>Lowest</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="esawodTableBody">
+                                                
+                                                </tbody>
+                                            </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+            </div>
 
         </div>
     </div>
@@ -215,12 +340,12 @@
 
   <?php include "includes/footer.php"; ?>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   
 <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
 <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
 
-  <script>
+<script>
     document.querySelectorAll('.nav-link').forEach(function(tab) {
     tab.addEventListener('click', function(event) {
         event.preventDefault();
@@ -245,6 +370,7 @@
 });
   </script>
 
+<!-- week  -->
 <script type="text/javascript">
    
     const chart1 = Highcharts.chart('kit1_minute', {
@@ -373,355 +499,650 @@
 
     fetchAndUpdateCharts();
 </script>
-
+<!-- hour  -->
 <script type="text/javascript">
-    FusionCharts.ready(function () {
-        // Initialize the chart
-        var chartObj = new FusionCharts({
-            type: 'angulargauge',
-            renderAt: 'humidity1', // ID of the container div
-            width: '100%', // Makes the chart responsive
-            height: '300', // Chart height
-            dataFormat: 'json',
-            dataSource: {
-                "chart": {
-                    "caption": "Humidity Level",
-                    "subcaption": "Real-Time Monitor",
-                    "lowerLimit": "0",
-                    "upperLimit": "70",
-                    "numberSuffix": "%",
-                    "theme": "fusion",
-                    "showValue": "1", // Show value on the gauge
-                    "valueFontSize": "14" // Font size for the displayed value
-                },
-                "colorRange": {
-                    "color": [
-                        {
-                            "minValue": "0",
-                            "maxValue": "30",
-                            "code": "#e44a00" // Red for low humidity
-                        },
-                        {
-                            "minValue": "30",
-                            "maxValue": "60",
-                            "code": "#f8bd19" // Yellow for moderate humidity
-                        },
-                        {
-                            "minValue": "60",
-                            "maxValue": "100",
-                            "code": "#6baa01" // Green for high humidity
-                        }
-                    ]
-                },
-                "dials": {
-                    "dial": [
-                        {
-                            "value": "0" // Initial value; this will update dynamically
-                        }
-                    ]
-                }
+   
+    const chart3 = Highcharts.chart('kit1_hour', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'E-SAWOD1'
+        },
+        xAxis: {
+            categories: ['Last Hour'],
+            title: {
+                text: 'Time'
             }
-        });
-
-        // Render the chart
-        chartObj.render();
-
-        // Real-time update mechanism
-        setInterval(() => {
-            fetch('classes/speedometer1.php') // Path to the PHP file providing real-time data
-                .then(response => {
-                    // Check if response is OK (status 200)
-                    if (!response.ok) {
-                        throw new Error("Network response was not ok " + response.statusText);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Validate the returned data
-                    if (data.humidity !== undefined && !isNaN(data.humidity)) {
-                        var newHumidity = data.humidity;
-
-                        // Update the gauge value
-                        chartObj.feedData("&value=" + newHumidity);
-                        console.log("Updated Humidity:", newHumidity);
-                    } else {
-                        console.error("Invalid humidity data:", data);
-                    }
-                })
-                .catch(error => {
-                    console.error("Error fetching humidity data:", error);
-                });
-        }, 3000); // Fetch new data every 3 seconds
-    });
-</script>
-
-
-<script type="text/javascript">
-    FusionCharts.ready(function () {
-        
-        var chartObj = new FusionCharts({
-            type: 'angulargauge',
-            renderAt: 'humidity2', 
-            width: '100%', 
-            height: '300', 
-            dataFormat: 'json',
-            dataSource: {
-                "chart": {
-                    "caption": "Humidity Level",
-                    "subcaption": "Real-Time Monitor",
-                    "lowerLimit": "0",
-                    "upperLimit": "70",
-                    "numberSuffix": "%",
-                    "theme": "fusion",
-                    "showValue": "1", // Show value on the gauge
-                    "valueFontSize": "14" // Font size for the displayed value
-                },
-                "colorRange": {
-                    "color": [
-                        {
-                            "minValue": "0",
-                            "maxValue": "30",
-                            "code": "#e44a00" // Red for low humidity
-                        },
-                        {
-                            "minValue": "30",
-                            "maxValue": "60",
-                            "code": "#f8bd19" // Yellow for moderate humidity
-                        },
-                        {
-                            "minValue": "60",
-                            "maxValue": "100",
-                            "code": "#6baa01" // Green for high humidity
-                        }
-                    ]
-                },
-                "dials": {
-                    "dial": [
-                        {
-                            "value": "0" // Initial value; this will update dynamically
-                        }
-                    ]
-                }
+        },
+        yAxis: {
+            title: {
+                text: 'Values'
             }
-        });
-
-        // Render the chart
-        chartObj.render();
-
-        // Real-time update mechanism
-        setInterval(() => {
-            fetch('classes/speedometer1.php') // Path to the PHP file providing real-time data
-                .then(response => {
-                    // Check if response is OK (status 200)
-                    if (!response.ok) {
-                        throw new Error("Network response was not ok " + response.statusText);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Validate the returned data
-                    if (data.humidity !== undefined && !isNaN(data.humidity)) {
-                        var newHumidity = data.humidity;
-
-                        // Update the gauge value
-                        chartObj.feedData("&value=" + newHumidity);
-                        console.log("Updated Humidity:", newHumidity);
-                    } else {
-                        console.error("Invalid humidity data:", data);
-                    }
-                })
-                .catch(error => {
-                    console.error("Error fetching humidity data:", error);
-                });
-        }, 3000); // Fetch new data every 3 seconds
+        },
+        legend: {
+            align: 'center',
+            verticalAlign: 'top',
+            layout: 'horizontal',
+            backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Water Level (cm)',
+            type: 'column',
+            color: '#0d6efd',
+            data: []
+        }, {
+            name: 'Humidity (%)',
+            type: 'column',
+            color: '#6c757d',
+            data: []
+        }, {
+            name: 'Temperature (°C)',
+            type: 'column', 
+            color: '#dc3545',
+            data: []
+        }],
+        tooltip: {
+            shared: true,
+            valueSuffix: ' units'
+        }
     });
-</script>
 
+    const chart4 = Highcharts.chart('kit2_hour', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'E-SAWOD2'
+        },
+        xAxis: {
+            categories: ['Last Hour'],
+            title: {
+                text: 'Time'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Values'
+            }
+        },
+        legend: {
+            align: 'center',
+            verticalAlign: 'top',
+            layout: 'horizontal',
+            backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Water Level (cm)',
+            type: 'column',
+            color: '#0d6efd',
+            data: []
+        }, {
+            name: 'Humidity (%)',
+            type: 'column',
+            color: '#6c757d',
+            data: []
+        }, {
+            name: 'Temperature (°C)',
+            type: 'column', 
+            color: '#dc3545',
+            data: []
+        }],
+        tooltip: {
+            shared: true,
+            valueSuffix: ' units'
+        }
+    });
 
+    // Function to fetch the last minute's data and update the charts
+    function fetchAndUpdateCharts() {
+        // Send an AJAX request to the PHP endpoint
+        $.ajax({
+            url: 'classes/fetch_last_hour_data.php', // PHP script to fetch last minute data
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                // Update Kit 1 chart
+                chart3.series[0].setData(response.kit1.level_data); // Update Water Level
+                chart3.series[1].setData(response.kit1.humidity_data); // Update Humidity
+                chart3.series[2].setData(response.kit1.temperature_data); // Update Temperature
 
-<script type="text/javascript">
-    FusionCharts.ready(function(){
-        var chartObj = new FusionCharts({
-            type: 'thermometer',
-            renderAt: 'temperature2',
-            width: '240',
-            height: '310',
-            dataFormat: 'json',
-            dataSource: {
-                "chart": {
-                    "caption": "E-SAWOD 1",
-                    "subcaption": "TEMPERATURE",
-                    "lowerLimit": "0",
-                    "upperLimit": "50",
-                    "decimals": "1",
-                    "numberSuffix": "°C",
-                    "showhovereffect": "1",
-                    "thmFillColor": "#008ee4",
-                    "showGaugeBorder": "1",
-                    "gaugeBorderColor": "#008ee4",
-                    "gaugeBorderThickness": "2",
-                    "gaugeBorderAlpha": "30",
-                    "thmOriginX": "100",
-                    "chartBottomMargin": "20",
-                    "valueFontColor": "#000000",
-                    "theme": "fusion"
-                },
-                // Initial temperature value fetched from PHP
-                "value": 0,
-                "annotations": {
-                    "showbelow": "0",
-                    "groups": [{
-                        "id": "indicator",
-                        "items": [
-                            {
-                                "id": "background",
-                                "type": "rectangle",
-                                "alpha": "50",
-                                "fillColor": "#AABBCC",
-                                "x": "$gaugeEndX-40",
-                                "tox": "$gaugeEndX",
-                                "y": "$gaugeEndY+54",
-                                "toy": "$gaugeEndY+72"
-                            }
-                        ]
-                    }]
-                },
+                // Update Kit 2 chart
+                chart4.series[0].setData(response.kit2.level_data); // Update Water Level
+                chart4.series[1].setData(response.kit2.humidity_data); // Update Humidity
+                chart4.series[2].setData(response.kit2.temperature_data); // Update Temperature
             },
-           "events": {
-    "rendered": function(evt, arg) {
-        // Fetch new temperature data every 3 seconds from PHP
-        evt.sender.dataUpdate = setInterval(function() {
-            fetch('classes/thermometer2.php')  // Fetch latest temperature from PHP
-                .then(response => response.json())
-                .then(data => {
-                    // Update the thermometer value with the fetched data
-                    var newTemp = data.value;
-                    evt.sender.feedData("&value=" + newTemp);
-
-                    // Update the annotation color based on the temperature value
-                    var code;
-                    if (newTemp >= 30) {
-                        code = "#FF0000";  // Red for high temperatures (above 30°C)
-                    } else if (newTemp >= 20) {
-                        code = "#FF9900";  // Yellow for moderate temperatures (20°C to 29°C)
-                    } else {
-                        code = "#00FF00";  // Green for low temperatures (below 20°C)
-                    }
-
-                    // Update the annotation background color
-                    evt.sender.updateAnnotation("background", {
-                        "fillColor": code
-                    });
-                });
-        });
-    },
-
-                'renderComplete': function(evt, arg) {
-                    evt.sender.updateAnnotation(evt, arg);
-                },
-                'realtimeUpdateComplete': function(evt, arg) {
-                    evt.sender.updateAnnotation(evt, arg);
-                },
-                'disposed': function(evt, arg) {
-                    clearInterval(evt.sender.dataUpdate);
-                }
+            error: function(xhr, status, error) {
+                console.error('Error fetching data:', error);
             }
         });
-        chartObj.render();
+    }
+
+    setInterval(fetchAndUpdateCharts, 1000); 
+    fetchAndUpdateCharts();
+</script>
+<!-- day  -->
+<script type="text/javascript">
+   
+    const chart5 = Highcharts.chart('kit1_day', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'E-SAWOD1'
+        },
+        xAxis: {
+            categories: ['Last Day'],
+            title: {
+                text: 'Time'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Values'
+            }
+        },
+        legend: {
+            align: 'center',
+            verticalAlign: 'top',
+            layout: 'horizontal',
+            backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Water Level (cm)',
+            type: 'column',
+            color: '#0d6efd',
+            data: []
+        }, {
+            name: 'Humidity (%)',
+            type: 'column',
+            color: '#6c757d',
+            data: []
+        }, {
+            name: 'Temperature (°C)',
+            type: 'column', 
+            color: '#dc3545',
+            data: []
+        }],
+        tooltip: {
+            shared: true,
+            valueSuffix: ' units'
+        }
     });
+
+    const chart6 = Highcharts.chart('kit2_day', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'E-SAWOD2'
+        },
+        xAxis: {
+            categories: ['Last Day'],
+            title: {
+                text: 'Time'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Values'
+            }
+        },
+        legend: {
+            align: 'center',
+            verticalAlign: 'top',
+            layout: 'horizontal',
+            backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Water Level (cm)',
+            type: 'column',
+            color: '#0d6efd',
+            data: []
+        }, {
+            name: 'Humidity (%)',
+            type: 'column',
+            color: '#6c757d',
+            data: []
+        }, {
+            name: 'Temperature (°C)',
+            type: 'column', 
+            color: '#dc3545',
+            data: []
+        }],
+        tooltip: {
+            shared: true,
+            valueSuffix: ' units'
+        }
+    });
+
+    // Function to fetch the last minute's data and update the charts
+    function fetchAndUpdateCharts() {
+        // Send an AJAX request to the PHP endpoint
+        $.ajax({
+            url: 'classes/fetch_last_day_data.php', // PHP script to fetch last minute data
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                // Update Kit 1 chart
+                chart5.series[0].setData(response.kit1.level_data); // Update Water Level
+                chart5.series[1].setData(response.kit1.humidity_data); // Update Humidity
+                chart5.series[2].setData(response.kit1.temperature_data); // Update Temperature
+
+                // Update Kit 2 chart
+                chart6.series[0].setData(response.kit2.level_data); // Update Water Level
+                chart6.series[1].setData(response.kit2.humidity_data); // Update Humidity
+                chart6.series[2].setData(response.kit2.temperature_data); // Update Temperature
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+    }
+
+    setInterval(fetchAndUpdateCharts, 1000); 
+    fetchAndUpdateCharts();
+</script>
+<!-- week  -->
+<script type="text/javascript">
+   
+   const chart7 = Highcharts.chart('kit1_week', {
+       chart: {
+           type: 'line'
+       },
+       title: {
+           text: 'E-SAWOD1'
+       },
+       xAxis: {
+           categories: ['Last Week'],
+           title: {
+               text: 'Time'
+           }
+       },
+       yAxis: {
+           title: {
+               text: 'Values'
+           }
+       },
+       legend: {
+           align: 'center',
+           verticalAlign: 'top',
+           layout: 'horizontal',
+           backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
+       },
+       credits: {
+           enabled: false
+       },
+       series: [{
+           name: 'Water Level (cm)',
+           type: 'column',
+           color: '#0d6efd',
+           data: []
+       }, {
+           name: 'Humidity (%)',
+           type: 'column',
+           color: '#6c757d',
+           data: []
+       }, {
+           name: 'Temperature (°C)',
+           type: 'column', 
+           color: '#dc3545',
+           data: []
+       }],
+       tooltip: {
+           shared: true,
+           valueSuffix: ' units'
+       }
+   });
+
+   const chart8 = Highcharts.chart('kit2_week', {
+       chart: {
+           type: 'line'
+       },
+       title: {
+           text: 'E-SAWOD2'
+       },
+       xAxis: {
+           categories: ['Last Week'],
+           title: {
+               text: 'Time'
+           }
+       },
+       yAxis: {
+           title: {
+               text: 'Values'
+           }
+       },
+       legend: {
+           align: 'center',
+           verticalAlign: 'top',
+           layout: 'horizontal',
+           backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
+       },
+       credits: {
+           enabled: false
+       },
+       series: [{
+           name: 'Water Level (cm)',
+           type: 'column',
+           color: '#0d6efd',
+           data: []
+       }, {
+           name: 'Humidity (%)',
+           type: 'column',
+           color: '#6c757d',
+           data: []
+       }, {
+           name: 'Temperature (°C)',
+           type: 'column', 
+           color: '#dc3545',
+           data: []
+       }],
+       tooltip: {
+           shared: true,
+           valueSuffix: ' units'
+       }
+   });
+
+   // Function to fetch the last minute's data and update the charts
+   function fetchAndUpdateCharts() {
+       // Send an AJAX request to the PHP endpoint
+       $.ajax({
+           url: 'classes/fetch_last_week_data.php', // PHP script to fetch last minute data
+           method: 'GET',
+           dataType: 'json',
+           success: function(response) {
+               // Update Kit 1 chart
+               chart7.series[0].setData(response.kit1.level_data); // Update Water Level
+               chart7.series[1].setData(response.kit1.humidity_data); // Update Humidity
+               chart7.series[2].setData(response.kit1.temperature_data); // Update Temperature
+
+               // Update Kit 2 chart
+               chart8.series[0].setData(response.kit2.level_data); // Update Water Level
+               chart8.series[1].setData(response.kit2.humidity_data); // Update Humidity
+               chart8.series[2].setData(response.kit2.temperature_data); // Update Temperature
+           },
+           error: function(xhr, status, error) {
+               console.error('Error fetching data:', error);
+           }
+       });
+   }
+
+   setInterval(fetchAndUpdateCharts, 1000); 
+
+   fetchAndUpdateCharts();
 </script>
 
-
+<!-- month  -->
 <script type="text/javascript">
-    FusionCharts.ready(function(){
-        var chartObj = new FusionCharts({
-            type: 'thermometer',
-            renderAt: 'temperature1',
-            width: '240',
-            height: '310',
-            dataFormat: 'json',
-            dataSource: {
-                "chart": {
-                    "caption": "E-SAWOD 1",
-                    "subcaption": "TEMPERATURE",
-                    "lowerLimit": "0",
-                    "upperLimit": "50",
-                    "decimals": "1",
-                    "numberSuffix": "°C",
-                    "showhovereffect": "1",
-                    "thmFillColor": "#008ee4",
-                    "showGaugeBorder": "1",
-                    "gaugeBorderColor": "#008ee4",
-                    "gaugeBorderThickness": "2",
-                    "gaugeBorderAlpha": "30",
-                    "thmOriginX": "100",
-                    "chartBottomMargin": "20",
-                    "valueFontColor": "#000000",
-                    "theme": "fusion"
-                },
-                // Initial temperature value fetched from PHP
-                "value": 0,
-                "annotations": {
-                    "showbelow": "0",
-                    "groups": [{
-                        "id": "indicator",
-                        "items": [
-                            {
-                                "id": "background",
-                                "type": "rectangle",
-                                "alpha": "50",
-                                "fillColor": "#AABBCC",
-                                "x": "$gaugeEndX-40",
-                                "tox": "$gaugeEndX",
-                                "y": "$gaugeEndY+54",
-                                "toy": "$gaugeEndY+72"
-                            }
-                        ]
-                    }]
-                },
-            },
-           "events": {
-    "rendered": function(evt, arg) {
-        // Fetch new temperature data every 3 seconds from PHP
-        evt.sender.dataUpdate = setInterval(function() {
-            fetch('classes/thermometer1.php')  // Fetch latest temperature from PHP
-                .then(response => response.json())
-                .then(data => {
-                    // Update the thermometer value with the fetched data
-                    var newTemp = data.value;
-                    evt.sender.feedData("&value=" + newTemp);
+   
+   const chart9 = Highcharts.chart('kit1_month', {
+       chart: {
+           type: 'line'
+       },
+       title: {
+           text: 'E-SAWOD1'
+       },
+       xAxis: {
+           categories: ['Last Month'],
+           title: {
+               text: 'Time'
+           }
+       },
+       yAxis: {
+           title: {
+               text: 'Values'
+           }
+       },
+       legend: {
+           align: 'center',
+           verticalAlign: 'top',
+           layout: 'horizontal',
+           backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
+       },
+       credits: {
+           enabled: false
+       },
+       series: [{
+           name: 'Water Level (cm)',
+           type: 'column',
+           color: '#0d6efd',
+           data: []
+       }, {
+           name: 'Humidity (%)',
+           type: 'column',
+           color: '#6c757d',
+           data: []
+       }, {
+           name: 'Temperature (°C)',
+           type: 'column', 
+           color: '#dc3545',
+           data: []
+       }],
+       tooltip: {
+           shared: true,
+           valueSuffix: ' units'
+       }
+   });
 
-                    // Update the annotation color based on the temperature value
-                    var code;
-                    if (newTemp >= 30) {
-                        code = "#FF0000";  // Red for high temperatures (above 30°C)
-                    } else if (newTemp >= 20) {
-                        code = "#FF9900";  // Yellow for moderate temperatures (20°C to 29°C)
-                    } else {
-                        code = "#00FF00";  // Green for low temperatures (below 20°C)
-                    }
+   const chart10 = Highcharts.chart('kit2_month', {
+       chart: {
+           type: 'line'
+       },
+       title: {
+           text: 'E-SAWOD2'
+       },
+       xAxis: {
+           categories: ['Last Month'],
+           title: {
+               text: 'Time'
+           }
+       },
+       yAxis: {
+           title: {
+               text: 'Values'
+           }
+       },
+       legend: {
+           align: 'center',
+           verticalAlign: 'top',
+           layout: 'horizontal',
+           backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
+       },
+       credits: {
+           enabled: false
+       },
+       series: [{
+           name: 'Water Level (cm)',
+           type: 'column',
+           color: '#0d6efd',
+           data: []
+       }, {
+           name: 'Humidity (%)',
+           type: 'column',
+           color: '#6c757d',
+           data: []
+       }, {
+           name: 'Temperature (°C)',
+           type: 'column', 
+           color: '#dc3545',
+           data: []
+       }],
+       tooltip: {
+           shared: true,
+           valueSuffix: ' units'
+       }
+   });
 
-                    // Update the annotation background color
-                    evt.sender.updateAnnotation("background", {
-                        "fillColor": code
-                    });
-                });
-        });
-    },
+   // Function to fetch the last minute's data and update the charts
+   function fetchAndUpdateCharts() {
+       // Send an AJAX request to the PHP endpoint
+       $.ajax({
+           url: 'classes/fetch_last_month_data.php', // PHP script to fetch last minute data
+           method: 'GET',
+           dataType: 'json',
+           success: function(response) {
+               // Update Kit 1 chart
+               chart9.series[0].setData(response.kit1.level_data); // Update Water Level
+               chart9.series[1].setData(response.kit1.humidity_data); // Update Humidity
+               chart9.series[2].setData(response.kit1.temperature_data); // Update Temperature
 
-                'renderComplete': function(evt, arg) {
-                    evt.sender.updateAnnotation(evt, arg);
-                },
-                'realtimeUpdateComplete': function(evt, arg) {
-                    evt.sender.updateAnnotation(evt, arg);
-                },
-                'disposed': function(evt, arg) {
-                    clearInterval(evt.sender.dataUpdate);
-                }
-            }
-        });
-        chartObj.render();
-    });
+               // Update Kit 2 chart
+               chart10.series[0].setData(response.kit2.level_data); // Update Water Level
+               chart10.series[1].setData(response.kit2.humidity_data); // Update Humidity
+               chart10.series[2].setData(response.kit2.temperature_data); // Update Temperature
+           },
+           error: function(xhr, status, error) {
+               console.error('Error fetching data:', error);
+           }
+       });
+   }
+
+   setInterval(fetchAndUpdateCharts, 1000); 
+
+   fetchAndUpdateCharts();
+</script>
+
+<!-- all time  -->
+<script type="text/javascript">
+   
+   const chart11 = Highcharts.chart('kit1_alltime', {
+       chart: {
+           type: 'line'
+       },
+       title: {
+           text: 'E-SAWOD1'
+       },
+       xAxis: {
+           categories: ['All Time'],
+           title: {
+               text: 'Time'
+           }
+       },
+       yAxis: {
+           title: {
+               text: 'Values'
+           }
+       },
+       legend: {
+           align: 'center',
+           verticalAlign: 'top',
+           layout: 'horizontal',
+           backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
+       },
+       credits: {
+           enabled: false
+       },
+       series: [{
+           name: 'Water Level (cm)',
+           type: 'column',
+           color: '#0d6efd',
+           data: []
+       }, {
+           name: 'Humidity (%)',
+           type: 'column',
+           color: '#6c757d',
+           data: []
+       }, {
+           name: 'Temperature (°C)',
+           type: 'column', 
+           color: '#dc3545',
+           data: []
+       }],
+       tooltip: {
+           shared: true,
+           valueSuffix: ' units'
+       }
+   });
+
+   const chart12 = Highcharts.chart('kit2_alltime', {
+       chart: {
+           type: 'line'
+       },
+       title: {
+           text: 'E-SAWOD2'
+       },
+       xAxis: {
+           categories: ['All Time'],
+           title: {
+               text: 'Time'
+           }
+       },
+       yAxis: {
+           title: {
+               text: 'Values'
+           }
+       },
+       legend: {
+           align: 'center',
+           verticalAlign: 'top',
+           layout: 'horizontal',
+           backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
+       },
+       credits: {
+           enabled: false
+       },
+       series: [{
+           name: 'Water Level (cm)',
+           type: 'column',
+           color: '#0d6efd',
+           data: []
+       }, {
+           name: 'Humidity (%)',
+           type: 'column',
+           color: '#6c757d',
+           data: []
+       }, {
+           name: 'Temperature (°C)',
+           type: 'column', 
+           color: '#dc3545',
+           data: []
+       }],
+       tooltip: {
+           shared: true,
+           valueSuffix: ' units'
+       }
+   });
+
+   // Function to fetch the last minute's data and update the charts
+   function fetchAndUpdateCharts() {
+       // Send an AJAX request to the PHP endpoint
+       $.ajax({
+           url: 'classes/fetch_last_all_data.php', // PHP script to fetch last minute data
+           method: 'GET',
+           dataType: 'json',
+           success: function(response) {
+               // Update Kit 1 chart
+               chart11.series[0].setData(response.kit1.level_data); // Update Water Level
+               chart11.series[1].setData(response.kit1.humidity_data); // Update Humidity
+               chart11.series[2].setData(response.kit1.temperature_data); // Update Temperature
+
+               // Update Kit 2 chart
+               chart12.series[0].setData(response.kit2.level_data); // Update Water Level
+               chart12.series[1].setData(response.kit2.humidity_data); // Update Humidity
+               chart12.series[2].setData(response.kit2.temperature_data); // Update Temperature
+           },
+           error: function(xhr, status, error) {
+               console.error('Error fetching data:', error);
+           }
+       });
+   }
+
+   setInterval(fetchAndUpdateCharts, 1000); 
+
+   fetchAndUpdateCharts();
 </script>
 
 
@@ -798,11 +1219,11 @@ $(document).ready(function() {
                 data.forEach(function(row) {
                     // Convert UTC timestamp to Cebu local time (UTC+8)
                     var localTime = new Date(row.timestamp);
-                    localTime.setHours(localTime.getHours() + 8); // Add 8 hours to convert to UTC+8
+                    localTime.setHours(localTime.getHours() + 7); // Add 8 hours to convert to UTC+8
 
                     var newRow = '<tr>' +
                         '<td>' + row.kit_name + '</td>' +
-                        '<td>' + row.level_cm + ' cm</td>' +
+                       
                         '<td>' + row.humidity + ' %</td>' +
                         '<td>' + row.temperature + ' °C</td>' +
                         '<td>' + localTime.toLocaleString() + '</td>' + // Show local time
@@ -835,11 +1256,11 @@ $(document).ready(function() {
             dataSource: {
                 "chart": {
                     "theme": "fusion",
-                    "caption": "E-SAWOD 1 LIVE MONITORING",
+                    "caption": "-",
                     "captionFontColor": "#0062cc",
                     "subcaption": "WATER LEVEL",
                     "lowerLimit": "0",
-                    "upperLimit": "30", // Maximum water level of 30 cm
+                    "upperLimit": "40", // Maximum water level of 30 cm
                     "lowerLimitDisplay": "Empty",
                     "upperLimitDisplay": "Full",
                     "numberSuffix": " cm",
@@ -955,11 +1376,11 @@ $(document).ready(function() {
             dataSource: {
                 "chart": {
                     "theme": "fusion",
-                    "caption": "E-SAWOD 2",
+                    "caption": "-",
                     "captionFontColor": "#0062cc",
-                    "subcaption": "Live Monitoring",
+                    "subcaption": "WATER LEVEL",
                     "lowerLimit": "0",
-                    "upperLimit": "30", // Maximum water level of 30 cm
+                    "upperLimit": "40", // Maximum water level of 30 cm
                     "lowerLimitDisplay": "Empty",
                     "upperLimitDisplay": "Full",
                     "numberSuffix": " cm",
@@ -1066,6 +1487,249 @@ $(document).ready(function() {
 
 
 <!-- STARTTT HERE  -->
+ 
+   <!-- Scripts -->
+   <script type="text/javascript">
+   document.addEventListener('DOMContentLoaded', function () {
+       const monthInput = document.getElementById('monthYearInput');
+       let monthOf = monthInput.value;
+
+       const formData = new FormData();
+       formData.append('month_of', monthOf);
+
+       function fetchDataForKit1() {
+           fetch('admin/get_esawod_1_data.php', {
+               method: 'POST',
+               body: formData
+           })
+               .then(response => response.json())
+               .then(data => {
+                   console.log(data); 
+
+                   if (data.error) {
+                       throw new Error(data.error);
+                   }
+
+                   Highcharts.chart('kit1', {
+                       chart: {
+                           type: 'column'
+                       },
+                       title: {
+                           text: 'E-SAWOD1'
+                       },
+                       xAxis: {
+                           categories: data.days, 
+                           title: {
+                               text: 'Day of the Month'
+                           }
+                       },
+                       yAxis: {
+                           title: {
+                               text: 'Measurements'
+                           },
+                           labels: {
+                               format: '{value}'
+                           }
+                       },
+                       legend: {
+                           align: 'center',
+                           verticalAlign: 'top',
+                           layout: 'horizontal',
+                           backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
+                       },
+                       credits: {
+                           enabled: false
+                       },
+                       series: [
+                           {
+                               name: 'Water Level (cm)',
+                               type: 'area',
+                               color: '#0d6efd',
+                               data: data.level_data.map(Number) 
+                           },
+                           {
+                               name: 'Temperature (°C)',
+                               type: 'line',
+                               color: '#dc3545',
+                               data: data.temperature_data
+                           },
+                           {
+                               name: 'Humidity (%)',
+                               type: 'line',
+                               color: '#6c757d',
+                               data: data.humidity_data
+                           }
+                       ],
+                       tooltip: {
+                           shared: true,
+                           formatter: function () {
+                               let tooltip = '<b>Day: ' + this.x + '</b><br>';
+                               this.points.forEach(point => {
+                                   tooltip += point.series.name + ': ' + point.y + '<br>';
+                               });
+                               return tooltip;
+                           }
+                       }
+                   });
+               })
+               .catch(error => {
+                   console.error('Error fetching data for E-SAWOD1:', error);
+               });
+       }
+
+       function fetchDataForKit2() {
+           fetch('admin/get_esawod_2_data.php', {
+               method: 'POST',
+               body: formData
+           })
+               .then(response => response.json())
+               .then(data => {
+                   console.log(data); 
+
+                   if (data.error) {
+                       throw new Error(data.error);
+                   }
+
+                   Highcharts.chart('kit2', {
+                       chart: {
+                           type: 'column'
+                       },
+                       title: {
+                           text: 'E-SAWOD2'
+                       },
+                       xAxis: {
+                           categories: data.days, 
+                           title: {
+                               text: 'Day of the Month'
+                           }
+                       },
+                       yAxis: {
+                           title: {
+                               text: 'Measurements'
+                           },
+                           labels: {
+                               format: '{value}'
+                           }
+                       },
+                       legend: {
+                           align: 'center',
+                           verticalAlign: 'top',
+                           layout: 'horizontal',
+                           backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
+                       },
+                       credits: {
+                           enabled: false
+                       },
+                       series: [
+                           {
+                               name: 'Water Level (cm)',
+                               type: 'area',
+                               color: '#0d6efd',
+                               data: data.level_data.map(Number) 
+                           },
+                           {
+                               name: 'Temperature (°C)',
+                               type: 'line',
+                               color: '#dc3545',
+                               data: data.temperature_data
+                           },
+                           {
+                               name: 'Humidity (%)',
+                               type: 'line',
+                               color: '#6c757d',
+                               data: data.humidity_data
+                           }
+                       ],
+                       tooltip: {
+                           shared: true,
+                           formatter: function () {
+                               let tooltip = '<b>Day: ' + this.x + '</b><br>';
+                               this.points.forEach(point => {
+                                   tooltip += point.series.name + ': ' + point.y + '<br>';
+                               });
+                               return tooltip;
+                           }
+                       }
+                   });
+               })
+               .catch(error => {
+                   console.error('Error fetching data for E-SAWOD1:', error);
+               });
+       }
+
+       fetchDataForKit1();
+       fetchDataForKit2();
+       document.getElementById('monthYearFilterForm').addEventListener('submit', function (event) {
+           event.preventDefault();
+           monthOf = monthInput.value;
+           formData.set('month_of', monthOf);
+           fetchDataForKit1();
+           fetchDataForKit2();
+       });
+
+
+
+   });
+</script>
+
+<script type="text/javascript">
+   document.addEventListener('DOMContentLoaded', function () {
+       const monthInput = document.getElementById('monthYearInput');
+       let monthOf = monthInput.value;
+
+       const formData = new FormData();
+       formData.append('month_of', monthOf);
+
+       function fetchSummaryData() {
+           fetch('admin/generate_report.php', {
+               method: 'POST',
+               body: formData
+           })
+               .then(response => response.json())
+               .then(data => {
+                   console.log(data); 
+
+                   if (data.error) {
+                       throw new Error(data.error);
+                   }
+
+                   const esawodTableBody = document.getElementById('esawodTableBody');
+                   esawodTableBody.innerHTML = '';
+
+                   data.forEach(item => {
+                       const row = document.createElement('tr');
+                       row.innerHTML = `
+                           <td>${item.kit_name}</td>
+                           <td>${item.highest_wl}</td>
+                           <td>${item.lowest_wl}</td>
+                           <td>${item.highest_temp}</td>
+                           <td>${item.lowest_temp}</td>
+                           <td>${item.highest_humidity}</td>
+                           <td>${item.lowest_humidity}</td>
+                       `;
+                       esawodTableBody.appendChild(row);
+                   });
+               })
+               .catch(error => {
+                   console.error('Error fetching summary data:', error);
+               });
+       }
+
+       fetchSummaryData();
+
+       document.getElementById('monthYearFilterForm').addEventListener('submit', function (event) {
+           event.preventDefault();
+           monthOf = monthInput.value;
+           formData.set('month_of', monthOf);
+           fetchSummaryData();
+       });
+
+       document.getElementById('printButton').addEventListener('click', function () {
+           window.print();
+       });
+   });
+</script>
+
 
 
 </body>

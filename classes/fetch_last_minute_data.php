@@ -39,11 +39,9 @@ function fetch_last_minute($kit_name, $conn) {
     ];
 }
 
-// Fetch last minute data for both kits
 $kit1_data = fetch_last_minute('esawod_1', $conn);
 $kit2_data = fetch_last_minute('esawod_2', $conn);
 
-// Return data as JSON
 echo json_encode([
     'kit1' => $kit1_data,
     'kit2' => $kit2_data,

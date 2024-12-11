@@ -1,53 +1,56 @@
 <?php
+// Connect to the database
+include '../classes/connection.php';
 
-include '../classes/connection.php'; // Adjust the path as needed
+// Get the selected month and year from the POST request
+$monthOf = isset($_POST['month_of']) ? $_POST['month_of'] : date('Y-m');
 
-// Check if date range is provided
-if (isset($_POST['date_from']) && isset($_POST['date_to'])) {
-    $dateFrom = $_POST['date_from'];
-    $dateTo = $_POST['date_to'];
+// SQL query to fetch average water level, temperature, and humidity for the selected month
+$query = "
+    SELECT 
+        DATE_FORMAT(timestamp, '%Y-%m-%d') as day,
+        AVG(level_cm) as avg_level,
+        AVG(temperature) as avg_temp,
+        AVG(humidity) as avg_humidity
+    FROM 
+        sensor_data
+    WHERE 
+        kit_name = 'esawod_2' AND DATE_FORMAT(timestamp, '%Y-%m') = ?
+    GROUP BY 
+        DATE_FORMAT(timestamp, '%Y-%m-%d')
+    ORDER BY 
+        day ASC
+";
 
-    try {
-        $query = "
-            SELECT 
-                DAY(timestamp) AS day,
-                AVG(level_cm) AS avg_wl,
-                AVG(temperature) AS avg_temp,
-                AVG(humidity) AS avg_humidity
-            FROM sensor_data
-            WHERE kit_name = 'esawod_2' AND DATE(timestamp) BETWEEN ? AND ?
-            GROUP BY DAY(timestamp)
-            ORDER BY day
-        ";
+// Prepare and execute the query
+$stmt = $conn->prepare($query);
+$stmt->bind_param('s', $monthOf); // Bind the month parameter
+$stmt->execute();
+$result = $stmt->get_result();
 
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("ss", $dateFrom, $dateTo);
-        $stmt->execute();
-        $result = $stmt->get_result();
+// Initialize arrays to hold the results
+$days = [];
+$level_data = [];
+$temperature_data = [];
+$humidity_data = [];
 
-        $level_data = [];
-        $temperature_data = [];
-        $humidity_data = [];
-        $days = [];
-
-        while ($row = $result->fetch_assoc()) {
-            $days[] = $row['day'];
-            $level_data[] = $row['avg_wl'];
-            $temperature_data[] = $row['avg_temp'];
-            $humidity_data[] = $row['avg_humidity'];
-        }
-
-        // Return chart data as JSON
-        echo json_encode([
-            'days' => $days,
-            'level_data' => $level_data,
-            'temperature_data' => $temperature_data,
-            'humidity_data' => $humidity_data
-        ]);
-    } catch (Exception $e) {
-        echo json_encode(['error' => $e->getMessage()]);
-    }
-} else {
-    echo json_encode(['error' => 'Date range not provided.']);
+// Fetch the results
+while ($row = $result->fetch_assoc()) {
+    $days[] = $row['day'];
+    $level_data[] = (float)$row['avg_level'];  // Use average level for water level data
+    $temperature_data[] = (float)$row['avg_temp'];
+    $humidity_data[] = (float)$row['avg_humidity'];
 }
+
+// Close the statement and connection
+$stmt->close();
+$conn->close();
+
+// Return the data as JSON
+echo json_encode([
+    'days' => $days,
+    'level_data' => $level_data,
+    'temperature_data' => $temperature_data,
+    'humidity_data' => $humidity_data
+]);
 ?>

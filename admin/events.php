@@ -218,8 +218,8 @@
 
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>    
-                        <button type="submit" name="edit_event" class="btn btn-primary">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>    
+                        <button type="submit" name="edit_event" class="btn btn-primary">Save</button>
                     </div>
                 </form>
             </div>
@@ -300,7 +300,7 @@
                     
                     <div class="row mt-3">
                         <div class="col">
-                            <label for="event_photo" class="form-label">Event Photo</label>
+                            <label for="event_photo" class="form-label">Event banner</label>
                             <input type="file" class="form-control" name="event_photo" id="event_photo" >
                             <?php if (isset($_SESSION['error_event_photo'])): ?>
                                 <p class="error text-danger"><?php echo $_SESSION['error_event_photo']; unset($_SESSION['error_event_photo']); ?></p>
@@ -378,7 +378,7 @@
     <script>
 $(document).ready(function() {
     $('.deleteMessageBtn').on('click', function(e) {
-        e.preventDefault(); // Prevent the default action
+        e.preventDefault();
 
         const eventId = $(this).data('event-id');
         const eventName = $(this).data('event-name');
@@ -435,7 +435,6 @@ $(document).ready(function() {
 $event = $mainClass->fetchEvents();
 $events = [];
 foreach($event as $row){
-    // Prepare raw datetime for start and end in ISO format
     $row['start_datetime'] = date("Y-m-d\TH:i:s", strtotime($row['start_datetime']));
     $row['end_datetime'] = date("Y-m-d\TH:i:s", strtotime($row['end_datetime']));
     $events[] = $row;
@@ -443,7 +442,6 @@ foreach($event as $row){
 ?>
 
 <script>
-    // Directly pass the events to JavaScript (no need for parseJSON)
     var calendarEvents = <?= json_encode($events) ?>;
 </script>
 
