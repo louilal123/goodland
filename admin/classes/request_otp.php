@@ -1,4 +1,4 @@
-<?php
+<?php 
 session_start();
 require_once "Main_class.php";
 require_once "config.php";
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Process OTP or reset link request
     if (isset($_POST['send_otp'])) {
         $otp = $mainClass->initiatePasswordReset($email, 'otp');
-        $_SESSION['email'] = $email;
+        $_SESSION['email'] = $email; 
 
         if ($otp) {
             $mail = require __DIR__ . "/../../mailer.php";
@@ -102,6 +102,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             $_SESSION['status'] = "Failed to generate OTP. Please try again.";
             $_SESSION['status_icon'] = "error";
+            $_SESSION['login_attempts'] += 1;  // Increment login attempts
+            if ($_SESSION['login_attempts'] >= 3) {
+                $_SESSION['lockout_time'] = time();  // Lockout the user for 5 minutes
+            }
             header("Location: ../forgot_password.php");
             exit;
         }
@@ -143,12 +147,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             } catch (Exception $e) {
                 $_SESSION['status1'] = "Mailer Error: {$mail->ErrorInfo}";
                 $_SESSION['status_icon1'] = "error";
+                $_SESSION['login_attempts'] += 1;  // Increment login attempts
+                if ($_SESSION['login_attempts'] >= 3) {
+                    $_SESSION['lockout_time'] = time();  // Lockout the user for 5 minutes
+                }
                 header("Location: ../forgot_password.php");
                 exit;
             }
         } else {
             $_SESSION['status'] = "Failed to generate reset link. Please try again.";
             $_SESSION['status_icon'] = "error";
+            $_SESSION['login_attempts'] += 1;  // Increment login attempts
+            if ($_SESSION['login_attempts'] >= 3) {
+                $_SESSION['lockout_time'] = time();  // Lockout the user for 5 minutes
+            }
             header("Location: ../forgot_password.php");
             exit;
         }
