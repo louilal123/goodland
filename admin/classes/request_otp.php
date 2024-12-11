@@ -1,14 +1,22 @@
-<?php 
+<?php
 session_start();
 require_once "Main_class.php";
 require_once "config.php";
 
-
 $mainClass = new Main_class();
+
+// Initialize login attempt and lockout time if not already set
+if (!isset($_SESSION['login_attempts'])) {
+    $_SESSION['login_attempts'] = 0;
+}
+if (!isset($_SESSION['lockout_time'])) {
+    $_SESSION['lockout_time'] = null;
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = trim($_POST['email']);
 
+    // Check if email is provided
     if (empty($email)) {
         $_SESSION['status'] = "Please enter your email address.";
         $_SESSION['status_icon'] = "error";
@@ -16,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
+    // Validate email format
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $_SESSION['status'] = "Please enter a valid email address.";
         $_SESSION['status_icon'] = "error";
@@ -23,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
+    // Check if email exists in the database
     if (!$mainClass->emailExists($email)) {
         $_SESSION['status'] = "The email you provided isn't associated with any account.";
         $_SESSION['status_icon'] = "error";
@@ -30,9 +40,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
+    // Lockout mechanism: Too many failed attempts will lock the user out
+    if ($_SESSION['login_attempts'] >= 3) {
+        $current_time = time();
+        $lockout_time = $_SESSION['lockout_time'];
+
+        // If locked out, check the time remaining before they can try again
+        if ($lockout_time && ($current_time - $lockout_time) < 300) { // 5 minutes lockout
+            $remaining_time = 300 - ($current_time - $lockout_time);
+            $_SESSION['status'] = "Too many failed attempts. Please try again in $remaining_time seconds.";
+            $_SESSION['status_icon'] = "error";
+            header("Location: ../forgot_password.php");
+            exit;
+        } else {
+            // Reset attempts and lockout time after 5 minutes
+            $_SESSION['login_attempts'] = 0;
+            $_SESSION['lockout_time'] = null;
+        }
+    }
+
+    // Process OTP or reset link request
     if (isset($_POST['send_otp'])) {
         $otp = $mainClass->initiatePasswordReset($email, 'otp');
-        $_SESSION['email'] = $email; 
+        $_SESSION['email'] = $email;
 
         if ($otp) {
             $mail = require __DIR__ . "/../../mailer.php";
@@ -77,6 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
+    // Generate and send password reset link
     if (isset($_POST['send_link'])) {
         $otp = rand(100000, 999999);
         
@@ -87,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['otp'] = $otp;  
             
             $full_reset_link = "https://goodlandv2.com/admin/reset_password_vialink.php?otp=" . urlencode($encrypted_otp);
-    
+
             $mail = require __DIR__ . "/../../mailer.php";
             $mail->setFrom("rubinlouie41@gmail.com", "GOODLAND.PH");
             $mail->addAddress($email);
@@ -102,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </body>
             </html>
             ";
-    
+
             try {
                 $mail->send();
                 $_SESSION['status1'] = "Password reset link has been sent to your email.";
@@ -122,7 +153,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit;
         }
     }
-    
-    
 }
 ?>
