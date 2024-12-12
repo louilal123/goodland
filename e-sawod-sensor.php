@@ -1260,7 +1260,7 @@ $(document).ready(function() {
                     "captionFontColor": "#0062cc",
                     "subcaption": "WATER LEVEL",
                     "lowerLimit": "0",
-                    "upperLimit": "30", // Maximum water level of 30 cm
+                    "upperLimit": "40", // Maximum water level of 30 cm
                     "lowerLimitDisplay": "Empty",
                     "upperLimitDisplay": "Full",
                     "numberSuffix": " cm",
