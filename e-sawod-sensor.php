@@ -84,7 +84,7 @@
       <div class="col-md-12">
         <div class=" btn-primary text-center">
             
-          <h1><span class="bi bi-chart"></span> <strong>"E-SAWOD SENSOR REAL-TIME DATA"</strong></h1>
+          <h1><span class="bi bi-chart"></span> <strong>"E-SAWOD SENSOR DATA"</strong></h1>
         </div>
       </div>
 
