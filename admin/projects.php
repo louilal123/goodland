@@ -236,11 +236,12 @@
 
                 <!-- Modal Footer -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success btn-rounded">
-                        <i class="fas fa-save"></i> Save Changes
-                    </button>
+                   
                     <button type="button" class="btn btn-secondary btn-rounded" data-bs-dismiss="modal">
                         <i class="fas fa-times"></i> Cancel
+                    </button>
+                     <button type="submit" class="btn btn-success btn-rounded">
+                        <i class="fas fa-save"></i> Save Changes
                     </button>
                 </div>
             </form>
