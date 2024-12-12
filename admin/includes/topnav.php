@@ -90,7 +90,7 @@
                     <i class="fas fa-bell fa-lg"></i>
                     <span class="badge rounded-pill badge-notification bg-danger" id="notif-count">
                         <?php 
-                        echo isset($unread_notifications_count) && $unread_notifications_count > 0 ? htmlspecialchars($unread_notifications_count) : '0'; 
+                        echo "0";
                         ?>
                     </span>
                 </a>
