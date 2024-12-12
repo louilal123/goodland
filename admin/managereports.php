@@ -11,7 +11,7 @@
 <script src="https://code.highcharts.com/highcharts-3d.js"></script>
 <style>
     #kit1, #kit2{
-        /* width: 330px !important; */
+         width: 330px !important; 
         height: 400px !important;
     }
     @media (max-width: 480px) {
