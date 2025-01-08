@@ -18,7 +18,15 @@ if (!$sqlContent) {
     die("Failed to read SQL file.");
 }
 
-// Execute the SQL content
+// Clear the existing data in the sensor_data table
+$truncateQuery = "TRUNCATE TABLE sensor_data";
+if ($conn->query($truncateQuery)) {
+    echo "Table cleared successfully!<br>";
+} else {
+    die("Error clearing table: " . $conn->error);
+}
+
+// Execute the SQL content to import new data
 if ($conn->multi_query($sqlContent)) {
     echo "Data imported successfully!";
 
