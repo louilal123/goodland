@@ -18,26 +18,21 @@ if (!$sqlContent) {
     die("Failed to read SQL file.");
 }
 
-// Clear the existing data in the sensor_data table
-$truncateQuery = "TRUNCATE TABLE sensor_data";
-if ($conn->query($truncateQuery)) {
-    echo "Table cleared successfully!<br>";
-} else {
-    die("Error clearing table: " . $conn->error);
-}
+// Split SQL content into individual queries
+$sqlQueries = explode(";", $sqlContent);
 
-// Execute the SQL content to import new data
-if ($conn->multi_query($sqlContent)) {
-    echo "Data imported successfully!";
-
-    // Flush results to process multiple queries
-    do {
-        if ($result = $conn->store_result()) {
-            $result->free();
+// Execute each query
+foreach ($
+// Execute each query
+foreach ($sqlQueries as $query) {
+    $query = trim($query);
+    if (!empty($query)) {
+        if ($conn->query($query)) {
+            echo "Query executed successfully: " . htmlspecialchars($query) . "<br>";
+        } else {
+            echo "Error executing query: " . htmlspecialchars($query) . " - " . $conn->error . "<br>";
         }
-    } while ($conn->next_result());
-} else {
-    echo "Error importing data: " . $conn->error;
+    }
 }
 
 // Close the database connection
