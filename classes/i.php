@@ -3,7 +3,7 @@
 require_once 'connection.php';
 
 // Path to the SQL file in the same classes folder
-$sqlFilePath = __DIR__ . '/sensor_data.sql';
+$sqlFilePath = 'sensor_data.sql'; // Relative path
 
 // Check if the SQL file exists
 if (!file_exists($sqlFilePath)) {
