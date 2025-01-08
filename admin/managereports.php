@@ -118,7 +118,17 @@
 
     <?php include "includes/footer.php"; ?>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-   
+<script>
+    // Get the current date
+    const today = new Date();
+
+    // Format the date to YYYY-MM
+    const maxMonth = today.toISOString().slice(0, 7);
+
+    // Set the max attribute of the input
+    document.getElementById('monthYearInput').setAttribute('max', maxMonth);
+</script>
+
     <!-- Scripts -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">
