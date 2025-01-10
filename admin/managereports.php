@@ -11,12 +11,12 @@
 <script src="https://code.highcharts.com/highcharts-3d.js"></script>
 <style>
     #kit1, #kit2{
-         width: 330px !important; 
+        width: 330px !important;
         height: 400px !important;
     }
     @media (max-width: 480px) {
                     #kit1, #kit2 {
-                        width: 400px !important;
+                        width: 440px !important;
                         height: 400px !important;
                     }
                 }
@@ -74,7 +74,6 @@
                                                 </div>
                                             </div>
 
-                                        <hr>
                                     </div>
 
                                    <div class="card">
@@ -118,17 +117,7 @@
 
     <?php include "includes/footer.php"; ?>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script>
-    // Get the current date
-    const today = new Date();
-
-    // Format the date to YYYY-MM
-    const maxMonth = today.toISOString().slice(0, 7);
-
-    // Set the max attribute of the input
-    document.getElementById('monthYearInput').setAttribute('max', maxMonth);
-</script>
-
+   
     <!-- Scripts -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">
@@ -310,6 +299,7 @@
         });
 
         document.getElementById('printButton').addEventListener('click', function () {
+    // Temporarily hide unwanted elements
     document.getElementById('monthYearFilterForm').style.display = 'none';
     document.getElementById('printButton').style.display = 'none';
 
@@ -323,9 +313,11 @@
         reportHeader.style.display = 'none';
     }
 
+    // Generate the month/year text for the header
     const monthYearInput = document.getElementById('monthYearInput');
     const monthYearText = new Date(monthYearInput.value).toLocaleString('default', { month: 'long', year: 'numeric' });
 
+    // Add print-specific styles
     const style = document.createElement('style');
     style.innerHTML = `
         @media print {
@@ -334,53 +326,63 @@
                 margin: 0;
                 padding: 0;
             }
-            .print-header {
+            .print-only {
+                display: block !important;
                 text-align: center;
                 margin-bottom: 20px;
                 z-index: 1000;
                 position: relative;
             }
-            .print-header h1 {
+            .print-only h1 {
                 font-size: 2em;
                 color: #007bff;
             }
-            .print-header p {
+            .print-only p {
                 font-size: 1.2em;
+            }
+            .non-printable {
+                display: none !important;
             }
         }
     `;
     document.head.appendChild(style);
 
-    const printHeader = `
-        <div class="print-header">
-            <h1 class="text-primary">GOOD<i class="fw-light">Land</i></h1>
-            <h5>ESAWOD DATA Report</h5>
-            <p>37 St., Brgy Atop-Atop, Bantayan Island, Cebu</p>
-            <p>${monthYearText}</p>
-        </div>
+    // Create a container for the print-only header
+    const printHeader = document.createElement('div');
+    printHeader.classList.add('print-only');
+    printHeader.innerHTML = `
+        <h1 class="text-primary">GOOD<i class="fw-light">Land</i></h1>
+        <h5>ESAWOD DATA Report</h5>
+        <p>37 St., Brgy Atop-Atop, Bantayan Island, Cebu</p>
+        <p>Email: goodland.philippines@gmail.com</p>
+        <p>Phone: 09451295199</p>
+        <p>Report Date: ${monthYearText}</p>
     `;
 
-    const bodyContent = document.body.innerHTML;
-    document.body.innerHTML = printHeader + bodyContent;
+    // Add the print-only header to the DOM temporarily
+    document.body.prepend(printHeader);
 
+    // Trigger the print dialog
     window.print();
 
+    // Cleanup after printing
     window.onafterprint = function () {
-        document.body.innerHTML = bodyContent;
+        // Remove the print-only header
+        printHeader.remove();
 
+        // Restore hidden elements
         document.getElementById('monthYearFilterForm').style.display = '';
         document.getElementById('printButton').style.display = '';
         navLinks.forEach(link => link.style.display = '');
         navItems.forEach(item => item.style.display = '');
-        
         if (reportHeader) {
             reportHeader.style.display = '';
         }
 
+        // Remove the print-specific styles
         document.head.removeChild(style);
     };
 });
-
 
 
     });
