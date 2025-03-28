@@ -419,7 +419,7 @@
                 </div>
             </div>
             <div class="border-t border-white/10 pt-6 text-center text-sm opacity-50">
-                © 2025 Crimson Cycles. All rights reserved.
+                © 2025 Crimson Cycles. All rights reserved. Created By Jhon Louie Rubin
             </div>
         </div>
     </footer>
