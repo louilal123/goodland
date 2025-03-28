@@ -199,7 +199,7 @@
                 </div>
                 <div class="md:w-1/2 flex justify-center bike-container">
 
-<img src="images/MTBSport.webp" class="bike-image" srcset=""  alt="Red Mountain Bike">
+<img src="images/MTBSport.webp" class="bike-image" srcset="" height="900" width="900"  alt="Red Mountain Bike">
 
                 
                 </div>
