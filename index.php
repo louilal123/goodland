@@ -1,16 +1,150 @@
-<?php
- ini_set('display_errors', 1); 
- ini_set('display_startup_errors', 1); 
- error_reporting(E_ALL); 
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welcome To Goodland</title>
-<?php include "includes/header.php"?>
-
-</head>
-<style>
+  <?php include "includes/header.php"?>
+  <style>
+    :root {
+      --primary-color: #144D53;
+      --accent-color: #FFC107;
+      --dark-color: #121212;
+      --light-color: #f8f9fa;
+      --blue-accent: #0062cc;
+      --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--light-color);
+      color: var(--dark-color);
+      overflow-x: hidden;
+    }
+    
+    /* Hero Section */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    
+   
+    
+    #hero-background-video {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+    
+ 
+    
+    .hero p {
+      font-size: clamp(1rem, 1.5vw, 1.25rem);
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+      color: rgba(255, 255, 255, 0.85);
+      max-width: 580px;
+    }
+    
+    .hero .text-warning {
+      color: var(--accent-color) !important;
+    }
+    
+    .hero .accent-dot {
+      font-size: 80px;
+      color: var(--blue-accent) !important;
+      display: inline-block;
+      line-height: 0;
+      margin-left: -5px;
+      vertical-align: middle;
+    }
+    
+    .btn-get-started {
+      background: linear-gradient(45deg, var(--primary-color), var(--blue-accent)) !important;
+      color: white;
+      padding: 15px 30px;
+      border-radius: 4px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: var(--transition);
+      border: none;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .btn-get-started::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      transition: var(--transition);
+      z-index: -1;
+    }
+    
+    .btn-get-started:hover::before {
+      width: 100%;
+    }
+    
+    .btn-watch-video {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      font-weight: 600;
+      transition: var(--transition);
+      text-decoration: none;
+      position: relative;
+    }
+    
+    .btn-watch-video i {
+      font-size: 2rem;
+      transition: var(--transition);
+      color: var(--accent-color);
+    }
+    
+    .btn-watch-video:hover {
+      color: var(--accent-color);
+    }
+    
+    .hero-img .broken-img {
+      position: relative;
+      border-radius: 10px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      transition: var(--transition);
+      transform: perspective(1000px) rotateY(-5deg);
+    }
+    
+    .lightning-strike {
+      position: absolute;
+      top: 0;
+      right: 20%;
+      width: 3px;
+      height: 0;
+      background: var(--accent-color);
+      z-index: 10;
+      animation: lightning 5s infinite;
+    }
+    
+    @keyframes lightning {
+      0%, 95%, 100% {
+        height: 0;
+        opacity: 0;
+      }
+      96%, 99% {
+        height: 200px;
+        opacity: 1;
+      }
+    }
 .real-time-data {
   background: black !important;
   border: 1px solid rgba(0, 0, 0, 0.1);
