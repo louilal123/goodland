@@ -121,30 +121,9 @@
       border-radius: 10px;
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
       transition: var(--transition);
-      transform: perspective(1000px) rotateY(-5deg);
+      
     }
-    
-    .lightning-strike {
-      position: absolute;
-      top: 0;
-      right: 20%;
-      width: 3px;
-      height: 0;
-      background: var(--accent-color);
-      z-index: 10;
-      animation: lightning 5s infinite;
-    }
-    
-    @keyframes lightning {
-      0%, 95%, 100% {
-        height: 0;
-        opacity: 0;
-      }
-      96%, 99% {
-        height: 200px;
-        opacity: 1;
-      }
-    }
+ 
 .real-time-data {
   background: black !important;
   border: 1px solid rgba(0, 0, 0, 0.1);
