@@ -286,7 +286,7 @@
           </div>
 
           <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
-            <img src="assets/img/backgroun.jpg" class="img-fluid" style="height: 1000px !important; width: auto;" alt="">
+            <img src="assets/img/backgroun.jpg" class="img-fluid"  alt="">
           </div>
 
         </div>
