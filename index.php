@@ -117,7 +117,7 @@
       <div class="col-lg-6 order-1 order-lg-2 hero-img d-flex flex-column justify-content-center" data-aos="zoom-out">
         <!-- Image -->
         <div class="lightning-strike"></div>
-        <img src="assets/img/landingbg.png" class="img-fluid broken-img mb-4">
+        <img src="assets/img/landingbg.png" class="img-fluid broken-img mb-4" style="hieght: 700px !important;">
 
         <!-- Table -->
        
@@ -152,7 +152,7 @@
           </div>
 
           <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
-            <img src="assets/img/backgroun.jpg" class="img-fluid" alt="">
+            <img src="assets/img/backgroun.jpg" class="img-fluid" style="height: 1000px !important; width: auto;" alt="">
           </div>
 
         </div>

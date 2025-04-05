@@ -221,7 +221,7 @@ h6 {
 ------------------------------*/
 .index-page .header {
  
-  --background-color: white !important; 
+  --background-color: none !important; 
  
 }
 
