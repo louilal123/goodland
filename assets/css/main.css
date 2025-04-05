@@ -225,13 +225,6 @@ h6 {
  
 }
 
-.sitename {
-  font-size: 48px; /* Adjust size as needed */
-  background-image: linear-gradient(to right, #144D53, #0062cc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 
 
 /* Index Page Header on Scroll
