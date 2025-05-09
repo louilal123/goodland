@@ -1,4 +1,107 @@
-<!-- AI Chatbot Widget -->
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MECMEC Boarding House</title>
+  <meta name="description" content="MECMEC Boarding House - Modern and comfortable accommodation for students and professionals.">
+  <!-- Tailwind CSS CDN -->
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- AOS Animation Library -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <!-- Swiper JS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <!-- Custom Styles -->
+<link rel="stylesheet" href="style.css">
+
+<script  src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<!-- <link href="src/output.css" rel="stylesheet"> -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              DEFAULT: '#1e40af',
+              dark: '#1e3a8a',
+              light: '#3b82f6',
+            },
+            accent: {
+              DEFAULT: '#f97316',
+              dark: '#ea580c',
+              light: '#fb923c',
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Poppins', 'sans-serif'],
+          },
+          boxShadow: {
+            'custom': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .chat-message {
+        display: flex;
+        margin-bottom: 1rem;
+    }
+    .bot-message {
+        justify-content: flex-start;
+    }
+    .user-message {
+        justify-content: flex-end;
+    }
+    #chatbot-container {
+        font-family: 'Inter', sans-serif;
+    }
+    #chat-messages::-webkit-scrollbar {
+        width: 6px;
+    }
+    #chat-messages::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    #chat-messages::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 3px;
+    }
+    .dark #chat-messages::-webkit-scrollbar-track {
+        background: #334155;
+    }
+    .dark #chat-messages::-webkit-scrollbar-thumb {
+        background: #64748b;
+    }
+    .suggestion-btn {
+        background: rgba(255,255,255,0.3);
+        border: none;
+        border-radius: 4px;
+        padding: 6px 8px;
+        text-align: left;
+        font-size: 0.875rem;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    .suggestion-btn:hover {
+        background: rgba(255,255,255,0.4);
+    }
+    .dark .suggestion-btn {
+        background: rgba(0,0,0,0.2);
+        color: white;
+    }
+    .dark .suggestion-btn:hover {
+        background: rgba(0,0,0,0.3);
+    }
+</style><!-- AI Chatbot Widget -->
 <div id="chatbot-container" class="fixed bottom-6 right-6 z-50">
     <div class="bg-white dark:bg-slate-800 rounded-xl shadow-xl w-80 overflow-hidden transition-all duration-300 transform hidden" id="chatbot-window">
         <div class="bg-primary dark:bg-primary-dark text-white p-4 flex justify-between items-center">
